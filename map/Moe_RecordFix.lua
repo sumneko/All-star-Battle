@@ -16,7 +16,6 @@
         end
         return strs
     end
-
     --连接字符串
     string.concat = function(t, cs)
         cs = cs or ""
@@ -40,7 +39,6 @@
             DisplayTimedTextToPlayer(GetLocalPlayer(), 0, 0, 60, i)
         end
     end
-
     local hash = function(t)
         local r = 1
         for i, v in ipairs(t) do
@@ -48,7 +46,6 @@
         end
         return r
     end
-
     local nameHash = function(v)
         local r = {}
         local l = string.len(v)
@@ -58,7 +55,6 @@
         end
         return hash(r)
     end
-
     local ks = "校验,杀敌,助攻,经验,荣誉,MVP,局数,助攻王,战神,胜率"
     local name = {}
     local trg = CreateTrigger()

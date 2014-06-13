@@ -27,9 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-trigger array YDWEBase___AbilityCastingOverEventQueue
-integer array YDWEBase___AbilityCastingOverEventType
-integer YDWEBase___AbilityCastingOverEventNumber=0
+string array YDWEBase__yd_PlayerColor
+trigger array YDWEBase__AbilityCastingOverEventQueue
+integer array YDWEBase__AbilityCastingOverEventType
+integer YDWEBase__AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -46,20 +47,20 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRangeOfLocMatchingNull
 //globals from YDWEGetUnitsInRectMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEMakeUnitsPassiveForPlayerNull:
 constant boolean LIBRARY_YDWEMakeUnitsPassiveForPlayerNull=true
@@ -91,12 +92,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent___DamageEventQueue
-integer YDWETriggerEvent___DamageEventNumber=0
+trigger array YDWETriggerEvent__DamageEventQueue
+integer YDWETriggerEvent__DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent___MoveItemEventTrigger=null
-trigger array YDWETriggerEvent___MoveItemEventQueue
-integer YDWETriggerEvent___MoveItemEventNumber=0
+trigger YDWETriggerEvent__MoveItemEventTrigger=null
+trigger array YDWETriggerEvent__MoveItemEventQueue
+integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -678,6 +679,11 @@ trigger gg_trg__________soundLibrary=null
 trigger gg_trg__________bakaLibrary=null
 trigger gg_trg__________objectLibrary=null
 trigger gg_trg_Lua___LuaLibrary=null
+trigger gg_trg_base_lua=null
+trigger gg_trg_timer_lua=null
+trigger gg_trg_player_lua=null
+trigger gg_trg_game_lua=null
+trigger gg_trg_text_lua=null
 trigger gg_trg_suijiduiwu=null
 trigger gg_trg_chushihua=null
 trigger gg_trg_test_1=null
@@ -1768,11 +1774,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_base_lua=null
-trigger gg_trg_text_lua=null
-trigger gg_trg_timer_lua=null
-trigger gg_trg_game_lua=null
-trigger gg_trg_player_lua=null
 
 trigger l__library_init
 
@@ -2250,13 +2251,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -2800,20 +2801,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
-if YDWEBase___AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
+if YDWEBase__AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
+if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
-set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
-set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
+set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
+set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
+set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2844,6 +2845,9 @@ set bj_lastSetAttackType=at
 set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
+function YDWEGetPlayerColorString takes player p,string s returns string
+return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
 loop
@@ -2856,7 +2860,7 @@ endloop
 return 0
 endfunction
 function YDWEVersion_Display takes nothing returns boolean
-call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 30, "|cFF1E90FF当前编辑器版本为： |r|cFF00FF00YDWE 1.25.11.137")
+call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 30, "|cFF1E90FF当前编辑器版本为： |r|cFF00FF00YDWE 1.27.5.859")
 return false
 endfunction
 function YDWEVersion_Init takes nothing returns nothing
@@ -2875,17 +2879,31 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
+set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase__yd_PlayerColor[3]="|cFF540081"
+set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase__yd_PlayerColor[8]="|cFF959697"
+set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase__yd_PlayerColor[10]="|cFF106246"
+set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase__yd_PlayerColor[12]="|cFF282828"
+set YDWEBase__yd_PlayerColor[13]="|cFF282828"
+set YDWEBase__yd_PlayerColor[14]="|cFF282828"
+set YDWEBase__yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
 //library YDWEBase ends
 //library YDWEEnumDestructablesInCircleBJFilterNull:
 function YDWEEnumDestructablesInCircleBJFilterNull takes nothing returns boolean
-local real dx=GetDestructableX(GetFilterDestructable())
-local real dy=GetDestructableY(GetFilterDestructable())
-set dx=dx - GetLocationX(bj_enumDestructableCenter)
-set dy=dy - GetLocationY(bj_enumDestructableCenter)
-return SquareRoot(dx * dx + dy * dy) <= bj_enumDestructableRadius
+local real dx=GetDestructableX(GetFilterDestructable()) - GetLocationX(bj_enumDestructableCenter)
+local real dy=GetDestructableY(GetFilterDestructable()) - GetLocationY(bj_enumDestructableCenter)
+return dx * dx + dy * dy <= bj_enumDestructableRadius * bj_enumDestructableRadius
 endfunction
 
 //library YDWEEnumDestructablesInCircleBJFilterNull ends
@@ -3204,9 +3222,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent___DamageEventNumber
-if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent__DamageEventNumber
+if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3233,22 +3251,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___DamageEventNumber == 0 then
+if YDWETriggerEvent__DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
-set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
+set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
+set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
-if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
+if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3258,13 +3276,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___MoveItemEventNumber == 0 then
-set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent__MoveItemEventNumber == 0 then
+set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
-set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
+set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
+set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3298,7 +3316,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary__Init takes nothing returns nothing
+function baseLibrary___Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3310,7 +3328,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary__Init takes nothing returns nothing
+function LuaLibrary___Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -3914,7 +3932,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record__Init takes nothing returns nothing
+function Record___Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -3922,14 +3940,16 @@ endfunction
 //library YDWEEnumDestructablesInCircleBJNull:
 function YDWEEnumDestructablesInCircleBJNull takes real radius,location loc,code actionFunc returns nothing
 local rect r
-if ( radius >= 0 ) then
+local real centerX=GetLocationX(loc)
+local real centerY=GetLocationY(loc)
+if radius >= 0 then
 set bj_enumDestructableCenter=loc
 set bj_enumDestructableRadius=radius
-set r=GetRectFromCircleBJ(loc, radius)
+set r=Rect(centerX - radius, centerY - radius, centerX + radius, centerY + radius)
 call EnumDestructablesInRect(r, Filter(function YDWEEnumDestructablesInCircleBJFilterNull), actionFunc)
 call RemoveRect(r)
-endif
 set r=null
+endif
 endfunction
 
 //library YDWEEnumDestructablesInCircleBJNull ends
@@ -4332,7 +4352,7 @@ call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
 call s__maphack_InitHero(hero)
 endfunction
-function bakaLibrary__Init takes nothing returns nothing
+function bakaLibrary___Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 set trg=CreateTrigger()
@@ -4349,7 +4369,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary__Init takes nothing returns nothing
+function effectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4387,7 +4407,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary__Init takes nothing returns nothing
+function eventLibrary___Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4501,7 +4521,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary__Init takes nothing returns nothing
+function mathLibrary___Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4523,7 +4543,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4563,7 +4583,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary__Init takes nothing returns nothing
+function soundLibrary___Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4574,7 +4594,7 @@ return SubString(s__String_char2AllString, n - 1, n)
 endif
 return ""
 endfunction
-function stringLibrary__Init takes nothing returns nothing
+function stringLibrary___Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -4598,7 +4618,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary__Init takes nothing returns nothing
+function textLibrary___Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -4723,7 +4743,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary__Init takes nothing returns nothing
+function unitLibrary___Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -4744,7 +4764,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix__StartLua takes nothing returns nothing
+function RecordFix___StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -4760,10 +4780,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix__Init takes nothing returns nothing
+function RecordFix___Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
 endfunction
 
 //library RecordFix ends
@@ -7091,6 +7111,8 @@ call TriggerRegisterPlayerChatEvent(gg_trg_PK_start_0, GetEnumPlayer(), "-pk", f
 call SetPlayerStateBJ(GetEnumPlayer(), PLAYER_STATE_RESOURCE_GOLD, 1200)
 endfunction
 function Trig_time_0Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu[0], function Trig_time_0Func001A)
 call IssueTargetOrderById(gg_unit_ngme_0025, 852566, gg_unit_hgtw_0012)
 call IssueTargetOrderById(gg_unit_ngme_0014, 852566, gg_unit_hgtw_0019)
@@ -7250,6 +7272,8 @@ call RemoveUnit(gg_unit_n00K_0067)
 call RemoveUnit(gg_unit_n00L_0068)
 call RemoveUnit(gg_unit_n00M_0069)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_time_0 takes nothing returns nothing
 set gg_trg_time_0=CreateTrigger()
@@ -7370,6 +7394,8 @@ function Trig_time40out_randomFunc003A takes nothing returns nothing
 call RemoveUnit(GetEnumUnit())
 endfunction
 function Trig_time40out_randomActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call TimerDialogDisplay(udg_chuangkou[0], false)
 call ForForce(GetPlayersAll(), function Trig_time40out_randomFunc002A)
 call ForGroupBJ(udg_danweizu[0], function Trig_time40out_randomFunc003A)
@@ -7439,6 +7465,8 @@ call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_time_0))
 call DestroyTrigger(gg_trg_time_0)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_OB))
 call DestroyTrigger(gg_trg_OB)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_time40out_random takes nothing returns nothing
 set gg_trg_time40out_random=CreateTrigger()
@@ -7672,6 +7700,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_duihuakuang2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call EnableUserControl(true)
 if ( ( GetClickedButtonBJ() == udg_anniu[0] ) ) then
 set bj_forLoopAIndex=1
@@ -7940,6 +7970,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duihuakuang2 takes nothing returns nothing
 set gg_trg_duihuakuang2=CreateTrigger()
@@ -9398,6 +9430,8 @@ function Trig_lx1221122112Func002Func005Func003Func001Func015Func005Func003Func0
 call RemoveUnit(GetEnumUnit())
 endfunction
 function Trig_lx1221122112Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_kzs[13]=( udg_kzs[13] + 1 )
 if ( ( udg_kzs[13] == 1 ) ) then
 call SetUnitColor(udg_danwei2[180], ConvertPlayerColor(12))
@@ -9598,6 +9632,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lx1221122112 takes nothing returns nothing
 set gg_trg_lx1221122112=CreateTrigger()
@@ -9611,6 +9647,8 @@ function Trig_lx2112211221Func002Func005Func003Func001Func015Func005Func003Func0
 call RemoveUnit(GetEnumUnit())
 endfunction
 function Trig_lx2112211221Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_kzs[13]=( udg_kzs[13] + 1 )
 if ( ( udg_kzs[13] == 1 ) ) then
 call SetUnitColor(udg_danwei2[180], ConvertPlayerColor(12))
@@ -9811,6 +9849,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lx2112211221 takes nothing returns nothing
 set gg_trg_lx2112211221=CreateTrigger()
@@ -10099,6 +10139,8 @@ function Trig_random_heroFunc003A takes nothing returns nothing
 call RemoveUnit(GetEnumUnit())
 endfunction
 function Trig_random_heroActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call DisableTrigger(gg_trg_choose_hero)
 call EnableTrigger(gg_trg_random_hero2)
 call ForGroupBJ(udg_danweizu[0], function Trig_random_heroFunc003A)
@@ -10116,6 +10158,8 @@ call GroupRemoveUnitSimple(udg_randomhero[bj_forLoopAIndex], udg_danweizu[0])
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call StartTimerBJ(udg_MS[0], false, 1.00)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_random_hero takes nothing returns nothing
 set gg_trg_random_hero=CreateTrigger()
@@ -11984,6 +12028,8 @@ else
 endif
 endfunction
 function Trig_shengfupandingActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetUnitTypeId(GetDyingUnit()) == 0x68636173 ) and ( GetOwningPlayer(GetDyingUnit()) == s__baka_SPlayer(10) ) ) then
 if ( ( udg_Points > - 1 ) ) then
 call EnableUserControl(false)
@@ -12106,6 +12152,8 @@ call DisableTrigger(GetTriggeringTrigger())
 else
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shengfupanding takes nothing returns nothing
 set gg_trg_shengfupanding=CreateTrigger()
@@ -12298,6 +12346,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_guanqiachongzhi_ifActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetClickedButtonBJ() == udg_anniu[10] ) ) then
 call EnableUserControl(true)
 call PauseTimer(udg_timsJS[10])
@@ -12337,6 +12387,8 @@ set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guanqiachongzhi_if takes nothing returns nothing
 set gg_trg_guanqiachongzhi_if=CreateTrigger()
@@ -12964,6 +13016,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_endActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PlaySoundBJ(gg_snd_QuestCompleted)
 call TimerDialogDisplay(udg_timesJSP, false)
 call PauseTimer(udg_jishiqi[61])
@@ -12989,6 +13043,8 @@ set udg_xuanqu=YDWEGetUnitsInRectOfPlayerNull(udg_quyu[100] , s__baka_SPlayer(10
 call ForGroupBJ(udg_xuanqu, function Trig_endFunc016A)
 call DestroyGroup(udg_xuanqu)
 call RemoveRect(udg_quyu[100])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_end takes nothing returns nothing
 set gg_trg_end=CreateTrigger()
@@ -13139,6 +13195,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_lv_10_winActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call StartTimerBJ(udg_times[178], false, 60.00)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=10
@@ -13163,6 +13221,8 @@ set udg_xuanqu=YDWEGetUnitsInRectOfPlayerNull(udg_quyu[100] , s__baka_SPlayer(10
 call ForGroupBJ(udg_xuanqu, function Trig_lv_10_winFunc016A)
 call DestroyGroup(udg_xuanqu)
 call RemoveRect(udg_quyu[100])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lv_10_win takes nothing returns nothing
 set gg_trg_lv_10_win=CreateTrigger()
@@ -15106,6 +15166,8 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_JS_AI_1sFunc003A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_UNDEAD) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -15192,13 +15254,19 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_JS_AI_1sActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_quyu[100]=GetEntireMapRect()
 set udg_danweizu2[139]=YDWEGetUnitsInRectOfPlayerNull(udg_quyu[100] , s__baka_SPlayer(11))
 call ForGroupBJ(udg_danweizu2[139], function Trig_JS_AI_1sFunc003A)
 call DestroyGroup(udg_danweizu2[139])
 call RemoveRect(udg_quyu[100])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_JS_AI_1s takes nothing returns nothing
 set gg_trg_JS_AI_1s=CreateTrigger()
@@ -15217,6 +15285,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_JS_AI_3sActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_xuanqu=YDWEGetUnitsInRectOfPlayerNull(gg_rct_jidi , s__baka_SPlayer(11))
 call ForGroupBJ(udg_xuanqu, function Trig_JS_AI_3sFunc003A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == false ) ) then
@@ -15237,6 +15307,8 @@ call IssuePointOrderLoc(udg_boss[1], "attack", udg_dian2[0])
 call RemoveLocation(udg_dian2[0])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_JS_AI_3s takes nothing returns nothing
 set gg_trg_JS_AI_3s=CreateTrigger()
@@ -15252,6 +15324,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_attack_jsActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetAttacker()
 set udg_danwei2[1]=GetAttackedUnitBJ()
 if ( ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303038 ) or ( GetUnitTypeId(udg_danwei2[1]) == 0x75303038 ) ) ) then
@@ -15338,6 +15412,8 @@ else
 endif
 set udg_danwei2[0]=null
 set udg_danwei2[1]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_attack_js takes nothing returns nothing
 set gg_trg_attack_js=CreateTrigger()
@@ -15355,6 +15431,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huifu_15_uActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 400.00, GetUnitFacing(udg_danwei2[0]))
@@ -15364,6 +15442,8 @@ call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huifu_15_u takes nothing returns nothing
 set gg_trg_huifu_15_u=CreateTrigger()
@@ -15412,6 +15492,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tufupenguozhiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call StopSoundBJ(gg_snd_AbominationAlternateDeath1, false)
@@ -15439,6 +15521,8 @@ set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tufupenguozhi takes nothing returns nothing
 set gg_trg_tufupenguozhi=CreateTrigger()
@@ -15471,6 +15555,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_ningshi_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -15483,9 +15569,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[149], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_ningshi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[149], function Trig_ningshi_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_ningshi_2 takes nothing returns nothing
 set gg_trg_ningshi_2=CreateTrigger()
@@ -15534,6 +15626,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuanwo_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -15547,9 +15641,15 @@ call IssueImmediateOrderById(udg_danwei2[0], 852127)
 call GroupRemoveUnit(udg_danweizu2[140], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_xuanwo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[140], function Trig_xuanwo_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanwo_2 takes nothing returns nothing
 set gg_trg_xuanwo_2=CreateTrigger()
@@ -15587,7 +15687,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_duyepenshe_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[141], function Trig_duyepenshe_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duyepenshe_2 takes nothing returns nothing
 set gg_trg_duyepenshe_2=CreateTrigger()
@@ -15617,7 +15721,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_duyepenshe_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[142], function Trig_duyepenshe_3Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duyepenshe_3 takes nothing returns nothing
 set gg_trg_duyepenshe_3=CreateTrigger()
@@ -15651,6 +15759,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tujin_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) == 24 ) ) then
@@ -15695,9 +15805,15 @@ endif
 else
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tujin_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[143], function Trig_tujin_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tujin_2 takes nothing returns nothing
 set gg_trg_tujin_2=CreateTrigger()
@@ -15744,6 +15860,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhendang_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -15777,9 +15895,15 @@ set udg_danwei2[1]=null
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_zhendang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[147], function Trig_zhendang_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhendang_2 takes nothing returns nothing
 set gg_trg_zhendang_2=CreateTrigger()
@@ -15807,6 +15931,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhendang_3Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -15820,9 +15946,15 @@ call KillUnit(udg_danwei2[148])
 call GroupRemoveUnit(udg_danweizu2[148], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_zhendang_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[148], function Trig_zhendang_3Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhendang_3 takes nothing returns nothing
 set gg_trg_zhendang_3=CreateTrigger()
@@ -15920,6 +16052,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss_dajiangshan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call SetUnitUserData(udg_boss[1], ( GetUnitUserData(udg_boss[1]) - 1 ))
 if ( ( GetUnitUserData(udg_boss[1]) >= 0 ) ) then
 if ( ( GetUnitUserData(udg_boss[1]) >= 40 ) ) then
@@ -15990,6 +16124,8 @@ call PauseTimer(udg_times[143])
 call RemoveLocation(udg_dian2[143])
 call RemoveLocation(udg_dian2[144])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss_dajiangshan_2 takes nothing returns nothing
 set gg_trg_boss_dajiangshan_2=CreateTrigger()
@@ -16030,6 +16166,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss_dajiangshan_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call SetUnitUserData(udg_boss[2], ( GetUnitUserData(udg_boss[2]) - 1 ))
 if ( ( GetUnitUserData(udg_boss[2]) >= 0 ) ) then
 if ( ( GetUnitUserData(udg_boss[2]) >= 40 ) ) then
@@ -16100,6 +16238,8 @@ call PauseTimer(udg_times[145])
 call RemoveLocation(udg_dian2[145])
 call RemoveLocation(udg_dian2[146])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss_dajiangshan_3 takes nothing returns nothing
 set gg_trg_boss_dajiangshan_3=CreateTrigger()
@@ -16168,6 +16308,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss_zhendangbo_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitLifeBJ(udg_danwei2[0], ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) + 1.00 ))
 if ( ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) <= 35.00 ) ) then
@@ -16196,9 +16338,15 @@ call KillUnit(udg_danwei2[0])
 call GroupRemoveUnit(udg_danweizu2[145], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_boss_zhendangbo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[145], function Trig_boss_zhendangbo_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss_zhendangbo_2 takes nothing returns nothing
 set gg_trg_boss_zhendangbo_2=CreateTrigger()
@@ -16365,6 +16513,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_wajue_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -16418,9 +16568,15 @@ endif
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_wajue_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[150], function Trig_wajue_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_wajue_2 takes nothing returns nothing
 set gg_trg_wajue_2=CreateTrigger()
@@ -16464,6 +16620,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuanfengshabao_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) + 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) <= 60 ) ) then
@@ -16493,9 +16651,15 @@ call GroupRemoveUnit(udg_danweizu2[151], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_xuanfengshabao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[151], function Trig_xuanfengshabao_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanfengshabao_2 takes nothing returns nothing
 set gg_trg_xuanfengshabao_2=CreateTrigger()
@@ -16529,6 +16693,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tiaoji_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -16559,9 +16725,15 @@ call GroupRemoveUnit(udg_danweizu2[152], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tiaoji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[152], function Trig_tiaoji_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaoji_2 takes nothing returns nothing
 set gg_trg_tiaoji_2=CreateTrigger()
@@ -16597,6 +16769,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_leishouzhenji_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -16618,9 +16792,15 @@ call KillUnit(udg_danwei2[0])
 call GroupRemoveUnit(udg_danweizu2[153], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_leishouzhenji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[153], function Trig_leishouzhenji_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_leishouzhenji_2 takes nothing returns nothing
 set gg_trg_leishouzhenji_2=CreateTrigger()
@@ -16639,6 +16819,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_anwuzhiFunc001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -16675,9 +16857,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[154], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_anwuzhiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[154], function Trig_anwuzhiFunc001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_anwuzhi takes nothing returns nothing
 set gg_trg_anwuzhi=CreateTrigger()
@@ -16696,6 +16884,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tujin_jiaoxiFunc003A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -16730,9 +16920,15 @@ endif
 call GroupRemoveUnit(udg_danweizu2[155], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tujin_jiaoxiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[155], function Trig_tujin_jiaoxiFunc003A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tujin_jiaoxi takes nothing returns nothing
 set gg_trg_tujin_jiaoxi=CreateTrigger()
@@ -16786,6 +16982,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_siwangchanrao_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -16810,9 +17008,15 @@ call RemoveUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_siwangchanrao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[156], function Trig_siwangchanrao_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_siwangchanrao_2 takes nothing returns nothing
 set gg_trg_siwangchanrao_2=CreateTrigger()
@@ -16844,6 +17048,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_siwanghuimie_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) + 1 ))
@@ -16869,9 +17075,15 @@ call GroupRemoveUnit(udg_danweizu2[157], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_siwanghuimie_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[157], function Trig_siwanghuimie_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_siwanghuimie_2 takes nothing returns nothing
 set gg_trg_siwanghuimie_2=CreateTrigger()
@@ -16920,6 +17132,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_guishou_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -16937,9 +17151,15 @@ call RemoveUnit(udg_danwei2[0])
 call GroupRemoveUnit(udg_danweizu2[161], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_guishou_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[161], function Trig_guishou_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guishou_2 takes nothing returns nothing
 set gg_trg_guishou_2=CreateTrigger()
@@ -16955,6 +17175,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_chuanciActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_danwei2[1]=GetSpellTargetUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -16991,6 +17213,8 @@ set udg_danwei2[0]=null
 set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chuanci takes nothing returns nothing
 set gg_trg_chuanci=CreateTrigger()
@@ -17027,6 +17251,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhixianchuanci_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -17049,9 +17275,15 @@ call RemoveUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_zhixianchuanci_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[177], function Trig_zhixianchuanci_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhixianchuanci_2 takes nothing returns nothing
 set gg_trg_zhixianchuanci_2=CreateTrigger()
@@ -17071,6 +17303,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss2_jiantaActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian2[162]=GetUnitLoc(udg_boss[1])
 call UnitRemoveBuffs(udg_boss[1], false, true)
 if ( ( udg_zhengshu2[163] == 0 ) ) then
@@ -17119,6 +17353,8 @@ endif
 call RemoveLocation(udg_dian2[162])
 call RemoveLocation(udg_dian2[163])
 set udg_dian2[163]=GetUnitLoc(udg_boss[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_jianta takes nothing returns nothing
 set gg_trg_boss2_jianta=CreateTrigger()
@@ -17189,6 +17425,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss2_hongtianlei_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -17214,9 +17452,15 @@ call KillUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_boss2_hongtianlei_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[165], function Trig_boss2_hongtianlei_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_hongtianlei_2 takes nothing returns nothing
 set gg_trg_boss2_hongtianlei_2=CreateTrigger()
@@ -17279,6 +17523,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss2_liuxingchui_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( s__maphack_GetHeight(udg_danwei2[0]) >= 10.00 ) ) then
@@ -17305,9 +17551,15 @@ call RemoveUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_boss2_liuxingchui_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[166], function Trig_boss2_liuxingchui_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_liuxingchui_2 takes nothing returns nothing
 set gg_trg_boss2_liuxingchui_2=CreateTrigger()
@@ -17345,6 +17597,8 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_boss2_huanxingzhenjiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call StopSoundBJ(gg_snd_CannonTowerMissile2, false)
@@ -17399,6 +17653,8 @@ endif
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_huanxingzhenji takes nothing returns nothing
 set gg_trg_boss2_huanxingzhenji=CreateTrigger()
@@ -17424,6 +17680,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss2_attack_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[173]=( udg_zhengshu2[173] - 1 )
 if ( ( udg_zhengshu2[173] >= 0 ) ) then
 if ( ( udg_zhengshu2[173] == 1 ) ) then
@@ -17465,6 +17723,8 @@ set udg_danwei2[173]=null
 call PauseTimer(udg_times[173])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_attack_2 takes nothing returns nothing
 set gg_trg_boss2_attack_2=CreateTrigger()
@@ -17489,6 +17749,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_boss2_gouheji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[174]=( udg_zhengshu2[174] - 1 )
 if ( ( udg_zhengshu2[174] >= 0 ) ) then
 if ( ( udg_zhengshu2[174] == 5 ) ) then
@@ -17520,6 +17782,8 @@ endif
 else
 call PauseTimer(udg_times[174])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_boss2_gouheji_2 takes nothing returns nothing
 set gg_trg_boss2_gouheji_2=CreateTrigger()
@@ -17624,6 +17888,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_bossex_anren_3Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -17646,9 +17912,15 @@ call GroupRemoveUnit(udg_danweizu2[169], udg_danwei2[0])
 call RemoveUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_bossex_anren_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[169], function Trig_bossex_anren_3Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bossex_anren_3 takes nothing returns nothing
 set gg_trg_bossex_anren_3=CreateTrigger()
@@ -17696,7 +17968,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_bossex_canying_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[170], function Trig_bossex_canying_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bossex_canying_2 takes nothing returns nothing
 set gg_trg_bossex_canying_2=CreateTrigger()
@@ -17773,6 +18049,8 @@ call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_sheep_mieActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetRandomInt(1, 3) == 1 ) ) then
 set udg_dian2[0]=GetRandomLocInRect(gg_rct_sheep)
 if ( ( GetRandomInt(1, 4) == 1 ) ) then
@@ -17793,6 +18071,8 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 call ForGroupBJ(udg_sheep, function Trig_sheep_mieFunc003A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sheep_mie takes nothing returns nothing
 set gg_trg_sheep_mie=CreateTrigger()
@@ -17830,7 +18110,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_sheepActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_sheep, function Trig_sheepFunc002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sheep takes nothing returns nothing
 set gg_trg_sheep=CreateTrigger()
@@ -17848,6 +18132,8 @@ endif
 set udg_Danwei[10]=null
 endfunction
 function Trig_sheep_deathActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[10]=GetDyingUnit()
 set udg_Danwei[11]=GetKillingUnitBJ()
 if ( ( IsUnitType(udg_Danwei[11], UNIT_TYPE_HERO) == true ) and ( GetUnitTypeId(udg_Danwei[10]) == 0x6E303036 ) ) then
@@ -17911,6 +18197,8 @@ else
 endif
 set udg_Danwei[10]=null
 set udg_Danwei[11]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sheep_death takes nothing returns nothing
 set gg_trg_sheep_death=CreateTrigger()
@@ -18058,6 +18346,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_FXTActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_dian2[1]=GetSpellTargetLoc()
@@ -18081,6 +18371,8 @@ endloop
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_FXT takes nothing returns nothing
 set gg_trg_FXT=CreateTrigger()
@@ -18145,6 +18437,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huanlei_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -18191,9 +18485,15 @@ call RemoveLocation(udg_dian2[3])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huanlei_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[265], function Trig_huanlei_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huanlei_2 takes nothing returns nothing
 set gg_trg_huanlei_2=CreateTrigger()
@@ -18241,6 +18541,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_0_33t_zhouqiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set bj_forLoopBIndex=1
 set bj_forLoopBIndexEnd=5
 loop
@@ -18321,6 +18623,8 @@ endif
 call DestroyGroup(udg_xuanqu)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_0_33t_zhouqi takes nothing returns nothing
 set gg_trg_0_33t_zhouqi=CreateTrigger()
@@ -18433,8 +18737,12 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_spellActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[37], function Trig_spellFunc002A)
 call ForGroupBJ(udg_Danweizu[38], function Trig_spellFunc003A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_spell takes nothing returns nothing
 set gg_trg_spell=CreateTrigger()
@@ -18981,6 +19289,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_attackActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
 set ydl_localvar_step=ydl_localvar_step + 3
 call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
@@ -19215,6 +19525,8 @@ endif
 else
 endif
 call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_attack takes nothing returns nothing
 set gg_trg_attack=CreateTrigger()
@@ -19511,6 +19823,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_DT_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnteringUnit()
 set udg_dian2[0]=GetUnitLoc(gg_unit_n00F_0045)
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_DT_1)
@@ -19526,6 +19840,8 @@ endif
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_DT_1 takes nothing returns nothing
 set gg_trg_DT_1=CreateTrigger()
@@ -19553,6 +19869,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_DT_1_outActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetLeavingUnit()
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_DT_1)
 set udg_danweizu2[112]=YDWEGetUnitsInRectAllNull(gg_rct_DT_1)
@@ -19572,6 +19890,8 @@ else
 endif
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_DT_1_out takes nothing returns nothing
 set gg_trg_DT_1_out=CreateTrigger()
@@ -19591,6 +19911,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_DT_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnteringUnit()
 set udg_dian2[0]=GetUnitLoc(gg_unit_n00F_0044)
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_DT_2)
@@ -19606,6 +19928,8 @@ endif
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_DT_2 takes nothing returns nothing
 set gg_trg_DT_2=CreateTrigger()
@@ -19633,6 +19957,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_DT_2_outActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetLeavingUnit()
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_DT_2)
 set udg_danweizu2[112]=YDWEGetUnitsInRectAllNull(gg_rct_DT_2)
@@ -19652,6 +19978,8 @@ else
 endif
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_DT_2_out takes nothing returns nothing
 set gg_trg_DT_2_out=CreateTrigger()
@@ -19692,6 +20020,8 @@ call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
 endfunction
 function Trig_chuansong_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 if ( ( GetTriggerUnit() == udg_danwei2[67] ) ) then
 call UnitRemoveAbility(udg_danwei2[67], 0x41305041)
@@ -19799,6 +20129,8 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRI
 call IssueImmediateOrderById(udg_danwei2[0], 851972)
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chuansong_1 takes nothing returns nothing
 set gg_trg_chuansong_1=CreateTrigger()
@@ -19837,6 +20169,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_chuansong_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Zhengshu[68]=0
 set udg_Zhengshu[24]=1
 loop
@@ -19912,6 +20246,8 @@ endif
 endif
 set udg_Zhengshu[24]=udg_Zhengshu[24] + 1
 endloop
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chuansong_2 takes nothing returns nothing
 set gg_trg_chuansong_2=CreateTrigger()
@@ -19932,6 +20268,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_chuansong_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 if ( ( udg_zhengshu2[( 300 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 ) )] > 0 ) ) then
 call ForGroupBJ(udg_Danweizu[38], function Trig_chuansong_3Func004Func001A)
@@ -19944,6 +20282,8 @@ set udg_danwei2[( 320 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) 
 else
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chuansong_3 takes nothing returns nothing
 set gg_trg_chuansong_3=CreateTrigger()
@@ -20018,6 +20358,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_gangshao_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_dian2[0]=GetSpellTargetLoc()
 set udg_zhengshuex[0]=0
@@ -20064,6 +20406,8 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRI
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gangshao_1 takes nothing returns nothing
 set gg_trg_gangshao_1=CreateTrigger()
@@ -20144,6 +20488,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_gangshao_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x6E776164 ) ) then
@@ -20208,9 +20554,15 @@ endif
 call GroupRemoveUnit(udg_danweizu2[369], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_gangshao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[369], function Trig_gangshao_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gangshao_2 takes nothing returns nothing
 set gg_trg_gangshao_2=CreateTrigger()
@@ -20230,6 +20582,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_chaichuActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_danwei2[1]=GetSpellTargetUnit()
 if ( ( ( GetUnitTypeId(udg_danwei2[1]) == 0x6F657965 ) or ( GetUnitTypeId(udg_danwei2[1]) == 0x6E776164 ) ) ) then
@@ -20244,6 +20598,8 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRI
 endif
 set udg_danwei2[0]=null
 set udg_danwei2[1]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chaichu takes nothing returns nothing
 set gg_trg_chaichu=CreateTrigger()
@@ -20683,6 +21039,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_SmD_SGActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call DisableTrigger(GetTriggeringTrigger())
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_quyu[100]=GetEntireMapRect()
@@ -20730,6 +21088,8 @@ call DestroyGroup(udg_xuanqu)
 call RemoveRect(udg_quyu[100])
 set udg_danwei2[0]=null
 call EnableTrigger(GetTriggeringTrigger())
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_SmD_SG takes nothing returns nothing
 set gg_trg_SmD_SG=CreateTrigger()
@@ -20749,11 +21109,15 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_SG01Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_quyu[100]=GetEntireMapRect()
 set udg_xuanqu=YDWEGetUnitsInRectOfPlayerNull(udg_quyu[100] , s__baka_SPlayer(10))
 call ForGroupBJ(udg_xuanqu, function Trig_SG01Func003A)
 call DestroyGroup(udg_xuanqu)
 call RemoveRect(udg_quyu[100])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_SG01 takes nothing returns nothing
 set gg_trg_SG01=CreateTrigger()
@@ -20772,11 +21136,15 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_SG02Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_quyu[100]=GetEntireMapRect()
 set udg_xuanqu=YDWEGetUnitsInRectOfPlayerNull(udg_quyu[100] , s__baka_SPlayer(11))
 call ForGroupBJ(udg_xuanqu, function Trig_SG02Func003A)
 call DestroyGroup(udg_xuanqu)
 call RemoveRect(udg_quyu[100])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_SG02 takes nothing returns nothing
 set gg_trg_SG02=CreateTrigger()
@@ -20957,6 +21325,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_SmD_xinshiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[185]=GetTriggerUnit()
 if ( ( udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )] != null ) ) then
 set udg_zhengshuex[0]=0
@@ -20983,6 +21353,8 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, 10.00, "T
 call SetPlayerStateBJ(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetTriggerUnit()), PLAYER_STATE_RESOURCE_GOLD) + 300 ))
 endif
 set udg_danwei[185]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_SmD_xinshi takes nothing returns nothing
 set gg_trg_SmD_xinshi=CreateTrigger()
@@ -24701,6 +25073,10 @@ call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_nengliangzhirenActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_danwei2[0]=GetSpellAbilityUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -24715,6 +25091,7 @@ call IssueImmediateOrderById(udg_danwei2[0], 851972)
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_7124")
 endif
 set udg_danwei2[0]=null
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_nengliangzhiren takes nothing returns nothing
@@ -24772,6 +25149,8 @@ call GroupAddUnit(udg_danweizu2[351], udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_chongji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[350]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[350])
 call SetUnitTimeScale(udg_danwei2[350], 1.50)
@@ -24819,6 +25198,8 @@ call DestroyGroup(udg_xuanqu)
 call IssueImmediateOrderById(udg_danwei2[350], 852096)
 set udg_danwei2[350]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chongji_2 takes nothing returns nothing
 set gg_trg_chongji_2=CreateTrigger()
@@ -24846,6 +25227,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_chongji_3Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x6530354F ) ) then
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -24889,9 +25272,15 @@ call GroupRemoveUnit(udg_danweizu2[351], udg_danwei2[0])
 endif
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_chongji_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[351], function Trig_chongji_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chongji_3 takes nothing returns nothing
 set gg_trg_chongji_3=CreateTrigger()
@@ -24970,6 +25359,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yinshenxie_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_aXUNHUAN[6]=1
 loop
 exitwhen udg_aXUNHUAN[6] > 10
@@ -25041,6 +25432,8 @@ call RemoveLocation(udg_dian2[0])
 set udg_dian2[( 300 + udg_aXUNHUAN[6] )]=GetUnitLoc(udg_player[udg_aXUNHUAN[6]])
 set udg_aXUNHUAN[6]=udg_aXUNHUAN[6] + 1
 endloop
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yinshenxie_1 takes nothing returns nothing
 set gg_trg_yinshenxie_1=CreateTrigger()
@@ -25093,6 +25486,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuanzhihuo_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitManaBJ(udg_danwei2[0], ( GetUnitState(udg_danwei2[0], UNIT_STATE_MANA) + 1 ))
 if ( ( R2I(GetUnitState(udg_danwei2[0], UNIT_STATE_MANA)) <= GetUnitUserData(udg_danwei2[0]) ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
@@ -25118,9 +25513,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[342], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_yuanzhihuo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[342], function Trig_yuanzhihuo_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuanzhihuo_2 takes nothing returns nothing
 set gg_trg_yuanzhihuo_2=CreateTrigger()
@@ -25192,7 +25593,11 @@ endif
 set udg_danwei2[346]=null
 endfunction
 function Trig_baowufengyin_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[346], function Trig_baowufengyin_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_baowufengyin_2 takes nothing returns nothing
 set gg_trg_baowufengyin_2=CreateTrigger()
@@ -25263,7 +25668,7 @@ call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
 function Trig_yuexiFunc001Func001Func002T takes nothing returns nothing
-local integer ydl_exxh1
+local integer ydul_exxh1
 local timer ydl_timer
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59)))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x4D6303C9, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF)))
@@ -25284,14 +25689,14 @@ if ( ( GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x41305144)
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x41305143)
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621, 0)
-set ydl_exxh1=1
+set ydul_exxh1=1
 loop
-exitwhen ydl_exxh1 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), ydl_exxh1)) == 0x72617463 ) ) then
+exitwhen ydul_exxh1 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), ydul_exxh1)) == 0x72617463 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621) + 1 ))
 else
 endif
-set ydl_exxh1=ydl_exxh1 + 1
+set ydul_exxh1=ydul_exxh1 + 1
 endloop
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621) == 2 ) ) then
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x41305138)
@@ -25315,9 +25720,16 @@ else
 endif
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
 call TimerStart(ydl_timer, 10.00, false, function Trig_yuexiFunc001Func001Func002Func003Func016Func010T)
 set ydl_timer=CreateTimer()
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x2A37F621, 20)
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x748ACBAC, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x748ACBAC))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x4D6303C9, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x4D6303C9))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
@@ -25337,16 +25749,26 @@ set ydl_timer=null
 endfunction
 function Trig_yuexiActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303139)) == true ) ) then
 if ( ( GetItemCharges(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303139)) >= 30 ) ) then
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, GetTriggerUnit())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, GetSpellTargetUnit())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x4D6303C9, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4D6303C9))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x41F5BFF0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x748ACBAC, LoadLightningHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x748ACBAC))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x2A37F621, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A37F621))
 call TimerStart(ydl_timer, 0.00, false, function Trig_yuexiFunc001Func001Func002T)
 else
 endif
 else
 endif
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_yuexi takes nothing returns nothing
@@ -25359,7 +25781,7 @@ function Trig_yueyaohuandunConditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41304559 ) )
 endfunction
 function Trig_yueyaohuandunFunc001T takes nothing returns nothing
-local integer ydl_exxh1
+local integer ydul_exxh1
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31) > 0 ) and ( GetUnitManaPercent(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59)) >= 25.00 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31) - 1 ))
 else
@@ -25370,26 +25792,26 @@ call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621, YDWEGetInvent
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31, 0)
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621) > 1 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621) - 1 ))
-set ydl_exxh1=1
+set ydul_exxh1=1
 loop
-exitwhen ydl_exxh1 > LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621)
-if ( ( IsItemOwned(UnitItemInSlotBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59), ydl_exxh1)) == true ) ) then
+exitwhen ydul_exxh1 > LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621)
+if ( ( IsItemOwned(UnitItemInSlotBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59), ydul_exxh1)) == true ) ) then
 else
 call UnitAddItemByIdSwapped(0x49303253, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31) + 1 ))
 endif
-set ydl_exxh1=ydl_exxh1 + 1
+set ydul_exxh1=ydul_exxh1 + 1
 endloop
 else
 endif
 call SetItemPositionLoc(LoadItemHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6DEAD1F6), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B))
 call UnitAddItem(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59), LoadItemHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6DEAD1F6))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x2A37F621) > 1 ) ) then
-set ydl_exxh1=1
+set ydul_exxh1=1
 loop
-exitwhen ydl_exxh1 > LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31)
+exitwhen ydul_exxh1 > LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xEFC9FB31)
 call RemoveItem(YDWEGetItemOfTypeFromUnitBJNull(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59) , 0x49303253))
-set ydl_exxh1=ydl_exxh1 + 1
+set ydul_exxh1=ydul_exxh1 + 1
 endloop
 else
 endif
@@ -25403,10 +25825,18 @@ endif
 endfunction
 function Trig_yueyaohuandunActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, GetTriggerUnit())
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xEFC9FB31, 50)
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x61E1A70B))
+call SaveItemHandle(YDHT, GetHandleId(ydl_timer), 0x6DEAD1F6, LoadItemHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x6DEAD1F6))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x2A37F621, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x2A37F621))
 call TimerStart(ydl_timer, 0.10, true, function Trig_yueyaohuandunFunc001T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_yueyaohuandun takes nothing returns nothing
@@ -25470,6 +25900,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xiangchichongji_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -25487,9 +25919,15 @@ call GroupRemoveUnit(udg_danweizu2[350], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_xiangchichongji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[350], function Trig_xiangchichongji_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xiangchichongji_2 takes nothing returns nothing
 set gg_trg_xiangchichongji_2=CreateTrigger()
@@ -25521,6 +25959,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuehongzhanfu_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_zhengshu2[3]=0
@@ -25544,6 +25984,8 @@ call IssueImmediateOrderById(udg_danwei2[0], 851972)
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_395")
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuehongzhanfu_1 takes nothing returns nothing
 set gg_trg_xuehongzhanfu_1=CreateTrigger()
@@ -25567,6 +26009,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuehongzhanfu_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )], UNIT_TYPE_TAUREN) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 2.00)
@@ -25619,9 +26063,15 @@ else
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_xuehongzhanfu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[10], function Trig_xuehongzhanfu_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuehongzhanfu_2 takes nothing returns nothing
 set gg_trg_xuehongzhanfu_2=CreateTrigger()
@@ -25699,6 +26149,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tuxizhiren_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitState(udg_danwei2[0], UNIT_STATE_MANA) == 1.00 ) ) then
@@ -25758,9 +26210,15 @@ endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tuxizhiren_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[376], function Trig_tuxizhiren_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tuxizhiren_2 takes nothing returns nothing
 set gg_trg_tuxizhiren_2=CreateTrigger()
@@ -25827,6 +26285,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_guangshi_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -25866,9 +26326,15 @@ call KillUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_guangshi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[143], function Trig_guangshi_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guangshi_2 takes nothing returns nothing
 set gg_trg_guangshi_2=CreateTrigger()
@@ -25888,7 +26354,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_guangshi_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[144], function Trig_guangshi_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guangshi_3 takes nothing returns nothing
 set gg_trg_guangshi_3=CreateTrigger()
@@ -25906,6 +26376,10 @@ call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_yingyan_1Actions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303758, udg_dian2[0], 270.00)
@@ -25917,6 +26391,7 @@ call TimerStart(ydl_timer, 15.00, false, function Trig_yingyan_1Func006T)
 set udg_danwei2[0]=null
 set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[0])
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_yingyan_1 takes nothing returns nothing
@@ -26006,7 +26481,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_fengkiangliliang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[267], function Trig_fengkiangliliang_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fengkiangliliang_2 takes nothing returns nothing
 set gg_trg_fengkiangliliang_2=CreateTrigger()
@@ -26224,7 +26703,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_xuezhou_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[159], function Trig_xuezhou_1Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuezhou_1 takes nothing returns nothing
 set gg_trg_xuezhou_1=CreateTrigger()
@@ -26247,7 +26730,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_xingcanpifengActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[166], function Trig_xingcanpifengFunc001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xingcanpifeng takes nothing returns nothing
 set gg_trg_xingcanpifeng=CreateTrigger()
@@ -26344,7 +26831,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_yuyi_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[104], function Trig_yuyi_4Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuyi_4 takes nothing returns nothing
 set gg_trg_yuyi_4=CreateTrigger()
@@ -26381,6 +26872,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuyi_6Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetAttackedUnitBJ()
 if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303233)) == true ) ) then
 set udg_danwei2[3]=GetAttacker()
@@ -26405,6 +26898,8 @@ endif
 call IssueImmediateOrderById(udg_danwei2[0], 851972)
 call GroupRemoveUnit(udg_danweizu2[104], udg_danwei2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuyi_6 takes nothing returns nothing
 set gg_trg_yuyi_6=CreateTrigger()
@@ -26538,6 +27033,8 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_lichang_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -26551,9 +27048,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[76], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_lichang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[76], function Trig_lichang_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lichang_2 takes nothing returns nothing
 set gg_trg_lichang_2=CreateTrigger()
@@ -26636,6 +27139,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_lingji_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -26651,9 +27156,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[87], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_lingji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[87], function Trig_lingji_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lingji_2 takes nothing returns nothing
 set gg_trg_lingji_2=CreateTrigger()
@@ -27093,7 +27604,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_jushe_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[142], function Trig_jushe_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jushe_2 takes nothing returns nothing
 set gg_trg_jushe_2=CreateTrigger()
@@ -27202,6 +27717,8 @@ call RemoveLocation(udg_dian2[2])
 set udg_danwei2[1]=null
 endfunction
 function Trig_fengbao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_aXUNHUAN[28]=1
 loop
 exitwhen udg_aXUNHUAN[28] > 10
@@ -27230,6 +27747,8 @@ endif
 set udg_danwei2[0]=null
 set udg_aXUNHUAN[28]=udg_aXUNHUAN[28] + 1
 endloop
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fengbao_2 takes nothing returns nothing
 set gg_trg_fengbao_2=CreateTrigger()
@@ -27287,6 +27806,11 @@ set ydl_timer=CreateTimer()
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x2A37F621, 30)
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xEE2C4E9D, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEE2C4E9D))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_xingchenzhiren_1Func002Func008T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -27296,10 +27820,19 @@ set ydl_timer=null
 endfunction
 function Trig_xingchenzhiren_1Actions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, GetTriggerUnit())
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x4D6303C9, GetSpellTargetLoc())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xEE2C4E9D, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xEE2C4E9D))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.00, false, function Trig_xingchenzhiren_1Func002T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_xingchenzhiren_1 takes nothing returns nothing
@@ -27360,6 +27893,11 @@ set ydl_timer=CreateTimer()
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x2A37F621, 30)
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xEE2C4E9D, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEE2C4E9D))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_xingchenzhiren_2Func001Func008T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -27369,10 +27907,19 @@ set ydl_timer=null
 endfunction
 function Trig_xingchenzhiren_2Actions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x60D54C59, GetTriggerUnit())
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x4D6303C9, GetSpellTargetLoc())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x61E1A70B, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x61E1A70B))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xEE2C4E9D, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xEE2C4E9D))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9CB980BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.00, false, function Trig_xingchenzhiren_2Func001T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_xingchenzhiren_2 takes nothing returns nothing
@@ -27407,6 +27954,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_jixing_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( UnitHasBuffBJ(udg_danwei2[0], 0x42303158) == true ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -27422,9 +27971,15 @@ else
 call GroupRemoveUnit(udg_danweizu2[336], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_jixing_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[336], function Trig_jixing_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jixing_2 takes nothing returns nothing
 set gg_trg_jixing_2=CreateTrigger()
@@ -27695,6 +28250,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zinengliang_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -27716,9 +28273,15 @@ call KillUnit(udg_danwei2[0])
 call GroupRemoveUnit(udg_danweizu2[51], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_zinengliang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[51], function Trig_zinengliang_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zinengliang_2 takes nothing returns nothing
 set gg_trg_zinengliang_2=CreateTrigger()
@@ -27740,6 +28303,8 @@ set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 endfunction
 function Trig_zinengliang_3Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[1]=GetEnumUnit()
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
 set udg_zhengshuex[0]=0
@@ -27752,9 +28317,15 @@ call GroupRemoveUnit(udg_Danweizu[145], udg_danwei2[1])
 endif
 set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_zinengliang_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[145], function Trig_zinengliang_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zinengliang_3 takes nothing returns nothing
 set gg_trg_zinengliang_3=CreateTrigger()
@@ -27839,6 +28410,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_xuhuachongji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_danwei2[1]=GetSpellTargetUnit()
@@ -27873,6 +28446,8 @@ call IssueImmediateOrderById(udg_danwei2[0], 851972)
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_183")
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuhuachongji_2 takes nothing returns nothing
 set gg_trg_xuhuachongji_2=CreateTrigger()
@@ -27903,6 +28478,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_mofaxishouActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call GroupClear(udg_Danweizu[11])
 set udg_aXUNHUAN[36]=1
 loop
@@ -27920,6 +28497,8 @@ else
 endif
 set udg_aXUNHUAN[36]=udg_aXUNHUAN[36] + 1
 endloop
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_mofaxishou takes nothing returns nothing
 set gg_trg_mofaxishou=CreateTrigger()
@@ -27986,6 +28565,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_aoshujian_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[( 380 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 ) )])
@@ -28050,9 +28631,15 @@ endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_aoshujian_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[381], function Trig_aoshujian_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_aoshujian_2 takes nothing returns nothing
 set gg_trg_aoshujian_2=CreateTrigger()
@@ -28085,6 +28672,8 @@ endif
 set udg_danwei2[2]=null
 endfunction
 function Trig_cangqiong_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Zhengshu[25]=1
 loop
 exitwhen udg_Zhengshu[25] > 10
@@ -28107,6 +28696,8 @@ endif
 set udg_Shishu[( 20 + udg_Zhengshu[25] )]=0.00
 set udg_Zhengshu[25]=udg_Zhengshu[25] + 1
 endloop
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_cangqiong_2 takes nothing returns nothing
 set gg_trg_cangqiong_2=CreateTrigger()
@@ -28289,6 +28880,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_smr4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[40]=( udg_zhengshu2[40] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_bossSMR)
 if ( ( udg_zhengshu2[40] <= 20 ) and ( IsUnitType(udg_bossSMR, UNIT_TYPE_DEAD) == false ) ) then
@@ -28318,6 +28911,8 @@ call RemoveLocation(udg_dian2[0])
 call PauseTimer(udg_times[40])
 endif
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_smr4 takes nothing returns nothing
 set gg_trg_smr4=CreateTrigger()
@@ -28465,6 +29060,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_smrII_5Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -28485,9 +29082,15 @@ call GroupRemoveUnit(udg_danweizu2[53], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_smrII_5Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[53], function Trig_smrII_5Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_smrII_5 takes nothing returns nothing
 set gg_trg_smrII_5=CreateTrigger()
@@ -28507,6 +29110,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xiaoxinshiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[185]=GetBuyingUnit()
 if ( ( udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetBuyingUnit())) + 1 )] != null ) ) then
 set udg_zhengshuex[0]=0
@@ -28534,6 +29139,8 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(GetBuyingUnit()), 0, 0, 10.00, "TR
 call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) + 300 ))
 endif
 set udg_danwei[185]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xiaoxinshi takes nothing returns nothing
 set gg_trg_xiaoxinshi=CreateTrigger()
@@ -28588,6 +29195,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_gongxiang_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[185]=GetTriggerUnit()
 if ( ( ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303038 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303039 ) ) and ( GetUnitAbilityLevel(udg_danwei[185], 0x41303342) == 1 ) and ( IsUnitAlly(udg_danwei[185], GetTriggerPlayer()) == true ) and ( udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] != null ) ) then
 call SetUnitOwner(udg_danwei[185], GetTriggerPlayer(), false)
@@ -28598,6 +29207,8 @@ call ForGroupBJ(udg_danweizu2[293], function Trig_gongxiang_3Func003Func001A)
 else
 endif
 set udg_danwei[185]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gongxiang_3 takes nothing returns nothing
 set gg_trg_gongxiang_3=CreateTrigger()
@@ -28686,6 +29297,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuanqu_xinshiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl", udg_dian2[0]))
@@ -28696,6 +29309,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_xuanqu_xinshiFunc007A)
 call DestroyGroup(udg_xuanqu)
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanqu_xinshi takes nothing returns nothing
 set gg_trg_xuanqu_xinshi=CreateTrigger()
@@ -28715,6 +29330,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xuanqu_heroActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[1]=GetTriggerUnit()
 set udg_danwei2[0]=udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[1])) + 1 )]
 set udg_danwei2[1]=null
@@ -28727,6 +29344,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_xuanqu_heroFunc009A)
 call DestroyGroup(udg_xuanqu)
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanqu_hero takes nothing returns nothing
 set gg_trg_xuanqu_hero=CreateTrigger()
@@ -28972,6 +29591,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_zhizhu_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG2)
 call ForGroupBJ(udg_xuanqu, function Trig_zhizhu_1Func002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
@@ -29048,6 +29669,8 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 call DestroyGroup(udg_xuanqu)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhizhu_1 takes nothing returns nothing
 set gg_trg_zhizhu_1=CreateTrigger()
@@ -29079,6 +29702,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_juxiongActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG5)
 call ForGroupBJ(udg_xuanqu, function Trig_juxiongFunc002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
@@ -29115,6 +29740,8 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 call DestroyGroup(udg_xuanqu)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_juxiong takes nothing returns nothing
 set gg_trg_juxiong=CreateTrigger()
@@ -29161,6 +29788,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_jumo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG1)
 call ForGroupBJ(udg_xuanqu, function Trig_jumo_2Func002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
@@ -29197,6 +29826,8 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 call DestroyGroup(udg_xuanqu)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jumo_2 takes nothing returns nothing
 set gg_trg_jumo_2=CreateTrigger()
@@ -29298,6 +29929,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhiyu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[141]=GetTriggerUnit()
 set udg_Dian[141]=GetUnitLoc(udg_Danwei[141])
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[141]), 0x41304851, false)
@@ -29312,6 +29945,8 @@ else
 endif
 call DestroyGroup(udg_Danweizu[141])
 call RemoveLocation(udg_Dian[141])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhiyu_2 takes nothing returns nothing
 set gg_trg_zhiyu_2=CreateTrigger()
@@ -29371,6 +30006,8 @@ call RemoveLocation(udg_Dian[141])
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuhuasongge_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[31] > 0 ) ) then
 set udg_zhengshu[31]=( udg_zhengshu[31] - 1 )
 set udg_Danweizu[141]=YDWEGetUnitsInRangeOfLocAllNull(500.00 , udg_dian[16])
@@ -29384,6 +30021,8 @@ call GroupClear(udg_danweizu[3])
 call PauseTimerBJ(true, udg_jishiqi[4])
 call RemoveLocation(udg_dian[16])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuhuasongge_2 takes nothing returns nothing
 set gg_trg_yuhuasongge_2=CreateTrigger()
@@ -29451,10 +30090,14 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_kongjianyuesong_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PauseTimer(udg_Times[142])
 call RemoveUnit(udg_Danwei[142])
 call ForGroupBJ(udg_Danweizu[37], function Trig_kongjianyuesong_3Func005A)
 call RemoveLocation(udg_Dian[142])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_kongjianyuesong_3 takes nothing returns nothing
 set gg_trg_kongjianyuesong_3=CreateTrigger()
@@ -29492,6 +30135,8 @@ endif
 set udg_danwei[137]=null
 endfunction
 function Trig_sstc2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian[13]=GetUnitLoc(udg_danwei[7])
 set udg_dian[14]=GetUnitLoc(udg_danwei[6])
 if ( ( DistanceBetweenPoints(udg_dian[13], udg_dian[14]) >= 80.00 ) ) then
@@ -29530,6 +30175,8 @@ call DisableTrigger(gg_trg_sstc2)
 endif
 call RemoveLocation(udg_dian[13])
 call RemoveLocation(udg_dian[14])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sstc2 takes nothing returns nothing
 set gg_trg_sstc2=CreateTrigger()
@@ -29602,10 +30249,14 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_star_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PlaySoundOnUnitBJ(gg_snd_HealingSprayBirth1, 100, udg_danwei2[12])
 call PauseTimer(udg_times[0])
 call StartTimerBJ(udg_times[1], true, 0.02)
 call ForGroupBJ(udg_Danweizu[37], function Trig_star_3Func007A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_star_3 takes nothing returns nothing
 set gg_trg_star_3=CreateTrigger()
@@ -29631,6 +30282,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_star_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[12])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[11])
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], RMinBJ(I2R(udg_zhengshu2[1]), 50.00), AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
@@ -29672,6 +30325,8 @@ endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_star_4 takes nothing returns nothing
 set gg_trg_star_4=CreateTrigger()
@@ -29727,6 +30382,8 @@ endif
 set udg_danwei[138]=null
 endfunction
 function Trig_qyzsg2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[31]=( udg_zhengshu[31] + 1 )
 if ( ( udg_zhengshu[31] == 1 ) ) then
 set udg_danweizu[3]=YDWEGetUnitsInRangeOfLocAllNull(512 , udg_dian[16])
@@ -29774,6 +30431,8 @@ call DestroyGroup(udg_danweizu[3])
 call PauseTimerBJ(true, udg_jishiqi[4])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_qyzsg2 takes nothing returns nothing
 set gg_trg_qyzsg2=CreateTrigger()
@@ -30183,6 +30842,8 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\SteamTank\\SteamT
 set udg_danwei[139]=null
 endfunction
 function Trig_syslzj2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[32]=( udg_zhengshu[32] + 1 )
 if ( ( udg_zhengshu[32] <= 30 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[18])
@@ -30255,6 +30916,8 @@ call RemoveLocation(udg_dian[19])
 set udg_zhengshu[32]=0
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_syslzj2 takes nothing returns nothing
 set gg_trg_syslzj2=CreateTrigger()
@@ -30282,7 +30945,11 @@ call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_syslzj_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[393], function Trig_syslzj_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_syslzj_3 takes nothing returns nothing
 set gg_trg_syslzj_3=CreateTrigger()
@@ -30393,6 +31060,8 @@ endif
 set udg_danwei[140]=null
 endfunction
 function Trig_fwjj3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei[22], UNIT_TYPE_DEAD) == false ) ) then
 set udg_danwei[23]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[22]), 0x65303037, PolarProjectionBJ(udg_dian[21], 0.00, 0), 0)
 call UnitApplyTimedLife(udg_danwei[23], 0x42487765, 0.30)
@@ -30447,6 +31116,8 @@ call RemoveLocation(udg_dian[142])
 call RemoveLocation(udg_dian[143])
 call RemoveLocation(udg_dian[144])
 call RemoveLocation(udg_dian[145])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fwjj3 takes nothing returns nothing
 set gg_trg_fwjj3=CreateTrigger()
@@ -30470,6 +31141,8 @@ call RemoveLocation(udg_dian2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_fwjj4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[350]=( udg_zhengshu2[350] - 1 )
 if ( ( udg_zhengshu2[350] >= 0 ) ) then
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(450.00 , udg_dian[21])
@@ -30481,6 +31154,8 @@ call PauseTimer(udg_times[350])
 set udg_danwei[22]=null
 call RemoveLocation(udg_dian[21])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fwjj4 takes nothing returns nothing
 set gg_trg_fwjj4=CreateTrigger()
@@ -30499,6 +31174,8 @@ call PingMinimapLocForForce(YDWEGetPlayersAlliesNull(GetOwningPlayer(udg_danwei[
 call RemoveLocation(udg_dian[24])
 endfunction
 function Trig_zjActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[29]=GetTriggerUnit()
 set udg_dian[23]=GetUnitLoc(udg_danwei[29])
 set udg_danweizu[7]=YDWEGetUnitsInRangeOfLocMatchingNull(( 750.00 + ( 450.00 * I2R(GetUnitAbilityLevel(udg_danwei[29], 0x41487463)) ) ) , udg_dian[23] , Condition(function Trig_zjFunc003002003))
@@ -30506,6 +31183,8 @@ call ForGroupBJ(udg_danweizu[7], function Trig_zjFunc004A)
 call DestroyGroup(udg_danweizu[7])
 call RemoveLocation(udg_dian[23])
 set udg_danwei[29]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zj takes nothing returns nothing
 set gg_trg_zj=CreateTrigger()
@@ -30619,6 +31298,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yylxx4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[40] == - 16 ) ) then
 set udg_Zhengshu[40]=( udg_Zhengshu[40] + 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[40])
@@ -30718,6 +31399,8 @@ call RemoveLocation(udg_Dian[169])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yylxx4 takes nothing returns nothing
 set gg_trg_yylxx4=CreateTrigger()
@@ -30793,6 +31476,8 @@ endif
 set udg_danwei[141]=null
 endfunction
 function Trig_trps2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call CreateNUnitsAtLoc(1, 0x65303041, GetOwningPlayer(udg_danwei[33]), udg_dian[26], bj_UNIT_FACING)
 set udg_danwei[34]=bj_lastCreatedUnit
 call SetUnitAnimation(udg_danwei[34], "birth")
@@ -30804,6 +31489,8 @@ call ForGroupBJ(udg_danweizu[9], function Trig_trps2Func009A)
 call DestroyGroup(udg_danweizu[9])
 set udg_zhengshu2[78]=0
 call StartTimerBJ(udg_times[78], true, 0.15)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_trps2 takes nothing returns nothing
 set gg_trg_trps2=CreateTrigger()
@@ -30819,6 +31506,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tianporangsuiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[78]=( udg_zhengshu2[78] + 1 )
 if ( ( udg_zhengshu2[78] <= 10 ) ) then
 set udg_aXUNHUAN[50]=1
@@ -30839,6 +31528,8 @@ set udg_danwei[33]=null
 set udg_danwei[34]=null
 call RemoveLocation(udg_dian[26])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tianporangsui takes nothing returns nothing
 set gg_trg_tianporangsui=CreateTrigger()
@@ -30940,6 +31631,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_duanzui_2Func003Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[173]=GetEnumUnit()
 set udg_Dian[174]=GetUnitLoc(udg_Danwei[173])
 call SetUnitScale(udg_Danwei[173], ( 1 + ( 0.07 * I2R(GetUnitUserData(udg_Danwei[173])) ) ), ( 1 + ( 0.07 * I2R(GetUnitUserData(udg_Danwei[173])) ) ), ( 1 + ( 0.07 * I2R(GetUnitUserData(udg_Danwei[173])) ) ))
@@ -30980,8 +31673,12 @@ endif
 endif
 call RemoveLocation(udg_Dian[174])
 set udg_Danwei[173]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_duanzui_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[178] == - 2 ) ) then
 set udg_Zhengshu[178]=( udg_Zhengshu[178] + 1 )
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[170]), 0x65303130, udg_Dian[170], 0)
@@ -31029,6 +31726,8 @@ call ForGroupBJ(udg_Danweizu[170], function Trig_duanzui_2Func003Func002A)
 else
 endif
 call RemoveLocation(udg_Dian[175])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duanzui_2 takes nothing returns nothing
 set gg_trg_duanzui_2=CreateTrigger()
@@ -31090,6 +31789,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_zhenhong_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[172] == - 18 ) ) then
 set udg_Zhengshu[172]=( udg_Zhengshu[172] + 1 )
 set udg_Dian[176]=GetUnitLoc(udg_Danwei[170])
@@ -31151,6 +31852,8 @@ call PauseTimer(udg_jishiqi[171])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhenhong_2 takes nothing returns nothing
 set gg_trg_zhenhong_2=CreateTrigger()
@@ -31215,6 +31918,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_feiyan_2Func001Func013Func001Func004Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[36]=GetEnumUnit()
 set udg_Dian[173]=GetUnitLoc(udg_danwei[36])
 if ( ( GetUnitUserData(udg_danwei[36]) <= 20 ) ) then
@@ -31268,8 +31973,12 @@ call KillUnit(udg_danwei[36])
 endif
 call RemoveLocation(udg_Dian[173])
 set udg_danwei[36]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_feiyan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[33] == - 2 ) ) then
 set udg_zhengshu[33]=( udg_zhengshu[33] + 1 )
 set udg_Dian[176]=GetUnitLoc(udg_Danwei[170])
@@ -31331,6 +32040,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feiyan_2 takes nothing returns nothing
 set gg_trg_feiyan_2=CreateTrigger()
@@ -31367,6 +32078,8 @@ endif
 set udg_danwei[39]=null
 endfunction
 function Trig_hwxj2Func001Func001Func014Func007Func014A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[142]=GetEnumUnit()
 set udg_dian2[1]=GetUnitLoc(udg_danwei[142])
 if ( ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[142]) == true ) and ( IsUnitEnemy(udg_danwei[142], GetOwningPlayer(udg_danwei[38])) == true ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) ) then
@@ -31384,8 +32097,12 @@ else
 endif
 call RemoveLocation(udg_dian2[1])
 set udg_danwei[142]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_hwxj2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[38], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[38], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_aXUNHUAN[87] == - 2 ) ) then
 set udg_aXUNHUAN[87]=( udg_aXUNHUAN[87] + 1 )
@@ -31431,6 +32148,8 @@ endif
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hwxj2 takes nothing returns nothing
 set gg_trg_hwxj2=CreateTrigger()
@@ -31451,6 +32170,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_baka_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetTriggerExecCount(GetTriggeringTrigger()) == 1 ) ) then
 set udg_danwei2[246]=GetSpellAbilityUnit()
 call TriggerRegisterUnitEvent(gg_trg_baka_5, udg_danwei2[246], EVENT_UNIT_ISSUED_TARGET_ORDER)
@@ -31479,6 +32200,8 @@ set udg_zhengshu2[246]=0
 set udg_zhengshu2[247]=0
 call StartTimerBJ(udg_times[246], true, 0.03)
 call RemoveLocation(udg_dian[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_baka_1 takes nothing returns nothing
 set gg_trg_baka_1=CreateTrigger()
@@ -31533,6 +32256,8 @@ call RemoveLocation(udg_dian2[4])
 set udg_danwei2[0]=null
 endfunction
 function Trig_baka_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[246] <= ( 33 * ( GetUnitAbilityLevel(udg_danwei2[246], 0x41303248) + 3 ) ) ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[40])
 set udg_zhengshu2[246]=( udg_zhengshu2[246] + 1 )
@@ -31635,6 +32360,8 @@ call RemoveLocation(udg_dian2[248])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_baka_2 takes nothing returns nothing
 set gg_trg_baka_2=CreateTrigger()
@@ -31691,7 +32418,7 @@ set gg_trg_zhidianzhena_3=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_zhidianzhena_3, udg_jishiqi[80])
 call TriggerAddAction(gg_trg_zhidianzhena_3, function Trig_zhidianzhena_3Actions)
 endfunction
-function Trig_renyishanghaiFunc006Func006Func006A takes nothing returns nothing
+function Trig_renyishanghaiFunc003Func006Func006A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetEventDamageSource() ) and ( IsUnitAlly(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
 if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_HERO) == true ) ) then
 if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) ) then
@@ -31707,7 +32434,7 @@ endif
 else
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func004Func001Func003Func007T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func004Func001Func003Func007T takes nothing returns nothing
 if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA) == 1 ) ) then
 call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA, 0)
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 45.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -31721,7 +32448,7 @@ call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func004Func002Func003Func007T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func004Func002Func003Func007T takes nothing returns nothing
 if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) > 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) - 1 ))
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -31735,7 +32462,7 @@ call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func004Func003Func003Func008T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func004Func003Func003Func008T takes nothing returns nothing
 if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x71BB96BD) == 1 ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), "origin"))
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -31750,7 +32477,7 @@ call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func004Func006Func007T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func004Func006Func007T takes nothing returns nothing
 if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B) == 1 ) ) then
 call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B, 0)
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -31764,7 +32491,7 @@ call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func005Func003Func007T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func005Func003Func007T takes nothing returns nothing
 if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) > 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) - 1 ))
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), ( 5.00 + ( 15.00 * I2R(GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), 0x41303549)) ) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -31778,13 +32505,13 @@ call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func007Func003Func005A takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func007Func003Func005A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_danweizu2[369]) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_FLYING) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ) + ( GetEventDamage() * 0.50 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func010Func002Func012Func009A takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func010Func002Func012Func009A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_Danweizu[161]) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.80 ) + ( GetEventDamage() * 0.80 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GyroCopter\\GyroCopterImpact.mdl", GetEnumUnit(), "chest"))
@@ -31792,7 +32519,7 @@ call GroupAddUnit(udg_Danweizu[161], GetEnumUnit())
 else
 endif
 endfunction
-function Trig_renyishanghaiFunc009Func012Func005Func007T takes nothing returns nothing
+function Trig_renyishanghaiFunc006Func012Func005Func007T takes nothing returns nothing
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4E)
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4D)
 call UnitRemoveBuffBJ(0x42303345, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
@@ -31801,17 +32528,20 @@ call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
-function Trig_renyishanghaiFunc012Func005A takes nothing returns nothing
+function Trig_renyishanghaiFunc009Func005A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_danweizu2[369]) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_FLYING) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( GetEventDamage() * 0.50 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
 else
 endif
 endfunction
 function Trig_renyishanghaiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 local timer ydl_timer
-local integer l__udg_jubuzs1
-local integer l__udg_jubuzs2
-local real l__udg_jubuss1
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_danwei[328]=GetEventDamageSource()
 if ( ( IsUnitIllusionBJ(GetEventDamageSource()) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == true ) and ( ( GetOwningPlayer(GetTriggerUnit()) == s__baka_SPlayer(10) ) or ( GetOwningPlayer(GetTriggerUnit()) == s__baka_SPlayer(11) ) ) ) then
 call SetUnitLifeBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) + ( GetEventDamage() * 0.50 ) ))
@@ -31820,30 +32550,30 @@ endif
 if ( ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_HERO) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == true ) and ( ( GetOwningPlayer(GetTriggerUnit()) == s__baka_SPlayer(10) ) or ( GetOwningPlayer(GetTriggerUnit()) == s__baka_SPlayer(11) ) ) ) then
 set udg_zhengshuex[11]=0
 set udg_zhengshuex[12]=0
-set l__udg_jubuzs1=1
+set udg_jubuzs1=1
 loop
-exitwhen l__udg_jubuzs1 > 5
-if ( ( udg_player[l__udg_jubuzs1] != null ) and ( IsUnitType(udg_player[l__udg_jubuzs1], UNIT_TYPE_DEAD) == false ) ) then
+exitwhen udg_jubuzs1 > 5
+if ( ( udg_player[udg_jubuzs1] != null ) and ( IsUnitType(udg_player[udg_jubuzs1], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshuex[11]=( udg_zhengshuex[11] + 1 )
 else
 endif
-set l__udg_jubuzs1=l__udg_jubuzs1 + 1
+set udg_jubuzs1=udg_jubuzs1 + 1
 endloop
-set l__udg_jubuzs1=6
+set udg_jubuzs1=6
 loop
-exitwhen l__udg_jubuzs1 > 10
-if ( ( udg_player[l__udg_jubuzs1] != null ) and ( IsUnitType(udg_player[l__udg_jubuzs1], UNIT_TYPE_DEAD) == false ) ) then
+exitwhen udg_jubuzs1 > 10
+if ( ( udg_player[udg_jubuzs1] != null ) and ( IsUnitType(udg_player[udg_jubuzs1], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshuex[12]=( udg_zhengshuex[12] + 1 )
 else
 endif
-set l__udg_jubuzs1=l__udg_jubuzs1 + 1
+set udg_jubuzs1=udg_jubuzs1 + 1
 endloop
 if ( ( ( ( udg_zhengshuex[12] >= udg_zhengshuex[11] ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 5 ) ) or ( ( udg_zhengshuex[11] >= udg_zhengshuex[12] ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 6 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) ) ) ) then
 set udg_zhengshuex[11]=0
 set udg_zhengshuex[12]=0
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(700.00 , udg_Dian[75])
-call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc006Func006Func006A)
+call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc003Func006Func006A)
 call DestroyGroup(udg_Danweizu[76])
 if ( ( udg_zhengshuex[11] == 0 ) and ( udg_zhengshuex[12] == 0 ) ) then
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Items\\AIlm\\AIlmTarget.mdl", udg_Dian[75]))
@@ -31883,7 +32613,7 @@ call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 0)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc009Func004Func006Func007T)
+call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc006Func004Func006Func007T)
 else
 call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 1)
 endif
@@ -31897,7 +32627,7 @@ call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 0)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc009Func004Func001Func003Func007T)
+call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc006Func004Func001Func003Func007T)
 else
 call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 1)
 endif
@@ -31912,7 +32642,7 @@ call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 4)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc009Func004Func002Func003Func007T)
+call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc006Func004Func002Func003Func007T)
 else
 call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 5)
 endif
@@ -31928,7 +32658,7 @@ call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 0)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc009Func004Func003Func003Func008T)
+call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc006Func004Func003Func003Func008T)
 else
 call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 1)
 endif
@@ -31944,7 +32674,7 @@ call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 2)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc009Func005Func003Func007T)
+call TimerStart(ydl_timer, 1.00, true, function Trig_renyishanghaiFunc006Func005Func003Func007T)
 else
 call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 3)
 endif
@@ -31978,16 +32708,16 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\ChimaeraLightning
 call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 1 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_Dian[75])
-call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc009Func007Func003Func005A)
+call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc006Func007Func003Func005A)
 call DestroyGroup(udg_Danweizu[76])
 call DestroyEffect(AddSpecialEffectLoc("war3mapImported\\A6_zisepili.mdx", udg_Dian[75]))
-set l__udg_jubuzs1=1
+set udg_jubuzs1=1
 loop
-exitwhen l__udg_jubuzs1 > 9
-set udg_Dian[76]=PolarProjectionBJ(udg_Dian[75], 100.00, ( 40.00 * I2R(l__udg_jubuzs1) ))
+exitwhen udg_jubuzs1 > 9
+set udg_Dian[76]=PolarProjectionBJ(udg_Dian[75], 100.00, ( 40.00 * I2R(udg_jubuzs1) ))
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl", udg_Dian[76]))
 call RemoveLocation(udg_Dian[76])
-set l__udg_jubuzs1=l__udg_jubuzs1 + 1
+set udg_jubuzs1=udg_jubuzs1 + 1
 endloop
 call RemoveLocation(udg_Dian[75])
 else
@@ -32036,21 +32766,21 @@ endif
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Dian[76]=GetUnitLoc(GetEventDamageSource())
 call GroupClear(udg_Danweizu[161])
-set l__udg_jubuzs1=1
+set udg_jubuzs1=1
 loop
-exitwhen l__udg_jubuzs1 > 4
-set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 * I2R(l__udg_jubuzs1) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
+exitwhen udg_jubuzs1 > 4
+set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 * I2R(udg_jubuzs1) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
 call CreateNUnitsAtLoc(1, 0x65303831, GetOwningPlayer(GetEventDamageSource()), udg_Dian[161], AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
 call UnitApplyTimedLife(bj_lastCreatedUnit, 0x42487765, 2.00)
-call SetUnitScale(bj_lastCreatedUnit, ( 0.40 + ( 0.40 * I2R(l__udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(l__udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(l__udg_jubuzs1) ) ))
-call SetUnitTimeScale(bj_lastCreatedUnit, ( 3.00 - ( 0.50 * I2R(l__udg_jubuzs1) ) ))
+call SetUnitScale(bj_lastCreatedUnit, ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ))
+call SetUnitTimeScale(bj_lastCreatedUnit, ( 3.00 - ( 0.50 * I2R(udg_jubuzs1) ) ))
 call RemoveLocation(udg_Dian[161])
-set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 + ( 40.00 * I2R(l__udg_jubuzs1) ) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
-set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(( 100.00 + ( 25.00 * I2R(l__udg_jubuzs1) ) ) , udg_Dian[161])
-call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc009Func010Func002Func012Func009A)
+set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 + ( 40.00 * I2R(udg_jubuzs1) ) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
+set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(( 100.00 + ( 25.00 * I2R(udg_jubuzs1) ) ) , udg_Dian[161])
+call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc006Func010Func002Func012Func009A)
 call DestroyGroup(udg_Danweizu[76])
 call RemoveLocation(udg_Dian[161])
-set l__udg_jubuzs1=l__udg_jubuzs1 + 1
+set udg_jubuzs1=udg_jubuzs1 + 1
 endloop
 call RemoveLocation(udg_Dian[75])
 call RemoveLocation(udg_Dian[76])
@@ -32088,66 +32818,66 @@ call UnitAddAbility(GetTriggerUnit(), 0x41304E4E)
 call UnitAddAbility(GetTriggerUnit(), 0x41304E4D)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 2.00, false, function Trig_renyishanghaiFunc009Func012Func005Func007T)
+call TimerStart(ydl_timer, 2.00, false, function Trig_renyishanghaiFunc006Func012Func005Func007T)
 else
 endif
 else
 endif
 if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-set l__udg_jubuss1=0.00
-set l__udg_jubuzs1=( GetHeroAgi(GetEventDamageSource(), true) / 15 )
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930344A)) == true ) and ( GetRandomInt(1, 100) <= l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 1.00)
+set udg_jubuss1=0.00
+set udg_jubuzs1=( GetHeroAgi(GetEventDamageSource(), true) / 15 )
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930344A)) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
 else
 endif
-set l__udg_jubuzs1=15
-if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303348) == true ) and ( GetRandomInt(1, 100) <= l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 1.00)
+set udg_jubuzs1=15
+if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303348) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
 else
 endif
-set l__udg_jubuzs1=0
-set l__udg_jubuzs2=1
+set udg_jubuzs1=0
+set udg_jubuzs2=1
 loop
-exitwhen l__udg_jubuzs2 > 6
-if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), l__udg_jubuzs2)) == 0x7372746C ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), l__udg_jubuzs2)) == 0x73726264 ) ) ) then
-set l__udg_jubuzs1=( l__udg_jubuzs1 + 1 )
+exitwhen udg_jubuzs2 > 6
+if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x7372746C ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x73726264 ) ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
 else
 endif
-set l__udg_jubuzs2=l__udg_jubuzs2 + 1
+set udg_jubuzs2=udg_jubuzs2 + 1
 endloop
-set l__udg_jubuzs1=R2I(( Pow(0.85, I2R(l__udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 0.50)
+set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.50)
 else
 endif
-set l__udg_jubuzs1=0
-set l__udg_jubuzs2=1
+set udg_jubuzs1=0
+set udg_jubuzs2=1
 loop
-exitwhen l__udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), l__udg_jubuzs2)) == 0x74656C73 ) ) then
-set l__udg_jubuzs1=( l__udg_jubuzs1 + 1 )
+exitwhen udg_jubuzs2 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x74656C73 ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
 else
 endif
-set l__udg_jubuzs2=l__udg_jubuzs2 + 1
+set udg_jubuzs2=udg_jubuzs2 + 1
 endloop
-set l__udg_jubuzs1=R2I(( Pow(0.80, I2R(l__udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 1.00)
+set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
 else
 endif
-set l__udg_jubuzs1=0
-set l__udg_jubuzs2=1
+set udg_jubuzs1=0
+set udg_jubuzs2=1
 loop
-exitwhen l__udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), l__udg_jubuzs2)) == 0x72617466 ) ) then
-set l__udg_jubuzs1=( l__udg_jubuzs1 + 1 )
+exitwhen udg_jubuzs2 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x72617466 ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
 else
 endif
-set l__udg_jubuzs2=l__udg_jubuzs2 + 1
+set udg_jubuzs2=udg_jubuzs2 + 1
 endloop
-set l__udg_jubuzs1=R2I(( Pow(0.85, I2R(l__udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 1.50)
+set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.50)
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
@@ -32157,19 +32887,19 @@ set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
 else
 endif
-set l__udg_jubuzs1=0
-set l__udg_jubuzs2=1
+set udg_jubuzs1=0
+set udg_jubuzs2=1
 loop
-exitwhen l__udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), l__udg_jubuzs2)) == 0x49303239 ) ) then
-set l__udg_jubuzs1=( l__udg_jubuzs1 + 1 )
+exitwhen udg_jubuzs2 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303239 ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
 else
 endif
-set l__udg_jubuzs2=l__udg_jubuzs2 + 1
+set udg_jubuzs2=udg_jubuzs2 + 1
 endloop
-set l__udg_jubuzs1=R2I(( Pow(0.80, I2R(l__udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > l__udg_jubuzs1 ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 0.80)
+set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.80)
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
@@ -32180,7 +32910,7 @@ call RemoveLocation(udg_Dian[75])
 else
 endif
 if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303045) == true ) ) then
-set l__udg_jubuss1=RMaxBJ(l__udg_jubuss1, 1.00)
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
 call UnitRemoveBuffBJ(0x42303045, GetTriggerUnit())
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl", GetTriggerUnit(), "chest"))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", GetTriggerUnit(), "chest"))
@@ -32188,7 +32918,7 @@ call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetUnitState(G
 else
 endif
 if ( ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) > GetEventDamage() ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303251) == 1 ) ) then
-set l__udg_jubuss1=( l__udg_jubuss1 + 1 )
+set udg_jubuss1=( udg_jubuss1 + 1 )
 set udg_danwei[278]=GetEventDamageSource()
 call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetUnitAbilityLevel(GetEventDamageSource(), 0x41556373)) * 25.00 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call StartTimerBJ(udg_jishiqi[80], false, 8.00)
@@ -32203,14 +32933,14 @@ set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
 else
 endif
-if ( ( l__udg_jubuss1 > 0.00 ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetEventDamage() * l__udg_jubuss1 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+if ( ( udg_jubuss1 > 0.00 ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetEventDamage() * udg_jubuss1 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\jianqibo.mdx", GetTriggerUnit(), "chest"))
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-if ( ( ( l__udg_jubuss1 / 10.00 ) == ( I2R(R2I(l__udg_jubuss1)) / 10.00 ) ) ) then
-call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ))) + ( "（" + ( I2S(R2I(( l__udg_jubuss1 + 1 ))) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
+if ( ( ( udg_jubuss1 / 10.00 ) == ( I2R(R2I(udg_jubuss1)) / 10.00 ) ) ) then
+call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( I2S(R2I(( udg_jubuss1 + 1 ))) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
 else
-call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ))) + ( "（" + ( R2SW(( l__udg_jubuss1 + 1.00 ), 1, 1) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
+call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( R2SW(( udg_jubuss1 + 1.00 ), 1, 1) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
 endif
 call SetTextTagVelocity(bj_lastCreatedTextTag, 0.00, 0.03)
 call SetTextTagPermanent(bj_lastCreatedTextTag, false)
@@ -32218,14 +32948,14 @@ call SetTextTagFadepoint(bj_lastCreatedTextTag, 1.50)
 call SetTextTagLifespan(bj_lastCreatedTextTag, 4.00)
 call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 set udg_wanjiazu[0]=CreateForce()
-set l__udg_jubuzs1=1
+set udg_jubuzs1=1
 loop
-exitwhen l__udg_jubuzs1 > 10
-if ( ( IsUnitVisible(GetTriggerUnit(), s__baka_SPlayer(l__udg_jubuzs1 - 1)) == true ) ) then
-call ForceAddPlayer(udg_wanjiazu[0], s__baka_SPlayer(l__udg_jubuzs1 - 1))
+exitwhen udg_jubuzs1 > 10
+if ( ( IsUnitVisible(GetTriggerUnit(), s__baka_SPlayer(udg_jubuzs1 - 1)) == true ) ) then
+call ForceAddPlayer(udg_wanjiazu[0], s__baka_SPlayer(udg_jubuzs1 - 1))
 else
 endif
-set l__udg_jubuzs1=l__udg_jubuzs1 + 1
+set udg_jubuzs1=udg_jubuzs1 + 1
 endloop
 call ShowTextTagForceBJ(true, bj_lastCreatedTextTag, udg_wanjiazu[0])
 call DestroyForce(udg_wanjiazu[0])
@@ -32233,19 +32963,19 @@ call RemoveLocation(udg_Dian[75])
 else
 endif
 if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 4 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.35 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.35 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 3 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.30 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.30 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 2 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.25 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.25 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 1 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.20 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.20 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 endif
@@ -32253,11 +32983,11 @@ endif
 endif
 endif
 if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303349) == true ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.15 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.15 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x4230334A) == true ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + l__udg_jubuss1 ) ) * 0.10 ) ))
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.10 ) ))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
 else
 endif
@@ -32285,7 +33015,7 @@ call DisableTrigger(GetTriggeringTrigger())
 call UnitRemoveBuffBJ(0x4230324A, GetTriggerUnit())
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(180.00 , udg_Dian[75])
-call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc012Func005A)
+call ForGroupBJ(udg_Danweizu[76], function Trig_renyishanghaiFunc009Func005A)
 call DestroyGroup(udg_Danweizu[76])
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=9
@@ -32343,7 +33073,9 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAu
 else
 endif
 set udg_danwei[328]=null
-set ydl_timer=null
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_group=null
+set ydl_unit=null
 set ydl_timer=null
 endfunction
 function InitTrig_renyishanghai takes nothing returns nothing
@@ -32513,6 +33245,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhuizongdaodan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei2[50], UNIT_TYPE_TAUREN) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[50])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[49])
@@ -32568,6 +33302,8 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhuizongdaodan_2 takes nothing returns nothing
 set gg_trg_zhuizongdaodan_2=CreateTrigger()
@@ -32627,6 +33363,8 @@ endif
 set udg_Danwei[79]=null
 endfunction
 function Trig_danmu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetUnitAbilityLevel(GetAttacker(), 0x41616D6B) > 0 ) ) then
 set udg_Danwei[77]=GetAttacker()
 set udg_Danwei[78]=GetAttackedUnitBJ()
@@ -32645,6 +33383,8 @@ else
 endif
 set udg_Danwei[77]=null
 set udg_Danwei[78]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_danmu_2 takes nothing returns nothing
 set gg_trg_danmu_2=CreateTrigger()
@@ -32680,7 +33420,11 @@ endif
 set udg_danwei[185]=null
 endfunction
 function Trig_danmu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_attack, function Trig_danmu_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_danmu_3 takes nothing returns nothing
 set gg_trg_danmu_3=CreateTrigger()
@@ -32699,7 +33443,11 @@ endif
 set udg_danwei[185]=null
 endfunction
 function Trig_majiagongjiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_attack, function Trig_majiagongjiFunc001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_majiagongji takes nothing returns nothing
 set gg_trg_majiagongji=CreateTrigger()
@@ -32774,6 +33522,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_daodanqishe_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -32804,9 +33554,15 @@ call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\Mortar\\MortarMissil
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_daodanqishe_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[46], function Trig_daodanqishe_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_daodanqishe_2 takes nothing returns nothing
 set gg_trg_daodanqishe_2=CreateTrigger()
@@ -32842,6 +33598,8 @@ endif
 set udg_danwei[144]=null
 endfunction
 function Trig_dd2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[31] <= 40 ) ) then
 set udg_zhengshu2[31]=( udg_zhengshu2[31] + 1 )
 if ( ( udg_zhengshu2[31] < 40 ) ) then
@@ -32894,6 +33652,8 @@ call PauseTimer(udg_jishiqi[18])
 call DestroyGroup(udg_danweizu[14])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dd2 takes nothing returns nothing
 set gg_trg_dd2=CreateTrigger()
@@ -32949,6 +33709,8 @@ endif
 set udg_danwei[145]=null
 endfunction
 function Trig_weixingshexian_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[47]=( udg_zhengshu2[47] + 1 )
 if ( ( udg_zhengshu2[47] <= 10 ) ) then
 call SetUnitFacing(udg_danwei2[47], ( GetUnitFacing(udg_danwei2[47]) - 30.00 ))
@@ -32998,6 +33760,8 @@ else
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_weixingshexian_2 takes nothing returns nothing
 set gg_trg_weixingshexian_2=CreateTrigger()
@@ -33228,6 +33992,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_wuyun_2Func001Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( GetUnitUserData(udg_danwei2[0]) >= 0 ) and ( UnitHasBuffBJ(udg_danwei[173], 0x42303137) == false ) ) then
 call PlaySoundOnUnitBJ(gg_snd_CloudOfFogLoop1, 100, udg_danwei2[0])
@@ -33260,6 +34026,8 @@ call KillUnit(udg_danwei2[0])
 call GroupRemoveUnit(udg_danweizu2[106], udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_wuyun_2Func002Func001Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -33280,6 +34048,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_wuyun_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitGroupEmptyBJ(udg_danweizu2[106]) == false ) ) then
 call ForGroupBJ(udg_danweizu2[106], function Trig_wuyun_2Func001Func001A)
 else
@@ -33310,6 +34080,8 @@ else
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_wuyun_2 takes nothing returns nothing
 set gg_trg_wuyun_2=CreateTrigger()
@@ -33376,6 +34148,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_leiji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[81] <= 20 ) ) then
 set udg_Zhengshu[81]=( udg_Zhengshu[81] + 1 )
 set udg_Danweizu[81]=YDWEGetUnitsInRangeOfLocAllNull(( 50.00 + ( 50.00 * I2R(udg_Zhengshu[81]) ) ) , udg_Dian[81])
@@ -33389,6 +34163,8 @@ set udg_Danwei[81]=null
 set udg_Danwei[82]=null
 call RemoveLocation(udg_Dian[81])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_leiji_2 takes nothing returns nothing
 set gg_trg_leiji_2=CreateTrigger()
@@ -33431,6 +34207,8 @@ endif
 set udg_danwei[146]=null
 endfunction
 function Trig_sphl2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[105]=( udg_zhengshu2[105] + 1 )
 if ( ( udg_zhengshu2[105] <= 60 ) ) then
 if ( ( udg_zhengshu2[105] <= 50 ) ) then
@@ -33457,6 +34235,8 @@ set udg_danwei[57]=null
 set udg_danwei[58]=null
 call PauseTimer(udg_times[105])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sphl2 takes nothing returns nothing
 set gg_trg_sphl2=CreateTrigger()
@@ -33538,6 +34318,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_guangdun_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetUnitAbilityLevel(udg_danwei2[100], 0x41303338) == 0 ) ) then
 call PauseTimer(udg_jishiqi[95])
 call StartTimerBJ(udg_jishiqi[95], false, 0.00)
@@ -33552,6 +34334,8 @@ call DestroyGroup(udg_xuanqu)
 call RemoveLocation(udg_dian2[0])
 call StartTimerBJ(udg_Times[158], false, 2.50)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guangdun_1 takes nothing returns nothing
 set gg_trg_guangdun_1=CreateTrigger()
@@ -33565,8 +34349,12 @@ call UnitRemoveBuffBJ(0x42303346, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_guangdun_1_5Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[158], function Trig_guangdun_1_5Func001A)
 call GroupClear(udg_Danweizu[158])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_guangdun_1_5 takes nothing returns nothing
 set gg_trg_guangdun_1_5=CreateTrigger()
@@ -33822,6 +34610,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhuanzhuyijian_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[17])
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 75.00, GetUnitFacing(udg_danwei2[17]))
 set udg_zhengshu2[15]=( udg_zhengshu2[15] + 1 )
@@ -33966,6 +34756,8 @@ endif
 endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhuanzhuyijian_2 takes nothing returns nothing
 set gg_trg_zhuanzhuyijian_2=CreateTrigger()
@@ -34012,6 +34804,8 @@ endif
 set udg_danwei[147]=null
 endfunction
 function Trig_fzj2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian[66]=GetUnitLoc(udg_danwei[65])
 set udg_dian2[0]=PolarProjectionBJ(udg_dian[66], 93.75, GetUnitFacing(udg_danwei[65]))
 if ( ( IsTerrainPathableBJ(udg_dian[66], PATHING_TYPE_FLYABILITY) == false ) and ( IsUnitType(udg_danwei[65], UNIT_TYPE_DEAD) == false ) ) then
@@ -34034,6 +34828,8 @@ set udg_danwei[65]=null
 endif
 call RemoveLocation(udg_dian[66])
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fzj2 takes nothing returns nothing
 set gg_trg_fzj2=CreateTrigger()
@@ -34132,7 +34928,11 @@ endif
 set udg_danwei[185]=null
 endfunction
 function Trig_lianshe_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_attack, function Trig_lianshe_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_lianshe_3 takes nothing returns nothing
 set gg_trg_lianshe_3=CreateTrigger()
@@ -34182,6 +34982,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_baoyujianzhen_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[89]=( udg_zhengshu2[89] + 1 )
 if ( ( udg_zhengshu2[89] <= 50 ) ) then
 call ForGroupBJ(udg_danweizu2[89], function Trig_baoyujianzhen_2Func003Func001A)
@@ -34193,6 +34995,8 @@ else
 call PauseTimer(udg_times[89])
 call DestroyGroup(udg_danweizu2[89])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_baoyujianzhen_2 takes nothing returns nothing
 set gg_trg_baoyujianzhen_2=CreateTrigger()
@@ -34208,6 +35012,8 @@ endif
 set udg_danwei[148]=null
 endfunction
 function Trig_gmjz2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[38]=( udg_zhengshu[38] + 1 )
 set udg_danweizu[19]=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_dian[68])
 call ForGroupBJ(udg_danweizu[19], function Trig_gmjz2Func003A)
@@ -34218,6 +35024,8 @@ call RemoveLocation(udg_dian[68])
 call DisableTrigger(GetTriggeringTrigger())
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gmjz2 takes nothing returns nothing
 set gg_trg_gmjz2=CreateTrigger()
@@ -34259,6 +35067,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_rongjiangjushi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[33])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 20.00, GetUnitFacing(udg_danwei2[33]))
 if ( ( IsUnitType(udg_danwei2[33], UNIT_TYPE_DEAD) == false ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) and ( ( GetLocationZ(udg_dian2[0]) + s__maphack_GetHeight(udg_danwei2[33]) ) > GetLocationZ(udg_dian2[1]) ) ) then
@@ -34291,6 +35101,8 @@ set udg_danwei2[34]=null
 endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_rongjiangjushi_2 takes nothing returns nothing
 set gg_trg_rongjiangjushi_2=CreateTrigger()
@@ -34371,6 +35183,8 @@ endif
 set udg_danwei[149]=null
 endfunction
 function Trig_bf2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[73], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[73], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[363]=( udg_zhengshu2[363] - 1 )
 if ( ( udg_zhengshu2[363] >= 0 ) and ( IsUnitType(udg_danwei[73], UNIT_TYPE_DEAD) == false ) ) then
@@ -34388,6 +35202,8 @@ endif
 else
 call ForGroupBJ(udg_danweizu2[363], function Trig_bf2Func001Func001A)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bf2 takes nothing returns nothing
 set gg_trg_bf2=CreateTrigger()
@@ -34786,6 +35602,8 @@ call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( I2R(GetHeroStr(udg_danwe
 set udg_danwei2[1]=null
 endfunction
 function Trig_yanzhuaActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_danweizu2[34]=CreateGroup()
@@ -34809,6 +35627,8 @@ call DestroyGroup(udg_danweizu2[34])
 set udg_danwei2[0]=null
 set udg_danwei2[2]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yanzhua takes nothing returns nothing
 set gg_trg_yanzhua=CreateTrigger()
@@ -34864,6 +35684,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huitianmiedi_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Other\\Volcano\\VolcanoMissile.mdl", udg_dian2[0]))
@@ -34873,6 +35695,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_huitianmiedi_3Func007A)
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huitianmiedi_3 takes nothing returns nothing
 set gg_trg_huitianmiedi_3=CreateTrigger()
@@ -34923,6 +35747,8 @@ call RemoveUnit(udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_qianxing_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[159], UNIT_TYPE_DEAD) == false ) and ( ( udg_zhengshu[39] > 0 ) or ( UnitHasBuffBJ(udg_Danwei[159], 0x424F776B) == true ) ) ) then
 if ( ( udg_zhengshu[39] > 0 ) ) then
 if ( ( udg_zhengshu[39] == 20 ) ) then
@@ -35017,6 +35843,8 @@ call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[159]), 0x414F776B, tru
 call UnitRemoveAbility(udg_Danwei[159], 0x4130304E)
 call DisableTrigger(gg_trg_qianxing_3)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_qianxing_2 takes nothing returns nothing
 set gg_trg_qianxing_2=CreateTrigger()
@@ -35190,6 +36018,8 @@ endif
 set udg_danwei[435]=null
 endfunction
 function Trig_huibi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[73], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( udg_Shishu[73] > 0.00 ) and ( IsUnitType(udg_Danwei[73], UNIT_TYPE_DEAD) == false ) and ( udg_zhengshu[39] == 0 ) ) then
 if ( ( udg_Shishu[73] == 15.00 ) ) then
@@ -35229,6 +36059,8 @@ call PauseTimer(udg_Times[73])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huibi_2 takes nothing returns nothing
 set gg_trg_huibi_2=CreateTrigger()
@@ -35341,6 +36173,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_anyingbu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[159] == 17 ) ) then
 set udg_Zhengshu[159]=( udg_Zhengshu[159] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[159])
@@ -35429,6 +36263,8 @@ endif
 else
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_anyingbu_2 takes nothing returns nothing
 set gg_trg_anyingbu_2=CreateTrigger()
@@ -35464,6 +36300,8 @@ endif
 set udg_danwei[253]=null
 endfunction
 function Trig_huixuanbiao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[75]=( udg_zhengshu[75] - 1 )
 if ( ( udg_zhengshu[75] >= - 30 ) and ( IsUnitType(udg_danwei[87], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian[224]=GetUnitLoc(udg_danwei[87])
@@ -35492,6 +36330,8 @@ call RemoveLocation(udg_dian[78])
 call RemoveLocation(udg_dian[79])
 call PauseTimer(udg_jishiqi[85])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huixuanbiao_2 takes nothing returns nothing
 set gg_trg_huixuanbiao_2=CreateTrigger()
@@ -35530,6 +36370,8 @@ endif
 set udg_danwei[150]=null
 endfunction
 function Trig_zhimingtiji2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[88], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[88], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[82]=( udg_zhengshu2[82] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei[88])
@@ -35581,6 +36423,8 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhimingtiji2 takes nothing returns nothing
 set gg_trg_zhimingtiji2=CreateTrigger()
@@ -35622,6 +36466,8 @@ endif
 set udg_danwei[410]=null
 endfunction
 function Trig_dizhen2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[45]=( udg_zhengshu[45] + 1 )
 if ( ( ( ( udg_zhengshu[45] <= 12 ) and ( GetUnitAbilityLevel(udg_danwei[105], 0x41304E32) > 0 ) ) or ( udg_zhengshu[45] < 9 ) ) ) then
 set udg_dian[99]=PolarProjectionBJ(udg_dian[97], ( 125.00 * I2R(udg_zhengshu[45]) ), AngleBetweenPoints(udg_dian[97], udg_dian[98]))
@@ -35640,6 +36486,8 @@ set udg_danwei[106]=null
 call RemoveLocation(udg_dian[97])
 call RemoveLocation(udg_dian[98])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dizhen2 takes nothing returns nothing
 set gg_trg_dizhen2=CreateTrigger()
@@ -35805,6 +36653,8 @@ call RemoveUnit(udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_dunji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei2[42], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei2[42], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu2[42] > 0 ) ) then
 set udg_zhengshu2[42]=( udg_zhengshu2[42] - 1 )
@@ -35835,6 +36685,8 @@ set udg_danwei2[42]=null
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dunji_2 takes nothing returns nothing
 set gg_trg_dunji_2=CreateTrigger()
@@ -35944,6 +36796,8 @@ call KillUnit(udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_shenpanjiasuo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei[126], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_danwei[126], 0x42303254) == true ) and ( udg_zhengshu2[367] > 0 ) ) then
 set udg_zhengshu2[367]=( udg_zhengshu2[367] - 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[367])
@@ -35972,6 +36826,8 @@ set udg_danwei2[367]=null
 call ForGroupBJ(udg_danweizu2[367], function Trig_shenpanjiasuo_2Func001Func024A)
 call GroupClear(udg_danweizu2[367])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shenpanjiasuo_2 takes nothing returns nothing
 set gg_trg_shenpanjiasuo_2=CreateTrigger()
@@ -35998,6 +36854,8 @@ set udg_danwei[154]=null
 call RemoveLocation(udg_dian[114])
 endfunction
 function Trig_shenshengzhicaiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[128]=GetTriggerUnit()
 set udg_danwei2[1]=GetSpellTargetUnit()
 set udg_dian[113]=GetUnitLoc(udg_danwei2[1])
@@ -36007,6 +36865,8 @@ set udg_danwei[128]=null
 set udg_danwei2[1]=null
 call RemoveLocation(udg_dian[113])
 call DestroyGroup(udg_danweizu[128])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shenshengzhicai takes nothing returns nothing
 set gg_trg_shenshengzhicai=CreateTrigger()
@@ -36045,6 +36905,8 @@ endif
 set udg_danwei[155]=null
 endfunction
 function Trig_huangjinxuanfeng2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[51] >= 0 ) ) then
 set udg_zhengshu[51]=( udg_zhengshu[51] - 1 )
 set udg_dian[117]=GetUnitLoc(udg_danwei[131])
@@ -36066,6 +36928,8 @@ set udg_danwei[131]=null
 call RemoveLocation(udg_dian[115])
 call RemoveLocation(udg_dian[116])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huangjinxuanfeng2 takes nothing returns nothing
 set gg_trg_huangjinxuanfeng2=CreateTrigger()
@@ -36109,6 +36973,8 @@ endif
 set udg_danwei[162]=null
 endfunction
 function Trig_aersaisideyizhi2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[160]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[133]), 0x65303130, udg_dian[120], 0)
 call UnitApplyTimedLife(udg_danwei[160], 0x42487765, 4.00)
 call UnitAddAbility(udg_danwei[160], 0x414E736F)
@@ -36148,6 +37014,8 @@ set udg_zhengshu2[45]=0
 set udg_danwei[133]=null
 set udg_danwei[160]=null
 call RemoveLocation(udg_dian[120])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_aersaisideyizhi2 takes nothing returns nothing
 set gg_trg_aersaisideyizhi2=CreateTrigger()
@@ -36245,6 +37113,8 @@ set udg_danwei[152]=null
 call RemoveLocation(udg_dian[94])
 endfunction
 function Trig_siwangchanrao2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian[92]=GetUnitLoc(udg_danwei[97])
 set udg_dian[93]=GetUnitLoc(udg_danwei[98])
 if ( ( udg_danwei2[366] != null ) ) then
@@ -36277,6 +37147,8 @@ endif
 call RemoveLocation(udg_dian[92])
 call RemoveLocation(udg_dian[93])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_siwangchanrao2 takes nothing returns nothing
 set gg_trg_siwangchanrao2=CreateTrigger()
@@ -36313,6 +37185,8 @@ endif
 set udg_danwei[152]=null
 endfunction
 function Trig_xiaowangyiji1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[79] <= 20 ) ) then
 set udg_zhengshu2[79]=( udg_zhengshu2[79] + 1 )
 set udg_dian2[0]=PolarProjectionBJ(udg_dian[88], ( DistanceBetweenPoints(udg_dian[87], udg_dian[88]) * ( I2R(udg_zhengshu2[79]) / 20.00 ) ), AngleBetweenPoints(udg_dian[88], udg_dian[87]))
@@ -36344,6 +37218,8 @@ call StartTimerBJ(udg_jishiqi[30], true, 0.03)
 set udg_zhengshu2[79]=0
 call RemoveLocation(udg_dian2[0])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xiaowangyiji1 takes nothing returns nothing
 set gg_trg_xiaowangyiji1=CreateTrigger()
@@ -36419,6 +37295,8 @@ endif
 set udg_danwei[153]=null
 endfunction
 function Trig_heihuagongji2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei[99], UNIT_TYPE_TAUREN) == false ) ) then
 call SetUnitVertexColor(udg_danwei[99], 0, 0, 0, 255)
 call SetUnitTimeScale(udg_danwei[99], 5.00)
@@ -36441,6 +37319,8 @@ else
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_heihuagongji2 takes nothing returns nothing
 set gg_trg_heihuagongji2=CreateTrigger()
@@ -36504,6 +37384,8 @@ call RemoveUnit(udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_heianyishi2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( I2R(udg_zhengshu[41]) / 2.00 ) == I2R(( udg_zhengshu[41] / 2 )) ) ) then
 call ForGroupBJ(udg_danweizu[27], function Trig_heianyishi2Func001Func002A)
 if ( ( udg_zhengshu[42] < 6 ) ) then
@@ -36544,6 +37426,8 @@ call ForGroupBJ(udg_danweizu[27], function Trig_heianyishi2Func008Func008A)
 call GroupClear(udg_danweizu[27])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_heianyishi2 takes nothing returns nothing
 set gg_trg_heianyishi2=CreateTrigger()
@@ -36629,6 +37513,8 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_heianzuzhou_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[60] > 0 ) ) then
 set udg_zhengshu2[60]=( udg_zhengshu2[60] - 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[60])
@@ -36656,6 +37542,8 @@ call PauseTimer(udg_times[60])
 set udg_danwei2[60]=null
 set udg_danwei2[61]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_heianzuzhou_2 takes nothing returns nothing
 set gg_trg_heianzuzhou_2=CreateTrigger()
@@ -36695,12 +37583,16 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_quanliyiji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[37], function Trig_quanliyiji_2Func001A)
 call SetUnitTimeScale(udg_danwei[163], 2.00)
 call SetUnitAnimation(udg_danwei[163], "Attack 2")
 call UnitDamageTarget(udg_danwei[163], udg_danwei[164], ( I2R(GetHeroAgi(udg_danwei[163], true)) * 7.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_ROCK_HEAVY_BASH)
 call StartTimerBJ(udg_jishiqi[40], true, 0.02)
 set udg_zhengshu[53]=2
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_quanliyiji_2 takes nothing returns nothing
 set gg_trg_quanliyiji_2=CreateTrigger()
@@ -36756,6 +37648,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_tiaoyueActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[166]=GetTriggerUnit()
 set udg_dian[125]=GetUnitLoc(udg_danwei[166])
 set udg_dian[126]=GetSpellTargetLoc()
@@ -36773,6 +37667,8 @@ call PauseTimer(udg_jishiqi[45])
 call SetUnitAnimation(udg_danwei[166], "Attack slam")
 call ForGroupBJ(udg_Danweizu[37], function Trig_tiaoyueFunc005Func011A)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaoyue takes nothing returns nothing
 set gg_trg_tiaoyue=CreateTrigger()
@@ -36788,6 +37684,8 @@ endif
 set udg_danwei[172]=null
 endfunction
 function Trig_tiaoyue_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[166], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[166], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu2[113] == 31 ) ) then
 set udg_Dian[89]=GetUnitLoc(udg_danwei[166])
@@ -36835,6 +37733,8 @@ endif
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaoyue_2 takes nothing returns nothing
 set gg_trg_tiaoyue_2=CreateTrigger()
@@ -36866,6 +37766,8 @@ endif
 set udg_danwei[172]=null
 endfunction
 function Trig_tiaoyue_boxingActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[113]=( udg_zhengshu2[113] + 1 )
 if ( ( udg_zhengshu2[113] <= 10 ) ) then
 set udg_dian2[0]=PolarProjectionBJ(udg_dian[125], ( ( DistanceBetweenPoints(udg_dian[125], udg_dian[126]) / 30.00 ) * I2R(udg_zhengshu2[113]) ), AngleBetweenPoints(udg_dian[125], udg_dian[126]))
@@ -37024,6 +37926,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaoyue_boxing takes nothing returns nothing
 set gg_trg_tiaoyue_boxing=CreateTrigger()
@@ -37075,6 +37979,8 @@ call RemoveLocation(udg_dian[129])
 call RemoveLocation(udg_dian2[0])
 endfunction
 function Trig_xuanfengti_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[54] == 43 ) ) then
 set udg_zhengshu[54]=( udg_zhengshu[54] - 1 )
 call StartTimerBJ(udg_Times[154], true, 0.03)
@@ -37116,6 +38022,8 @@ set udg_danwei[168]=null
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanfengti_2 takes nothing returns nothing
 set gg_trg_xuanfengti_2=CreateTrigger()
@@ -37165,6 +38073,8 @@ endif
 set udg_danwei[172]=null
 endfunction
 function Trig_shunshenlianxi2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[170], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[170], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[56]=( udg_zhengshu[56] + 1 )
 if ( ( udg_zhengshu[56] <= 12 ) ) then
@@ -37228,6 +38138,8 @@ endif
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shunshenlianxi2 takes nothing returns nothing
 set gg_trg_shunshenlianxi2=CreateTrigger()
@@ -37555,6 +38467,8 @@ endif
 set udg_danwei[328]=null
 endfunction
 function Trig_rougou_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[81] < 50 ) ) then
 set udg_dian[242]=GetUnitLoc(udg_rogou[100])
 set udg_zhengshu[81]=( udg_zhengshu[81] + 1 )
@@ -37631,6 +38545,8 @@ set udg_rogou[101]=null
 set udg_danwei[175]=null
 call PauseTimer(udg_jishiqi[91])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_rougou_2 takes nothing returns nothing
 set gg_trg_rougou_2=CreateTrigger()
@@ -37819,6 +38735,8 @@ endif
 set udg_danwei[328]=null
 endfunction
 function Trig_qiangxingliliang_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[329]=GetEnumUnit()
 if ( ( UnitHasBuffBJ(udg_danwei[329], 0x4230304B) == true ) ) then
 if ( ( IsUnitType(udg_danwei[329], UNIT_TYPE_TAUREN) == false ) ) then
@@ -37846,9 +38764,15 @@ call GroupRemoveUnit(udg_danweizu[63], udg_danwei[329])
 call RemoveLocation(udg_dian2[337])
 endif
 set udg_danwei[329]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_qiangxingliliang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu[63], function Trig_qiangxingliliang_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_qiangxingliliang_2 takes nothing returns nothing
 set gg_trg_qiangxingliliang_2=CreateTrigger()
@@ -37876,6 +38800,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_fushiwenyi_2Func001Func006A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[327]=GetEnumUnit()
 set udg_dian[241]=GetUnitLoc(udg_danwei[327])
 set udg_danweizu[61]=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian[241])
@@ -37889,8 +38815,12 @@ endif
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl", udg_dian[241]))
 set udg_danwei[327]=null
 call RemoveLocation(udg_dian[241])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_fushiwenyi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[80] < 20 ) ) then
 set udg_zhengshu[80]=( udg_zhengshu[80] + 1 )
 call ForGroupBJ(udg_danweizu[62], function Trig_fushiwenyi_2Func001Func006A)
@@ -37899,6 +38829,8 @@ call PauseTimer(udg_jishiqi[90])
 call DestroyGroup(udg_danweizu[62])
 set udg_danwei[326]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fushiwenyi_2 takes nothing returns nothing
 set gg_trg_fushiwenyi_2=CreateTrigger()
@@ -37915,6 +38847,8 @@ endif
 set udg_danwei[327]=null
 endfunction
 function Trig_fushiwenyi_exActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[147] == 2 ) ) then
 set udg_Zhengshu[147]=( udg_Zhengshu[147] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_danwei[326])
@@ -37970,6 +38904,8 @@ else
 call ResetUnitAnimation(udg_danwei[326])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fushiwenyi_ex takes nothing returns nothing
 set gg_trg_fushiwenyi_ex=CreateTrigger()
@@ -37997,6 +38933,8 @@ call GroupRemoveUnit(udg_Danweizu[148], GetEnumUnit())
 endif
 endfunction
 function Trig_tufubaozha_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Dian[147]=GetUnitLoc(GetTriggerUnit())
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\MarkOfChaos\\MarkOfChaosDone.mdl", udg_Dian[147]))
 set udg_Danwei[147]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[146]), 0x65303756, udg_Dian[147], GetUnitFacing(udg_Danwei[146]))
@@ -38007,6 +38945,8 @@ set udg_Danwei[147]=null
 call ShowUnit(udg_Danwei[146], false)
 set udg_Zhengshu[150]=10
 call StartTimerBJ(udg_Times[150], true, 0.03)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tufubaozha_2 takes nothing returns nothing
 set gg_trg_tufubaozha_2=CreateTrigger()
@@ -38027,6 +38967,8 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_tufubaozha_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[150] > 0 ) ) then
 set udg_Zhengshu[150]=( udg_Zhengshu[150] - 1 )
 call ForGroupBJ(udg_Danweizu[148], function Trig_tufubaozha_3Func001Func004A)
@@ -38035,6 +38977,8 @@ call RemoveLocation(udg_Dian[147])
 call GroupClear(udg_Danweizu[148])
 call PauseTimer(udg_Times[150])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tufubaozha_3 takes nothing returns nothing
 set gg_trg_tufubaozha_3=CreateTrigger()
@@ -38090,6 +39034,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_kenyaoActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[146] == 22 ) ) then
 set udg_Zhengshu[146]=( udg_Zhengshu[146] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[146])
@@ -38139,6 +39085,8 @@ call PauseTimer(udg_Times[146])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_kenyao takes nothing returns nothing
 set gg_trg_kenyao=CreateTrigger()
@@ -38268,6 +39216,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_fangdian_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[32] <= 40 ) ) then
 set udg_zhengshu2[32]=( udg_zhengshu2[32] + 1 )
 set udg_dian[146]=GetUnitLoc(udg_danwei[181])
@@ -38287,6 +39237,8 @@ call GroupClear(udg_Danweizu[168])
 call PauseTimer(udg_times[32])
 set udg_danwei[184]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fangdian_2 takes nothing returns nothing
 set gg_trg_fangdian_2=CreateTrigger()
@@ -38303,6 +39255,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_fangdian_2_______uActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[32]=( udg_zhengshu2[32] + 1 )
 if ( ( udg_zhengshu2[32] <= 10 ) ) then
 set udg_aXUNHUAN[88]=8
@@ -38333,6 +39287,8 @@ call DestroyLightning(udg_shandian[udg_aXUNHUAN[89]])
 set udg_aXUNHUAN[89]=udg_aXUNHUAN[89] + 1
 endloop
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fangdian_2_______u takes nothing returns nothing
 set gg_trg_fangdian_2_______u=CreateTrigger()
@@ -38402,6 +39358,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_leijizhiqiang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[173] == - 1 ) ) then
 set udg_Zhengshu[173]=( udg_Zhengshu[173] + 1 )
 set udg_Dian[89]=GetUnitLoc(udg_danwei[181])
@@ -38460,6 +39418,8 @@ call PauseTimer(udg_jishiqi[172])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_leijizhiqiang_2 takes nothing returns nothing
 set gg_trg_leijizhiqiang_2=CreateTrigger()
@@ -38474,6 +39434,8 @@ call GroupRemoveUnit(udg_Danweizu[171], GetEnumUnit())
 endif
 endfunction
 function Trig_leijizhiqiang_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[175] < ( 3 + GetUnitAbilityLevel(udg_danwei[181], 0x41305035) ) ) ) then
 set udg_Zhengshu[175]=( udg_Zhengshu[175] + 1 )
 if ( ( IsUnitGroupEmptyBJ(udg_Danweizu[171]) == false ) ) then
@@ -38490,6 +39452,8 @@ else
 call GroupClear(udg_Danweizu[171])
 call PauseTimer(udg_jishiqi[175])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_leijizhiqiang_3 takes nothing returns nothing
 set gg_trg_leijizhiqiang_3=CreateTrigger()
@@ -38555,6 +39519,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_chaodiancipao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_aXUNHUAN[90] == 0 ) ) then
 call ForGroupBJ(udg_Danweizu[37], function Trig_chaodiancipao_2Func001Func003A)
 set udg_danweizu[65]=CreateGroup()
@@ -38601,6 +39567,8 @@ else
 call PauseTimer(udg_jishiqi[49])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chaodiancipao_2 takes nothing returns nothing
 set gg_trg_chaodiancipao_2=CreateTrigger()
@@ -38622,6 +39590,8 @@ call RemoveLocation(udg_dian[243])
 set udg_danwei[329]=null
 endfunction
 function Trig_chaodiancipao_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[83]=( udg_zhengshu[83] + 1 )
 if ( ( udg_zhengshu[83] <= 40 ) ) then
 if ( ( udg_zhengshu[83] <= 20 ) ) then
@@ -38650,6 +39620,8 @@ call DestroyGroup(udg_danweizu[65])
 call RemoveLocation(udg_dian[148])
 call RemoveLocation(udg_dian[149])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chaodiancipao_3 takes nothing returns nothing
 set gg_trg_chaodiancipao_3=CreateTrigger()
@@ -38777,6 +39749,8 @@ endif
 set udg_danwei[190]=null
 endfunction
 function Trig_jiujibisha3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[59]=( udg_zhengshu[59] + 1 )
 if ( ( udg_zhengshu[59] == 1 ) ) then
 set udg_aXUNHUAN[94]=1
@@ -38870,6 +39844,8 @@ call RemoveLocation(udg_dian[151])
 call RemoveLocation(udg_dian[152])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jiujibisha3 takes nothing returns nothing
 set gg_trg_jiujibisha3=CreateTrigger()
@@ -38951,6 +39927,8 @@ function Trig_langxiFunc010Func009Func003A takes nothing returns nothing
 call IssueTargetOrder(udg_danwei[201], "attack", GetEnumUnit())
 endfunction
 function Trig_langxiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[200]=GetTriggerUnit()
 set udg_dian[160]=GetUnitLoc(udg_danwei[200])
 set udg_danwei[210]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[200]), 0x65303130, udg_dian[160], 0)
@@ -38997,6 +39975,8 @@ endloop
 call RemoveLocation(udg_dian[160])
 set udg_danwei[200]=null
 set udg_danwei[210]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_langxi takes nothing returns nothing
 set gg_trg_langxi=CreateTrigger()
@@ -39037,6 +40017,8 @@ endif
 set udg_danwei[205]=null
 endfunction
 function Trig_paoxiaochongji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[62] <= 12 ) ) then
 set udg_dian[164]=GetUnitLoc(udg_danwei[203])
 set udg_dian[165]=PolarProjectionBJ(udg_dian[164], 170.00, AngleBetweenPoints(udg_dian[162], udg_dian[163]))
@@ -39075,6 +40057,8 @@ set udg_danwei[203]=null
 call RemoveLocation(udg_dian[162])
 call RemoveLocation(udg_dian[163])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_paoxiaochongji_2 takes nothing returns nothing
 set gg_trg_paoxiaochongji_2=CreateTrigger()
@@ -39106,6 +40090,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_paoxiaochongji_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[70] <= 100 ) ) then
 if ( ( udg_Zhengshu[69] == 0 ) ) then
 set udg_Zhengshu[69]=1
@@ -39117,6 +40103,8 @@ call ForGroupBJ(udg_Danweizu[70], function Trig_paoxiaochongji_3Func001Func004A)
 else
 call GroupClear(udg_Danweizu[70])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_paoxiaochongji_3 takes nothing returns nothing
 set gg_trg_paoxiaochongji_3=CreateTrigger()
@@ -39207,6 +40195,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_langshenhoujiaoActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetTriggerUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set bj_forLoopAIndex=1
@@ -39224,6 +40214,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_langshenhoujiaoFunc006A)
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_langshenhoujiao takes nothing returns nothing
 set gg_trg_langshenhoujiao=CreateTrigger()
@@ -39289,6 +40281,8 @@ endif
 set udg_danwei[214]=null
 endfunction
 function Trig_jianqizhan2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[114]=( udg_zhengshu2[114] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[114])
 set udg_dian2[2]=GetUnitLoc(udg_danwei[213])
@@ -39347,6 +40341,8 @@ call PauseTimer(udg_jishiqi[62])
 endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jianqizhan2 takes nothing returns nothing
 set gg_trg_jianqizhan2=CreateTrigger()
@@ -39405,6 +40401,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xiongzhan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[122]=( udg_zhengshu2[122] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[122])
 if ( ( udg_zhengshu2[122] <= 50 ) and ( IsUnitType(udg_danwei2[122], UNIT_TYPE_DEAD) == false ) ) then
@@ -39518,6 +40516,8 @@ call RemoveLocation(udg_dian2[121])
 call RemoveLocation(udg_dian2[122])
 endif
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xiongzhan_2 takes nothing returns nothing
 set gg_trg_xiongzhan_2=CreateTrigger()
@@ -39582,6 +40582,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_bingjian_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[119]=( udg_zhengshu2[119] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[120])
 if ( ( udg_zhengshu2[119] < 20 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -39622,6 +40624,8 @@ call RemoveLocation(udg_dian2[120])
 call PauseTimer(udg_times[119])
 endif
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bingjian_2 takes nothing returns nothing
 set gg_trg_bingjian_2=CreateTrigger()
@@ -39694,6 +40698,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_bingbi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[35] >= 0 ) ) then
 set udg_Zhengshu[35]=( udg_Zhengshu[35] - 1 )
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_Dian[35])
@@ -39706,6 +40712,8 @@ call PauseTimer(udg_Times[35])
 set udg_Danwei[35]=null
 call RemoveLocation(udg_Dian[35])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bingbi_2 takes nothing returns nothing
 set gg_trg_bingbi_2=CreateTrigger()
@@ -39801,6 +40809,8 @@ endif
 set udg_danwei[217]=null
 endfunction
 function Trig_penqijiFunc001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) < 15 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -39830,9 +40840,15 @@ call GroupRemoveUnit(udg_danweizu2[111], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_penqijiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[111], function Trig_penqijiFunc001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_penqiji takes nothing returns nothing
 set gg_trg_penqiji=CreateTrigger()
@@ -39886,6 +40902,8 @@ endif
 set udg_danwei[222]=null
 endfunction
 function Trig_bingdong2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[111]=( udg_zhengshu2[111] + 1 )
 if ( ( udg_zhengshu2[111] == 1 ) ) then
 call StartTimerBJ(udg_jishiqi[65], false, 2.00)
@@ -39936,6 +40954,8 @@ set udg_danwei[219]=null
 set udg_danwei[220]=null
 call RemoveLocation(udg_dian[185])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bingdong2 takes nothing returns nothing
 set gg_trg_bingdong2=CreateTrigger()
@@ -39981,6 +41001,8 @@ endif
 set udg_danwei[225]=null
 endfunction
 function Trig_bingdognzhan2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[66]=( udg_zhengshu[66] + 1 )
 set udg_dian[189]=GetUnitLoc(udg_danwei[224])
 set udg_dian[188]=PolarProjectionBJ(udg_dian[189], 50.00, AngleBetweenPoints(udg_dian[186], udg_dian[187]))
@@ -40059,6 +41081,8 @@ endif
 endif
 call RemoveLocation(udg_dian[188])
 call RemoveLocation(udg_dian[189])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_bingdognzhan2 takes nothing returns nothing
 set gg_trg_bingdognzhan2=CreateTrigger()
@@ -40543,6 +41567,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yanshiqiang_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[123]=GetTriggerUnit()
 set udg_dian2[123]=GetUnitLoc(udg_danwei2[123])
 set udg_danwei2[1]=GetSpellTargetUnit()
@@ -40601,6 +41627,8 @@ endloop
 call GroupClear(udg_danweizu2[124])
 set udg_zhengshu2[123]=0
 call StartTimerBJ(udg_times[123], true, 0.05)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yanshiqiang_1 takes nothing returns nothing
 set gg_trg_yanshiqiang_1=CreateTrigger()
@@ -40639,6 +41667,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yanshiqiang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[123]=( udg_zhengshu2[123] + 1 )
 if ( ( IsUnitType(udg_danwei2[124], UNIT_TYPE_DEAD) == false ) ) then
 set udg_aXUNHUAN[117]=1
@@ -40668,6 +41698,8 @@ call GroupClear(udg_danweizu2[124])
 else
 call PauseTimer(udg_times[123])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yanshiqiang_2 takes nothing returns nothing
 set gg_trg_yanshiqiang_2=CreateTrigger()
@@ -40683,6 +41715,8 @@ call KillUnit(udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_yanshiqiang_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PauseTimer(udg_times[123])
 call DestroyGroup(udg_danweizu2[124])
 call ForGroupBJ(udg_danweizu2[123], function Trig_yanshiqiang_3Func003A)
@@ -40692,6 +41726,8 @@ set udg_danwei2[123]=null
 set udg_danwei2[124]=null
 call RemoveLocation(udg_dian2[123])
 call RemoveLocation(udg_dian2[124])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yanshiqiang_3 takes nothing returns nothing
 set gg_trg_yanshiqiang_3=CreateTrigger()
@@ -40725,6 +41761,8 @@ endif
 set udg_danwei[233]=null
 endfunction
 function Trig_gangcilianchengActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[230]=GetTriggerUnit()
 call SetUnitAnimation(udg_danwei[230], "stand Victory")
 set udg_dian[195]=GetUnitLoc(udg_danwei[230])
@@ -40753,6 +41791,8 @@ call RemoveLocation(udg_dian[195])
 call RemoveLocation(udg_dian[196])
 set udg_danwei[230]=null
 set udg_danwei[231]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gangciliancheng takes nothing returns nothing
 set gg_trg_gangciliancheng=CreateTrigger()
@@ -40778,6 +41818,8 @@ call UnitRemoveAbility(udg_danwei2[0], 0x41726176)
 set udg_danwei2[0]=null
 endfunction
 function Trig_gangciliancheng_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[103]=( udg_zhengshu2[103] + 1 )
 if ( ( udg_zhengshu2[103] <= 20 ) ) then
 call ForGroupBJ(udg_danweizu[50], function Trig_gangciliancheng_2Func003Func004A)
@@ -40786,6 +41828,8 @@ call ForGroupBJ(udg_danweizu[50], function Trig_gangciliancheng_2Func003Func001A
 call DestroyGroup(udg_danweizu[50])
 call PauseTimer(udg_times[103])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_gangciliancheng_2 takes nothing returns nothing
 set gg_trg_gangciliancheng_2=CreateTrigger()
@@ -40819,6 +41863,8 @@ endif
 set udg_danwei[236]=null
 endfunction
 function Trig_zhenlizhimenActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[234]=GetTriggerUnit()
 set udg_dian[199]=GetSpellTargetLoc()
 set udg_dian[200]=GetUnitLoc(udg_danwei[234])
@@ -40832,6 +41878,8 @@ set udg_danweizu[51]=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_dian[199])
 call ForGroupBJ(udg_danweizu[51], function Trig_zhenlizhimenFunc012A)
 set udg_zhengshu2[102]=0
 call StartTimerBJ(udg_times[102], true, 0.04)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhenlizhimen takes nothing returns nothing
 set gg_trg_zhenlizhimen=CreateTrigger()
@@ -40877,6 +41925,8 @@ call UnitDamageTarget(udg_danwei[234], udg_danwei[236], ( ( 3.50 * I2R(GetHeroIn
 set udg_danwei[236]=null
 endfunction
 function Trig_zhenlizhimen_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[102]=( udg_zhengshu2[102] + 1 )
 if ( ( udg_zhengshu2[102] <= 100 ) ) then
 if ( ( udg_zhengshu2[102] <= 40 ) ) then
@@ -40933,6 +41983,8 @@ call RemoveLocation(udg_dian[201])
 call PauseTimer(udg_times[102])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhenlizhimen_2 takes nothing returns nothing
 set gg_trg_zhenlizhimen_2=CreateTrigger()
@@ -40978,6 +42030,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_xianzhezhishi2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( R2I(GetUnitLifePercent(udg_danwei[238])) <= 33 ) and ( IsUnitDeadBJ(udg_danwei[237]) == false ) and ( IsUnitDeadBJ(udg_danwei[238]) == false ) ) then
 if ( ( IsUnitType(udg_danwei[238], UNIT_TYPE_HERO) == true ) ) then
 call SetUnitLifePercentBJ(udg_danwei[237], ( GetUnitLifePercent(udg_danwei[237]) + 25.00 ))
@@ -41001,6 +42055,8 @@ set udg_danwei[237]=null
 set udg_danwei[238]=null
 call RemoveLocation(udg_dian[202])
 call RemoveLocation(udg_dian[203])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xianzhezhishi2 takes nothing returns nothing
 set gg_trg_xianzhezhishi2=CreateTrigger()
@@ -41046,6 +42102,8 @@ endif
 set udg_danwei[241]=null
 endfunction
 function Trig_diyuhuoyan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[69] <= 50 ) and ( IsUnitType(udg_danwei[244], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian[204]=GetUnitLoc(udg_danwei[244])
 set udg_dian[205]=PolarProjectionBJ(udg_dian[204], 40.00, GetUnitFacing(udg_danwei[244]))
@@ -41088,6 +42146,8 @@ set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 set udg_Danwei[42]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_diyuhuoyan_2 takes nothing returns nothing
 set gg_trg_diyuhuoyan_2=CreateTrigger()
@@ -41104,6 +42164,8 @@ call UnitRemoveBuffBJ(0x42303253, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_diyuhuoyan_3Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -41114,9 +42176,15 @@ call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, ( 0.02 * I2R(CountUnitsInGro
 call ForGroupBJ(udg_danweizu2[394], function Trig_diyuhuoyan_3Func001Func002Func005A)
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_diyuhuoyan_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[352], function Trig_diyuhuoyan_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_diyuhuoyan_3 takes nothing returns nothing
 set gg_trg_diyuhuoyan_3=CreateTrigger()
@@ -41383,6 +42451,8 @@ endif
 set udg_danwei[241]=null
 endfunction
 function Trig_yuanheng_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[239]=GetTriggerUnit()
 set udg_danwei[251]=GetTriggerUnit()
 set udg_dian[208]=GetUnitLoc(udg_danwei[239])
@@ -41410,6 +42480,8 @@ call ForGroupBJ(udg_danweizu[53], function Trig_yuanheng_1Func008A)
 call DestroyGroup(udg_danweizu[53])
 set udg_danwei[239]=null
 call StartTimerBJ(udg_jishiqi[76], true, 0.05)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuanheng_1 takes nothing returns nothing
 set gg_trg_yuanheng_1=CreateTrigger()
@@ -41441,6 +42513,8 @@ endif
 set udg_danwei[241]=null
 endfunction
 function Trig_yuanheng_2Func004A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[239]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[239], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian[204]=GetUnitLoc(udg_danwei[239])
@@ -41459,12 +42533,18 @@ set udg_danwei[251]=null
 call RemoveLocation(udg_dian[208])
 endif
 set udg_danwei[239]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_yuanheng_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danweizu[53]=YDWEGetUnitsInRangeOfLocAllNull(500.00 , udg_dian[208])
 call ForGroupBJ(udg_danweizu[53], function Trig_yuanheng_2Func002A)
 call DestroyGroup(udg_danweizu[53])
 call ForGroupBJ(udg_danweizu[52], function Trig_yuanheng_2Func004A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuanheng_2 takes nothing returns nothing
 set gg_trg_yuanheng_2=CreateTrigger()
@@ -41527,6 +42607,8 @@ call RemoveLocation(udg_dian[212])
 call RemoveLocation(udg_dian2[0])
 endfunction
 function Trig_diushoulei2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[376]=( udg_zhengshu2[376] + 1 )
 if ( ( udg_zhengshu2[376] <= 45 ) ) then
 if ( ( udg_zhengshu2[376] >= 25 ) ) then
@@ -41566,6 +42648,8 @@ call RemoveLocation(udg_dian[210])
 call DestroyGroup(udg_danweizu[55])
 call PauseTimer(udg_jishiqi[77])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_diushoulei2 takes nothing returns nothing
 set gg_trg_diushoulei2=CreateTrigger()
@@ -41655,6 +42739,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_duochongjuji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[71]=( udg_zhengshu[71] + 1 )
 if ( ( udg_zhengshu[71] <= 40 ) and ( IsUnitType(udg_danwei[271], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_zhengshu[71] == 1 ) ) then
@@ -41720,6 +42806,8 @@ call ForGroupBJ(udg_Danweizu[37], function Trig_duochongjuji_2Func002Func003A)
 call PauseTimerBJ(true, udg_jishiqi[78])
 call RemoveLocation(udg_dian[217])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duochongjuji_2 takes nothing returns nothing
 set gg_trg_duochongjuji_2=CreateTrigger()
@@ -41781,6 +42869,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_duochongjuji_3Func001Func007A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) > 40.00 ) ) then
@@ -41844,8 +42934,12 @@ call RemoveLocation(udg_dian2[2])
 endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_duochongjuji_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitGroupEmptyBJ(udg_Danweizu[112]) == false ) ) then
 call ForGroupBJ(udg_Danweizu[112], function Trig_duochongjuji_3Func001Func007A)
 else
@@ -41863,6 +42957,8 @@ call GroupClear(udg_Danweizu[114])
 call PauseTimer(udg_Times[115])
 call RemoveLocation(udg_Dian[116])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duochongjuji_3 takes nothing returns nothing
 set gg_trg_duochongjuji_3=CreateTrigger()
@@ -41969,6 +43065,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_chongjidan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[110] == 27 ) ) then
 set udg_Zhengshu[110]=( udg_Zhengshu[110] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
@@ -42048,6 +43146,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chongjidan_2 takes nothing returns nothing
 set gg_trg_chongjidan_2=CreateTrigger()
@@ -42120,6 +43220,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_baoliedan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[111] == 27 ) ) then
 set udg_Zhengshu[111]=( udg_Zhengshu[111] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
@@ -42225,6 +43327,8 @@ call PauseTimer(udg_Times[111])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_baoliedan_2 takes nothing returns nothing
 set gg_trg_baoliedan_2=CreateTrigger()
@@ -42277,6 +43381,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huabu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[112] == 31 ) ) then
 set udg_Zhengshu[112]=( udg_Zhengshu[112] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
@@ -42319,6 +43425,8 @@ call PauseTimer(udg_Times[112])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huabu_2 takes nothing returns nothing
 set gg_trg_huabu_2=CreateTrigger()
@@ -42543,6 +43651,8 @@ set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[2])
 endfunction
 function Trig_time_shoubiao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[56] < 100 ) ) then
 set udg_zhengshu2[56]=( udg_zhengshu2[56] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei[283])
@@ -42573,6 +43683,8 @@ call PauseTimer(udg_times[56])
 set udg_danwei[282]=null
 set udg_danwei[283]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_time_shoubiao_2 takes nothing returns nothing
 set gg_trg_time_shoubiao_2=CreateTrigger()
@@ -42756,6 +43868,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tansheyinren_2_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[375]=( udg_zhengshu2[375] + 1 )
 if ( ( GetUnitState(udg_danwei2[376], UNIT_STATE_LIFE) > 1.00 ) and ( udg_zhengshu2[375] <= 200 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[376])
@@ -42819,6 +43933,8 @@ call RemoveLocation(udg_dian2[375])
 call RemoveLocation(udg_dian2[376])
 set udg_danwei2[380]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tansheyinren_2_2 takes nothing returns nothing
 set gg_trg_tansheyinren_2_2=CreateTrigger()
@@ -42930,6 +44046,8 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[2])
 endfunction
 function Trig_feidao_2Func003Func001Func004Func001Func006Func001Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsDestructableDeadBJ(GetEnumDestructable()) == false ) ) then
 set udg_dian2[0]=GetDestructableLoc(GetEnumDestructable())
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(1200.00 , udg_dian2[0])
@@ -42963,8 +44081,12 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_feidao_2Func003Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) + 1 ))
 set udg_dian[230]=GetUnitLoc(udg_danwei2[0])
@@ -43020,12 +44142,18 @@ set udg_danwei2[0]=null
 endif
 call RemoveLocation(udg_dian[230])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_feidao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[79] == 0 ) ) then
 call ForGroupBJ(udg_danweizu2[92], function Trig_feidao_2Func003Func001A)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feidao_2 takes nothing returns nothing
 set gg_trg_feidao_2=CreateTrigger()
@@ -43224,6 +44352,8 @@ endif
 set udg_danwei[328]=null
 endfunction
 function Trig_feidaoqishe_2Func001Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[329]=GetEnumUnit()
 if ( ( GetUnitUserData(udg_danwei[329]) <= 8 ) ) then
 call SetUnitUserData(udg_danwei[329], ( GetUnitUserData(udg_danwei[329]) + 1 ))
@@ -43246,12 +44376,18 @@ call KillUnit(udg_danwei[329])
 call GroupRemoveUnit(udg_danweizu[64], udg_danwei[329])
 endif
 set udg_danwei[329]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_feidaoqishe_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[79] == 0 ) ) then
 call ForGroupBJ(udg_danweizu[64], function Trig_feidaoqishe_2Func001Func001A)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feidaoqishe_2 takes nothing returns nothing
 set gg_trg_feidaoqishe_2=CreateTrigger()
@@ -43273,6 +44409,8 @@ endif
 set udg_danwei[328]=null
 endfunction
 function Trig_feidaoqishe_2_jishuFunc001Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[329]=GetEnumUnit()
 if ( ( GetUnitUserData(udg_danwei[329]) >= 0 ) ) then
 call SetUnitUserData(udg_danwei[329], ( GetUnitUserData(udg_danwei[329]) - 1 ))
@@ -43295,12 +44433,18 @@ call KillUnit(udg_danwei[329])
 call GroupRemoveUnit(udg_danweizu[64], udg_danwei[329])
 endif
 set udg_danwei[329]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_feidaoqishe_2_jishuActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[79] == 0 ) ) then
 call ForGroupBJ(udg_danweizu2[391], function Trig_feidaoqishe_2_jishuFunc001Func001A)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feidaoqishe_2_jishu takes nothing returns nothing
 set gg_trg_feidaoqishe_2_jishu=CreateTrigger()
@@ -43397,6 +44541,8 @@ call RemoveLocation(udg_dian2[3])
 set udg_danwei2[0]=null
 endfunction
 function Trig_sharenmuou_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitGroupEmptyBJ(udg_danweizu2[373]) == false ) ) then
 if ( ( udg_zhengshu[79] == 0 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[373])
@@ -43415,6 +44561,8 @@ call RemoveLocation(udg_dian2[374])
 else
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_sharenmuou_3 takes nothing returns nothing
 set gg_trg_sharenmuou_3=CreateTrigger()
@@ -43519,6 +44667,8 @@ endif
 set udg_danwei[328]=null
 endfunction
 function Trig_yemuhuanyingsharengui_2Func003Func003A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -43568,8 +44718,12 @@ endif
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_yemuhuanyingsharengui_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_dian[236]=GetUnitLoc(udg_danwei[308])
 set udg_dian[239]=GetUnitLoc(udg_danwei[307])
 if ( ( udg_zhengshu[79] == 0 ) ) then
@@ -43588,6 +44742,8 @@ call ForGroupBJ(udg_danweizu2[340], function Trig_yemuhuanyingsharengui_2Func003
 endif
 call RemoveLocation(udg_dian[236])
 call RemoveLocation(udg_dian[239])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yemuhuanyingsharengui_2 takes nothing returns nothing
 set gg_trg_yemuhuanyingsharengui_2=CreateTrigger()
@@ -43657,6 +44813,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_the_world_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call SetUnitVertexColor(udg_danwei[324], 255, 255, 255, 255)
 if ( ( GetUnitAbilityLevel(udg_danwei[322], 0x41304756) == 1 ) ) then
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei[322]), 0x41304752, false)
@@ -43678,6 +44836,8 @@ set udg_zhengshu[79]=85
 call ForGroupBJ(udg_Danweizu[37], function Trig_the_world_2Func009Func002A)
 endif
 call StartTimerBJ(udg_jishiqi[89], true, 0.05)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_the_world_2 takes nothing returns nothing
 set gg_trg_the_world_2=CreateTrigger()
@@ -43738,6 +44898,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_the_world_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[79]=( udg_zhengshu[79] + 1 )
 if ( ( udg_zhengshu[79] < 80 ) ) then
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei[322]), 0x41303259, false)
@@ -43771,6 +44933,8 @@ set udg_danwei[324]=null
 call PauseTimer(udg_jishiqi[89])
 call RemoveLocation(udg_dian[240])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_the_world_3 takes nothing returns nothing
 set gg_trg_the_world_3=CreateTrigger()
@@ -43822,6 +44986,8 @@ endif
 set udg_danwei[334]=null
 endfunction
 function Trig_chaosuzaisheng2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[86]=( udg_zhengshu[86] + 1 )
 if ( ( udg_zhengshu[86] <= 10 ) ) then
 set udg_dian[248]=GetUnitLoc(udg_danwei[333])
@@ -43834,6 +45000,8 @@ set udg_danwei[333]=GetTriggerUnit()
 set udg_danwei[335]=null
 call PauseTimer(udg_jishiqi[97])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chaosuzaisheng2 takes nothing returns nothing
 set gg_trg_chaosuzaisheng2=CreateTrigger()
@@ -44038,7 +45206,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_xuhua_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[2], function Trig_xuhua_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuhua_2 takes nothing returns nothing
 set gg_trg_xuhua_2=CreateTrigger()
@@ -44095,6 +45267,8 @@ endif
 set udg_danwei[340]=null
 endfunction
 function Trig_yueyatianchongActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[336]=GetTriggerUnit()
 set udg_dian[250]=GetUnitLoc(udg_danwei[336])
 set udg_dian[251]=GetSpellTargetLoc()
@@ -44190,6 +45364,8 @@ set udg_aXUNHUAN[141]=udg_aXUNHUAN[141] + 1
 endloop
 call EnableTrigger(gg_trg_yueyatianchong2)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yueyatianchong takes nothing returns nothing
 set gg_trg_yueyatianchong=CreateTrigger()
@@ -44226,6 +45402,8 @@ call KillUnit(udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_yueyatianchong2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[87]=( udg_zhengshu[87] + 1 )
 set udg_dian[252]=GetUnitLoc(udg_danwei[337])
 set udg_dian[253]=PolarProjectionBJ(udg_dian[252], 60.00, AngleBetweenPoints(udg_dian[250], udg_dian[251]))
@@ -44247,6 +45425,8 @@ call RemoveLocation(udg_dian[251])
 call DisableTrigger(GetTriggeringTrigger())
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yueyatianchong2 takes nothing returns nothing
 set gg_trg_yueyatianchong2=CreateTrigger()
@@ -44284,6 +45464,8 @@ call KillUnit(udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_yueyatianchong_heiActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[87]=( udg_zhengshu[87] + 1 )
 set udg_dian[252]=GetUnitLoc(udg_danwei[337])
 set udg_dian[253]=PolarProjectionBJ(udg_dian[252], 60.00, AngleBetweenPoints(udg_dian[250], udg_dian[251]))
@@ -44305,6 +45487,8 @@ call RemoveLocation(udg_dian[251])
 call DisableTrigger(GetTriggeringTrigger())
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yueyatianchong_hei takes nothing returns nothing
 set gg_trg_yueyatianchong_hei=CreateTrigger()
@@ -44423,6 +45607,8 @@ endif
 set udg_danwei[345]=null
 endfunction
 function Trig_wuyue2Func002Func011A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[344]=GetEnumUnit()
 set udg_dian[259]=GetUnitLoc(udg_danwei[344])
 set udg_danweizu[151]=YDWEGetUnitsInRangeOfLocAllNull(275.00 , udg_dian[259])
@@ -44430,8 +45616,12 @@ call ForGroupBJ(udg_danweizu[151], function Trig_wuyue2Func002Func011Func004A)
 call DestroyGroup(udg_danweizu[151])
 set udg_danwei[344]=null
 call RemoveLocation(udg_dian[259])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_wuyue2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[88]=( udg_zhengshu[88] + 1 )
 if ( ( udg_zhengshu[88] <= 34 ) ) then
 set udg_dian[258]=PolarProjectionBJ(udg_dian[257], ( 60.00 * I2R(udg_zhengshu[88]) ), AngleBetweenPoints(udg_dian[255], udg_dian[256]))
@@ -44449,6 +45639,8 @@ call DisableTrigger(GetTriggeringTrigger())
 call PauseTimer(udg_jishiqi[98])
 call RemoveLocation(udg_dian[257])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_wuyue2 takes nothing returns nothing
 set gg_trg_wuyue2=CreateTrigger()
@@ -44617,6 +45809,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tieshi_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) < 10 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -44651,9 +45845,15 @@ call GroupRemoveUnit(udg_danweizu2[24], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tieshi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[24], function Trig_tieshi_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tieshi_2 takes nothing returns nothing
 set gg_trg_tieshi_2=CreateTrigger()
@@ -44674,7 +45874,11 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_tieshi_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[29], function Trig_tieshi_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tieshi_3 takes nothing returns nothing
 set gg_trg_tieshi_3=CreateTrigger()
@@ -44704,6 +45908,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_chumoyidong_starActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_dian2[1]=GetSpellTargetLoc()
@@ -44719,6 +45925,8 @@ set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chumoyidong_star takes nothing returns nothing
 set gg_trg_chumoyidong_star=CreateTrigger()
@@ -44757,6 +45965,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_chumoyidongActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_dian2[1]=GetSpellTargetLoc()
@@ -44796,6 +46006,8 @@ set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_chumoyidong takes nothing returns nothing
 set gg_trg_chumoyidong=CreateTrigger()
@@ -44913,6 +46125,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_duochongtieshi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[28]=( udg_zhengshu2[28] + 1 )
 if ( ( udg_zhengshu2[28] <= 20 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[28])
@@ -44967,6 +46181,8 @@ call PauseTimer(udg_times[28])
 set udg_danwei2[28]=null
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_duochongtieshi_2 takes nothing returns nothing
 set gg_trg_duochongtieshi_2=CreateTrigger()
@@ -45020,6 +46236,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_feitui2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[360], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[360], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[90]=( udg_zhengshu[90] + 1 )
 if ( ( IsUnitAliveBJ(udg_danwei[360]) == true ) and ( udg_zhengshu[90] <= 20 ) ) then
@@ -45049,6 +46267,8 @@ call RemoveLocation(udg_dian[271])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feitui2 takes nothing returns nothing
 set gg_trg_feitui2=CreateTrigger()
@@ -45064,6 +46284,8 @@ endif
 set udg_danwei[364]=null
 endfunction
 function Trig_zhanzhengjiantaActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei[362]=GetTriggerUnit()
 set udg_dian[275]=GetUnitLoc(udg_danwei[362])
 set udg_danweizu[70]=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian[275])
@@ -45083,6 +46305,8 @@ else
 set udg_zhengshu[91]=5
 call StartTimerBJ(udg_jishiqi[101], true, 0.40)
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhanzhengjianta takes nothing returns nothing
 set gg_trg_zhanzhengjianta=CreateTrigger()
@@ -45098,6 +46322,8 @@ endif
 set udg_danwei[364]=null
 endfunction
 function Trig_zhanzhengjianta2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei[363], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[363], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu[91] > 0 ) ) then
 set udg_zhengshu[91]=( udg_zhengshu[91] - 1 )
@@ -45118,6 +46344,8 @@ call PauseTimer(udg_jishiqi[101])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhanzhengjianta2 takes nothing returns nothing
 set gg_trg_zhanzhengjianta2=CreateTrigger()
@@ -45290,6 +46518,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zhanshenzhufu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( ( udg_Zhengshu[120] <= 20 ) and ( udg_Zhengshu[120] > 0 ) ) or ( ( IsUnitType(udg_Danwei[121], UNIT_TYPE_DEAD) == false ) and ( ( ( udg_Zhengshu[121] <= 500 ) and ( udg_Zhengshu[121] > 0 ) ) or ( UnitHasBuffBJ(udg_Danwei[121], 0x42303054) == true ) ) ) ) ) then
 if ( ( UnitHasBuffBJ(udg_Danwei[121], 0x42303054) == true ) ) then
 call SetUnitLifeBJ(udg_Danwei[121], ( GetUnitState(udg_Danwei[121], UNIT_STATE_LIFE) + ( GetUnitState(udg_Danwei[121], UNIT_STATE_MAX_LIFE) / 2500.00 ) ))
@@ -45336,6 +46566,8 @@ call UnitRemoveAbility(udg_Danwei[121], 0x41304A42)
 call UnitRemoveAbility(udg_Danwei[121], 0x41304C51)
 call PauseTimer(udg_Times[121])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhanshenzhufu_2 takes nothing returns nothing
 set gg_trg_zhanshenzhufu_2=CreateTrigger()
@@ -45498,6 +46730,8 @@ call SetUnitX(GetEnumUnit(), GetLocationX(udg_dian2[0]))
 call SetUnitY(GetEnumUnit(), GetLocationY(udg_dian2[0]))
 endfunction
 function Trig_zhonglifeixing_moveActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetUnitManaPercent(udg_danwei2[67]) >= 5.00 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[67])
 if ( ( udg_Zhengshu[177] == - 1 ) ) then
@@ -45551,6 +46785,8 @@ call DisableTrigger(gg_trg_zhonglifeixing_1)
 call DisableTrigger(gg_trg_zhonglifeixing_move)
 call PauseTimer(udg_times[67])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zhonglifeixing_move takes nothing returns nothing
 set gg_trg_zhonglifeixing_move=CreateTrigger()
@@ -45736,6 +46972,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_blood_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[62]=( udg_zhengshu2[62] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[63])
 if ( ( udg_zhengshu2[62] < 20 ) and ( UnitHasBuffBJ(udg_danwei2[63], 0x42303136) == true ) and ( IsUnitType(udg_danwei2[62], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei2[63], UNIT_TYPE_DEAD) == false ) ) then
@@ -45779,6 +47017,8 @@ set udg_danwei2[62]=null
 set udg_danwei2[63]=null
 endif
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_blood_2 takes nothing returns nothing
 set gg_trg_blood_2=CreateTrigger()
@@ -45830,6 +47070,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_dongliangchongji_2AActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[64]=( udg_zhengshu2[64] + 1 )
 if ( ( udg_zhengshu2[64] < 30 ) ) then
 if ( ( udg_zhengshu2[64] < 20 ) ) then
@@ -45863,6 +47105,8 @@ call RemoveLocation(udg_dian[287])
 call RemoveLocation(udg_dian[288])
 call RemoveLocation(udg_dian[289])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dongliangchongji_2A takes nothing returns nothing
 set gg_trg_dongliangchongji_2A=CreateTrigger()
@@ -45892,6 +47136,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_dongliangchongji_2BActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[65]=( udg_zhengshu2[65] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei[376])
 if ( ( udg_zhengshu2[65] < 15 ) ) then
@@ -45945,6 +47191,8 @@ call DestroyGroup(udg_xuanqu)
 else
 endif
 call RemoveLocation(udg_dian2[0])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dongliangchongji_2B takes nothing returns nothing
 set gg_trg_dongliangchongji_2B=CreateTrigger()
@@ -46007,6 +47255,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_doom_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[69]=( udg_zhengshu2[69] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[69])
 set udg_dian2[3]=GetUnitLoc(udg_danwei2[70])
@@ -46040,6 +47290,8 @@ else
 endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[3])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_doom_2 takes nothing returns nothing
 set gg_trg_doom_2=CreateTrigger()
@@ -46063,6 +47315,8 @@ call SetUnitScale(udg_Danwei[21], 10.00, 10.00, 10.00)
 set udg_Danwei[21]=null
 endfunction
 function Trig_doom_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call DisableTrigger(GetTriggeringTrigger())
 call PauseTimer(udg_times[69])
 set udg_zhengshu2[70]=0
@@ -46099,6 +47353,8 @@ set udg_danwei2[69]=null
 set udg_danwei2[70]=null
 endif
 call EnableTrigger(GetTriggeringTrigger())
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_doom_3 takes nothing returns nothing
 set gg_trg_doom_3=CreateTrigger()
@@ -46127,6 +47383,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_doom_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[70]=( udg_zhengshu2[70] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[70])
 set udg_dian2[3]=GetUnitLoc(udg_danwei2[69])
@@ -46142,6 +47400,8 @@ set udg_danwei2[70]=null
 endif
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[3])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_doom_4 takes nothing returns nothing
 set gg_trg_doom_4=CreateTrigger()
@@ -46286,6 +47546,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_dierjiefang_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei[400], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( udg_zhengshu[110] > 0 ) ) then
 set udg_zhengshu2[284]=IMinBJ(( udg_zhengshu2[284] + 1 ), ( 200 + ( 100 * GetUnitAbilityLevel(udg_danwei[400], 0x41304447) ) ))
@@ -46351,6 +47613,8 @@ call DestroyEffect(udg_texiao[50])
 set udg_danwei[400]=null
 call RemoveLocation(udg_dian2[284])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_dierjiefang_4 takes nothing returns nothing
 set gg_trg_dierjiefang_4=CreateTrigger()
@@ -46397,6 +47661,8 @@ endif
 set udg_danwei[404]=null
 endfunction
 function Trig_yinjia2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[111]=( udg_zhengshu[111] + 1 )
 if ( ( udg_zhengshu[111] <= 35 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[403])
@@ -46486,6 +47752,8 @@ set udg_zhengshu[110]=0
 call RemoveLocation(udg_dian[305])
 call RemoveLocation(udg_dian[306])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yinjia2 takes nothing returns nothing
 set gg_trg_yinjia2=CreateTrigger()
@@ -46517,6 +47785,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tiejia_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[262]=( udg_zhengshu2[262] + 1 )
 call SetUnitX(udg_danwei2[263], GetLocationX(udg_dian2[263]))
 call SetUnitY(udg_danwei2[263], GetLocationY(udg_dian2[263]))
@@ -46664,6 +47934,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiejia_2 takes nothing returns nothing
 set gg_trg_tiejia_2=CreateTrigger()
@@ -46785,6 +48057,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuanwuwufeng2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[266]=( udg_zhengshu2[266] + 1 )
 if ( ( udg_shishu2[266] == 2.00 ) ) then
 if ( ( udg_zhengshu2[266] <= 45 ) ) then
@@ -46866,6 +48140,8 @@ call RemoveLocation(udg_dian[310])
 call RemoveLocation(udg_dian[311])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuanwuwufeng2 takes nothing returns nothing
 set gg_trg_yuanwuwufeng2=CreateTrigger()
@@ -46900,6 +48176,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yinsufengbao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( ( IsUnitType(udg_danwei2[286], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei2[286], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[287]=( udg_zhengshu2[287] - 1 )
 if ( ( udg_zhengshu2[287] >= 0 ) ) then
@@ -46930,6 +48208,8 @@ call RemoveLocation(udg_dian2[287])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yinsufengbao_2 takes nothing returns nothing
 set gg_trg_yinsufengbao_2=CreateTrigger()
@@ -46990,6 +48270,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yefu_tuji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei2[85], UNIT_TYPE_TAUREN) == false ) ) then
 set udg_zhengshu2[85]=( udg_zhengshu2[85] + 1 )
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[85])
@@ -47085,6 +48367,8 @@ endif
 call RemoveLocation(udg_dian2[1])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yefu_tuji_2 takes nothing returns nothing
 set gg_trg_yefu_tuji_2=CreateTrigger()
@@ -47114,6 +48398,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_emo_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PauseTimer(udg_times[84])
 call StartTimerBJ(udg_times[84], false, 2.00)
 set udg_danwei2[91]=GetTriggerUnit()
@@ -47126,6 +48412,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_emo_1Func009A)
 call DestroyGroup(udg_xuanqu)
 call StartTimerBJ(udg_jishiqi[141], false, 0.00)
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_emo_1 takes nothing returns nothing
 set gg_trg_emo_1=CreateTrigger()
@@ -47180,6 +48468,8 @@ call UnitDamageTarget(udg_danwei2[91], udg_danwei2[1], ( 2.00 * I2R(GetHeroAgi(u
 set udg_danwei2[1]=null
 endfunction
 function Trig_emo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei2[91], UNIT_TYPE_TAUREN) == false ) ) then
 set udg_zhengshu2[91]=( udg_zhengshu2[91] + 1 )
 if ( ( udg_zhengshu2[91] <= 30 ) ) then
@@ -47249,6 +48539,8 @@ call PauseTimer(udg_times[91])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_emo_2 takes nothing returns nothing
 set gg_trg_emo_2=CreateTrigger()
@@ -47350,6 +48642,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_Damon_Lord_Walk_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[20], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( udg_Zhengshu[20] < 10 ) ) then
 set udg_Zhengshu[20]=( udg_Zhengshu[20] + 1 )
@@ -47386,6 +48680,8 @@ set udg_Danwei[20]=null
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Damon_Lord_Walk_2 takes nothing returns nothing
 set gg_trg_Damon_Lord_Walk_2=CreateTrigger()
@@ -47505,6 +48801,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_shenqiang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[71]=( udg_zhengshu2[71] + 1 )
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[73])
 set udg_dian2[3]=PolarProjectionBJ(udg_dian2[1], 400.00, GetUnitFacing(udg_danwei2[73]))
@@ -47537,6 +48835,8 @@ call PauseTimer(udg_times[71])
 endif
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[3])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shenqiang_2 takes nothing returns nothing
 set gg_trg_shenqiang_2=CreateTrigger()
@@ -47594,6 +48894,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_hongmo_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_danwei2[77], UNIT_TYPE_TAUREN) == false ) ) then
 set udg_zhengshu2[77]=( udg_zhengshu2[77] + 1 )
 if ( ( udg_zhengshu2[77] <= 70 ) ) then
@@ -47641,6 +48943,8 @@ call RemoveLocation(udg_dian2[77])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hongmo_2 takes nothing returns nothing
 set gg_trg_hongmo_2=CreateTrigger()
@@ -48307,6 +49611,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huofu_a_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -48333,9 +49639,15 @@ call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\RedDragonBreath\\Red
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huofu_a_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[205], function Trig_huofu_a_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huofu_a_2 takes nothing returns nothing
 set gg_trg_huofu_a_2=CreateTrigger()
@@ -48403,6 +49715,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huofu_b_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -48431,9 +49745,15 @@ endif
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huofu_b_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[206], function Trig_huofu_b_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huofu_b_2 takes nothing returns nothing
 set gg_trg_huofu_b_2=CreateTrigger()
@@ -48491,6 +49811,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huotufu_3Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -48519,6 +49841,8 @@ endif
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huotufu_3Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -48526,10 +49850,14 @@ call UnitDamageTarget(udg_danwei2[264], udg_danwei2[1], ( ( ( 1 + ( 1 * I2R(GetU
 set udg_danwei2[1]=null
 endfunction
 function Trig_huotufu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danweizu2[331]=CreateGroup()
 call ForGroupBJ(udg_danweizu2[212], function Trig_huotufu_3Func002A)
 call ForGroupBJ(udg_danweizu2[331], function Trig_huotufu_3Func003A)
 call DestroyGroup(udg_danweizu2[331])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huotufu_3 takes nothing returns nothing
 set gg_trg_huotufu_3=CreateTrigger()
@@ -48582,6 +49910,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huojinfu_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -48631,9 +49961,15 @@ endif
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huojinfu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[214], function Trig_huojinfu_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huojinfu_2 takes nothing returns nothing
 set gg_trg_huojinfu_2=CreateTrigger()
@@ -48733,6 +50069,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huoshuifu_3Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -48750,6 +50088,8 @@ call GroupRemoveUnit(udg_danweizu2[217], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_huoshuifu_3Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -48757,10 +50097,14 @@ call UnitDamageTarget(udg_danwei2[264], udg_danwei2[1], ( ( I2R(GetHeroInt(udg_d
 set udg_danwei2[1]=null
 endfunction
 function Trig_huoshuifu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danweizu2[331]=CreateGroup()
 call ForGroupBJ(udg_danweizu2[217], function Trig_huoshuifu_3Func002A)
 call ForGroupBJ(udg_danweizu2[331], function Trig_huoshuifu_3Func003A)
 call DestroyGroup(udg_danweizu2[331])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huoshuifu_3 takes nothing returns nothing
 set gg_trg_huoshuifu_3=CreateTrigger()
@@ -48858,6 +50202,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_shuifu_b_2Func001Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
@@ -48886,6 +50232,8 @@ endif
 call DestroyGroup(udg_xuanqu)
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_shuifu_b_2Func002Func002A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -48899,6 +50247,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_shuifu_b_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitGroupEmptyBJ(udg_danweizu2[211]) == false ) ) then
 call ForGroupBJ(udg_danweizu2[211], function Trig_shuifu_b_2Func001Func002A)
 else
@@ -48907,6 +50257,8 @@ if ( ( IsUnitGroupEmptyBJ(udg_danweizu2[347]) == false ) ) then
 call ForGroupBJ(udg_danweizu2[347], function Trig_shuifu_b_2Func002Func002A)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shuifu_b_2 takes nothing returns nothing
 set gg_trg_shuifu_b_2=CreateTrigger()
@@ -49000,6 +50352,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_shuitu_3Func001Func003A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -49017,8 +50371,12 @@ call GroupRemoveUnit(udg_danweizu2[207], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_shuitu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitGroupEmptyBJ(udg_danweizu2[207]) == false ) ) then
 call ForGroupBJ(udg_danweizu2[207], function Trig_shuitu_3Func001Func003A)
 else
@@ -49028,6 +50386,8 @@ call GroupClear(udg_danweizu2[370])
 else
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shuitu_3 takes nothing returns nothing
 set gg_trg_shuitu_3=CreateTrigger()
@@ -49184,6 +50544,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_shuijinfu_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -49290,9 +50652,15 @@ call GroupRemoveUnit(udg_danweizu2[260], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_shuijinfu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[260], function Trig_shuijinfu_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shuijinfu_2 takes nothing returns nothing
 set gg_trg_shuijinfu_2=CreateTrigger()
@@ -49363,6 +50731,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_jinfu_a_2Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > - 11 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -49410,9 +50780,15 @@ call KillUnit(udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_jinfu_a_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[208], function Trig_jinfu_a_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jinfu_a_2 takes nothing returns nothing
 set gg_trg_jinfu_a_2=CreateTrigger()
@@ -49495,7 +50871,11 @@ call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_jinfu_b_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[209], function Trig_jinfu_b_2Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jinfu_b_2 takes nothing returns nothing
 set gg_trg_jinfu_b_2=CreateTrigger()
@@ -49560,6 +50940,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_mufu_a_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) ) then
@@ -49581,9 +50963,15 @@ call GroupRemoveUnit(udg_danweizu2[210], udg_danwei2[0])
 call KillUnit(udg_danwei2[0])
 endif
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_mufu_a_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[210], function Trig_mufu_a_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_mufu_a_2 takes nothing returns nothing
 set gg_trg_mufu_a_2=CreateTrigger()
@@ -49628,6 +51016,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_mufu_b_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[261]=( udg_zhengshu2[261] - 1 )
 if ( ( udg_zhengshu2[261] >= 0 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[262])
@@ -49675,6 +51065,8 @@ call KillUnit(udg_danwei2[262])
 set udg_danwei2[261]=null
 set udg_danwei2[262]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_mufu_b_2 takes nothing returns nothing
 set gg_trg_mufu_b_2=CreateTrigger()
@@ -49701,7 +51093,11 @@ call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_mufu_b_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[261], function Trig_mufu_b_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_mufu_b_3 takes nothing returns nothing
 set gg_trg_mufu_b_3=CreateTrigger()
@@ -49736,6 +51132,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_rimufu_2Func002A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) <= ( 120 + ( 40 * GetUnitAbilityLevel(udg_danwei2[216], 0x41304453) ) ) ) ) then
@@ -49776,9 +51174,15 @@ call PauseTimer(udg_times[216])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_rimufu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[216], function Trig_rimufu_2Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_rimufu_2 takes nothing returns nothing
 set gg_trg_rimufu_2=CreateTrigger()
@@ -49842,6 +51246,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_jinmufu_2Func002Func010A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x65303439 ) ) then
@@ -49863,6 +51269,8 @@ endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_jinmufu_2Func002Func011Func004A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -49877,6 +51285,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_jinmufu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[256]=( udg_zhengshu2[256] + 1 )
 if ( ( udg_zhengshu2[256] <= 75 ) ) then
 set udg_dian2[256]=GetUnitLoc(udg_danwei2[256])
@@ -49900,6 +51310,8 @@ call GroupClear(udg_danweizu2[256])
 call PauseTimer(udg_times[256])
 set udg_danwei2[256]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jinmufu_2 takes nothing returns nothing
 set gg_trg_jinmufu_2=CreateTrigger()
@@ -49950,6 +51362,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuemufu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[290]=( udg_zhengshu2[290] + 1 )
 if ( ( udg_zhengshu2[290] < 150 ) ) then
 set udg_shishu2[290]=( udg_shishu2[290] + 10.00 )
@@ -49993,6 +51407,8 @@ set udg_danwei2[291]=null
 set udg_danwei2[292]=null
 call RemoveLocation(udg_dian2[290])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuemufu_2 takes nothing returns nothing
 set gg_trg_yuemufu_2=CreateTrigger()
@@ -50052,6 +51468,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tufu_a_3Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( s__maphack_GetHeight(udg_danwei2[0]) >= 10 ) ) then
@@ -50085,9 +51503,15 @@ set udg_danwei2[2]=null
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_tufu_a_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[220], function Trig_tufu_a_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tufu_a_3 takes nothing returns nothing
 set gg_trg_tufu_a_3=CreateTrigger()
@@ -50127,6 +51551,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tufu_b_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[288]=( udg_zhengshu2[288] + 1 )
 if ( ( udg_zhengshu2[288] < ( 75 + ( 25 * GetUnitAbilityLevel(udg_danwei2[288], 0x41304335) ) ) ) and ( IsUnitType(udg_danwei2[288], UNIT_TYPE_DEAD) == false ) ) then
 call UnitRemoveBuffBJ(0x4253544E, udg_danwei2[288])
@@ -50144,6 +51570,8 @@ call RemoveUnit(udg_danwei2[289])
 set udg_danwei2[288]=null
 set udg_danwei2[289]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tufu_b_2 takes nothing returns nothing
 set gg_trg_tufu_b_2=CreateTrigger()
@@ -50223,6 +51651,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_tujinfu_1_5Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call StartTimerBJ(udg_times[240], true, 0.35)
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[240], 120.00, udg_shishu2[240])
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[240], 120.00, ( udg_shishu2[240] - 180.00 ))
@@ -50244,6 +51674,8 @@ call ForGroupBJ(udg_xuanqu, function Trig_tujinfu_1_5Func018A)
 call DestroyGroup(udg_xuanqu)
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tujinfu_1_5 takes nothing returns nothing
 set gg_trg_tujinfu_1_5=CreateTrigger()
@@ -50299,6 +51731,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_tujinfu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[240]=( udg_zhengshu2[240] + 1 )
 if ( ( udg_zhengshu2[240] <= 4 ) ) then
 call StopSoundBJ(gg_snd_FeralSpiritTarget1, false)
@@ -50347,6 +51781,8 @@ set udg_danwei2[240]=null
 call RemoveLocation(udg_dian2[240])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tujinfu_2 takes nothing returns nothing
 set gg_trg_tujinfu_2=CreateTrigger()
@@ -50369,7 +51805,11 @@ call UnitRemoveAbility(udg_danwei2[0], 0x41726176)
 set udg_danwei2[0]=null
 endfunction
 function Trig_tujinfu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[294], function Trig_tujinfu_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tujinfu_3 takes nothing returns nothing
 set gg_trg_tujinfu_3=CreateTrigger()
@@ -50416,6 +51856,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_rifu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu2[222] == 0 ) ) then
 set udg_zhengshu2[221]=( udg_zhengshu2[221] + 1 )
 if ( ( udg_zhengshu2[221] <= 10 ) ) then
@@ -50476,6 +51918,8 @@ endloop
 set udg_danwei2[221]=null
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_rifu_2 takes nothing returns nothing
 set gg_trg_rifu_2=CreateTrigger()
@@ -50497,8 +51941,12 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_rifu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[222]=1
 call ForGroupBJ(udg_Danweizu[37], function Trig_rifu_3Func002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_rifu_3 takes nothing returns nothing
 set gg_trg_rifu_3=CreateTrigger()
@@ -50570,6 +52018,8 @@ call RemoveUnit(udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_yuefu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[225]=( udg_zhengshu2[225] + 1 )
 if ( ( udg_zhengshu2[225] <= 125 ) ) then
 if ( ( udg_zhengshu2[225] <= 25 ) ) then
@@ -50651,6 +52101,8 @@ set udg_danwei2[225]=null
 call RemoveLocation(udg_dian2[225])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuefu_2 takes nothing returns nothing
 set gg_trg_yuefu_2=CreateTrigger()
@@ -50690,6 +52142,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_riyuefu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[364]=( udg_zhengshu2[364] + 1 )
 if ( ( udg_zhengshu2[364] < 40 ) ) then
 if ( ( ( I2R(udg_zhengshu2[364]) / 2.00 ) == I2R(( udg_zhengshu2[364] / 2 )) ) ) then
@@ -50723,6 +52177,8 @@ call PauseTimer(udg_times[364])
 set udg_danwei2[364]=null
 call RemoveLocation(udg_dian2[364])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_riyuefu_2 takes nothing returns nothing
 set gg_trg_riyuefu_2=CreateTrigger()
@@ -50749,7 +52205,11 @@ call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
 endfunction
 function Trig_riyuefu_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[364], function Trig_riyuefu_3Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_riyuefu_3 takes nothing returns nothing
 set gg_trg_riyuefu_3=CreateTrigger()
@@ -50965,6 +52425,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_xianzhezhishi_4Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitUserData(udg_danwei2[0]) > 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -50986,9 +52448,15 @@ call GroupRemoveUnit(udg_danweizu2[235], udg_danwei2[0])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_xianzhezhishi_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_danweizu2[235], function Trig_xianzhezhishi_4Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xianzhezhishi_4 takes nothing returns nothing
 set gg_trg_xianzhezhishi_4=CreateTrigger()
@@ -51188,6 +52656,8 @@ endif
 set udg_danwei[435]=null
 endfunction
 function Trig_Handsonic_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_aXUNHUAN[196]=0
 loop
 exitwhen udg_aXUNHUAN[196] > 4
@@ -51254,6 +52724,8 @@ call ForGroupBJ(udg_Danweizu[40], function Trig_Handsonic_3Func002Func003A)
 else
 call PauseTimer(udg_jishiqi[131])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Handsonic_3 takes nothing returns nothing
 set gg_trg_Handsonic_3=CreateTrigger()
@@ -51274,6 +52746,8 @@ call RemoveLocation(udg_dian2[1])
 set udg_danwei2[0]=null
 endfunction
 function Trig_fenshen_1Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[49]=GetEnumUnit()
 set udg_Zhengshu[( 55 + GetUnitUserData(udg_Danwei[49]) )]=( udg_Zhengshu[( 55 + GetUnitUserData(udg_Danwei[49]) )] + 1 )
 if ( ( IsUnitType(udg_Danwei[65], UNIT_TYPE_DEAD) == false ) ) then
@@ -51334,9 +52808,15 @@ call RemoveUnit(udg_Danwei[49])
 call GroupRemoveUnit(udg_Danweizu[49], udg_Danwei[49])
 endif
 set udg_Danwei[49]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_fenshen_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[49], function Trig_fenshen_1Func001A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_fenshen_1 takes nothing returns nothing
 set gg_trg_fenshen_1=CreateTrigger()
@@ -51468,6 +52948,8 @@ endif
 call RemoveLocation(udg_dian[357])
 endfunction
 function Trig_Howling2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[152], UNIT_TYPE_DEAD) == false ) and ( udg_shishu2ex[8] <= 100.00 ) ) then
 set udg_dian[355]=GetUnitLoc(udg_Danwei[152])
 set udg_shishu2ex[8]=( udg_shishu2ex[8] + 1.00 )
@@ -51508,6 +52990,8 @@ endif
 set udg_Danwei[152]=null
 set udg_Danwei[47]=null
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Howling2 takes nothing returns nothing
 set gg_trg_Howling2=CreateTrigger()
@@ -51523,6 +53007,8 @@ function Trig_Howling3Func003A takes nothing returns nothing
 call RemoveUnit(GetEnumUnit())
 endfunction
 function Trig_Howling3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call ForGroupBJ(udg_Danweizu[47], function Trig_Howling3Func001A)
 call GroupClear(udg_Danweizu[47])
 call ForGroupBJ(udg_Danweizu[48], function Trig_Howling3Func003A)
@@ -51536,6 +53022,8 @@ call RemoveUnit(udg_Danwei[152])
 else
 endif
 set udg_Danwei[47]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Howling3 takes nothing returns nothing
 set gg_trg_Howling3=CreateTrigger()
@@ -51658,12 +53146,16 @@ endif
 set udg_danwei[435]=null
 endfunction
 function Trig_Distortion3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_shishu2ex[5] > 0.00 ) ) then
 set udg_dian[352]=GetUnitLoc(udg_danwei[442])
 call ForGroupBJ(udg_Danweizu[41], function Trig_Distortion3Func001Func002A)
 call RemoveLocation(udg_dian[352])
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Distortion3 takes nothing returns nothing
 set gg_trg_Distortion3=CreateTrigger()
@@ -51714,6 +53206,8 @@ call UnitAddAbility(udg_Danwei[49], 0x41304944)
 set udg_Danwei[49]=null
 endfunction
 function Trig_Overdrive_0Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[64]=GetTriggerUnit()
 call StartTimerBJ(udg_Times[63], true, ( 0.35 - ( 0.05 * I2R(GetUnitAbilityLevel(udg_Danwei[64], 0x41303841)) ) ))
 set udg_Zhengshu[63]=( 25 + ( 5 * GetUnitAbilityLevel(udg_Danwei[64], 0x41303841) ) )
@@ -51726,6 +53220,8 @@ if ( ( GetTriggerExecCount(GetTriggeringTrigger()) == 1 ) and ( GetTriggerExecCo
 call TriggerRegisterUnitEvent(gg_trg_Distortion2, udg_Danwei[64], EVENT_UNIT_DAMAGED)
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_0 takes nothing returns nothing
 set gg_trg_Overdrive_0=CreateTrigger()
@@ -51738,6 +53234,8 @@ call SetHeroStr(udg_Danwei[49], ( GetHeroStr(udg_Danwei[49], false) + 1 ), true)
 set udg_Danwei[49]=null
 endfunction
 function Trig_Overdrive_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Zhengshu[63]=( udg_Zhengshu[63] - 1 )
 if ( ( udg_Zhengshu[63] >= 0 ) and ( IsUnitType(udg_Danwei[64], UNIT_TYPE_DEAD) == false ) ) then
 call SetHeroStr(udg_Danwei[64], ( GetHeroStr(udg_Danwei[64], false) + 1 ), true)
@@ -51769,6 +53267,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_1 takes nothing returns nothing
 set gg_trg_Overdrive_1=CreateTrigger()
@@ -51786,6 +53286,8 @@ call UnitRemoveAbility(udg_Danwei[49], 0x41304944)
 set udg_Danwei[49]=null
 endfunction
 function Trig_Overdrive_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call SetHeroStr(udg_Danwei[64], ( GetHeroStr(udg_Danwei[64], false) - udg_Zhengshu[64] ), true)
 call ForGroupBJ(udg_Danweizu[49], function Trig_Overdrive_2Func002A)
 call UnitRemoveAbility(udg_Danwei[64], 0x41303842)
@@ -51795,6 +53297,8 @@ call UnitRemoveAbility(udg_Danwei[64], 0x41304944)
 call UnitRemoveAbility(udg_Danwei[64], 0x41304854)
 call ForGroupBJ(udg_Danweizu[49], function Trig_Overdrive_2Func008A)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[64]), 0x41303841, true)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_2 takes nothing returns nothing
 set gg_trg_Overdrive_2=CreateTrigger()
@@ -51813,6 +53317,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_Overdrive_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call UnitRemoveAbility(udg_Danwei[64], 0x41304937)
 call UnitAddAbility(udg_Danwei[64], 0x41303842)
 set udg_Danwei[62]=GetTriggerUnit()
@@ -51828,6 +53334,8 @@ call UnitApplyTimedLife(udg_Danwei[63], 0x42487765, 2.00)
 call SetUnitTimeScale(udg_Danwei[63], 2.00)
 call StartTimerBJ(udg_Times[62], true, 0.03)
 set udg_Zhengshu[62]=30
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_3 takes nothing returns nothing
 set gg_trg_Overdrive_3=CreateTrigger()
@@ -51846,6 +53354,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_Overdrive_3_5Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call UnitRemoveAbility(udg_Danwei[64], 0x41304A4A)
 call UnitAddAbility(udg_Danwei[64], 0x41303842)
 set udg_Danwei[62]=GetTriggerUnit()
@@ -51862,6 +53372,8 @@ call SetUnitTimeScale(udg_Danwei[63], 0.50)
 call StartTimerBJ(udg_Times[62], true, 0.03)
 set udg_Zhengshu[62]=30
 set udg_Zhengshu[63]=0
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_3_5 takes nothing returns nothing
 set gg_trg_Overdrive_3_5=CreateTrigger()
@@ -51881,6 +53393,8 @@ call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
 set udg_danwei2[1]=null
 endfunction
 function Trig_Overdrive_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[62] >= 0 ) ) then
 if ( ( udg_Zhengshu[62] <= 25 ) ) then
 call SetUnitTimeScale(udg_Danwei[63], ( 0.20 + ( 0.02 * I2R(udg_Zhengshu[62]) ) ))
@@ -51898,6 +53412,8 @@ set udg_Danwei[63]=null
 call RemoveLocation(udg_Dian[62])
 endif
 set udg_Zhengshu[62]=( udg_Zhengshu[62] - 1 )
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Overdrive_4 takes nothing returns nothing
 set gg_trg_Overdrive_4=CreateTrigger()
@@ -51984,10 +53500,14 @@ call RemoveUnit(udg_Danwei[49])
 set udg_Danwei[49]=null
 endfunction
 function Trig_Harmonics_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call UnitRemoveAbility(udg_Danwei[65], 0x41304D48)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[65]), 0x41304938, true)
 call ForGroupBJ(udg_Danweizu[49], function Trig_Harmonics_1Func003A)
 call GroupClear(udg_Danweizu[49])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_Harmonics_1 takes nothing returns nothing
 set gg_trg_Harmonics_1=CreateTrigger()
@@ -52051,6 +53571,8 @@ function Trig_paoxiao_new2Func002Func021002003 takes nothing returns boolean
 return ( ( ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[411])) == true ) and ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(GetFilterUnit(), UNIT_TYPE_DEAD) == false ) ) ) )
 endfunction
 function Trig_paoxiao_new2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[121]=( udg_zhengshu[121] + 1 )
 if ( ( IsUnitGroupEmptyBJ(udg_danweizu[131]) == true ) and ( udg_zhengshu[121] < 20 ) ) then
 call SetUnitScale(udg_danwei[414], ( 1.00 + ( 0.05 * I2R(udg_zhengshu[121]) ) ), ( 1 + ( 0.05 * I2R(udg_zhengshu[121]) ) ), ( 1 + ( 0.05 * I2R(udg_zhengshu[121]) ) ))
@@ -52076,6 +53598,8 @@ set udg_danwei[414]=null
 set udg_danwei[412]=null
 call DestroyGroup(udg_danweizu[131])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_paoxiao_new2 takes nothing returns nothing
 set gg_trg_paoxiao_new2=CreateTrigger()
@@ -52209,6 +53733,8 @@ endif
 set udg_danwei[421]=null
 endfunction
 function Trig_huologn2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu[122]=( udg_zhengshu[122] + 1 )
 if ( ( udg_zhengshu[122] <= 25 ) ) then
 call SetUnitAnimation(udg_danwei[417], "Attack")
@@ -52245,6 +53771,8 @@ call RemoveLocation(udg_dian[329])
 set udg_danwei[418]=null
 call DestroyGroup(udg_danweizu[117])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huologn2 takes nothing returns nothing
 set gg_trg_huologn2=CreateTrigger()
@@ -52297,6 +53825,8 @@ endif
 set udg_danwei2[0]=null
 endfunction
 function Trig_honglianbaoyanren_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_zhengshu2[345]=( udg_zhengshu2[345] + 1 )
 if ( ( udg_zhengshu2[345] <= 25 ) ) then
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[345], ( 300.00 + GetRandomReal(0, 45.00) ), GetRandomReal(0, 360.00))
@@ -52347,6 +53877,8 @@ call PauseTimer(udg_times[345])
 call ForGroupBJ(udg_danweizu2[345], function Trig_honglianbaoyanren_2Func003Func004A)
 call GroupClear(udg_danweizu2[345])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_honglianbaoyanren_2 takes nothing returns nothing
 set gg_trg_honglianbaoyanren_2=CreateTrigger()
@@ -52387,6 +53919,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_zuzhou_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[83] == 27 ) ) then
 set udg_Zhengshu[83]=( udg_Zhengshu[83] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[83])
@@ -52438,6 +53972,8 @@ set udg_Danwei[84]=null
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_zuzhou_2 takes nothing returns nothing
 set gg_trg_zuzhou_2=CreateTrigger()
@@ -52518,6 +54054,8 @@ call UnitRemoveBuffBJ(0x42303338, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_wuran_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[153] == 17 ) ) then
 set udg_Zhengshu[153]=( udg_Zhengshu[153] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[86])
@@ -52563,6 +54101,8 @@ call GroupClear(udg_Danweizu[154])
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_wuran_2 takes nothing returns nothing
 set gg_trg_wuran_2=CreateTrigger()
@@ -52883,6 +54423,8 @@ call UnitRemoveAbility(udg_danwei2[1], 0x41304E39)
 set udg_danwei2[1]=null
 endfunction
 function Trig_judu2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_zhengshu[138] == - 2 ) ) then
 set udg_zhengshu[138]=( udg_zhengshu[138] + 1 )
 set udg_Dian[89]=GetUnitLoc(udg_danwei[447])
@@ -52962,6 +54504,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_judu2 takes nothing returns nothing
 set gg_trg_judu2=CreateTrigger()
@@ -53033,6 +54577,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_emeng_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call PauseTimer(udg_Times[156])
 call ForGroupBJ(udg_Danweizu[37], function Trig_emeng_2Func002A)
 call StartTimerBJ(udg_Times[157], true, 0.04)
@@ -53055,6 +54601,8 @@ call ForGroupBJ(udg_Danweizu[156], function Trig_emeng_2Func012A)
 set udg_Danwei[92]=null
 call DestroyGroup(udg_Danweizu[156])
 call RemoveLocation(udg_Dian[83])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_emeng_2 takes nothing returns nothing
 set gg_trg_emeng_2=CreateTrigger()
@@ -53076,6 +54624,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_emeng_2_5Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[157] < 100 ) ) then
 set udg_Zhengshu[157]=( udg_Zhengshu[157] + 1 )
 if ( ( ( udg_Zhengshu[156] == - 1 ) or ( ( I2R(udg_Zhengshu[157]) / 2.00 ) == I2R(( udg_Zhengshu[157] / 2 )) ) ) ) then
@@ -53102,6 +54652,8 @@ else
 call KillUnit(udg_Danwei[156])
 call PauseTimer(udg_Times[157])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_emeng_2_5 takes nothing returns nothing
 set gg_trg_emeng_2_5=CreateTrigger()
@@ -53115,6 +54667,8 @@ call UnitRemoveBuffBJ(0x42303242, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_hengkan_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[118] == 0 ) ) then
 call SetUnitManaBJ(udg_Danwei[93], ( GetUnitState(udg_Danwei[93], UNIT_STATE_MANA) + ( 35.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_Danwei[93], 0x41304B51)) ) ) ))
 else
@@ -53137,6 +54691,8 @@ call RemoveLocation(udg_Dian[89])
 call RemoveLocation(udg_Dian[90])
 call StartTimerBJ(udg_Times[89], true, 0.03)
 call StartTimerBJ(udg_Times[90], false, 0.00)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hengkan_1 takes nothing returns nothing
 set gg_trg_hengkan_1=CreateTrigger()
@@ -53217,6 +54773,8 @@ call UnitRemoveBuffBJ(0x42303242, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_huaji_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[118] == 0 ) ) then
 call SetUnitManaBJ(udg_Danwei[93], ( GetUnitState(udg_Danwei[93], UNIT_STATE_MANA) + ( 35.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_Danwei[93], 0x41304B51)) ) ) ))
 else
@@ -53242,6 +54800,8 @@ call RemoveLocation(udg_Dian[92])
 set udg_Danweizu[92]=CreateGroup()
 call StartTimerBJ(udg_Times[91], true, 0.04)
 call StartTimerBJ(udg_Times[92], false, 0.00)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huaji_1 takes nothing returns nothing
 set gg_trg_huaji_1=CreateTrigger()
@@ -53281,6 +54841,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_huaji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[91], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[91], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_Zhengshu[91] > 0 ) ) then
@@ -53312,6 +54874,8 @@ call DestroyGroup(udg_Danweizu[92])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_huaji_2 takes nothing returns nothing
 set gg_trg_huaji_2=CreateTrigger()
@@ -53410,6 +54974,8 @@ call RemoveLocation(udg_Dian[90])
 set udg_danwei2[1]=null
 endfunction
 function Trig_hengsao_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[93], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[93], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[93], 0x42303250) == true ) and ( ( UnitHasBuffBJ(udg_Danwei[93], 0x42303256) == true ) or ( ( UnitHasBuffBJ(udg_Danwei[93], 0x4253544E) == false ) and ( UnitHasBuffBJ(udg_Danwei[93], 0x42505345) == false ) ) ) and ( udg_Zhengshu[93] > 0 ) ) then
 set udg_Zhengshu[93]=( udg_Zhengshu[93] - 1 )
@@ -53454,6 +55020,8 @@ call UnitRemoveBuffBJ(0x42303250, udg_Danwei[93])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hengsao_2 takes nothing returns nothing
 set gg_trg_hengsao_2=CreateTrigger()
@@ -53505,6 +55073,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_tiaokan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( IsUnitType(udg_Danwei[94], UNIT_TYPE_TAUREN) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[94], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_Zhengshu[94] > 0 ) ) then
@@ -53541,6 +55111,8 @@ call UnitRemoveBuffBJ(0x42303250, udg_Danwei[93])
 endif
 else
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaokan_2 takes nothing returns nothing
 set gg_trg_tiaokan_2=CreateTrigger()
@@ -53574,6 +55146,8 @@ call UnitRemoveBuffBJ(0x42303242, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_tiaokan_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( GetIssuedOrderIdBJ() == String2OrderIdBJ("breathoffire") ) ) then
 if ( ( udg_Zhengshu[118] == 0 ) ) then
 call SetUnitManaBJ(udg_Danwei[93], ( GetUnitState(udg_Danwei[93], UNIT_STATE_MANA) + ( 35.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_Danwei[93], 0x41304B51)) ) ) ))
@@ -53607,6 +55181,8 @@ else
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_tiaokan_4 takes nothing returns nothing
 set gg_trg_tiaokan_4=CreateTrigger()
@@ -53629,6 +55205,8 @@ call UnitRemoveBuffBJ(0x42303242, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_feifu_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[118] == 0 ) ) then
 call SetUnitManaBJ(udg_Danwei[93], ( GetUnitState(udg_Danwei[93], UNIT_STATE_MANA) + ( 35.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_Danwei[93], 0x41304B51)) ) ) ))
 else
@@ -53645,6 +55223,8 @@ set udg_Zhengshu[97]=0
 call StartTimerBJ(udg_Times[96], false, 0.50)
 call StartTimerBJ(udg_Times[97], false, 0.00)
 call SetUnitAnimationByIndex(udg_Danwei[96], 5)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feifu_1 takes nothing returns nothing
 set gg_trg_feifu_1=CreateTrigger()
@@ -53690,6 +55270,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_feifu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[96] > 25 ) ) then
 set udg_Zhengshu[96]=( udg_Zhengshu[96] - 1 )
 if ( ( udg_Zhengshu[96] == 25 ) ) then
@@ -53756,6 +55338,8 @@ call RemoveLocation(udg_Dian[95])
 call RemoveLocation(udg_Dian[93])
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_feifu_2 takes nothing returns nothing
 set gg_trg_feifu_2=CreateTrigger()
@@ -53914,6 +55498,8 @@ endif
 set udg_Danwei[134]=null
 endfunction
 function Trig_caiyansheji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[132] == 4 ) ) then
 set udg_Zhengshu[132]=( udg_Zhengshu[132] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
@@ -53943,6 +55529,8 @@ call UnitShareVision(udg_Danwei[133], GetOwningPlayer(udg_Danwei[132]), false)
 set udg_Zhengshu[132]=0
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_caiyansheji_2 takes nothing returns nothing
 set gg_trg_caiyansheji_2=CreateTrigger()
@@ -53992,6 +55580,8 @@ call SetUnitFacing(udg_Danwei[135], GetUnitFacing(udg_Danwei[132]))
 set udg_Danwei[135]=null
 endfunction
 function Trig_hongzhishi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[133] == 77 ) ) then
 set udg_Zhengshu[133]=( udg_Zhengshu[133] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
@@ -54095,6 +55685,8 @@ call ForGroupBJ(udg_Danweizu[37], function Trig_hongzhishi_2Func001Func001Func01
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hongzhishi_2 takes nothing returns nothing
 set gg_trg_hongzhishi_2=CreateTrigger()
@@ -54167,6 +55759,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_hongzhishi_3Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[134] > 0 ) ) then
 set udg_Zhengshu[134]=( udg_Zhengshu[134] - 1 )
 set udg_Dian[135]=GetUnitLoc(udg_Danwei[136])
@@ -54190,6 +55784,8 @@ call GroupClear(udg_Danweizu[133])
 call GroupClear(udg_Danweizu[135])
 call PauseTimer(udg_Times[134])
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hongzhishi_3 takes nothing returns nothing
 set gg_trg_hongzhishi_3=CreateTrigger()
@@ -54210,6 +55806,8 @@ endif
 set udg_Danwei[37]=null
 endfunction
 function Trig_hongzhishi_4Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Zhengshu[133]=0
 call StopSoundBJ(gg_snd_FrostArrowLaunch1, false)
 call PlaySoundOnUnitBJ(gg_snd_FrostArrowLaunch1, 100, udg_Danwei[132])
@@ -54227,6 +55825,8 @@ call DisableTrigger(gg_trg_hongzhishi_2_6)
 call DisableTrigger(gg_trg_hongzhishi_2_7)
 call DisableTrigger(gg_trg_hongzhishi_4)
 call ForGroupBJ(udg_Danweizu[37], function Trig_hongzhishi_4Func017A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_hongzhishi_4 takes nothing returns nothing
 set gg_trg_hongzhishi_4=CreateTrigger()
@@ -54370,6 +55970,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_molipingzhang_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[135] == 0 ) ) then
 set udg_Zhengshu[135]=( udg_Zhengshu[135] + 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
@@ -54429,6 +56031,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_molipingzhang_2 takes nothing returns nothing
 set gg_trg_molipingzhang_2=CreateTrigger()
@@ -54486,6 +56090,8 @@ call UnitRemoveBuffBJ(0x42303334, udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
 function Trig_jinghuazhiyu_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[136] == 81 ) ) then
 set udg_Zhengshu[136]=( udg_Zhengshu[136] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
@@ -54594,6 +56200,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_jinghuazhiyu_2 takes nothing returns nothing
 set gg_trg_jinghuazhiyu_2=CreateTrigger()
@@ -54646,6 +56254,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func001Func001A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) >= 5.00 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -54667,6 +56277,8 @@ call DestroyGroup(udg_Danweizu[134])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func001Func003Func002Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -54688,6 +56300,8 @@ endif
 set udg_danwei2[1]=null
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func015A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) >= 5.00 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -54709,8 +56323,12 @@ call DestroyGroup(udg_Danweizu[134])
 endif
 call RemoveLocation(udg_dian2[0])
 set udg_danwei2[0]=null
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function Trig_yuanhuanzhili_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[137] == 111 ) ) then
 set udg_Zhengshu[137]=( udg_Zhengshu[137] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
@@ -54920,6 +56538,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yuanhuanzhili_2 takes nothing returns nothing
 set gg_trg_yuanhuanzhili_2=CreateTrigger()
@@ -55022,6 +56642,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_xuanfengsheji_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[162] == 23 ) ) then
 set udg_Zhengshu[162]=( udg_Zhengshu[162] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
@@ -55076,6 +56698,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_xuanfengsheji_2 takes nothing returns nothing
 set gg_trg_xuanfengsheji_2=CreateTrigger()
@@ -55189,6 +56813,8 @@ function Trig_yizhidan_2Func001Func001Func012Func006A takes nothing returns noth
 call UnitRemoveAbility(GetEnumUnit(), 0x41304F51)
 endfunction
 function Trig_yizhidan_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[165] == 3 ) ) then
 set udg_Zhengshu[165]=( udg_Zhengshu[165] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
@@ -55232,6 +56858,8 @@ else
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yizhidan_2 takes nothing returns nothing
 set gg_trg_yizhidan_2=CreateTrigger()
@@ -55276,6 +56904,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_yizhidan_shunyi_2Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 if ( ( udg_Zhengshu[164] == 21 ) ) then
 set udg_Zhengshu[164]=( udg_Zhengshu[164] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
@@ -55355,6 +56985,8 @@ endif
 endif
 endif
 endif
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yizhidan_shunyi_2 takes nothing returns nothing
 set gg_trg_yizhidan_shunyi_2=CreateTrigger()
@@ -55365,8 +56997,12 @@ function Trig_yizhidangongsuFunc002A takes nothing returns nothing
 call UnitRemoveAbility(GetEnumUnit(), 0x41304F51)
 endfunction
 function Trig_yizhidangongsuActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 call UnitRemoveAbility(udg_Danwei[161], 0x41304F51)
 call ForGroupBJ(udg_Danweizu[164], function Trig_yizhidangongsuFunc002A)
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_yizhidangongsu takes nothing returns nothing
 set gg_trg_yizhidangongsu=CreateTrigger()
@@ -55561,6 +57197,8 @@ endif
 set udg_Danwei[162]=null
 endfunction
 function Trig_shishizhicheng_1Actions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
 set udg_Danwei[161]=GetTriggerUnit()
 set udg_Dian[167]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[166]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303837, udg_Dian[167], 0)
@@ -55575,6 +57213,8 @@ set udg_Danweizu[162]=YDWEGetUnitsInRangeOfLocAllNull(800.00 , udg_Dian[167])
 call ForGroupBJ(udg_Danweizu[162], function Trig_shishizhicheng_1Func012A)
 call DestroyGroup(udg_Danweizu[162])
 call PlaySoundOnUnitBJ(gg_snd_SoulGem, 100, udg_Danwei[161])
+set ydl_group=null
+set ydl_unit=null
 endfunction
 function InitTrig_shishizhicheng_1 takes nothing returns nothing
 set gg_trg_shishizhicheng_1=CreateTrigger()
@@ -55678,6 +57318,10 @@ call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_shishizhicheng_3Actions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_Danwei[167]=GetSummonedUnit()
 set udg_Dian[163]=PolarProjectionBJ(udg_Dian[167], GetRandomReal(300.00, 600.00), ( ( 45.00 * I2R(( udg_Zhengshu[167] - 1 )) ) + GetRandomReal(0, 30.00) ))
 call SetUnitFacing(udg_Danwei[167], GetUnitFacing(udg_Danwei[161]))
@@ -55692,6 +57336,7 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xC58841DE, GetSummonedUnit())
 call TimerStart(ydl_timer, 0.65, false, function Trig_shishizhicheng_3Func010T)
 set udg_Danwei[167]=null
 call RemoveLocation(udg_Dian[163])
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_shishizhicheng_3 takes nothing returns nothing
@@ -55998,6 +57643,7 @@ call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84
 set udg_mkszs[1]=0
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call TimerStart(ydl_timer, 3.00, false, function Trig_litijidongFunc002Func013Func004Func001Func001Func001Func004Func001Func008T)
 else
 endif
@@ -56038,6 +57684,19 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDH
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
 call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x93AA82B4, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x93AA82B4))
+call SaveRectHandle(YDHT, GetHandleId(ydl_timer), 0xFB65B3F0, LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x80A9ADA7, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_litijidongFunc002Func013T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -56047,6 +57706,10 @@ set ydl_timer=null
 endfunction
 function Trig_litijidongActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 if ( ( GetTriggerExecCount(GetTriggeringTrigger()) == 1 ) ) then
 call TriggerRegisterUnitEvent(gg_trg_litijidong_1_5, GetTriggerUnit(), EVENT_UNIT_ISSUED_POINT_ORDER)
 call TriggerRegisterUnitEvent(gg_trg_litijidong_1_5, GetTriggerUnit(), EVENT_UNIT_ISSUED_TARGET_ORDER)
@@ -56056,7 +57719,18 @@ set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, GetTriggerUnit())
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, GetUnitLoc(GetTriggerUnit()))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, GetSpellTargetLoc())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBF9304BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x293DF2F5))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x93AA82B4, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x93AA82B4))
+call SaveRectHandle(YDHT, GetHandleId(ydl_timer), 0xFB65B3F0, LoadRectHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFB65B3F0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8AD04E87))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x80A9ADA7, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x80A9ADA7))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.00, false, function Trig_litijidongFunc002T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_litijidong takes nothing returns nothing
@@ -56161,6 +57835,12 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x80A9ADA7, 10)
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
 call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call TimerStart(ydl_timer, 0.02, true, function Trig_xuanfengzhanFunc001Func002Func002Func020Func010T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -56210,6 +57890,14 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\Polymorph\\
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\Polymorph\\PolyMorphDoneGround.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), "right weapon"))
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call TimerStart(ydl_timer, 0.30, false, function Trig_xuanfengzhanFunc001Func002Func002Func020T)
 endif
 endif
@@ -56221,9 +57909,22 @@ set ydl_timer=null
 endfunction
 function Trig_xuanfengzhanActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, GetTriggerUnit())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8A0E31E7))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x293DF2F5))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBF0EA2EC))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xEB494D94))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.00, false, function Trig_xuanfengzhanFunc001T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_xuanfengzhan takes nothing returns nothing
@@ -56260,6 +57961,7 @@ call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF
 set udg_mkszs[2]=0
 call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 1.00)
 set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call TimerStart(ydl_timer, 5.00, false, function Trig_shuangdaozhanFunc001Func001Func007Func001Func006T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
@@ -56404,6 +58106,17 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDH
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
 call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3824AE9B, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3824AE9B))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xD78D4D25, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
 call TimerStart(ydl_timer, 0.03, true, function Trig_shuangdaozhanFunc001Func001Func022T)
 else
 call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 1)
@@ -56419,6 +58132,13 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDH
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call TimerStart(ydl_timer, 0.03, true, function Trig_shuangdaozhanFunc001Func001Func007T)
 endif
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
@@ -56429,12 +58149,24 @@ set ydl_timer=null
 endfunction
 function Trig_shuangdaozhanActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, GetTriggerUnit())
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, GetSpellTargetUnit())
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, GetUnitLoc(GetTriggerUnit()))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, GetUnitLoc(GetSpellTargetUnit()))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBF9304BF))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3824AE9B, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x3824AE9B))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xD78D4D25, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD78D4D25))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8AD04E87))
 call TimerStart(ydl_timer, 0.00, false, function Trig_shuangdaozhanFunc001T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_shuangdaozhan takes nothing returns nothing
@@ -56485,9 +58217,9 @@ else
 endif
 endfunction
 function Trig_huixuanzhanFunc001Func016T takes nothing returns nothing
-local timer ydl_timer
 local group ydl_group
 local unit ydl_unit
+local timer ydl_timer
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
@@ -56732,6 +58464,7 @@ call UnitRemoveBuffBJ(0x4230324F, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTim
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), false)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call TimerStart(ydl_timer, 1.00, false, function Trig_huixuanzhanFunc001Func016Func004Func001Func001Func001Func010T)
 call EnableTrigger(gg_trg_litijidong_1_5)
 endif
@@ -56739,9 +58472,9 @@ else
 endif
 endif
 endif
-set ydl_timer=null
 set ydl_group=null
 set ydl_unit=null
+set ydl_timer=null
 endfunction
 function Trig_huixuanzhanFunc001T takes nothing returns nothing
 local timer ydl_timer
@@ -56770,6 +58503,23 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDH
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
 call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x93AA82B4, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x93AA82B4))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
+call SaveRectHandle(YDHT, GetHandleId(ydl_timer), 0xFB65B3F0, LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x804606DC, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x804606DC))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x4F80CBBC, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xFE77D408, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xFE77D408))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_huixuanzhanFunc001Func016T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -56779,11 +58529,30 @@ set ydl_timer=null
 endfunction
 function Trig_huixuanzhanActions takes nothing returns nothing
 local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, GetTriggerUnit())
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x99149280, GetUnitLoc(GetTriggerUnit()))
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xC90F02FD, GetSpellTargetLoc())
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x8A0E31E7, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8A0E31E7))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x3AA0CF34, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x3AA0CF34))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBF9304BF, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBF9304BF))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x1B1E869E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x1B1E869E))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x293DF2F5))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x93AA82B4, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x93AA82B4))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBF0EA2EC))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xEB494D94))
+call SaveRectHandle(YDHT, GetHandleId(ydl_timer), 0xFB65B3F0, LoadRectHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFB65B3F0))
+call SaveLightningHandle(YDHT, GetHandleId(ydl_timer), 0x8AD04E87, LoadLightningHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x8AD04E87))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x804606DC, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x804606DC))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x4F80CBBC, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4F80CBBC))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xFE77D408, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFE77D408))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.00, false, function Trig_huixuanzhanFunc001T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
 function InitTrig_huixuanzhan takes nothing returns nothing
@@ -56813,6 +58582,11 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig__________bakaLibrary()
 //Function not found: call InitTrig__________objectLibrary()
 //Function not found: call InitTrig_Lua___LuaLibrary()
+//Function not found: call InitTrig_base_lua()
+//Function not found: call InitTrig_timer_lua()
+//Function not found: call InitTrig_player_lua()
+//Function not found: call InitTrig_game_lua()
+//Function not found: call InitTrig_text_lua()
 call InitTrig_suijiduiwu()
 call InitTrig_chushihua()
 call InitTrig_time_0()
@@ -57778,11 +59552,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-//Function not found: call InitTrig_base_lua()
-//Function not found: call InitTrig_text_lua()
-//Function not found: call InitTrig_timer_lua()
-//Function not found: call InitTrig_game_lua()
-//Function not found: call InitTrig_player_lua()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -58017,23 +59786,23 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs923326939")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs925658764")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("LuaLibrary__Init")
-call ExecuteFunc("Record__Init")
-call ExecuteFunc("bakaLibrary__Init")
-call ExecuteFunc("effectLibrary__Init")
-call ExecuteFunc("eventLibrary__Init")
-call ExecuteFunc("mathLibrary__Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("soundLibrary__Init")
-call ExecuteFunc("stringLibrary__Init")
-call ExecuteFunc("textLibrary__Init")
-call ExecuteFunc("unitLibrary__Init")
-call ExecuteFunc("RecordFix__Init")
+call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
+call ExecuteFunc("Record___Init")
+call ExecuteFunc("bakaLibrary___Init")
+call ExecuteFunc("effectLibrary___Init")
+call ExecuteFunc("eventLibrary___Init")
+call ExecuteFunc("mathLibrary___Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("soundLibrary___Init")
+call ExecuteFunc("stringLibrary___Init")
+call ExecuteFunc("textLibrary___Init")
+call ExecuteFunc("unitLibrary___Init")
+call ExecuteFunc("RecordFix___Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -58149,7 +59918,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs923326939 takes nothing returns nothing
+function jasshelper__initstructs925658764 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()

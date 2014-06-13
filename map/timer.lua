@@ -1,11 +1,9 @@
     
     timer = {}
-
 	local timer = timer
 	--全局计时
 	timer.gTimer = jass.CreateTimer()
 	jass.TimerStart(timer.gTimer, 999999, false, nil)
-
 	--获取当前时间
 	-- -代参数时返回时间对应的文字
 	function timer.time(a)
@@ -27,21 +25,16 @@
 			return jass.TimerGetElapsed(timer.gTimer)
 		end
 	end
-
 	--存放空闲计时器
 	timer.idles = {}
-
 	--空闲计时器计数
 	timer.idleCount = 500
-
 	--先创建500个备用计时器出来
 	for i = 1, 500 do
 		timer.idles[i] = jass.CreateTimer()
 	end
-
 	--已经创建的计时器计数
 	timer.count = 500
-
 	--创建计时器
 	function timer.create()
 		local jTimer
@@ -58,7 +51,6 @@
 		end
 		return setmetatable({jTimer}, timer)
 	end
-
 	--计时器结构	
 	timer.__index = {
 		--结构类型
@@ -66,16 +58,12 @@
 		
 		--[1]计时器handle
 		[1] = nil,
-
 		--[2]计时器周期
 		[2] = 0,
-
 		--[3]是否循环
 		[3] = false,
-
 		--[4]回调函数
 		[4] = nil,
-
 		--启动计时器
 		-- -timer:start(周期, 是否循环, 回调函数)
 		start = function(this, dur, loop, func)
@@ -85,7 +73,6 @@
 				jass.TimerStart(jTimer, dur, loop, func)
 			end
 		end,
-
 		--暂停计时器
 		-- -timer:pause()
 		pause = function(this)
@@ -94,7 +81,6 @@
 				jass.PauseTimer(jTimer)
 			end
 		end,
-
 		--摧毁计时器
 		-- -timer:destroy()
 		destroy = function(this)
@@ -109,7 +95,6 @@
 			end
 		end,
 	}
-
 	--常用函数
 	
 	--延迟后执行函数(时间, 函数)
@@ -126,7 +111,6 @@
 		)
 		return t, f
 	end
-
 	--循环执行函数(时间, [是否立即运行一次], 函数)
 	-- -返回(计时器, 函数)
 	-- --执行的函数将代入参数(计时器),如果函数返回true则摧毁计时器
@@ -148,7 +132,6 @@
 		end
 		return t, f
 	end
-
 	--按次数循环执行函数(时间, 次数, [是否立即运行一次], 函数)
 	-- -返回(计时器, 函数)
 	-- --执行的函数将代入参数(当前次数, 计时器),如果函数返回true则提前摧毁计时器
