@@ -27,6 +27,8 @@
 
 	sub(jass)
 	sub(japi)
+    
+    print 'hello world'
 
 	--调用栈
 	function runtime.error_handle(msg)
