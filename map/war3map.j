@@ -27,9 +27,9 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -91,12 +91,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -117,6 +117,9 @@ timer globalTimer=null
 integer globalTriggerIndex=0
 trigger globalTrigger=null
 //endglobals from defineLibrary
+//globals from LuaLibrary:
+constant boolean LIBRARY_LuaLibrary=true
+//endglobals from LuaLibrary
 //globals from Record:
 constant boolean LIBRARY_Record=true
 string hke_ZZ=null
@@ -173,9 +176,6 @@ constant boolean LIBRARY_YDWEGetUnitsInRectAllNull=true
 constant boolean LIBRARY_YDWEJumpTimer=true
 integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
-//globals from YDWELibrary:
-constant boolean LIBRARY_YDWELibrary=true
-//endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
 //endglobals from YDWESetUnitFacingToFaceUnitTimedNull
@@ -677,7 +677,7 @@ trigger gg_trg__________effeLibrary=null
 trigger gg_trg__________soundLibrary=null
 trigger gg_trg__________bakaLibrary=null
 trigger gg_trg__________objectLibrary=null
-trigger gg_trg_YDWE___YDWELibrary=null
+trigger gg_trg_Lua___LuaLibrary=null
 trigger gg_trg_suijiduiwu=null
 trigger gg_trg_chushihua=null
 trigger gg_trg_test_1=null
@@ -1768,6 +1768,11 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
+trigger gg_trg_base_lua=null
+trigger gg_trg_text_lua=null
+trigger gg_trg_timer_lua=null
+trigger gg_trg_game_lua=null
+trigger gg_trg_player_lua=null
 
 trigger l__library_init
 
@@ -2795,20 +2800,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -3199,9 +3204,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3228,22 +3233,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3253,13 +3258,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3304,6 +3309,16 @@ endfunction
 //library defineLibrary:
 
 //library defineLibrary ends
+//library LuaLibrary:
+function LuaLibrary___Init takes nothing returns nothing
+call Cheat("run base.lua")
+call Cheat("run timer.lua")
+call Cheat("run player.lua")
+call Cheat("run game.lua")
+call Cheat("run text.lua")
+endfunction
+
+//library LuaLibrary ends
 //library Record:
 function I2S2 takes integer i returns string
 return SubString("ABCDEFGHIJKLMNOPQRSTUVWXYZ", i, i + 1)
@@ -4005,11 +4020,6 @@ set t=null
 endfunction
 
 //library YDWEJumpTimer ends
-//library YDWELibrary:
-function YDWELibrary___Init takes nothing returns nothing
-endfunction
-
-//library YDWELibrary ends
 //library YDWESetUnitFacingToFaceUnitTimedNull:
 function YDWESetUnitFacingToFaceUnitTimedNull takes unit whichUnit,unit target,real duration returns nothing
 local location unitLoc=GetUnitLoc(target)
@@ -4751,6 +4761,7 @@ call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
 function RecordFix___Init takes nothing returns nothing
+return
 call Cheat("run Moe_RecordFix.lua")
 call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
 endfunction
@@ -56801,7 +56812,7 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig__________soundLibrary()
 //Function not found: call InitTrig__________bakaLibrary()
 //Function not found: call InitTrig__________objectLibrary()
-//Function not found: call InitTrig_YDWE___YDWELibrary()
+//Function not found: call InitTrig_Lua___LuaLibrary()
 call InitTrig_suijiduiwu()
 call InitTrig_chushihua()
 call InitTrig_time_0()
@@ -57767,6 +57778,11 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
+//Function not found: call InitTrig_base_lua()
+//Function not found: call InitTrig_text_lua()
+//Function not found: call InitTrig_timer_lua()
+//Function not found: call InitTrig_game_lua()
+//Function not found: call InitTrig_player_lua()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -58001,13 +58017,13 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs909855192")
+call ExecuteFunc("jasshelper__initstructs920656233")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
 call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary___Init")
 call ExecuteFunc("bakaLibrary___Init")
 call ExecuteFunc("effectLibrary___Init")
 call ExecuteFunc("eventLibrary___Init")
@@ -58133,7 +58149,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs909855192 takes nothing returns nothing
+function jasshelper__initstructs920656233 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
