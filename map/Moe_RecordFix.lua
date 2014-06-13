@@ -1,4 +1,4 @@
-    
+ 
     --分割字符串
     string.split = function(str, tos)
         local x = 1
