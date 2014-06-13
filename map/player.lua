@@ -50,7 +50,7 @@
 	--预设玩家
 	function player.init()
 		for i = 1, 16 do
-			player.create(i, jass.baka.SPlayer(i - 1))
+			player.create(i, jass.Player(i - 1))
 		end
         
         player.self = player.j_player(jass.GetLocalPlayer())
