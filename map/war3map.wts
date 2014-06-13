@@ -7354,11 +7354,6 @@ STRING 1233
 |cffffcc00这件装备(星辰之刃)最多携带1件|r
 }
 
-STRING 1234
-{
-|cffffcc00双击选择英雄|r
-}
-
 STRING 1235
 // 技能: A04O (|cFFFF0033瞬步斩|r), Hotkey (热键 - 普通)
 {
@@ -33407,6 +33402,11 @@ STRING 5605
 禁止移动攻击
 }
 
+STRING 5606
+{
+|cffffffff洗牌：|r|cffff0000洗牌模式|r|cffffcc00(S)|r
+}
+
 STRING 5609
 // 技能: A02F (|cffff66ff圆环之理|r), Tip (提示工具 - 普通)
 {
@@ -49541,6 +49541,43 @@ STRING 8309
 // 技能: A0Q0 (|cFFffff00横跃斩/双刀斩|r), Researchtip (提示工具 - 学习)
 {
 学习|cFFffff00横跃斩/双刀斩|r（E）
+}
+
+STRING 8311
+{
+|cFFFF0000洗牌模式|r
+-所有玩家重新分组
+-可以与其他模式叠加
+}
+
+STRING 8312
+{
+游戏模式
+}
+
+STRING 8313
+{
+常规：自由选择|cffffcc00(Q)|r
+}
+
+STRING 8314
+{
+|cffffffff常规：全体随机|r|cffffcc00(W)|r
+}
+
+STRING 8315
+{
+|cffffffff娱乐：|r|cff00ffff圣诞模式|r|cffffcc00(E)|r
+}
+
+STRING 8316
+{
+|cffffffff比赛：|r|cffffff00单路模式|r|cffffcc00(R)|r
+}
+
+STRING 8317
+{
+|cffffcc00双击选择英雄|r
 }
 
 STRING 8318
