@@ -93,7 +93,7 @@ local function main()
 			end
 		end
 	end
-	
+	--[[
 
 	--搜索dir下的所有文件,导入地图
 	local files = {}
@@ -124,7 +124,6 @@ local function main()
 	local map_dir = root_dir / 'src' / 'map.w3x'
 	local new_dir = root_dir / 'test' / input_map:filename():string()
 	if not flag_newmap then
-		--[[
 		--复制地图模板到test,覆盖之前的地图
 		inmap:close()
 		if pcall(fs.copy_file, map_dir, new_dir, true) then
@@ -139,7 +138,6 @@ local function main()
 			print('[失败]: 打开 ' .. new_dir:string())
 			return
 		end
-		--]]
 	end
 
 	--将文件全部导入回去
@@ -154,8 +152,6 @@ local function main()
 		end
 	end
 
-	inmap:close()
-
 	if not flag_newmap then
 		local dir = input_map:parent_path() / ('new_' .. input_map:filename():string())
 		if pcall(fs.copy_file, new_dir, dir, true) then
@@ -164,6 +160,9 @@ local function main()
 			print('[失败]: 复制 ' .. dir:string())
 		end
 	end
+	--]]
+
+	inmap:close()
 	
 	print('[完毕]: 用时 ' .. os.clock() .. ' 秒') 
 
