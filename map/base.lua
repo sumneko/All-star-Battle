@@ -2,6 +2,7 @@
 	japi = require 'jass.japi'
 	slk = require 'jass.slk'
 	runtime = require 'jass.runtime'
+    hook = require 'jass.hook'
 	--打开控制台
 	runtime.console = true
 	--设置句柄等级为0(地图中所有的句柄均使用table封装)

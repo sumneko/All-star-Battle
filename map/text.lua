@@ -14,12 +14,10 @@
                     text.setAbText(ab)
                 end
             end
-            for i = 0, 11 do
-                local hero = game.heros()[i]
-                if hero then
-                    jass.UnitAddAbility(hero, |Amgl|)
-                    jass.UnitRemoveAbility(hero, |Amgl|)
-                end
+            for i = 1, #game.heroes do
+                local hero = game.heroes[i]
+                jass.UnitAddAbility(hero, |Amgl|)
+                jass.UnitRemoveAbility(hero, |Amgl|)
             end
         end
     )
@@ -107,7 +105,11 @@
 					local s, e = string.find(te, "[%d.]+", start + 2)
 					if s then
 						local num = string.sub(te, s, e)
-						te = string.sub(te, 1, s - 9) .. "%d" .. string.sub(te, e + 1, -1)
+                        if te:sub(s - 9, s - 9) == '+' then
+                            te = string.sub(te, 1, s - 10) .. "(+%d)" .. string.sub(te, e + 1, -1)
+                        else
+                            te = string.sub(te, 1, s - 9) .. "%d" .. string.sub(te, e + 1, -1)
+                        end
 						table.insert(t, func)
 						table.insert(t, num)
 						flag = true

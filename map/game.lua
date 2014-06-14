@@ -2,17 +2,20 @@
     
     local game = game
     
-    function game.heros()
-        return jass[game.jHero]
+    game.heroes = {}
+    
+    function game.initHero(u)
+        table.insert(game.heroes, u)
+        if jass.GetOwningPlayer(u) == jass.GetLocalPlayer() then
+            game.selfHero = u
+        end
     end
     
     function game.self()
-        return game.heros()[player.self:get()]
+        return game.selfHero
     end
     
-    function game.init()
-        game.jHero = 'udg_player'
+    function hook.UnitWakeUp(u, f)
+        game.initHero(u)
     end
-    
-    game.init()
     
