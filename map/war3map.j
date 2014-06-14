@@ -4444,6 +4444,15 @@ call GroupRemoveUnit(s__baka_CG3, s__baka_CU)
 call GroupRemoveUnit(s__baka_CG4, s__baka_CU)
 return false
 endfunction
+function s__baka_MoveLightningEx2 takes lightning whichBolt,boolean checkVisibility,real x1,real y1,real z1,real x2,real y2,real z2 returns boolean
+if not IsVisibleToPlayer(x1, y1, s__sys_selfp) and not IsVisibleToPlayer(x2, y2, s__sys_selfp) then
+call SetLightningColor(whichBolt, 1, 1, 1, 0)
+else
+call SetLightningColor(whichBolt, 1, 1, 1, 1)
+return MoveLightningEx(whichBolt, false, x1, y1, z1, x2, y2, z2)
+endif
+return false
+endfunction
 function s__baka_InitHero takes unit hero returns nothing
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
@@ -4763,10 +4772,6 @@ call SetUnitState(hero, UNIT_STATE_LIFE, 999999)
 call SetUnitState(hero, UNIT_STATE_MANA, 999999)
 call UnitResetCooldown(hero)
 elseif s == ".move" then
-call BJDebugMsg(I2S(id) + " / " + I2S(s__sys_self))
-if s__sys_GC == null then
-call BJDebugMsg("sys.GC为null!")
-endif
 if s__sys_selfp == p then
 call StoreInteger(s__sys_GC, "mx", I2S(id), R2I(GetCameraTargetPositionX()))
 call StoreInteger(s__sys_GC, "my", I2S(id), R2I(GetCameraTargetPositionY()))
@@ -57676,10 +57681,10 @@ call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUni
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E)))
 if ( ( udg_mkszs[2] == 1 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 100.00, GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))))
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
 else
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 endif
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), 80.00, GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))))
 if ( ( ( GetTerrainCliffLevelBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) > GetTerrainCliffLevelBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) ) or ( IsTerrainPathableBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), PATHING_TYPE_WALKABILITY) == true ) ) ) then
@@ -57740,10 +57745,10 @@ endif
 if ( ( IsTerrainPathableBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), PATHING_TYPE_FLYABILITY) == false ) ) then
 if ( ( udg_mkszs[2] == 1 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 100.00, GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))))
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
 else
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) + 100.00 ))
 endif
 call SetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)))
 call SetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)))
@@ -57787,10 +57792,10 @@ call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUni
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E)))
 if ( ( udg_mkszs[2] == 1 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 100.00, GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))))
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
 else
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 endif
 if ( ( DistanceBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) >= 80.00 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), ( 15.00 + ( 12.00 * I2R(GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x41305058)) ) ), AngleBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))))
@@ -57875,10 +57880,10 @@ endloop
 call DestroyGroup(ydl_group)
 if ( ( udg_mkszs[2] == 1 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 100.00, GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))))
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
 else
-call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
+call s__baka_MoveLightningEx2(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87) , false , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ) , GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) , ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
 endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x55BBA912) > 0 ) and ( udg_mkszs[2] == 0 ) ) then
 if ( ( udg_mkszs[0] == 0 ) ) then
@@ -57957,7 +57962,7 @@ call SetPlayerAbilityAvailable(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(
 else
 endif
 call GroupAddUnit(udg_mksdwz[1], LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
-call SaveLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87, AddLightningEx("SZ", true, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 100.00 )))
+call SaveLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87, AddLightningEx("SZ", false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 100.00 )))
 call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 5)
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x4162756E)
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( 15 + ( 2 * GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x41305058) ) ))
@@ -60073,7 +60078,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1013469512")
+call ExecuteFunc("jasshelper__initstructs1016388400")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -60204,7 +60209,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1013469512 takes nothing returns nothing
+function jasshelper__initstructs1016388400 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
