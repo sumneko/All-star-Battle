@@ -85,7 +85,7 @@ local function main()
 			fs.create_directories(dir_par)
 			fs.create_directories(map_dir_par)
 			if inmap:extract(line, dir) then
-				print('[成功]: 导出 ' .. line)
+				--print('[成功]: 导出 ' .. line)
 				git_fresh(line)
 			else
 				print('[失败]: 导出 ' .. line)

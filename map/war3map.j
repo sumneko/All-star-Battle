@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -92,19 +92,19 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
+region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterEnterRectSimpleNull
 //globals from YDWETriggerRegisterLeaveRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterLeaveRectSimpleNull=true
-region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterLeaveRectSimpleNull
 //globals from baseLibrary:
 constant boolean LIBRARY_baseLibrary=true
@@ -687,6 +687,7 @@ trigger gg_trg__________effeLibrary=null
 trigger gg_trg__________soundLibrary=null
 trigger gg_trg__________bakaLibrary=null
 trigger gg_trg__________objectLibrary=null
+trigger gg_trg_______testLibrary=null
 trigger gg_trg_suijiduiwu=null
 trigger gg_trg_chushihua=null
 trigger gg_trg_test_1=null
@@ -933,6 +934,7 @@ trigger gg_trg_shijiao=null
 trigger gg_trg_shijiao2=null
 trigger gg_trg_shijiao_time=null
 trigger gg_trg_money_balabala=null
+trigger gg_trg_HeroSkillPoint=null
 trigger gg_trg_hp1_2=null
 trigger gg_trg_hp2_2=null
 trigger gg_trg_gongxiangwupin=null
@@ -1777,8 +1779,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_HeroSkillPoint=null
-trigger gg_trg_______testLibrary=null
 
 trigger l__library_init
 
@@ -1806,24 +1806,25 @@ integer si__baka_I=0
 integer array si__baka_V
 player array s__baka_spplayer
 integer array s__baka_spid
+group array s__baka_g
 integer s__baka_thisVer=260
 string s__baka_thatVerName=""
-constant integer si__Effect=6
+constant integer si__Effect=4
 integer si__Effect_F=0
 integer si__Effect_I=0
 integer array si__Effect_V
-constant integer si__Event=7
+constant integer si__Event=5
 integer si__Event_F=0
 integer si__Event_I=0
 integer array si__Event_V
 hashtable s__Event_HT=InitHashtable()
-constant integer si__math=8
+constant integer si__math=6
 integer si__math_F=0
 integer si__math_I=0
 integer array si__math_V
 real array s__math_PolygonX
 real array s__math_PolygonY
-constant integer si__object=9
+constant integer si__object=7
 integer si__object_F=0
 integer si__object_I=0
 integer array si__object_V
@@ -1831,32 +1832,30 @@ hashtable s__object_HT=InitHashtable()
 integer s__object_COST=1
 integer s__object_COOL=2
 integer s__object_COMMAND=0
-constant integer si__Sound=10
+constant integer si__Sound=8
 integer si__Sound_F=0
 integer si__Sound_I=0
 integer array si__Sound_V
 hashtable s__Sound_HT=InitHashtable()
-constant integer si__String=11
+constant integer si__String=9
 integer si__String_F=0
 integer si__String_I=0
 integer array si__String_V
 string s__String_char2AllString="abcdefghijklmnopqrstuvwxyz"
 string array s__String_Str
 integer s__String_StrCount
-constant integer si__test=12
+constant integer si__test=10
 integer si__test_F=0
 integer si__test_I=0
 integer array si__test_V
-constant integer si__text=13
+constant integer si__text=11
 integer si__text_F=0
 integer si__text_I=0
 integer array si__text_V
-constant integer si__Unit=14
+constant integer si__Unit=12
 integer si__Unit_F=0
 integer si__Unit_I=0
 integer array si__Unit_V
-unit array s__s__baka_units
-location array s__s__baka_unitslocation
 trigger st__maphack_SetHeight
 trigger st__maphack_GetHeight
 trigger st__baka_newMap
@@ -2840,20 +2839,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2885,7 +2884,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2918,22 +2917,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3261,9 +3260,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3290,22 +3289,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3315,13 +3314,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3355,7 +3354,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3367,7 +3366,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -3971,7 +3970,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4202,47 +4201,21 @@ endfunction
 function s__baka_SGetPlayerId takes player p returns integer
 return s__baka_spid[GetPlayerId(p)]
 endfunction
-function s__baka_changeColor takes player p,integer i returns nothing
-local group g
-local group localLoopGroup
-local unit cjlocgn_00000000
-call SetPlayerColor(p, ConvertPlayerColor(i))
-set g=CreateGroup()
-call GroupEnumUnitsOfPlayer(CreateGroup(), p, null)
-set localLoopGroup=g
-loop
-set cjlocgn_00000000=FirstOfGroup(localLoopGroup)
-exitwhen cjlocgn_00000000 == null
-call GroupRemoveUnit(localLoopGroup, cjlocgn_00000000)
-call SetUnitColor(cjlocgn_00000000, ConvertPlayerColor(i))
-endloop
-call DestroyGroup(localLoopGroup)
-set localLoopGroup=null
-set g=null
-endfunction
-function s__baka_findLifes takes nothing returns nothing
+function s__baka_UnitDefine takes nothing returns nothing
+local unit array u1
+local unit array u2
 local integer i=0
-set s__s__baka_units[(0)*(100)+0]= gg_unit_n00O_0091
-set s__s__baka_units[(1)*(100)+0]= gg_unit_n00P_0092
-set s__s__baka_units[(2)*(100)+0]= gg_unit_n00Q_0093
-set s__s__baka_units[(3)*(100)+0]= gg_unit_n00R_0094
-set s__s__baka_units[(4)*(100)+0]= gg_unit_n00S_0095
-set s__s__baka_units[(5)*(100)+0]= gg_unit_n00T_0096
-set s__s__baka_units[(6)*(100)+0]= gg_unit_n00U_0097
-set s__s__baka_units[(7)*(100)+0]= gg_unit_n00V_0098
-set s__s__baka_units[(8)*(100)+0]= gg_unit_n00W_0100
-set s__s__baka_units[(9)*(100)+0]= gg_unit_n00X_0099
 loop
 exitwhen i > 9
-set s__s__baka_unitslocation[(i)*(100)+0]= GetUnitLoc(s__s__baka_units[(i)*(100)+0])
+set u1[i]=udg_SmD[i + 1]
+set u2[i]=udg_wupinqiu[i + 1]
 set i=i + 1
 endloop
-endfunction
-function s__baka_changeLifes takes nothing returns nothing
-local integer i=0
+set i=0
 loop
 exitwhen i > 9
-call SetUnitPositionLoc(s__s__baka_units[(s__baka_spid[i])*(100)+0], s__s__baka_unitslocation[(i)*(100)+0])
+set udg_SmD[s__baka_spid[i] + 1]=u1[i]
+set udg_wupinqiu[s__baka_spid[i] + 1]=u2[i]
 set i=i + 1
 endloop
 endfunction
@@ -4254,12 +4227,15 @@ local integer array nids
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
 local integer cjlocgn_00000002
+local group cjlocgn_00000003
+local unit cjlocgn_00000004
 local integer x=0
-call s__baka_findLifes()
 loop
 exitwhen i > 9
 set oids[i]=i
 set startLocIndex[i]=GetPlayerStartLocation(Player(i))
+set s__baka_g[i]=CreateGroup()
+call GroupEnumUnitsOfPlayer(s__baka_g[i], Player(i), null)
 set i=i + 1
 endloop
 set i=0
@@ -4280,9 +4256,18 @@ set i=0
 loop
 exitwhen i > 9
 set s__baka_spplayer[i]=Player(nids[i])
-set s__baka_spid[i]=nids[i]
+set s__baka_spid[nids[i]]=i
+call BJDebugMsg("<洗牌>玩家: " + I2S(nids[i]) + " → 玩家: " + I2S(i))
 call SetPlayerStartLocation(s__baka_spplayer[i], startLocIndex[i])
-call s__baka_changeColor(s__baka_spplayer[i] , s__baka_spid[i])
+set cjlocgn_00000003=s__baka_g[i]
+loop
+set cjlocgn_00000004=FirstOfGroup(cjlocgn_00000003)
+exitwhen cjlocgn_00000004 == null
+call GroupRemoveUnit(cjlocgn_00000003, cjlocgn_00000004)
+call SetUnitOwner(cjlocgn_00000004, s__baka_spplayer[i], true)
+endloop
+call DestroyGroup(cjlocgn_00000003)
+set cjlocgn_00000003=null
 set i=i + 1
 endloop
 loop
@@ -4330,7 +4315,6 @@ call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_PASSI
 call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, false)
 set x=x + 1
 endloop
-call s__baka_changeLifes()
 call s__baka_OB()
 endfunction
 function s__baka_oldMapTimerFunc takes nothing returns nothing
@@ -4396,7 +4380,7 @@ call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
 call s__maphack_InitHero(hero)
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 call s__baka_InitSP()
 call s__maphack_InitS()
 endfunction
@@ -4409,7 +4393,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4447,7 +4431,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4561,7 +4545,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4583,7 +4567,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4623,7 +4607,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4667,7 +4651,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -4675,11 +4659,20 @@ endfunction
 function s__test_condition takes nothing returns boolean
 local string s=GetEventPlayerChatString()
 local player p=GetTriggerPlayer()
-local integer id=GetPlayerId(p)
+local integer id=s__baka_SGetPlayerId(p)
 local unit hero=udg_player[id + 1]
+local integer cjlocgn_00000000
 call s__String_Split(s , " ")
 if s__String_GetStr(1) == ".lv" then
 call SetHeroLevel(hero, S2I(s__String_GetStr(2)), true)
+elseif s__String_GetStr(1) == ".showid" then
+set cjlocgn_00000000=0
+call BJDebugMsg("[当前ID]" + I2S(s__baka_SGetPlayerId(GetLocalPlayer())) + " / " + I2S(GetHandleId(GetLocalPlayer())))
+loop
+exitwhen cjlocgn_00000000 > 9
+call BJDebugMsg("[" + I2S(cjlocgn_00000000) + "] → " + I2S(s__baka_SGetPlayerId(s__baka_SPlayer(cjlocgn_00000000))) + " / " + I2S(GetHandleId(s__baka_SPlayer(cjlocgn_00000000))))
+set cjlocgn_00000000=cjlocgn_00000000 + 1
+endloop
 endif
 set p=null
 set hero=null
@@ -4687,7 +4680,7 @@ return false
 endfunction
 function testLibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
-call TriggerRegisterPlayerChatEvent(trg, Player(0), "", false)
+call TriggerRegisterPlayerChatEvent(trg, s__baka_SPlayer(0), "", false)
 call TriggerAddCondition(trg, Condition(function s__test_condition))
 set trg=null
 endfunction
@@ -4713,7 +4706,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -4838,7 +4831,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -4859,7 +4852,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -4875,10 +4868,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -8097,6 +8090,14 @@ call CreateFogModifierRectBJ(true, s__baka_SPlayer(0), FOG_OF_WAR_VISIBLE, gg_rc
 set udg_kejiandu[0]=GetLastCreatedFogModifier()
 call CreateFogModifierRectBJ(true, s__baka_SPlayer(5), FOG_OF_WAR_VISIBLE, gg_rct_xuanren)
 set udg_kejiandu[1]=GetLastCreatedFogModifier()
+set bj_forLoopAIndex=1
+set bj_forLoopAIndexEnd=10
+loop
+exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+set udg_Name[bj_forLoopAIndex]=GetPlayerName(s__baka_SPlayer(bj_forLoopAIndex - 1))
+call SelectUnitForPlayerSingle(udg_SmD[bj_forLoopAIndex], s__baka_SPlayer(bj_forLoopAIndex - 1))
+set bj_forLoopAIndex=bj_forLoopAIndex + 1
+endloop
 else
 endif
 endif
@@ -21676,6 +21677,18 @@ function InitTrig_money_balabala takes nothing returns nothing
 set gg_trg_money_balabala=CreateTrigger()
 call TriggerRegisterTimerEventPeriodic(gg_trg_money_balabala, 1.00)
 call TriggerAddAction(gg_trg_money_balabala, function Trig_money_balabalaActions)
+endfunction
+function Trig_HeroSkillPointConditions takes nothing returns boolean
+return ( ( GetHeroLevel(GetTriggerUnit()) > 18 ) and ( GetHeroLevel(GetTriggerUnit()) < 24 ) )
+endfunction
+function Trig_HeroSkillPointActions takes nothing returns nothing
+call UnitModifySkillPoints(GetTriggerUnit(), - 1)
+endfunction
+function InitTrig_HeroSkillPoint takes nothing returns nothing
+set gg_trg_HeroSkillPoint=CreateTrigger()
+call TriggerRegisterAnyUnitEventBJ(gg_trg_HeroSkillPoint, EVENT_PLAYER_HERO_LEVEL)
+call TriggerAddCondition(gg_trg_HeroSkillPoint, Condition(function Trig_HeroSkillPointConditions))
+call TriggerAddAction(gg_trg_HeroSkillPoint, function Trig_HeroSkillPointActions)
 endfunction
 function Trig_gongxiangwupinActions takes nothing returns nothing
 set udg_dian2[0]=GetItemLoc(GetManipulatedItem())
@@ -58731,18 +58744,6 @@ function InitTrig_undef takes nothing returns nothing
 set gg_trg_undef=CreateTrigger()
 call TriggerAddAction(gg_trg_undef, function Trig_undefActions)
 endfunction
-function Trig_HeroSkillPointConditions takes nothing returns boolean
-return ( ( GetHeroLevel(GetTriggerUnit()) > 18 ) and ( GetHeroLevel(GetTriggerUnit()) < 24 ) )
-endfunction
-function Trig_HeroSkillPointActions takes nothing returns nothing
-call UnitModifySkillPoints(GetTriggerUnit(), - 1)
-endfunction
-function InitTrig_HeroSkillPoint takes nothing returns nothing
-set gg_trg_HeroSkillPoint=CreateTrigger()
-call TriggerRegisterAnyUnitEventBJ(gg_trg_HeroSkillPoint, EVENT_PLAYER_HERO_LEVEL)
-call TriggerAddCondition(gg_trg_HeroSkillPoint, Condition(function Trig_HeroSkillPointConditions))
-call TriggerAddAction(gg_trg_HeroSkillPoint, function Trig_HeroSkillPointActions)
-endfunction
 function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_Lua___LuaLibrary()
 //Function not found: call InitTrig_base_lua()
@@ -58763,6 +58764,7 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig__________soundLibrary()
 //Function not found: call InitTrig__________bakaLibrary()
 //Function not found: call InitTrig__________objectLibrary()
+//Function not found: call InitTrig_______testLibrary()
 call InitTrig_suijiduiwu()
 call InitTrig_chushihua()
 call InitTrig_time_0()
@@ -58995,6 +58997,7 @@ call InitTrig_shijiao()
 call InitTrig_shijiao2()
 call InitTrig_shijiao_time()
 call InitTrig_money_balabala()
+call InitTrig_HeroSkillPoint()
 call InitTrig_gongxiangwupin()
 call InitTrig_zhuangbei_new()
 call InitTrig_fuwen()
@@ -59728,8 +59731,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-call InitTrig_HeroSkillPoint()
-//Function not found: call InitTrig_______testLibrary()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -59964,24 +59965,24 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs979818988")
+call ExecuteFunc("jasshelper__initstructs991375277")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("objectLibrary__Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
 call ExecuteFunc("testLibrary__Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -60011,8 +60012,6 @@ endfunction
 
 
 //Struct method generated initializers/callers:
-
-//Functions for BigArrays:
 function sa__String_char2 takes nothing returns boolean
 local integer n=f__arg_integer1
 if n > 0 and n < 27 then
@@ -60097,7 +60096,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs979818988 takes nothing returns nothing
+function jasshelper__initstructs991375277 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
@@ -60110,8 +60109,6 @@ function jasshelper__initstructs979818988 takes nothing returns nothing
     call TriggerAddCondition(st__maphack_SetHeight,Condition( function sa__maphack_SetHeight))
     set st__maphack_GetHeight=CreateTrigger()
     call TriggerAddCondition(st__maphack_GetHeight,Condition( function sa__maphack_GetHeight))
-
-
 
 
 
