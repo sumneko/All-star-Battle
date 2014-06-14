@@ -2296,13 +2296,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -4763,6 +4763,10 @@ call SetUnitState(hero, UNIT_STATE_LIFE, 999999)
 call SetUnitState(hero, UNIT_STATE_MANA, 999999)
 call UnitResetCooldown(hero)
 elseif s == ".move" then
+call BJDebugMsg(I2S(id) + " / " + I2S(s__sys_self))
+if s__sys_GC == null then
+call BJDebugMsg("sys.GC为null!")
+endif
 if s__sys_selfp == p then
 call StoreInteger(s__sys_GC, "mx", I2S(id), R2I(GetCameraTargetPositionX()))
 call StoreInteger(s__sys_GC, "my", I2S(id), R2I(GetCameraTargetPositionY()))
@@ -7415,7 +7419,6 @@ call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304C4E
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304C51, false)
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304D4E, false)
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41305044, false)
-call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304D58, false)
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304E35, false)
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304F56, false)
 call SetPlayerAbilityAvailable(s__baka_SPlayer(bj_forLoopAIndex - 1), 0x41304551, false)
@@ -26534,7 +26537,6 @@ function Trig_guangshi_2Func001Func003Func019Func007A takes nothing returns noth
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 call IssueTargetOrder(udg_Danwei[92], "cripple", udg_danwei2[1])
-call UnitAddAbility(udg_danwei2[1], 0x41304D58)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", udg_danwei2[1], "origin"))
 call GroupAddUnit(udg_Danweizu[144], udg_danwei2[1])
 else
@@ -60071,9 +60073,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1006368440")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs1013469512")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary__Init")
 call ExecuteFunc("LuaLibrary__Init")
@@ -60202,7 +60204,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1006368440 takes nothing returns nothing
+function jasshelper__initstructs1013469512 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
