@@ -3355,7 +3355,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary__Init takes nothing returns nothing
+function baseLibrary___Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3367,7 +3367,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary__Init takes nothing returns nothing
+function LuaLibrary___Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -3971,7 +3971,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record__Init takes nothing returns nothing
+function Record___Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4396,7 +4396,7 @@ call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
 call s__maphack_InitHero(hero)
 endfunction
-function bakaLibrary__Init takes nothing returns nothing
+function bakaLibrary___Init takes nothing returns nothing
 call s__baka_InitSP()
 call s__maphack_InitS()
 endfunction
@@ -4409,7 +4409,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary__Init takes nothing returns nothing
+function effectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4447,7 +4447,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary__Init takes nothing returns nothing
+function eventLibrary___Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4561,7 +4561,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary__Init takes nothing returns nothing
+function mathLibrary___Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4583,7 +4583,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4623,7 +4623,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary__Init takes nothing returns nothing
+function soundLibrary___Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4667,7 +4667,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary__Init takes nothing returns nothing
+function stringLibrary___Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -4713,7 +4713,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary__Init takes nothing returns nothing
+function textLibrary___Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -4838,7 +4838,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary__Init takes nothing returns nothing
+function unitLibrary___Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -4859,7 +4859,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix__StartLua takes nothing returns nothing
+function RecordFix___StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -4875,10 +4875,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix__Init takes nothing returns nothing
+function RecordFix___Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
 endfunction
 
 //library RecordFix ends
@@ -7046,7 +7046,16 @@ set gg_trg_suijiduiwu=CreateTrigger()
 call TriggerRegisterTimerEventSingle(gg_trg_suijiduiwu, 0.00)
 call TriggerAddAction(gg_trg_suijiduiwu, function Trig_suijiduiwuActions)
 endfunction
+function Trig_chushihuaFunc013T takes nothing returns nothing
+call DestroyFogModifier(udg_kejiandu[10])
+call DestroyFogModifier(udg_kejiandu[11])
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endfunction
 function Trig_chushihuaActions takes nothing returns nothing
+local timer ydl_timer
 set udg_zhengshu[72]=0
 set udg_zhengshu[73]=0
 set udg_zhengshu[120]=0
@@ -7054,6 +7063,12 @@ call CreateFogModifierRectBJ(true, s__baka_SPlayer(0), FOG_OF_WAR_VISIBLE, gg_rc
 set udg_kejiandu[0]=GetLastCreatedFogModifier()
 call CreateFogModifierRectBJ(true, s__baka_SPlayer(5), FOG_OF_WAR_VISIBLE, gg_rct_xuanren)
 set udg_kejiandu[1]=GetLastCreatedFogModifier()
+call CreateFogModifierRectBJ(true, s__baka_SPlayer(0), FOG_OF_WAR_VISIBLE, GetEntireMapRect())
+set udg_kejiandu[10]=GetLastCreatedFogModifier()
+call CreateFogModifierRectBJ(true, s__baka_SPlayer(5), FOG_OF_WAR_VISIBLE, GetEntireMapRect())
+set udg_kejiandu[11]=GetLastCreatedFogModifier()
+set ydl_timer=CreateTimer()
+call TimerStart(ydl_timer, 1.00, false, function Trig_chushihuaFunc013T)
 set udg_buer[0]=true
 set udg_buer[3]=true
 set udg_buer[6]=true
@@ -7186,6 +7201,7 @@ call YDWESetPlayerColorBJNull(s__baka_SPlayer(10) , PLAYER_COLOR_AQUA , true)
 call YDWESetPlayerColorBJNull(s__baka_SPlayer(11) , PLAYER_COLOR_BROWN , true)
 call SetUnitTimeScale(gg_unit_e05G_0101, 0.00)
 call s__baka_OB()
+set ydl_timer=null
 endfunction
 function InitTrig_chushihua takes nothing returns nothing
 set gg_trg_chushihua=CreateTrigger()
@@ -59948,24 +59964,24 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs935897110")
+call ExecuteFunc("jasshelper__initstructs979818988")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("LuaLibrary__Init")
-call ExecuteFunc("Record__Init")
-call ExecuteFunc("bakaLibrary__Init")
-call ExecuteFunc("effectLibrary__Init")
-call ExecuteFunc("eventLibrary__Init")
-call ExecuteFunc("mathLibrary__Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("soundLibrary__Init")
-call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
+call ExecuteFunc("Record___Init")
+call ExecuteFunc("bakaLibrary___Init")
+call ExecuteFunc("effectLibrary___Init")
+call ExecuteFunc("eventLibrary___Init")
+call ExecuteFunc("mathLibrary___Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("soundLibrary___Init")
+call ExecuteFunc("stringLibrary___Init")
 call ExecuteFunc("testLibrary__Init")
-call ExecuteFunc("textLibrary__Init")
-call ExecuteFunc("unitLibrary__Init")
-call ExecuteFunc("RecordFix__Init")
+call ExecuteFunc("textLibrary___Init")
+call ExecuteFunc("unitLibrary___Init")
+call ExecuteFunc("RecordFix___Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -60081,7 +60097,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs935897110 takes nothing returns nothing
+function jasshelper__initstructs979818988 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
