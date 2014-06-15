@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase___yd_PlayerColor
-trigger array YDWEBase___AbilityCastingOverEventQueue
-integer array YDWEBase___AbilityCastingOverEventType
-integer YDWEBase___AbilityCastingOverEventNumber=0
+string array YDWEBase__yd_PlayerColor
+trigger array YDWEBase__AbilityCastingOverEventQueue
+integer array YDWEBase__AbilityCastingOverEventType
+integer YDWEBase__AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -92,12 +92,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent___DamageEventQueue
-integer YDWETriggerEvent___DamageEventNumber=0
+trigger array YDWETriggerEvent__DamageEventQueue
+integer YDWETriggerEvent__DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent___MoveItemEventTrigger=null
-trigger array YDWETriggerEvent___MoveItemEventQueue
-integer YDWETriggerEvent___MoveItemEventNumber=0
+trigger YDWETriggerEvent__MoveItemEventTrigger=null
+trigger array YDWETriggerEvent__MoveItemEventQueue
+integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -1825,6 +1825,7 @@ group s__baka_CG3=CreateGroup()
 group s__baka_CG4=CreateGroup()
 unit s__baka_CU=null
 trigger s__baka_CheckDeath=CreateTrigger()
+integer s__baka_key_pause=StringHash("暂停")
 constant integer si__Effect=4
 integer si__Effect_F=0
 integer si__Effect_I=0
@@ -2855,20 +2856,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
-if YDWEBase___AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
+if YDWEBase__AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
+if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
-set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
-set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
+set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
+set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
+set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2900,7 +2901,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2933,22 +2934,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase___yd_PlayerColor[3]="|cFF540081"
-set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase___yd_PlayerColor[8]="|cFF959697"
-set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase___yd_PlayerColor[10]="|cFF106246"
-set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase___yd_PlayerColor[12]="|cFF282828"
-set YDWEBase___yd_PlayerColor[13]="|cFF282828"
-set YDWEBase___yd_PlayerColor[14]="|cFF282828"
-set YDWEBase___yd_PlayerColor[15]="|cFF282828"
+set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase__yd_PlayerColor[3]="|cFF540081"
+set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase__yd_PlayerColor[8]="|cFF959697"
+set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase__yd_PlayerColor[10]="|cFF106246"
+set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase__yd_PlayerColor[12]="|cFF282828"
+set YDWEBase__yd_PlayerColor[13]="|cFF282828"
+set YDWEBase__yd_PlayerColor[14]="|cFF282828"
+set YDWEBase__yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3276,9 +3277,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent___DamageEventNumber
-if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent__DamageEventNumber
+if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3305,22 +3306,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___DamageEventNumber == 0 then
+if YDWETriggerEvent__DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
-set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
+set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
+set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
-if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
+if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3330,13 +3331,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___MoveItemEventNumber == 0 then
-set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent__MoveItemEventNumber == 0 then
+set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
-set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
+set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
+set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -4499,6 +4500,22 @@ call SetLightningColor(whichBolt, 1, 1, 1, 1)
 return MoveLightningEx(whichBolt, false, x1, y1, z1, x2, y2, z2)
 endif
 return false
+endfunction
+function s__baka_PauseUnit2 takes unit u,boolean f returns nothing
+local integer h=GetHandleId(u)
+local integer cjlocgn_00000000
+if f then
+call SaveInteger(YDHT, h, s__baka_key_pause, 1 + LoadInteger(YDHT, h, s__baka_key_pause))
+call PauseUnit(u, f)
+else
+set cjlocgn_00000000=LoadInteger(YDHT, h, s__baka_key_pause) - 1
+call SaveInteger(YDHT, h, s__baka_key_pause, cjlocgn_00000000)
+if cjlocgn_00000000 == 0 then
+call PauseUnit(u, f)
+elseif cjlocgn_00000000 < 0 then
+call BJDebugMsg("<暂停计数错误>[" + GetUnitName(u) + "]: " + I2S(cjlocgn_00000000))
+endif
+endif
 endfunction
 function s__baka_InitHero takes unit hero returns nothing
 call UnitAddAbility(hero, 0x41726176)
@@ -8169,7 +8186,7 @@ call RemoveUnit(gg_unit_n00J_0066)
 call RemoveUnit(gg_unit_n00K_0067)
 call RemoveUnit(gg_unit_n00L_0068)
 call RemoveUnit(gg_unit_n00M_0069)
-call PauseUnit(gg_unit_hgtw_0012, true)
+call s__baka_PauseUnit2(gg_unit_hgtw_0012 , true)
 call UnitAddAbility(gg_unit_hgtw_0012, 0x4176756C)
 call KillUnit(gg_unit_h001_0134)
 call KillUnit(gg_unit_h009_0136)
@@ -12311,7 +12328,7 @@ return ( ( IsUnitType(GetDyingUnit(), UNIT_TYPE_STRUCTURE) == true ) )
 endfunction
 function Trig_shengfupandingFunc002Func001Func014A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetDyingUnit() ) ) then
-call PauseUnit(GetEnumUnit(), true)
+call s__baka_PauseUnit2(GetEnumUnit() , true)
 call UnitAddType(GetEnumUnit(), UNIT_TYPE_TAUREN)
 call SetUnitInvulnerable(GetEnumUnit(), true)
 call SetUnitTimeScale(GetEnumUnit(), 0.00)
@@ -12320,7 +12337,7 @@ endif
 endfunction
 function Trig_shengfupandingFunc002Func005Func014A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetDyingUnit() ) ) then
-call PauseUnit(GetEnumUnit(), true)
+call s__baka_PauseUnit2(GetEnumUnit() , true)
 call UnitAddType(GetEnumUnit(), UNIT_TYPE_TAUREN)
 call SetUnitInvulnerable(GetEnumUnit(), true)
 call SetUnitTimeScale(GetEnumUnit(), 0.00)
@@ -16038,7 +16055,7 @@ set udg_danwei2[0]=GetSpellAbilityUnit()
 call SetUnitUserData(udg_danwei2[0], 25)
 call UnitAddAbility(udg_danwei2[0], 0x41304156)
 call SetUnitTimeScale(udg_danwei2[0], 1.50)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call GroupAddUnit(udg_danweizu2[143], udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
@@ -16091,7 +16108,7 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 else
 if ( ( GetUnitUserData(udg_danwei2[0]) == - 1 ) ) then
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 call ResetUnitAnimation(udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 else
@@ -16310,7 +16327,7 @@ call StartTimerBJ(udg_times[145], true, 0.04)
 else
 endif
 call SetUnitUserData(udg_danwei2[0], 50)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 set udg_danwei2[0]=null
 endfunction
@@ -16410,7 +16427,7 @@ call IssueImmediateOrderById(udg_danwei2[1], 852127)
 call SetUnitScale(udg_danwei2[1], 3.00, 3.00, 3.00)
 set udg_danwei2[1]=null
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 else
 endif
 else
@@ -16524,7 +16541,7 @@ call IssueImmediateOrderById(udg_danwei2[1], 852127)
 call SetUnitScale(udg_danwei2[1], 3.00, 3.00, 3.00)
 set udg_danwei2[1]=null
 call UnitRemoveAbility(udg_boss[2], 0x41436D69)
-call PauseUnit(udg_boss[2], false)
+call s__baka_PauseUnit2(udg_boss[2] , false)
 else
 endif
 else
@@ -16745,7 +16762,7 @@ call RemoveLocation(udg_dian2[1])
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call SetUnitUserData(udg_danwei2[0], 50)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call GroupAddUnit(udg_danweizu2[150], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.50)
 set udg_danwei2[0]=null
@@ -16780,7 +16797,7 @@ function Trig_wajue_2Func002Func004Func003Func003Func002A takes nothing returns 
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x75303049 ) ) then
-call PauseUnit(udg_danwei2[1], false)
+call s__baka_PauseUnit2(udg_danwei2[1] , false)
 call AddUnitAnimationProperties(udg_danwei2[1], "alternate", false)
 else
 endif
@@ -16792,7 +16809,7 @@ function Trig_wajue_2Func002Func004Func003Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x75303049 ) ) then
-call PauseUnit(udg_danwei2[1], true)
+call s__baka_PauseUnit2(udg_danwei2[1] , true)
 call AddUnitAnimationProperties(udg_danwei2[1], "alternate", true)
 call SetUnitX(udg_danwei2[1], GetLocationX(udg_dian2[1]))
 call SetUnitY(udg_danwei2[1], GetLocationY(udg_dian2[1]))
@@ -16859,7 +16876,7 @@ else
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_wajue_2Func002Func004Func003Func003Func002A)
 call DestroyGroup(udg_xuanqu)
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 call ResetUnitAnimation(udg_danwei2[0])
 call AddUnitAnimationProperties(udg_danwei2[0], "alternate", false)
 call GroupRemoveUnit(udg_danweizu2[150], udg_danwei2[0])
@@ -16970,7 +16987,7 @@ function Trig_tiaoji_1Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], 20)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call GroupAddUnit(udg_danweizu2[152], udg_danwei2[0])
 call SetUnitAnimation(udg_danwei2[0], "spell")
 call SetUnitTimeScale(udg_danwei2[0], 2.40)
@@ -17018,7 +17035,7 @@ set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_tiaoji_2Func002Func004Func003A)
 call DestroyGroup(udg_xuanqu)
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl", udg_dian2[0]))
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 call ResetUnitAnimation(udg_danwei2[0])
 call IssueImmediateOrderById(udg_danwei2[0], 852127)
 call GroupRemoveUnit(udg_danweizu2[152], udg_danwei2[0])
@@ -17664,7 +17681,7 @@ endfunction
 function Trig_boss2_hongtianlei_0Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_zhengshu2[165]=6
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 if ( ( GetRandomInt(1, 3) == 1 ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304251)
 call UnitAddAbility(udg_danwei2[0], 0x41304251)
@@ -17686,7 +17703,7 @@ else
 endif
 else
 call PauseTimer(udg_times[165])
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 200.00, ( GetUnitFacing(udg_boss[1]) - 60.00 ))
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_boss[1]), 0x6530304D, udg_dian2[1], GetUnitFacing(udg_boss[1]))
@@ -17769,7 +17786,7 @@ call TriggerAddAction(gg_trg_boss2_hongtianlei_2, function Trig_boss2_hongtianle
 endfunction
 function Trig_boss2_liuxingchui_0Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 call StartTimerBJ(udg_times[166], true, 0.10)
 set udg_danwei2[0]=null
@@ -17789,7 +17806,7 @@ else
 endif
 else
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
@@ -17963,7 +17980,7 @@ endfunction
 function Trig_boss2_attack_1Actions takes nothing returns nothing
 set udg_danwei2[173]=GetSpellTargetUnit()
 set udg_zhengshu2[173]=5
-call PauseUnit(udg_boss[1], true)
+call s__baka_PauseUnit2(udg_boss[1] , true)
 call SetUnitAnimation(udg_boss[1], "attack")
 call StartTimerBJ(udg_times[173], true, 0.10)
 endfunction
@@ -18004,7 +18021,7 @@ call PlaySoundBJ(gg_snd_WoodHeavyBashFlesh1)
 endif
 endif
 endif
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 call IssueImmediateOrderById(udg_boss[1], 851972)
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei2[173]), 12.00)
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[173])
@@ -18033,7 +18050,7 @@ call TriggerAddAction(gg_trg_boss2_attack_2, function Trig_boss2_attack_2Actions
 endfunction
 function Trig_boss2_gouheji_1Actions takes nothing returns nothing
 set udg_zhengshu2[174]=6
-call PauseUnit(udg_boss[1], true)
+call s__baka_PauseUnit2(udg_boss[1] , true)
 call StartTimerBJ(udg_times[174], true, 0.10)
 endfunction
 function InitTrig_boss2_gouheji_1 takes nothing returns nothing
@@ -18060,7 +18077,7 @@ endif
 if ( ( udg_zhengshu2[174] == 1 ) ) then
 call StopSoundBJ(gg_snd_ThunderClapCaster01, false)
 call PlaySoundBJ(gg_snd_ThunderClapCaster01)
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
@@ -18132,7 +18149,7 @@ call TriggerAddAction(gg_trg_bossex_anxi_2, function Trig_bossex_anxi_2Actions)
 endfunction
 function Trig_bossex_anren_1Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 call StartTimerBJ(udg_times[169], true, 0.10)
 set udg_danwei2[0]=null
@@ -18153,7 +18170,7 @@ else
 call StopSoundBJ(gg_snd_EntanglingRootsTarget1, false)
 call PlaySoundOnUnitBJ(gg_snd_AncestralGuardianMissileLaunch, 100, udg_boss[1])
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
-call PauseUnit(udg_boss[1], false)
+call s__baka_PauseUnit2(udg_boss[1] , false)
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=11
@@ -19817,7 +19834,7 @@ else
 endif
 if ( ( IsUnitInGroup(GetAttacker(), udg_attack) == true ) ) then
 if ( ( GetUnitAbilityLevel(GetAttacker(), 0x41304A53) == 1 ) ) then
-call PauseUnit(GetAttacker(), true)
+call s__baka_PauseUnit2(GetAttacker() , true)
 call SetUnitUserData(GetAttacker(), 10)
 else
 call UnitAddAbility(GetAttacker(), 0x41304A53)
@@ -20022,7 +20039,7 @@ if ( ( IsUnitType(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 
 set udg_buer[0]=false
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( GetUnitName(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]) + "|cFFFF0000使用自杀命令，20秒后自杀|r" ))
 call SetUnitInvulnerable(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], false)
-call PauseUnit(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], false)
+call s__baka_PauseUnit2(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , false)
 call s__maphack_SetHeight(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 0.00 , 2000.00)
 call StartTimerBJ(udg_jishiqi[93], false, 20.00)
 set udg_zs[0]=udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]
@@ -20928,7 +20945,7 @@ call SetPlayerAbilityAvailable(GetTriggerPlayer(), 0x41303644, false)
 call SetPlayerAbilityAvailable(GetTriggerPlayer(), 0x41303050, false)
 call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD, 0)
 call AddUnitAnimationPropertiesBJ(false, "alternate", udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
-call PauseUnit(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], true)
+call s__baka_PauseUnit2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , true)
 else
 endif
 endfunction
@@ -21148,7 +21165,7 @@ call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303645, fals
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303644, false)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303050, false)
 call SetPlayerStateBJ(GetOwningPlayer(udg_danwei2[0]), PLAYER_STATE_RESOURCE_GOLD, 0)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 set udg_danwei2[0]=null
 endfunction
 function InitTrig_SmD_OB takes nothing returns nothing
@@ -22027,7 +22044,7 @@ call UnitDamageTarget(GetEventDamageSource(), udg_danwei[240], GetEventDamage(),
 else
 endif
 if ( ( IsUnitInGroup(udg_danwei[328], udg_attack) == true ) and ( GetUnitUserData(udg_danwei[328]) < 10 ) ) then
-call PauseUnit(udg_danwei[328], true)
+call s__baka_PauseUnit2(udg_danwei[328] , true)
 call SetUnitUserData(udg_danwei[328], 10)
 if ( ( GetUnitTypeId(udg_danwei[328]) == 0x4830304D ) and ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304A54) != 1 ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroInt(GetEventDamageSource(), true)) * 0.30 ), true, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -33270,7 +33287,7 @@ if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_MAGIC_IMMUNE) == false ) and ( IsUni
 call GroupAddUnit(udg_danweizu2[246], udg_danwei2[0])
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 else
 endif
 else
@@ -33319,7 +33336,7 @@ endfunction
 function Trig_baka_2Func001Func001A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 set udg_danwei2[0]=null
 endfunction
 function Trig_baka_2Func001Func010A takes nothing returns nothing
@@ -33333,7 +33350,7 @@ else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 else
 endif
 call GroupAddUnit(udg_danweizu2[246], udg_danwei2[0])
@@ -33354,7 +33371,7 @@ else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 else
 endif
 call GroupRemoveUnit(udg_danweizu2[246], udg_danwei2[0])
@@ -33727,7 +33744,7 @@ call RemoveItem(UnitItemInSlotBJ(udg_danwei[185], bj_forLoopAIndex))
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 endif
-call PauseUnit(udg_danwei[185], true)
+call s__baka_PauseUnit2(udg_danwei[185] , true)
 call SetUnitUserData(udg_danwei[185], 10)
 else
 endif
@@ -35235,7 +35252,7 @@ call RemoveItem(UnitItemInSlotBJ(udg_danwei[185], bj_forLoopAIndex))
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 endif
-call PauseUnit(udg_danwei[185], true)
+call s__baka_PauseUnit2(udg_danwei[185] , true)
 call SetUnitUserData(udg_danwei[185], 10)
 else
 endif
@@ -37472,7 +37489,7 @@ set udg_danwei[95]=GetTriggerUnit()
 set udg_danwei[96]=GetSpellTargetUnit()
 call StartTimerBJ(udg_jishiqi[39], true, 0.03)
 call PlaySoundOnUnitBJ(gg_snd_ShimmeringPortalDeath, 100, udg_danwei[95])
-call PauseUnit(udg_danwei[95], true)
+call s__baka_PauseUnit2(udg_danwei[95] , true)
 call UnitAddType(udg_danwei[95], UNIT_TYPE_TAUREN)
 call UnitDamageTarget(udg_danwei[95], udg_danwei[96], RMinBJ(( ( GetUnitState(udg_danwei[96], UNIT_STATE_LIFE) * 0.15 ) + ( - 25.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[95], 0x4130374D)) ) ) ), 3000.00), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 set udg_dian[87]=GetUnitLoc(udg_danwei[95])
@@ -37522,7 +37539,7 @@ set udg_danwei[104]=null
 set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[95]), 0x65303057, udg_dian2[0], AngleBetweenPoints(udg_dian[87], udg_dian[88]))
 call IssueTargetOrderById(udg_danwei2[0], 852075, udg_danwei[96])
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
-call PauseUnit(udg_danwei[95], false)
+call s__baka_PauseUnit2(udg_danwei[95] , false)
 call UnitRemoveType(udg_danwei[95], UNIT_TYPE_TAUREN)
 call SetUnitAnimation(udg_danwei2[0], "birth")
 call SetUnitAnimation(udg_danwei[95], "attack")
@@ -37970,9 +37987,9 @@ set udg_zhengshu2[113]=31
 call StartTimerBJ(udg_jishiqi[41], false, 0.00)
 else
 set udg_zhengshu2[113]=0
-call PauseUnit(udg_danwei[166], true)
+call s__baka_PauseUnit2(udg_danwei[166] , true)
 call UnitAddType(udg_danwei[166], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[164], true)
+call s__baka_PauseUnit2(udg_danwei[164] , true)
 call UnitAddType(udg_danwei[164], UNIT_TYPE_TAUREN)
 call StartTimerBJ(udg_jishiqi[42], true, 0.04)
 call PauseTimer(udg_jishiqi[45])
@@ -38215,9 +38232,9 @@ call RemoveLocation(udg_dian[126])
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei[164]), 50.00)
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei[166]), 50.00)
 call StartTimerBJ(udg_jishiqi[45], false, 0.00)
-call PauseUnit(udg_danwei[166], false)
+call s__baka_PauseUnit2(udg_danwei[166] , false)
 call UnitRemoveType(udg_danwei[166], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[164], false)
+call s__baka_PauseUnit2(udg_danwei[164] , false)
 call UnitRemoveType(udg_danwei[164], UNIT_TYPE_TAUREN)
 call StopSoundBJ(gg_snd_BuildingDeathLargeHuman01, false)
 call PlaySoundOnUnitBJ(gg_snd_BuildingDeathLargeHuman01, 100, udg_danwei[166])
@@ -40148,7 +40165,7 @@ call DestroyGroup(udg_danweizu[38])
 else
 endif
 if ( ( udg_zhengshu[59] == 5 ) ) then
-call PauseUnit(udg_danwei[188], false)
+call s__baka_PauseUnit2(udg_danwei[188] , false)
 set udg_danwei[196]=null
 set udg_danwei[188]=null
 call PauseTimer(udg_jishiqi[51])
@@ -41194,7 +41211,7 @@ if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitI
 set udg_dian2[0]=GetUnitLoc(udg_danwei[222])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", udg_dian2[0]))
 call SetUnitTimeScale(udg_danwei[222], 1)
-call PauseUnit(udg_danwei[222], false)
+call s__baka_PauseUnit2(udg_danwei[222] , false)
 call ResetUnitAnimation(udg_danwei[222])
 call UnitRemoveType(udg_danwei[222], UNIT_TYPE_TAUREN)
 call UnitDamageTarget(udg_danwei[218], udg_danwei[222], ( ( I2R(GetHeroInt(udg_danwei[218], true)) * 2.50 ) + ( I2R(GetUnitAbilityLevel(udg_danwei[218], 0x41303759)) * 35.00 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -41207,7 +41224,7 @@ function Trig_bingdong2Func002Func019A takes nothing returns nothing
 set udg_danwei[222]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
 call SetUnitTimeScale(udg_danwei[222], 0.00)
-call PauseUnit(udg_danwei[222], true)
+call s__baka_PauseUnit2(udg_danwei[222] , true)
 call UnitAddType(udg_danwei[222], UNIT_TYPE_TAUREN)
 else
 endif
@@ -41480,7 +41497,7 @@ if ( ( IsUnitType(udg_danwei2[107], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_zhengshu2[107] <= 40 ) ) then
 if ( ( udg_zhengshu2[107] <= 10 ) ) then
 if ( ( udg_zhengshu2[107] == 1 ) ) then
-call PauseUnit(udg_danwei2[108], true)
+call s__baka_PauseUnit2(udg_danwei2[108] , true)
 call UnitAddType(udg_danwei2[108], UNIT_TYPE_TAUREN)
 else
 endif
@@ -41600,7 +41617,7 @@ if ( ( udg_zhengshu2[107] == 70 ) ) then
 call UnitDamageTarget(udg_danwei2[107], udg_danwei2[108], ( 200.00 + ( 1.80 * I2R(GetHeroStr(udg_danwei2[107], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call PlaySoundOnUnitBJ(gg_snd_MetalHeavySliceWood1, 100, udg_danwei2[107])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl", udg_dian2[109]))
-call PauseUnit(udg_danwei2[108], false)
+call s__baka_PauseUnit2(udg_danwei2[108] , false)
 call UnitRemoveType(udg_danwei2[108], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[108], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[108] , 0.00 , 0.00)
@@ -41634,7 +41651,7 @@ endif
 endif
 else
 call UnitRemoveAbility(udg_danwei2[107], 0x4130394B)
-call PauseUnit(udg_danwei2[108], false)
+call s__baka_PauseUnit2(udg_danwei2[108] , false)
 call UnitRemoveType(udg_danwei2[108], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[108], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[108] , 0.00 , 0.00)
@@ -41684,9 +41701,9 @@ call SetUnitY(udg_danwei2[110], GetLocationY(udg_dian2[2]))
 else
 endif
 call UnitAddAbility(udg_danwei2[110], 0x4130394D)
-call PauseUnit(udg_danwei2[110], true)
+call s__baka_PauseUnit2(udg_danwei2[110] , true)
 call UnitAddType(udg_danwei2[110], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[111], true)
+call s__baka_PauseUnit2(udg_danwei2[111] , true)
 call UnitAddType(udg_danwei2[111], UNIT_TYPE_TAUREN)
 call SetUnitTimeScale(udg_danwei2[110], 2.00)
 call PlaySoundOnUnitBJ(gg_snd_MetalHeavySliceStone3, 100, udg_danwei2[110])
@@ -41804,7 +41821,7 @@ call s__maphack_SetHeight(udg_danwei2[111] , ( s__maphack_GetHeight(udg_danwei2[
 call UnitRemoveAbility(udg_danwei2[111], 0x41726176)
 else
 if ( ( udg_zhengshu2[110] == 21 ) ) then
-call PauseUnit(udg_danwei2[111], false)
+call s__baka_PauseUnit2(udg_danwei2[111] , false)
 call UnitRemoveType(udg_danwei2[111], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[111], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[111] , 0.00 , 0.00)
@@ -41817,7 +41834,7 @@ call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , ( s__maphack_GetHeight(udg_danwei2[110]) - 30.00 ) , 0.00)
 call UnitRemoveAbility(udg_danwei2[110], 0x41726176)
 else
-call PauseUnit(udg_danwei2[110], false)
+call s__baka_PauseUnit2(udg_danwei2[110] , false)
 call UnitRemoveType(udg_danwei2[110], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , 0.00 , 0.00)
@@ -41830,13 +41847,13 @@ endif
 endif
 else
 call UnitRemoveAbility(udg_danwei2[110], 0x4130394D)
-call PauseUnit(udg_danwei2[111], false)
+call s__baka_PauseUnit2(udg_danwei2[111] , false)
 call UnitRemoveType(udg_danwei2[111], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[111], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[111] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[111], 0x41726176)
 call SetUnitTimeScale(udg_danwei2[110], 1.00)
-call PauseUnit(udg_danwei2[110], false)
+call s__baka_PauseUnit2(udg_danwei2[110] , false)
 call UnitRemoveType(udg_danwei2[110], UNIT_TYPE_TAUREN)
 call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , 0.00 , 0.00)
@@ -42314,8 +42331,8 @@ call SetUnitAnimation(udg_danwei[239], "birth")
 call AddLightningLoc("AFOD", udg_dian[202], udg_dian[203])
 set udg_shandian[0]=bj_lastCreatedLightning
 call AddUnitAnimationProperties(udg_danwei[237], "channel", true)
-call PauseUnit(udg_danwei[237], true)
-call PauseUnit(udg_danwei[238], true)
+call s__baka_PauseUnit2(udg_danwei[237] , true)
+call s__baka_PauseUnit2(udg_danwei[238] , true)
 call UnitAddType(udg_danwei[237], UNIT_TYPE_TAUREN)
 call UnitAddType(udg_danwei[238], UNIT_TYPE_TAUREN)
 call YDWEJumpTimer(udg_danwei[239] , AngleBetweenPoints(udg_dian[203], udg_dian[202]) , DistanceBetweenPoints(udg_dian[203], udg_dian[202]) , 1.50 , 0.01 , 0.00)
@@ -42357,8 +42374,8 @@ else
 call UnitDamageTarget(udg_danwei[237], udg_danwei[238], ( GetUnitState(udg_danwei[237], UNIT_STATE_MANA) / 3.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 endif
 call ForGroupBJ(udg_Danweizu[37], function Trig_xianzhezhishi2Func002A)
-call PauseUnit(udg_danwei[237], false)
-call PauseUnit(udg_danwei[238], false)
+call s__baka_PauseUnit2(udg_danwei[237] , false)
+call s__baka_PauseUnit2(udg_danwei[238] , false)
 call UnitRemoveType(udg_danwei[237], UNIT_TYPE_TAUREN)
 call UnitRemoveType(udg_danwei[238], UNIT_TYPE_TAUREN)
 call AddUnitAnimationProperties(udg_danwei[237], "channel", false)
@@ -42593,7 +42610,7 @@ call SetUnitVertexColor(udg_danwei[242], 255, 255, 255, 125)
 call SetUnitTimeScale(udg_danwei[242], 0.00)
 call SetUnitFacing(udg_danwei[242], GetUnitFacing(udg_danwei[240]))
 call SetUnitPathing(udg_danwei[242], false)
-call PauseUnit(udg_danwei[242], true)
+call s__baka_PauseUnit2(udg_danwei[242] , true)
 call SetUnitX(udg_danwei[242], GetLocationX(udg_dian[204]))
 call SetUnitY(udg_danwei[242], GetLocationY(udg_dian[204]))
 set udg_zhengshu2[20]=( 60 + ( 20 * GetUnitAbilityLevel(udg_danwei[239], 0x41303234) ) )
@@ -42610,7 +42627,7 @@ endfunction
 function Trig_xuhuan_3Actions takes nothing returns nothing
 if ( ( udg_zhengshu2[20] >= 0 ) and ( IsUnitType(udg_danwei[242], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_danwei[240], 0x42303033) == true ) and ( udg_shishu2[20] < ( GetUnitState(udg_danwei[240], UNIT_STATE_LIFE) + ( 200.00 + Pow(( 10000.00 * I2R(udg_zhengshu[( ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[240])) + 1 ) + 19 )]) ), 0.50) ) ) ) ) then
 set udg_zhengshu2[20]=( udg_zhengshu2[20] - 1 )
-call PauseUnit(udg_danwei[242], true)
+call s__baka_PauseUnit2(udg_danwei[242] , true)
 call SetUnitLifePercentBJ(udg_danwei[240], RMinBJ(GetUnitLifePercent(udg_danwei[240]), GetUnitLifePercent(udg_danwei[242])))
 call SetUnitLifePercentBJ(udg_danwei[242], RMinBJ(GetUnitLifePercent(udg_danwei[240]), GetUnitLifePercent(udg_danwei[242])))
 call SetUnitManaPercentBJ(udg_danwei[240], RMinBJ(GetUnitManaPercent(udg_danwei[240]), GetUnitManaPercent(udg_danwei[242])))
@@ -43883,7 +43900,7 @@ endfunction
 function Trig_time_shoubiao_2Func001Func005A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 call UnitRemoveType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303053 ) ) then
 call SetUnitVertexColor(udg_danwei2[0], 25, 25, 50, 255)
@@ -43916,7 +43933,7 @@ function Trig_time_shoubiao_2Func001Func014A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_ANCIENT) == false ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x48626C6D ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x68677477 ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[56]) == false ) ) then
 call UnitAddType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], true)
+call s__baka_PauseUnit2(udg_danwei2[0] , true)
 call GroupAddUnit(udg_danweizu2[56], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
 call SetUnitVertexColor(udg_danwei2[0], 128, 128, 128, 128)
@@ -43930,7 +43947,7 @@ set udg_dian2[2]=GetUnitLoc(udg_danwei2[0])
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[2]) <= 200.00 ) ) then
 else
 call UnitRemoveType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], false)
+call s__baka_PauseUnit2(udg_danwei2[0] , false)
 call GroupRemoveUnit(udg_danweizu2[56], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303053 ) ) then
@@ -44016,7 +44033,7 @@ set udg_danwei2[96]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[93]), 0x65303052
 set udg_danwei2[97]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[93]), 0x65303052, udg_dian2[2], AngleBetweenPoints(udg_dian2[93], udg_dian2[94]))
 set udg_zhengshu2[93]=0
 call UnitAddType(udg_danwei2[93], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[93], true)
+call s__baka_PauseUnit2(udg_danwei2[93] , true)
 call UnitRemoveAbility(udg_danwei2[93], 0x41304754)
 if ( ( GetUnitAbilityLevel(udg_danwei2[93], 0x41303852) == 1 ) ) then
 else
@@ -44086,7 +44103,7 @@ endif
 else
 call ResetUnitAnimation(udg_danwei2[93])
 call UnitRemoveType(udg_danwei2[93], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[93], false)
+call s__baka_PauseUnit2(udg_danwei2[93] , false)
 call PauseTimer(udg_times[93])
 set udg_danwei2[93]=null
 call RemoveLocation(udg_dian2[93])
@@ -45162,7 +45179,7 @@ if ( ( udg_danwei[323] != udg_danwei[322] ) and ( IsUnitType(udg_danwei[323], UN
 call SetUnitTimeScale(udg_danwei[323], 0.00)
 call SetUnitVertexColor(udg_danwei[323], 128, 128, 128, 128)
 call UnitAddType(udg_danwei[323], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[323], true)
+call s__baka_PauseUnit2(udg_danwei[323] , true)
 call GroupAddUnit(udg_danweizu[60], udg_danwei[323])
 else
 endif
@@ -45197,7 +45214,7 @@ endif
 endif
 endif
 call UnitRemoveType(udg_danwei[323], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[323], false)
+call s__baka_PauseUnit2(udg_danwei[323] , false)
 set udg_danwei[323]=null
 endfunction
 function Trig_the_world_3Func003Func012A takes nothing returns nothing
@@ -49179,7 +49196,7 @@ set udg_danwei2[1]=GetEnumUnit()
 call UnitAddAbility(udg_danwei2[1], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[1] , 0.00 , 600.00)
 call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
-call PauseUnit(udg_danwei2[1], false)
+call s__baka_PauseUnit2(udg_danwei2[1] , false)
 call UnitRemoveType(udg_danwei2[1], UNIT_TYPE_TAUREN)
 set udg_danwei2[1]=null
 endfunction
@@ -49196,7 +49213,7 @@ call UnitAddAbility(udg_danwei2[1], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[1] , ( s__maphack_GetHeight(udg_danwei2[1]) + 10.00 ) , 0.00)
 call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
 call UnitDamageTarget(udg_danwei2[77], udg_danwei2[1], ( 12.50 + ( ( I2R(GetHeroAgi(udg_danwei2[77], true)) / 40.00 ) * ( 2.00 + ( I2R(udg_zhengshu2[84]) * 0.50 ) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call PauseUnit(udg_danwei2[1], true)
+call s__baka_PauseUnit2(udg_danwei2[1] , true)
 call UnitAddType(udg_danwei2[1], UNIT_TYPE_TAUREN)
 call GroupAddUnit(udg_danweizu2[77], udg_danwei2[1])
 call RemoveLocation(udg_dian2[0])
@@ -52281,7 +52298,7 @@ set udg_zhengshu2[226]=0
 call StopSoundBJ(gg_snd_StarfallCaster101, false)
 call PlaySoundOnUnitBJ(gg_snd_StarfallCaster101, 100, udg_danwei2[225])
 call StartTimerBJ(udg_times[225], true, 0.03)
-call PauseUnit(udg_danwei2[225], true)
+call s__baka_PauseUnit2(udg_danwei2[225] , true)
 call UnitAddType(udg_danwei2[225], UNIT_TYPE_TAUREN)
 endfunction
 function InitTrig_yuefu_1 takes nothing returns nothing
@@ -52400,7 +52417,7 @@ set udg_aXUNHUAN[183]=udg_aXUNHUAN[183] + 1
 endloop
 else
 call PauseTimer(udg_times[225])
-call PauseUnit(udg_danwei2[225], false)
+call s__baka_PauseUnit2(udg_danwei2[225] , false)
 call UnitRemoveType(udg_danwei2[225], UNIT_TYPE_TAUREN)
 set udg_aXUNHUAN[184]=226
 loop
@@ -53080,7 +53097,7 @@ call ForGroupBJ(udg_danweizu2[51], function Trig_fenshen_1Func001Func003Func004F
 endif
 call RemoveLocation(udg_dian2[0])
 if ( ( udg_Zhengshu[( 55 + GetUnitUserData(udg_Danwei[49]) )] == 11 ) ) then
-call PauseUnit(udg_Danwei[49], false)
+call s__baka_PauseUnit2(udg_Danwei[49] , false)
 call UnitAddAbility(udg_Danwei[49], 0x41304943)
 if ( ( CountUnitsInGroup(udg_Danweizu[49]) == 1 ) ) then
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[65]), 0x41304938, false)
@@ -53771,7 +53788,7 @@ set udg_aXUNHUAN[197]=udg_aXUNHUAN[197] + 1
 endloop
 call SetUnitX(udg_Danwei[49], GetLocationX(udg_dian[350]))
 call SetUnitY(udg_Danwei[49], GetLocationY(udg_dian[350]))
-call PauseUnit(udg_Danwei[49], true)
+call s__baka_PauseUnit2(udg_Danwei[49] , true)
 call UnitAddAbility(udg_Danwei[49], 0x416C6F63)
 call GroupAddUnit(udg_Danweizu[49], udg_Danwei[49])
 if ( ( udg_Zhengshu[48] < 4 ) ) then
@@ -54008,7 +54025,7 @@ set udg_zhengshu[122]=0
 set udg_danweizu[117]=CreateGroup()
 call SetUnitX(udg_danwei[417], GetLocationX(udg_dian[329]))
 call SetUnitY(udg_danwei[417], GetLocationY(udg_dian[329]))
-call PauseUnit(udg_danwei[417], true)
+call s__baka_PauseUnit2(udg_danwei[417] , true)
 call SetUnitTimeScale(udg_danwei[417], 5.00)
 call StartTimerBJ(udg_jishiqi[128], true, 0.10)
 endfunction
@@ -54073,7 +54090,7 @@ else
 endif
 else
 call ForGroupBJ(udg_danweizu[117], function Trig_huologn2Func002Func001A)
-call PauseUnit(udg_danwei[417], false)
+call s__baka_PauseUnit2(udg_danwei[417] , false)
 call SetUnitTimeScale(udg_danwei[417], 1)
 set udg_danwei[417]=null
 call PauseTimer(udg_jishiqi[128])
@@ -54095,7 +54112,7 @@ function Trig_honglianbaoyanren_1Actions takes nothing returns nothing
 set udg_danwei2[345]=GetTriggerUnit()
 set udg_zhengshu2[345]=0
 set udg_dian2[345]=GetUnitLoc(udg_danwei2[345])
-call PauseUnit(udg_danwei2[345], true)
+call s__baka_PauseUnit2(udg_danwei2[345] , true)
 call UnitAddType(udg_danwei2[345], UNIT_TYPE_TAUREN)
 call StartTimerBJ(udg_times[345], true, 0.04)
 set bj_forLoopAIndex=1
@@ -54149,7 +54166,7 @@ set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[1])
 else
 if ( ( udg_zhengshu2[345] == 40 ) ) then
-call PauseUnit(udg_danwei2[345], false)
+call s__baka_PauseUnit2(udg_danwei2[345] , false)
 call UnitRemoveType(udg_danwei2[345], UNIT_TYPE_TAUREN)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
@@ -57393,7 +57410,7 @@ set udg_Dian[162]=GetUnitLoc(udg_Danwei[163])
 set udg_Danwei[164]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303833, udg_Dian[162], 0)
 call RemoveLocation(udg_Dian[162])
 call UnitAddType(udg_Danwei[163], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_Danwei[163], true)
+call s__baka_PauseUnit2(udg_Danwei[163] , true)
 call SetUnitTimeScale(udg_Danwei[163], 0.00)
 call SetUnitVertexColor(udg_Danwei[163], 128, 128, 128, 128)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\RocketMissile\\RocketMissile.mdl", udg_Danwei[163], "chest"))
@@ -57411,7 +57428,7 @@ else
 if ( ( udg_Zhengshu[163] == 2 ) ) then
 set udg_Zhengshu[163]=( udg_Zhengshu[163] - 1 )
 call UnitRemoveType(udg_Danwei[163], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_Danwei[163], false)
+call s__baka_PauseUnit2(udg_Danwei[163] , false)
 call SetUnitTimeScale(udg_Danwei[163], 1.00)
 call SetUnitVertexColor(udg_Danwei[163], 255, 255, 255, 255)
 call StartTimerBJ(udg_Times[172], false, 3.00)
@@ -57650,7 +57667,7 @@ call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC5884
 call SetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), 0x41304F51, GetUnitAbilityLevel(udg_Danwei[161], 0x41304F4A))
 else
 endif
-call PauseUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), false)
+call s__baka_PauseUnit2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE) , false)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
@@ -57667,7 +57684,7 @@ set udg_Dian[163]=PolarProjectionBJ(udg_Dian[167], GetRandomReal(300.00, 600.00)
 call SetUnitFacing(udg_Danwei[167], GetUnitFacing(udg_Danwei[161]))
 call SetUnitX(udg_Danwei[167], GetLocationX(udg_Dian[163]))
 call SetUnitY(udg_Danwei[167], GetLocationY(udg_Dian[163]))
-call PauseUnit(udg_Danwei[167], true)
+call s__baka_PauseUnit2(udg_Danwei[167] , true)
 call SetUnitAnimationByIndex(udg_Danwei[167], 10)
 call GroupAddUnit(udg_Danweizu[164], udg_Danwei[167])
 call SelectUnitAddForPlayer(udg_Danwei[167], GetOwningPlayer(udg_Danwei[161]))
@@ -60154,7 +60171,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1073298173")
+call ExecuteFunc("jasshelper__initstructs1076388864")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -60286,7 +60303,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1073298173 takes nothing returns nothing
+function jasshelper__initstructs1076388864 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
