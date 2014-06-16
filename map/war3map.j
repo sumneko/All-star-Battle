@@ -2305,13 +2305,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3370,7 +3370,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary__Init takes nothing returns nothing
+function baseLibrary___Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3383,7 +3383,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary__Init takes nothing returns nothing
+function LuaLibrary___Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -3987,7 +3987,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record__Init takes nothing returns nothing
+function Record___Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4527,7 +4527,7 @@ call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
 endfunction
-function bakaLibrary__Init takes nothing returns nothing
+function bakaLibrary___Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4547,7 +4547,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary__Init takes nothing returns nothing
+function effectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4585,7 +4585,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary__Init takes nothing returns nothing
+function eventLibrary___Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4699,7 +4699,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary__Init takes nothing returns nothing
+function mathLibrary___Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4761,7 +4761,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary__Init takes nothing returns nothing
+function soundLibrary___Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4805,7 +4805,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary__Init takes nothing returns nothing
+function stringLibrary___Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -4888,7 +4888,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary__Init takes nothing returns nothing
+function textLibrary___Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5013,7 +5013,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary__Init takes nothing returns nothing
+function unitLibrary___Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -5034,7 +5034,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix__StartLua takes nothing returns nothing
+function RecordFix___StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -5050,10 +5050,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix__Init takes nothing returns nothing
+function RecordFix___Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
 endfunction
 
 //library RecordFix ends
@@ -30637,16 +30637,36 @@ call DisableTrigger(gg_trg_PK_time_3)
 call TriggerRegisterAnyUnitEventBJ(gg_trg_PK_time_3, EVENT_PLAYER_UNIT_DEATH)
 call TriggerAddAction(gg_trg_PK_time_3, function Trig_PK_time_3Actions)
 endfunction
+function Trig_PK_leaveFunc001Func001Func001Func005T takes nothing returns nothing
+if ( ( RectContainsUnit(gg_rct_yaoqingjuedou, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)) == true ) ) then
+call UnitDamageTarget(gg_unit_n00Y_0109, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), 100000.00, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(gg_unit_n00Y_0109, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), 100000.00, true, false, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9))
+else
+endif
+endfunction
 function Trig_PK_leaveActions takes nothing returns nothing
+local timer ydl_timer
 if ( ( ( GetUnitTypeId(GetTriggerUnit()) == 0x4830304D ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x48303044 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x4F303030 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x48303042 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x4E303139 ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == false ) or ( GetTriggerUnit() == udg_PK[3] ) or ( GetTriggerUnit() == udg_PK[4] ) or ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) > 10 ) ) ) then
 else
 if ( ( udg_Zhengshu[68] != 1 ) ) then
+if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) ) then
+if ( ( HaveSavedHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xDFB79FC3) == false ) ) then
+call SaveTimerHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xDFB79FC3, CreateTimer())
+else
+endif
+set ydl_timer=LoadTimerHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xDFB79FC3)
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x458B7DE9, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, false, function Trig_PK_leaveFunc001Func001Func001Func005T)
+else
 call UnitDamageTarget(gg_unit_n00Y_0109, GetTriggerUnit(), 100000.00, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call UnitDamageTarget(gg_unit_n00Y_0109, GetTriggerUnit(), 100000.00, true, false, ATTACK_TYPE_MELEE, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
 call KillUnit(GetTriggerUnit())
+endif
 else
 endif
 endif
+set ydl_timer=null
 endfunction
 function InitTrig_PK_leave takes nothing returns nothing
 set gg_trg_PK_leave=CreateTrigger()
@@ -60181,25 +60201,25 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1134222600")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs1140121965")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("LuaLibrary__Init")
-call ExecuteFunc("Record__Init")
+call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
+call ExecuteFunc("Record___Init")
 call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary__Init")
-call ExecuteFunc("effectLibrary__Init")
-call ExecuteFunc("eventLibrary__Init")
-call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("bakaLibrary___Init")
+call ExecuteFunc("effectLibrary___Init")
+call ExecuteFunc("eventLibrary___Init")
+call ExecuteFunc("mathLibrary___Init")
 call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("soundLibrary__Init")
-call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("soundLibrary___Init")
+call ExecuteFunc("stringLibrary___Init")
 call ExecuteFunc("testLibrary___Init")
-call ExecuteFunc("textLibrary__Init")
-call ExecuteFunc("unitLibrary__Init")
-call ExecuteFunc("RecordFix__Init")
+call ExecuteFunc("textLibrary___Init")
+call ExecuteFunc("unitLibrary___Init")
+call ExecuteFunc("RecordFix___Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -60313,7 +60333,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1134222600 takes nothing returns nothing
+function jasshelper__initstructs1140121965 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
