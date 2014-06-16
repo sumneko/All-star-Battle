@@ -3370,7 +3370,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3383,7 +3383,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -3987,7 +3987,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -30563,6 +30563,7 @@ call TriggerAddAction(gg_trg_PK_start_1, function Trig_PK_start_1Actions)
 endfunction
 function Trig_PK_start_2Actions takes nothing returns nothing
 call EnableTrigger(gg_trg_PK_start_0)
+call DisableTrigger(gg_trg_PK_start_1)
 call DestroyTimerDialog(udg_PKchuangkou[1])
 endfunction
 function InitTrig_PK_start_2 takes nothing returns nothing
@@ -60179,13 +60180,13 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1128043994")
+call ExecuteFunc("jasshelper__initstructs1130237071")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
 call ExecuteFunc("YDWELibrary__Init")
 call ExecuteFunc("bakaLibrary__Init")
 call ExecuteFunc("effectLibrary__Init")
@@ -60311,7 +60312,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1128043994 takes nothing returns nothing
+function jasshelper__initstructs1130237071 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
