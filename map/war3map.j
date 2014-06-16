@@ -57411,7 +57411,26 @@ set gg_trg_qizhidan_1=CreateTrigger()
 call s__Event_AnyUnitSkill(gg_trg_qizhidan_1 , 3 , 0x41304F41)
 call TriggerAddAction(gg_trg_qizhidan_1, function Trig_qizhidan_1Actions)
 endfunction
+function Trig_qizhidan_2Func001Func001Func022Func005T takes nothing returns nothing
+call UnitAddType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), UNIT_TYPE_TAUREN)
+call PauseUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), true)
+call SetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE1E302A1))
+call SetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x8E7ECCD1))
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
+if ( ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) or ( IsUnitType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), UNIT_TYPE_DEAD) == true ) ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+else
+endif
+endfunction
 function Trig_qizhidan_2Actions takes nothing returns nothing
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 if ( ( udg_Zhengshu[163] == 5 ) ) then
 set udg_Zhengshu[163]=( udg_Zhengshu[163] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
@@ -57455,6 +57474,12 @@ if ( ( udg_Zhengshu[163] == 3 ) ) then
 set udg_Zhengshu[163]=( udg_Zhengshu[163] - 1 )
 call StartTimerBJ(udg_Times[172], false, ( 2.25 + ( 0.25 * I2R(GetUnitAbilityLevel(udg_Danwei[161], 0x41304F41)) ) ))
 call SetUnitTimeScale(udg_Danwei[164], 0.00)
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, R2I(( TimerGetTimeout(udg_Times[172]) / 0.03 )))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE1E302A1, GetUnitX(udg_Danwei[164]))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x8E7ECCD1, GetUnitY(udg_Danwei[164]))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62274AD0, udg_Danwei[163])
+call TimerStart(ydl_timer, 0.03, true, function Trig_qizhidan_2Func001Func001Func022Func005T)
 else
 if ( ( udg_Zhengshu[163] == 2 ) ) then
 set udg_Zhengshu[163]=( udg_Zhengshu[163] - 1 )
@@ -57479,6 +57504,8 @@ endif
 endif
 endif
 endif
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
 endfunction
 function InitTrig_qizhidan_2 takes nothing returns nothing
 set gg_trg_qizhidan_2=CreateTrigger()
@@ -60201,7 +60228,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1140121965")
+call ExecuteFunc("jasshelper__initstructs1142730786")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60333,7 +60360,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1140121965 takes nothing returns nothing
+function jasshelper__initstructs1142730786 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
