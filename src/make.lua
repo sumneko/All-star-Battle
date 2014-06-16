@@ -2,17 +2,21 @@ local file_dir
 local test_dir
 
 local function git_fresh(fname)
-	local f = io.open((test_dir / fname):string(), 'rb')
+	local r, w = 'rb', 'wb'
+	if fname:sub(-2) == '.j' or fname:sub(-4) == '.lua' then
+		r, w = 'r', 'w'
+	end
+	local f = io.open((test_dir / fname):string(), r)
 	local test_file = f:read('*a')
 	f:close()
 	local map_file
-	f = io.open((file_dir / fname):string(), 'rb')
+	f = io.open((file_dir / fname):string(), r)
 	if f then
 		map_file = f:read('*a')
 		f:close()
 	end
 	if test_file ~= map_file then
-		f = io.open((file_dir / fname):string(), 'wb')
+		f = io.open((file_dir / fname):string(), w)
 		f:write(test_file)
 		f:close()
 		print('[成功]: 更新 ' .. fname)
