@@ -179,10 +179,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -4102,39 +4102,39 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
+if YDWELibrary__Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,新的first为:" + I2S(YDWELibrary___Iflush_first))
+call BJDebugMsg("单位主键清理完毕,新的first为:" + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4522,6 +4522,36 @@ call BJDebugMsg("<暂停计数错误>[" + GetUnitName(u) + "]: " + I2S(cjlocgn_0
 endif
 endif
 endfunction
+function s__baka_IssueTargetOrder2 takes unit u,string o,unit t returns boolean
+local player cjlocgn_00000000
+local boolean cjlocgn_00000001
+if GetUnitAbilityLevel(u, 0x416C6F63) == 1 then
+set cjlocgn_00000000=GetOwningPlayer(u)
+if IsUnitInvisible(t, cjlocgn_00000000) then
+call UnitShareVision(t, cjlocgn_00000000, true)
+set cjlocgn_00000001=IssueTargetOrder(u, o, t)
+call UnitShareVision(t, cjlocgn_00000000, false)
+endif
+set cjlocgn_00000000=null
+return cjlocgn_00000001
+endif
+return IssueTargetOrder(u, o, t)
+endfunction
+function s__baka_IssueTargetOrderById2 takes unit u,integer o,unit t returns boolean
+local player cjlocgn_00000000
+local boolean cjlocgn_00000001
+if GetUnitAbilityLevel(u, 0x416C6F63) == 1 then
+set cjlocgn_00000000=GetOwningPlayer(u)
+if IsUnitInvisible(t, cjlocgn_00000000) then
+call UnitShareVision(t, cjlocgn_00000000, true)
+set cjlocgn_00000001=IssueTargetOrderById(u, o, t)
+call UnitShareVision(t, cjlocgn_00000000, false)
+endif
+set cjlocgn_00000000=null
+return cjlocgn_00000001
+endif
+return IssueTargetOrderById(u, o, t)
+endfunction
 function s__baka_InitHero takes unit hero returns nothing
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
@@ -4533,7 +4563,7 @@ call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4553,7 +4583,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4727,7 +4757,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4767,7 +4797,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4811,7 +4841,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -4861,7 +4891,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary___Init takes nothing returns nothing
+function testLibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 local integer i=0
 loop
@@ -4894,7 +4924,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5019,7 +5049,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -7406,8 +7436,8 @@ function Trig_time_0Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
 call ForGroupBJ(udg_danweizu[0], function Trig_time_0Func001A)
-call IssueTargetOrderById(gg_unit_ngme_0025, 852566, gg_unit_hgtw_0012)
-call IssueTargetOrderById(gg_unit_ngme_0014, 852566, gg_unit_hgtw_0019)
+call s__baka_IssueTargetOrderById2(gg_unit_ngme_0025 , 852566 , gg_unit_hgtw_0012)
+call s__baka_IssueTargetOrderById2(gg_unit_ngme_0014 , 852566 , gg_unit_hgtw_0019)
 call TriggerExecute(gg_trg_duomianban6_exe_2)
 call StartTimerBJ(udg_Times[3], true, 0.03)
 call StartTimerBJ(udg_Times[4], true, 0.04)
@@ -12783,7 +12813,7 @@ call StartTimerBJ(udg_times[80], true, 0.05)
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8985")
 call PlaySoundOnUnitBJ(gg_snd_BattleShipDeath1, 100, udg_danwei2[80])
 else
-call IssueTargetOrderById(gg_unit_n00Z_0112, 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Z_0112 , 852095 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8984")
 endif
 call SetUnitVertexColor(gg_unit_n00Z_0112, 0, 50, 50, 128)
@@ -12839,45 +12869,45 @@ call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\Other\\ToonBoom\\T
 if ( ( ( GetRandomInt(1, 3) != 1 ) or ( ( GetRandomInt(1, 2) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303256)) == true ) ) ) ) ) then
 set udg_zhengshu2[3]=GetRandomInt(1, 4)
 if ( ( ( udg_zhengshu2[3] == 1 ) or ( ( udg_zhengshu2[3] != 1 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303256)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852066, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8977")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852066 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8171")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 2 ) or ( ( udg_zhengshu2[3] != 2 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303256)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852069, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8978")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852069 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8172")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 3 ) or ( ( udg_zhengshu2[3] != 3 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303256)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852160, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8980")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852160 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8173")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 4 ) or ( ( udg_zhengshu2[3] != 4 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303256)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852101, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_9723")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852101 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8219")
 else
 endif
 else
 set udg_zhengshu2[3]=GetRandomInt(1, 4)
 if ( ( udg_zhengshu2[3] == 1 ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852668, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8981")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852668 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_7677")
 else
 if ( ( udg_zhengshu2[3] == 2 ) ) then
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8982")
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_5608")
 call UnitDamageTarget(gg_unit_n00Y_0109, udg_danwei2[0], ( GetUnitState(udg_danwei2[0], UNIT_STATE_MAX_LIFE) * 0.30 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl", udg_dian2[0]))
 else
 if ( ( udg_zhengshu2[3] == 3 ) ) then
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8983")
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_5607")
 call SetUnitManaBJ(udg_danwei2[0], ( GetUnitState(udg_danwei2[0], UNIT_STATE_MANA) * 0.50 ))
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Undead\\DeathPact\\DeathPactTarget.mdl", udg_dian2[0]))
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl", udg_dian2[0]))
 else
 if ( ( udg_zhengshu2[3] == 4 ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0109, 852486, udg_danwei2[0])
-call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_9472")
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0109 , 852486 , udg_danwei2[0])
+call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_1234")
 else
 endif
 endif
@@ -12908,29 +12938,29 @@ call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\Other\\ToonBoom\\T
 if ( ( ( GetRandomInt(1, 3) != 1 ) or ( ( GetRandomInt(1, 2) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) ) ) ) ) then
 set udg_zhengshu2[3]=GetRandomInt(1, 4)
 if ( ( ( udg_zhengshu2[3] == 1 ) or ( ( udg_zhengshu2[3] != 1 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852066, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852066 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8986")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 2 ) or ( ( udg_zhengshu2[3] != 2 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852069, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852069 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8987")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 3 ) or ( ( udg_zhengshu2[3] != 3 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852160, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852160 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8989")
 else
 endif
 if ( ( ( udg_zhengshu2[3] == 4 ) or ( ( udg_zhengshu2[3] != 4 ) and ( GetRandomInt(1, 4) == 1 ) and ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303231)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303158)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303037)) == true ) ) ) ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852101, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852101 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_9724")
 else
 endif
 else
 set udg_zhengshu2[3]=GetRandomInt(1, 4)
 if ( ( udg_zhengshu2[3] == 1 ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852668, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852668 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_8990")
 else
 if ( ( udg_zhengshu2[3] == 2 ) ) then
@@ -12945,7 +12975,7 @@ call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Undead\\DeathPact\\De
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl", udg_dian2[0]))
 else
 if ( ( udg_zhengshu2[3] == 4 ) ) then
-call IssueTargetOrderById(gg_unit_n00Y_0111, 852486, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(gg_unit_n00Y_0111 , 852486 , udg_danwei2[0])
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_9471")
 else
 endif
@@ -15356,7 +15386,7 @@ endfunction
 function Trig_JS_AI_1sFunc003Func002Func003Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -15657,7 +15687,7 @@ call IssueImmediateOrderById(udg_danwei2[0], 852096)
 else
 endif
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( GetUnitTypeId(udg_danwei2[0]) == 0x75303035 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 else
 endif
 if ( ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303054 ) or ( GetUnitTypeId(udg_danwei2[0]) == 0x7530304F ) ) ) then
@@ -15669,11 +15699,11 @@ call IssueImmediateOrderById(udg_danwei2[0], 852127)
 else
 endif
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303058 ) or ( GetUnitTypeId(udg_danwei2[0]) == 0x7530304B ) ) and ( GetRandomInt(1, 2) == 1 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852119, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852119 , udg_danwei2[1])
 else
 endif
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303039 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852119, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852119 , udg_danwei2[1])
 else
 endif
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x75303039 ) ) then
@@ -15684,13 +15714,13 @@ if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( ( GetUni
 if ( ( GetRandomInt(1, 3) == 1 ) ) then
 call IssueImmediateOrderById(udg_danwei2[0], 852526)
 else
-call IssueTargetOrderById(udg_danwei2[0], 852119, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852119 , udg_danwei2[1])
 endif
 else
 endif
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303045 ) ) then
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( GetRandomInt(1, 2) == 1 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852179, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852179 , udg_danwei2[1])
 else
 endif
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
@@ -15714,11 +15744,11 @@ call RemoveLocation(udg_dian2[0])
 else
 endif
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( ( ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303045 ) or ( GetUnitTypeId(udg_danwei2[0]) == 0x75303032 ) ) and ( GetRandomInt(1, 2) == 1 ) ) or ( ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303051 ) or ( GetUnitTypeId(udg_danwei2[0]) == 0x75303052 ) ) and ( GetRandomInt(1, 3) == 1 ) ) or ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303042 ) and ( GetRandomInt(1, 5) == 1 ) ) ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852668, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852668 , udg_danwei2[1])
 else
 endif
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303047 ) and ( GetRandomInt(1, 5) == 1 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852527, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852527 , udg_danwei2[1])
 else
 endif
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_STRUCTURE) == false ) and ( GetUnitTypeId(udg_danwei2[0]) == 0x75303052 ) and ( GetRandomInt(1, 2) == 1 ) ) then
@@ -16165,7 +16195,7 @@ endfunction
 function Trig_zhendang_2Func002Func004Func006A takes nothing returns nothing
 set udg_danwei2[2]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[2], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[2], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[1], 852095, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 852095 , udg_danwei2[2])
 call UnitDamageTarget(udg_danwei2[1], udg_danwei2[2], 125.00, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -17737,7 +17767,7 @@ call SetUnitY(udg_danwei2[1], GetLocationY(udg_dian2[2]))
 else
 endif
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], 100.00, true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
 call RemoveLocation(udg_dian2[1])
 call RemoveLocation(udg_dian2[2])
 else
@@ -18733,7 +18763,7 @@ if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitTy
 if ( ( GetUnitState(udg_danwei2[1], UNIT_STATE_MAX_MANA) > 0.00 ) ) then
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl", udg_dian2[2]))
-call IssueTargetOrderById(udg_danwei2[2], 852111, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852111 , udg_danwei2[1])
 call CreateTextTagUnitBJ(( "-" + I2S(R2I(RMinBJ(( ( GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE) * 8.00 ) + ( 500.00 - DistanceBetweenPoints(udg_dian2[3], udg_dian2[2]) ) ), GetUnitState(udg_danwei2[1], UNIT_STATE_MANA)))) ), udg_danwei2[1], 50.00, 10.00, 32.00, 32.00, 100.00, 0)
 call SetTextTagPermanent(GetLastCreatedTextTag(), false)
 call SetTextTagLifespan(GetLastCreatedTextTag(), 3.00)
@@ -19603,7 +19633,7 @@ endfunction
 function Trig_attackFunc003Func005A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(GetAttacker())) == true ) ) then
-call IssueTargetOrderById(GetAttacker(), 851983, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(GetAttacker() , 851983 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -19681,7 +19711,7 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\OrbCorrupti
 set udg_dian2[0]=GetUnitLoc(GetAttackedUnitBJ())
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(GetAttacker()), 0x65303348, udg_dian2[0], 0.00)
 call UnitApplyTimedLife(udg_danwei2[1], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[1], 852662, GetAttackedUnitBJ())
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 852662 , GetAttackedUnitBJ())
 set udg_danwei2[1]=null
 call RemoveLocation(udg_dian2[0])
 endif
@@ -20524,7 +20554,7 @@ if ( ( GetUnitTypeId(udg_danwei2[( 300 + udg_Zhengshu[24] )]) == 0x65303845 ) ) 
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_player[udg_Zhengshu[24]]), 0x65303130, udg_dian2[2], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304F58)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_player[udg_Zhengshu[24]])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_player[udg_Zhengshu[24]])
 set udg_Danwei[92]=null
 else
 endif
@@ -21078,17 +21108,17 @@ function Trig_Smd_swap2Actions takes nothing returns nothing
 if ( ( SubStringBJ(GetEventPlayerChatString(), 6, 6) == " " ) ) then
 if ( ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) <= 5 ) ) then
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) >= 1 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) <= 5 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7))])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7))])
 else
 endif
 else
 endif
 if ( ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) >= 6 ) and ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) <= 10 ) ) then
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) >= 1 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) <= 5 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) + 5 )])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) + 5 )])
 else
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) >= 6 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7)) <= 10 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7))])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 7, 7))])
 else
 endif
 endif
@@ -21097,17 +21127,17 @@ endif
 else
 if ( ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) <= 5 ) ) then
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) >= 1 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) <= 5 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6))])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6))])
 else
 endif
 else
 endif
 if ( ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) >= 6 ) and ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) <= 10 ) ) then
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) >= 1 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) <= 5 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) + 5 )])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) + 5 )])
 else
 if ( ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) >= 6 ) and ( S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6)) <= 10 ) ) then
-call IssueTargetOrderById(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 852095, udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6))])
+call s__baka_IssueTargetOrderById2(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 852095 , udg_player[S2I(SubStringBJ(GetEventPlayerChatString(), 6, 6))])
 else
 endif
 endif
@@ -22337,7 +22367,7 @@ set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", GetTriggerUnit())
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
 else
@@ -22359,7 +22389,7 @@ set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304759)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", GetTriggerUnit())
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
 else
@@ -22383,7 +22413,7 @@ set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", GetTriggerUnit())
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
 else
@@ -26803,7 +26833,7 @@ call SetItemCharges(YDWEGetItemOfTypeFromUnitBJNull(LoadUnitHandle(YDHT, GetHand
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x4230304D) == false ) and ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x42303046) == false ) and ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x42303033) == false ) ) then
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60D54C59)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x4D6303C9), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0), 0x41305135)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0), 852668, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0) , 852668 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0), 0x42487765, 0.50)
 else
 endif
@@ -27392,7 +27422,7 @@ endfunction
 function Trig_guangshi_2Func001Func003Func006A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[92], "cripple", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "cripple" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", udg_danwei2[1], "origin"))
 call GroupAddUnit(udg_Danweizu[144], udg_danwei2[1])
 else
@@ -27410,7 +27440,7 @@ endfunction
 function Trig_guangshi_2Func001Func003Func019Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[92], "cripple", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "cripple" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", udg_danwei2[1], "origin"))
 call GroupAddUnit(udg_Danweizu[144], udg_danwei2[1])
 else
@@ -27999,7 +28029,7 @@ endfunction
 function Trig_yuyi_6Func005Func013A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[2], 852111, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852111 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -28019,7 +28049,7 @@ call GroupAddUnit(udg_danweizu2[87], udg_danwei2[2])
 call SetUnitTimeScale(udg_danwei2[2], 1.50)
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[3], ( ( I2R(( ( GetHeroStr(udg_danwei2[0], true) + GetHeroAgi(udg_danwei2[0], true) ) + GetHeroInt(udg_danwei2[0], true) )) / 4.00 ) * I2R(GetItemCharges(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x49303233))) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[2], 852111, udg_danwei2[3])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852111 , udg_danwei2[3])
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_yuyi_6Func005Func013A)
 call DestroyGroup(udg_xuanqu)
@@ -29081,7 +29111,7 @@ endfunction
 function Trig_jixing_2Func001Func002Func007A takes nothing returns nothing
 set udg_danwei2[2]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[2], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[2], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[2], GetOwningPlayer(udg_danwei2[0])) == true ) and ( UnitHasBuffBJ(udg_danwei2[2], 0x42303159) == false ) ) then
-call IssueTargetOrder(udg_danwei2[1], "slow", udg_danwei2[2])
+call s__baka_IssueTargetOrder2(udg_danwei2[1] , "slow" , udg_danwei2[2])
 else
 endif
 set udg_danwei2[2]=null
@@ -29178,7 +29208,7 @@ set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303231, udg_dian2[0], 0.00)
 call PlaySoundOnUnitBJ(gg_snd_CharmTarget1, 100, udg_danwei2[1])
 call SetUnitAnimation(udg_danwei2[2], "birth")
-call IssueTargetOrderById(udg_danwei2[2], 852668, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852668 , udg_danwei2[1])
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 2.00)
 call SetUnitManaBJ(udg_danwei2[1], ( GetUnitState(udg_danwei2[1], UNIT_STATE_MANA) - 300.00 ))
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( ( 100.00 - GetUnitManaPercent(udg_danwei2[1]) ) * 5.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MIND, WEAPON_TYPE_WHOKNOWS)
@@ -29219,7 +29249,7 @@ call SetUnitX(udg_danwei2[0], GetLocationX(udg_dian2[1]))
 call SetUnitY(udg_danwei2[0], GetLocationY(udg_dian2[1]))
 if ( ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( 3.00 * I2R(GetHeroAgi(udg_danwei2[0], true)) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_METAL_HEAVY_SLICE)
-call IssueTargetOrderById(udg_danwei2[0], 851983, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 851983 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[0]=null
@@ -29480,7 +29510,7 @@ if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_danwei2[1]=GetSpellTargetUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303256, udg_dian2[0], 0.00)
-call IssueTargetOrderById(udg_danwei2[2], 852119, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852119 , udg_danwei2[1])
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
 if ( ( IsUnitIllusionBJ(udg_danwei2[1]) == false ) ) then
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( 25.00 * RMaxBJ(I2R(( ( GetUnitLevel(udg_danwei2[1]) * 2 ) - GetUnitLevel(udg_danwei2[0]) )), 0.00) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
@@ -29878,7 +29908,7 @@ if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_danwei2[1]=GetSpellTargetUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303258, udg_dian2[0], 0.00)
-call IssueTargetOrderById(udg_danwei2[2], 852119, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852119 , udg_danwei2[0])
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 3.00)
 call SetUnitLifeBJ(udg_danwei2[2], ( ( I2R(( GetHeroAgi(udg_danwei2[0], true) + GetHeroInt(udg_danwei2[0], true) )) * 3.00 ) + ( GetUnitState(udg_danwei2[1], UNIT_STATE_LIFE) * 0.20 ) ))
 call SetUnitManaBJ(udg_danwei2[2], ( ( GetUnitState(udg_danwei2[1], UNIT_STATE_MANA) * 0.20 ) + 200.00 ))
@@ -30190,7 +30220,7 @@ endfunction
 function Trig_smrII_5Func001Func003Func012A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 call SetUnitX(udg_danwei2[0], GetLocationX(udg_dian2[2]))
 call SetUnitY(udg_danwei2[0], GetLocationY(udg_dian2[2]))
 else
@@ -32121,7 +32151,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[18])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[18]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B57)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[18])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[18])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_danwei[18], 15)
@@ -32158,7 +32188,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[22])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[22]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[22])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[22])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_danwei[22], 9)
@@ -32208,7 +32238,7 @@ endfunction
 function Trig_fwjj3Func001Func021A takes nothing returns nothing
 set udg_danwei[140]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[140], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[140], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[140]) == true ) and ( IsUnitEnemy(udg_danwei[140], GetOwningPlayer(udg_danwei[22])) == true ) ) then
-call IssueTargetOrder(udg_danwei[183], "thunderbolt", udg_danwei[140])
+call s__baka_IssueTargetOrder2(udg_danwei[183] , "thunderbolt" , udg_danwei[140])
 if ( ( GetUnitAbilityLevel(udg_danwei[22], 0x41304535) == 1 ) ) then
 call UnitDamageTarget(udg_danwei[22], udg_danwei[140], ( ( ( 40.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[22], 0x41303141), GetUnitAbilityLevel(udg_danwei[22], 0x41304534))) ) + ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei[22], 0x41304758)) ) ) + ( ( I2R(GetHeroAgi(udg_danwei[22], true)) * 2.50 ) + 25.00 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -32465,7 +32495,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[40])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[40]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[40])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[40])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[40], 7)
@@ -32503,7 +32533,7 @@ call UnitDamageTarget(udg_Danwei[40], udg_Danwei[41], ( 300.00 + ( 2.50 * I2R(Ge
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[40]), 0x65303130, udg_Dian[41], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41304236)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[41])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[41])
 set udg_Danwei[85]=null
 call GroupAddUnit(udg_Danweizu[42], udg_Danwei[41])
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl", udg_Dian[41]))
@@ -32512,7 +32542,7 @@ if ( ( DistanceBetweenPoints(udg_Dian[41], udg_Dian[169]) <= 350.00 ) ) then
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[40]), 0x65303130, udg_Dian[41], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41304236)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[41])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[41])
 set udg_Danwei[85]=null
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl", udg_Dian[41]))
 if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_Danwei[40] , 0x72617466)) == true ) ) then
@@ -32789,7 +32819,7 @@ function Trig_duanzui_2Func003Func002Func007Func001Func006A takes nothing return
 set udg_Danwei[162]=GetEnumUnit()
 if ( ( IsUnitType(udg_Danwei[162], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_Danwei[162], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_Danwei[162], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_Danwei[162], GetOwningPlayer(udg_Danwei[170])) == true ) ) then
 call UnitDamageTarget(udg_Danwei[170], udg_Danwei[162], ( ( ( ( - 20.00 + ( 40.00 * I2R(GetUnitAbilityLevel(udg_Danwei[170], 0x41305033)) ) ) + ( 2.00 * I2R(GetHeroAgi(udg_Danwei[170], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[162])
 else
 endif
 set udg_Danwei[162]=null
@@ -32848,7 +32878,7 @@ set udg_Zhengshu[178]=( udg_Zhengshu[178] + 1 )
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[170]), 0x65303130, udg_Dian[170], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x41304B58)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[170])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[170])
 set udg_Danwei[92]=null
 call StartTimerBJ(udg_jishiqi[170], false, 0.45)
 call SetUnitAnimationByIndex(udg_Danwei[170], 7)
@@ -32932,7 +32962,7 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\BallsOfFireMissil
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[162]), 0x65303130, udg_Dian[173], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[162])
 set udg_Danwei[92]=null
 call UnitDamageTarget(udg_Danwei[170], udg_Danwei[162], ( ( ( ( 50.00 + ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[170], 0x41305034)) ) ) + ( 1.50 * I2R(GetHeroAgi(udg_Danwei[170], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_Danweizu[174], udg_Danwei[162])
@@ -32961,7 +32991,7 @@ set udg_Dian[176]=GetUnitLoc(udg_Danwei[170])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[170]), 0x65303130, udg_Dian[176], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x4130504A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[170])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[170])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[176])
 call StartTimerBJ(udg_jishiqi[171], true, 0.03)
@@ -33101,7 +33131,7 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Incinerate\
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[37]), 0x65303130, udg_Dian[173], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[37])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[37])
 set udg_Danwei[92]=null
 else
 endif
@@ -33149,7 +33179,7 @@ set udg_Dian[176]=GetUnitLoc(udg_Danwei[170])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[170]), 0x65303130, udg_Dian[176], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[170])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[170])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[176])
 call StartTimerBJ(udg_jishiqi[14], false, 0.40)
@@ -33274,7 +33304,7 @@ set udg_dian[35]=GetUnitLoc(udg_danwei[38])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[38]), 0x65303130, udg_dian[35], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x4130475A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[38])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[38])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_dian[35])
 call SetUnitTimeScale(udg_danwei[38], 2.00)
@@ -33384,7 +33414,7 @@ if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
 if ( ( IsUnitInGroup(udg_danwei2[0], udg_danweizu2[246]) == false ) ) then
 if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) > 375.00 ) ) then
-call IssueTargetOrderById(udg_danwei[40], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
 else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
@@ -33405,7 +33435,7 @@ set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
 if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) > 425.00 ) ) then
 if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) < 450.00 ) ) then
-call IssueTargetOrderById(udg_danwei[40], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
 else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
@@ -33636,7 +33666,7 @@ else
 endif
 if ( ( udg_zhengshu2[50] > 0 ) ) then
 if ( ( UnitHasBuffBJ(udg_danwei2[49], 0x42303058) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[50], 851986, udg_danwei2[49])
+call s__baka_IssueTargetOrderById2(udg_danwei2[50] , 851986 , udg_danwei2[49])
 call SetUnitFacing(udg_danwei2[50], AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], Pow(I2R(IMinBJ(udg_zhengshu2[50], 25)), 1.40), AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 else
@@ -33652,7 +33682,7 @@ call SetUnitX(udg_danwei2[50], GetLocationX(udg_dian2[2]))
 call SetUnitY(udg_danwei2[50], GetLocationY(udg_dian2[2]))
 call RemoveLocation(udg_dian2[2])
 else
-call IssueTargetOrderById(udg_danwei2[50], 851986, udg_danwei2[49])
+call s__baka_IssueTargetOrderById2(udg_danwei2[50] , 851986 , udg_danwei2[49])
 call SetUnitFacing(udg_danwei2[50], AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 endif
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[1]) <= 70.00 ) ) then
@@ -33729,7 +33759,7 @@ endloop
 call SetUnitX(udg_Danwei[80], GetLocationX(udg_Dian[77]))
 call SetUnitY(udg_Danwei[80], GetLocationY(udg_Dian[77]))
 call UnitAddAbility(udg_Danwei[80], 0x416C6F63)
-call IssueTargetOrderById(udg_Danwei[80], 851983, udg_Danwei[79])
+call s__baka_IssueTargetOrderById2(udg_Danwei[80] , 851983 , udg_Danwei[79])
 call GroupAddUnit(udg_attack, udg_Danwei[80])
 call ShowUnitHide(udg_Danwei[80])
 set udg_Danwei[80]=null
@@ -33852,7 +33882,7 @@ call GroupAddUnit(udg_danweizu2[46], udg_danwei2[1])
 if ( ( udg_danwei2[2] == null ) ) then
 call IssuePointOrderByIdLoc(udg_danwei2[1], 851983, udg_dian2[1])
 else
-call IssueTargetOrderById(udg_danwei2[1], 851983, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 851983 , udg_danwei2[2])
 endif
 set udg_danwei2[1]=null
 set udg_aXUNHUAN[56]=udg_aXUNHUAN[56] + 1
@@ -34189,12 +34219,12 @@ call StartTimerBJ(udg_jishiqi[20], true, 0.15)
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[54]), 0x65303130, udg_dian[50], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304F39)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[54])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[54])
 set udg_Danwei[92]=null
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[55]), 0x65303130, udg_dian[51], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304F4E)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[55])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[55])
 set udg_Danwei[92]=null
 endif
 call RemoveLocation(udg_dian[50])
@@ -34383,7 +34413,7 @@ set udg_danwei2[2]=GroupPickRandomUnit(udg_xuanqu)
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[2])
 set udg_danwei2[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303332, udg_dian2[2], 0.00)
 call UnitApplyTimedLife(udg_danwei2[3], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[3], 852587, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[3] , 852587 , udg_danwei2[2])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\Bolt\\BoltImpact.mdl", udg_dian2[2]))
 set udg_danweizu2[105]=YDWEGetUnitsInRangeOfLocAllNull(250.00 , udg_dian2[2])
 call ForGroupBJ(udg_danweizu2[105], function Trig_wuyun_2Func001Func001Func002Func010Func002Func008A)
@@ -34441,7 +34471,7 @@ set udg_danwei2[2]=GroupPickRandomUnit(udg_xuanqu)
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[2])
 set udg_danwei2[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[173]), 0x65303332, udg_dian2[2], 0.00)
 call UnitApplyTimedLife(udg_danwei2[3], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[3], 852587, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[3] , 852587 , udg_danwei2[2])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\Bolt\\BoltImpact.mdl", udg_dian2[2]))
 set udg_danweizu2[105]=YDWEGetUnitsInRangeOfLocAllNull(250.00 , udg_dian2[2])
 call ForGroupBJ(udg_danweizu2[105], function Trig_wuyun_2Func002Func001Func007Func008A)
@@ -34497,7 +34527,7 @@ call GroupAddUnit(udg_Danweizu[82], udg_danwei2[1])
 set udg_Zhengshu[82]=1
 call UnitDamageTarget(udg_Danwei[81], udg_danwei2[1], ( ( ( 3.00 * I2R(GetHeroAgi(udg_Danwei[81], true)) ) + ( 20.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_Danwei[81], 0x41303045), GetUnitAbilityLevel(udg_Danwei[81], 0x41304A55))) ) ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 set udg_Zhengshu[82]=0
-call IssueTargetOrderById(udg_Danwei[82], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_Danwei[82] , 852095 , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\ChimaeraLightningMissile\\ChimaeraLightningMissile.mdl", udg_dian2[0]))
 else
 endif
@@ -34916,7 +34946,7 @@ else
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl", udg_danwei2[1], "origin"))
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303348, udg_dian2[0], 0.00)
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[2], 852662, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852662 , udg_danwei2[1])
 set udg_danwei2[2]=null
 endif
 else
@@ -34932,7 +34962,7 @@ set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303130, udg_dian2[1], 0)
 call UnitApplyTimedLife(udg_danwei[3], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[3], 0x41303551)
-call IssueTargetOrder(udg_danwei[3], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_danwei[3] , "thunderbolt" , udg_danwei2[1])
 set udg_danwei[3]=null
 call RemoveLocation(udg_dian2[1])
 else
@@ -34951,7 +34981,7 @@ set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303130, udg_dian2[1], 0)
 call UnitApplyTimedLife(udg_danwei[3], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[3], 0x41304641)
-call IssueTargetOrder(udg_danwei[3], "purge", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_danwei[3] , "purge" , udg_danwei2[1])
 set udg_danwei[3]=null
 call RemoveLocation(udg_dian2[1])
 else
@@ -35041,7 +35071,7 @@ else
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\OrbCorruption\\OrbCorruptionMissile.mdl", udg_danwei2[16], "origin"))
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303348, udg_dian2[0], 0.00)
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[2], 852662, udg_danwei2[16])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852662 , udg_danwei2[16])
 set udg_danwei2[2]=null
 endif
 else
@@ -35057,7 +35087,7 @@ set udg_dian2[1]=GetUnitLoc(udg_danwei2[16])
 set udg_danwei[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303130, udg_dian2[1], 0)
 call UnitApplyTimedLife(udg_danwei[3], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[3], 0x41303551)
-call IssueTargetOrder(udg_danwei[3], "thunderbolt", udg_danwei2[16])
+call s__baka_IssueTargetOrder2(udg_danwei[3] , "thunderbolt" , udg_danwei2[16])
 set udg_danwei[3]=null
 call RemoveLocation(udg_dian2[1])
 else
@@ -35076,7 +35106,7 @@ set udg_dian2[1]=GetUnitLoc(udg_danwei2[16])
 set udg_danwei[3]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303130, udg_dian2[1], 0)
 call UnitApplyTimedLife(udg_danwei[3], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[3], 0x41304641)
-call IssueTargetOrder(udg_danwei[3], "purge", udg_danwei2[16])
+call s__baka_IssueTargetOrder2(udg_danwei[3] , "purge" , udg_danwei2[16])
 set udg_danwei[3]=null
 call RemoveLocation(udg_dian2[1])
 else
@@ -35258,7 +35288,7 @@ endloop
 call SetUnitX(udg_danwei2[2], GetLocationX(udg_dian2[2]))
 call SetUnitY(udg_danwei2[2], GetLocationY(udg_dian2[2]))
 call UnitAddAbility(udg_danwei2[2], 0x416C6F63)
-call IssueTargetOrderById(udg_danwei2[2], 851983, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 851983 , udg_danwei2[1])
 call GroupAddUnit(udg_attack, udg_danwei2[2])
 call ShowUnitHide(udg_danwei2[2])
 call RemoveLocation(udg_dian2[2])
@@ -35437,7 +35467,7 @@ function Trig_rongjiangjushi_2Func003Func010Func004A takes nothing returns nothi
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[34])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[34], udg_danwei2[1], I2R(GetHeroInt(udg_danwei2[34], true)), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -35632,7 +35662,7 @@ call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Orc\\FeralSpirit\\fer
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl", udg_dian2[1]))
 else
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[1]) >= 1600.00 ) ) then
-call IssueTargetOrderById(udg_danwei[76], 851990, udg_danwei[75])
+call s__baka_IssueTargetOrderById2(udg_danwei[76] , 851990 , udg_danwei[75])
 else
 endif
 endif
@@ -35833,8 +35863,8 @@ else
 call UnitDamageTarget(udg_danwei2[377], udg_danwei2[378], ( I2R(GetHeroStr(udg_danwei2[377], true)) * 2.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WOOD_HEAVY_BASH)
 if ( ( udg_danwei[76] != null ) ) then
 set udg_zhengshu2[378]=1
-call IssueTargetOrderById(udg_danwei[76], 851983, udg_danwei2[378])
-call IssueTargetOrderById(udg_danwei[76], 852095, udg_danwei2[378])
+call s__baka_IssueTargetOrderById2(udg_danwei[76] , 851983 , udg_danwei2[378])
+call s__baka_IssueTargetOrderById2(udg_danwei[76] , 852095 , udg_danwei2[378])
 else
 set udg_zhengshu2[378]=2
 endif
@@ -35972,8 +36002,8 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_yanzhuaFunc010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[2], 852662, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852662 , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( I2R(GetHeroStr(udg_danwei2[0], true)) * 2.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WOOD_HEAVY_BASH)
 set udg_danwei2[1]=null
 endfunction
@@ -36054,7 +36084,7 @@ function Trig_huitianmiedi_3Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[39], udg_danwei2[1], ( I2R(GetHeroInt(udg_danwei2[39], true)) * 1.50 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -36169,7 +36199,7 @@ call UnitAddAbility(udg_Danwei[92], 0x41304236)
 else
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
 endif
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[85])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[85])
 set udg_Danwei[92]=null
 call UnitDamageTarget(udg_Danwei[159], udg_danwei[85], ( ( 50.00 + ( 1 * I2R(GetHeroAgi(udg_Danwei[159], true)) ) ) + ( 40.00 * I2R(GetUnitAbilityLevel(udg_Danwei[159], 0x414F776B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl", udg_danwei[85], "chest"))
@@ -36247,7 +36277,7 @@ call UnitAddAbility(udg_Danwei[92], 0x41304236)
 else
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
 endif
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[83])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[83])
 set udg_Danwei[92]=null
 call UnitDamageTarget(udg_danwei[82], udg_danwei[83], ( ( 50.00 + ( 1.00 * I2R(GetHeroAgi(udg_danwei[82], true)) ) ) + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei[82], 0x414F776B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl", udg_danwei[83], "chest"))
@@ -36296,7 +36326,7 @@ if ( ( udg_zhengshu2[98] == 5 ) ) then
 set udg_zhengshu2[98]=0
 set udg_zhengshu[39]=( udg_zhengshu[39] + 1 )
 if ( ( udg_zhengshu[39] == 1 ) ) then
-call IssueTargetOrderById(udg_danwei[84], 851983, udg_danwei[85])
+call s__baka_IssueTargetOrderById2(udg_danwei[84] , 851983 , udg_danwei[85])
 else
 endif
 call SetUnitAnimation(udg_danwei[84], "attack")
@@ -36539,7 +36569,7 @@ endfunction
 function Trig_anyingbu_2Func001Func001Func001Func001Func005Func003Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[92], "slow", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GlaiveMissile\\GlaiveMissileTarget.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[159], udg_danwei2[1], ( ( ( ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[159], 0x41304F30)) ) + ( 1.00 * I2R(GetHeroAgi(udg_Danwei[159], true)) ) ) * 1.00 ) * 0.50 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 else
@@ -36555,7 +36585,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[159])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[159]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B52)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[159])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[159])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[159], true, 0.02)
@@ -36832,7 +36862,7 @@ endfunction
 function Trig_dizhen2Func002Func007A takes nothing returns nothing
 set udg_danwei[410]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[410], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei[410]) == false ) and ( IsUnitEnemy(udg_danwei[410], GetOwningPlayer(udg_danwei[105])) == true ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu[112]) == false ) ) then
-call IssueTargetOrder(udg_danwei[106], "slow", udg_danwei[410])
+call s__baka_IssueTargetOrder2(udg_danwei[106] , "slow" , udg_danwei[410])
 call UnitDamageTarget(udg_danwei[105], udg_danwei[410], ( ( ( 1.00 * I2R(GetHeroAgi(udg_danwei[105], true)) ) + ( 40.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[105], 0x41303056), GetUnitAbilityLevel(udg_danwei[105], 0x41304E32))) ) ) + ( 1.00 * I2R(GetHeroStr(udg_danwei[105], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_ROCK_HEAVY_BASH)
 call GroupAddUnit(udg_danweizu[112], udg_danwei[410])
 else
@@ -36926,7 +36956,7 @@ call IncUnitAbilityLevel(udg_danwei[113], 0x41303059)
 else
 call SetUnitScale(udg_danwei[111], 3.00, 3.00, 3.00)
 endif
-call IssueTargetOrderById(udg_danwei[113], 852095, udg_danwei[110])
+call s__baka_IssueTargetOrderById2(udg_danwei[113] , 852095 , udg_danwei[110])
 set udg_danwei[111]=null
 set udg_danwei[113]=null
 else
@@ -36934,7 +36964,7 @@ call UnitDamageTarget(udg_danwei[109], udg_danwei[110], ( ( 50.00 * I2R(GetUnitA
 set udg_danwei[113]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[109]), 0x65303130, udg_dian[105], 0)
 call UnitAddAbility(udg_danwei[113], 0x41303545)
 call UnitApplyTimedLife(udg_danwei[113], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei[113], 852587, udg_danwei[110])
+call s__baka_IssueTargetOrderById2(udg_danwei[113] , 852587 , udg_danwei[110])
 set udg_danwei[113]=null
 endif
 set udg_danwei[109]=null
@@ -37011,7 +37041,7 @@ set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[42]), 0x6530324E,
 call SetUnitAnimation(udg_danwei2[0], "birth")
 call IncUnitAbilityLevel(udg_danwei2[0], 0x41303059)
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 call SetUnitPositionLoc(udg_danwei2[1], udg_dian2[1])
 call UnitDamageTarget(udg_danwei2[42], udg_danwei2[1], ( ( 100.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei2[42], 0x41303255)) ) ) + ( 2.00 * I2R(( GetUnitAbilityLevel(udg_danwei2[42], 0x41776172) * GetHeroStr(udg_danwei2[42], true) )) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_dian2[1]))
@@ -37075,7 +37105,7 @@ set udg_dian[112]=GetUnitLoc(udg_danwei[126])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[125]), 0x65303130, udg_dian[112], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C31)
-call IssueTargetOrder(udg_Danwei[92], "slow", udg_danwei[126])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_danwei[126])
 set udg_Danwei[92]=null
 set udg_danwei2[367]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[125]), 0x65303558, udg_dian[112], 270.00)
 set udg_aXUNHUAN[72]=1
@@ -37341,7 +37371,7 @@ set udg_dian2[0]=GetUnitLoc(GetEnumUnit())
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Other\\Andt\\Andt.mdl", udg_dian2[0]))
 call RemoveLocation(udg_dian2[0])
 call UnitDamageTarget(udg_danwei[133], udg_danwei[162], ( I2R(GetHeroInt(udg_danwei[133], true)) * 4.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrder(udg_danwei[160], "soulburn", udg_danwei[162])
+call s__baka_IssueTargetOrder2(udg_danwei[160] , "soulburn" , udg_danwei[162])
 else
 endif
 set udg_danwei[162]=null
@@ -37582,7 +37612,7 @@ call DestroyGroup(udg_danweizu[25])
 call RemoveUnit(udg_danwei[104])
 set udg_danwei[104]=null
 set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[95]), 0x65303057, udg_dian2[0], AngleBetweenPoints(udg_dian[87], udg_dian[88]))
-call IssueTargetOrderById(udg_danwei2[0], 852075, udg_danwei[96])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852075 , udg_danwei[96])
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
 call PauseUnit(udg_danwei[95], false)
 call UnitRemoveType(udg_danwei[95], UNIT_TYPE_TAUREN)
@@ -37706,7 +37736,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[99])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[99]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B52)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[99])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[99])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -37768,7 +37798,7 @@ else
 set udg_zhengshu[42]=1
 set udg_danwei[440]=CreateUnit(GetOwningPlayer(udg_danwei[101]), 0x65303130, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
 call UnitAddAbility(udg_danwei[440], 0x41304939)
-call IssueTargetOrder(udg_danwei[440], "doom", udg_danwei[101])
+call s__baka_IssueTargetOrder2(udg_danwei[440] , "doom" , udg_danwei[101])
 call RemoveUnit(udg_danwei[440])
 set udg_danwei[440]=null
 endif
@@ -38066,7 +38096,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[166])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[166]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[166])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[166])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 set udg_zhengshu2[113]=( udg_zhengshu2[113] - 1 )
@@ -38366,7 +38396,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[168])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[168]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B50)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[168])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[168])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endif
@@ -38542,7 +38572,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[122])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[122])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[122], true, 0.03)
@@ -38579,7 +38609,7 @@ call UnitDamageTarget(udg_Danwei[122], udg_Danwei[123], ( ( ( ( 0.00 + ( 15.00 *
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[122], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[123])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[123])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[122])
 if ( ( IsUnitType(udg_Danwei[123], UNIT_TYPE_DEAD) == true ) ) then
@@ -38640,7 +38670,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[122])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[122])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[123], true, 0.03)
@@ -38666,7 +38696,7 @@ call UnitDamageTarget(udg_Danwei[122], udg_Danwei[123], ( ( ( ( 0.00 + ( 20.00 *
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[122], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[123])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[123])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[122])
 set udg_Zhengshu[126]=1
@@ -38731,7 +38761,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B56)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[122])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[122])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[124], true, 0.03)
@@ -38776,7 +38806,7 @@ call UnitDamageTarget(udg_Danwei[122], udg_Danwei[123], ( ( ( ( 0.00 + ( 20.00 *
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[122]), 0x65303130, udg_Dian[122], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[123])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[123])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[122])
 else
@@ -38910,7 +38940,7 @@ call RemoveLocation(udg_dian[242])
 call RemoveLocation(udg_dian[243])
 else
 if ( ( udg_rogou[101] != null ) and ( IsUnitType(udg_rogou[101], UNIT_TYPE_HERO) == true ) and ( GetUnitTypeId(udg_rogou[101]) != 0x4F303030 ) and ( udg_Zhengshu[15] == 0 ) ) then
-call IssueTargetOrderById(udg_danwei[175], 852668, udg_rogou[101])
+call s__baka_IssueTargetOrderById2(udg_danwei[175] , 852668 , udg_rogou[101])
 else
 endif
 call RemoveUnit(udg_rogou[100])
@@ -38934,7 +38964,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[175])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[175]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[175])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[175])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_danwei[175], 2)
@@ -39030,7 +39060,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[176])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[176]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x4130475A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[176])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[176])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_danwei[176], 4)
@@ -39055,7 +39085,7 @@ call UnitDamageTarget(udg_danwei[176], udg_danwei[211], ( I2R(GetHeroStr(udg_dan
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[176]), 0x65303130, udg_dian[134], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[211])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[211])
 set udg_Danwei[92]=null
 endif
 endif
@@ -39230,7 +39260,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[326])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[326]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B52)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[326])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[326])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_danwei[326], 7)
@@ -39417,7 +39447,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[146])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[146]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x4130475A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[146])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[146])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[146], 6)
@@ -39568,7 +39598,7 @@ if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[167]) == false ) ) then
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[181]), 0x65303130, udg_dian[146], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41305032)
-call IssueTargetOrder(udg_Danwei[92], "slow", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_danwei2[1])
 set udg_Danwei[92]=null
 call GroupAddUnit(udg_Danweizu[167], udg_danwei2[1])
 call UnitDamageTarget(udg_danwei[181], udg_danwei2[1], ( ( ( ( 50.00 + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei[181], 0x41303143)) ) ) + ( 1.00 * I2R(GetHeroInt(udg_danwei[181], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -39580,7 +39610,7 @@ if ( ( DistanceBetweenPoints(udg_dian[146], udg_dian2[0]) <= 150.00 ) and ( IsUn
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[181]), 0x65303130, udg_dian[146], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 set udg_Danwei[92]=null
 call GroupAddUnit(udg_Danweizu[168], udg_danwei2[1])
 else
@@ -39624,7 +39654,7 @@ function Trig_fangdian_2_______uFunc003Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 call IssueImmediateOrderById(udg_danwei2[1], 851972)
-call IssueTargetOrderById(udg_danwei2[0], 852587, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852587 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -39715,14 +39745,14 @@ if ( ( IsUnitType(udg_Danwei[162], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitT
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[181]), 0x65303130, udg_Dian[173], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x41303545)
-call IssueTargetOrder(udg_Danwei[92], "forkedlightning", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "forkedlightning" , udg_Danwei[162])
 call GroupAddUnit(udg_Danweizu[172], udg_Danwei[92])
 set udg_Danwei[92]=null
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[181]), 0x65303130, udg_Dian[177], 0)
 call s__maphack_SetHeight(udg_Danwei[92] , 170.00 , 0.00)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 1.00)
 call UnitAddAbility(udg_Danwei[92], 0x41303545)
-call IssueTargetOrder(udg_Danwei[92], "forkedlightning", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "forkedlightning" , udg_Danwei[162])
 call GroupAddUnit(udg_Danweizu[173], udg_Danwei[92])
 set udg_Danwei[92]=null
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\Bolt\\BoltImpact.mdl", udg_Danwei[162], "origin"))
@@ -39741,7 +39771,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[181])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[181]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[181])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[181])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_jishiqi[172], true, 0.02)
@@ -39803,7 +39833,7 @@ call TriggerAddAction(gg_trg_leijizhiqiang_2, function Trig_leijizhiqiang_2Actio
 endfunction
 function Trig_leijizhiqiang_3Func001Func004Func006A takes nothing returns nothing
 if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) ) then
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", GetEnumUnit())
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetEnumUnit())
 else
 call GroupRemoveUnit(udg_Danweizu[171], GetEnumUnit())
 endif
@@ -40008,7 +40038,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[186])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[186]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B57)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[186])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[186])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -40050,7 +40080,7 @@ call StartTimerBJ(udg_jishiqi[50], true, 0.20)
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[188]), 0x65303130, udg_dian[151], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[188])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[188])
 set udg_Danwei[92]=null
 set udg_danwei[189]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[188]), 0x6530384A, udg_dian[151], 0)
 call UnitApplyTimedLife(udg_danwei[189], 0x42487765, 2.00)
@@ -40299,7 +40329,7 @@ function Trig_langxiFunc010Func009Func002002003 takes nothing returns boolean
 return ( ( ( GetUnitTypeId(GetFilterUnit()) != 0x4F303030 ) and ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO) == true ) and ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[200])) == true ) ) ) )
 endfunction
 function Trig_langxiFunc010Func009Func003A takes nothing returns nothing
-call IssueTargetOrder(udg_danwei[201], "attack", GetEnumUnit())
+call s__baka_IssueTargetOrder2(udg_danwei[201] , "attack" , GetEnumUnit())
 endfunction
 function Trig_langxiActions takes nothing returns nothing
 local group ydl_group
@@ -40337,7 +40367,7 @@ set udg_aXUNHUAN[190]=udg_aXUNHUAN[190] + 1
 endloop
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Orc\\FeralSpirit\\feralspiritdone.mdl", udg_dian[161]))
 if ( ( udg_zhengshu[95] > 0 ) and ( udg_zhengshu[95] < 31 ) ) then
-call IssueTargetOrder(udg_danwei[201], "attack", udg_danwei[198])
+call s__baka_IssueTargetOrder2(udg_danwei[201] , "attack" , udg_danwei[198])
 else
 set udg_danweizu[45]=YDWEGetUnitsInRangeOfLocMatchingNull(400.00 , udg_dian[160] , Condition(function Trig_langxiFunc010Func009Func002002003))
 call ForGroupBJ(udg_danweizu[45], function Trig_langxiFunc010Func009Func003A)
@@ -40381,7 +40411,7 @@ if ( ( IsUnitType(udg_danwei[205], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitI
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei[205], "origin"))
 if ( ( IsUnitInGroup(udg_danwei[205], udg_Danweizu[70]) == false ) ) then
 call GroupAddUnit(udg_Danweizu[70], udg_danwei[205])
-call IssueTargetOrder(udg_danwei[204], "slow", udg_danwei[205])
+call s__baka_IssueTargetOrder2(udg_danwei[204] , "slow" , udg_danwei[205])
 call UnitDamageTarget(udg_danwei[202], udg_danwei[205], ( I2R(GetHeroAgi(udg_danwei[202], true)) * 4.00 ), true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\lianzhanbo.mdx", udg_danwei[205], "chest"))
 else
@@ -40756,7 +40786,7 @@ function Trig_xiongzhan_2Func003Func001Func002Func008Func007A takes nothing retu
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[122], udg_danwei2[1], ( ( 2.00 * I2R(GetHeroStr(udg_danwei2[122], true)) ) + ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei2[122], 0x4130364B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl", udg_dian2[1]))
 call DestroyEffect(AddSpecialEffectLoc("war3mapImported\\fireworkswhite.mdx", udg_dian2[1]))
@@ -40769,7 +40799,7 @@ function Trig_xiongzhan_2Func003Func001Func005Func010A takes nothing returns not
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[122], udg_danwei2[1], ( ( 1.00 * I2R(GetHeroStr(udg_danwei2[122], true)) ) + ( 20.00 * I2R(GetUnitAbilityLevel(udg_danwei2[122], 0x4130364B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
 else
 call GroupRemoveUnit(udg_danweizu2[122], udg_danwei2[1])
 endif
@@ -40818,7 +40848,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[122])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[122]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B56)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[122])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[122])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 else
@@ -40904,7 +40934,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[122])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[122]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[122])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[122])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -40945,7 +40975,7 @@ endfunction
 function Trig_bingjian_2Func003Func011A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[119])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[120], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[120] , 852095 , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[119], udg_danwei2[1], I2R(GetHeroInt(udg_danwei2[119], true)), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[119]) == false ) ) then
 call UnitDamageTarget(udg_danwei2[119], udg_danwei2[1], ( 50.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei2[119], 0x41303956)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -41720,7 +41750,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[107])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[107]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B5A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[107])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[107])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -42118,7 +42148,7 @@ function Trig_gangcilianchengFunc012A takes nothing returns nothing
 set udg_danwei[233]=GetEnumUnit()
 if ( ( IsUnitInGroup(udg_danwei[233], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[233], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[233]) == true ) and ( IsUnitEnemy(udg_danwei[233], GetOwningPlayer(udg_danwei[230])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[233])
-call IssueTargetOrder(udg_danwei[231], "thunderbolt", udg_danwei[233])
+call s__baka_IssueTargetOrder2(udg_danwei[231] , "thunderbolt" , udg_danwei[233])
 if ( ( GetUnitAbilityLevel(udg_danwei[230], 0x41303232) == 1 ) ) then
 call UnitDamageTarget(udg_danwei[230], udg_danwei[233], ( ( 50.00 + ( GetUnitState(udg_danwei[230], UNIT_STATE_MANA) * 0.10 ) ) + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[230], 0x4155696D)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -42629,7 +42659,7 @@ set udg_danwei[240]=GetSpellTargetUnit()
 set udg_dian[204]=GetUnitLoc(udg_danwei[239])
 set udg_danwei[241]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[240]), 0x65303148, udg_dian[204], 0.00)
 call SetUnitAbilityLevel(udg_danwei[241], 0x41303234, GetUnitAbilityLevel(udg_danwei[239], 0x41303235))
-call IssueTargetOrderById(udg_danwei[241], 852274, udg_danwei[240])
+call s__baka_IssueTargetOrderById2(udg_danwei[241] , 852274 , udg_danwei[240])
 call UnitApplyTimedLife(udg_danwei[241], 0x42487765, 0.50)
 set udg_shishu2[20]=GetUnitState(udg_danwei[240], UNIT_STATE_LIFE)
 set udg_danwei[239]=null
@@ -42717,7 +42747,7 @@ call UnitRemoveBuffBJ(0x42303034, udg_danwei[239])
 call SetUnitLifeBJ(udg_danwei[239], ( GetEventDamage() + GetUnitState(udg_danwei[239], UNIT_STATE_LIFE) ))
 set udg_dian[204]=GetUnitLoc(udg_danwei[239])
 set udg_danwei[241]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[239]), 0x6530314C, udg_dian[204], 0.00)
-call IssueTargetOrderById(udg_danwei[241], 852209, udg_danwei[239])
+call s__baka_IssueTargetOrderById2(udg_danwei[241] , 852209 , udg_danwei[239])
 call UnitApplyTimedLife(udg_danwei[241], 0x42487765, 0.50)
 set udg_danwei[241]=null
 call RemoveLocation(udg_dian[204])
@@ -42737,7 +42767,7 @@ set udg_danwei[241]=null
 set udg_aXUNHUAN[122]=udg_aXUNHUAN[122] + 1
 endloop
 set udg_danwei[241]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[250]), 0x6530314E, udg_dian[205], AngleBetweenPoints(udg_dian[205], udg_dian[204]))
-call IssueTargetOrderById(udg_danwei[241], 852480, udg_danwei[250])
+call s__baka_IssueTargetOrderById2(udg_danwei[241] , 852480 , udg_danwei[250])
 call UnitApplyTimedLife(udg_danwei[241], 0x42487765, 6.00)
 call SetUnitVertexColor(udg_danwei[241], 128, 128, 128, 128)
 set udg_danwei[241]=null
@@ -43126,7 +43156,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[271])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[271]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B57)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[271])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[271])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimation(udg_danwei[271], "spell")
@@ -43299,7 +43329,7 @@ set udg_danwei2[1]=null
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[271]), 0x65303130, udg_dian2[2], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[GetUnitUserData(udg_danwei2[0])])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[GetUnitUserData(udg_danwei2[0])])
 set udg_Danwei[92]=null
 else
 endif
@@ -43451,7 +43481,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[110]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[110])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[110])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[110], false, 0.30)
@@ -43496,7 +43526,7 @@ call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\FrostBolt\\
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[113]), 0x65303130, udg_Dian[110], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[113])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[113])
 set udg_Danwei[92]=null
 else
 endif
@@ -43606,7 +43636,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[110]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[110])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[110])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[111], false, 0.30)
@@ -43767,7 +43797,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[110])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[110]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[110])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[110])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[112], true, 0.03)
@@ -44261,7 +44291,7 @@ set udg_danwei2[380]=GroupPickRandomUnit(udg_xuanqu)
 call UnitDamageTarget(udg_danwei2[375], udg_danwei2[380], ( ( 0.30 * I2R(GetHeroAgi(udg_danwei2[375], true)) ) + 50.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_SONIC, WEAPON_TYPE_METAL_HEAVY_SLICE)
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[375]), 0x65303636, udg_dian2[0], 270.00)
 call UnitApplyTimedLife(udg_danwei2[1], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[1], 852095, udg_danwei2[380])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 852095 , udg_danwei2[380])
 set udg_danwei2[1]=null
 call SetUnitManaBJ(udg_danwei2[376], 500.00)
 if ( ( IsUnitInGroup(udg_danwei2[380], udg_danweizu2[380]) == true ) ) then
@@ -45348,7 +45378,7 @@ call UnitDamageTarget(udg_danwei[333], udg_danwei[334], ( ( 40.00 + ( 40.00 * I2
 set udg_danwei[336]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[334]), 0x65303130, udg_dian[248], 0)
 call UnitApplyTimedLife(udg_danwei[336], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[336], 0x41303033)
-call IssueTargetOrder(udg_danwei[336], "thunderbolt", udg_danwei[334])
+call s__baka_IssueTargetOrder2(udg_danwei[336] , "thunderbolt" , udg_danwei[334])
 set udg_danwei[336]=null
 else
 endif
@@ -45483,7 +45513,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[459])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[459]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B56)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[459])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[459])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitTimeScale(udg_danwei[459], 1.40)
@@ -46173,7 +46203,7 @@ else
 call IncUnitAbilityLevel(udg_danwei2[1], 0x41303530)
 call SetUnitAbilityLevel(udg_danwei2[0], 0x41303535, GetUnitAbilityLevel(udg_danwei2[1], 0x41303530))
 endif
-call IssueTargetOrderById(udg_danwei2[0], 852075, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852075 , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\WardenMissile\\WardenMissile.mdl", udg_danwei2[1], "chest"))
 call DestroyEffect(AddSpecialEffectTarget("abilities\\weapons\\WyvernSpear\\WyvernSpearMissile.mdl", udg_danwei2[1], "chest"))
 else
@@ -46435,7 +46465,7 @@ call UnitRemoveBuffBJ(0x42637932, udg_danwei2[26])
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[27])
 set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[25]), 0x65303130, udg_dian2[0], 0.00)
 call UnitAddAbility(udg_danwei2[0], 0x41304449)
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[26])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[26])
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
 call DestroyLightning(udg_shandian[7])
 call PauseTimer(udg_times[25])
@@ -46567,7 +46597,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[28])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[28]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B59)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[28])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[28])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -46735,7 +46765,7 @@ call UnitAddAbility(udg_danwei[365], 0x41303130)
 call StartTimerBJ(udg_jishiqi[102], true, 0.10)
 set udg_danwei[367]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[365]), 0x65303130, udg_dian[276], 0)
 call UnitApplyTimedLife(udg_danwei[367], 0x42487765, 1.00)
-call IssueTargetOrder(udg_danwei[367], "bloodlust", udg_danwei[365])
+call s__baka_IssueTargetOrder2(udg_danwei[367] , "bloodlust" , udg_danwei[365])
 set udg_danwei[367]=null
 endfunction
 function InitTrig_lianji takes nothing returns nothing
@@ -46883,7 +46913,7 @@ function Trig_zhanshenzhufu_2Func001Func007Func006A takes nothing returns nothin
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[121])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[121]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[121], udg_danwei2[1], ( ( 1.00 * I2R(GetHeroStr(udg_Danwei[121], true)) ) + ( 50.00 + ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[121], 0x41303643)) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei2[1], "chest"))
 call GroupAddUnit(udg_Danweizu[121], udg_danwei2[1])
 else
@@ -48036,7 +48066,7 @@ endfunction
 function Trig_yinjia2Func002Func004Func008A takes nothing returns nothing
 set udg_danwei[404]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[404], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[404], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[404], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei[404], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei[404], GetOwningPlayer(udg_danwei[403])) == true ) ) then
-call IssueTargetOrder(udg_danwei2[1], "thunderbolt", udg_danwei[404])
+call s__baka_IssueTargetOrder2(udg_danwei2[1] , "thunderbolt" , udg_danwei[404])
 else
 endif
 set udg_danwei[404]=null
@@ -48328,7 +48358,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[262])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[262]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B5A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[262])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[262])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -48350,7 +48380,7 @@ if ( ( DistanceBetweenPoints(udg_dian[310], udg_dian[311]) <= 400.00 ) ) then
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[405]), 0x65303130, udg_dian[310], 0)
 call UnitAddAbility(udg_danwei2[1], 0x41303551)
 call UnitApplyTimedLife(udg_danwei2[1], 0x42487765, 0.50)
-call IssueTargetOrder(udg_danwei2[1], "thunderbolt", udg_danwei[406])
+call s__baka_IssueTargetOrder2(udg_danwei2[1] , "thunderbolt" , udg_danwei[406])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\StormBolt\\StormBoltMissile.mdl", udg_danwei[406], "chest"))
 set udg_shishu2[266]=1.00
 call StartTimerBJ(udg_jishiqi[123], true, 0.01)
@@ -48694,7 +48724,7 @@ call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 1.00)
 set udg_danwei2[2]=null
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[85]), 0x65303338, udg_dian2[1], 0.00)
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
-call IssueTargetOrderById(udg_danwei2[2], 852075, udg_danwei2[86])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852075 , udg_danwei2[86])
 set udg_danwei2[2]=null
 call UnitDamageTarget(udg_danwei2[85], udg_danwei2[86], I2R(GetHeroAgi(udg_danwei2[85], true)), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 set udg_zhengshu2[84]=( udg_zhengshu2[84] + 1 )
@@ -48761,7 +48791,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[85])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[85]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x4130475A)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[85])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[85])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -48933,7 +48963,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[91])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[91]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[91])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[91])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -49017,7 +49047,7 @@ else
 endif
 call GroupAddUnit(udg_Danweizu[20], udg_danwei2[1])
 call UnitDamageTarget(udg_Danwei[20], udg_danwei2[1], ( ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[20], 0x41303934)) ) + ( 1.00 * I2R(GetHeroAgi(udg_Danwei[20], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
-call IssueTargetOrderById(udg_Danwei[19], 852075, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_Danwei[19] , 852075 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -49082,7 +49112,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[20])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[20]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C36)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[20])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[20])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -49337,7 +49367,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei2[77])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[77]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x4130384E)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[77])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[77])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -49957,7 +49987,7 @@ call SetUnitScale(udg_danwei2[1], ( 0.85 + ( 0.06 * I2R(GetUnitAbilityLevel(udg_
 call SetUnitLifeBJ(udg_danwei2[1], ( ( I2R(GetHeroInt(udg_danwei2[0], true)) * 0.30 ) + ( 6.00 * I2R(GetUnitAbilityLevel(udg_danwei2[264], 0x41304334)) ) ))
 call SetUnitUserData(udg_danwei2[1], 50)
 call GroupAddUnit(udg_danweizu2[205], udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[1], 851986, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 851986 , udg_danwei2[2])
 set udg_danwei2[1]=null
 set udg_aXUNHUAN[158]=udg_aXUNHUAN[158] + 1
 endloop
@@ -50077,7 +50107,7 @@ call SetUnitY(udg_danwei2[1], GetLocationY(udg_dian2[3]))
 else
 endif
 if ( ( GetUnitUserData(udg_danwei2[0]) == - 1 ) ) then
-call IssueTargetOrderById(udg_danwei2[0], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -50285,7 +50315,7 @@ function Trig_huojinfu_2Func001Func004Func001Func003Func011Func010A takes nothin
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[264], udg_danwei2[1], GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
 else
 endif
 set udg_danwei2[1]=null
@@ -51762,14 +51792,14 @@ set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(( 350.00 + ( 3.00 * I2R(udg_zheng
 call ForGroupBJ(udg_xuanqu, function Trig_yuemufu_2Func002Func013A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == false ) ) then
 set udg_danwei2[1]=GroupPickRandomUnit(udg_xuanqu)
-call IssueTargetOrderById(udg_danwei2[291], 852119, udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[291], 852486, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[291] , 852119 , udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[291] , 852486 , udg_danwei2[1])
 call GroupRemoveUnit(udg_xuanqu, udg_danwei2[1])
 set udg_danwei2[1]=null
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == false ) ) then
 set udg_danwei2[1]=GroupPickRandomUnit(udg_xuanqu)
-call IssueTargetOrderById(udg_danwei2[292], 852119, udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[292], 852486, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[292] , 852119 , udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[292] , 852486 , udg_danwei2[1])
 call GroupRemoveUnit(udg_xuanqu, udg_danwei2[1])
 set udg_danwei2[1]=null
 else
@@ -51841,7 +51871,7 @@ endfunction
 function Trig_tufu_a_3Func001Func003Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
 call SetUnitAnimation(udg_danwei2[2], "death")
 call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], GetUnitState(udg_danwei2[0], UNIT_STATE_LIFE), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -51920,7 +51950,7 @@ function Trig_tufu_b_2Func002Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[288]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[288])) == true ) ) then
 call GroupAddUnit(udg_danweizu2[288], udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[289], 852095, udg_danwei2[1])
+call s__baka_IssueTargetOrderById2(udg_danwei2[289] , 852095 , udg_danwei2[1])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[288]), 0x6530344C, udg_dian2[1], GetRandomReal(0, 360.00))
 call SetUnitAnimation(udg_danwei2[2], "death")
@@ -51995,7 +52025,7 @@ call SetUnitX(udg_danwei2[0], GetLocationX(udg_dian2[5]))
 call SetUnitY(udg_danwei2[0], GetLocationY(udg_dian2[5]))
 else
 endif
-call IssueTargetOrderById(udg_danwei2[1], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 852095 , udg_danwei2[0])
 call UnitDamageTarget(udg_danwei2[240], udg_danwei2[0], ( ( I2R(GetHeroInt(udg_danwei2[240], true)) * 0.30 ) + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei2[264], 0x41304453)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_BASH)
 call SetUnitAnimation(udg_danwei2[1], "birth")
 call UnitAddAbility(udg_danwei2[0], 0x41726176)
@@ -52018,7 +52048,7 @@ call SetUnitX(udg_danwei2[0], GetLocationX(udg_dian2[5]))
 call SetUnitY(udg_danwei2[0], GetLocationY(udg_dian2[5]))
 else
 endif
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[0])
 call UnitDamageTarget(udg_danwei2[240], udg_danwei2[0], ( ( I2R(GetHeroInt(udg_danwei2[240], true)) * 0.30 ) + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei2[264], 0x41304453)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_BASH)
 call SetUnitAnimation(udg_danwei2[2], "birth")
 call UnitAddAbility(udg_danwei2[0], 0x41726176)
@@ -52066,7 +52096,7 @@ endfunction
 function Trig_tujinfu_2Func002Func006Func007A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[0], GetOwningPlayer(udg_danwei2[240])) == true ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu2[295]) == false ) ) then
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[0])
 call SetUnitAnimation(udg_danwei2[2], "birth")
 call GroupAddUnit(udg_danweizu2[295], udg_danwei2[0])
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
@@ -52090,7 +52120,7 @@ endfunction
 function Trig_tujinfu_2Func002Func007Func007A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[0], GetOwningPlayer(udg_danwei2[240])) == true ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu2[295]) == false ) ) then
-call IssueTargetOrderById(udg_danwei2[2], 852095, udg_danwei2[0])
+call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[0])
 call SetUnitAnimation(udg_danwei2[2], "birth")
 call GroupAddUnit(udg_danweizu2[295], udg_danwei2[0])
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
@@ -52504,7 +52534,7 @@ endfunction
 function Trig_riyuefu_2Func002Func001Func008A takes nothing returns nothing
 set udg_danwei2[2]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[2], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[2], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[2], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[2], GetOwningPlayer(udg_danwei2[364])) == true ) and ( UnitHasBuffBJ(udg_danwei2[2], 0x42303146) == false ) ) then
-call IssueTargetOrderById(udg_danwei2[1], 852668, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 852668 , udg_danwei2[2])
 else
 endif
 set udg_danwei2[2]=null
@@ -52732,7 +52762,7 @@ if ( ( udg_danwei2[2] != null ) ) then
 set udg_dian2[3]=GetUnitLoc(udg_danwei2[2])
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x6530344B, udg_dian2[1], ( DistanceBetweenPoints(udg_dian2[1], udg_dian2[3]) + ( 72.00 * I2R(udg_aXUNHUAN[189]) ) ))
 call GroupAddUnit(udg_DAZE[0], udg_danwei2[1])
-call IssueTargetOrderById(udg_danwei2[1], 851986, udg_danwei2[2])
+call s__baka_IssueTargetOrderById2(udg_danwei2[1] , 851986 , udg_danwei2[2])
 call RemoveLocation(udg_dian2[3])
 else
 if ( ( GetLocationX(udg_dian2[2]) != 0.00 ) and ( GetLocationY(udg_dian2[2]) != 0.00 ) ) then
@@ -52954,7 +52984,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[128])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[128]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C47)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[128])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[128])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[128], 2)
@@ -53070,7 +53100,7 @@ call UnitDamageTarget(udg_Danwei[( 50 + udg_aXUNHUAN[196] )], udg_Danwei[( 55 + 
 else
 call UnitDamageTarget(udg_Danwei[( 50 + udg_aXUNHUAN[196] )], udg_Danwei[( 55 + udg_aXUNHUAN[196] )], ( ( 10.00 + ( 10.00 * I2R(GetUnitAbilityLevel(udg_Danwei[50], 0x41304D30)) ) ) + ( 0.30 * I2R(GetHeroStr(udg_Danwei[50], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 endif
-call IssueTargetOrderById(udg_Danwei[50], 851983, udg_Danwei[55])
+call s__baka_IssueTargetOrderById2(udg_Danwei[50] , 851983 , udg_Danwei[55])
 if ( ( udg_Zhengshu[65] > 0 ) ) then
 set udg_Zhengshu[65]=( udg_Zhengshu[65] + ( 3 + GetUnitAbilityLevel(udg_Danwei[128], 0x41304946) ) )
 else
@@ -53166,13 +53196,13 @@ call UnitAddAbility(udg_Danwei[49], 0x41304944)
 else
 endif
 if ( ( udg_Zhengshu[61] == 2 ) ) then
-call IssueTargetOrderById(udg_Danwei[49], 851990, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_Danwei[49])) + 1 )])
+call s__baka_IssueTargetOrderById2(udg_Danwei[49] , 851990 , udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_Danwei[49])) + 1 )])
 else
 if ( ( udg_Zhengshu[61] == 3 ) ) then
 call IssuePointOrderByIdLoc(udg_Danwei[49], 851983, udg_Dian[61])
 else
 if ( ( udg_Zhengshu[61] == 4 ) ) then
-call IssueTargetOrderById(udg_Danwei[49], 851983, udg_Danwei[61])
+call s__baka_IssueTargetOrderById2(udg_Danwei[49] , 851983 , udg_Danwei[61])
 else
 endif
 endif
@@ -53420,7 +53450,7 @@ if ( ( IsUnitType(udg_danwei[439], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitE
 set udg_danwei[440]=CreateUnit(GetOwningPlayer(udg_Danwei[152]), 0x65303130, GetLocationX(udg_dian[358]), GetLocationY(udg_dian[358]), 0)
 call UnitApplyTimedLife(udg_danwei[440], 0x42487765, 0.50)
 call UnitAddAbility(udg_danwei[440], 0x41303033)
-call IssueTargetOrder(udg_danwei[440], "thunderbolt", udg_danwei[439])
+call s__baka_IssueTargetOrder2(udg_danwei[440] , "thunderbolt" , udg_danwei[439])
 call UnitDamageTarget(udg_Danwei[152], udg_danwei[439], ( ( 100.00 * I2R(GetUnitAbilityLevel(udg_Danwei[152], 0x41304857)) ) + ( 1.00 * I2R(GetHeroStr(udg_Danwei[152], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_Danweizu[65], udg_danwei[439])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl", udg_dian[358]))
@@ -53689,7 +53719,7 @@ endfunction
 function Trig_Overdrive_3Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[62])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[63], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[63] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\A4_lvbai.mdx", udg_danwei2[1], "origin"))
 call UnitDamageTarget(udg_Danwei[62], udg_danwei2[1], ( ( 50.00 + ( 30.00 * I2R(GetUnitAbilityLevel(udg_Danwei[62], 0x41303841)) ) ) + ( 2.00 * I2R(GetHeroStr(udg_Danwei[62], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -53726,7 +53756,7 @@ endfunction
 function Trig_Overdrive_3_5Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[62])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[63], "slow", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[63] , "slow" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\A4_lvbai.mdx", udg_danwei2[1], "origin"))
 call UnitDamageTarget(udg_Danwei[62], udg_danwei2[1], ( ( 30.00 + ( 30.00 * I2R(GetUnitAbilityLevel(udg_Danwei[62], 0x41303841)) ) ) + ( 1.00 * I2R(GetHeroStr(udg_Danwei[62], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -54308,7 +54338,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[83])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[83]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B50)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[83])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[83])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[83], false, 0.50)
@@ -54334,7 +54364,7 @@ if ( ( udg_Zhengshu[84] >= 75 ) ) then
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[83]), 0x65303130, udg_Dian[83], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41303033)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[84])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[84])
 set udg_Danwei[85]=null
 else
 endif
@@ -54443,7 +54473,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[86])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B50)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[86])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[86])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[153], false, 0.50)
@@ -54522,7 +54552,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[86])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304C36)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[86])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[86])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[86], false, 0.20)
@@ -54585,7 +54615,7 @@ call UnitDamageTarget(udg_Danwei[86], udg_Danwei[88], ( ( ( I2R(GetHeroInt(udg_D
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[88], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41303551)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[88])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[88])
 set udg_Danwei[85]=null
 set udg_Danwei[88]=null
 call UnitRemoveAbility(udg_Danwei[86], 0x41304B36)
@@ -54604,7 +54634,7 @@ set udg_Dian[88]=GetUnitLoc(udg_Danwei[88])
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[88], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41303551)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[88])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[88])
 set udg_Danwei[85]=null
 set udg_Danwei[88]=null
 call RemoveLocation(udg_Dian[88])
@@ -54646,7 +54676,7 @@ set udg_Dian[88]=GetUnitLoc(udg_Danwei[88])
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[88], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41303551)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[88])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[88])
 set udg_Danwei[85]=null
 set udg_Danwei[88]=null
 call RemoveLocation(udg_Dian[88])
@@ -54712,7 +54742,7 @@ set udg_Dian[88]=GetUnitLoc(udg_Danwei[88])
 set udg_Danwei[85]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[86]), 0x65303130, udg_Dian[88], 0)
 call UnitApplyTimedLife(udg_Danwei[85], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[85], 0x41303551)
-call IssueTargetOrder(udg_Danwei[85], "thunderbolt", udg_Danwei[88])
+call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[88])
 set udg_Danwei[85]=null
 set udg_Danwei[88]=null
 call RemoveLocation(udg_Dian[88])
@@ -54812,7 +54842,7 @@ set udg_Dian[89]=GetUnitLoc(udg_danwei[447])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[447]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B50)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei[447])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[447])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_jishiqi[139], false, 0.50)
@@ -54951,7 +54981,7 @@ function Trig_emeng_2Func012A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl", udg_danwei2[1], "origin"))
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call UnitDamageTarget(udg_Danwei[86], udg_danwei2[1], ( ( ( 100.00 + ( 1.00 * I2R(GetHeroInt(udg_Danwei[86], true)) ) ) / 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -55107,7 +55137,7 @@ call UnitAddAbility(udg_Danwei[90], 0x41304757)
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[89]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[90])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[90])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 else
@@ -55138,7 +55168,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[89])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[89]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[89])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[89])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -55204,7 +55234,7 @@ endif
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[91]), 0x65303130, udg_Dian[91], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303935)
-call IssueTargetOrder(udg_Danwei[92], "slow", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_danwei2[1])
 set udg_Danwei[92]=null
 else
 endif
@@ -55268,7 +55298,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[91])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[91]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[91])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[91])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -55447,7 +55477,7 @@ function Trig_tiaokan_2Func001Func001Func004Func009A takes nothing returns nothi
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[94])) == true ) ) then
 call UnitDamageTarget(udg_Danwei[94], udg_danwei2[1], ( ( ( ( 25.00 + ( 125.00 * I2R(GetUnitAbilityLevel(udg_Danwei[94], 0x41304B51)) ) ) + ( 2.00 * I2R(GetHeroStr(udg_Danwei[94], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei2[1], "chest"))
 else
 endif
@@ -55505,7 +55535,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[94])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[94]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B52)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[94])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[94])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -55732,7 +55762,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[96])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[96]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B50)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[96])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[96])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 endfunction
@@ -55869,7 +55899,7 @@ endloop
 call SetUnitX(udg_Danwei[135], GetLocationX(udg_Dian[132]))
 call SetUnitY(udg_Danwei[135], GetLocationY(udg_Dian[132]))
 call UnitAddAbility(udg_Danwei[135], 0x416C6F63)
-call IssueTargetOrderById(udg_Danwei[135], 851983, udg_Danwei[134])
+call s__baka_IssueTargetOrderById2(udg_Danwei[135] , 851983 , udg_Danwei[134])
 call GroupAddUnit(udg_attack, udg_Danwei[135])
 call ShowUnitHide(udg_Danwei[135])
 set udg_Danwei[135]=null
@@ -55889,7 +55919,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B58)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[132])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[132], false, 0.45)
@@ -55973,7 +56003,7 @@ call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41305149)
 call IssuePointOrderLoc(udg_Danwei[92], "silence", udg_Dian[89])
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[132])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
 set udg_Danwei[92]=null
 call SetUnitAnimationByIndex(udg_Danwei[132], 8)
 call StartTimerBJ(udg_Times[133], false, 0.60)
@@ -56397,7 +56427,7 @@ call DestroyGroup(udg_Danweizu[134])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B52)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[132])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[132], 1)
@@ -56509,7 +56539,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B58)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[132])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[136], true, 0.04)
@@ -56694,7 +56724,7 @@ endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func001Func003Func002Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_danwei2[1])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[132], udg_danwei2[1], ( ( ( 100.00 + ( 1.00 * I2R(GetHeroInt(udg_Danwei[132], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -56746,7 +56776,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303959)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[132])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[132], 7)
@@ -57021,7 +57051,7 @@ call GroupAddUnit(udg_Danweizu[163], udg_Danwei[162])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[162], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41303033)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[162])
 set udg_Danwei[92]=null
 else
 endif
@@ -57061,7 +57091,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B58)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[161])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[161])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[171], false, 0.01)
@@ -57169,7 +57199,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304F39)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[161])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[161])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[170], false, 1.60)
@@ -57232,7 +57262,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304F39)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[161])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[161])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[174], false, 1.60)
@@ -57307,7 +57337,7 @@ endfunction
 function Trig_yizhidan_shunyi_2Func001Func001Func006Func005Func003Func012A takes nothing returns nothing
 set udg_Danwei[162]=GetEnumUnit()
 if ( ( IsUnitType(udg_Danwei[162], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_Danwei[162], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_Danwei[162], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_Danwei[162], GetOwningPlayer(udg_Danwei[161])) == true ) ) then
-call IssueTargetOrder(udg_Danwei[92], "slow", udg_Danwei[162])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_Danwei[162])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", udg_Danwei[162], "chest"))
 call UnitDamageTarget(udg_Danwei[161], udg_Danwei[162], ( ( ( ( 25.00 + ( 25.00 * I2R(GetUnitAbilityLevel(udg_Danwei[161], 0x41304F4A)) ) ) + ( 1.00 * I2R(GetHeroAgi(udg_Danwei[161], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -57323,7 +57353,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B4F)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[161])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[161])
 set udg_Danwei[92]=null
 set udg_Danwei[165]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303835, udg_Dian[89], AngleBetweenPoints(udg_Dian[89], udg_Dian[165]))
 call SetUnitAnimation(udg_Danwei[165], "death")
@@ -57460,7 +57490,7 @@ set udg_Dian[89]=GetUnitLoc(udg_Danwei[161])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[89], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[92], 0x41304B57)
-call IssueTargetOrder(udg_Danwei[92], "thunderbolt", udg_Danwei[161])
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[161])
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[172], false, 1.80)
@@ -57704,7 +57734,7 @@ if ( ( IsUnitType(udg_Danwei[161], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu
 set udg_Danwei[166]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303130, udg_Dian[167], 0)
 call UnitApplyTimedLife(udg_Danwei[166], 0x42487765, 0.50)
 call UnitAddAbility(udg_Danwei[166], 0x41304F4C)
-call IssueTargetOrderById(udg_Danwei[166], 852274, udg_Danwei[161])
+call s__baka_IssueTargetOrderById2(udg_Danwei[166] , 852274 , udg_Danwei[161])
 set udg_Danwei[166]=null
 else
 endif
@@ -57817,7 +57847,7 @@ call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer())
 call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 2.00)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 else
@@ -57852,7 +57882,7 @@ call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer())
 call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 2.00)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 else
@@ -57881,7 +57911,7 @@ call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer())
 call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 2.00)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 else
@@ -57917,7 +57947,7 @@ call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer())
 call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 2.00)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 else
@@ -58035,7 +58065,7 @@ endif
 call GroupAddUnit(udg_mksdwz[3], ydl_unit)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41303551)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, ydl_unit)
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , ydl_unit)
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 else
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x42303356) == true ) ) then
@@ -58243,7 +58273,7 @@ set ydl_unit=FirstOfGroup(ydl_group)
 exitwhen ydl_unit == null
 call GroupRemoveUnit(ydl_group, ydl_unit)
 if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitInGroup(ydl_unit, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94)) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))) == true ) ) then
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, ydl_unit)
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , ydl_unit)
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x42303356) == true ) ) then
 call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), ydl_unit, ( ( ( ( 50.00 + ( 25.00 * I2R(GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x4130505A)) ) ) + ( 1.00 * I2R(GetHeroAgi(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)) ) ) * 1.20 ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 else
@@ -58321,7 +58351,7 @@ call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
@@ -58346,7 +58376,7 @@ call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer())
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41304B50)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\Polymorph\\PolyMorphDoneGround.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), "left weapon"))
@@ -58498,7 +58528,7 @@ endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) == 5 ) ) then
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x41304236)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x42487765, 0.50)
 else
 endif
@@ -58559,7 +58589,7 @@ endif
 call SaveLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87, AddLightningEx("SZ", true, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 100.00 ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 100.00 )))
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x41304B58)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x42487765, 0.50)
 set ydl_timer=CreateTimer()
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x80A9ADA7, 30)
@@ -58585,7 +58615,7 @@ else
 call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 1)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x4130504A)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xD78D4D25), 0x42487765, 0.50)
 set udg_mkszs[2]=2
 set ydl_timer=CreateTimer()
@@ -58848,7 +58878,7 @@ call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD
 endif
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41304449)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, ydl_unit)
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , ydl_unit)
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 else
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x42303356) == true ) ) then
@@ -58945,7 +58975,7 @@ set udg_mkszs[0]=0
 set udg_mkszs[1]=0
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), 0.00))
 call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305059)
-call IssueTargetOrderById(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 852095, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x42487765, 0.50)
 call DisableTrigger(gg_trg_litijidong_1_5)
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x6530384D, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), AngleBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC90F02FD))))
@@ -60250,24 +60280,24 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1238117706")
+call ExecuteFunc("jasshelper__initstructs1239677701")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary__Init")
 call ExecuteFunc("LuaLibrary__Init")
 call ExecuteFunc("Record__Init")
-call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
+call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
 call ExecuteFunc("eventLibrary__Init")
 call ExecuteFunc("mathLibrary__Init")
-call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary___Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
+call ExecuteFunc("objectLibrary__Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
 call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
@@ -60382,7 +60412,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1238117706 takes nothing returns nothing
+function jasshelper__initstructs1239677701 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
