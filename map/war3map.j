@@ -4156,7 +4156,7 @@ loop
 exitwhen i > s__maphack_heroCount
 if s__maphack_heroes[s__maphack_heroCount] == hero then
 return
-elseif GetUnitState(s__maphack_heroes[s__maphack_heroCount], UNIT_STATE_MAX_LIFE) == 0 then
+elseif GetUnitTypeId(s__maphack_heroes[s__maphack_heroCount]) == 0 then
 set cjlocgn_00000000=i
 loop
 exitwhen cjlocgn_00000000 == s__maphack_heroCount
@@ -4217,7 +4217,7 @@ endloop
 return GetUnitFlyHeight(u)
 endfunction
 function s__maphack_InitS takes nothing returns nothing
-if IsPlayerObserver(GetLocalPlayer()) then
+if IsPlayerObserver(s__sys_selfp) then
 call TimerStart(CreateTimer(), 0.01, true, null)
 else
 call TimerStart(CreateTimer(), 0.01, true, function s__maphack_TimerFunc)
@@ -4341,19 +4341,19 @@ call SetPlayerTeam(s__baka_spplayer[i], 0)
 set cjlocgn_00000000=0
 loop
 exitwhen cjlocgn_00000000 > 4
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], true)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 + 5], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 + 5], false)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 + 5], ALLIANCE_SHARED_VISION, false)
 set cjlocgn_00000000=cjlocgn_00000000 + 1
 endloop
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[10], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[10], true)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[10], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[11], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[11], false)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[11], ALLIANCE_SHARED_VISION, false)
-call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[10], s__baka_spplayer[x], true)
 call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[11], s__baka_spplayer[x], false)
 call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, false)
 set x=x + 1
 endloop
@@ -4364,19 +4364,19 @@ call SetPlayerTeam(s__baka_spplayer[i], 1)
 set cjlocgn_00000000=5
 loop
 exitwhen cjlocgn_00000000 > 9
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], true)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 - 5], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 - 5], false)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[cjlocgn_00000000 - 5], ALLIANCE_SHARED_VISION, false)
 set cjlocgn_00000000=cjlocgn_00000000 + 1
 endloop
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[11], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[11], true)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[11], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[10], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[x], s__baka_spplayer[10], false)
 call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[10], ALLIANCE_SHARED_VISION, false)
-call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_PASSIVE, true)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[11], s__baka_spplayer[x], true)
 call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, true)
-call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_PASSIVE, false)
+call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[10], s__baka_spplayer[x], false)
 call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, false)
 set x=x + 1
 endloop
@@ -60236,7 +60236,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1214392091")
+call ExecuteFunc("jasshelper__initstructs1216359685")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -60368,7 +60368,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1214392091 takes nothing returns nothing
+function jasshelper__initstructs1216359685 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
