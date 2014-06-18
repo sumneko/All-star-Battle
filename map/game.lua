@@ -19,3 +19,20 @@
         game.initHero(u)
     end
     
+    function hook.SetUnitRescueRange(u, r, f)
+        if r < 0 then
+            game[math.floor(0 - r)](u)
+        else
+            return f(u, r)
+        end
+    end
+    
+    --重力移动冷却
+    game[1] = function(u)
+        local ab = japi.EXGetUnitAbility(u, |A0II|)
+        local lv = jass.GetUnitAbilityLevel(u, |A0II|)
+        japi.EXSetAbilityDataReal(ab, lv, 105, 2)
+        japi.EXSetAbilityState(ab, 1, 2)
+        japi.EXSetAbilityDataReal(ab, lv, 105, 0)
+    end
+    
