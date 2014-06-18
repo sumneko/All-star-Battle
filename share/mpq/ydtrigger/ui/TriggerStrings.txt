@@ -5477,6 +5477,7 @@ S2I="转换字符串为整数"
 S2I="转换 ",~String," 为整数"
 S2IHint=
 
+//最萌小汐
 process.Create="创建过程"
 process.Create="新建 ",~单位," 的 ",~名字," 过程, 优先级为 ",~优先级," ,剔除低优先级过程 ",~布尔
 process.CreateHint="返回key。这东西解释起来比较麻烦，果然还是不解释了。"
