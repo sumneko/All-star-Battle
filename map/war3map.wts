@@ -44778,18 +44778,6 @@ STRING 7494
 Q
 }
 
-STRING 7495
-// 物品: sreg (尘土之影), Ubertip (提示工具 - 扩展)
-{
-|cffffcc00破影：|r显示1000区域内隐形的单位|n|n|cffaabbff持续时间：|r10秒|n|cffaabbff间隔时间：|r30秒|n|n|cff757575撒沙子是很缺德的- -
-}
-
-STRING 7496
-// 物品: sreg (尘土之影), Description (说明)
-{
-|cffffcc00破影：|r显示1000区域内隐形的单位|n|n|cffaabbff持续时间：|r10秒|n|cffaabbff间隔时间：|r30秒|n|n|cff757575撒沙子是很缺德的- -
-}
-
 STRING 7497
 // 技能: A0JA (|cff5099ff刺杀技巧|r), Ubertip (提示工具 - 普通 - 扩展)
 {
@@ -49654,6 +49642,18 @@ STRING 8322
 提高175点攻击力|n提高25点全属性|n提高25%攻击命中率|n|n|cffff0000重斩：|r|n15%几率2.5倍致命一击并击晕1秒(远程0.1秒)|n|n|cffffff00圣剑之光：|r|n攻击能使目标降低25%攻击速度和50%移动速度并每秒受到100点额外伤害，持续1秒|n|n|cff757575神器·誓约胜利之剑|n（传说中拥有了它就可以获得胜利和荣耀）
 }
 
+STRING 8323
+// 物品: sreg (尘土之影), Ubertip (提示工具 - 扩展)
+{
+|cffffcc00破影：|r获得450范围内敌方单位的视野并使他们无所遁形|n|n|cffaabbff持续时间：|r5秒|n|cffaabbff间隔时间：|r30秒|n|n|cff757575撒沙子是很缺德的- -
+}
+
+STRING 8324
+// 物品: sreg (尘土之影), Description (说明)
+{
+|cffffcc00破影：|r获得450范围内敌方单位的视野并使他们无所遁形|n|n|cffaabbff持续时间：|r5秒|n|cffaabbff间隔时间：|r30秒|n|n|cff757575撒沙子是很缺德的- -
+}
+
 STRING 8325
 // 魔法效果: B03V (), EditorSuffix (编辑器后缀)
 {
@@ -49724,6 +49724,18 @@ STRING 8335
 -买活固定3000金钱
 -复活延长系统被取消
 -双方基地的金钱将分成5份给予玩家
+}
+
+STRING 8336
+// 技能: A0QK (尘土之影), Name (名字)
+{
+尘土之影
+}
+
+STRING 8337
+// 技能: A0QK (尘土之影), EditorSuffix (编辑器后缀)
+{
+精灵之火
 }
 
 STRING 8343

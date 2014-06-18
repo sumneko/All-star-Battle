@@ -1788,6 +1788,7 @@ unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
 trigger gg_trg_renyishanghai_hero=null
 trigger gg_trg_StayHome=null
+trigger gg_trg_CTZY=null
 
 trigger l__library_init
 
@@ -59125,6 +59126,37 @@ call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi)
 call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi_2)
 call TriggerAddAction(gg_trg_StayHome, function Trig_StayHomeActions)
 endfunction
+function Trig_CTZYActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
+call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, CreateUnit(GetOwningPlayer(GetTriggerUnit()), 0x65303130, 0.00, 0, 0))
+call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 0x4130514B)
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()), 450.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(GetTriggerUnit())) == true ) ) then
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA) , 852149 , ydl_unit)
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function InitTrig_CTZY takes nothing returns nothing
+set gg_trg_CTZY=CreateTrigger()
+call s__Event_AnyUnitSkill(gg_trg_CTZY , 3 , 0x41497462)
+call TriggerAddAction(gg_trg_CTZY, function Trig_CTZYActions)
+endfunction
 function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_Lua___LuaLibrary()
 //Function not found: call InitTrig_base_lua()
@@ -60112,6 +60144,7 @@ call InitTrig_huixuanzhan()
 call InitTrig_undef()
 call InitTrig_renyishanghai_hero()
 call InitTrig_StayHome()
+call InitTrig_CTZY()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -60346,7 +60379,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1315685210")
+call ExecuteFunc("jasshelper__initstructs1319812497")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60478,7 +60511,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1315685210 takes nothing returns nothing
+function jasshelper__initstructs1319812497 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
