@@ -27,12 +27,21 @@
         end
     end
     
-    --重力移动冷却
+    --重力移动冷却2秒
     game[1] = function(u)
         local ab = japi.EXGetUnitAbility(u, |A0II|)
         local lv = jass.GetUnitAbilityLevel(u, |A0II|)
         japi.EXSetAbilityDataReal(ab, lv, 105, 2)
         japi.EXSetAbilityState(ab, 1, 2)
+        japi.EXSetAbilityDataReal(ab, lv, 105, 0)
+    end
+    
+    --重力移动冷却1秒
+    game[2] = function(u)
+        local ab = japi.EXGetUnitAbility(u, |A0II|)
+        local lv = jass.GetUnitAbilityLevel(u, |A0II|)
+        japi.EXSetAbilityDataReal(ab, lv, 105, 1)
+        japi.EXSetAbilityState(ab, 1, 1)
         japi.EXSetAbilityDataReal(ab, lv, 105, 0)
     end
     

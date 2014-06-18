@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase___yd_PlayerColor
-trigger array YDWEBase___AbilityCastingOverEventQueue
-integer array YDWEBase___AbilityCastingOverEventType
-integer YDWEBase___AbilityCastingOverEventNumber=0
+string array YDWEBase__yd_PlayerColor
+trigger array YDWEBase__AbilityCastingOverEventQueue
+integer array YDWEBase__AbilityCastingOverEventType
+integer YDWEBase__AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -47,20 +47,20 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRangeOfLocMatchingNull
 //globals from YDWEGetUnitsInRectMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEMakeUnitsPassiveForPlayerNull:
 constant boolean LIBRARY_YDWEMakeUnitsPassiveForPlayerNull=true
@@ -92,19 +92,19 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent___DamageEventQueue
-integer YDWETriggerEvent___DamageEventNumber=0
+trigger array YDWETriggerEvent__DamageEventQueue
+integer YDWETriggerEvent__DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent___MoveItemEventTrigger=null
-trigger array YDWETriggerEvent___MoveItemEventQueue
-integer YDWETriggerEvent___MoveItemEventNumber=0
+trigger YDWETriggerEvent__MoveItemEventTrigger=null
+trigger array YDWETriggerEvent__MoveItemEventQueue
+integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
-region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterEnterRectSimpleNull
 //globals from YDWETriggerRegisterLeaveRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterLeaveRectSimpleNull=true
+region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterLeaveRectSimpleNull
 //globals from YDWEUnitHasItemOfTypeBJNull:
 constant boolean LIBRARY_YDWEUnitHasItemOfTypeBJNull=true
@@ -705,6 +705,7 @@ trigger gg_trg__________bakaLibrary=null
 trigger gg_trg__________objectLibrary=null
 trigger gg_trg_______testLibrary=null
 trigger gg_trg_YDWEKLibrary=null
+trigger gg_trg__________processLibrary=null
 trigger gg_trg_suijiduiwu=null
 trigger gg_trg_chushihua=null
 trigger gg_trg_test_1=null
@@ -952,9 +953,11 @@ trigger gg_trg_shijiao2=null
 trigger gg_trg_shijiao_time=null
 trigger gg_trg_money_balabala=null
 trigger gg_trg_HeroSkillPoint=null
-trigger gg_trg_renyishanghai=null
+trigger gg_trg_StayHome=null
 trigger gg_trg_hp1_2=null
 trigger gg_trg_hp2_2=null
+trigger gg_trg_renyishanghai=null
+trigger gg_trg_renyishanghai_hero=null
 trigger gg_trg_gongxiangwupin=null
 trigger gg_trg_zhuangbei=null
 trigger gg_trg_zhuangbei_new=null
@@ -1036,6 +1039,7 @@ trigger gg_trg_jinghua_2=null
 trigger gg_trg_zinengliang_1=null
 trigger gg_trg_zinengliang_2=null
 trigger gg_trg_zinengliang_3=null
+trigger gg_trg_zinengliang_4=null
 trigger gg_trg_xianzuquanzhang_1=null
 trigger gg_trg_xuhuachongji=null
 trigger gg_trg_xuhuachongji_2=null
@@ -1056,6 +1060,7 @@ trigger gg_trg_smrII_3=null
 trigger gg_trg_smrII_4=null
 trigger gg_trg_smrII_4_5=null
 trigger gg_trg_smrII_5=null
+trigger gg_trg_CTZY=null
 trigger gg_trg_xiaoxinshi=null
 trigger gg_trg_gongxiang_1=null
 trigger gg_trg_gongxiang_2=null
@@ -1793,11 +1798,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_renyishanghai_hero=null
-trigger gg_trg_StayHome=null
-trigger gg_trg_CTZY=null
-trigger gg_trg_zinengliang_4=null
-trigger gg_trg__________processLibrary=null
 
 trigger l__library_init
 
@@ -2910,20 +2910,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
-if YDWEBase___AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
+if YDWEBase__AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
+if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
-set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
-set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
+set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
+set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
+set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2955,7 +2955,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2988,22 +2988,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase___yd_PlayerColor[3]="|cFF540081"
-set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase___yd_PlayerColor[8]="|cFF959697"
-set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase___yd_PlayerColor[10]="|cFF106246"
-set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase___yd_PlayerColor[12]="|cFF282828"
-set YDWEBase___yd_PlayerColor[13]="|cFF282828"
-set YDWEBase___yd_PlayerColor[14]="|cFF282828"
-set YDWEBase___yd_PlayerColor[15]="|cFF282828"
+set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase__yd_PlayerColor[3]="|cFF540081"
+set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase__yd_PlayerColor[8]="|cFF959697"
+set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase__yd_PlayerColor[10]="|cFF106246"
+set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase__yd_PlayerColor[12]="|cFF282828"
+set YDWEBase__yd_PlayerColor[13]="|cFF282828"
+set YDWEBase__yd_PlayerColor[14]="|cFF282828"
+set YDWEBase__yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3331,9 +3331,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent___DamageEventNumber
-if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent__DamageEventNumber
+if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3360,22 +3360,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___DamageEventNumber == 0 then
+if YDWETriggerEvent__DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
-set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
+set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
+set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
-if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
+if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3385,13 +3385,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___MoveItemEventNumber == 0 then
-set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent__MoveItemEventNumber == 0 then
+set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
-set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
+set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
+set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -4939,7 +4939,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary___Init takes nothing returns nothing
+function processLibrary__Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 50
@@ -22094,6 +22094,25 @@ call TriggerRegisterAnyUnitEventBJ(gg_trg_HeroSkillPoint, EVENT_PLAYER_HERO_LEVE
 call TriggerAddCondition(gg_trg_HeroSkillPoint, Condition(function Trig_HeroSkillPointConditions))
 call TriggerAddAction(gg_trg_HeroSkillPoint, function Trig_HeroSkillPointActions)
 endfunction
+function Trig_StayHomeActions takes nothing returns nothing
+if ( ( udg_GameStart == true ) ) then
+call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
+call DestroyTrigger(GetTriggeringTrigger())
+else
+if ( ( ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303039 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303038 ) ) ) then
+call IssueImmediateOrderById(GetTriggerUnit(), 851972)
+call s__Unit_Move(GetTriggerUnit() , GetUnitFacing(GetTriggerUnit()) , - 100.00)
+call DisplayTimedTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, 10.00, "TRIGSTR_8308")
+else
+endif
+endif
+endfunction
+function InitTrig_StayHome takes nothing returns nothing
+set gg_trg_StayHome=CreateTrigger()
+call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi)
+call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi_2)
+call TriggerAddAction(gg_trg_StayHome, function Trig_StayHomeActions)
+endfunction
 function Trig_renyishanghaiFunc003Func006Func006A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetEventDamageSource() ) and ( IsUnitAlly(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
 if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_HERO) == true ) ) then
@@ -22762,6 +22781,135 @@ function InitTrig_renyishanghai takes nothing returns nothing
 set gg_trg_renyishanghai=CreateTrigger()
 call YDWESyStemAnyUnitDamagedRegistTrigger(gg_trg_renyishanghai)
 call TriggerAddAction(gg_trg_renyishanghai, function Trig_renyishanghaiActions)
+endfunction
+function Trig_renyishanghai_heroConditions takes nothing returns boolean
+return ( ( GetEventDamage() > 0.00 ) )
+endfunction
+function Trig_renyishanghai_heroActions takes nothing returns nothing
+if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) and ( GetEventDamage() < 100000.00 ) ) then
+if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 5 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) >= 6 ) ) then
+set udg_zhugong[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 5 ) )]=15
+set udg_shuju[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 5 ) )]=( udg_shuju[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 5 ) )] + GetEventDamage() )
+else
+endif
+if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 6 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) <= 5 ) ) then
+set udg_zhugong[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 0 ) )]=15
+set udg_shuju[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 0 ) )]=( udg_shuju[( ( 5 * ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) - 0 ) )] + GetEventDamage() )
+else
+endif
+set udg_shuju[( 50 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) )]=( udg_shuju[( 50 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) )] + GetEventDamage() )
+set udg_shuju[( 60 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) )]=( udg_shuju[( 60 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) )] + GetEventDamage() )
+else
+endif
+if ( ( GetEventDamage() >= 1.00 ) and ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 )] , 0x49303232)) == true ) ) then
+set udg_danwei[331]=GetTriggerUnit()
+set udg_zhengshu2[( 352 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[331])) + 1 ) )]=10
+set udg_shishu2[( 352 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[331])) + 1 ) )]=( udg_shishu2[( 352 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[331])) + 1 ) )] + ( GetEventDamage() * 0.25 ) )
+set udg_danwei[331]=null
+else
+endif
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303332)) == true ) and ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4253544E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x42505345) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324F) == true ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_TAUREN) == true ) ) ) then
+set udg_Danwei[44]=GetTriggerUnit()
+if ( ( GetHeroStr(udg_Danwei[44], true) > GetHeroAgi(udg_Danwei[44], true) ) and ( GetHeroStr(udg_Danwei[44], true) > GetHeroInt(udg_Danwei[44], true) ) ) then
+call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.25 ) ))
+else
+if ( ( GetHeroAgi(udg_Danwei[44], true) > GetHeroStr(udg_Danwei[44], true) ) and ( GetHeroAgi(udg_Danwei[44], true) > GetHeroInt(udg_Danwei[44], true) ) ) then
+call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.20 ) ))
+else
+if ( ( GetHeroInt(udg_Danwei[44], true) > GetHeroStr(udg_Danwei[44], true) ) and ( GetHeroInt(udg_Danwei[44], true) > GetHeroAgi(udg_Danwei[44], true) ) ) then
+call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.15 ) ))
+else
+endif
+endif
+endif
+set udg_Danwei[44]=null
+else
+endif
+if ( ( ( GetUnitLifePercent(GetTriggerUnit()) <= 15.00 ) or ( GetEventDamage() >= GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) ) ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303158)) == true ) and ( GetEventDamage() >= 10 ) ) then
+set udg_danwei[331]=GetTriggerUnit()
+call UnitUseItem(udg_danwei[331], YDWEGetItemOfTypeFromUnitBJNull(udg_danwei[331] , 0x49303158))
+set udg_danwei[331]=null
+else
+endif
+if ( ( GetEventDamage() >= 1.00 ) and ( GetTriggerUnit() == udg_danwei2[100] ) ) then
+if ( ( udg_Shishu[10] > 0.00 ) ) then
+if ( ( udg_Shishu[11] == 0.00 ) ) then
+call StartTimerBJ(udg_Times[10], false, 0.00)
+call PauseTimer(udg_jishiqi[95])
+call StartTimerBJ(udg_jishiqi[95], false, ( 17.50 - ( 1.50 * I2R(GetUnitAbilityLevel(udg_danwei2[100], 0x41304E4F)) ) ))
+set udg_Shishu[13]=GetUnitState(udg_danwei2[100], UNIT_STATE_LIFE)
+call SetUnitLifePercentBJ(udg_danwei2[100], 100)
+else
+endif
+set udg_Shishu[11]=( udg_Shishu[11] + RMinBJ(udg_Shishu[10], GetEventDamage()) )
+set udg_Shishu[12]=RMinBJ(udg_Shishu[10], GetEventDamage())
+if ( ( udg_Shishu[10] <= GetEventDamage() ) ) then
+set udg_Shishu[13]=( udg_Shishu[13] - ( GetEventDamage() - udg_Shishu[10] ) )
+call UnitRemoveAbility(udg_danwei2[100], 0x41303338)
+set udg_aXUNHUAN[55]=1
+loop
+exitwhen udg_aXUNHUAN[55] > 5
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Transmute\\GoldBottleMissile.mdl", udg_danwei2[100], "chest"))
+set udg_aXUNHUAN[55]=udg_aXUNHUAN[55] + 1
+endloop
+else
+endif
+set udg_Shishu[10]=( udg_Shishu[10] - GetEventDamage() )
+set udg_danwei2[396]=null
+else
+call PauseTimer(udg_jishiqi[95])
+call StartTimerBJ(udg_jishiqi[95], false, ( 17.50 - ( 1.50 * I2R(GetUnitAbilityLevel(udg_danwei2[100], 0x41304E4F)) ) ))
+endif
+else
+endif
+if ( ( GetEventDamage() > 1.00 ) and ( udg_Zhengshu[177] != 1 ) and ( GetTriggerUnit() == udg_danwei2[67] ) and ( ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) ) or ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303035 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303033 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303034 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303031 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303039 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303041 ) or ( udg_Points >= 0 ) ) ) then
+set udg_zhengshu2[68]=20
+set udg_Zhengshu[177]=- 1
+call PauseTimer(udg_Times[177])
+call StartTimerBJ(udg_Times[177], false, 1.00)
+else
+endif
+if ( ( GetTriggerUnit() == udg_PK[3] ) and ( udg_Shishu[68] == 0.00 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) != ( s__baka_SGetPlayerId(GetOwningPlayer(udg_PK[1])) + 1 ) ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) != ( s__baka_SGetPlayerId(GetOwningPlayer(udg_PK[2])) + 1 ) ) ) then
+set udg_Shishu[68]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
+call SetUnitLifePercentBJ(udg_PK[1], 100)
+call StartTimerBJ(udg_Times[68], false, 0.00)
+else
+endif
+if ( ( GetTriggerUnit() == udg_PK[4] ) and ( udg_Shishu[69] == 0.00 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) != ( s__baka_SGetPlayerId(GetOwningPlayer(udg_PK[1])) + 1 ) ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) != ( s__baka_SGetPlayerId(GetOwningPlayer(udg_PK[2])) + 1 ) ) ) then
+set udg_Shishu[69]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
+call SetUnitLifePercentBJ(udg_PK[2], 100)
+call StartTimerBJ(udg_Times[69], false, 0.00)
+else
+endif
+if ( ( GetTriggerUnit() == udg_Danwei[73] ) and ( udg_Shishu[73] > 0.00 ) and ( udg_Shishu[74] == 0.00 ) ) then
+set udg_Danwei[74]=GetTriggerUnit()
+set udg_Shishu[74]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
+call SetUnitLifePercentBJ(udg_Danwei[74], 100)
+call StartTimerBJ(udg_Times[74], false, 0.00)
+else
+endif
+if ( ( GetTriggerUnit() == udg_danwei[100] ) ) then
+call UnitDamageTarget(udg_danwei[100], udg_danwei[101], ( GetEventDamage() * 0.25 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+endif
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303256) == true ) ) then
+call SetUnitLifeBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) + ( GetEventDamage() * 0.30 ) ))
+set udg_Shishu[99]=( udg_Shishu[99] + ( GetEventDamage() * 0.10 ) )
+else
+endif
+if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303256) == true ) ) then
+set udg_Shishu[99]=( udg_Shishu[99] + ( GetEventDamage() * 0.10 ) )
+else
+endif
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303356) == true ) ) then
+call SetUnitLifeBJ(GetTriggerUnit(), RMaxBJ(( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) - ( GetEventDamage() * 0.20 ) ), 1.00))
+else
+endif
+endfunction
+function InitTrig_renyishanghai_hero takes nothing returns nothing
+set gg_trg_renyishanghai_hero=CreateTrigger()
+call TriggerAddCondition(gg_trg_renyishanghai_hero, Condition(function Trig_renyishanghai_heroConditions))
+call TriggerAddAction(gg_trg_renyishanghai_hero, function Trig_renyishanghai_heroActions)
 endfunction
 function Trig_gongxiangwupinActions takes nothing returns nothing
 set udg_dian2[0]=GetItemLoc(GetManipulatedItem())
@@ -29567,6 +29715,57 @@ call TriggerRegisterTimerEventPeriodic(gg_trg_zinengliang_3, 0.20)
 call TriggerAddCondition(gg_trg_zinengliang_3, Condition(function Trig_zinengliang_3Conditions))
 call TriggerAddAction(gg_trg_zinengliang_3, function Trig_zinengliang_3Actions)
 endfunction
+function Trig_zinengliang_4Conditions takes nothing returns boolean
+return ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303134 ) and ( HaveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC) == false ) )
+endfunction
+function Trig_zinengliang_4Func002T takes nothing returns nothing
+local integer ydul_i
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111, false)
+set ydul_i=1
+loop
+exitwhen ydul_i > 10
+if ( ( YDWEUnitHasItemOfTypeBJNull(udg_player[ydul_i] , 0x49303134) == true ) ) then
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111, true)
+if ( ( ( TimerGetElapsed(s__sys_timeTimer) - LoadReal(YDHT, GetHandleId(udg_player[ydul_i]), 0x2A607BA5) ) > 60.00 ) ) then
+call UnitAddAbility(udg_player[ydul_i], 0x4130514D)
+call SetPlayerAbilityAvailable(s__baka_SPlayer(ydul_i - 1), 0x4130514D, false)
+else
+call UnitRemoveAbility(udg_player[ydul_i], 0x4130514D)
+endif
+else
+call UnitRemoveAbility(udg_player[ydul_i], 0x4130514D)
+endif
+if ( ( UnitHasBuffBJ(udg_player[ydul_i], 0x42303357) == true ) ) then
+call UnitAddAbility(udg_player[ydul_i], 0x4130514E)
+call SetPlayerAbilityAvailable(s__baka_SPlayer(ydul_i - 1), 0x4130514E, false)
+else
+call UnitRemoveAbility(udg_player[ydul_i], 0x4130514E)
+endif
+set ydul_i=ydul_i + 1
+endloop
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111) == false ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+call RemoveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
+else
+endif
+endfunction
+function Trig_zinengliang_4Actions takes nothing returns nothing
+local timer ydl_timer
+call SaveTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC, CreateTimer())
+set ydl_timer=LoadTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0xA3319111, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7), 0xA3319111))
+call TimerStart(ydl_timer, 0.50, true, function Trig_zinengliang_4Func002T)
+set ydl_timer=null
+endfunction
+function InitTrig_zinengliang_4 takes nothing returns nothing
+set gg_trg_zinengliang_4=CreateTrigger()
+call TriggerRegisterAnyUnitEventBJ(gg_trg_zinengliang_4, EVENT_PLAYER_UNIT_PICKUP_ITEM)
+call TriggerAddCondition(gg_trg_zinengliang_4, Condition(function Trig_zinengliang_4Conditions))
+call TriggerAddAction(gg_trg_zinengliang_4, function Trig_zinengliang_4Actions)
+endfunction
 function Trig_xianzuquanzhang_1Conditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41303737 ) )
 endfunction
@@ -30344,6 +30543,37 @@ set gg_trg_smrII_5=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_smrII_5, udg_Times[4])
 call TriggerAddCondition(gg_trg_smrII_5, Condition(function Trig_smrII_5Conditions))
 call TriggerAddAction(gg_trg_smrII_5, function Trig_smrII_5Actions)
+endfunction
+function Trig_CTZYActions takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
+call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, CreateUnit(GetOwningPlayer(GetTriggerUnit()), 0x65303130, 0.00, 0, 0))
+call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 0x4130514B)
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()), 450.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(GetTriggerUnit())) == true ) ) then
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA) , 852149 , ydl_unit)
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function InitTrig_CTZY takes nothing returns nothing
+set gg_trg_CTZY=CreateTrigger()
+call s__Event_AnyUnitSkill(gg_trg_CTZY , 3 , 0x41497462)
+call TriggerAddAction(gg_trg_CTZY, function Trig_CTZYActions)
 endfunction
 function Trig_xiaoxinshiConditions takes nothing returns boolean
 return ( ( GetItemTypeId(GetSoldItem()) == 0x49303033 ) )
@@ -47079,7 +47309,15 @@ endfunction
 function Trig_zhonglifeixing_starConditions takes nothing returns boolean
 return ( ( ( GetSpellAbilityId() == 0x41304949 ) or ( GetSpellAbilityId() == 0x4130494A ) ) )
 endfunction
+function Trig_zhonglifeixing_starFunc004Func003Func001T takes nothing returns nothing
+call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endfunction
 function Trig_zhonglifeixing_starActions takes nothing returns nothing
+local timer ydl_timer
 set udg_danwei2[67]=GetTriggerUnit()
 if ( ( GetTriggerExecCount(GetTriggeringTrigger()) == 1 ) ) then
 call TriggerRegisterUnitEvent(gg_trg_zhonglifeixing_1, udg_danwei2[67], EVENT_UNIT_ISSUED_TARGET_ORDER)
@@ -47089,8 +47327,14 @@ call UnitAddAbility(udg_danwei2[67], 0x4130494A)
 else
 endif
 if ( ( IsTriggerEnabled(gg_trg_zhonglifeixing_move) == true ) ) then
-call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x4130494A, false)
+if ( ( s__sys_isIn11() == true ) ) then
+call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
+call SetUnitRescueRange(udg_danwei2[67], - 2)
+else
+set ydl_timer=CreateTimer()
+call TimerStart(ydl_timer, 1.00, false, function Trig_zhonglifeixing_starFunc004Func003Func001T)
+endif
 call DisableTrigger(gg_trg_zhonglifeixing_1)
 call DisableTrigger(gg_trg_zhonglifeixing_move)
 call UnitRemoveAbility(udg_danwei2[67], 0x41305041)
@@ -47113,6 +47357,7 @@ call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[67]), 0, 0, 10.00, "TR
 set udg_danwei2[67]=null
 endif
 endif
+set ydl_timer=null
 endfunction
 function InitTrig_zhonglifeixing_star takes nothing returns nothing
 set gg_trg_zhonglifeixing_star=CreateTrigger()
@@ -47211,7 +47456,7 @@ call DisableTrigger(gg_trg_zhonglifeixing_3)
 call TriggerRegisterTimerEventPeriodic(gg_trg_zhonglifeixing_3, 0.10)
 call TriggerAddAction(gg_trg_zhonglifeixing_3, function Trig_zhonglifeixing_3Actions)
 endfunction
-function Trig_zhonglifeixing_moveFunc001Func001Func011Func001T takes nothing returns nothing
+function Trig_zhonglifeixing_moveFunc001Func001Func004Func001T takes nothing returns nothing
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -47221,6 +47466,13 @@ endfunction
 function Trig_zhonglifeixing_moveFunc001Func001Func014Func002Func019A takes nothing returns nothing
 call SetUnitX(GetEnumUnit(), GetLocationX(udg_dian2[0]))
 call SetUnitY(GetEnumUnit(), GetLocationY(udg_dian2[0]))
+endfunction
+function Trig_zhonglifeixing_moveFunc001Func005Func001T takes nothing returns nothing
+call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_zhonglifeixing_moveActions takes nothing returns nothing
 local timer ydl_timer
@@ -47272,6 +47524,13 @@ else
 set udg_zhengshu2[68]=0
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[67]), 0, 0, 10.00, "TRIGSTR_8303")
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x4130494A, false)
+if ( ( s__sys_isIn11() == true ) ) then
+call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
+call SetUnitRescueRange(udg_danwei2[67], - 1)
+else
+set ydl_timer=CreateTimer()
+call TimerStart(ydl_timer, 2.00, false, function Trig_zhonglifeixing_moveFunc001Func001Func004Func001T)
+endif
 call UnitRemoveAbility(udg_danwei2[67], 0x41305041)
 call UnitRemoveBuffBJ(0x42303353, udg_danwei2[67])
 call SetUnitTurnSpeed(udg_danwei2[67], GetUnitDefaultTurnSpeed(udg_danwei2[67]))
@@ -47279,19 +47538,18 @@ call ResetUnitAnimation(udg_danwei2[67])
 call DisableTrigger(gg_trg_zhonglifeixing_1)
 call DisableTrigger(gg_trg_zhonglifeixing_move)
 call PauseTimer(udg_times[67])
-if ( ( s__sys_isIn11() == true ) ) then
-call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
-call SetUnitRescueRange(udg_danwei2[67], - 1)
-else
-set ydl_timer=CreateTimer()
-call TimerStart(ydl_timer, 2.00, false, function Trig_zhonglifeixing_moveFunc001Func001Func011Func001T)
-endif
 endif
 else
 set udg_zhengshu2[68]=0
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[67]), 0, 0, 10.00, "TRIGSTR_8304")
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x4130494A, false)
+if ( ( s__sys_isIn11() == true ) ) then
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[67]), 0x41304949, true)
+call SetUnitRescueRange(udg_danwei2[67], - 2)
+else
+set ydl_timer=CreateTimer()
+call TimerStart(ydl_timer, 1.00, false, function Trig_zhonglifeixing_moveFunc001Func005Func001T)
+endif
 call UnitRemoveAbility(udg_danwei2[67], 0x41305041)
 call UnitRemoveBuffBJ(0x42303353, udg_danwei2[67])
 call SetUnitTurnSpeed(udg_danwei2[67], GetUnitDefaultTurnSpeed(udg_danwei2[67]))
@@ -59173,236 +59431,6 @@ function InitTrig_undef takes nothing returns nothing
 set gg_trg_undef=CreateTrigger()
 call TriggerAddAction(gg_trg_undef, function Trig_undefActions)
 endfunction
-function Trig_renyishanghai_heroConditions takes nothing returns boolean
-return ( ( GetEventDamage() > 0.00 ) )
-endfunction
-function Trig_renyishanghai_heroActions takes nothing returns nothing
-if ( ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) >= 1 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) <= 10 ) and ( GetEventDamage() < 100000.00 ) ) then
-if ( ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) <= 5 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) >= 6 ) ) then
-set udg_zhugong[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 5 ) )]=15
-set udg_shuju[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 5 ) )]=( udg_shuju[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 5 ) )] + GetEventDamage() )
-else
-endif
-if ( ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) >= 6 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) <= 5 ) ) then
-set udg_zhugong[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 0 ) )]=15
-set udg_shuju[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 0 ) )]=( udg_shuju[( ( 5 * ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) - 1 ) ) + ( GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) - 0 ) )] + GetEventDamage() )
-else
-endif
-set udg_shuju[( 50 + GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) )]=( udg_shuju[( 50 + GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) )] + GetEventDamage() )
-set udg_shuju[( 60 + GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) )]=( udg_shuju[( 60 + GetConvertedPlayerId(GetOwningPlayer(GetTriggerUnit())) )] + GetEventDamage() )
-else
-endif
-if ( ( GetEventDamage() >= 1.00 ) and ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_player[GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource()))] , 0x49303232)) == true ) ) then
-set udg_danwei[331]=GetTriggerUnit()
-set udg_zhengshu2[( 352 + GetConvertedPlayerId(GetOwningPlayer(udg_danwei[331])) )]=10
-set udg_shishu2[( 352 + GetConvertedPlayerId(GetOwningPlayer(udg_danwei[331])) )]=( udg_shishu2[( 352 + GetConvertedPlayerId(GetOwningPlayer(udg_danwei[331])) )] + ( GetEventDamage() * 0.25 ) )
-set udg_danwei[331]=null
-else
-endif
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303332)) == true ) and ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4253544E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x42505345) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324F) == true ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_TAUREN) == true ) ) ) then
-set udg_Danwei[44]=GetTriggerUnit()
-if ( ( GetHeroStr(udg_Danwei[44], true) > GetHeroAgi(udg_Danwei[44], true) ) and ( GetHeroStr(udg_Danwei[44], true) > GetHeroInt(udg_Danwei[44], true) ) ) then
-call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.25 ) ))
-else
-if ( ( GetHeroAgi(udg_Danwei[44], true) > GetHeroStr(udg_Danwei[44], true) ) and ( GetHeroAgi(udg_Danwei[44], true) > GetHeroInt(udg_Danwei[44], true) ) ) then
-call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.20 ) ))
-else
-if ( ( GetHeroInt(udg_Danwei[44], true) > GetHeroStr(udg_Danwei[44], true) ) and ( GetHeroInt(udg_Danwei[44], true) > GetHeroAgi(udg_Danwei[44], true) ) ) then
-call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.15 ) ))
-else
-endif
-endif
-endif
-set udg_Danwei[44]=null
-else
-endif
-if ( ( ( GetUnitLifePercent(GetTriggerUnit()) <= 15.00 ) or ( GetEventDamage() >= GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) ) ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303158)) == true ) and ( GetEventDamage() >= 10 ) ) then
-set udg_danwei[331]=GetTriggerUnit()
-call UnitUseItem(udg_danwei[331], YDWEGetItemOfTypeFromUnitBJNull(udg_danwei[331] , 0x49303158))
-set udg_danwei[331]=null
-else
-endif
-if ( ( GetEventDamage() >= 1.00 ) and ( GetTriggerUnit() == udg_danwei2[100] ) ) then
-if ( ( udg_Shishu[10] > 0.00 ) ) then
-if ( ( udg_Shishu[11] == 0.00 ) ) then
-call StartTimerBJ(udg_Times[10], false, 0.00)
-call PauseTimer(udg_jishiqi[95])
-call StartTimerBJ(udg_jishiqi[95], false, ( 17.50 - ( 1.50 * I2R(GetUnitAbilityLevel(udg_danwei2[100], 0x41304E4F)) ) ))
-set udg_Shishu[13]=GetUnitState(udg_danwei2[100], UNIT_STATE_LIFE)
-call SetUnitLifePercentBJ(udg_danwei2[100], 100)
-else
-endif
-set udg_Shishu[11]=( udg_Shishu[11] + RMinBJ(udg_Shishu[10], GetEventDamage()) )
-set udg_Shishu[12]=RMinBJ(udg_Shishu[10], GetEventDamage())
-if ( ( udg_Shishu[10] <= GetEventDamage() ) ) then
-set udg_Shishu[13]=( udg_Shishu[13] - ( GetEventDamage() - udg_Shishu[10] ) )
-call UnitRemoveAbility(udg_danwei2[100], 0x41303338)
-set udg_aXUNHUAN[55]=1
-loop
-exitwhen udg_aXUNHUAN[55] > 5
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Transmute\\GoldBottleMissile.mdl", udg_danwei2[100], "chest"))
-set udg_aXUNHUAN[55]=udg_aXUNHUAN[55] + 1
-endloop
-else
-endif
-set udg_Shishu[10]=( udg_Shishu[10] - GetEventDamage() )
-set udg_danwei2[396]=null
-else
-call PauseTimer(udg_jishiqi[95])
-call StartTimerBJ(udg_jishiqi[95], false, ( 17.50 - ( 1.50 * I2R(GetUnitAbilityLevel(udg_danwei2[100], 0x41304E4F)) ) ))
-endif
-else
-endif
-if ( ( GetEventDamage() > 1.00 ) and ( udg_Zhengshu[177] != 1 ) and ( GetTriggerUnit() == udg_danwei2[67] ) and ( ( ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) >= 1 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) <= 10 ) ) or ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303035 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303033 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303034 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303031 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303039 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303041 ) or ( udg_Points >= 0 ) ) ) then
-set udg_zhengshu2[68]=20
-set udg_Zhengshu[177]=- 1
-call PauseTimer(udg_Times[177])
-call StartTimerBJ(udg_Times[177], false, 1.00)
-else
-endif
-if ( ( GetTriggerUnit() == udg_PK[3] ) and ( udg_Shishu[68] == 0.00 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) != GetConvertedPlayerId(GetOwningPlayer(udg_PK[1])) ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) != GetConvertedPlayerId(GetOwningPlayer(udg_PK[2])) ) ) then
-set udg_Shishu[68]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
-call SetUnitLifePercentBJ(udg_PK[1], 100)
-call StartTimerBJ(udg_Times[68], false, 0.00)
-else
-endif
-if ( ( GetTriggerUnit() == udg_PK[4] ) and ( udg_Shishu[69] == 0.00 ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) != GetConvertedPlayerId(GetOwningPlayer(udg_PK[1])) ) and ( GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) != GetConvertedPlayerId(GetOwningPlayer(udg_PK[2])) ) ) then
-set udg_Shishu[69]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
-call SetUnitLifePercentBJ(udg_PK[2], 100)
-call StartTimerBJ(udg_Times[69], false, 0.00)
-else
-endif
-if ( ( GetTriggerUnit() == udg_Danwei[73] ) and ( udg_Shishu[73] > 0.00 ) and ( udg_Shishu[74] == 0.00 ) ) then
-set udg_Danwei[74]=GetTriggerUnit()
-set udg_Shishu[74]=GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE)
-call SetUnitLifePercentBJ(udg_Danwei[74], 100)
-call StartTimerBJ(udg_Times[74], false, 0.00)
-else
-endif
-if ( ( GetTriggerUnit() == udg_danwei[100] ) ) then
-call UnitDamageTarget(udg_danwei[100], udg_danwei[101], ( GetEventDamage() * 0.25 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-endif
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303256) == true ) ) then
-call SetUnitLifeBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) + ( GetEventDamage() * 0.30 ) ))
-set udg_Shishu[99]=( udg_Shishu[99] + ( GetEventDamage() * 0.10 ) )
-else
-endif
-if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303256) == true ) ) then
-set udg_Shishu[99]=( udg_Shishu[99] + ( GetEventDamage() * 0.10 ) )
-else
-endif
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303356) == true ) ) then
-call SetUnitLifeBJ(GetTriggerUnit(), RMaxBJ(( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) - ( GetEventDamage() * 0.20 ) ), 1.00))
-else
-endif
-endfunction
-function InitTrig_renyishanghai_hero takes nothing returns nothing
-set gg_trg_renyishanghai_hero=CreateTrigger()
-call TriggerAddCondition(gg_trg_renyishanghai_hero, Condition(function Trig_renyishanghai_heroConditions))
-call TriggerAddAction(gg_trg_renyishanghai_hero, function Trig_renyishanghai_heroActions)
-endfunction
-function Trig_StayHomeActions takes nothing returns nothing
-if ( ( udg_GameStart == true ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
-call DestroyTrigger(GetTriggeringTrigger())
-else
-if ( ( ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303039 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303038 ) ) ) then
-call IssueImmediateOrderById(GetTriggerUnit(), 851972)
-call s__Unit_Move(GetTriggerUnit() , GetUnitFacing(GetTriggerUnit()) , - 100.00)
-call DisplayTimedTextToPlayer(GetOwningPlayer(GetTriggerUnit()), 0, 0, 10.00, "TRIGSTR_8308")
-else
-endif
-endif
-endfunction
-function InitTrig_StayHome takes nothing returns nothing
-set gg_trg_StayHome=CreateTrigger()
-call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi)
-call YDWETriggerRegisterLeaveRectSimpleNull(gg_trg_StayHome , gg_rct_jidi_2)
-call TriggerAddAction(gg_trg_StayHome, function Trig_StayHomeActions)
-endfunction
-function Trig_CTZYActions takes nothing returns nothing
-local group ydl_group
-local unit ydl_unit
-local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
-set ydl_localvar_step=ydl_localvar_step + 3
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
-call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, CreateUnit(GetOwningPlayer(GetTriggerUnit()), 0x65303130, 0.00, 0, 0))
-call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 0x4130514B)
-set ydl_group=CreateGroup()
-call GroupEnumUnitsInRange(ydl_group, GetUnitX(GetTriggerUnit()), GetUnitY(GetTriggerUnit()), 450.00, null)
-loop
-set ydl_unit=FirstOfGroup(ydl_group)
-exitwhen ydl_unit == null
-call GroupRemoveUnit(ydl_group, ydl_unit)
-if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(GetTriggerUnit())) == true ) ) then
-call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA) , 852149 , ydl_unit)
-else
-endif
-endloop
-call DestroyGroup(ydl_group)
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
-call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
-set ydl_group=null
-set ydl_unit=null
-endfunction
-function InitTrig_CTZY takes nothing returns nothing
-set gg_trg_CTZY=CreateTrigger()
-call s__Event_AnyUnitSkill(gg_trg_CTZY , 3 , 0x41497462)
-call TriggerAddAction(gg_trg_CTZY, function Trig_CTZYActions)
-endfunction
-function Trig_zinengliang_4Conditions takes nothing returns boolean
-return ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303134 ) and ( HaveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC) == false ) )
-endfunction
-function Trig_zinengliang_4Func002T takes nothing returns nothing
-local integer ydul_i
-call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111, false)
-set ydul_i=1
-loop
-exitwhen ydul_i > 10
-if ( ( YDWEUnitHasItemOfTypeBJNull(udg_player[ydul_i] , 0x49303134) == true ) ) then
-call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111, true)
-if ( ( ( TimerGetElapsed(s__sys_timeTimer) - LoadReal(YDHT, GetHandleId(udg_player[ydul_i]), 0x2A607BA5) ) > 60.00 ) ) then
-call UnitAddAbility(udg_player[ydul_i], 0x4130514D)
-call SetPlayerAbilityAvailable(ConvertedPlayer(ydul_i), 0x4130514D, false)
-else
-call UnitRemoveAbility(udg_player[ydul_i], 0x4130514D)
-endif
-else
-call UnitRemoveAbility(udg_player[ydul_i], 0x4130514D)
-endif
-if ( ( UnitHasBuffBJ(udg_player[ydul_i], 0x42303357) == true ) ) then
-call UnitAddAbility(udg_player[ydul_i], 0x4130514E)
-call SetPlayerAbilityAvailable(ConvertedPlayer(ydul_i), 0x4130514E, false)
-else
-call UnitRemoveAbility(udg_player[ydul_i], 0x4130514E)
-endif
-set ydul_i=ydul_i + 1
-endloop
-if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111) == false ) ) then
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-call RemoveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
-else
-endif
-endfunction
-function Trig_zinengliang_4Actions takes nothing returns nothing
-local timer ydl_timer
-call SaveTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC, CreateTimer())
-set ydl_timer=LoadTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
-call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0xA3319111, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7), 0xA3319111))
-call TimerStart(ydl_timer, 0.50, true, function Trig_zinengliang_4Func002T)
-set ydl_timer=null
-endfunction
-function InitTrig_zinengliang_4 takes nothing returns nothing
-set gg_trg_zinengliang_4=CreateTrigger()
-call TriggerRegisterAnyUnitEventBJ(gg_trg_zinengliang_4, EVENT_PLAYER_UNIT_PICKUP_ITEM)
-call TriggerAddCondition(gg_trg_zinengliang_4, Condition(function Trig_zinengliang_4Conditions))
-call TriggerAddAction(gg_trg_zinengliang_4, function Trig_zinengliang_4Actions)
-endfunction
 function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_Lua___LuaLibrary()
 //Function not found: call InitTrig_base_lua()
@@ -59425,6 +59453,7 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig__________objectLibrary()
 //Function not found: call InitTrig_______testLibrary()
 //Function not found: call InitTrig_YDWEKLibrary()
+//Function not found: call InitTrig__________processLibrary()
 call InitTrig_suijiduiwu()
 call InitTrig_chushihua()
 call InitTrig_time_0()
@@ -59658,7 +59687,9 @@ call InitTrig_shijiao2()
 call InitTrig_shijiao_time()
 call InitTrig_money_balabala()
 call InitTrig_HeroSkillPoint()
+call InitTrig_StayHome()
 call InitTrig_renyishanghai()
+call InitTrig_renyishanghai_hero()
 call InitTrig_gongxiangwupin()
 call InitTrig_zhuangbei_new()
 call InitTrig_fuwen()
@@ -59735,6 +59766,7 @@ call InitTrig_jinghua_2()
 call InitTrig_zinengliang_1()
 call InitTrig_zinengliang_2()
 call InitTrig_zinengliang_3()
+call InitTrig_zinengliang_4()
 call InitTrig_xianzuquanzhang_1()
 call InitTrig_xuhuachongji()
 call InitTrig_xuhuachongji_2()
@@ -59755,6 +59787,7 @@ call InitTrig_smrII_3()
 call InitTrig_smrII_4()
 call InitTrig_smrII_4_5()
 call InitTrig_smrII_5()
+call InitTrig_CTZY()
 call InitTrig_xiaoxinshi()
 call InitTrig_gongxiang_1()
 call InitTrig_gongxiang_2()
@@ -60388,11 +60421,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-call InitTrig_renyishanghai_hero()
-call InitTrig_StayHome()
-call InitTrig_CTZY()
-call InitTrig_zinengliang_4()
-//Function not found: call InitTrig__________processLibrary()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -60627,7 +60655,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1338796477")
+call ExecuteFunc("jasshelper__initstructs1340959462")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -60640,7 +60668,7 @@ call ExecuteFunc("effectLibrary__Init")
 call ExecuteFunc("eventLibrary__Init")
 call ExecuteFunc("mathLibrary__Init")
 call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary___Init")
+call ExecuteFunc("processLibrary__Init")
 call ExecuteFunc("soundLibrary__Init")
 call ExecuteFunc("stringLibrary__Init")
 call ExecuteFunc("testLibrary__Init")
@@ -60760,7 +60788,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1338796477 takes nothing returns nothing
+function jasshelper__initstructs1340959462 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
