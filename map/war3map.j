@@ -92,12 +92,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -182,10 +182,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -1859,27 +1859,43 @@ hashtable s__object_HT=InitHashtable()
 integer s__object_COST=1
 integer s__object_COOL=2
 integer s__object_COMMAND=0
-constant integer si__Sound=8
+constant integer si__process=8
+integer si__process_F=0
+integer si__process_I=0
+integer array si__process_V
+integer array s__process_keys
+unit array s__process_us
+string array s__process_name
+integer array s__process_uper
+boolean array s__process_cover
+boolean array s__process_enable
+integer array s__process_lastkey
+integer array s__process_nextkey
+integer array s__process_hashindex
+integer s__process_h_count=StringHash("过程数量")
+integer array s__process_h_index
+integer s__process_h_max=StringHash("过程最大值")
+constant integer si__Sound=9
 integer si__Sound_F=0
 integer si__Sound_I=0
 integer array si__Sound_V
 hashtable s__Sound_HT=InitHashtable()
-constant integer si__String=9
+constant integer si__String=10
 integer si__String_F=0
 integer si__String_I=0
 integer array si__String_V
 string s__String_char2AllString="abcdefghijklmnopqrstuvwxyz"
 string array s__String_Str
 integer s__String_StrCount
-constant integer si__test=10
+constant integer si__test=11
 integer si__test_F=0
 integer si__test_I=0
 integer array si__test_V
-constant integer si__text=11
+constant integer si__text=12
 integer si__text_F=0
 integer si__text_I=0
 integer array si__text_V
-constant integer si__Unit=12
+constant integer si__Unit=13
 integer si__Unit_F=0
 integer si__Unit_I=0
 integer array si__Unit_V
@@ -2092,6 +2108,34 @@ function s__Sound_deallocate takes integer this returns nothing
     endif
     set si__Sound_V[this]=si__Sound_F
     set si__Sound_F=this
+endfunction
+
+//Generated allocator of process
+function s__process__allocate takes nothing returns integer
+ local integer this=si__process_F
+    if (this!=0) then
+        set si__process_F=si__process_V[this]
+    else
+        set si__process_I=si__process_I+1
+        set this=si__process_I
+    endif
+    if (this>8190) then
+        return 0
+    endif
+
+    set si__process_V[this]=-1
+ return this
+endfunction
+
+//Generated destructor of process
+function s__process_deallocate takes integer this returns nothing
+    if this==null then
+        return
+    elseif (si__process_V[this]!=-1) then
+        return
+    endif
+    set si__process_V[this]=si__process_F
+    set si__process_F=this
 endfunction
 
 //Generated allocator of object
@@ -2316,13 +2360,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3287,9 +3331,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3316,22 +3360,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3341,13 +3385,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -4133,42 +4177,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
+if YDWELibrary__Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4599,7 +4643,7 @@ call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4793,12 +4837,111 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
 //library processLibrary:
+function s__process_Cover takes unit u,integer uper,string name returns integer
+local integer h=GetHandleId(u)
+local integer count=0
+local integer max=LoadInteger(YDHT, h, s__process_h_max)
+local integer new_max=0
+local integer i=1
+local integer cjlocgn_00000000
+loop
+exitwhen i > max
+set cjlocgn_00000000=LoadInteger(YDHT, h, s__process_h_index[i])
+if cjlocgn_00000000 != 0 then
+set new_max=i
+if s__process_name[cjlocgn_00000000] == name and s__process_uper[cjlocgn_00000000] > uper and s__process_enable[cjlocgn_00000000] then
+set count=count + 1
+else
+set s__process_enable[cjlocgn_00000000]=false
+call SaveInteger(YDHT, h, s__process_h_index[i], 0)
+endif
+endif
+set i=i + 1
+endloop
+call SaveInteger(YDHT, h, s__process_h_max, new_max)
+call SaveInteger(YDHT, h, s__process_h_count, count)
+return count
+endfunction
+function s__process_Create takes unit u,string name,integer uper,boolean cover returns integer
+local integer key
+local integer h=GetHandleId(u)
+local integer max=LoadInteger(YDHT, h, s__process_h_max)
+local integer i=1
+local integer count
+loop
+exitwhen i > max
+set key=LoadInteger(YDHT, h, s__process_h_index[i])
+if key != 0 and s__process_name[key] == name and s__process_uper[key] > uper and s__process_cover[key] and s__process_enable[key] then
+return 0
+endif
+set i=i + 1
+endloop
+if cover then
+call s__process_Cover(u , uper , name)
+endif
+set count=LoadInteger(YDHT, h, s__process_h_count) + 1
+call SaveInteger(YDHT, h, s__process_h_count, count)
+set max=LoadInteger(YDHT, h, s__process_h_max)
+if count > max then
+set max=count
+call SaveInteger(YDHT, h, s__process_h_max, max)
+endif
+set key=1
+loop
+exitwhen s__process_hashindex[key] == 0
+set key=key + 1
+endloop
+set s__process_us[key]=u
+set s__process_name[key]=name
+set s__process_uper[key]=uper
+set s__process_cover[key]=cover
+set s__process_enable[key]=true
+set i=1
+loop
+exitwhen LoadInteger(YDHT, h, s__process_h_index[i]) == 0
+set i=i + 1
+endloop
+if i > 50 then
+call BJDebugMsg("<未找到空闲过程位>[" + GetUnitName(u) + "]")
+return 0
+endif
+call SaveInteger(YDHT, h, s__process_h_index[i], key)
+set s__process_hashindex[key]=i
+set s__process_lastkey[key]=0
+set s__process_nextkey[key]=s__process_nextkey[0]
+set s__process_nextkey[0]=key
+return key
+endfunction
+function s__process_IsEnable takes integer key returns boolean
+return s__process_enable[key]
+endfunction
+function s__process_Remove takes integer key returns boolean
+local integer h
+local integer last
+local integer next
+if s__process_hashindex[key] == 0 then
+return false
+endif
+set h=GetHandleId(s__process_us[key])
+set s__process_hashindex[key]=0
+set last=s__process_lastkey[key]
+set next=s__process_nextkey[key]
+set s__process_nextkey[last]=next
+set s__process_lastkey[next]=last
+return true
+endfunction
 function processLibrary__Init takes nothing returns nothing
+local integer i=1
+loop
+exitwhen i > 50
+set s__process_h_index[i]=StringHash("过程" + I2S(i))
+set i=i + 1
+endloop
 endfunction
 
 //library processLibrary ends
@@ -4838,7 +4981,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -4932,7 +5075,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary___Init takes nothing returns nothing
+function testLibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 local integer i=0
 loop
@@ -60480,23 +60623,23 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1328007448")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs1336799461")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
 call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary___Init")
+call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("bakaLibrary__Init")
 call ExecuteFunc("effectLibrary___Init")
 call ExecuteFunc("eventLibrary___Init")
 call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("objectLibrary__Init")
 call ExecuteFunc("processLibrary__Init")
-call ExecuteFunc("soundLibrary___Init")
+call ExecuteFunc("soundLibrary__Init")
 call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary___Init")
+call ExecuteFunc("testLibrary__Init")
 call ExecuteFunc("textLibrary___Init")
 call ExecuteFunc("unitLibrary___Init")
 call ExecuteFunc("RecordFix___Init")
@@ -60613,7 +60756,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1328007448 takes nothing returns nothing
+function jasshelper__initstructs1336799461 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
@@ -60626,6 +60769,7 @@ function jasshelper__initstructs1328007448 takes nothing returns nothing
     call TriggerAddCondition(st__maphack_SetHeight,Condition( function sa__maphack_SetHeight))
     set st__maphack_GetHeight=CreateTrigger()
     call TriggerAddCondition(st__maphack_GetHeight,Condition( function sa__maphack_GetHeight))
+
 
 
 
