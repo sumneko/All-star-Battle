@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -2360,13 +2360,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -2910,20 +2910,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2955,7 +2955,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2988,22 +2988,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3444,7 +3444,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3457,7 +3457,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -4068,7 +4068,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4663,7 +4663,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4701,7 +4701,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4815,7 +4815,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4928,6 +4928,10 @@ if s__process_hashindex[key] == 0 then
 return false
 endif
 set h=GetHandleId(s__process_us[key])
+if s__process_enable[key] then
+set s__process_enable[key]=false
+call SaveInteger(YDHT, h, s__process_h_index[s__process_hashindex[key]], 0)
+endif
 set s__process_hashindex[key]=0
 set last=s__process_lastkey[key]
 set next=s__process_nextkey[key]
@@ -4935,7 +4939,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary__Init takes nothing returns nothing
+function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 50
@@ -5025,7 +5029,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -5108,7 +5112,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5233,7 +5237,7 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -5254,7 +5258,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -5270,10 +5274,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -60623,26 +60627,26 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1336799461")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs1338796477")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
 call ExecuteFunc("YDWELibrary__Init")
 call ExecuteFunc("bakaLibrary__Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
 call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("processLibrary___Init")
 call ExecuteFunc("soundLibrary__Init")
-call ExecuteFunc("stringLibrary___Init")
+call ExecuteFunc("stringLibrary__Init")
 call ExecuteFunc("testLibrary__Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -60756,7 +60760,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1336799461 takes nothing returns nothing
+function jasshelper__initstructs1338796477 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()

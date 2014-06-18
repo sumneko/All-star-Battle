@@ -30,6 +30,7 @@ TC_MU_UNIT=单位库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_TEXT=漂浮文字库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_EFFECT=特效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_SOUND=音效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
+TC_MU_PROCESS=过程库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 
 TC_ARITHMETIC=WESTRING_TRIGCAT_ARITHMETIC,ReplaceableTextures\WorldEditUI\Actions-AI,1
 TC_NOTHING=WESTRING_TRIGCAT_NOTHING,ReplaceableTextures\CommandButtons\BTNPillage.blp,1
@@ -3926,6 +3927,14 @@ Unit.Move=0,unit,real,real
 _Unit.Move_Defaults=GetTriggerUnit,0,50
 _Unit.Move_Category=TC_MU_UNIT
 
+//过程库
+process.Remove=0,integer
+_process.Remove_Defaults=_
+_process.Remove_Category=TC_MU_PROCESS
+
+process.Cover=0,unit,integer,string
+_process.Cover_Defaults=GetTriggerUnit,100,"移动"
+_process.Cover_Category=TC_MU_PROCESS
 
 //YD Ability
 YDWEJumpTimer=0,unit,real,real,real,real,real
@@ -8650,6 +8659,8 @@ math.isInsidePolygon=0,1,boolean,integer,integer,location,boolean
 _math.isInsidePolygon_Defaults=1,3,_,true
 _math.isInsidePolygon_Category=TC_MU_MATH
 
+process.IsEnable=0,1,boolean,integer
+_process.IsEnable_Category=TC_MU_PROCESS
 
 // returns boolean
 
@@ -9143,6 +9154,11 @@ _R2I_Category=TC_CONVERSION
 S2I=0,1,integer,string
 _S2I_Defaults=GetEventPlayerChatString
 _S2I_Category=TC_CONVERSION
+
+//最萌小汐
+process.Create=0,1,integer,unit,string,integer,boolean
+_process.Create_Defaults=GetTriggerUnit,"移动",100,true
+_process.Create_Category=TC_MU_PROCESS
 
 YDWE_TP_GetExpiredTimerIndex=0,1,integer
 _YDWE_TP_GetExpiredTimerIndex_Category=TC_YDST

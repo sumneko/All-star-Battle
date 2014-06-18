@@ -577,6 +577,15 @@ Unit.Move="移动单位"
 Unit.Move="将 ",~单位," 向 ",~角度,"° 的方向移动 ",~实数," 距离"
 Unit.MoveHint="如果单位移动速度为0则不做动作(否则可能出现灵肉分离)"
 
+//过程库
+process.Remove="结束过程"
+process.Remove="结束过程 # ",~key," #"
+process.RemoveHint="立刻结束并回收此过程.之后的key将不可预料,请确认不会再使用到此key"
+
+process.Cover="剔除过程"
+process.Cover="剔除 ",~单位," 优先级小于等于 ",~优先级," 的 ",~过程名称," 过程"
+process.CoverHint="仅改变过程有效性,需要手动结束过程"
+
 // Trigger actions
 DisableTrigger="关闭触发"
 DisableTrigger="关闭 ",~Trigger
@@ -4988,6 +4997,10 @@ math.isInsidePolygon="凸多边形内包含点"
 math.isInsidePolygon="在编号 ",~整数," - ",~整数," 围成的凸多边形内包含 ",~点," (清除此点 ",~真值," )"
 math.isInsidePolygonHint="要先注册这些点.目前只支持凸多边形,不过效率妥妥的"
 
+process.IsEnable="过程是否有效"
+process.IsEnable="过程 # ",~key," # 有效"
+process.IsEnableHint="过程无效时请及时做好回收工作"
+
 YDWEGetLocalVariableBoolean="局部变量"
 YDWEGetLocalVariableBoolean="local_",~bl
 YDWEGetLocalVariableBooleanHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
@@ -5463,6 +5476,10 @@ R2RHint="舍弃小数部分."
 S2I="转换字符串为整数"
 S2I="转换 ",~String," 为整数"
 S2IHint=
+
+process.Create="创建过程"
+process.Create="新建 ",~单位," 的 ",~名字," 过程, 优先级为 ",~优先级," ,剔除低优先级过程 ",~布尔
+process.CreateHint="返回key。这东西解释起来比较麻烦，果然还是不解释了。"
 
 StringHash="获取字符串的哈希值"
 StringHash="(",~String,")的哈希值"
