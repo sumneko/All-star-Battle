@@ -29389,6 +29389,10 @@ function Trig_xianzuquanzhang_1Conditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41303737 ) )
 endfunction
 function Trig_xianzuquanzhang_1Actions takes nothing returns nothing
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_danwei2[0]=GetTriggerUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == true ) ) then
 set udg_danwei2[1]=GetSpellTargetUnit()
@@ -29396,11 +29400,19 @@ set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303256, udg_dian2[0], 0.00)
 call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852119 , udg_danwei2[1])
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 0.50)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD5D95160, GetHeroLevel(udg_danwei2[0]))
 if ( ( IsUnitIllusionBJ(udg_danwei2[1]) == false ) ) then
-call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( 25.00 * RMaxBJ(I2R(( ( GetUnitLevel(udg_danwei2[1]) * 2 ) - GetUnitLevel(udg_danwei2[0]) )), 0.00) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123, GetHeroLevel(udg_danwei2[1]))
 else
-call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], ( 25.00 * RMaxBJ(I2R(( ( GetUnitLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[1])) + 1 )]) * 2 ) - GetUnitLevel(udg_danwei2[0]) )), 0.00) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123, GetHeroLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[1])) + 1 )]))
 endif
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887, I2R(( 25 * LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123) )))
+if ( ( LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD5D95160) > LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123) ) ) then
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887, ( LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887) - ( 50.00 * I2R(( LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD5D95160) - LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123) )) ) ))
+else
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887, ( LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887) - ( 25.00 * I2R(( LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD5D95160) - LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x247C5123) )) ) ))
+endif
+call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], RMaxBJ(0.00, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887)), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL, WEAPON_TYPE_WHOKNOWS)
 set udg_danwei2[1]=null
 set udg_danwei2[2]=null
 call RemoveLocation(udg_dian2[0])
@@ -29409,6 +29421,7 @@ call IssueImmediateOrderById(udg_danwei2[0], 851972)
 call DisplayTimedTextToPlayer(GetOwningPlayer(udg_danwei2[0]), 0, 0, 10.00, "TRIGSTR_9074")
 endif
 set udg_danwei2[0]=null
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 endfunction
 function InitTrig_xianzuquanzhang_1 takes nothing returns nothing
 set gg_trg_xianzuquanzhang_1=CreateTrigger()
@@ -60379,7 +60392,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1319812497")
+call ExecuteFunc("jasshelper__initstructs1320686056")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60511,7 +60524,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1319812497 takes nothing returns nothing
+function jasshelper__initstructs1320686056 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
