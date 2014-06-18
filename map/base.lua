@@ -26,6 +26,7 @@
     print 'hello world'
 	--调用栈
 	function runtime.error_handle(msg)
+        runtime.console = true
 		print("---------------------------------------")
 		print("             LUA ERROR                 ")
 		print("---------------------------------------")
