@@ -33798,7 +33798,7 @@ set udg_dian2[0]=GetUnitLoc(udg_danwei[40])
 set udg_zhengshu2[246]=( udg_zhengshu2[246] + 1 )
 set udg_zhengshu2[247]=IMaxBJ(( udg_zhengshu2[247] - 1 ), 0)
 set udg_dian2[246]=GetUnitLoc(udg_danwei2[246])
-if ( ( udg_danwei2[248] != null ) and ( GetUnitTypeId(udg_danwei2[248]) != 0 ) and ( IsUnitType(udg_danwei2[248], UNIT_TYPE_DEAD) == false ) ) then
+if ( ( udg_dian2[2] != null ) and ( udg_danwei2[248] != null ) and ( GetUnitTypeId(udg_danwei2[248]) != 0 ) and ( IsUnitType(udg_danwei2[248], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[248])
 if ( ( udg_zhengshu2[247] == 0 ) and ( udg_zhengshu2[248] == 0 ) and ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[246]) <= 425.00 ) and ( DistanceBetweenPoints(udg_dian2[2], udg_dian2[246]) <= 800.00 ) ) then
 set udg_zhengshu2[248]=1
@@ -33850,7 +33850,11 @@ endif
 if ( ( udg_zhengshu2[248] != 0 ) ) then
 if ( ( udg_zhengshu2[248] < 25 ) ) then
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[248])
-if ( ( GetUnitTypeId(udg_danwei2[248]) != 0 ) and ( IsUnitType(udg_danwei2[248], UNIT_TYPE_DEAD) == false ) and ( YDWEDistanceBetweenUnits(udg_danwei2[246] , udg_danwei2[248]) < 2000.00 ) ) then
+if ( ( udg_dian2[2] == null ) ) then
+set udg_dian2[2]=Location(0, 0)
+else
+endif
+if ( ( udg_danwei2[248] != null ) and ( GetUnitTypeId(udg_danwei2[248]) != 0 ) and ( IsUnitType(udg_danwei2[248], UNIT_TYPE_DEAD) == false ) and ( YDWEDistanceBetweenUnits(udg_danwei2[246] , udg_danwei2[248]) < 2000.00 ) ) then
 call MoveLocation(LoadLocationHandle(YDHT, GetHandleId(udg_danwei2[246]), 0xE98FFDB6), GetLocationX(udg_dian2[2]), GetLocationY(udg_dian2[2]))
 else
 call MoveLocation(udg_dian2[2], GetLocationX(LoadLocationHandle(YDHT, GetHandleId(udg_danwei2[246]), 0xE98FFDB6)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(udg_danwei2[246]), 0xE98FFDB6)))
@@ -60713,7 +60717,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1422924322")
+call ExecuteFunc("jasshelper__initstructs1423982118")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60846,7 +60850,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1422924322 takes nothing returns nothing
+function jasshelper__initstructs1423982118 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
