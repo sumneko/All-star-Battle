@@ -800,13 +800,17 @@ SetUnitInvulnerable="设置无敌/可攻击"
 SetUnitInvulnerable="设置 ",~单位," ",~Invulnerable/Vulnerable
 SetUnitInvulnerableHint=
 
+Unit.PauseUnitMU="暂停/恢复<单位库>"
+Unit.PauseUnitMU="设置 ",~单位," ",~Pause/Unpause," ,标签为 ",~标签
+Unit.PauseUnitMUHint=
+
 PauseUnit="暂停/恢复 [R]"
-PauseUnit="设置 ",~单位," ",~Pause/Unpause," ,标签为 ",~标签
-PauseUnitHint=
+PauseUnit="设置 ",~单位," ",~Pause/Unpause
+PauseUnitHint="废弃"
 
 PauseUnitBJ="暂停/恢复"
-PauseUnitBJ=~Pause/Unpause," ",~单位," ,标签为 ",~标签
-PauseUnitBJHint=
+PauseUnitBJ=~Pause/Unpause," ",~单位
+PauseUnitBJHint="废弃"
 
 PauseAllUnitsBJ="暂停/恢复 所有单位"
 PauseAllUnitsBJ=~Pause/Unpause," 所有单位"

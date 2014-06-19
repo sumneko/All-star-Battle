@@ -5456,6 +5456,11 @@ STRING 914
 R
 }
 
+STRING 915
+{
+|cffff0000通关失败|r
+}
+
 STRING 916
 // 技能: A003 (眩晕), Tip (提示工具 - 普通)
 {
@@ -8106,11 +8111,6 @@ STRING 1362
 暗刃
 }
 
-STRING 1363
-{
-|cffff0000通关失败|r
-}
-
 STRING 1364
 {
 游戏进行了|cffff505050分钟|r
@@ -8192,31 +8192,6 @@ STRING 1377
 // 单位: e01D (冰冻), EditorSuffix (名字 - 编辑器后缀)
 {
 预警
-}
-
-STRING 1378
-{
-|cffff5000通关失败|r
-}
-
-STRING 1379
-{
-|cffff5000通关失败|r
-}
-
-STRING 1380
-{
-|cffff5000通关失败|r
-}
-
-STRING 1381
-{
-|cffff5000通关失败|r
-}
-
-STRING 1382
-{
-|cffff5000通关失败|r
 }
 
 STRING 1383
@@ -31386,6 +31361,16 @@ STRING 5259
 |cFF0075ff灵魂相位|r等级3（E）
 }
 
+STRING 5260
+{
+|cffff5000通关失败|r
+}
+
+STRING 5261
+{
+|cffff5000通关失败|r
+}
+
 STRING 5262
 // 技能: A0K3 (|cFF0075ff灵魂相位|r), Tip (提示工具 - 普通)
 {
@@ -42697,6 +42682,11 @@ STRING 7138
 诅咒一个指向的单位，使其|cffffaa00降低20%攻击速度和移动速度|r并每秒受到伤害，这个伤害每持续|cffffff001|r秒就会提高|cffff505010%|r，诅咒持续|cffffff005|r秒，但目标每|cffffff00使用技能或者物品|r就会将持续时间|cffffff00刷新为5秒|r，若诅咒持续累计达到|cffffff0015|r秒会立即停止并爆发一股能量，对|cffffff00500|r范围内敌人造成伤害并使目标|cff00ffff眩晕2秒|r|n|n|cffaa50ff初始伤害：17+智力×0.1（每秒）|n爆发伤害：120+智力×1|n|n|cff757575施法距离：600|n间隔时间：16秒
 }
 
+STRING 7139
+{
+|cffff5000通关失败|r
+}
+
 STRING 7140
 // 技能: A033 (|cFFcc7515恶魔鬼手|r), Name (名字)
 {
@@ -42719,6 +42709,11 @@ STRING 7143
 // 技能: A06U (屏蔽攻击), EditorSuffix (编辑器后缀)
 {
 紫能量
+}
+
+STRING 7144
+{
+|cffff5000通关失败|r
 }
 
 STRING 7145
@@ -44800,6 +44795,11 @@ STRING 7494
 // 技能: A0PE (|cFFff0050最后的月牙天冲|r), Researchhotkey (热键 - 学习)
 {
 Q
+}
+
+STRING 7495
+{
+|cffff5000通关失败|r
 }
 
 STRING 7497

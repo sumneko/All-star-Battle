@@ -5054,13 +5054,17 @@ SetUnitInvulnerable=0,unit,invulnerableoption
 _SetUnitInvulnerable_Defaults=GetTriggerUnit,InvulnerabilityInvulnerable
 _SetUnitInvulnerable_Category=TC_UNIT
 
-PauseUnit=0,unit,pauseunpauseoption,string
-_PauseUnit_Defaults=GetTriggerUnit,PauseUnpauseOptionPause,"全局"
-_PauseUnit_Category=TC_UNIT
+Unit.PauseUnitMU=0,unit,pauseunpauseoption,string
+_Unit.PauseUnitMU_Defaults=GetTriggerUnit,PauseUnpauseOptionPause,"全局"
+_Unit.PauseUnitMU_Category=TC_UNIT
 
-PauseUnitBJ=0,pauseunpauseoption,unit,string
-_PauseUnitBJ_Defaults=PauseUnpauseOptionPause,GetTriggerUnit,"全局"
-_PauseUnitBJ_Category=TC_UNIT
+PauseUnit=0,unit,pauseunpauseoption
+_PauseUnit_Defaults=GetTriggerUnit,PauseUnpauseOptionPause
+_PauseUnit_Category=TC_YDHIDE
+
+PauseUnitBJ=0,pauseunpauseoption,unit
+_PauseUnitBJ_Defaults=PauseUnpauseOptionPause,GetTriggerUnit
+_PauseUnitBJ_Category=TC_YDHIDE
 
 PauseAllUnitsBJ=0,pauseunpauseoption
 _PauseAllUnitsBJ_Defaults=PauseUnpauseOptionPause

@@ -1898,6 +1898,7 @@ constant integer si__Unit=13
 integer si__Unit_F=0
 integer si__Unit_I=0
 integer array si__Unit_V
+integer s__Unit_pause_count=StringHash("暂停计数")
 trigger st__maphack_SetHeight
 trigger st__maphack_GetHeight
 trigger st__baka_newMap
@@ -5236,6 +5237,30 @@ call UnitAddAbility(u, id)
 call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
+function s__Unit_PauseUnitMU takes unit u,boolean b,string flag returns nothing
+local integer key=StringHash("暂停-" + flag)
+local integer h=GetHandleId(u)
+local integer count=LoadInteger(YDHT, h, s__Unit_pause_count)
+if b then
+if not LoadBoolean(YDHT, h, key) then
+call SaveBoolean(YDHT, h, key, true)
+set count=count + 1
+call SaveInteger(YDHT, h, s__Unit_pause_count, count)
+if count == 1 then
+call PauseUnit(u, b)
+endif
+endif
+else
+if LoadBoolean(YDHT, h, key) then
+call SaveBoolean(YDHT, h, key, false)
+set count=count - 1
+call SaveInteger(YDHT, h, s__Unit_pause_count, count)
+if count == 0 then
+call PauseUnit(u, b)
+endif
+endif
+endif
+endfunction
 function unitLibrary___Init takes nothing returns nothing
 endfunction
 
@@ -8412,7 +8437,7 @@ call RemoveUnit(gg_unit_n00J_0066)
 call RemoveUnit(gg_unit_n00K_0067)
 call RemoveUnit(gg_unit_n00L_0068)
 call RemoveUnit(gg_unit_n00M_0069)
-call PauseUnit(gg_unit_hgtw_0012, true)
+call s__Unit_PauseUnitMU(gg_unit_hgtw_0012 , true , "全局")
 call UnitAddAbility(gg_unit_hgtw_0012, 0x4176756C)
 call KillUnit(gg_unit_h001_0134)
 call KillUnit(gg_unit_h009_0136)
@@ -12212,7 +12237,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff009900" +
 call SetUnitVertexColor(udg_fuhuo[1], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[1] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[1], 1)
-call UnitRemoveType(udg_fuhuo[1], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[1], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[1]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[1], 0x41305030)
@@ -12245,7 +12269,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff009900" +
 call SetUnitVertexColor(udg_fuhuo[2], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[2] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[2], 1)
-call UnitRemoveType(udg_fuhuo[2], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[2], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[2]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[2], 0x41305030)
@@ -12278,7 +12301,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff009900" +
 call SetUnitVertexColor(udg_fuhuo[3], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[3] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[3], 1)
-call UnitRemoveType(udg_fuhuo[3], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[3], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[3]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[3], 0x41305030)
@@ -12311,7 +12333,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff009900" +
 call SetUnitVertexColor(udg_fuhuo[4], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[4] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[4], 1)
-call UnitRemoveType(udg_fuhuo[4], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[4], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[4]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[4], 0x41305030)
@@ -12344,7 +12365,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff009900" +
 call SetUnitVertexColor(udg_fuhuo[5], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[5] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[5], 1)
-call UnitRemoveType(udg_fuhuo[5], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[5], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[5]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[5], 0x41305030)
@@ -12377,7 +12397,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff0075ff" +
 call SetUnitVertexColor(udg_fuhuo[6], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[6] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[6], 1)
-call UnitRemoveType(udg_fuhuo[6], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[6], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[6]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[6], 0x41305030)
@@ -12410,7 +12429,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff0075ff" +
 call SetUnitVertexColor(udg_fuhuo[7], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[7] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[7], 1)
-call UnitRemoveType(udg_fuhuo[7], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[7], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[7]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[7], 0x41305030)
@@ -12443,7 +12461,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff0075ff" +
 call SetUnitVertexColor(udg_fuhuo[8], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[8] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[8], 1)
-call UnitRemoveType(udg_fuhuo[8], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[8], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[8]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[8], 0x41305030)
@@ -12476,7 +12493,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff0075ff" +
 call SetUnitVertexColor(udg_fuhuo[9], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[9] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[9], 1)
-call UnitRemoveType(udg_fuhuo[9], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[9], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[9]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[9], 0x41305030)
@@ -12509,7 +12525,6 @@ call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( ( "|cff0075ff" +
 call SetUnitVertexColor(udg_fuhuo[10], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_fuhuo[10] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_fuhuo[10], 1)
-call UnitRemoveType(udg_fuhuo[10], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_fuhuo[10], 100)
 if ( ( GetUnitTypeId(udg_fuhuo[10]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_fuhuo[10], 0x41305030)
@@ -12549,8 +12564,7 @@ return ( ( IsUnitType(GetDyingUnit(), UNIT_TYPE_STRUCTURE) == true ) )
 endfunction
 function Trig_shengfupandingFunc002Func001Func014A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetDyingUnit() ) ) then
-call PauseUnit(GetEnumUnit(), true)
-call UnitAddType(GetEnumUnit(), UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(GetEnumUnit() , true , "全局")
 call SetUnitInvulnerable(GetEnumUnit(), true)
 call SetUnitTimeScale(GetEnumUnit(), 0.00)
 else
@@ -12558,8 +12572,7 @@ endif
 endfunction
 function Trig_shengfupandingFunc002Func005Func014A takes nothing returns nothing
 if ( ( GetEnumUnit() != GetDyingUnit() ) ) then
-call PauseUnit(GetEnumUnit(), true)
-call UnitAddType(GetEnumUnit(), UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(GetEnumUnit() , true , "全局")
 call SetUnitInvulnerable(GetEnumUnit(), true)
 call SetUnitTimeScale(GetEnumUnit(), 0.00)
 else
@@ -12581,18 +12594,18 @@ set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=10
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
-call DisplayTimedTextToPlayer(s__baka_SPlayer(bj_forLoopAIndex - 1), 0, 0, 10.00, "TRIGSTR_1363")
+call DisplayTimedTextToPlayer(s__baka_SPlayer(bj_forLoopAIndex - 1), 0, 0, 10.00, "TRIGSTR_915")
 call PauseTimer(udg_FH[bj_forLoopAIndex])
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call CinematicFadeBJ(bj_CINEFADETYPE_FADEOUT, 0.00, "ReplaceableTextures\\CameraMasks\\White_mask.blp", 100.00, 0, 0, 50.00)
 if ( ( udg_Points >= 101 ) ) then
 call PlaySoundBJ(gg_snd_GameFound)
-call CustomDefeatBJ(s__baka_SPlayer(0), "TRIGSTR_1378")
-call CustomDefeatBJ(s__baka_SPlayer(1), "TRIGSTR_1379")
-call CustomDefeatBJ(s__baka_SPlayer(2), "TRIGSTR_1380")
-call CustomDefeatBJ(s__baka_SPlayer(3), "TRIGSTR_1381")
-call CustomDefeatBJ(s__baka_SPlayer(4), "TRIGSTR_1382")
+call CustomDefeatBJ(s__baka_SPlayer(0), "TRIGSTR_5260")
+call CustomDefeatBJ(s__baka_SPlayer(1), "TRIGSTR_5261")
+call CustomDefeatBJ(s__baka_SPlayer(2), "TRIGSTR_7139")
+call CustomDefeatBJ(s__baka_SPlayer(3), "TRIGSTR_7144")
+call CustomDefeatBJ(s__baka_SPlayer(4), "TRIGSTR_7495")
 else
 call PlaySoundBJ(gg_snd_Tomes01)
 set udg_zhengshu2[159]=( udg_zhengshu2[159] + 1 )
@@ -16276,7 +16289,7 @@ set udg_danwei2[0]=GetSpellAbilityUnit()
 call SetUnitUserData(udg_danwei2[0], 25)
 call UnitAddAbility(udg_danwei2[0], 0x41304156)
 call SetUnitTimeScale(udg_danwei2[0], 1.50)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸突进")
 call GroupAddUnit(udg_danweizu2[143], udg_danwei2[0])
 set udg_danwei2[0]=null
 endfunction
@@ -16329,7 +16342,7 @@ call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
 else
 if ( ( GetUnitUserData(udg_danwei2[0]) == - 1 ) ) then
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "僵尸突进")
 call ResetUnitAnimation(udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 else
@@ -16548,7 +16561,7 @@ call StartTimerBJ(udg_times[145], true, 0.04)
 else
 endif
 call SetUnitUserData(udg_danwei2[0], 50)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸大江山")
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 set udg_danwei2[0]=null
 endfunction
@@ -16648,7 +16661,7 @@ call IssueImmediateOrderById(udg_danwei2[1], 852127)
 call SetUnitScale(udg_danwei2[1], 3.00, 3.00, 3.00)
 set udg_danwei2[1]=null
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸大江山")
 else
 endif
 else
@@ -16762,7 +16775,7 @@ call IssueImmediateOrderById(udg_danwei2[1], 852127)
 call SetUnitScale(udg_danwei2[1], 3.00, 3.00, 3.00)
 set udg_danwei2[1]=null
 call UnitRemoveAbility(udg_boss[2], 0x41436D69)
-call PauseUnit(udg_boss[2], false)
+call s__Unit_PauseUnitMU(udg_boss[2] , false , "僵尸大江山")
 else
 endif
 else
@@ -16983,7 +16996,7 @@ call RemoveLocation(udg_dian2[1])
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call SetUnitUserData(udg_danwei2[0], 50)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸挖掘")
 call GroupAddUnit(udg_danweizu2[150], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.50)
 set udg_danwei2[0]=null
@@ -17018,7 +17031,7 @@ function Trig_wajue_2Func002Func004Func003Func003Func002A takes nothing returns 
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x75303049 ) ) then
-call PauseUnit(udg_danwei2[1], false)
+call s__Unit_PauseUnitMU(udg_danwei2[1] , false , "僵尸挖掘")
 call AddUnitAnimationProperties(udg_danwei2[1], "alternate", false)
 else
 endif
@@ -17030,7 +17043,7 @@ function Trig_wajue_2Func002Func004Func003Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x75303049 ) ) then
-call PauseUnit(udg_danwei2[1], true)
+call s__Unit_PauseUnitMU(udg_danwei2[1] , true , "僵尸挖掘")
 call AddUnitAnimationProperties(udg_danwei2[1], "alternate", true)
 call SetUnitX(udg_danwei2[1], GetLocationX(udg_dian2[1]))
 call SetUnitY(udg_danwei2[1], GetLocationY(udg_dian2[1]))
@@ -17097,7 +17110,7 @@ else
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_wajue_2Func002Func004Func003Func003Func002A)
 call DestroyGroup(udg_xuanqu)
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "僵尸挖掘")
 call ResetUnitAnimation(udg_danwei2[0])
 call AddUnitAnimationProperties(udg_danwei2[0], "alternate", false)
 call GroupRemoveUnit(udg_danweizu2[150], udg_danwei2[0])
@@ -17208,7 +17221,7 @@ function Trig_tiaoji_1Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 call SetUnitUserData(udg_danwei2[0], 20)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸跳击")
 call GroupAddUnit(udg_danweizu2[152], udg_danwei2[0])
 call SetUnitAnimation(udg_danwei2[0], "spell")
 call SetUnitTimeScale(udg_danwei2[0], 2.40)
@@ -17256,7 +17269,7 @@ set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_tiaoji_2Func002Func004Func003A)
 call DestroyGroup(udg_xuanqu)
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl", udg_dian2[0]))
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "僵尸跳击")
 call ResetUnitAnimation(udg_danwei2[0])
 call IssueImmediateOrderById(udg_danwei2[0], 852127)
 call GroupRemoveUnit(udg_danweizu2[152], udg_danwei2[0])
@@ -17902,7 +17915,7 @@ endfunction
 function Trig_boss2_hongtianlei_0Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
 set udg_zhengshu2[165]=6
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸轰天雷")
 if ( ( GetRandomInt(1, 3) == 1 ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304251)
 call UnitAddAbility(udg_danwei2[0], 0x41304251)
@@ -17924,7 +17937,7 @@ else
 endif
 else
 call PauseTimer(udg_times[165])
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸轰天雷")
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 200.00, ( GetUnitFacing(udg_boss[1]) - 60.00 ))
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_boss[1]), 0x6530304D, udg_dian2[1], GetUnitFacing(udg_boss[1]))
@@ -18007,7 +18020,7 @@ call TriggerAddAction(gg_trg_boss2_hongtianlei_2, function Trig_boss2_hongtianle
 endfunction
 function Trig_boss2_liuxingchui_0Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸流星锤")
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 call StartTimerBJ(udg_times[166], true, 0.10)
 set udg_danwei2[0]=null
@@ -18027,7 +18040,7 @@ else
 endif
 else
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸流星锤")
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
@@ -18201,7 +18214,7 @@ endfunction
 function Trig_boss2_attack_1Actions takes nothing returns nothing
 set udg_danwei2[173]=GetSpellTargetUnit()
 set udg_zhengshu2[173]=5
-call PauseUnit(udg_boss[1], true)
+call s__Unit_PauseUnitMU(udg_boss[1] , true , "僵尸攻击")
 call SetUnitAnimation(udg_boss[1], "attack")
 call StartTimerBJ(udg_times[173], true, 0.10)
 endfunction
@@ -18242,7 +18255,7 @@ call PlaySoundBJ(gg_snd_WoodHeavyBashFlesh1)
 endif
 endif
 endif
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸攻击")
 call IssueImmediateOrderById(udg_boss[1], 851972)
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei2[173]), 12.00)
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[173])
@@ -18271,7 +18284,7 @@ call TriggerAddAction(gg_trg_boss2_attack_2, function Trig_boss2_attack_2Actions
 endfunction
 function Trig_boss2_gouheji_1Actions takes nothing returns nothing
 set udg_zhengshu2[174]=6
-call PauseUnit(udg_boss[1], true)
+call s__Unit_PauseUnitMU(udg_boss[1] , true , "僵尸沟壑击?")
 call StartTimerBJ(udg_times[174], true, 0.10)
 endfunction
 function InitTrig_boss2_gouheji_1 takes nothing returns nothing
@@ -18298,7 +18311,7 @@ endif
 if ( ( udg_zhengshu2[174] == 1 ) ) then
 call StopSoundBJ(gg_snd_ThunderClapCaster01, false)
 call PlaySoundBJ(gg_snd_ThunderClapCaster01)
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸沟壑击?")
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
@@ -18370,7 +18383,7 @@ call TriggerAddAction(gg_trg_bossex_anxi_2, function Trig_bossex_anxi_2Actions)
 endfunction
 function Trig_bossex_anren_1Actions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "僵尸矮人?")
 call UnitAddAbility(udg_danwei2[0], 0x41436D69)
 call StartTimerBJ(udg_times[169], true, 0.10)
 set udg_danwei2[0]=null
@@ -18391,7 +18404,7 @@ else
 call StopSoundBJ(gg_snd_EntanglingRootsTarget1, false)
 call PlaySoundOnUnitBJ(gg_snd_AncestralGuardianMissileLaunch, 100, udg_boss[1])
 set udg_dian2[0]=GetUnitLoc(udg_boss[1])
-call PauseUnit(udg_boss[1], false)
+call s__Unit_PauseUnitMU(udg_boss[1] , false , "僵尸矮人?")
 call UnitRemoveAbility(udg_boss[1], 0x41436D69)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=11
@@ -20055,7 +20068,7 @@ else
 endif
 if ( ( IsUnitInGroup(GetAttacker(), udg_attack) == true ) ) then
 if ( ( GetUnitAbilityLevel(GetAttacker(), 0x41304A53) == 1 ) ) then
-call PauseUnit(GetAttacker(), true)
+call s__Unit_PauseUnitMU(GetAttacker() , true , "摧毁的兵营")
 call SetUnitUserData(GetAttacker(), 10)
 else
 call UnitAddAbility(GetAttacker(), 0x41304A53)
@@ -20260,7 +20273,6 @@ if ( ( IsUnitType(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], 
 set udg_buer[0]=false
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( GetUnitName(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]) + "|cFFFF0000使用自杀命令，20秒后自杀|r" ))
 call SetUnitInvulnerable(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], false)
-call PauseUnit(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], false)
 call s__maphack_SetHeight(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )] , 0.00 , 2000.00)
 call StartTimerBJ(udg_jishiqi[93], false, 20.00)
 set udg_zs[0]=udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]
@@ -20714,7 +20726,7 @@ set udg_Zhengshu[24]=1
 loop
 exitwhen udg_Zhengshu[24] > 10
 if ( ( udg_zhengshu2[( 300 + udg_Zhengshu[24] )] > 0 ) ) then
-if ( ( IsUnitType(udg_player[udg_Zhengshu[24]], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_player[udg_Zhengshu[24]], UNIT_TYPE_TAUREN) == false ) and ( IsUnitType(udg_danwei2[( 300 + udg_Zhengshu[24] )], UNIT_TYPE_DEAD) == false ) ) then
+if ( ( IsUnitType(udg_player[udg_Zhengshu[24]], UNIT_TYPE_DEAD) == false ) and ( IsUnitPausedBJ(udg_player[udg_Zhengshu[24]]) == false ) and ( IsUnitType(udg_danwei2[( 300 + udg_Zhengshu[24] )], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshu2[( 300 + udg_Zhengshu[24] )]=( udg_zhengshu2[( 300 + udg_Zhengshu[24] )] - 1 )
 set udg_dian2[0]=GetUnitLoc(udg_player[udg_Zhengshu[24]])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[( 300 + udg_Zhengshu[24] )])
@@ -21166,7 +21178,7 @@ call SetPlayerAbilityAvailable(GetTriggerPlayer(), 0x41303644, false)
 call SetPlayerAbilityAvailable(GetTriggerPlayer(), 0x41303050, false)
 call SetPlayerStateBJ(GetTriggerPlayer(), PLAYER_STATE_RESOURCE_GOLD, 0)
 call AddUnitAnimationPropertiesBJ(false, "alternate", udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
-call PauseUnit(udg_SmD[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )], true)
+call s__Unit_PauseUnitMU(udg_SmD[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )] , true , "成为OB")
 else
 endif
 endfunction
@@ -21386,7 +21398,7 @@ call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303645, fals
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303644, false)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[0]), 0x41303050, false)
 call SetPlayerStateBJ(GetOwningPlayer(udg_danwei2[0]), PLAYER_STATE_RESOURCE_GOLD, 0)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "成为OB")
 set udg_danwei2[0]=null
 endfunction
 function InitTrig_SmD_OB takes nothing returns nothing
@@ -21717,7 +21729,6 @@ endif
 call SetUnitVertexColor(udg_danwei2[1], 255, 255, 255, 255)
 call s__maphack_SetHeight(udg_danwei2[1] , 0.00 , 0.00)
 call SetUnitTimeScale(udg_danwei2[1], 1)
-call UnitRemoveType(udg_danwei2[1], UNIT_TYPE_TAUREN)
 call SetUnitManaPercentBJ(udg_danwei2[1], 100)
 if ( ( GetUnitTypeId(udg_danwei2[1]) == 0x4E303043 ) ) then
 call UnitAddAbility(udg_danwei2[1], 0x41305030)
@@ -22284,7 +22295,7 @@ call UnitDamageTarget(GetEventDamageSource(), udg_danwei[240], GetEventDamage(),
 else
 endif
 if ( ( IsUnitInGroup(udg_danwei[328], udg_attack) == true ) and ( GetUnitUserData(udg_danwei[328]) < 10 ) ) then
-call PauseUnit(udg_danwei[328], true)
+call s__Unit_PauseUnitMU(udg_danwei[328] , true , "彩焰射击")
 call SetUnitUserData(udg_danwei[328], 10)
 if ( ( GetUnitTypeId(udg_danwei[328]) == 0x4830304D ) and ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304A54) != 1 ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroInt(GetEventDamageSource(), true)) * 0.30 ), true, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -22805,7 +22816,7 @@ set udg_shishu2[( 352 + ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[331]))
 set udg_danwei[331]=null
 else
 endif
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303332)) == true ) and ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4253544E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x42505345) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324F) == true ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_TAUREN) == true ) ) ) then
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetTriggerUnit() , 0x49303332)) == true ) and ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4253544E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x42505345) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324E) == true ) or ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230324F) == true ) or ( IsUnitPausedBJ(GetTriggerUnit()) == true ) ) ) then
 set udg_Danwei[44]=GetTriggerUnit()
 if ( ( GetHeroStr(udg_Danwei[44], true) > GetHeroAgi(udg_Danwei[44], true) ) and ( GetHeroStr(udg_Danwei[44], true) > GetHeroInt(udg_Danwei[44], true) ) ) then
 call SetUnitLifeBJ(udg_Danwei[44], ( GetUnitState(udg_Danwei[44], UNIT_STATE_LIFE) + ( GetEventDamage() * 0.25 ) ))
@@ -26613,7 +26624,7 @@ else
 if ( ( UnitHasBuffBJ(udg_danwei2[0], 0x42303232) == true ) ) then
 call UnitRemoveBuffBJ(0x42637963, udg_danwei2[0])
 call UnitRemoveBuffBJ(0x42637932, udg_danwei2[0])
-if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[0]) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41726176)
 if ( ( s__maphack_GetHeight(udg_danwei2[0]) == 60.00 ) ) then
 call s__maphack_SetHeight(udg_danwei2[0] , 15.00 , 0.00)
@@ -27253,7 +27264,7 @@ return ( ( IsUnitGroupEmptyBJ(udg_danweizu2[350]) == false ) )
 endfunction
 function Trig_xiangchichongji_2Func001Func003Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_TAUREN) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitPausedBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[1])
 set udg_dian2[3]=PolarProjectionBJ(udg_dian2[2], 40.00, GetUnitFacing(udg_danwei2[0]))
 if ( ( IsTerrainPathableBJ(udg_dian2[3], PATHING_TYPE_WALKABILITY) == false ) ) then
@@ -27380,7 +27391,7 @@ function Trig_xuehongzhanfu_2Func001A takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
 set udg_danwei2[0]=GetEnumUnit()
-if ( ( IsUnitType(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )]) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 2.00)
 set udg_dian2[0]=GetUnitLoc(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )])
 set udg_zhengshu2[3]=0
@@ -29015,7 +29026,7 @@ exitwhen udg_aXUNHUAN[27] > 10
 set udg_danwei2[0]=udg_player[udg_aXUNHUAN[27]]
 if ( ( udg_zhengshu2[( 270 + udg_aXUNHUAN[27] )] >= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshu2[( 270 + udg_aXUNHUAN[27] )]=( udg_zhengshu2[( 270 + udg_aXUNHUAN[27] )] - 1 )
-if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_TAUREN) == false ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[60]) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[0]) == false ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[60]) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 if ( ( UnitHasBuffBJ(udg_danwei2[0], 0x42303232) == false ) and ( UnitHasBuffBJ(udg_danwei2[0], 0x42303345) == false ) ) then
 if ( ( GetHeroAgi(udg_danwei2[0], true) > GetHeroStr(udg_danwei2[0], true) ) and ( GetHeroAgi(udg_danwei2[0], true) > GetHeroInt(udg_danwei2[0], true) ) ) then
@@ -29097,7 +29108,7 @@ exitwhen udg_aXUNHUAN[28] > 10
 set udg_danwei2[0]=udg_player[udg_aXUNHUAN[28]]
 if ( ( udg_shishu2[( 270 + udg_aXUNHUAN[28] )] >= 0.00 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) ) then
 set udg_shishu2[( 270 + udg_aXUNHUAN[28] )]=( udg_shishu2[( 270 + udg_aXUNHUAN[28] )] - 1 )
-if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_TAUREN) == false ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[60]) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[0]) == false ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[60]) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_fengbao_2Func001Func002Func002Func003A)
@@ -32520,7 +32531,7 @@ call SetUnitAnimationByIndex(udg_danwei[22], 9)
 call StartTimerBJ(udg_jishiqi[7], true, 0.03)
 set udg_zhengshu2[350]=( udg_zhengshu2[350] - 1 )
 else
-if ( ( IsUnitType(udg_danwei[22], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[22]) == false ) ) then
 if ( ( udg_zhengshu2[350] > 10 ) ) then
 set udg_dian[23]=GetUnitLoc(udg_danwei[22])
 set udg_dian[24]=PolarProjectionBJ(udg_dian[23], ( ( DistanceBetweenPoints(udg_dian[22], udg_dian[21]) - 150.00 ) / 10.00 ), AngleBetweenPoints(udg_dian[22], udg_dian[21]))
@@ -32740,7 +32751,7 @@ call TriggerAddAction(gg_trg_yylxx, function Trig_yylxxActions)
 endfunction
 function Trig_yylxx2Actions takes nothing returns nothing
 if ( ( udg_Zhengshu[41] <= 233 ) and ( IsUnitType(udg_danwei[30], UNIT_TYPE_DEAD) == false ) ) then
-if ( ( IsUnitType(udg_danwei[30], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[30]) == false ) ) then
 set udg_Zhengshu[41]=( udg_Zhengshu[41] + 1 )
 call SetTextTagTextBJ(udg_piaofuwenzi[6], ( "理想乡：" + R2SW(( ( 234.00 - I2R(udg_Zhengshu[41]) ) * 0.03 ), 1, 1) ), 11.00)
 call SetTextTagPos(udg_piaofuwenzi[6], ( GetUnitX(udg_danwei[30]) - 45.00 ), GetUnitY(udg_danwei[30]), ( s__maphack_GetHeight(udg_danwei[30]) + 200.00 ))
@@ -32826,7 +32837,7 @@ call RemoveLocation(udg_Dian[89])
 call SetUnitAnimationByIndex(udg_Danwei[40], 7)
 else
 if ( ( udg_Zhengshu[40] <= 0 ) and ( IsUnitType(udg_Danwei[40], UNIT_TYPE_DEAD) == false ) ) then
-if ( ( IsUnitType(udg_Danwei[40], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[40]) == false ) ) then
 set udg_Dian[40]=GetUnitLoc(udg_Danwei[40])
 set udg_Dian[41]=GetUnitLoc(udg_Danwei[41])
 if ( ( udg_Zhengshu[40] < 0 ) ) then
@@ -33078,7 +33089,7 @@ set gg_trg_hwzs2=CreateTrigger()
 call TriggerAddAction(gg_trg_hwzs2, function Trig_hwzs2Actions)
 endfunction
 function Trig_hwzs3Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[36], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[37], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[36]) == false ) or ( IsUnitType(udg_danwei[37], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[33]=( udg_zhengshu[33] + 1 )
 if ( ( udg_zhengshu[33] <= 15 ) and ( IsUnitType(udg_danwei[36], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei[37], UNIT_TYPE_DEAD) == false ) and ( udg_danwei[37] != null ) ) then
 set udg_dian[31]=GetRandomLocInRect(udg_quyu[2])
@@ -33622,7 +33633,7 @@ endfunction
 function Trig_hwxj2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[38], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[38], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[38]) == false ) or ( IsUnitType(udg_danwei[38], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_aXUNHUAN[87] == - 2 ) ) then
 set udg_aXUNHUAN[87]=( udg_aXUNHUAN[87] + 1 )
 set udg_dian[35]=GetUnitLoc(udg_danwei[38])
@@ -33681,7 +33692,7 @@ if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_MAGIC_IMMUNE) == false ) and ( IsUni
 call GroupAddUnit(udg_danweizu2[246], udg_danwei2[0])
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "封绝")
 else
 endif
 else
@@ -33730,7 +33741,7 @@ endfunction
 function Trig_baka_2Func001Func001A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "封绝")
 set udg_danwei2[0]=null
 endfunction
 function Trig_baka_2Func001Func010A takes nothing returns nothing
@@ -33744,7 +33755,7 @@ else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "封绝")
 else
 endif
 call GroupAddUnit(udg_danweizu2[246], udg_danwei2[0])
@@ -33765,7 +33776,7 @@ else
 endif
 if ( ( udg_Points <= 0 ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "封绝")
 else
 endif
 call GroupRemoveUnit(udg_danweizu2[246], udg_danwei2[0])
@@ -33978,7 +33989,7 @@ endfunction
 function Trig_zhuizongdaodan_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei2[50], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[50]) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[50])
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[49])
 set udg_zhengshu2[50]=( udg_zhengshu2[50] + 1 )
@@ -34144,7 +34155,7 @@ call RemoveItem(UnitItemInSlotBJ(udg_danwei[185], bj_forLoopAIndex))
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 endif
-call PauseUnit(udg_danwei[185], true)
+call s__Unit_PauseUnitMU(udg_danwei[185] , true , "地精弹幕攻击")
 call SetUnitUserData(udg_danwei[185], 10)
 else
 endif
@@ -34511,7 +34522,7 @@ call s__Event_AnyUnitSkill(gg_trg_lz , 3 , 0x41303044)
 call TriggerAddAction(gg_trg_lz, function Trig_lzActions)
 endfunction
 function Trig_lz2Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[54], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[55], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[54]) == false ) or ( IsUnitType(udg_danwei[55], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_dian[50]=GetUnitLoc(udg_danwei[54])
 set udg_dian[51]=GetUnitLoc(udg_danwei[55])
 if ( ( DistanceBetweenPoints(udg_dian[50], udg_dian[51]) >= 125.00 ) and ( IsUnitType(udg_danwei[54], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei[55], UNIT_TYPE_DEAD) == false ) ) then
@@ -34836,7 +34847,7 @@ call ForGroupBJ(udg_danweizu2[106], function Trig_wuyun_2Func001Func001A)
 else
 endif
 if ( ( UnitHasBuffBJ(udg_danwei[173], 0x42303137) == true ) ) then
-if ( ( GetRandomInt(1, 5) <= 2 ) and ( IsUnitType(udg_danwei[173], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( GetRandomInt(1, 5) <= 2 ) and ( IsUnitPausedBJ(udg_danwei[173]) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[173])
 set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(800.00 , udg_dian2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_wuyun_2Func002Func001Func003A)
@@ -35064,7 +35075,7 @@ call s__Event_AnyUnitSkill(gg_trg_sjqh , 3 , 0x41304E52)
 call TriggerAddAction(gg_trg_sjqh, function Trig_sjqhActions)
 endfunction
 function Trig_sjqh2Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_danwei[60], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[60]) == false ) ) then
 if ( ( udg_zhengshu[139] > 0 ) and ( IsUnitType(udg_danwei[60], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshu[139]=( udg_zhengshu[139] - 1 )
 call SetTextTagTextBJ(udg_piaofuwenzi[2], ( "强化圣剑：" + R2SW(( I2R(udg_zhengshu[139]) * 0.03 ), 1, 1) ), 11.00)
@@ -35702,7 +35713,7 @@ call RemoveItem(UnitItemInSlotBJ(udg_danwei[185], bj_forLoopAIndex))
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 endif
-call PauseUnit(udg_danwei[185], true)
+call s__Unit_PauseUnitMU(udg_danwei[185] , true , "游侠连射")
 call SetUnitUserData(udg_danwei[185], 10)
 else
 endif
@@ -35966,7 +35977,7 @@ endfunction
 function Trig_bf2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[73], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[73], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[73]) == false ) or ( IsUnitType(udg_danwei[73], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[363]=( udg_zhengshu2[363] - 1 )
 if ( ( udg_zhengshu2[363] >= 0 ) and ( IsUnitType(udg_danwei[73], UNIT_TYPE_DEAD) == false ) ) then
 set udg_dian[69]=GetUnitLoc(udg_danwei[73])
@@ -36226,7 +36237,7 @@ set udg_dian2[1]=GetUnitLoc(udg_danwei2[378])
 if ( ( udg_zhengshu2[378] == 0 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[377])
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[1]) > 100.00 ) and ( IsUnitType(udg_danwei2[377], UNIT_TYPE_DEAD) == false ) ) then
-if ( ( IsUnitType(udg_danwei2[377], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[377]) == false ) ) then
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 50.00, AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 call SetUnitX(udg_danwei2[377], GetLocationX(udg_dian2[2]))
 call SetUnitY(udg_danwei2[377], GetLocationY(udg_dian2[2]))
@@ -36255,7 +36266,7 @@ else
 set udg_zhengshu2[378]=2
 endif
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[1]) > 80.00 ) and ( IsUnitType(udg_danwei[76], UNIT_TYPE_DEAD) == false ) ) then
-if ( ( IsUnitType(udg_danwei[76], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[76]) == false ) ) then
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 15.00, AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 call SetUnitX(udg_danwei[76], GetLocationX(udg_dian2[2]))
 call SetUnitY(udg_danwei[76], GetLocationY(udg_dian2[2]))
@@ -36427,7 +36438,7 @@ call s__Event_AnyUnitSkill(gg_trg_huitianmiedi_1 , 3 , 0x41303550)
 call TriggerAddAction(gg_trg_huitianmiedi_1, function Trig_huitianmiedi_1Actions)
 endfunction
 function Trig_huitianmiedi_2Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei2[39], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei2[39], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei2[39]) == false ) or ( IsUnitType(udg_danwei2[39], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[39])
 set udg_zhengshu2[39]=( udg_zhengshu2[39] + 1 )
 if ( ( udg_zhengshu2[39] <= 24 ) and ( IsUnitType(udg_danwei2[39], UNIT_TYPE_DEAD) == false ) ) then
@@ -36693,7 +36704,7 @@ call s__Event_AnyUnitSkill(gg_trg_shunshenlianzhan_0 , 3 , 0x4130304E)
 call TriggerAddAction(gg_trg_shunshenlianzhan_0, function Trig_shunshenlianzhan_0Actions)
 endfunction
 function Trig_shunshenlianzhan_2Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[84], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[84], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[84]) == false ) or ( IsUnitType(udg_danwei[84], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu[39] < 6 ) and ( IsUnitType(udg_danwei[84], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei[85], UNIT_TYPE_DEAD) == false ) and ( udg_danwei[85] != null ) ) then
 call YDWESetUnitFacingToFaceUnitTimedNull(udg_danwei[84] , udg_danwei[85] , 0.00)
 set udg_zhengshu2[98]=( udg_zhengshu2[98] + 1 )
@@ -36799,7 +36810,7 @@ endfunction
 function Trig_huibi_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_Danwei[73], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[73]) == false ) ) then
 if ( ( udg_Shishu[73] > 0.00 ) and ( IsUnitType(udg_Danwei[73], UNIT_TYPE_DEAD) == false ) and ( udg_zhengshu[39] == 0 ) ) then
 if ( ( udg_Shishu[73] == 15.00 ) ) then
 call IssueImmediateOrderById(udg_Danwei[73], 851993)
@@ -36976,7 +36987,7 @@ endif
 call UnitAddAbility(udg_Danwei[159], 0x41303735)
 set udg_Danwei[160]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[159]), 0x65303830, udg_Dian[160], 270.00)
 else
-if ( ( IsUnitType(udg_Danwei[159], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[159]) == false ) ) then
 if ( ( udg_Zhengshu[159] > 1 ) and ( IsUnitType(udg_Danwei[159], UNIT_TYPE_DEAD) == false ) ) then
 set udg_Zhengshu[159]=( udg_Zhengshu[159] - 1 )
 set udg_dian2[0]=GetUnitLoc(udg_Danwei[159])
@@ -37151,7 +37162,7 @@ endfunction
 function Trig_zhimingtiji2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[88], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[88], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[88]) == false ) or ( IsUnitType(udg_danwei[88], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[82]=( udg_zhengshu2[82] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei[88])
 set udg_dian2[1]=GetUnitLoc(udg_danwei[89])
@@ -37292,7 +37303,7 @@ call s__Event_AnyUnitSkill(gg_trg_xunsu , 3 , 0x41303058)
 call TriggerAddAction(gg_trg_xunsu, function Trig_xunsuActions)
 endfunction
 function Trig_xunsu_2Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[109], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[109], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[109]) == false ) or ( IsUnitType(udg_danwei[109], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[116]=( udg_zhengshu2[116] + 1 )
 if ( ( udg_zhengshu2[116] <= ( R2I(DistanceBetweenPoints(udg_dian[104], udg_dian[105])) / 70 ) ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[109])
@@ -37434,7 +37445,7 @@ endfunction
 function Trig_dunji_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei2[42], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei2[42], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei2[42]) == false ) or ( IsUnitType(udg_danwei2[42], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu2[42] > 0 ) ) then
 set udg_zhengshu2[42]=( udg_zhengshu2[42] - 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[42])
@@ -37939,8 +37950,7 @@ set udg_danwei[95]=GetTriggerUnit()
 set udg_danwei[96]=GetSpellTargetUnit()
 call StartTimerBJ(udg_jishiqi[39], true, 0.03)
 call PlaySoundOnUnitBJ(gg_snd_ShimmeringPortalDeath, 100, udg_danwei[95])
-call PauseUnit(udg_danwei[95], true)
-call UnitAddType(udg_danwei[95], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[95] , true , "灵魂抽离")
 call UnitDamageTarget(udg_danwei[95], udg_danwei[96], RMinBJ(( ( GetUnitState(udg_danwei[96], UNIT_STATE_LIFE) * 0.15 ) + ( - 25.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[95], 0x4130374D)) ) ) ), 3000.00), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 set udg_dian[87]=GetUnitLoc(udg_danwei[95])
 set udg_dian[88]=GetUnitLoc(udg_danwei[96])
@@ -37989,8 +37999,7 @@ set udg_danwei[104]=null
 set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[95]), 0x65303057, udg_dian2[0], AngleBetweenPoints(udg_dian[87], udg_dian[88]))
 call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852075 , udg_danwei[96])
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
-call PauseUnit(udg_danwei[95], false)
-call UnitRemoveType(udg_danwei[95], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[95] , false , "灵魂抽离")
 call SetUnitAnimation(udg_danwei2[0], "birth")
 call SetUnitAnimation(udg_danwei[95], "attack")
 call StartTimerBJ(udg_jishiqi[30], true, 0.03)
@@ -38024,7 +38033,7 @@ endif
 else
 if ( ( UnitHasBuffBJ(udg_danwei[96], 0x42303133) == true ) ) then
 set udg_dian[88]=GetUnitLoc(udg_danwei[96])
-if ( ( IsUnitType(udg_danwei[96], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[96]) == false ) ) then
 set udg_dian2[1]=PolarProjectionBJ(udg_dian[87], RMinBJ(( DistanceBetweenPoints(udg_dian[87], udg_dian[88]) * 0.50 ), DistanceBetweenPoints(udg_dian[87], udg_dian[88])), AngleBetweenPoints(udg_dian[87], udg_dian[88]))
 call SetUnitX(udg_danwei[96], GetLocationX(udg_dian2[1]))
 call SetUnitY(udg_danwei[96], GetLocationY(udg_dian2[1]))
@@ -38076,7 +38085,7 @@ endfunction
 function Trig_heihuagongji2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei[99], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[99]) == false ) ) then
 call SetUnitVertexColor(udg_danwei[99], 0, 0, 0, 255)
 call SetUnitTimeScale(udg_danwei[99], 5.00)
 set udg_zhengshu[40]=( udg_zhengshu[40] + 1 )
@@ -38379,7 +38388,7 @@ call TriggerRegisterTimerExpireEvent(gg_trg_quanliyiji_2, udg_jishiqi[45])
 call TriggerAddAction(gg_trg_quanliyiji_2, function Trig_quanliyiji_2Actions)
 endfunction
 function Trig_quanliyiji_3Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[164], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[164], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[164]) == false ) or ( IsUnitType(udg_danwei[164], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[53]=( udg_zhengshu[53] + 1 )
 set udg_dian[124]=GetUnitLoc(udg_danwei[164])
 call AddSpecialEffectLocBJ(udg_dian[124], "Objects\\Spawnmodels\\NightElf\\NECancelDeath\\NECancelDeath.mdl")
@@ -38416,7 +38425,7 @@ set gg_trg_quanliyiji_3=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_quanliyiji_3, udg_jishiqi[40])
 call TriggerAddAction(gg_trg_quanliyiji_3, function Trig_quanliyiji_3Actions)
 endfunction
-function Trig_tiaoyueFunc005Func011A takes nothing returns nothing
+function Trig_tiaoyueFunc005Func009A takes nothing returns nothing
 set udg_Danwei[37]=GetEnumUnit()
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(udg_Danwei[37])) + 1 ) == ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[163])) + 1 ) ) ) then
 call SetUnitColor(udg_Danwei[37], PLAYER_COLOR_GREEN)
@@ -38437,14 +38446,12 @@ set udg_zhengshu2[113]=31
 call StartTimerBJ(udg_jishiqi[41], false, 0.00)
 else
 set udg_zhengshu2[113]=0
-call PauseUnit(udg_danwei[166], true)
-call UnitAddType(udg_danwei[166], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[164], true)
-call UnitAddType(udg_danwei[164], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[166] , true , "空中坠踢")
+call s__Unit_PauseUnitMU(udg_danwei[164] , true , "空中坠踢")
 call StartTimerBJ(udg_jishiqi[42], true, 0.04)
 call PauseTimer(udg_jishiqi[45])
 call SetUnitAnimation(udg_danwei[166], "Attack slam")
-call ForGroupBJ(udg_Danweizu[37], function Trig_tiaoyueFunc005Func011A)
+call ForGroupBJ(udg_Danweizu[37], function Trig_tiaoyueFunc005Func009A)
 endif
 set ydl_group=null
 set ydl_unit=null
@@ -38465,7 +38472,7 @@ endfunction
 function Trig_tiaoyue_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[166], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[166], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[166]) == false ) or ( IsUnitType(udg_danwei[166], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu2[113] == 31 ) ) then
 set udg_Dian[89]=GetUnitLoc(udg_danwei[166])
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[166]), 0x65303130, udg_Dian[89], 0)
@@ -38682,10 +38689,8 @@ call RemoveLocation(udg_dian[126])
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei[164]), 50.00)
 call CameraSetEQNoiseForPlayer(GetOwningPlayer(udg_danwei[166]), 50.00)
 call StartTimerBJ(udg_jishiqi[45], false, 0.00)
-call PauseUnit(udg_danwei[166], false)
-call UnitRemoveType(udg_danwei[166], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[164], false)
-call UnitRemoveType(udg_danwei[164], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[166] , false , "空中坠踢")
+call s__Unit_PauseUnitMU(udg_danwei[164] , false , "空中坠踢")
 call StopSoundBJ(gg_snd_BuildingDeathLargeHuman01, false)
 call PlaySoundOnUnitBJ(gg_snd_BuildingDeathLargeHuman01, 100, udg_danwei[166])
 call UnitRemoveAbility(udg_danwei[166], 0x41303130)
@@ -38854,7 +38859,7 @@ endfunction
 function Trig_shunshenlianxi2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[170], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[170], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[170]) == false ) or ( IsUnitType(udg_danwei[170], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[56]=( udg_zhengshu[56] + 1 )
 if ( ( udg_zhengshu[56] <= 12 ) ) then
 if ( ( udg_zhengshu[56] == 1 ) ) then
@@ -38940,7 +38945,7 @@ call s__Event_AnyUnitSkill(gg_trg_sanlianhengda_1 , 3 , 0x41304C55)
 call TriggerAddAction(gg_trg_sanlianhengda_1, function Trig_sanlianhengda_1Actions)
 endfunction
 function Trig_sanlianhengda_1_5Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_Danwei[122], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[122]) == false ) ) then
 if ( ( udg_Zhengshu[122] == 21 ) ) then
 set udg_Zhengshu[122]=( udg_Zhengshu[122] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
@@ -39038,7 +39043,7 @@ call s__Event_AnyUnitSkill(gg_trg_sanlianhengda_2 , 3 , 0x41304C54)
 call TriggerAddAction(gg_trg_sanlianhengda_2, function Trig_sanlianhengda_2Actions)
 endfunction
 function Trig_sanlianhengda_2_5Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_Danwei[122], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[122]) == false ) ) then
 if ( ( udg_Zhengshu[123] == 26 ) ) then
 set udg_Zhengshu[123]=( udg_Zhengshu[123] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
@@ -39129,7 +39134,7 @@ call s__Event_AnyUnitSkill(gg_trg_sanlianhengda_3 , 3 , 0x41304C56)
 call TriggerAddAction(gg_trg_sanlianhengda_3, function Trig_sanlianhengda_3Actions)
 endfunction
 function Trig_sanlianhengda_3_5Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_Danwei[122], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitType(udg_Danwei[122], UNIT_TYPE_TAUREN) == false ) and ( IsUnitPausedBJ(udg_Danwei[122]) == false ) ) then
 if ( ( udg_Zhengshu[124] == 26 ) ) then
 set udg_Zhengshu[124]=( udg_Zhengshu[124] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[122])
@@ -39519,7 +39524,7 @@ local group ydl_group
 local unit ydl_unit
 set udg_danwei[329]=GetEnumUnit()
 if ( ( UnitHasBuffBJ(udg_danwei[329], 0x4230304B) == true ) ) then
-if ( ( IsUnitType(udg_danwei[329], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[329]) == false ) ) then
 set udg_dian[242]=GetUnitLoc(udg_danwei[329])
 if ( ( DistanceBetweenPoints(udg_dian2[337], udg_dian[242]) <= 250.00 ) and ( ( ( ( ( AngleBetweenPoints(udg_dian2[337], udg_dian[242]) + 180.00 ) - GetUnitFacing(udg_danwei[329]) ) >= - 60.00 ) and ( ( ( AngleBetweenPoints(udg_dian2[337], udg_dian[242]) + 180.00 ) - GetUnitFacing(udg_danwei[329]) ) <= 60.00 ) ) or ( ( ( AngleBetweenPoints(udg_dian2[337], udg_dian[242]) + 180.00 ) - GetUnitFacing(udg_danwei[329]) ) >= 300.00 ) or ( ( ( AngleBetweenPoints(udg_dian2[337], udg_dian[242]) + 180.00 ) - GetUnitFacing(udg_danwei[329]) ) <= - 300.00 ) ) ) then
 call SetUnitX(udg_danwei[329], GetLocationX(udg_dian2[337]))
@@ -40616,7 +40621,6 @@ call DestroyGroup(udg_danweizu[38])
 else
 endif
 if ( ( udg_zhengshu[59] == 5 ) ) then
-call PauseUnit(udg_danwei[188], false)
 set udg_danwei[196]=null
 set udg_danwei[188]=null
 call PauseTimer(udg_jishiqi[51])
@@ -41662,9 +41666,8 @@ if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitI
 set udg_dian2[0]=GetUnitLoc(udg_danwei[222])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", udg_dian2[0]))
 call SetUnitTimeScale(udg_danwei[222], 1)
-call PauseUnit(udg_danwei[222], false)
+call s__Unit_PauseUnitMU(udg_danwei[222] , false , "寒霜冰封")
 call ResetUnitAnimation(udg_danwei[222])
-call UnitRemoveType(udg_danwei[222], UNIT_TYPE_TAUREN)
 call UnitDamageTarget(udg_danwei[218], udg_danwei[222], ( ( I2R(GetHeroInt(udg_danwei[218], true)) * 2.50 ) + ( I2R(GetUnitAbilityLevel(udg_danwei[218], 0x41303759)) * 35.00 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call RemoveLocation(udg_dian2[0])
 else
@@ -41675,8 +41678,7 @@ function Trig_bingdong2Func002Func019A takes nothing returns nothing
 set udg_danwei[222]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
 call SetUnitTimeScale(udg_danwei[222], 0.00)
-call PauseUnit(udg_danwei[222], true)
-call UnitAddType(udg_danwei[222], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[222] , true , "寒霜冰封")
 else
 endif
 set udg_danwei[222]=null
@@ -41944,8 +41946,7 @@ if ( ( IsUnitType(udg_danwei2[107], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_zhengshu2[107] <= 40 ) ) then
 if ( ( udg_zhengshu2[107] <= 10 ) ) then
 if ( ( udg_zhengshu2[107] == 1 ) ) then
-call PauseUnit(udg_danwei2[108], true)
-call UnitAddType(udg_danwei2[108], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[108] , true , "超究武神霸斩")
 else
 endif
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[108], ( 15.00 * I2R(udg_zhengshu2[107]) ), AngleBetweenPoints(udg_dian2[107], udg_dian2[108]))
@@ -42064,8 +42065,7 @@ if ( ( udg_zhengshu2[107] == 70 ) ) then
 call UnitDamageTarget(udg_danwei2[107], udg_danwei2[108], ( 200.00 + ( 1.80 * I2R(GetHeroStr(udg_danwei2[107], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call PlaySoundOnUnitBJ(gg_snd_MetalHeavySliceWood1, 100, udg_danwei2[107])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Thunderclap\\ThunderClapCaster.mdl", udg_dian2[109]))
-call PauseUnit(udg_danwei2[108], false)
-call UnitRemoveType(udg_danwei2[108], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[108] , false , "超究武神霸斩")
 call UnitAddAbility(udg_danwei2[108], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[108] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[108], 0x41726176)
@@ -42098,8 +42098,7 @@ endif
 endif
 else
 call UnitRemoveAbility(udg_danwei2[107], 0x4130394B)
-call PauseUnit(udg_danwei2[108], false)
-call UnitRemoveType(udg_danwei2[108], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[108] , false , "超究武神霸斩")
 call UnitAddAbility(udg_danwei2[108], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[108] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[108], 0x41726176)
@@ -42148,10 +42147,8 @@ call SetUnitY(udg_danwei2[110], GetLocationY(udg_dian2[2]))
 else
 endif
 call UnitAddAbility(udg_danwei2[110], 0x4130394D)
-call PauseUnit(udg_danwei2[110], true)
-call UnitAddType(udg_danwei2[110], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[111], true)
-call UnitAddType(udg_danwei2[111], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[110] , true , "黄龙点睛")
+call s__Unit_PauseUnitMU(udg_danwei2[111] , true , "黄龙点睛目标")
 call SetUnitTimeScale(udg_danwei2[110], 2.00)
 call PlaySoundOnUnitBJ(gg_snd_MetalHeavySliceStone3, 100, udg_danwei2[110])
 call StartTimerBJ(udg_times[110], false, 0.60)
@@ -42268,8 +42265,7 @@ call s__maphack_SetHeight(udg_danwei2[111] , ( s__maphack_GetHeight(udg_danwei2[
 call UnitRemoveAbility(udg_danwei2[111], 0x41726176)
 else
 if ( ( udg_zhengshu2[110] == 21 ) ) then
-call PauseUnit(udg_danwei2[111], false)
-call UnitRemoveType(udg_danwei2[111], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[111] , false , "黄龙点睛目标")
 call UnitAddAbility(udg_danwei2[111], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[111] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[111], 0x41726176)
@@ -42281,8 +42277,7 @@ call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , ( s__maphack_GetHeight(udg_danwei2[110]) - 30.00 ) , 0.00)
 call UnitRemoveAbility(udg_danwei2[110], 0x41726176)
 else
-call PauseUnit(udg_danwei2[110], false)
-call UnitRemoveType(udg_danwei2[110], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[110] , false , "黄龙点睛")
 call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[110], 0x41726176)
@@ -42294,14 +42289,12 @@ endif
 endif
 else
 call UnitRemoveAbility(udg_danwei2[110], 0x4130394D)
-call PauseUnit(udg_danwei2[111], false)
-call UnitRemoveType(udg_danwei2[111], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[111] , false , "黄龙点睛目标")
 call UnitAddAbility(udg_danwei2[111], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[111] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[111], 0x41726176)
 call SetUnitTimeScale(udg_danwei2[110], 1.00)
-call PauseUnit(udg_danwei2[110], false)
-call UnitRemoveType(udg_danwei2[110], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[110] , false , "黄龙点睛")
 call UnitAddAbility(udg_danwei2[110], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[110] , 0.00 , 0.00)
 call UnitRemoveAbility(udg_danwei2[110], 0x41726176)
@@ -42778,10 +42771,8 @@ call SetUnitAnimation(udg_danwei[239], "birth")
 call AddLightningLoc("AFOD", udg_dian[202], udg_dian[203])
 set udg_shandian[0]=bj_lastCreatedLightning
 call AddUnitAnimationProperties(udg_danwei[237], "channel", true)
-call PauseUnit(udg_danwei[237], true)
-call PauseUnit(udg_danwei[238], true)
-call UnitAddType(udg_danwei[237], UNIT_TYPE_TAUREN)
-call UnitAddType(udg_danwei[238], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[237] , true , "贤者之石")
+call s__Unit_PauseUnitMU(udg_danwei[238] , true , "贤者之石目标")
 call YDWEJumpTimer(udg_danwei[239] , AngleBetweenPoints(udg_dian[203], udg_dian[202]) , DistanceBetweenPoints(udg_dian[203], udg_dian[202]) , 1.50 , 0.01 , 0.00)
 call StartTimerBJ(udg_jishiqi[70], false, 1.50)
 set udg_Danwei[37]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[237]), 0x65303649, udg_dian[202], 270.00)
@@ -42821,10 +42812,8 @@ else
 call UnitDamageTarget(udg_danwei[237], udg_danwei[238], ( GetUnitState(udg_danwei[237], UNIT_STATE_MANA) / 3.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 endif
 call ForGroupBJ(udg_Danweizu[37], function Trig_xianzhezhishi2Func002A)
-call PauseUnit(udg_danwei[237], false)
-call PauseUnit(udg_danwei[238], false)
-call UnitRemoveType(udg_danwei[237], UNIT_TYPE_TAUREN)
-call UnitRemoveType(udg_danwei[238], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei[237] , false , "贤者之石")
+call s__Unit_PauseUnitMU(udg_danwei[238] , false , "贤者之石目标")
 call AddUnitAnimationProperties(udg_danwei[237], "channel", false)
 call DestroyLightning(udg_shandian[0])
 set udg_danwei[237]=null
@@ -42989,7 +42978,7 @@ function Trig_lunrudao_2Actions takes nothing returns nothing
 set udg_dian[204]=GetUnitLoc(udg_danwei[243])
 set udg_dian[205]=PolarProjectionBJ(udg_dian[204], RMinBJ(( I2R(udg_zhengshu[68]) / 10.00 ), 80.00), AngleBetweenPoints(udg_dian[204], udg_dian[206]))
 if ( ( DistanceBetweenPoints(udg_dian[204], udg_dian[206]) > 100.00 ) and ( IsUnitType(udg_danwei[243], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_danwei[243], 0x42637963) == false ) and ( UnitHasBuffBJ(udg_danwei[243], 0x42637932) == false ) and ( UnitHasBuffBJ(udg_danwei[243], 0x4253544E) == false ) and ( UnitHasBuffBJ(udg_danwei[243], 0x42505345) == false ) ) then
-if ( ( IsUnitType(udg_danwei[243], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[243]) == false ) ) then
 set udg_zhengshu[68]=( udg_zhengshu[68] + 1 )
 call SetUnitVertexColor(udg_danwei[243], 128, 128, 128, IMaxBJ(( 255 - R2I(( DistanceBetweenPoints(udg_dian[204], udg_dian[206]) * 0.10 )) ), 50))
 call SetUnitFacing(udg_danwei[243], AngleBetweenPoints(udg_dian[204], udg_dian[206]))
@@ -43057,7 +43046,7 @@ call SetUnitVertexColor(udg_danwei[242], 255, 255, 255, 125)
 call SetUnitTimeScale(udg_danwei[242], 0.00)
 call SetUnitFacing(udg_danwei[242], GetUnitFacing(udg_danwei[240]))
 call SetUnitPathing(udg_danwei[242], false)
-call PauseUnit(udg_danwei[242], true)
+call s__Unit_PauseUnitMU(udg_danwei[242] , true , "虚幻梦境")
 call SetUnitX(udg_danwei[242], GetLocationX(udg_dian[204]))
 call SetUnitY(udg_danwei[242], GetLocationY(udg_dian[204]))
 set udg_zhengshu2[20]=( 60 + ( 20 * GetUnitAbilityLevel(udg_danwei[239], 0x41303234) ) )
@@ -43074,7 +43063,6 @@ endfunction
 function Trig_xuhuan_3Actions takes nothing returns nothing
 if ( ( udg_zhengshu2[20] >= 0 ) and ( IsUnitType(udg_danwei[242], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_danwei[240], 0x42303033) == true ) and ( udg_shishu2[20] < ( GetUnitState(udg_danwei[240], UNIT_STATE_LIFE) + ( 200.00 + Pow(( 10000.00 * I2R(udg_zhengshu[( ( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei[240])) + 1 ) + 19 )]) ), 0.50) ) ) ) ) then
 set udg_zhengshu2[20]=( udg_zhengshu2[20] - 1 )
-call PauseUnit(udg_danwei[242], true)
 call SetUnitLifePercentBJ(udg_danwei[240], RMinBJ(GetUnitLifePercent(udg_danwei[240]), GetUnitLifePercent(udg_danwei[242])))
 call SetUnitLifePercentBJ(udg_danwei[242], RMinBJ(GetUnitLifePercent(udg_danwei[240]), GetUnitLifePercent(udg_danwei[242])))
 call SetUnitManaPercentBJ(udg_danwei[240], RMinBJ(GetUnitManaPercent(udg_danwei[240]), GetUnitManaPercent(udg_danwei[242])))
@@ -43768,7 +43756,7 @@ call s__Event_AnyUnitSkill(gg_trg_houkongfan , 3 , 0x41303247)
 call TriggerAddAction(gg_trg_houkongfan, function Trig_houkongfanActions)
 endfunction
 function Trig_houkognfan2Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_danwei[273], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[273]) == false ) ) then
 if ( ( IsUnitType(udg_danwei[273], UNIT_TYPE_DEAD) == false ) and ( udg_zhengshu[135] > 0 ) ) then
 set udg_zhengshu[135]=( udg_zhengshu[135] - 1 )
 set udg_dian[219]=GetUnitLoc(udg_danwei[273])
@@ -44353,8 +44341,7 @@ call TriggerAddAction(gg_trg_time_shoubiao, function Trig_time_shoubiaoActions)
 endfunction
 function Trig_time_shoubiao_2Func001Func005A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
-call UnitRemoveType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "特制时间手表")
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303053 ) ) then
 call SetUnitVertexColor(udg_danwei2[0], 25, 25, 50, 255)
@@ -44386,8 +44373,7 @@ endfunction
 function Trig_time_shoubiao_2Func001Func014A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_ANCIENT) == false ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x48626C6D ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x68677477 ) and ( IsUnitInGroup(udg_danwei2[0], udg_danweizu[56]) == false ) ) then
-call UnitAddType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], true)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "特制时间手表")
 call GroupAddUnit(udg_danweizu2[56], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
 call SetUnitVertexColor(udg_danwei2[0], 128, 128, 128, 128)
@@ -44400,8 +44386,7 @@ set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[2]=GetUnitLoc(udg_danwei2[0])
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[2]) <= 200.00 ) ) then
 else
-call UnitRemoveType(udg_danwei2[0], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[0], false)
+call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "特制时间手表")
 call GroupRemoveUnit(udg_danweizu2[56], udg_danwei2[0])
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 if ( ( GetUnitTypeId(udg_danwei2[0]) == 0x75303053 ) ) then
@@ -44486,8 +44471,7 @@ set udg_danwei2[95]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[93]), 0x65303052
 set udg_danwei2[96]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[93]), 0x65303052, udg_dian2[1], AngleBetweenPoints(udg_dian2[93], udg_dian2[94]))
 set udg_danwei2[97]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[93]), 0x65303052, udg_dian2[2], AngleBetweenPoints(udg_dian2[93], udg_dian2[94]))
 set udg_zhengshu2[93]=0
-call UnitAddType(udg_danwei2[93], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[93], true)
+call s__Unit_PauseUnitMU(udg_danwei2[93] , true , "瞬移魔术")
 call UnitRemoveAbility(udg_danwei2[93], 0x41304754)
 if ( ( GetUnitAbilityLevel(udg_danwei2[93], 0x41303852) == 1 ) ) then
 else
@@ -44556,8 +44540,7 @@ else
 endif
 else
 call ResetUnitAnimation(udg_danwei2[93])
-call UnitRemoveType(udg_danwei2[93], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei2[93], false)
+call s__Unit_PauseUnitMU(udg_danwei2[93] , false , "瞬移魔术")
 call PauseTimer(udg_times[93])
 set udg_danwei2[93]=null
 call RemoveLocation(udg_dian2[93])
@@ -45632,8 +45615,7 @@ set udg_danwei[323]=GetEnumUnit()
 if ( ( udg_danwei[323] != udg_danwei[322] ) and ( IsUnitType(udg_danwei[323], UNIT_TYPE_ANCIENT) == false ) and ( GetUnitTypeId(udg_danwei[323]) != 0x68677477 ) and ( IsUnitType(udg_danwei[323], UNIT_TYPE_DEAD) == false ) ) then
 call SetUnitTimeScale(udg_danwei[323], 0.00)
 call SetUnitVertexColor(udg_danwei[323], 128, 128, 128, 128)
-call UnitAddType(udg_danwei[323], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[323], true)
+call s__Unit_PauseUnitMU(udg_danwei[323] , true , "咲夜的世界")
 call GroupAddUnit(udg_danweizu[60], udg_danwei[323])
 else
 endif
@@ -45667,8 +45649,7 @@ endif
 endif
 endif
 endif
-call UnitRemoveType(udg_danwei[323], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_danwei[323], false)
+call s__Unit_PauseUnitMU(udg_danwei[323] , false , "咲夜的世界")
 set udg_danwei[323]=null
 endfunction
 function Trig_the_world_3Func003Func012A takes nothing returns nothing
@@ -45792,7 +45773,7 @@ call TriggerRegisterTimerExpireEvent(gg_trg_chaosuzaisheng2, udg_jishiqi[97])
 call TriggerAddAction(gg_trg_chaosuzaisheng2, function Trig_chaosuzaisheng2Actions)
 endfunction
 function Trig_shunbu_1Func006T takes nothing returns nothing
-if ( ( IsUnitType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)) == false ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
 if ( ( IsUnitType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), UNIT_TYPE_DEAD) == false ) and ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) > 0 ) ) then
 call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xDA9511F2) , 70.00)
@@ -45900,7 +45881,7 @@ call TriggerRegisterTimerExpireEvent(gg_trg_wanjie_0_5, udg_jishiqi[146])
 call TriggerAddAction(gg_trg_wanjie_0_5, function Trig_wanjie_0_5Actions)
 endfunction
 function Trig_wanjie_4Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_danwei[459], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[459]) == false ) ) then
 if ( ( udg_zhengshu[141] > 0 ) and ( IsUnitType(udg_danwei[459], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshu[141]=( udg_zhengshu[141] - 1 )
 call SetTextTagTextBJ(udg_piaofuwenzi[4], ( "" + R2SW(( I2R(udg_zhengshu[141]) * 0.03 ), 1, 1) ), 12.00)
@@ -47016,7 +46997,7 @@ endfunction
 function Trig_feitui2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[360], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[360], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[360]) == false ) or ( IsUnitType(udg_danwei[360], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[90]=( udg_zhengshu[90] + 1 )
 if ( ( IsUnitAliveBJ(udg_danwei[360]) == true ) and ( udg_zhengshu[90] <= 20 ) ) then
 set udg_dian[272]=GetUnitLoc(udg_danwei[360])
@@ -47102,7 +47083,7 @@ endfunction
 function Trig_zhanzhengjianta2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei[363], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[363], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[363]) == false ) or ( IsUnitType(udg_danwei[363], UNIT_TYPE_DEAD) == true ) ) ) then
 if ( ( udg_zhengshu[91] > 0 ) ) then
 set udg_zhengshu[91]=( udg_zhengshu[91] - 1 )
 set udg_dian[275]=GetUnitLoc(udg_danwei[362])
@@ -47149,7 +47130,7 @@ call s__Event_AnyUnitSkill(gg_trg_lianji , 3 , 0x41303641)
 call TriggerAddAction(gg_trg_lianji, function Trig_lianjiActions)
 endfunction
 function Trig_lianji2Actions takes nothing returns nothing
-if ( ( ( IsUnitType(udg_danwei[365], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei[365], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei[365]) == false ) or ( IsUnitType(udg_danwei[365], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[92]=( udg_zhengshu[92] + 1 )
 if ( ( udg_zhengshu[92] <= 19 ) and ( IsUnitDeadBJ(udg_danwei[365]) == false ) and ( IsUnitDeadBJ(udg_danwei[366]) == false ) ) then
 set udg_dian[278]=GetUnitLoc(udg_danwei[365])
@@ -47228,7 +47209,7 @@ call s__Event_AnyUnitSkill(gg_trg_yexingkuangben_1 , 3 , 0x41303649)
 call TriggerAddAction(gg_trg_yexingkuangben_1, function Trig_yexingkuangben_1Actions)
 endfunction
 function Trig_yexingkuangben_2Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_danwei2[43], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[43]) == false ) ) then
 if ( ( UnitHasBuffBJ(udg_danwei2[43], 0x42303053) == true ) and ( IsUnitType(udg_danwei2[43], UNIT_TYPE_DEAD) == false ) ) then
 set udg_zhengshu[140]=( udg_zhengshu[140] - 1 )
 call SetTextTagTextBJ(udg_piaofuwenzi[3], ( "野性狂奔：" + R2SW(( I2R(udg_zhengshu[140]) * 0.03 ), 1, 1) ), 11.00)
@@ -47326,7 +47307,7 @@ endif
 else
 endif
 if ( ( udg_Zhengshu[121] <= 500 ) and ( udg_Zhengshu[121] > 0 ) ) then
-if ( ( IsUnitType(udg_Danwei[121], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[121]) == false ) ) then
 set udg_Zhengshu[121]=( udg_Zhengshu[121] - 1 )
 if ( ( udg_Zhengshu[121] == 0 ) ) then
 call UnitRemoveAbility(udg_Danwei[121], 0x41304A42)
@@ -47559,7 +47540,7 @@ else
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], ( ( ( 4.50 + ( 1.50 * I2R(GetUnitAbilityLevel(udg_danwei2[67], 0x41304949)) ) ) + ( GetUnitDefaultMoveSpeed(udg_danwei2[67]) * 0.03 ) ) * ( I2R(udg_zhengshu2[68]) / 20.00 ) ), AngleBetweenPoints(udg_dian2[0], udg_dian2[68]))
 endif
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian2[68]) >= 150.00 ) and ( IsUnitType(udg_danwei2[67], UNIT_TYPE_DEAD) == false ) ) then
-if ( ( IsUnitType(udg_danwei2[67], UNIT_TYPE_TAUREN) == false ) and ( IsUnitType(udg_danwei2[67], UNIT_TYPE_STUNNED) == false ) and ( IsUnitType(udg_danwei2[67], UNIT_TYPE_SNARED) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303038) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4230304D) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303046) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303146) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4230304A) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42637963) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42637932) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4253544E) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42505345) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[67]) == false ) and ( IsUnitType(udg_danwei2[67], UNIT_TYPE_STUNNED) == false ) and ( IsUnitType(udg_danwei2[67], UNIT_TYPE_SNARED) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303038) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4230304D) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303046) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42303146) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4230304A) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42637963) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42637932) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x4253544E) == false ) and ( UnitHasBuffBJ(udg_danwei2[67], 0x42505345) == false ) ) then
 set udg_zhengshu2[68]=IMaxBJ(R2I(( ( I2R(udg_zhengshu2[68]) * 0.99 ) - 1.00 )), 20)
 call UnitAddAbility(udg_danwei2[67], 0x41305041)
 call SetUnitAnimationByIndex(udg_danwei2[67], 9)
@@ -48339,7 +48320,7 @@ function Trig_dierjiefang_3Actions takes nothing returns nothing
 set udg_zhengshu[110]=( udg_zhengshu[110] + 1 )
 set udg_dian[300]=GetUnitLoc(udg_danwei[400])
 set udg_dian[304]=GetUnitLoc(udg_danwei[402])
-if ( ( udg_danwei[402] != null ) and ( IsUnitType(udg_danwei[400], UNIT_TYPE_TAUREN) == false ) and ( IsUnitType(udg_danwei[400], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei[402], UNIT_TYPE_DEAD) == false ) and ( udg_zhengshu2[284] <= ( 200 + ( 100 * GetUnitAbilityLevel(udg_danwei[400], 0x41304447) ) ) ) and ( DistanceBetweenPoints(udg_dian[300], udg_dian[304]) <= 400.00 ) ) then
+if ( ( udg_danwei[402] != null ) and ( IsUnitPausedBJ(udg_danwei[400]) == false ) and ( IsUnitType(udg_danwei[400], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_danwei[402], UNIT_TYPE_DEAD) == false ) and ( udg_zhengshu2[284] <= ( 200 + ( 100 * GetUnitAbilityLevel(udg_danwei[400], 0x41304447) ) ) ) and ( DistanceBetweenPoints(udg_dian[300], udg_dian[304]) <= 400.00 ) ) then
 set udg_dian[302]=PolarProjectionBJ(udg_dian[304], GetRandomReal(75.00, 200.00), GetRandomReal(0, 360.00))
 call SetUnitX(udg_danwei[400], GetLocationX(udg_dian[302]))
 call SetUnitY(udg_danwei[400], GetLocationY(udg_dian[302]))
@@ -48402,7 +48383,7 @@ endfunction
 function Trig_dierjiefang_4Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei[400], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei[400]) == false ) ) then
 if ( ( udg_zhengshu[110] > 0 ) ) then
 set udg_zhengshu2[284]=IMinBJ(( udg_zhengshu2[284] + 1 ), ( 200 + ( 100 * GetUnitAbilityLevel(udg_danwei[400], 0x41304447) ) ))
 else
@@ -49032,7 +49013,7 @@ endfunction
 function Trig_yinsufengbao_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( ( IsUnitType(udg_danwei2[286], UNIT_TYPE_TAUREN) == false ) or ( IsUnitType(udg_danwei2[286], UNIT_TYPE_DEAD) == true ) ) ) then
+if ( ( ( IsUnitPausedBJ(udg_danwei2[286]) == false ) or ( IsUnitType(udg_danwei2[286], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu2[287]=( udg_zhengshu2[287] - 1 )
 if ( ( udg_zhengshu2[287] >= 0 ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[286])
@@ -49126,7 +49107,7 @@ endfunction
 function Trig_yefu_tuji_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei2[85], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[85]) == false ) ) then
 set udg_zhengshu2[85]=( udg_zhengshu2[85] + 1 )
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[85])
 if ( ( udg_zhengshu2[85] <= 40 ) ) then
@@ -49324,7 +49305,7 @@ endfunction
 function Trig_emo_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei2[91], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[91]) == false ) ) then
 set udg_zhengshu2[91]=( udg_zhengshu2[91] + 1 )
 if ( ( udg_zhengshu2[91] <= 30 ) ) then
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[91])
@@ -49498,7 +49479,7 @@ endfunction
 function Trig_Damon_Lord_Walk_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_Danwei[20], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[20]) == false ) ) then
 if ( ( udg_Zhengshu[20] < 10 ) ) then
 set udg_Zhengshu[20]=( udg_Zhengshu[20] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_Danwei[20])
@@ -49721,8 +49702,7 @@ set udg_danwei2[1]=GetEnumUnit()
 call UnitAddAbility(udg_danwei2[1], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[1] , 0.00 , 600.00)
 call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
-call PauseUnit(udg_danwei2[1], false)
-call UnitRemoveType(udg_danwei2[1], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[1] , false , "红色不夜城")
 set udg_danwei2[1]=null
 endfunction
 function Trig_hongmo_2Func001Func003Func008Func007A takes nothing returns nothing
@@ -49738,8 +49718,7 @@ call UnitAddAbility(udg_danwei2[1], 0x41726176)
 call s__maphack_SetHeight(udg_danwei2[1] , ( s__maphack_GetHeight(udg_danwei2[1]) + 10.00 ) , 0.00)
 call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
 call UnitDamageTarget(udg_danwei2[77], udg_danwei2[1], ( 12.50 + ( ( I2R(GetHeroAgi(udg_danwei2[77], true)) / 40.00 ) * ( 2.00 + ( I2R(udg_zhengshu2[84]) * 0.50 ) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call PauseUnit(udg_danwei2[1], true)
-call UnitAddType(udg_danwei2[1], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[1] , true , "红色不夜城")
 call GroupAddUnit(udg_danweizu2[77], udg_danwei2[1])
 call RemoveLocation(udg_dian2[0])
 call RemoveLocation(udg_dian2[1])
@@ -49750,7 +49729,7 @@ endfunction
 function Trig_hongmo_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_danwei2[77], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_danwei2[77]) == false ) ) then
 set udg_zhengshu2[77]=( udg_zhengshu2[77] + 1 )
 if ( ( udg_zhengshu2[77] <= 70 ) ) then
 if ( ( udg_zhengshu2[77] <= 40 ) ) then
@@ -52823,8 +52802,7 @@ set udg_zhengshu2[226]=0
 call StopSoundBJ(gg_snd_StarfallCaster101, false)
 call PlaySoundOnUnitBJ(gg_snd_StarfallCaster101, 100, udg_danwei2[225])
 call StartTimerBJ(udg_times[225], true, 0.03)
-call PauseUnit(udg_danwei2[225], true)
-call UnitAddType(udg_danwei2[225], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[255] , true , "元素-月符")
 endfunction
 function InitTrig_yuefu_1 takes nothing returns nothing
 set gg_trg_yuefu_1=CreateTrigger()
@@ -52942,8 +52920,7 @@ set udg_aXUNHUAN[183]=udg_aXUNHUAN[183] + 1
 endloop
 else
 call PauseTimer(udg_times[225])
-call PauseUnit(udg_danwei2[225], false)
-call UnitRemoveType(udg_danwei2[225], UNIT_TYPE_TAUREN)
+call s__Unit_PauseUnitMU(udg_danwei2[255] , false , "元素-月符")
 set udg_aXUNHUAN[184]=226
 loop
 exitwhen udg_aXUNHUAN[184] > 229
@@ -53622,7 +53599,7 @@ call ForGroupBJ(udg_danweizu2[51], function Trig_fenshen_1Func001Func003Func004F
 endif
 call RemoveLocation(udg_dian2[0])
 if ( ( udg_Zhengshu[( 55 + GetUnitUserData(udg_Danwei[49]) )] == 11 ) ) then
-call PauseUnit(udg_Danwei[49], false)
+call s__Unit_PauseUnitMU(udg_Danwei[49] , false , "谐波叠加")
 call UnitAddAbility(udg_Danwei[49], 0x41304943)
 if ( ( CountUnitsInGroup(udg_Danweizu[49]) == 1 ) ) then
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[65]), 0x41304938, false)
@@ -54313,7 +54290,7 @@ set udg_aXUNHUAN[197]=udg_aXUNHUAN[197] + 1
 endloop
 call SetUnitX(udg_Danwei[49], GetLocationX(udg_dian[350]))
 call SetUnitY(udg_Danwei[49], GetLocationY(udg_dian[350]))
-call PauseUnit(udg_Danwei[49], true)
+call s__Unit_PauseUnitMU(udg_Danwei[49] , true , "谐波叠加")
 call UnitAddAbility(udg_Danwei[49], 0x416C6F63)
 call GroupAddUnit(udg_Danweizu[49], udg_Danwei[49])
 if ( ( udg_Zhengshu[48] < 4 ) ) then
@@ -54638,7 +54615,6 @@ set udg_danwei2[345]=GetTriggerUnit()
 set udg_zhengshu2[345]=0
 set udg_dian2[345]=GetUnitLoc(udg_danwei2[345])
 call PauseUnit(udg_danwei2[345], true)
-call UnitAddType(udg_danwei2[345], UNIT_TYPE_TAUREN)
 call StartTimerBJ(udg_times[345], true, 0.04)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=9
@@ -54692,7 +54668,6 @@ call RemoveLocation(udg_dian2[1])
 else
 if ( ( udg_zhengshu2[345] == 40 ) ) then
 call PauseUnit(udg_danwei2[345], false)
-call UnitRemoveType(udg_danwei2[345], UNIT_TYPE_TAUREN)
 set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=15
 loop
@@ -55032,7 +55007,7 @@ call SetUnitY(udg_Danwei[86], GetLocationY(udg_Dian[85]))
 call RemoveLocation(udg_Dian[85])
 else
 endif
-if ( ( IsUnitType(udg_Danwei[86], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[86]) == false ) ) then
 call SetUnitVertexColor(udg_Danwei[86], 255, 255, 255, R2I(RMaxBJ(25.00, ( 255.00 - ( 255.00 * ( ( RMaxBJ(2000.00, DistanceBetweenPoints(udg_Dian[86], udg_Dian[87])) - 2000.00 ) / 500.00 ) ) ))))
 else
 endif
@@ -55554,7 +55529,7 @@ call s__Event_AnyUnitSkill(gg_trg_hengkan_1 , 3 , 0x41304B4D)
 call TriggerAddAction(gg_trg_hengkan_1, function Trig_hengkan_1Actions)
 endfunction
 function Trig_hengkan_2Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_Danwei[89], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[89]) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[89], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu[89] > 0 ) ) then
 set udg_Zhengshu[89]=( udg_Zhengshu[89] - 1 )
 set udg_Dian[89]=GetUnitLoc(udg_Danwei[89])
@@ -55697,7 +55672,7 @@ endfunction
 function Trig_huaji_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_Danwei[91], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[91]) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[91], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_Zhengshu[91] > 0 ) ) then
 set udg_Zhengshu[91]=( udg_Zhengshu[91] - 1 )
@@ -55830,7 +55805,7 @@ endfunction
 function Trig_hengsao_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_Danwei[93], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[93]) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[93], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[93], 0x42303250) == true ) and ( ( UnitHasBuffBJ(udg_Danwei[93], 0x42303256) == true ) or ( ( UnitHasBuffBJ(udg_Danwei[93], 0x4253544E) == false ) and ( UnitHasBuffBJ(udg_Danwei[93], 0x42505345) == false ) ) ) and ( udg_Zhengshu[93] > 0 ) ) then
 set udg_Zhengshu[93]=( udg_Zhengshu[93] - 1 )
 if ( ( udg_Zhengshu[98] > 0 ) ) then
@@ -55929,7 +55904,7 @@ endfunction
 function Trig_tiaokan_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( IsUnitType(udg_Danwei[94], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[94]) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[94], UNIT_TYPE_DEAD) == false ) ) then
 if ( ( udg_Zhengshu[94] > 0 ) ) then
 set udg_Zhengshu[94]=( udg_Zhengshu[94] - 1 )
@@ -56247,7 +56222,7 @@ call s__Event_AnyUnitSkill(gg_trg_heihua_1 , 3 , 0x41304C34)
 call TriggerAddAction(gg_trg_heihua_1, function Trig_heihua_1Actions)
 endfunction
 function Trig_heihua_2Actions takes nothing returns nothing
-if ( ( IsUnitType(udg_Danwei[99], UNIT_TYPE_TAUREN) == false ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[99]) == false ) ) then
 if ( ( IsUnitType(udg_Danwei[99], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu[99] > 0 ) ) then
 set udg_Zhengshu[99]=( udg_Zhengshu[99] - 1 )
 call SetTextTagTextBJ(udg_piaofuwenzi[5], ( "狂化：" + R2SW(( I2R(udg_Zhengshu[99]) * 0.03 ), 1, 1) ), 11.00)
@@ -56368,7 +56343,7 @@ call RemoveLocation(udg_Dian[89])
 call StartTimerBJ(udg_Times[132], false, 0.45)
 call SetUnitAnimationByIndex(udg_Danwei[132], 6)
 else
-if ( ( IsUnitType(udg_Danwei[132], UNIT_TYPE_TAUREN) == false ) and ( IsUnitType(udg_Danwei[132], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu[132] > 0 ) ) then
+if ( ( IsUnitPausedBJ(udg_Danwei[132]) == false ) and ( IsUnitType(udg_Danwei[132], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu[132] > 0 ) ) then
 set udg_Zhengshu[132]=( udg_Zhengshu[132] - 1 )
 call StopSoundBJ(gg_snd_ArrowAttack1, false)
 call PlaySoundOnUnitBJ(gg_snd_ArrowAttack1, 100, udg_Danwei[132])
@@ -56482,7 +56457,7 @@ call RemoveLocation(udg_Dian[136])
 set udg_Shishu[133]=GetUnitFacing(udg_Danwei[132])
 set udg_Shishu[135]=GetUnitFacing(udg_Danwei[132])
 else
-if ( ( IsUnitType(udg_Danwei[132], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[132], 0x42303259) == true ) and ( UnitHasBuffBJ(udg_Danwei[132], 0x42505345) == false ) and ( IsUnitType(udg_Danwei[132], UNIT_TYPE_TAUREN) == false ) and ( udg_Zhengshu[133] > 0 ) ) then
+if ( ( IsUnitType(udg_Danwei[132], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[132], 0x42303259) == true ) and ( UnitHasBuffBJ(udg_Danwei[132], 0x42505345) == false ) and ( IsUnitPausedBJ(udg_Danwei[132]) == false ) and ( udg_Zhengshu[133] > 0 ) ) then
 set udg_Zhengshu[133]=( udg_Zhengshu[133] - 1 )
 set udg_Shishu[132]=( udg_Shishu[132] + 0.40 )
 set udg_Shishu[134]=( GetUnitFacing(udg_Danwei[132]) - udg_Shishu[133] )
@@ -57907,9 +57882,7 @@ set gg_trg_qizhidan_1=CreateTrigger()
 call s__Event_AnyUnitSkill(gg_trg_qizhidan_1 , 3 , 0x41304F41)
 call TriggerAddAction(gg_trg_qizhidan_1, function Trig_qizhidan_1Actions)
 endfunction
-function Trig_qizhidan_2Func001Func001Func022Func005T takes nothing returns nothing
-call UnitAddType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), UNIT_TYPE_TAUREN)
-call PauseUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), true)
+function Trig_qizhidan_2Func001Func001Func021Func005T takes nothing returns nothing
 call SetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE1E302A1))
 call SetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x8E7ECCD1))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
@@ -57955,8 +57928,7 @@ call RemoveLocation(udg_Dian[162])
 set udg_Dian[162]=GetUnitLoc(udg_Danwei[163])
 set udg_Danwei[164]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[161]), 0x65303833, udg_Dian[162], 0)
 call RemoveLocation(udg_Dian[162])
-call UnitAddType(udg_Danwei[163], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_Danwei[163], true)
+call s__Unit_PauseUnitMU(udg_Danwei[163] , true , "七之弹")
 call SetUnitTimeScale(udg_Danwei[163], 0.00)
 call SetUnitVertexColor(udg_Danwei[163], 128, 128, 128, 128)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\RocketMissile\\RocketMissile.mdl", udg_Danwei[163], "chest"))
@@ -57975,12 +57947,11 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, R2I(( TimerGetTimeout
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE1E302A1, GetUnitX(udg_Danwei[164]))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x8E7ECCD1, GetUnitY(udg_Danwei[164]))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62274AD0, udg_Danwei[163])
-call TimerStart(ydl_timer, 0.03, true, function Trig_qizhidan_2Func001Func001Func022Func005T)
+call TimerStart(ydl_timer, 0.03, true, function Trig_qizhidan_2Func001Func001Func021Func005T)
 else
 if ( ( udg_Zhengshu[163] == 2 ) ) then
 set udg_Zhengshu[163]=( udg_Zhengshu[163] - 1 )
-call UnitRemoveType(udg_Danwei[163], UNIT_TYPE_TAUREN)
-call PauseUnit(udg_Danwei[163], false)
+call s__Unit_PauseUnitMU(udg_Danwei[163] , false , "七之弹")
 call SetUnitTimeScale(udg_Danwei[163], 1.00)
 call SetUnitVertexColor(udg_Danwei[163], 255, 255, 255, 255)
 call StartTimerBJ(udg_Times[172], false, 3.00)
@@ -58036,7 +58007,7 @@ function Trig_fengkuangsheji_2Actions takes nothing returns nothing
 if ( ( IsTriggerEnabled(gg_trg_fengkuangsheji_3) == true ) ) then
 set udg_Dian[162]=GetUnitLoc(udg_Danwei[161])
 set udg_Dian[163]=GetUnitLoc(udg_Danwei[163])
-if ( ( IsUnitType(udg_Danwei[161], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_Danwei[163], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[161], 0x42505345) == false ) and ( IsUnitType(udg_Danwei[161], UNIT_TYPE_TAUREN) == false ) and ( DistanceBetweenPoints(udg_Dian[162], udg_Dian[163]) <= 1000.00 ) ) then
+if ( ( IsUnitType(udg_Danwei[161], UNIT_TYPE_DEAD) == false ) and ( IsUnitType(udg_Danwei[163], UNIT_TYPE_DEAD) == false ) and ( UnitHasBuffBJ(udg_Danwei[161], 0x42505345) == false ) and ( IsUnitPausedBJ(udg_Danwei[161]) == false ) and ( DistanceBetweenPoints(udg_Dian[162], udg_Dian[163]) <= 1000.00 ) ) then
 call StopSoundBJ(gg_snd_RIFLE2HD, false)
 call PlaySoundOnUnitBJ(gg_snd_RIFLE2HD, 100, udg_Danwei[161])
 call SetUnitFacing(udg_Danwei[161], AngleBetweenPoints(udg_Dian[162], udg_Dian[163]))
@@ -58222,7 +58193,7 @@ call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC5884
 call SetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), 0x41304F51, GetUnitAbilityLevel(udg_Danwei[161], 0x41304F4A))
 else
 endif
-call PauseUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), false)
+call s__Unit_PauseUnitMU(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE) , false , "食时之城镜像")
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
@@ -58239,7 +58210,7 @@ set udg_Dian[163]=PolarProjectionBJ(udg_Dian[167], GetRandomReal(300.00, 600.00)
 call SetUnitFacing(udg_Danwei[167], GetUnitFacing(udg_Danwei[161]))
 call SetUnitX(udg_Danwei[167], GetLocationX(udg_Dian[163]))
 call SetUnitY(udg_Danwei[167], GetLocationY(udg_Dian[163]))
-call PauseUnit(udg_Danwei[167], true)
+call s__Unit_PauseUnitMU(udg_Danwei[167] , true , "食时之城镜像")
 call SetUnitAnimationByIndex(udg_Danwei[167], 10)
 call GroupAddUnit(udg_Danweizu[164], udg_Danwei[167])
 call SelectUnitAddForPlayer(udg_Danwei[167], GetOwningPlayer(udg_Danwei[161]))
@@ -60727,7 +60698,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1389027442")
+call ExecuteFunc("jasshelper__initstructs1402313782")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60860,7 +60831,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1389027442 takes nothing returns nothing
+function jasshelper__initstructs1402313782 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
