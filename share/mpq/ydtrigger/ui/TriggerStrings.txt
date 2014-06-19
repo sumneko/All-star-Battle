@@ -542,6 +542,10 @@ baka.Sp="洗牌"
 baka.Sp="将1-10号玩家随机重新洗牌,并自动重新设置颜色与结盟关系."
 baka.SPHint="你之后用整数转化玩家/获取玩家的索引均为洗牌后的结果"
 
+maphack.InitHero="加入反全图"
+maphack.InitHero="将 ",~单位," 加入反全图系统"
+maphack.InitHeroHint="注册英雄会自动加入"
+
 //基础库
 toDefine("循环整数A局部化")="将 循环整数A 局部化(废弃)"
 toDefine("循环整数A局部化")="将 循环整数A 局部化(废弃)"
@@ -861,9 +865,9 @@ UnitSetCanSleepBJ="设置单位夜晚睡眠"
 UnitSetCanSleepBJ="设置 ",~单位," ",~Sleep/Remain Awake," 在夜晚"
 UnitSetCanSleepBJHint="只对中立单位有效. 并不影响催眠魔法."
 
-UnitWakeUpBJ="叫醒"
-UnitWakeUpBJ="叫醒 ",~单位
-UnitWakeUpBJHint="不影响催眠魔法效果."
+UnitWakeUpBJ="注册英雄<全明星>"
+UnitWakeUpBJ="注册英雄 ",~单位
+UnitWakeUpBJHint=""
 
 
 //UnitIgnoreAlarm
@@ -884,9 +888,9 @@ MakeUnitRescuableToForceBJ="设置可否营救(对玩家组)"
 MakeUnitRescuableToForceBJ="设置 ",~单位," ",~Rescuable/Unrescuable," 对 ",~玩家组
 MakeUnitRescuableToForceBJHint=
 
-SetUnitRescueRange="设置营救范围"
-SetUnitRescueRange="设置 ",~单位," 的营救范围为 ",~Range
-SetUnitRescueRangeHint=
+SetUnitRescueRange="单位Lua接口<全明星>"
+SetUnitRescueRange="令 ",~单位," 发起编号为 ",~Range," 的Lua事件"
+SetUnitRescueRangeHint="编号取负数"
 
 SetRescueUnitColorChangeBJ="设置营救颜色(单位)"
 SetRescueUnitColorChangeBJ="设置单位 ",~Change/Retain Color," 当被营救时"

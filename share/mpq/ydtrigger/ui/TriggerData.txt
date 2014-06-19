@@ -3891,6 +3891,10 @@ _baka.lucky_Category=TC_MU_BAKA
 baka.Sp=0
 _baka.Sp_Category=TC_MU_BAKA
 
+maphack.InitHero=0,unit
+_maphack.InitHero_Defaults=GetTriggerUnit
+_maphack.InitHero_Category=TC_MU_BAKA
+
 //基础库
 toDefine("循环整数A局部化")=0
 _toDefine("循环整数A局部化")_Defaults=
