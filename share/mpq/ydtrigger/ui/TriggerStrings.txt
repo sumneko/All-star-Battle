@@ -801,11 +801,11 @@ SetUnitInvulnerable="设置 ",~单位," ",~Invulnerable/Vulnerable
 SetUnitInvulnerableHint=
 
 PauseUnit="暂停/恢复 [R]"
-PauseUnit="设置 ",~单位," ",~Pause/Unpause
+PauseUnit="设置 ",~单位," ",~Pause/Unpause," ,标签为 ",~标签
 PauseUnitHint=
 
 PauseUnitBJ="暂停/恢复"
-PauseUnitBJ=~Pause/Unpause," ",~单位
+PauseUnitBJ=~Pause/Unpause," ",~单位," ,标签为 ",~标签
 PauseUnitBJHint=
 
 PauseAllUnitsBJ="暂停/恢复 所有单位"
