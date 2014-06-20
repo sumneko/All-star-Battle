@@ -8111,6 +8111,11 @@ STRING 1362
 暗刃
 }
 
+STRING 1363
+{
+|cffffffff洗牌：|r|cffff0000洗牌模式|r|cffffcc00(S)|r
+}
+
 STRING 1364
 {
 游戏进行了|cffff505050分钟|r
@@ -33374,11 +33379,6 @@ STRING 5605
 // 技能: A0QH (禁止移动攻击), Name (名字)
 {
 禁止移动攻击
-}
-
-STRING 5606
-{
-|cffffffff洗牌：|r|cffff0000洗牌模式|r|cffffcc00(S)|r
 }
 
 STRING 5607
