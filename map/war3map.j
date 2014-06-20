@@ -2363,13 +2363,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -4205,6 +4205,7 @@ if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
 set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
 if YDWELibrary__Iflush_first > 500 then
+call BJDebugMsg("开始清理单位主键")
 set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
@@ -4218,6 +4219,7 @@ set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
@@ -5084,6 +5086,7 @@ exitwhen i > 11
 call TriggerRegisterPlayerChatEvent(trg, s__baka_SPlayer(i), "", false)
 set i=i + 1
 endloop
+call TriggerAddAction(trg, function s__test_action)
 set trg=null
 endfunction
 
@@ -20847,6 +20850,7 @@ endfunction
 function Trig_GHActions takes nothing returns nothing
 set udg_danwei2[0]=GetEnteringUnit()
 set udg_dian2[0]=GetUnitLoc(gg_unit_n00G_0048)
+call DestroyFogModifier(udg_GH[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )])
 set udg_GH[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )]=CreateFogModifierRadius(GetOwningPlayer(udg_danwei2[0]), FOG_OF_WAR_VISIBLE, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 2000.00, true, true)
 call FogModifierStart(udg_GH[( s__baka_SGetPlayerId(GetOwningPlayer(udg_danwei2[0])) + 1 )])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Other\\Andt\\Andt.mdl", udg_dian2[0]))
@@ -60745,9 +60749,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs3747612")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs5073339")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary__Init")
 call ExecuteFunc("LuaLibrary__Init")
@@ -60878,7 +60882,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs3747612 takes nothing returns nothing
+function jasshelper__initstructs5073339 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
