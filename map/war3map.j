@@ -59316,7 +59316,7 @@ if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 0 ) ) the
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E)))
-if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) >= 5.00 ) and ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 15 ) ) then
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) >= 5.00 ) and ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 15 ) and ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00) > 50.00 ) ) then
 set ydl_group=CreateGroup()
 call GroupEnumUnitsInRange(ydl_group, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), ( 100.00 + ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) * 8.00 ) ), null)
 loop
@@ -59386,6 +59386,7 @@ call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0
 call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_huixuanzhanFunc001Func016Func004Func001Func001Func001Func021A)
 call SetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), ( AngleBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 90.00 ))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0, 0)
+call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0) == 0 ) ) then
 if ( ( IsTerrainPathable(GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), PATHING_TYPE_FLYABILITY) == false ) ) then
 call SetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)))
@@ -59397,6 +59398,7 @@ else
 endif
 else
 endif
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00, s__math_U2L(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461) , LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09) , 0 , true))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
@@ -59468,6 +59470,8 @@ call SaveReal(YDHT, GetHandleId(ydl_timer), 0x804606DC, LoadReal(YDHT, GetHandle
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x4F80CBBC, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xFE77D408, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xFE77D408))
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBB4E8B09, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x0BA49B00, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00))
 call TimerStart(ydl_timer, 0.03, true, function Trig_huixuanzhanFunc001Func016T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -59499,6 +59503,8 @@ call SaveReal(YDHT, GetHandleId(ydl_timer), 0x804606DC, LoadReal(YDHT, GetHandle
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x4F80CBBC, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4F80CBBC))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xFE77D408, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xFE77D408))
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xAF4CC8D0))
+call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0xBB4E8B09, LoadLocationHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xBB4E8B09))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x0BA49B00, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x0BA49B00))
 call TimerStart(ydl_timer, 0.00, false, function Trig_huixuanzhanFunc001T)
 call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
@@ -60739,7 +60745,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs1355960")
+call ExecuteFunc("jasshelper__initstructs3747612")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -60872,7 +60878,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs1355960 takes nothing returns nothing
+function jasshelper__initstructs3747612 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
