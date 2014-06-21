@@ -20024,7 +20024,7 @@ set udg_aXUNHUAN[15]=1
 loop
 exitwhen udg_aXUNHUAN[15] > 6
 if ( ( GetItemTypeId(UnitItemInSlotBJ(GetAttacker(), udg_aXUNHUAN[15])) == 0x72617466 ) ) then
-call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990, ( 1.00 - ( ( 1 - LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990) ) * ( 1 - ( 0.25 * LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD9E93643) ) ) ) ))
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990, ( 1.00 - ( ( 1 - LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990) ) * ( 1 - ( 0.20 * LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD9E93643) ) ) ) ))
 else
 endif
 set udg_aXUNHUAN[15]=udg_aXUNHUAN[15] + 1
@@ -22587,11 +22587,7 @@ set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.50)
 set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
 set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
 call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-if ( ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_MELEE_ATTACKER) == true ) ) then
-call UnitAddAbility(udg_Danwei[92], 0x41304236)
-else
-call UnitAddAbility(udg_Danwei[92], 0x41305042)
-endif
+call UnitAddAbility(udg_Danwei[92], 0x41303551)
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
 set udg_Danwei[92]=null
 call RemoveLocation(udg_Dian[75])
@@ -60778,7 +60774,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs121158114")
+call ExecuteFunc("jasshelper__initstructs122365686")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60911,7 +60907,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs121158114 takes nothing returns nothing
+function jasshelper__initstructs122365686 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
