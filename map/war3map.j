@@ -39735,7 +39735,7 @@ call TriggerAddAction(gg_trg_tufubaozha, function Trig_tufubaozhaActions)
 endfunction
 function Trig_tufubaozha_2Func006A takes nothing returns nothing
 if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(GetEnumUnit()) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(udg_Danwei[146])) == true ) ) then
-call UnitDamageTarget(udg_Danwei[146], GetEnumUnit(), ( ( ( 0.00 + ( 0.20 * GetUnitState(udg_Danwei[146], UNIT_STATE_MAX_LIFE) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(udg_Danwei[146], GetEnumUnit(), ( ( ( 0.00 + ( 0.25 * GetUnitState(udg_Danwei[146], UNIT_STATE_MAX_LIFE) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 call GroupRemoveUnit(udg_Danweizu[148], GetEnumUnit())
 endif
@@ -60774,7 +60774,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs123328680")
+call ExecuteFunc("jasshelper__initstructs123693504")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60907,7 +60907,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs123328680 takes nothing returns nothing
+function jasshelper__initstructs123693504 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
