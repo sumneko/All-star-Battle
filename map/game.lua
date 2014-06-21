@@ -45,3 +45,57 @@
         japi.EXSetAbilityDataReal(ab, lv, 105, 0)
     end
     
+    --技能耗蓝增加50%
+    game.table_3 = {}
+    
+    game[3] = function(u)
+        local data = {}
+        local t = timer.loop(0.1, true,
+            function()
+                for i = 0, 99 do
+                    local ab = japi.EXGetUnitAbilityByIndex(u, i)
+                    if ab == 0 then
+                        return
+                    end
+                    local id = japi.EXGetAbilityId(ab)
+                    local lv = jass.GetUnitAbilityLevel(u, id)
+                    local mp = japi.EXGetAbilityDataInteger(ab, lv, 104)
+                    if mp > 0 then
+                        if data[id] then
+                            mp = mp - (data[id][lv] or 0)
+                        end
+                        data[id] = {}
+                        data[id][lv] = math.floor(mp * 0.5)
+                        mp = mp + data[id][lv]
+                        japi.EXSetAbilityDataInteger(ab, lv, 104, mp)
+                    end
+                end
+            end
+        )
+        game.table_3[u] = {t, data}
+    end
+    
+    game[4] = function(u)
+        if not game.table_3[u] then
+            return
+        end
+        local t = game.table_3[u][1]
+        local data = game.table_3[u][2]
+        t:destroy()
+        for i = 0, 99 do
+            local ab = japi.EXGetUnitAbilityByIndex(u, i)
+            if ab == 0 then
+                return
+            end
+            local id = japi.EXGetAbilityId(ab)
+            local lv = jass.GetUnitAbilityLevel(u, id)
+            local mp = japi.EXGetAbilityDataInteger(ab, lv, 104)
+            if mp > 0 then
+                if data[id] then
+                    mp = mp - (data[id][lv] or 0)
+                end
+                japi.EXSetAbilityDataInteger(ab, lv, 104, mp)
+            end
+        end
+    end
+    
