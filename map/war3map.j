@@ -22620,7 +22620,7 @@ set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
 call UnitRemoveBuffBJ(0x42303045, GetTriggerUnit())
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl", GetTriggerUnit(), "chest"))
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", GetTriggerUnit(), "chest"))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_LIFE) * 0.10 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_LIFE) * 0.05 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 else
 endif
 if ( ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) > GetEventDamage() ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303251) == 1 ) ) then
@@ -60774,7 +60774,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs122906214")
+call ExecuteFunc("jasshelper__initstructs123328680")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60907,7 +60907,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs122906214 takes nothing returns nothing
+function jasshelper__initstructs123328680 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
