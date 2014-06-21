@@ -24099,11 +24099,11 @@ call UnitAddItemByIdSwapped(0x49303448, GetBuyingUnit())
 call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) - udg_zhengshuex[0] ))
 else
 call DisplayTimedTextToPlayer(GetOwningPlayer(GetBuyingUnit()), 0, 0, 10.00, "TRIGSTR_3932")
-call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) + 2500 ))
+call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) + 3500 ))
 endif
 else
 call DisplayTimedTextToPlayer(GetOwningPlayer(GetBuyingUnit()), 0, 0, 10.00, ( "|cffffcc00缺少合成所需的材料/没有足够的钱购买，还差|r|cffffdd00" + ( I2S(( udg_zhengshuex[0] - GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) )) + "|r|cffffcc00金币|r" ) ))
-call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) + 2500 ))
+call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) + 3500 ))
 endif
 else
 endif
@@ -60774,7 +60774,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs122365686")
+call ExecuteFunc("jasshelper__initstructs122906214")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -60907,7 +60907,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs122365686 takes nothing returns nothing
+function jasshelper__initstructs122906214 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
