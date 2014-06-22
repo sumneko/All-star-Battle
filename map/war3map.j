@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -95,12 +95,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -185,10 +185,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -2914,20 +2914,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2959,7 +2959,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2992,22 +2992,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3346,9 +3346,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3375,22 +3375,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3400,13 +3400,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3459,7 +3459,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3472,7 +3472,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -4083,7 +4083,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4192,42 +4192,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
+if YDWELibrary__Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4644,7 +4644,7 @@ call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4664,7 +4664,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4702,7 +4702,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4816,7 +4816,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4838,7 +4838,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4940,7 +4940,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary___Init takes nothing returns nothing
+function processLibrary__Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 50
@@ -4986,7 +4986,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -5030,7 +5030,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -5080,7 +5080,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary___Init takes nothing returns nothing
+function testLibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 local integer i=0
 loop
@@ -5113,7 +5113,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5262,7 +5262,7 @@ endif
 endif
 endif
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -5283,7 +5283,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -5299,10 +5299,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -58312,27 +58312,27 @@ endfunction
 function Trig_litijidongConditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41305058 ) )
 endfunction
-function Trig_litijidongFunc003Func013Func004Func001Func001Func001Func004Func001Func008T takes nothing returns nothing
+function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func004Func001Func008T takes nothing returns nothing
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
-function Trig_litijidongFunc003Func013Func004Func001Func001Func001Func012Func003A takes nothing returns nothing
+function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func012Func003A takes nothing returns nothing
 if ( ( GetEnumDestructable() != gg_dest_YT11_3231 ) and ( IsDestructableDeadBJ(GetEnumDestructable()) == false ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0, 1)
 else
 endif
 endfunction
-function Trig_litijidongFunc003Func013Func004Func003Func007Func001Func008T takes nothing returns nothing
+function Trig_litijidongFunc003Func013Func005Func003Func007Func001Func008T takes nothing returns nothing
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
-function Trig_litijidongFunc003Func013Func004Func003Func013Func003A takes nothing returns nothing
+function Trig_litijidongFunc003Func013Func005Func003Func013Func003A takes nothing returns nothing
 if ( ( GetEnumDestructable() != gg_dest_YT11_3231 ) and ( IsDestructableDeadBJ(GetEnumDestructable()) == false ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1, 2)
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( ( ( 15 + ( 2 * GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x41305058) ) ) - LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) ) * 2 ))
@@ -58355,6 +58355,13 @@ function Trig_litijidongFunc003Func013T takes nothing returns nothing
 local timer ydl_timer
 local group ydl_group
 local unit ydl_unit
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) == true ) ) then
+set ydl_timer=null
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
@@ -58385,7 +58392,7 @@ else
 endif
 else
 call SaveRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0, RectFromCenterSizeBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), 175.00, 175.00))
-call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_litijidongFunc003Func013Func004Func003Func013Func003A)
+call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_litijidongFunc003Func013Func005Func003Func013Func003A)
 call RemoveRect(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 set ydl_group=CreateGroup()
@@ -58477,7 +58484,7 @@ set udg_mkszs[1]=0
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
-call TimerStart(ydl_timer, 3.00, false, function Trig_litijidongFunc003Func013Func004Func003Func007Func001Func008T)
+call TimerStart(ydl_timer, 3.00, false, function Trig_litijidongFunc003Func013Func005Func003Func007Func001Func008T)
 else
 endif
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x4162756E)
@@ -58592,7 +58599,7 @@ call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, PolarP
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x55BBA912, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x55BBA912) - 1 ))
 endif
 call SaveRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0, RectFromCenterSizeBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), 150.00, 150.00))
-call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_litijidongFunc003Func013Func004Func001Func001Func001Func012Func003A)
+call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func012Func003A)
 call RemoveRect(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0) == 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0, 1)
@@ -58633,7 +58640,7 @@ set udg_mkszs[1]=0
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
-call TimerStart(ydl_timer, 3.00, false, function Trig_litijidongFunc003Func013Func004Func001Func001Func001Func004Func001Func008T)
+call TimerStart(ydl_timer, 3.00, false, function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func004Func001Func008T)
 else
 endif
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x4162756E)
@@ -58752,20 +58759,26 @@ endfunction
 function Trig_xuanfengzhanConditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x4130505A ) )
 endfunction
-function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func006Func001A takes nothing returns nothing
+function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func007Func001A takes nothing returns nothing
 call RemoveUnit(GetEnumUnit())
 endfunction
-function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func006Func006A takes nothing returns nothing
+function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func007Func006A takes nothing returns nothing
 call SetUnitScale(GetEnumUnit(), ( 8.00 - ( 0.45 * I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7)) ) ), ( 8.00 - ( 0.45 * I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7)) ) ), ( 8.00 - ( 0.45 * I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7)) ) ))
 call SetUnitVertexColor(GetEnumUnit(), ( 0 + ( 26 * LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) ) ), ( 0 + ( 26 * LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) ) ), ( 0 + ( 26 * LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) ) ), ( 0 + ( 26 * LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) ) ))
 endfunction
 function Trig_xuanfengzhanFunc002Func002Func002Func020Func010T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) == true ) ) then
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 0 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
-call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func006Func006A)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func007Func006A)
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 5 ) ) then
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280), ( 125.00 - ( 5.00 * I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7)) ) ), GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))))
 call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5, CreateUnitAtLoc(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)), 0x65303130, LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), 0.00))
@@ -58794,7 +58807,7 @@ call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8
 else
 endif
 else
-call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func006Func001A)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_xuanfengzhanFunc002Func002Func002Func020Func010Func007Func001A)
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
@@ -58943,12 +58956,17 @@ endfunction
 function Trig_shuangdaozhanConditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41305130 ) )
 endfunction
-function Trig_shuangdaozhanFunc002Func001Func007Func001Func006T takes nothing returns nothing
+function Trig_shuangdaozhanFunc002Func001Func007Func002Func006T takes nothing returns nothing
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5), 0x41305134)
 call UnitRemoveBuffBJ(0x42303355, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 endfunction
 function Trig_shuangdaozhanFunc002Func001Func007T takes nothing returns nothing
 local timer ydl_timer
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) == true ) ) then
+set ydl_timer=null
+return
+else
+endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 0 ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\QuillSprayMissile\\QuillSprayMissile.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), "right weapon"))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
@@ -58970,7 +58988,7 @@ call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
-call TimerStart(ydl_timer, 5.00, false, function Trig_shuangdaozhanFunc002Func001Func007Func001Func006T)
+call TimerStart(ydl_timer, 5.00, false, function Trig_shuangdaozhanFunc002Func001Func007Func002Func006T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
@@ -58979,6 +58997,10 @@ endif
 set ydl_timer=null
 endfunction
 function Trig_shuangdaozhanFunc002Func001Func022T takes nothing returns nothing
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) == true ) ) then
+return
+else
+endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 15 ) ) then
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) - 1 ))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
@@ -59194,10 +59216,10 @@ endfunction
 function Trig_huixuanzhanConditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41305131 ) )
 endfunction
-function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func002A takes nothing returns nothing
+function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func002A takes nothing returns nothing
 call RemoveUnit(GetEnumUnit())
 endfunction
-function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func010T takes nothing returns nothing
+function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func010T takes nothing returns nothing
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x42487765, 0.50)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
@@ -59205,14 +59227,14 @@ call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
-function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func021A takes nothing returns nothing
+function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func021A takes nothing returns nothing
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) * 10.00 ), ( ( I2R(GetUnitUserData(GetEnumUnit())) * 90.00 ) + LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xFE77D408) )))
 call SetUnitX(GetEnumUnit(), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)))
 call SetUnitY(GetEnumUnit(), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF)))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF9304BF))
 call SetUnitScale(GetEnumUnit(), ( 0.10 + ( 0.05 * LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) ) ), ( 0.10 + ( 0.05 * LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) ) ), ( 0.10 + ( 0.05 * LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) ) ))
 endfunction
-function Trig_huixuanzhanFunc002Func015Func004Func004Func014Func002A takes nothing returns nothing
+function Trig_huixuanzhanFunc002Func015Func005Func004Func014Func002A takes nothing returns nothing
 if ( ( GetEnumDestructable() != gg_dest_YT11_3231 ) and ( IsDestructableDeadBJ(GetEnumDestructable()) == false ) and ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, GetDestructableLoc(GetEnumDestructable()))
@@ -59237,6 +59259,13 @@ function Trig_huixuanzhanFunc002Func015T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
 local timer ydl_timer
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) == true ) ) then
+set ydl_group=null
+set ydl_unit=null
+set ydl_timer=null
+return
+else
+endif
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x4230324F) == false ) ) then
 call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
@@ -59271,7 +59300,7 @@ set udg_mkszs[3]=udg_mkszs[3] + 1
 endloop
 else
 call SaveRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0, RectFromCenterSizeBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34), 175.00, 175.00))
-call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_huixuanzhanFunc002Func015Func004Func004Func014Func002A)
+call EnumDestructablesInRectAll(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0), function Trig_huixuanzhanFunc002Func015Func005Func004Func014Func002A)
 call RemoveRect(LoadRectHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xFB65B3F0))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1) == 0 ) ) then
 set ydl_group=CreateGroup()
@@ -59460,9 +59489,10 @@ endif
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xFE77D408, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xFE77D408) + ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) * 5.00 ) + 5.00 ) ))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34, PolarProjectionBJ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), ( DistanceBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x804606DC) ), ( AngleBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) )))
 call MoveLightningEx(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87), false, GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)) + ( s__maphack_GetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)) + 100.00 ) ), GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)), ( GetLocationZ(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7)) + 100.00 ))
-call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func021A)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func021A)
 call SetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), ( AngleBetweenPoints(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7), LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)) + 90.00 ))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0, 0)
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00, s__math_U2L(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461) , LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09) , 0 , true))
 call SaveLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09, GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461)))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0) == 0 ) ) then
 if ( ( IsTerrainPathable(GetLocationX(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34)), GetLocationY(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)), PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -59475,13 +59505,12 @@ else
 endif
 else
 endif
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00, s__math_U2L(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461) , LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBB4E8B09) , 0 , true))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x3AA0CF34))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8A0E31E7))
 else
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x93AA82B4))
-call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func002A)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC), function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func002A)
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xC8F7F1C1, 1)
@@ -59493,7 +59522,7 @@ set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x6CD84461, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xC367145E, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E))
-call TimerStart(ydl_timer, 1.00, false, function Trig_huixuanzhanFunc002Func015Func004Func002Func001Func002Func010T)
+call TimerStart(ydl_timer, 1.00, false, function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func010T)
 call EnableTrigger(gg_trg_litijidong_1_5)
 endif
 else
@@ -60859,26 +60888,26 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs8633500")
+call ExecuteFunc("jasshelper__initstructs9857749")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("processLibrary___Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary___Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
+call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("objectLibrary__Init")
+call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -60992,7 +61021,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs8633500 takes nothing returns nothing
+function jasshelper__initstructs9857749 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
