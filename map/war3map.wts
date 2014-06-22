@@ -429,6 +429,11 @@ STRING 73
 购买岗哨守卫(|cffffcc00Z|r)
 }
 
+STRING 74
+{
+邀请时间
+}
+
 STRING 75
 // 单位: e068 (冲盾), Name (名字)
 {
@@ -497,6 +502,11 @@ STRING 86
 // 物品: mlst (力量之锤), Hotkey (热键)
 {
 A
+}
+
+STRING 87
+{
+|cff00ff00全明星战役|cffffff002.6c
 }
 
 STRING 88
@@ -2466,11 +2476,6 @@ STRING 418
 // 技能: A08A (|cff5099ff视频过载|r), Ubertip (提示工具 - 普通 - 扩展)
 {
 立华奏开始提升力量，每|cffffff000.3秒|r提升|cffffff001|r点力量。当提升到|cffffdd2530|r点力量后立华奏可以再次使用该技能，将|cffffff00300范围|r内敌人|cff00ffff击晕2秒|r并震到空中，立华奏也可以提前使用，但会导致力量不再继续增加。增加的力量在打断或蓄满后能持续|cffffff005|r秒。|n|n|cffff7500伤害（已蓄满）：80+力量×2|n|cffff9020伤害（未蓄满）：60+力量×1|n|n|cff757575间隔时间：30秒
-}
-
-STRING 419
-{
-邀请时间
 }
 
 STRING 420
@@ -13658,7 +13663,7 @@ STRING 2301
 
 STRING 2302
 {
-|cFFFFFF00全明星战役2.6c测试版1|r
+|cFFFFFF00全明星战役2.6c测试版|r
 }
 
 STRING 2303
@@ -32874,11 +32879,6 @@ STRING 5531
 半月灵魂(2)
 }
 
-STRING 5532
-{
-|cff00ff00全明星战役|cffffff002.6
-}
-
 STRING 5533
 // 技能: A0KO (眩晕), Ubertip (提示工具 - 普通 - 扩展)
 {
@@ -50304,13 +50304,13 @@ STRING 8471
 }
 
 STRING 8472
-// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
+// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级2（Q）
 }
 
 STRING 8473
-// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
+// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级3（Q）
 }
@@ -50322,13 +50322,13 @@ STRING 8474
 }
 
 STRING 8475
-// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
+// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级4（Q）
 }
 
 STRING 8476
-// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
+// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级5（Q）
 }
@@ -51833,25 +51833,25 @@ STRING 9263
 }
 
 STRING 9326
-// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
+// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级2（Q）
 }
 
 STRING 9327
-// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
+// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级3（Q）
 }
 
 STRING 9328
-// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
+// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级4（Q）
 }
 
 STRING 9329
-// 技能: A09A (|cFF99FF66小夜的世界|r), Tip (提示工具 - 普通)
+// 技能: A0QO (自身移动), Tip (提示工具 - 普通)
 {
 |cFFccccff自身移动|r等级5（Q）
 }
