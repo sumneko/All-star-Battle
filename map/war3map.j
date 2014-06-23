@@ -4313,9 +4313,9 @@ return GetUnitFlyHeight(u)
 endfunction
 function s__maphack_InitS takes nothing returns nothing
 if IsPlayerObserver(s__sys_selfp) then
-call TimerStart(CreateTimer(), 0.01, true, null)
+call TimerStart(CreateTimer(), 0.05, true, null)
 else
-call TimerStart(CreateTimer(), 0.01, true, function s__maphack_TimerFunc)
+call TimerStart(CreateTimer(), 0.05, true, function s__maphack_TimerFunc)
 endif
 call SetAltMinimapIcon("null_16_16.blp")
 endfunction
@@ -60891,7 +60891,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs19238682")
+call ExecuteFunc("jasshelper__initstructs20446536")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61024,7 +61024,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs19238682 takes nothing returns nothing
+function jasshelper__initstructs20446536 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
