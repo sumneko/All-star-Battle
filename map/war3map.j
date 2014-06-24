@@ -36585,6 +36585,11 @@ set udg_danwei2[1]=GetEnumUnit()
 call RemoveUnit(udg_danwei2[1])
 set udg_danwei2[1]=null
 endfunction
+function Trig_qianxing_2Func001Func006A takes nothing returns nothing
+set udg_danwei2[1]=GetEnumUnit()
+call RemoveUnit(udg_danwei2[1])
+set udg_danwei2[1]=null
+endfunction
 function Trig_qianxing_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
@@ -36680,6 +36685,7 @@ call PauseTimer(udg_jishiqi[26])
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_Danwei[159]), 0x414F776B, true)
 call UnitRemoveAbility(udg_Danwei[159], 0x4130304E)
 call DisableTrigger(gg_trg_qianxing_3)
+call ForGroupBJ(udg_Danweizu[160], function Trig_qianxing_2Func001Func006A)
 endif
 set ydl_group=null
 set ydl_unit=null
@@ -60891,7 +60897,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs83277576")
+call ExecuteFunc("jasshelper__initstructs85736480")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61024,7 +61030,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs83277576 takes nothing returns nothing
+function jasshelper__initstructs85736480 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
