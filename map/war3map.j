@@ -2364,13 +2364,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -38570,7 +38570,7 @@ endfunction
 function Trig_tiaoyue_2Func001Func001Func001Func012Func003A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
-call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 1 * I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 35.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 75.00 + I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
 set udg_danwei[172]=null
@@ -60953,9 +60953,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs169782502")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs205705585")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary__Init")
 call ExecuteFunc("LuaLibrary__Init")
@@ -61086,7 +61086,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs169782502 takes nothing returns nothing
+function jasshelper__initstructs205705585 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
