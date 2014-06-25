@@ -20038,6 +20038,15 @@ set udg_aXUNHUAN[15]=1
 loop
 exitwhen udg_aXUNHUAN[15] > 6
 if ( ( GetItemTypeId(UnitItemInSlotBJ(GetAttacker(), udg_aXUNHUAN[15])) == 0x72617466 ) ) then
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990, ( 1.00 - ( ( 1 - LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990) ) * ( 1 - ( 0.25 * LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD9E93643) ) ) ) ))
+else
+endif
+set udg_aXUNHUAN[15]=udg_aXUNHUAN[15] + 1
+endloop
+set udg_aXUNHUAN[15]=1
+loop
+exitwhen udg_aXUNHUAN[15] > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetAttacker(), udg_aXUNHUAN[15])) == 0x49303453 ) ) then
 call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990, ( 1.00 - ( ( 1 - LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x4A4AE990) ) * ( 1 - ( 0.20 * LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xD9E93643) ) ) ) ))
 else
 endif
@@ -22324,7 +22333,7 @@ endif
 if ( ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303339) == true ) or ( GetUnitAbilityLevel(GetTriggerUnit(), 0x41304F42) == 1 ) ) ) then
 call UnitRemoveBuffBJ(0x42303339, GetTriggerUnit())
 call UnitRemoveAbility(GetTriggerUnit(), 0x41304F42)
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x72617466)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x49303453) == true ) ) ) then
 if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303344) == false ) ) then
 call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call UnitAddAbility(GetTriggerUnit(), 0x41304E49)
@@ -22589,7 +22598,7 @@ set udg_jubuzs1=0
 set udg_jubuzs2=1
 loop
 exitwhen udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x72617466 ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303453 ) ) ) then
 set udg_jubuzs1=( udg_jubuzs1 + 1 )
 else
 endif
@@ -22992,23 +23001,40 @@ call UnitAddAbility(udg_danwei2[0], 0x41303231)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41303231)
 else
 endif
-if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F32)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F31)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F33)
+if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_MELEE_ATTACKER) == true ) ) then
+if ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) then
+call DisableTrigger(GetTriggeringTrigger())
+call RemoveItem(GetManipulatedItem())
+call UnitAddItemByIdSwapped(0x72617466, GetTriggerUnit())
+call EnableTrigger(GetTriggeringTrigger())
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+else
+if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+call DisableTrigger(GetTriggeringTrigger())
+call RemoveItem(GetManipulatedItem())
+call UnitAddItemByIdSwapped(0x49303453, GetTriggerUnit())
+call EnableTrigger(GetTriggeringTrigger())
+else
+endif
+endif
+else
+endif
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F32)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F32)
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F31)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F31)
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F33)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F33)
 else
@@ -23089,23 +23115,40 @@ call UnitAddAbility(udg_danwei2[0], 0x41303231)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41303231)
 else
 endif
-if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F32)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F31)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F33)
+if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_MELEE_ATTACKER) == true ) ) then
+if ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) then
+call DisableTrigger(GetTriggeringTrigger())
+call RemoveItem(GetManipulatedItem())
+call UnitAddItemByIdSwapped(0x72617466, GetTriggerUnit())
+call EnableTrigger(GetTriggeringTrigger())
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+else
+if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+call DisableTrigger(GetTriggeringTrigger())
+call RemoveItem(GetManipulatedItem())
+call UnitAddItemByIdSwapped(0x49303453, GetTriggerUnit())
+call EnableTrigger(GetTriggeringTrigger())
+else
+endif
+endif
+else
+endif
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F32)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F32)
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F31)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F31)
 else
 endif
-if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F33) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F32) == 0 ) and ( GetUnitAbilityLevel(udg_danwei2[0], 0x41304F31) == 0 ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F33)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F33)
 else
@@ -23153,7 +23196,11 @@ endif
 set udg_aXUNHUAN[191]=udg_aXUNHUAN[191] + 1
 endloop
 if ( ( udg_zhengshu2[3] >= 1 ) ) then
+if ( ( IsUnitType(GetBuyingUnit(), UNIT_TYPE_MELEE_ATTACKER) == true ) ) then
 call UnitAddItemByIdSwapped(0x72617466, GetBuyingUnit())
+else
+call UnitAddItemByIdSwapped(0x49303453, GetBuyingUnit())
+endif
 call SetPlayerStateBJ(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD, ( GetPlayerState(GetOwningPlayer(GetBuyingUnit()), PLAYER_STATE_RESOURCE_GOLD) - udg_zhengshuex[0] ))
 else
 call DisplayTimedTextToPlayer(GetOwningPlayer(GetBuyingUnit()), 0, 0, 10.00, "TRIGSTR_5360")
@@ -26263,12 +26310,12 @@ call TriggerAddCondition(gg_trg_shengshisuipian, Condition(function Trig_shengsh
 call TriggerAddAction(gg_trg_shengshisuipian, function Trig_shengshisuipianActions)
 endfunction
 function Trig_faqiufumoConditions takes nothing returns boolean
-return ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) )
+return ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72646534 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73726264 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x6F76656E ) or ( GetItemTypeId(GetManipulatedItem()) == 0x726E7370 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x73666F67 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x66726764 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) )
 endfunction
 function Trig_faqiufumoActions takes nothing returns nothing
 set udg_danwei2[0]=GetManipulatingUnit()
 set udg_zhengshu2[3]=0
-if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) ) then
 if ( ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72646534)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x73726264)) == true ) ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41304F32)
 call UnitMakeAbilityPermanent(udg_danwei2[0], true, 0x41304F32)
@@ -26374,7 +26421,7 @@ call TriggerAddAction(gg_trg_faqiufumo, function Trig_faqiufumoActions)
 endfunction
 function Trig_faqiufumo_huoqiuActions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F31)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F33)
 call UnitAddAbility(udg_danwei2[0], 0x41304F32)
@@ -26390,7 +26437,7 @@ call TriggerAddAction(gg_trg_faqiufumo_huoqiu, function Trig_faqiufumo_huoqiuAct
 endfunction
 function Trig_faqiufumo_duqiuActions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F32)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F33)
 call UnitAddAbility(udg_danwei2[0], 0x41304F31)
@@ -26406,7 +26453,7 @@ call TriggerAddAction(gg_trg_faqiufumo_duqiu, function Trig_faqiufumo_duqiuActio
 endfunction
 function Trig_faqiufumo_bingqiuActions takes nothing returns nothing
 set udg_danwei2[0]=GetSpellAbilityUnit()
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[0] , 0x72617466)) == false ) ) then
+if ( ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x72617466) == false ) and ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[0] , 0x49303453) == false ) ) then
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F32)
 call UnitRemoveAbility(udg_danwei2[0], 0x41304F31)
 call UnitAddAbility(udg_danwei2[0], 0x41304F33)
@@ -28654,12 +28701,12 @@ else
 endif
 else
 endif
-if ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x72617466 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303453 ) ) ) then
 set udg_zhengshu2[3]=0
 set udg_aXUNHUAN[18]=1
 loop
 exitwhen udg_aXUNHUAN[18] > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(udg_danwei2[0], udg_aXUNHUAN[18])) == 0x72617466 ) ) then
+if ( ( ( GetItemTypeId(UnitItemInSlotBJ(udg_danwei2[0], udg_aXUNHUAN[18])) == 0x72617466 ) or ( GetItemTypeId(UnitItemInSlotBJ(udg_danwei2[0], udg_aXUNHUAN[18])) == 0x49303453 ) ) ) then
 set udg_zhengshu2[3]=( udg_zhengshu2[3] + 1 )
 else
 endif
@@ -32405,7 +32452,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_syslzj2Func003Func006A takes nothing returns nothing
 set udg_danwei[139]=GetEnumUnit()
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei[18] , 0x72617466)) == true ) ) then
+if ( ( ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[18] , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[18] , 0x49303453) == true ) ) ) then
 call UnitDamageTargetBJ(udg_danwei[18], udg_danwei[139], ( ( - 100.00 + ( 200.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[18], 0x41303344), GetUnitAbilityLevel(udg_danwei[18], 0x41304930))) ) ) + ( 5.00 * I2R(GetHeroAgi(udg_danwei[18], true)) ) ), ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED)
 else
 call UnitDamageTargetBJ(udg_danwei[18], udg_danwei[139], ( ( - 100.00 + ( 200.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[18], 0x41303344), GetUnitAbilityLevel(udg_danwei[18], 0x41304930))) ) ) + ( 5.00 * I2R(GetHeroAgi(udg_danwei[18], true)) ) ), ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC)
@@ -32860,7 +32907,7 @@ function Trig_yylxx4Func001Func011Func002Func016A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[42]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[40])) == true ) ) then
 call GroupAddUnit(udg_Danweizu[42], udg_danwei2[1])
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_Danwei[40] , 0x72617466)) == true ) ) then
+if ( ( ( YDWEUnitHasItemOfTypeBJNull(udg_Danwei[40] , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(udg_Danwei[40] , 0x49303453) == true ) ) ) then
 call UnitDamageTarget(udg_Danwei[40], udg_danwei2[1], ( 300.00 + ( 2.50 * I2R(GetHeroAgi(udg_Danwei[40], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 else
 call UnitDamageTarget(udg_Danwei[40], udg_danwei2[1], ( 300.00 + ( 2.50 * I2R(GetHeroAgi(udg_Danwei[40], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -32928,7 +32975,7 @@ call UnitAddAbility(udg_Danwei[85], 0x41304236)
 call s__baka_IssueTargetOrder2(udg_Danwei[85] , "thunderbolt" , udg_Danwei[41])
 set udg_Danwei[85]=null
 call DestroyEffect(AddSpecialEffectLoc("Objects\\Spawnmodels\\NightElf\\NEDeathSmall\\NEDeathSmall.mdl", udg_Dian[41]))
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_Danwei[40] , 0x72617466)) == true ) ) then
+if ( ( ( YDWEUnitHasItemOfTypeBJNull(udg_Danwei[40] , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(udg_Danwei[40] , 0x49303453) == true ) ) ) then
 call UnitDamageTarget(udg_Danwei[40], udg_Danwei[41], ( ( 25.00 + ( 35.00 * I2R(GetUnitAbilityLevel(udg_Danwei[40], 0x41304F44)) ) ) + ( 1.50 * I2R(GetHeroAgi(udg_Danwei[40], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 else
 call UnitDamageTarget(udg_Danwei[40], udg_Danwei[41], ( ( 25.00 + ( 35.00 * I2R(GetUnitAbilityLevel(udg_Danwei[40], 0x41304F44)) ) ) + ( 1.50 * I2R(GetHeroAgi(udg_Danwei[40], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_METAL_HEAVY_SLICE)
@@ -35309,7 +35356,7 @@ set udg_dian2[1]=GetSpellTargetLoc()
 endif
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 10.00, AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 set udg_danwei2[17]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303232, udg_dian2[2], AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(udg_danwei2[15] , 0x72617466)) == true ) ) then
+if ( ( ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[15] , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(udg_danwei2[15] , 0x49303453) == true ) ) ) then
 call StartTimerBJ(udg_times[15], true, 0.03)
 set udg_danwei2[365]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[15]), 0x65303554, udg_dian2[2], AngleBetweenPoints(udg_dian2[0], udg_dian2[1]))
 call SetUnitTimeScale(udg_danwei2[365], 0.00)
@@ -60902,7 +60949,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs165079789")
+call ExecuteFunc("jasshelper__initstructs167923703")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61035,7 +61082,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs165079789 takes nothing returns nothing
+function jasshelper__initstructs167923703 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
