@@ -4257,6 +4257,7 @@ set s__maphack_heroes[s__maphack_heroCount]=s__maphack_heroes[s__maphack_heroCou
 set cjlocgn_00000000=cjlocgn_00000000 + 1
 endloop
 set s__maphack_heroCount=s__maphack_heroCount - 1
+set i=i - 1
 endif
 set i=i + 1
 endloop
@@ -60901,7 +60902,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs120826050")
+call ExecuteFunc("jasshelper__initstructs162933918")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61034,7 +61035,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs120826050 takes nothing returns nothing
+function jasshelper__initstructs162933918 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
