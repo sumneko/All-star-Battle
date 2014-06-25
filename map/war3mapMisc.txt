@@ -43,3 +43,12 @@ AttackVerySlow=1.7
 AttackSlow=1.2
 AttackAverage=0.8
 
+[TWN2]
+XPFactor=0.00,0
+
+[TWN3]
+XPFactor=0.00,0
+
+[HERO]
+DependencyOr=
+
