@@ -24665,6 +24665,12 @@ STRING 4142
 Q
 }
 
+STRING 4143
+// 技能: A0QQ (减速50%), Name (名字)
+{
+减速50%
+}
+
 STRING 4144
 // 技能: A0LI (|cFFffaa25空翻|r), Hotkey (热键 - 普通)
 {
@@ -25295,6 +25301,12 @@ STRING 4248
 防御塔升级
 }
 
+STRING 4249
+// 技能: A0QQ (减速50%), EditorSuffix (编辑器后缀)
+{
+（飞斧）
+}
+
 STRING 4250
 // 物品: I03D (星空之眼), Tip (提示工具 - 基础)
 {
@@ -25409,10 +25421,22 @@ STRING 4268
 学习|cFFffff00七之弹|r(R)
 }
 
+STRING 4269
+// 魔法效果: B03X (), Buffubertip (工具提示 - 扩展)
+{
+该单位被减速了。
+}
+
 STRING 4270
 // 技能: A0OI (|cFFaa30ff时间瞬移|r), Tip (提示工具 - 普通)
 {
 |cFFff7599时间瞬移|r（W）
+}
+
+STRING 4271
+// 魔法效果: B03X (), Bufftip (工具提示)
+{
+减速
 }
 
 STRING 4272
@@ -26173,6 +26197,12 @@ STRING 4398
 // 技能: A078 (眩晕), Tip (提示工具 - 普通)
 {
 |cFFFF0033火雾瞬斩|r等级2（R）
+}
+
+STRING 4399
+// 魔法效果: B03X (), EditorSuffix (编辑器后缀)
+{
+飞斧
 }
 
 STRING 4401
