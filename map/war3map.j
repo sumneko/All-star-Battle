@@ -59570,6 +59570,10 @@ call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x804606DC, ( LoadReal(YDHT,
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7) > 40 ) ) then
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC, RMinBJ(( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) + 0.40 ), 30.00))
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\FlakCannons\\FlakTarget.mdl", LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280)))
+if ( ( IsUnitType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), UNIT_TYPE_DEAD) == true ) ) then
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x80A9ADA7, 15)
+else
+endif
 else
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC, RMaxBJ(( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x4F80CBBC) * 0.97 ) - 0.35 ), 0.00))
 endif
@@ -60949,7 +60953,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs167923703")
+call ExecuteFunc("jasshelper__initstructs169028097")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61082,7 +61086,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs167923703 takes nothing returns nothing
+function jasshelper__initstructs169028097 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
