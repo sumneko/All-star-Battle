@@ -47,6 +47,12 @@
     
     --技能耗蓝增加50%
     game.table_3 = {}
+    game.table_4 = {
+        [|A0PX|] = true,
+        [|A0PZ|] = true,
+        [|A0Q0|] = true,
+        [|A0Q1|] = true,
+    }
     
     game[3] = function(u)
         local data = {}
@@ -60,7 +66,7 @@
                     local id = japi.EXGetAbilityId(ab)
                     local lv = jass.GetUnitAbilityLevel(u, id)
                     local mp = japi.EXGetAbilityDataInteger(ab, lv, 104)
-                    if mp > 0 then
+                    if mp > 0 and game.table_4[id] then
                         if data[id] then
                             mp = mp - (data[id][lv] or 0)
                         end
@@ -90,7 +96,7 @@
             local id = japi.EXGetAbilityId(ab)
             local lv = jass.GetUnitAbilityLevel(u, id)
             local mp = japi.EXGetAbilityDataInteger(ab, lv, 104)
-            if mp > 0 then
+            if mp > 0 and game.table_4[id] then
                 if data[id] then
                     mp = mp - (data[id][lv] or 0)
                 end
