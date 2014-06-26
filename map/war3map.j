@@ -2364,13 +2364,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3459,7 +3459,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary__Init takes nothing returns nothing
+function baseLibrary___Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3472,7 +3472,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary__Init takes nothing returns nothing
+function LuaLibrary___Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -4083,7 +4083,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record__Init takes nothing returns nothing
+function Record___Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -10450,6 +10450,7 @@ set udg_suijixuanren[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[161] -
 set udg_point[8]=GetPlayerStartLocationLoc(s__baka_SPlayer(udg_zhengshu2[161] - 1))
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), s__baka_SPlayer(udg_zhengshu2[161] - 1), udg_point[8], bj_UNIT_FACING)
 set udg_player[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[161] - 1)) + 1 )]=bj_lastCreatedUnit
+call InitPlayerHero(bj_lastCreatedUnit)
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(bj_lastCreatedUnit)])
 if ( ( udg_zhengshu2[161] >= 1 ) and ( udg_zhengshu2[161] <= 5 ) ) then
@@ -10532,6 +10533,7 @@ set udg_suijixuanren[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[180] -
 set udg_point[8]=GetPlayerStartLocationLoc(s__baka_SPlayer(udg_zhengshu2[180] - 1))
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), s__baka_SPlayer(udg_zhengshu2[180] - 1), udg_point[8], bj_UNIT_FACING)
 set udg_player[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[180] - 1)) + 1 )]=bj_lastCreatedUnit
+call InitPlayerHero(bj_lastCreatedUnit)
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(bj_lastCreatedUnit)])
 if ( ( udg_zhengshu2[180] >= 1 ) and ( udg_zhengshu2[180] <= 5 ) ) then
@@ -60953,13 +60955,13 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs207987428")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs250411026")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("LuaLibrary__Init")
-call ExecuteFunc("Record__Init")
+call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
+call ExecuteFunc("Record___Init")
 call ExecuteFunc("YDWELibrary__Init")
 call ExecuteFunc("bakaLibrary__Init")
 call ExecuteFunc("effectLibrary__Init")
@@ -61086,7 +61088,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs207987428 takes nothing returns nothing
+function jasshelper__initstructs250411026 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
