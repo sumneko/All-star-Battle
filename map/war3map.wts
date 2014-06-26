@@ -360,11 +360,6 @@ STRING 61
 |cff009900万物复苏|r
 }
 
-STRING 62
-{
-|cFF00CCFF感谢玩家s芙兰朵露z和东风谷早面对本地图的支持！|r
-}
-
 STRING 63
 // 物品: rhth (生命护符), Tip (提示工具 - 基础)
 {
@@ -383,12 +378,8 @@ STRING 65
 A
 }
 
-STRING 66
-{
-|cffffcc00自由选择英雄|r
-}
-
 STRING 67
+// 技能: A03C (选择英雄), Name (名字)
 {
 选择英雄
 }
@@ -3251,12 +3242,6 @@ STRING 545
 从地下伸出缠绕的鬼手将目标抓住，并造成持续伤害。|n|cFFFF0033总伤害：250/375/500+力量×2，持续5秒。|r|n|cFF757575间隔时间：40/35/30秒|r
 }
 
-STRING 546
-// 技能: A03C (选择英雄), Name (名字)
-{
-选择英雄
-}
-
 STRING 547
 {
 |cffff7500——回合重置——|r
@@ -4856,21 +4841,6 @@ STRING 814
 // 技能: A0AG (漩涡), Tip (提示工具 - 普通)
 {
 |cFF6699FF直觉|r等级2（W）
-}
-
-STRING 815
-{
-游戏模式
-}
-
-STRING 816
-{
-常规：自由选择|cffffcc00(Q)|r
-}
-
-STRING 817
-{
-|cffffffff常规：全体随机|r|cffffcc00(W)|r
 }
 
 STRING 818
@@ -7216,11 +7186,6 @@ STRING 1210
 地精机械师
 }
 
-STRING 1211
-{
-|cffffffff防守：|r|cffff0000挑战模式|r|cffffcc00(F)|r
-}
-
 STRING 1212
 // 技能: A057 (移动锤地), Researchhotkey (热键 - 学习)
 {
@@ -7427,11 +7392,6 @@ STRING 1246
 // 技能: A0BU (尖刺外壳), EditorSuffix (编辑器后缀)
 {
 小强
-}
-
-STRING 1247
-{
-|cffffffff比赛：|r|cFF00FF00轮选模式|r|cffffcc00(D)|r
 }
 
 STRING 1248
@@ -7891,11 +7851,6 @@ STRING 1325
 Q
 }
 
-STRING 1326
-{
-由|cffff0000红色|R玩家选择游戏模式
-}
-
 STRING 1327
 {
 防守模式|cffff0000大灾变|r即将开启
@@ -8108,11 +8063,6 @@ STRING 1362
 // 技能: A0BV (暗刃), Tip (提示工具 - 普通)
 {
 暗刃
-}
-
-STRING 1363
-{
-|cffffffff洗牌：|r|cffff0000洗牌模式|r|cffffcc00(S)|r
 }
 
 STRING 1364
@@ -13721,20 +13671,10 @@ STRING 2301
 音速打击(|cffffcc00W|r)等级5
 }
 
-STRING 2302
-{
-|cFFFFFF00全明星战役2.6c测试版|r
-}
-
 STRING 2303
 // 技能: A0D2 (水火木金土符[贤者之石]), Researchubertip (提示工具 - 学习 - 扩展)
 {
 利用元素炼成魔力增幅器，期间发动任何基础型元素魔法或者发展型元素魔法，对应元素的魔石追加弹幕，碎掉的魔石在4秒内自动再生|n|n|cffaaaaff追加弹幕伤害：智力×0.4+10|n追加弹幕数：5|n|n|Cff757575持续时间：20秒|n间隔时间：90秒
-}
-
-STRING 2304
-{
-|cFFFF6600作者：小神 幻雷 最萌小汐 裂魂|r
 }
 
 STRING 2305
@@ -14153,12 +14093,6 @@ STRING 2374
 // 物品: I03W (购买的星空之眼), Description (说明)
 {
 |cff2099ff星空之眼：|r|n拥有200范围的空中视野和1200范围的真实视野|n激活：拥有1200范围的空中视野|n|n-己方英雄靠近200范围并没远离500范围能激活|n-放置在己方窥视之眼200范围内能相互激活|n-屏蔽1200范围内敌人的窥视之眼|n|n|cffffff00可购买叠加|r
-}
-
-STRING 2375
-{
-|cFFFFFF00游戏指令.更新内容.游戏专房请查看F9|r
-
 }
 
 STRING 2376
@@ -42901,11 +42835,6 @@ STRING 7188
 |cffffaa50主动技能|r|n|cff00ff00[奇迹]|r立即恢复损失生命值的25%，间隔时间180秒|n|cff50aaff被动效果|r|n提高10%生命恢复效果|n每600点生命上限提高1.0/s魔法恢复|n每250点魔法上限提高1.0/s生命恢复
 }
 
-STRING 7189
-{
-|cffffffff娱乐：|r|cff00ffff圣诞模式|r|cffffcc00(E)|r
-}
-
 STRING 7190
 // 魔法效果: B032 (), Buffubertip (工具提示 - 扩展)
 {
@@ -50065,6 +49994,11 @@ STRING 8405
 刺客隐藏自己，在|cffffff001.5|r秒后进入隐身状态并提高|cffffff0010%|r的移动速度，下一次攻击将造成额外伤害并|cff00ffff击晕1.5秒|r，也可以在潜行时发动|cff2565ff[影突]|r技能进行远距离突进攻击，攻击、使用技能或物品均会终止潜行状态|n|n|cffff0000伤害：250+敏捷×1（强化伤害）|n|n|cff757575持续时间：18秒|n间隔时间：20秒|n|n|cff2565ff[影突]|r|n从远距离极快地袭向指定目标的后方，伤害效果与潜行攻击额外伤害一致|n|n|cff757575施法距离：700
 }
 
+STRING 8407
+{
+|cFFFFFF00全明星战役2.6c测试版|r
+}
+
 STRING 8408
 // 技能: A0KM (|cFFff5025横砍|r), Researchubertip (提示工具 - 学习 - 扩展)
 {
@@ -50171,6 +50105,11 @@ STRING 8425
 提高10点力量|n提高20点敏捷|n提高30点智力|n提高300点生命值|n提高200点魔法值|n|n|cff7575ff迷路的时间|r|n|cffccccff复活加速(高级)|r|n|n时之沙漏(4000)|n神秘宝石(3000)|n卷轴(3000)|n总价：10000|n|n|cffffcc00已下架的装备
 }
 
+STRING 8426
+{
+|cFFFF6600作者：小神 幻雷 最萌小汐 裂魂|r
+}
+
 STRING 8427
 // 物品: I04N (月光圆盘), Ubertip (提示工具 - 扩展)
 {
@@ -50211,6 +50150,22 @@ STRING 8433
 // 技能: A0PY (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
+}
+
+STRING 8434
+{
+|cFF00CCFF感谢玩家s芙兰朵露z和东风谷早面对本地图的支持！|r
+}
+
+STRING 8435
+{
+|cFFFFFF00游戏指令.更新内容.游戏专房请查看F9|r
+
+}
+
+STRING 8436
+{
+由|cffff0000红色|R玩家选择游戏模式
 }
 
 STRING 8437
@@ -50297,6 +50252,11 @@ STRING 8450
 当己方英雄在三笠的|cffffff001500|r范围内死亡后，三笠会失去冷静变得容易冲动，立即刷新技能冷却，但所有技能提高|cff5075ff50%|r魔法消耗，持续|cffffff0010|r秒，该效果持续时间内不再触发。
 }
 
+STRING 8451
+{
+|cffffcc00自由选择英雄|r
+}
+
 STRING 8452
 // 技能: A035 (自身移动), Researchubertip (提示工具 - 学习 - 扩展)
 {
@@ -50325,6 +50285,51 @@ STRING 8456
 // 技能: A035 (自身移动), Ubertip (提示工具 - 普通 - 扩展)
 {
 对自身空间移动，能任意移动到指定地点|n|n|cff00ffff最大距离：300+敏捷×2|n|n|cffff0000最近3秒内受到过英雄或建筑伤害会使技能冷却变为7秒，魔法消耗变为150。|n|n|cff757575间隔时间：0.5秒
+}
+
+STRING 8457
+{
+选择英雄
+}
+
+STRING 8458
+{
+游戏模式
+}
+
+STRING 8459
+{
+常规：自由选择|cffffcc00(Q)|r
+}
+
+STRING 8460
+{
+|cffffffff常规：全体随机|r|cffffcc00(W)|r
+}
+
+STRING 8461
+{
+|cffffffff娱乐：|r|cff00ffff圣诞模式|r|cffffcc00(E)|r
+}
+
+STRING 8462
+{
+|cffffffff比赛：|r|cffffff00单路模式|r|cffffcc00(R)|r
+}
+
+STRING 8463
+{
+|cffffffff比赛：|r|cFF00FF00轮选模式|r|cffffcc00(D)|r
+}
+
+STRING 8464
+{
+|cffffffff路人：|r|cffff0000洗牌模式|r|cffffcc00(S)|r
+}
+
+STRING 8465
+{
+|cffffffff防守：|r|cffff0000挑战模式|r|cffffcc00(F)|r
 }
 
 STRING 8466
@@ -51879,11 +51884,6 @@ STRING 9214
 // 技能: A098 (|cff7575ff暴雨箭阵|r), Tip (提示工具 - 普通)
 {
 |cFF7575FF暴雨箭阵|r（D）
-}
-
-STRING 9263
-{
-|cffffffff比赛：|r|cffffff00单路模式|r|cffffcc00(R)|r
 }
 
 STRING 9326

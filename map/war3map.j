@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -95,12 +95,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -1815,6 +1815,7 @@ player s__sys_selfp
 integer s__sys_self
 group s__sys_g
 timer s__sys_timeTimer=CreateTimer()
+boolean s__sys_Debug=false
 gamecache s__sys_GC
 constant integer si__maphack=2
 integer si__maphack_F=0
@@ -2364,13 +2365,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -2914,20 +2915,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2959,7 +2960,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -2992,22 +2993,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3346,9 +3347,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3375,22 +3376,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3400,13 +3401,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3459,12 +3460,13 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
 call TimerStart(s__sys_timeTimer, 999999, false, null)
 set s__sys_GC=InitGameCache("Moe")
+set s__sys_Debug=true
 endfunction
 
 //library baseLibrary ends
@@ -3472,7 +3474,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run timer.lua")
 call Cheat("run player.lua")
@@ -4083,7 +4085,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -7673,10 +7675,10 @@ call SetMusicVolume(85)
 call SetPlayerOnScoreScreen(s__baka_SPlayer(10), false)
 call SetPlayerOnScoreScreen(s__baka_SPlayer(11), false)
 set udg_Points=- 1
-call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_2302")
-call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_2304")
-call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_062")
-call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_2375")
+call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_8407")
+call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_8426")
+call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_8434")
+call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_8435")
 set udg_Color[1]="|Cffff0000"
 set udg_Color[2]="|Cff0041ff"
 set udg_Color[3]="|Cff1BE6B8"
@@ -7774,28 +7776,28 @@ call SetPlayerState(s__baka_SPlayer(11), PLAYER_STATE_GIVES_BOUNTY, 1)
 call PanCameraToTimed(- 5775.00, 6225.00, 0.00)
 call ForForce(GetPlayersAll(), function Trig_time_0Func068A)
 if ( ( GetPlayerSlotState(s__baka_SPlayer(0)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerController(s__baka_SPlayer(0)) == MAP_CONTROL_USER ) ) then
-call DisplayTimedTextToForce(GetPlayersAll(), 30.00, "TRIGSTR_1326")
+call DisplayTimedTextToForce(GetPlayersAll(), 30.00, "TRIGSTR_8436")
 call StartTimerBJ(udg_jishiqi[64], true, 1.00)
-call DialogSetMessage(udg_duihuakuang[0], "TRIGSTR_815")
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_816", 0x51)
+call DialogSetMessage(udg_duihuakuang[0], "TRIGSTR_8458")
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8459", 0x51)
 set udg_anniu[0]=GetLastCreatedButtonBJ()
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_817", 0x57)
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8460", 0x57)
 set udg_anniu[1]=GetLastCreatedButtonBJ()
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_7189", 0x45)
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8461", 0x45)
 set udg_anniu[2]=GetLastCreatedButtonBJ()
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_9263", 0x52)
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8462", 0x52)
 set udg_anniu[3]=GetLastCreatedButtonBJ()
 if ( ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_PLAYING ) ) then
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_1247", 0x44)
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8463", 0x44)
 set udg_anniu[4]=GetLastCreatedButtonBJ()
 else
 endif
 if ( ( ( GetPlayerController(s__baka_SPlayer(5)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(6)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(7)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(8)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(9)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_EMPTY ) ) ) then
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_1211", 0x46)
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8465", 0x46)
 set udg_anniu[5]=GetLastCreatedButtonBJ()
 else
-if ( ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_PLAYING ) ) then
-call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_1363", 0x53)
+if ( ( ( s__sys_Debug ) or ( ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_PLAYING ) ) ) ) then
+call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[0], "TRIGSTR_8464", 0x53)
 set udg_anniu[7]=GetLastCreatedButtonBJ()
 else
 endif
@@ -7812,10 +7814,10 @@ set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call StartTimerBJ(udg_jishiqi[64], true, 1.00)
 call StartTimerBJ(udg_jishiqi[79], false, 120.00)
-call DisplayTimedTextToForce(GetPlayersAll(), 30.00, "TRIGSTR_066")
+call DisplayTimedTextToForce(GetPlayersAll(), 30.00, "TRIGSTR_8451")
 call EnableTrigger(gg_trg_choose_hero)
 call StartTimerBJ(udg_jishiqi[0], false, 40.00)
-call CreateTimerDialogBJ(udg_jishiqi[0], "TRIGSTR_067")
+call CreateTimerDialogBJ(udg_jishiqi[0], "TRIGSTR_8457")
 set udg_chuangkou[0]=bj_lastCreatedTimerDialog
 call TimerDialogDisplay(udg_chuangkou[0], true)
 call StartTimerBJ(udg_jishiqi[28], false, 0.50)
@@ -37534,6 +37536,7 @@ set udg_zhengshu2[42]=0
 set udg_danwei2[0]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[42]), 0x6530324E, udg_dian2[0], GetUnitFacing(udg_danwei2[42]))
 call SetUnitAnimation(udg_danwei2[0], "birth")
 call IncUnitAbilityLevel(udg_danwei2[0], 0x41303059)
+call IncUnitAbilityLevel(udg_danwei2[0], 0x41303059)
 call UnitApplyTimedLife(udg_danwei2[0], 0x42487765, 0.50)
 call s__baka_IssueTargetOrderById2(udg_danwei2[0] , 852095 , udg_danwei2[1])
 call SetUnitPositionLoc(udg_danwei2[1], udg_dian2[1])
@@ -60955,13 +60958,13 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs250411026")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs253428881")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
 call ExecuteFunc("YDWELibrary__Init")
 call ExecuteFunc("bakaLibrary__Init")
 call ExecuteFunc("effectLibrary__Init")
@@ -61088,7 +61091,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs250411026 takes nothing returns nothing
+function jasshelper__initstructs253428881 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
