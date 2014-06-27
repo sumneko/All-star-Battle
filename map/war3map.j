@@ -46619,16 +46619,14 @@ call TriggerRegisterTimerExpireEvent(gg_trg_zishenyidong_2, udg_times[21])
 call TriggerAddAction(gg_trg_zishenyidong_2, function Trig_zishenyidong_2Actions)
 endfunction
 function Trig_yidongjinzhiActions takes nothing returns nothing
-if ( ( GetEventDamage() > 0.00 ) and ( ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) ) or ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303035 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303033 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303034 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303031 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303039 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303041 ) or ( udg_Points >= 0 ) ) and ( IsUnitIllusionBJ(GetTriggerUnit()) == false ) and ( ( GetUnitAbilityLevel(GetTriggerUnit(), 0x41303335) > 0 ) or ( GetUnitAbilityLevel(GetTriggerUnit(), 0x4130514F) > 0 ) ) ) then
-if ( ( udg_zhengshu2[23] == 0 ) ) then
+if ( ( GetEventDamage() > 0.00 ) and ( ( GetUnitAbilityLevel(GetTriggerUnit(), 0x41303335) > 0 ) or ( GetUnitAbilityLevel(GetTriggerUnit(), 0x4130514F) > 0 ) ) and ( ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) ) or ( IsUnitType(GetEventDamageSource(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303035 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303033 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303034 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303031 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303039 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x68303041 ) or ( udg_Points >= 0 ) ) and ( IsUnitIllusionBJ(GetTriggerUnit()) == false ) ) then
 set udg_danwei2[23]=GetTriggerUnit()
 set udg_tempReal[0]=( 10.00 * ( GetEventDamage() / GetUnitState(udg_danwei2[23], UNIT_STATE_MAX_LIFE) ) )
+set udg_tempReal[0]=RMinBJ(5.00, RMaxBJ(0.50, udg_tempReal[0]))
 if ( ( udg_tempReal[0] > TimerGetRemaining(udg_times[23]) ) ) then
 call UnitAddAbility(udg_danwei2[23], 0x41305150)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei2[23]), 0x41305150, false)
 call StartTimerBJ(udg_times[23], false, udg_tempReal[0])
-else
-endif
 else
 endif
 else
@@ -61080,7 +61078,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs41976374")
+call ExecuteFunc("jasshelper__initstructs43008914")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61213,7 +61211,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs41976374 takes nothing returns nothing
+function jasshelper__initstructs43008914 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
