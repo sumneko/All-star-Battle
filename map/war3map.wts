@@ -23,7 +23,7 @@ STRING 3
 
 STRING 4
 {
-全明星战役2.6c测试版
+全明星战役2.6d测试版
 }
 
 STRING 5
@@ -271,6 +271,11 @@ STRING 46
 向目标投掷一枚铁锤，击中后对300范围的敌人造成打击并降低50%的攻击速度和移动速度|n|n|cFFFFff00伤害值100/150/200/250/300|n主目标额外造成智力×1的伤害|r|n|n|cff757575施法距离：800|n间隔时间：20秒
 }
 
+STRING 47
+{
+|cff00ff00全明星战役|cffffff002.6d
+}
+
 STRING 48
 // 单位: e08M (三笠), Name (名字)
 {
@@ -481,11 +486,6 @@ STRING 86
 // 物品: mlst (力量之锤), Hotkey (热键)
 {
 A
-}
-
-STRING 87
-{
-|cff00ff00全明星战役|cffffff002.6c
 }
 
 STRING 88
@@ -49804,7 +49804,7 @@ STRING 8406
 
 STRING 8407
 {
-|cFFFFFF00全明星战役2.6c测试版|r
+|cFFFFFF00全明星战役2.6d测试版|r
 }
 
 STRING 8408

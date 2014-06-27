@@ -3466,7 +3466,6 @@ set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
 call TimerStart(s__sys_timeTimer, 999999, false, null)
 set s__sys_GC=InitGameCache("Moe")
-set s__sys_Debug=true
 endfunction
 
 //library baseLibrary ends
@@ -4209,7 +4208,6 @@ if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
 set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
 if YDWELibrary___Iflush_first > 500 then
-call BJDebugMsg("开始清理单位主键")
 set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
@@ -4223,7 +4221,6 @@ set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
@@ -4269,7 +4266,6 @@ set s__maphack_heroes[s__maphack_heroCount]=hero
 set s__maphack_heroState[s__maphack_heroCount]=0
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
-call BJDebugMsg("<FMH>添加[" + GetUnitName(hero) + "],计数:" + I2S(s__maphack_heroCount))
 endfunction
 function s__maphack_TimerFunc takes nothing returns nothing
 local integer i=1
@@ -4423,7 +4419,6 @@ loop
 exitwhen i > 9
 set s__baka_spplayer[i]=Player(nids[i])
 set s__baka_spid[nids[i]]=i
-call BJDebugMsg("<洗牌>玩家: " + I2S(nids[i]) + " → 玩家: " + I2S(i))
 call SetPlayerStartLocation(s__baka_spplayer[i], startLocIndex[i])
 set cjlocgn_00000003=s__baka_g[i]
 loop
@@ -4864,7 +4859,6 @@ set new_max=i
 if ( name == "全部" or s__process_name[cjlocgn_00000000] == name ) and s__process_uper[cjlocgn_00000000] > uper and s__process_enable[cjlocgn_00000000] then
 set count=count + 1
 else
-call BJDebugMsg("<优先级被剔除> hashindex:[" + I2S(i) + "] key:[" + I2S(cjlocgn_00000000) + "]")
 set s__process_enable[cjlocgn_00000000]=false
 call SaveInteger(YDHT, h, s__process_h_index[i], 0)
 endif
@@ -4885,7 +4879,6 @@ loop
 exitwhen i > max
 set key=LoadInteger(YDHT, h, s__process_h_index[i])
 if key != 0 and s__process_name[key] == name and s__process_uper[key] > uper and s__process_cover[key] and s__process_enable[key] then
-call BJDebugMsg("<有更高优先级存在> hashindex:[" + I2S(i) + "] key:[" + I2S(key) + "]")
 return 0
 endif
 set i=i + 1
@@ -4924,7 +4917,6 @@ set s__process_hashindex[key]=i
 set s__process_lastkey[key]=0
 set s__process_nextkey[key]=s__process_nextkey[0]
 set s__process_nextkey[0]=key
-call BJDebugMsg("<新建过程> unit:[" + GetUnitName(u) + "] process:[" + name + "] hashindex:[" + I2S(i) + "] key:[" + I2S(key) + "]")
 return key
 endfunction
 function s__process_IsEnable takes integer key returns boolean
@@ -4942,7 +4934,6 @@ if s__process_enable[key] then
 set s__process_enable[key]=false
 call SaveInteger(YDHT, h, s__process_h_index[s__process_hashindex[key]], 0)
 endif
-call BJDebugMsg("<结束过程> unit:[" + GetUnitName(s__process_us[key]) + "] process:[" + s__process_name[key] + "] hashindex:[" + I2S(s__process_hashindex[key]) + "] key:[" + I2S(key) + "]")
 set s__process_hashindex[key]=0
 set last=s__process_lastkey[key]
 set next=s__process_nextkey[key]
@@ -5112,7 +5103,6 @@ exitwhen i > 11
 call TriggerRegisterPlayerChatEvent(trg, s__baka_SPlayer(i), "", false)
 set i=i + 1
 endloop
-call TriggerAddAction(trg, function s__test_action)
 set trg=null
 endfunction
 
@@ -50786,7 +50776,6 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
-call BJDebugMsg("[火土符]-火焰马甲创建结束")
 else
 endif
 endfunction
@@ -50814,7 +50803,6 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
-call BJDebugMsg("[火土符]-火焰马甲移动结束")
 else
 endif
 set ydl_group=null
@@ -50874,7 +50862,6 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
-call BJDebugMsg("[火土符]-全部结束")
 else
 endif
 set ydl_group=null
@@ -61078,7 +61065,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs43008914")
+call ExecuteFunc("jasshelper__initstructs45531138")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61211,7 +61198,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs43008914 takes nothing returns nothing
+function jasshelper__initstructs45531138 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
