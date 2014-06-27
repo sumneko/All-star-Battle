@@ -49,6 +49,3 @@ XPFactor=0.00,0
 [TWN3]
 XPFactor=0.00,0
 
-[HERO]
-DependencyOr=
-
