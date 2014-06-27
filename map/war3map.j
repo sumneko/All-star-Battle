@@ -47,20 +47,20 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRangeOfLocMatchingNull
 //globals from YDWEGetUnitsInRectMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEGetUnitsOfPlayerAndTypeIdNull:
 constant boolean LIBRARY_YDWEGetUnitsOfPlayerAndTypeIdNull=true
@@ -185,10 +185,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary__U=null
-unit array YDWELibrary__Uflush_units
-integer YDWELibrary__Iflush_first=0
-integer YDWELibrary__Iflush_top=0
+unit YDWELibrary___U=null
+unit array YDWELibrary___Uflush_units
+integer YDWELibrary___Iflush_first=0
+integer YDWELibrary___Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -1531,8 +1531,6 @@ trigger gg_trg_huofu_a_2=null
 trigger gg_trg_huofu_b_1=null
 trigger gg_trg_huofu_b_2=null
 trigger gg_trg_huotufu_1=null
-trigger gg_trg_huotufu_2=null
-trigger gg_trg_huotufu_3=null
 trigger gg_trg_huojinfu_1=null
 trigger gg_trg_huojinfu_2=null
 trigger gg_trg_huoshuifu_1=null
@@ -4197,42 +4195,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary__FlushUnit_Add takes nothing returns nothing
+function YDWELibrary___FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary__U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
+set YDWELibrary___U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
 loop
-set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
-exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
+set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
+exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
 endloop
-if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
-set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
+if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
+set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
-if YDWELibrary__Iflush_first > 500 then
+if YDWELibrary___Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary__Iflush_top
+set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary__U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
-set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary__Iflush_first=cjlocgn_00000000
+set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary___U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
+set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary___Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary__Init takes nothing returns nothing
+function YDWELibrary___Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4846,7 +4844,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -4863,7 +4861,7 @@ exitwhen i > max
 set cjlocgn_00000000=LoadInteger(YDHT, h, s__process_h_index[i])
 if cjlocgn_00000000 != 0 then
 set new_max=i
-if s__process_name[cjlocgn_00000000] == name and s__process_uper[cjlocgn_00000000] > uper and s__process_enable[cjlocgn_00000000] then
+if ( name == "全部" or s__process_name[cjlocgn_00000000] == name ) and s__process_uper[cjlocgn_00000000] > uper and s__process_enable[cjlocgn_00000000] then
 set count=count + 1
 else
 call BJDebugMsg("<优先级被剔除> hashindex:[" + I2S(i) + "] key:[" + I2S(cjlocgn_00000000) + "]")
@@ -4917,7 +4915,7 @@ loop
 exitwhen LoadInteger(YDHT, h, s__process_h_index[i]) == 0
 set i=i + 1
 endloop
-if i > 50 then
+if i > 100 then
 call BJDebugMsg("<未找到空闲过程位>[" + GetUnitName(u) + "][" + name + "][" + I2S(uper) + "]")
 return 0
 endif
@@ -4926,7 +4924,7 @@ set s__process_hashindex[key]=i
 set s__process_lastkey[key]=0
 set s__process_nextkey[key]=s__process_nextkey[0]
 set s__process_nextkey[0]=key
-call BJDebugMsg("<新建过程> hashindex:[" + I2S(i) + "] key:[" + I2S(i) + "]")
+call BJDebugMsg("<新建过程> unit:[" + GetUnitName(u) + "] process:[" + name + "] hashindex:[" + I2S(i) + "] key:[" + I2S(key) + "]")
 return key
 endfunction
 function s__process_IsEnable takes integer key returns boolean
@@ -4944,6 +4942,7 @@ if s__process_enable[key] then
 set s__process_enable[key]=false
 call SaveInteger(YDHT, h, s__process_h_index[s__process_hashindex[key]], 0)
 endif
+call BJDebugMsg("<结束过程> unit:[" + GetUnitName(s__process_us[key]) + "] process:[" + s__process_name[key] + "] hashindex:[" + I2S(s__process_hashindex[key]) + "] key:[" + I2S(key) + "]")
 set s__process_hashindex[key]=0
 set last=s__process_lastkey[key]
 set next=s__process_nextkey[key]
@@ -4951,10 +4950,10 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary__Init takes nothing returns nothing
+function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
-exitwhen i > 50
+exitwhen i > 100
 set s__process_h_index[i]=StringHash("过程" + I2S(i))
 set i=i + 1
 endloop
@@ -5105,7 +5104,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary__Init takes nothing returns nothing
+function testLibrary___Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 local integer i=0
 loop
@@ -5211,6 +5210,12 @@ call GroupAddUnit(bj_lastCreatedGroup, bj_lastCreatedUnit)
 endloop
 call RemoveLocation(loc)
 return bj_lastCreatedGroup
+endfunction
+function s__Unit_CreateUnitAtLocMU takes player id,integer unitid,location whichLocation,real face returns unit
+local real x=GetLocationX(whichLocation)
+local real y=GetLocationY(whichLocation)
+call RemoveLocation(whichLocation)
+return CreateUnit(id, unitid, x, y, face)
 endfunction
 function s__Unit_SetUnitPositionLocMU takes unit u,location loc returns nothing
 call SetUnitPositionLoc(u, loc)
@@ -9524,16 +9529,10 @@ call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huojinfu_2))
 call DestroyTrigger(gg_trg_huojinfu_2)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huotufu_1))
 call DestroyTrigger(gg_trg_huotufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huotufu_2))
-call DestroyTrigger(gg_trg_huotufu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huotufu_3))
-call DestroyTrigger(gg_trg_huotufu_3)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huoshuifu_1))
 call DestroyTrigger(gg_trg_huoshuifu_1)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huoshuifu_2))
 call DestroyTrigger(gg_trg_huoshuifu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huotufu_3))
-call DestroyTrigger(gg_trg_huotufu_3)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_a_1))
 call DestroyTrigger(gg_trg_shuifu_a_1)
 call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_a_2))
@@ -12259,6 +12258,7 @@ endif
 endif
 else
 endif
+call s__process_Cover(GetDyingUnit() , 100000000 , "全部")
 endfunction
 function InitTrig_fuhuo takes nothing returns nothing
 set gg_trg_fuhuo=CreateTrigger()
@@ -50776,109 +50776,165 @@ call TriggerRegisterTimerExpireEvent(gg_trg_huofu_b_2, udg_Times[4])
 call TriggerAddCondition(gg_trg_huofu_b_2, Condition(function Trig_huofu_b_2Conditions))
 call TriggerAddAction(gg_trg_huofu_b_2, function Trig_huofu_b_2Actions)
 endfunction
+function Trig_huotufu_1Func013T takes nothing returns nothing
+call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)) , 0x65303447 , GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)) , ( GetUnitFacing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)) + ( 15.00 * SinBJ(( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 20.00 )) ) )))
+call GroupAddUnit(udg_DAZE[0], LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+call SetUnitUserData(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA), ( 35 + ( 10 * GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), 0x41304453) ) ))
+call SetUnitTimeScale(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA), 0.50)
+call GroupAddUnit(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-火焰马甲创建结束")
+else
+endif
+endfunction
+function Trig_huotufu_1Func014Func003Func002A takes nothing returns nothing
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788, false)
+call SetUnitUserData(GetEnumUnit(), ( GetUnitUserData(GetEnumUnit()) - 1 ))
+if ( ( GetUnitUserData(GetEnumUnit()) > 5 ) and ( IsTerrainPathable(GetUnitX(GetEnumUnit()), GetUnitY(GetEnumUnit()), PATHING_TYPE_FLYABILITY) == false ) ) then
+call s__Unit_Move(GetEnumUnit() , GetUnitFacing(GetEnumUnit()) , RMaxBJ(0.00, RMinBJ(50.00, ( I2R(GetUnitUserData(GetEnumUnit())) - 5.00 ))))
+else
+if ( ( GetUnitUserData(GetEnumUnit()) == - 15 ) ) then
+call KillUnit(GetEnumUnit())
+call GroupRemoveUnit(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62), GetEnumUnit())
+else
+endif
+endif
+endfunction
+function Trig_huotufu_1Func014Func003T takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788, true)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62), function Trig_huotufu_1Func014Func003Func002A)
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788) == true ) ) then
+call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-火焰马甲移动结束")
+else
+endif
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function Trig_huotufu_1Func014Func005Func003A takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788, false)
+if ( ( GetUnitUserData(GetEnumUnit()) > 0 ) ) then
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(GetEnumUnit()), GetUnitY(GetEnumUnit()), 200.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_FLYING) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x436C6C8F))) == true ) ) then
+if ( ( YDWEGetIntegerByInteger(YDWEH2I(ydl_unit) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA)) == 0 ) ) then
+call GroupAddUnit(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440), ydl_unit)
+call YDWESaveIntegerByInteger(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , YDWEH2I(ydl_unit) , s__process_Create(ydl_unit , "灼热粉尘" , 100 , false))
+else
+endif
+call YDWESaveIntegerByInteger(YDWEH2I(ydl_unit) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , 6)
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
+else
+endif
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function Trig_huotufu_1Func014Func005Func005A takes nothing returns nothing
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788, false)
+call YDWESaveIntegerByInteger(YDWEH2I(GetEnumUnit()) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , ( YDWEGetIntegerByInteger(YDWEH2I(GetEnumUnit()) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA)) - 1 ))
+if ( ( s__process_IsEnable(YDWEGetIntegerByInteger(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , YDWEH2I(GetEnumUnit()))) == true ) ) then
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x436C6C8F), GetEnumUnit(), ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887) * ( 2.00 - ( GetUnitState(GetEnumUnit(), UNIT_STATE_LIFE) / GetUnitState(GetEnumUnit(), UNIT_STATE_MAX_LIFE) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call YDWESaveIntegerByInteger(YDWEH2I(GetEnumUnit()) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , 0)
+endif
+if ( ( YDWEGetIntegerByInteger(YDWEH2I(GetEnumUnit()) , LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA)) == 0 ) ) then
+call GroupRemoveUnit(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440), GetEnumUnit())
+call s__process_Remove(YDWEGetIntegerByInteger(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA) , YDWEH2I(GetEnumUnit())))
+else
+endif
+endfunction
+function Trig_huotufu_1Func014Func005T takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788, true)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62), function Trig_huotufu_1Func014Func005Func003A)
+call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440), function Trig_huotufu_1Func014Func005Func005A)
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788) == true ) ) then
+call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440))
+call YDWEFlushMissionByInteger(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-全部结束")
+else
+endif
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function Trig_huotufu_1Func014T takes nothing returns nothing
+local timer ydl_timer
+set ydl_timer=CreateTimer()
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x14B2F788, LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x691E9C62, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62))
+call TimerStart(ydl_timer, 0.04, true, function Trig_huotufu_1Func014Func003T)
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xDB7C34FA, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x9375D887, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887))
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x14B2F788, LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x436C6C8F, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x436C6C8F))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x691E9C62, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x60E03440, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440))
+call TimerStart(ydl_timer, 0.20, true, function Trig_huotufu_1Func014Func005T)
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+set ydl_timer=null
+endfunction
 function Trig_huotufu_1Actions takes nothing returns nothing
-set udg_danwei2[212]=GetTriggerUnit()
-set udg_zhengshu2[212]=0
-call StartTimerBJ(udg_times[212], true, 0.05)
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 call StopSoundBJ(gg_snd_RainOfFireTarget1, false)
-call PlaySoundOnUnitBJ(gg_snd_RainOfFireTarget1, 100, udg_danwei2[212])
+call PlaySoundOnUnitBJ(gg_snd_RainOfFireTarget1, 100, GetTriggerUnit())
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887, ( ( ( 25.00 + ( 25.00 * I2R(GetUnitAbilityLevel(GetTriggerUnit(), 0x41304453)) ) ) + ( 1.50 * I2R(GetHeroInt(GetTriggerUnit(), true)) ) ) / 6.00 ))
+call SaveGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x691E9C62, CreateGroup())
+call SaveGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x60E03440, CreateGroup())
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xDB7C34FA, YDWEH2I(LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x60E03440)))
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, ( 25 + ( 5 * GetUnitAbilityLevel(GetTriggerUnit(), 0x41304453) ) ))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x458B7DE9, GetTriggerUnit())
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x691E9C62, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x691E9C62))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+call TimerStart(ydl_timer, 0.05, true, function Trig_huotufu_1Func013T)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x436C6C8F, GetTriggerUnit())
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xDB7C34FA, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xDB7C34FA))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x9375D887, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x9375D887))
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x14B2F788, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x14B2F788))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x691E9C62, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x691E9C62))
+call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x60E03440, LoadGroupHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x60E03440))
+call TimerStart(ydl_timer, 0.05, false, function Trig_huotufu_1Func014T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
 endfunction
 function InitTrig_huotufu_1 takes nothing returns nothing
 set gg_trg_huotufu_1=CreateTrigger()
 call s__Event_AnyUnitSkill(gg_trg_huotufu_1 , 3 , 0x4130434D)
 call TriggerAddAction(gg_trg_huotufu_1, function Trig_huotufu_1Actions)
-endfunction
-function Trig_huotufu_2Actions takes nothing returns nothing
-set udg_zhengshu2[212]=( udg_zhengshu2[212] + 1 )
-if ( ( udg_zhengshu2[212] <= ( 25 + ( 5 * GetUnitAbilityLevel(udg_danwei2[264], 0x41304453) ) ) ) ) then
-set udg_dian2[0]=GetUnitLoc(udg_danwei2[212])
-set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[212]), 0x65303447, udg_dian2[0], ( GetUnitFacing(udg_danwei2[212]) + ( 15.00 * SinBJ(( I2R(udg_zhengshu2[212]) * 20.00 )) ) ))
-call GroupAddUnit(udg_DAZE[0], udg_danwei2[1])
-call SetUnitLifeBJ(udg_danwei2[1], ( ( I2R(GetHeroInt(udg_danwei2[212], true)) * 0.02 ) + ( 1.20 * I2R(GetUnitAbilityLevel(udg_danwei2[264], 0x41304453)) ) ))
-call SetUnitUserData(udg_danwei2[1], ( 35 + ( 10 * GetUnitAbilityLevel(udg_danwei2[264], 0x41304453) ) ))
-call SetUnitTimeScale(udg_danwei2[1], 0.50)
-call GroupAddUnit(udg_danweizu2[212], udg_danwei2[1])
-set udg_danwei2[1]=null
-call RemoveLocation(udg_dian2[0])
-else
-call PauseTimer(udg_times[212])
-set udg_danwei2[212]=null
-endif
-endfunction
-function InitTrig_huotufu_2 takes nothing returns nothing
-set gg_trg_huotufu_2=CreateTrigger()
-call TriggerRegisterTimerExpireEvent(gg_trg_huotufu_2, udg_times[212])
-call TriggerAddAction(gg_trg_huotufu_2, function Trig_huotufu_2Actions)
-endfunction
-function Trig_huotufu_3Conditions takes nothing returns boolean
-return ( ( IsUnitGroupEmptyBJ(udg_danweizu2[212]) == false ) )
-endfunction
-function Trig_huotufu_3Func002Func004Func004A takes nothing returns nothing
-set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[331]) == false ) ) then
-call GroupAddUnit(udg_danweizu2[331], udg_danwei2[1])
-else
-endif
-else
-call GroupRemoveUnit(udg_xuanqu, udg_danwei2[1])
-endif
-set udg_danwei2[1]=null
-endfunction
-function Trig_huotufu_3Func002A takes nothing returns nothing
-local group ydl_group
-local unit ydl_unit
-set udg_danwei2[0]=GetEnumUnit()
-set udg_dian2[0]=GetUnitLoc(udg_danwei2[0])
-call SetUnitUserData(udg_danwei2[0], ( GetUnitUserData(udg_danwei2[0]) - 1 ))
-if ( ( GetUnitUserData(udg_danwei2[0]) >= 0 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
-if ( ( GetUnitUserData(udg_danwei2[0]) == 15 ) ) then
-call SetUnitTimeScale(udg_danwei2[1], 0.00)
-else
-endif
-set udg_xuanqu=YDWEGetUnitsInRangeOfLocAllNull(200.00 , udg_dian2[0])
-call ForGroupBJ(udg_xuanqu, function Trig_huotufu_3Func002Func004Func004A)
-if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == false ) ) then
-call SetUnitUserData(udg_danwei2[0], R2I(( I2R(GetUnitUserData(udg_danwei2[0])) * 0.95 )))
-else
-endif
-call DestroyGroup(udg_xuanqu)
-set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], RMaxBJ(( RMinBJ(I2R(GetUnitUserData(udg_danwei2[0])), 55.00) - 5.00 ), 0.00), GetUnitFacing(udg_danwei2[0]))
-call SetUnitX(udg_danwei2[0], GetLocationX(udg_dian2[1]))
-call SetUnitY(udg_danwei2[0], GetLocationY(udg_dian2[1]))
-call RemoveLocation(udg_dian2[1])
-else
-if ( ( GetUnitUserData(udg_danwei2[0]) > - 15 ) ) then
-else
-call KillUnit(udg_danwei2[0])
-call GroupRemoveUnit(udg_danweizu2[212], udg_danwei2[0])
-endif
-endif
-call RemoveLocation(udg_dian2[0])
-set udg_danwei2[0]=null
-set ydl_group=null
-set ydl_unit=null
-endfunction
-function Trig_huotufu_3Func003A takes nothing returns nothing
-set udg_danwei2[1]=GetEnumUnit()
-call UnitDamageTarget(udg_danwei2[264], udg_danwei2[1], ( ( ( 1 + ( 1 * I2R(GetUnitAbilityLevel(udg_danwei2[264], 0x41304453)) ) ) + ( I2R(GetHeroInt(udg_danwei2[264], true)) * 0.06 ) ) * ( 2.00 - ( GetUnitLifePercent(udg_danwei2[1]) / 100.00 ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
-set udg_danwei2[1]=null
-endfunction
-function Trig_huotufu_3Actions takes nothing returns nothing
-local group ydl_group
-local unit ydl_unit
-set udg_danweizu2[331]=CreateGroup()
-call ForGroupBJ(udg_danweizu2[212], function Trig_huotufu_3Func002A)
-call ForGroupBJ(udg_danweizu2[331], function Trig_huotufu_3Func003A)
-call DestroyGroup(udg_danweizu2[331])
-set ydl_group=null
-set ydl_unit=null
-endfunction
-function InitTrig_huotufu_3 takes nothing returns nothing
-set gg_trg_huotufu_3=CreateTrigger()
-call TriggerRegisterTimerExpireEvent(gg_trg_huotufu_3, udg_Times[4])
-call TriggerAddCondition(gg_trg_huotufu_3, Condition(function Trig_huotufu_3Conditions))
-call TriggerAddAction(gg_trg_huotufu_3, function Trig_huotufu_3Actions)
 endfunction
 function Trig_huojinfu_1Actions takes nothing returns nothing
 set udg_danwei2[0]=GetTriggerUnit()
@@ -60610,8 +60666,6 @@ call InitTrig_huofu_a_2()
 call InitTrig_huofu_b_1()
 call InitTrig_huofu_b_2()
 call InitTrig_huotufu_1()
-call InitTrig_huotufu_2()
-call InitTrig_huotufu_3()
 call InitTrig_huojinfu_1()
 call InitTrig_huojinfu_2()
 call InitTrig_huoshuifu_1()
@@ -61026,23 +61080,23 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs15013848")
+call ExecuteFunc("jasshelper__initstructs41976374")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
 call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("YDWELibrary___Init")
 call ExecuteFunc("bakaLibrary___Init")
 call ExecuteFunc("effectLibrary___Init")
 call ExecuteFunc("eventLibrary___Init")
 call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("processLibrary___Init")
 call ExecuteFunc("soundLibrary___Init")
 call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("testLibrary___Init")
 call ExecuteFunc("textLibrary___Init")
 call ExecuteFunc("unitLibrary___Init")
 call ExecuteFunc("RecordFix___Init")
@@ -61159,7 +61213,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs15013848 takes nothing returns nothing
+function jasshelper__initstructs41976374 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
