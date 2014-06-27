@@ -46880,10 +46880,6 @@ call SetUnitY(udg_danwei2[1], GetLocationY(udg_dian2[2]))
 else
 call SetUnitPositionLoc(udg_danwei2[1], udg_dian2[2])
 endif
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[0])) == true ) ) then
-call UnitDamageTarget(udg_danwei2[0], udg_danwei2[1], RMaxBJ(( I2R(GetHeroAgi(udg_danwei2[0], true)) * 1.00 ), 0.00), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-endif
 else
 endif
 set udg_danwei2[1]=null
@@ -46922,6 +46918,18 @@ call PlaySoundOnUnitBJ(gg_snd_BlinkArrival1, 100, udg_danwei2[0])
 call ForGroupBJ(udg_xuanqu, function Trig_chumoyidongFunc011A)
 call DestroyGroup(udg_xuanqu)
 set udg_danwei2[2]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei2[0]), 0x65303243, udg_dian2[2], 0.00)
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetLocationX(udg_dian2[2]), GetLocationY(udg_dian2[2]), 232.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_FLYING) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(udg_danwei2[0])) == true ) ) then
+call UnitDamageTarget(udg_danwei2[0], ydl_unit, RMaxBJ(( I2R(GetHeroAgi(udg_danwei2[0], true)) * 1.00 ), 0.00), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
 call SetUnitAbilityLevel(udg_danwei2[2], 0x41303537, GetUnitAbilityLevel(udg_danwei2[0], 0x41303457))
 call UnitApplyTimedLife(udg_danwei2[2], 0x42487765, 1.00)
 call IssueImmediateOrderById(udg_danwei2[2], 852096)
@@ -61017,7 +61025,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs8453959")
+call ExecuteFunc("jasshelper__initstructs9728081")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61150,7 +61158,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs8453959 takes nothing returns nothing
+function jasshelper__initstructs9728081 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
