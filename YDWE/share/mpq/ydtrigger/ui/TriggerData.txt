@@ -9301,11 +9301,11 @@ _GetUnitLevel_Defaults=GetTriggerUnit
 _GetUnitLevel_Category=TC_UNIT
 
 GetUnitAbilityLevel=1,1,integer,unit,abilcode
-_GetUnitAbilityLevel_Defaults=GetTriggerUnit,_
+_GetUnitAbilityLevel_Defaults=GetTriggerUnit,GetSpellAbilityId
 _GetUnitAbilityLevel_Category=TC_UNIT
 
 GetUnitAbilityLevelSwapped=1,1,integer,abilcode,unit
-_GetUnitAbilityLevelSwapped_Defaults=_,GetTriggerUnit
+_GetUnitAbilityLevelSwapped_Defaults=GetSpellAbilityId,GetTriggerUnit
 _GetUnitAbilityLevelSwapped_Category=TC_UNIT
 
 UnitInventoryCount=1,1,integer,unit
@@ -9465,19 +9465,19 @@ _GetHeroXP_Defaults=GetTriggerUnit
 _GetHeroXP_Category=TC_HERO
 
 GetHeroStr=1,1,integer,unit,includeoption
-_GetHeroStr_Defaults=_,InclusionExclude
+_GetHeroStr_Defaults=GetTriggerUnit,InclusionInclude
 _GetHeroStr_Category=TC_HERO
 
 GetHeroAgi=1,1,integer,unit,includeoption
-_GetHeroAgi_Defaults=_,InclusionExclude
+_GetHeroAgi_Defaults=GetTriggerUnit,InclusionInclude
 _GetHeroAgi_Category=TC_HERO
 
 GetHeroInt=1,1,integer,unit,includeoption
-_GetHeroInt_Defaults=_,InclusionExclude
+_GetHeroInt_Defaults=GetTriggerUnit,InclusionInclude
 _GetHeroInt_Category=TC_HERO
 
 GetHeroStatBJ=1,1,integer,herostat,unit,includeoption
-_GetHeroStatBJ_Defaults=HeroStatStr,_,InclusionExclude
+_GetHeroStatBJ_Defaults=HeroStatStr,GetTriggerUnit,InclusionInclude
 _GetHeroStatBJ_Category=TC_HERO
 
 GetHeroSkillPoints=1,1,integer,unit
@@ -10451,6 +10451,11 @@ _CreateUnit_Category=TC_NOTHING
 CreateUnitAtLoc=0,1,unit,player,unitcode,location,real
 _CreateUnitAtLoc_Defaults=Player00,hfoo,_,0
 _CreateUnitAtLoc_Category=TC_NOTHING
+
+//最萌小汐
+Unit.CreateUnitAtLocMU=0,1,unit,player,unitcode,location,real
+_Unit.CreateUnitAtLocMU_Defaults=Player00,hfoo,_,0
+_Unit.CreateUnitAtLocMU_Category=TC_NOTHING
 
 CreateCorpse=0,1,unit,player,unitcode,real,real,real
 _CreateCorpse_Defaults=Player00,hfoo,0,0,0

@@ -7062,6 +7062,11 @@ CreateUnitAtLoc="新建单位(指定点) [R]"
 CreateUnitAtLoc="新建 ",~玩家," 的 ",~单位," 在 ",~点," 面向角度:",~Face," 度"
 CreateUnitAtLocHint=
 
+//最萌小汐
+Unit.CreateUnitAtLocMU="新建单位(指定点) <单位库>"
+Unit.CreateUnitAtLocMU="新建 ",~玩家," 的 ",~单位," 在 ",~点," 面向角度:",~Face," 度"
+Unit.CreateUnitAtLocMUHint="自动删除点"
+
 CreateCorpse="新建尸体 [R]"
 CreateCorpse="新建 ",~玩家," 的 ",~单位," 的尸体在(",~X,",",~Y,"),面向角度:",~Face," 度"
 CreateCorpseHint=
