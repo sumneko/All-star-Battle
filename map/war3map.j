@@ -58169,7 +58169,7 @@ else
 call UnitAddAbility(udg_Danwei[161], 0x41304F51)
 call SetUnitAbilityLevel(udg_Danwei[161], 0x41304F51, GetUnitAbilityLevel(udg_Danwei[161], 0x41304F4A))
 call ForGroupBJ(udg_Danweizu[164], function Trig_yizhidan_shunyi_2Func001Func001Func001Func001Func003A)
-call StartTimerBJ(udg_jishiqi[178], false, 2.00)
+call StartTimerBJ(udg_jishiqi[178], false, RMaxBJ(1.50, TimerGetRemaining(udg_jishiqi[178])))
 call RemoveLocation(udg_Dian[165])
 call KillUnit(udg_Danwei[165])
 call SetUnitTimeScale(udg_Danwei[165], 5.00)
@@ -61121,7 +61121,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs462218622")
+call ExecuteFunc("jasshelper__initstructs462653896")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61254,7 +61254,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs462218622 takes nothing returns nothing
+function jasshelper__initstructs462653896 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
