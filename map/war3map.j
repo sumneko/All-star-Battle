@@ -185,10 +185,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -4148,7 +4148,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4257,42 +4257,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
+if YDWELibrary__Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4730,7 +4730,7 @@ call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4750,7 +4750,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4788,7 +4788,7 @@ call TriggerRegisterAnyUnitEventBJ(trg, EVENT_PLAYER_UNIT_SPELL_FINISH)
 call TriggerAddAction(trg, function s__Event_skillEventAction)
 set trg=null
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 endfunction
 
@@ -4902,7 +4902,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -4924,7 +4924,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -5030,7 +5030,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary___Init takes nothing returns nothing
+function processLibrary__Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -5076,7 +5076,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -5120,7 +5120,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -5184,7 +5184,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary___Init takes nothing returns nothing
+function testLibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 local integer i=0
 loop
@@ -5217,7 +5217,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5372,7 +5372,7 @@ endif
 endif
 endif
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -5393,7 +5393,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -5409,10 +5409,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -33909,17 +33909,17 @@ set udg_danwei2[0]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_FLYING) == false ) and ( IsUnitType(udg_danwei2[0], UNIT_TYPE_DEAD) == false ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x48757468 ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x65303253 ) and ( GetUnitTypeId(udg_danwei2[0]) != 0x68677477 ) ) then
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
 if ( ( IsUnitInGroup(udg_danwei2[0], udg_danweizu2[246]) == false ) ) then
-if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
-if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) > 375.00 ) ) then
-call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
-else
-endif
+if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) and ( IsUnitIllusionBJ(udg_danwei2[0]) == false ) ) then
 if ( ( udg_Points <= 0 ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 0.00)
 call s__Unit_PauseUnitMU(udg_danwei2[0] , true , "封绝")
 else
 endif
 else
+if ( ( IsUnitEnemy(udg_danwei2[0], GetOwningPlayer(udg_danwei2[246])) == true ) and ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) > 375.00 ) ) then
+call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
+else
+endif
 endif
 call GroupAddUnit(udg_danweizu2[246], udg_danwei2[0])
 else
@@ -33933,17 +33933,17 @@ function Trig_baka_2Func001Func011A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[4]=GetUnitLoc(udg_danwei2[0])
 if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) > 425.00 ) ) then
-if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) ) then
-if ( ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) < 450.00 ) ) then
-call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
-else
-endif
+if ( ( IsUnitType(udg_danwei2[0], UNIT_TYPE_HERO) == false ) and ( IsUnitIllusionBJ(udg_danwei2[0]) == false ) ) then
 if ( ( udg_Points <= 0 ) ) then
 call SetUnitTimeScale(udg_danwei2[0], 1.00)
 call s__Unit_PauseUnitMU(udg_danwei2[0] , false , "封绝")
 else
 endif
 else
+if ( ( IsUnitEnemy(udg_danwei2[0], GetOwningPlayer(udg_danwei2[246])) == true ) and ( DistanceBetweenPoints(udg_dian2[4], udg_dian2[0]) < 450.00 ) ) then
+call s__baka_IssueTargetOrderById2(udg_danwei[40] , 852095 , udg_danwei2[0])
+else
+endif
 endif
 call GroupRemoveUnit(udg_danweizu2[246], udg_danwei2[0])
 else
@@ -61121,26 +61121,26 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs442396106")
+call ExecuteFunc("jasshelper__initstructs449453014")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("processLibrary___Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary___Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("Record__Init")
+call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("objectLibrary__Init")
+call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -61254,7 +61254,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs442396106 takes nothing returns nothing
+function jasshelper__initstructs449453014 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
