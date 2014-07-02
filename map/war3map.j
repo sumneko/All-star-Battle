@@ -11487,13 +11487,8 @@ endfunction
 function Trig_duomianban3_untilConditions takes nothing returns boolean
 return ( ( IsUnitType(GetDyingUnit(), UNIT_TYPE_HERO) == false ) and ( GetKillingUnitBJ() != null ) )
 endfunction
-function Trig_duomianban3_untilFunc001Func001Func001Func020A takes nothing returns nothing
-if ( ( GetItemUserData(GetEnumItem()) >= 1 ) and ( GetItemUserData(GetEnumItem()) <= 10 ) ) then
-call SetItemPositionLoc(GetEnumItem(), udg_Dian[11])
-else
-endif
-endfunction
 function Trig_duomianban3_untilActions takes nothing returns nothing
+local integer ydul_i
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) <= 10 ) and ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) < 1 ) or ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) > 10 ) ) ) then
 if ( ( IsUnitEnemy(GetKillingUnitBJ(), GetOwningPlayer(GetDyingUnit())) == true ) ) then
 set udg_zhengshu[( 9 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )]=( udg_zhengshu[( 9 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )] + 1 )
@@ -11578,9 +11573,12 @@ call ForceAddPlayer(udg_wanjiazu[0], s__baka_SPlayer(( s__baka_SGetPlayerId(GetO
 call ShowTextTagForceBJ(true, bj_lastCreatedTextTag, udg_wanjiazu[0])
 call DestroyForce(udg_wanjiazu[0])
 set udg_Dian[11]=GetUnitLoc(udg_SmD[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )])
-set udg_quyu[0]=RectFromCenterSizeBJ(udg_Dian[10], 200.00, 200.00)
-call EnumItemsInRectBJ(udg_quyu[0], function Trig_duomianban3_untilFunc001Func001Func001Func020A)
-call RemoveRect(udg_quyu[0])
+set ydul_i=0
+loop
+exitwhen ydul_i > 5
+call SetItemPositionLoc(UnitItemInSlot(GetTriggerUnit(), ydul_i), udg_Dian[11])
+set ydul_i=ydul_i + 1
+endloop
 call RemoveLocation(udg_Dian[10])
 call RemoveLocation(udg_Dian[11])
 else
@@ -61121,7 +61119,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs462653896")
+call ExecuteFunc("jasshelper__initstructs463987206")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61254,7 +61252,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs462653896 takes nothing returns nothing
+function jasshelper__initstructs463987206 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
