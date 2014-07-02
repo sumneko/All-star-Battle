@@ -288,6 +288,11 @@ STRING 49
 钩爪
 }
 
+STRING 50
+{
+|cffffffff比赛：|r|cFF00FF00轮选模式|r|cffffcc00(D)|r
+}
+
 STRING 53
 // 技能: A02F (|cffff66ff圆环之理|r), Name (名字)
 {
