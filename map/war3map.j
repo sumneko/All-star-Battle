@@ -1837,7 +1837,7 @@ integer array si__baka_V
 player array s__baka_spplayer
 integer array s__baka_spid
 group array s__baka_g
-integer s__baka_thisVer=260
+integer s__baka_thisVer=265
 string s__baka_thatVerName=""
 group s__baka_CG1=CreateGroup()
 group s__baka_CG2=CreateGroup()
@@ -2371,13 +2371,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -10966,7 +10966,7 @@ set udg_Hexadecimal[12]="c"
 set udg_Hexadecimal[13]="d"
 set udg_Hexadecimal[14]="e"
 set udg_Hexadecimal[15]="f"
-set udg_Color[30]="|cFF0066FF全|r|cFF006EEE明|r|cFF0077DD星|r|cFF0080CC战|r|cFF0088BB役|r|cffffff002.6|r"
+set udg_Color[30]="|cFF0066FF全|r|cFF006EEE明|r|cFF0077DD星|r|cFF0080CC战|r|cFF0088BB役|r|cffffff002.6E正式版|r"
 call CreateMultiboardBJ(9, 13, udg_Color[30])
 set udg_duomianban[0]=bj_lastCreatedMultiboard
 call YDWEMultiboardSetItemValueBJNull(udg_duomianban[0] , 1 , 1 , udg_Color[30])
@@ -61040,9 +61040,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs91250772")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs102275035")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
@@ -61173,7 +61173,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs91250772 takes nothing returns nothing
+function jasshelper__initstructs102275035 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()

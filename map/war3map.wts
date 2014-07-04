@@ -23,7 +23,7 @@ STRING 3
 
 STRING 4
 {
-全明星战役2.6
+全明星战役2.6E正式版
 }
 
 STRING 5
@@ -19822,11 +19822,6 @@ STRING 3327
 |cFF0075ff地狱火炎|r等级5（Q）
 }
 
-STRING 3328
-{
-|cff00ff00全明星战役|cffffff002.6
-}
-
 STRING 3329
 // 魔法效果: B005 (), Bufftip (工具提示)
 {
@@ -29908,6 +29903,11 @@ STRING 5025
 // 技能: A04J (|cFFaaaaff专注一箭|r), Researchtip (提示工具 - 学习)
 {
 学习|cFFaaaaff专注一箭|r（W）
+}
+
+STRING 5026
+{
+|cff00ff00全明星战役|cffffff002.6E正式版
 }
 
 STRING 5027
@@ -49893,7 +49893,7 @@ STRING 8406
 
 STRING 8407
 {
-|cFFFFFF00全明星战役2.6正式版|r
+|cFFFFFF00全明星战役2.6E正式版|r
 }
 
 STRING 8408
