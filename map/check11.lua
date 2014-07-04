@@ -1,0 +1,3 @@
+    
+    jass.hasLua = true
+    
