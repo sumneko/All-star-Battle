@@ -3446,25 +3446,25 @@ STRING 579
 }
 
 STRING 580
-// 技能: Afzy (狂热), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 581
-// 技能: Afzy (狂热), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 582
-// 技能: Afzy (狂热), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 583
-// 技能: Afzy (狂热), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -10799,49 +10799,49 @@ STRING 1813
 }
 
 STRING 1814
-// 技能: Afzy (狂热), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 1815
-// 技能: Afzy (狂热), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 1816
-// 技能: Afzy (狂热), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 1817
-// 技能: Afzy (狂热), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 1818
-// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 1819
-// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 1820
-// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 1821
-// 技能: A03H (|cFF00ff00治愈术|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -13455,25 +13455,25 @@ STRING 2255
 }
 
 STRING 2256
-// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 2257
-// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 2258
-// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 2259
-// 技能: A04V (|cFFaa7525强行力量|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -26006,18 +26006,6 @@ STRING 4373
 |cFFcc8800十字切/旋风切|r等级5（W）
 }
 
-STRING 4375
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
-{
-|cffc3dbff点击右键以激活自动施放功能。|r
-}
-
-STRING 4376
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
-{
-|cffc3dbff点击右键以激活自动施放功能。|r
-}
-
 STRING 4377
 // 技能: A0HQ (|cffffdd75赐福|r), Ubertip (提示工具 - 普通 - 扩展)
 {
@@ -26156,12 +26144,6 @@ STRING 4399
 飞斧
 }
 
-STRING 4400
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
-{
-|cffc3dbff点击右键以激活自动施放功能。|r
-}
-
 STRING 4401
 // 技能: A078 (眩晕), Tip (提示工具 - 普通)
 {
@@ -26196,18 +26178,6 @@ STRING 4406
 // 科技: Rhri (长管火枪), Name (名字)
 {
 坦克升级
-}
-
-STRING 4407
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
-{
-|cffc3dbff点击右键以激活自动施放功能。|r
-}
-
-STRING 4408
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
-{
-|cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4409
@@ -26528,18 +26498,6 @@ STRING 4461
 W
 }
 
-STRING 4462
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
-{
-|cffc3dbff点击右键以取消自动施放功能。|r
-}
-
-STRING 4463
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
-{
-|cffc3dbff点击右键以取消自动施放功能。|r
-}
-
 STRING 4464
 // 技能: A07Y (|cFF25FFFF寒霜冰封|r), Name (名字)
 {
@@ -26774,49 +26732,49 @@ STRING 4502
 }
 
 STRING 4503
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4504
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4505
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4506
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4507
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4508
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4509
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4510
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -26861,12 +26819,6 @@ STRING 4517
 // 技能: A0IJ (关闭重力移动), Hotkey (热键 - 普通)
 {
 Q
-}
-
-STRING 4518
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
-{
-|cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4520
@@ -26990,25 +26942,25 @@ Q
 }
 
 STRING 4540
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4541
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4542
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4543
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
