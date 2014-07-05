@@ -20,6 +20,9 @@
     end
     
     function hook.SetUnitRescueRange(u, r, f)
+        if jass.GetUnitTypeId(u) == 0 then
+            return
+        end
         if r < 0 then
             game[math.floor(0 - r)](u)
         else
