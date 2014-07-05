@@ -17955,7 +17955,7 @@ STRING 3007
 }
 
 STRING 3008
-// 技能: A0QE (信使购买), Hotkey (热键 - 普通)
+// 物品: I01I (翠云之翡合成书), Hotkey (热键)
 {
 C
 }
@@ -23656,7 +23656,7 @@ STRING 3980
 }
 
 STRING 3981
-// 物品: I01I (翠云之翡合成书), Hotkey (热键)
+// 物品: I01Z (原力圣杖合成书), Hotkey (热键)
 {
 C
 }
@@ -26002,13 +26002,13 @@ STRING 4373
 }
 
 STRING 4375
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4376
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
@@ -26152,7 +26152,7 @@ STRING 4399
 }
 
 STRING 4400
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
@@ -26194,13 +26194,13 @@ STRING 4406
 }
 
 STRING 4407
-// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
+// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4408
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -26524,13 +26524,13 @@ W
 }
 
 STRING 4462
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4463
-// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -26769,25 +26769,25 @@ STRING 4502
 }
 
 STRING 4503
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4504
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4505
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4506
-// 技能: A03H (|cFF00ff00治愈术|r), Untip (提示工具 -关闭)
+// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
@@ -26799,19 +26799,19 @@ STRING 4507
 }
 
 STRING 4508
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4509
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
 
 STRING 4510
-// 技能: A06I (|cFFff7500野性狂奔|r), Unubertip (提示工具 -关闭 - 扩展)
+// 技能: A06O (|cFFFF0000追踪导弹|r), Unubertip (提示工具 -关闭 - 扩展)
 {
 |cffc3dbff点击右键以取消自动施放功能。|r
 }
@@ -26985,25 +26985,25 @@ Q
 }
 
 STRING 4540
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4541
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4542
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
 
 STRING 4543
-// 技能: A04V (|cFFaa7525强行力量|r), Untip (提示工具 -关闭)
+// 技能: A06I (|cFFff7500野性狂奔|r), Untip (提示工具 -关闭)
 {
 |cffc3dbff点击右键以激活自动施放功能。|r
 }
@@ -33432,7 +33432,7 @@ STRING 5630
 }
 
 STRING 5631
-// 物品: I01Z (原力圣杖合成书), Hotkey (热键)
+// 物品: I04C (圣石碎片), Hotkey (热键)
 {
 C
 }
@@ -40551,7 +40551,7 @@ STRING 6816
 }
 
 STRING 6817
-// 物品: I04C (圣石碎片), Hotkey (热键)
+// 物品: I04F (天启之戒合成书), Hotkey (热键)
 {
 C
 }
@@ -43348,7 +43348,7 @@ STRING 7287
 }
 
 STRING 7288
-// 物品: I04F (天启之戒合成书), Hotkey (热键)
+// 技能: A0QE (信使购买), Hotkey (热键 - 普通)
 {
 C
 }

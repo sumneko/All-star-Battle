@@ -104,10 +104,10 @@ integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
+region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterEnterRectSimpleNull
 //globals from YDWETriggerRegisterLeaveRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterLeaveRectSimpleNull=true
-region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterLeaveRectSimpleNull
 //globals from YDWEUnitHasItemOfTypeBJNull:
 constant boolean LIBRARY_YDWEUnitHasItemOfTypeBJNull=true
@@ -697,6 +697,7 @@ trigger gg_trg_timer_lua=null
 trigger gg_trg_player_lua=null
 trigger gg_trg_game_lua=null
 trigger gg_trg_text_lua=null
+trigger gg_trg_check11_lua=null
 trigger gg_trg____defineLibrary=null
 trigger gg_trg__________baseLibrary=null
 trigger gg_trg_11____________11plantRecord=null
@@ -1802,7 +1803,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_check11_lua=null
 
 trigger l__library_init
 
@@ -2371,13 +2371,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3498,6 +3498,7 @@ set s__sys_IsReplay=1
 call BJDebugMsg("<录像模式>")
 else
 set s__sys_IsReplay=0
+call BJDebugMsg("<游戏模式>")
 endif
 else
 set s__sys_IsReplay=0
@@ -3531,6 +3532,7 @@ set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
 call TimerStart(s__sys_timeTimer, 999999, false, null)
 set s__sys_GC=InitGameCache("Moe")
+set s__sys_Debug=true
 call s__sys_InitFirstPlayer()
 call TimerStart(CreateTimer(), 5, false, function s__sys_CheckReplay)
 endfunction
@@ -4276,6 +4278,7 @@ if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
 set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
 if YDWELibrary___Iflush_first > 500 then
+call BJDebugMsg("开始清理单位主键")
 set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
@@ -4289,6 +4292,7 @@ set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
@@ -4329,6 +4333,7 @@ set s__maphack_heroCount=s__maphack_heroCount - 1
 endif
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
+call BJDebugMsg("<FMH>添加[" + GetUnitName(hero) + "] 位置[" + I2S(i) + "] 计数:" + I2S(s__maphack_heroCount))
 endfunction
 function s__maphack_TimerFunc takes nothing returns nothing
 local integer i=1
@@ -4491,6 +4496,7 @@ loop
 exitwhen i > 9
 set s__baka_spplayer[i]=Player(nids[i])
 set s__baka_spid[nids[i]]=i
+call BJDebugMsg("<洗牌>玩家: " + I2S(nids[i]) + " → 玩家: " + I2S(i))
 call SetPlayerStartLocation(s__baka_spplayer[i], startLocIndex[i])
 set cjlocgn_00000003=s__baka_g[i]
 loop
@@ -4615,6 +4621,7 @@ if IsUnitInvisible(s__baka_CU, s__baka_SPlayer(5)) then
 call GroupRemoveUnit(s__baka_CG1, s__baka_CU)
 call GroupAddUnit(s__baka_CG2, s__baka_CU)
 call UnitAddType(s__baka_CU, UNIT_TYPE_SAPPER)
+call BJDebugMsg("万物离开视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check2 takes nothing returns nothing
@@ -4623,6 +4630,7 @@ if IsUnitVisible(s__baka_CU, s__baka_SPlayer(5)) then
 call GroupRemoveUnit(s__baka_CG2, s__baka_CU)
 call GroupAddUnit(s__baka_CG1, s__baka_CU)
 call UnitRemoveType(s__baka_CU, UNIT_TYPE_SAPPER)
+call BJDebugMsg("万物进入视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check3 takes nothing returns nothing
@@ -4631,6 +4639,7 @@ if IsUnitInvisible(s__baka_CU, s__baka_SPlayer(0)) then
 call GroupRemoveUnit(s__baka_CG3, s__baka_CU)
 call GroupAddUnit(s__baka_CG4, s__baka_CU)
 call UnitAddType(s__baka_CU, UNIT_TYPE_SAPPER)
+call BJDebugMsg("极寒离开视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check4 takes nothing returns nothing
@@ -4639,6 +4648,7 @@ if IsUnitVisible(s__baka_CU, s__baka_SPlayer(0)) then
 call GroupRemoveUnit(s__baka_CG4, s__baka_CU)
 call GroupAddUnit(s__baka_CG3, s__baka_CU)
 call UnitRemoveType(s__baka_CU, UNIT_TYPE_SAPPER)
+call BJDebugMsg("极寒进入视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_CheckVisible takes nothing returns nothing
@@ -4656,6 +4666,7 @@ call GroupAddUnit(s__baka_CG3, s__baka_CU)
 endif
 call TriggerRegisterUnitEvent(s__baka_CheckDeath, s__baka_CU, EVENT_UNIT_DEATH)
 set s__baka_CheckCount=s__baka_CheckCount + 1
+call BJDebugMsg("<视野检查> 单位名称[" + GetUnitName(s__baka_CU) + "] 计数[" + I2S(s__baka_CheckCount) + "]")
 return false
 endfunction
 function s__baka_SummonDeath takes nothing returns boolean
@@ -4665,6 +4676,7 @@ call GroupRemoveUnit(s__baka_CG2, s__baka_CU)
 call GroupRemoveUnit(s__baka_CG3, s__baka_CU)
 call GroupRemoveUnit(s__baka_CG4, s__baka_CU)
 set s__baka_CheckCount=s__baka_CheckCount - 1
+call BJDebugMsg("<视野检查> 单位名称[" + GetUnitName(s__baka_CU) + "] 计数[" + I2S(s__baka_CheckCount) + "]")
 return false
 endfunction
 function s__baka_MoveLightningEx2 takes lightning whichBolt,boolean checkVisibility,real x1,real y1,real z1,real x2,real y2,real z2 returns boolean
@@ -4933,6 +4945,7 @@ set new_max=i
 if ( name == "全部" or s__process_name[cjlocgn_00000000] == name ) and s__process_uper[cjlocgn_00000000] > uper and s__process_enable[cjlocgn_00000000] then
 set count=count + 1
 else
+call BJDebugMsg("<优先级被剔除> hashindex:[" + I2S(i) + "] key:[" + I2S(cjlocgn_00000000) + "]")
 set s__process_enable[cjlocgn_00000000]=false
 call SaveInteger(YDHT, h, s__process_h_index[i], 0)
 endif
@@ -4953,6 +4966,7 @@ loop
 exitwhen i > max
 set key=LoadInteger(YDHT, h, s__process_h_index[i])
 if key != 0 and s__process_name[key] == name and s__process_uper[key] > uper and s__process_cover[key] and s__process_enable[key] then
+call BJDebugMsg("<有更高优先级存在> hashindex:[" + I2S(i) + "] key:[" + I2S(key) + "]")
 return 0
 endif
 set i=i + 1
@@ -4991,6 +5005,7 @@ set s__process_hashindex[key]=i
 set s__process_lastkey[key]=0
 set s__process_nextkey[key]=s__process_nextkey[0]
 set s__process_nextkey[0]=key
+call BJDebugMsg("<新建过程> unit:[" + GetUnitName(u) + "] process:[" + name + "] hashindex:[" + I2S(i) + "] key:[" + I2S(key) + "]")
 return key
 endfunction
 function s__process_IsEnable takes integer key returns boolean
@@ -5008,6 +5023,7 @@ if s__process_enable[key] then
 set s__process_enable[key]=false
 call SaveInteger(YDHT, h, s__process_h_index[s__process_hashindex[key]], 0)
 endif
+call BJDebugMsg("<结束过程> unit:[" + GetUnitName(s__process_us[key]) + "] process:[" + s__process_name[key] + "] hashindex:[" + I2S(s__process_hashindex[key]) + "] key:[" + I2S(key) + "]")
 set s__process_hashindex[key]=0
 set last=s__process_lastkey[key]
 set next=s__process_nextkey[key]
@@ -5177,6 +5193,7 @@ exitwhen i > 11
 call TriggerRegisterPlayerChatEvent(trg, s__baka_SPlayer(i), "", false)
 set i=i + 1
 endloop
+call TriggerAddAction(trg, function s__test_action)
 set trg=null
 endfunction
 
@@ -11537,7 +11554,6 @@ call SetTextTagLifespan(bj_lastCreatedTextTag, 2.00)
 call RemoveLocation(udg_Dian[10])
 endif
 else
-if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) <= 10 ) and ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) >= 1 ) or ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) <= 10 ) ) and ( IsUnitEnemy(GetKillingUnitBJ(), GetOwningPlayer(GetDyingUnit())) == true ) ) then
 if ( ( ( GetUnitTypeId(GetDyingUnit()) == 0x6E303039 ) or ( GetUnitTypeId(GetDyingUnit()) == 0x6E303038 ) ) ) then
 set udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=( udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + 30 )
 call AdjustPlayerStateBJ(( ( 50 + ( 15 * GetUnitLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]) ) ) + 0 ), GetOwningPlayer(GetKillingUnitBJ()), PLAYER_STATE_RESOURCE_GOLD)
@@ -11571,8 +11587,6 @@ if ( ( ( GetUnitTypeId(GetDyingUnit()) == 0x6F657965 ) or ( GetUnitTypeId(GetDyi
 set udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=( udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + 15 )
 else
 endif
-endif
-else
 endif
 endif
 endfunction
@@ -50748,6 +50762,7 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-火焰马甲创建结束")
 else
 endif
 endfunction
@@ -50775,6 +50790,7 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-火焰马甲移动结束")
 else
 endif
 set ydl_group=null
@@ -50834,6 +50850,7 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
+call BJDebugMsg("[火土符]-全部结束")
 else
 endif
 set ydl_group=null
@@ -59826,6 +59843,7 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_player_lua()
 //Function not found: call InitTrig_game_lua()
 //Function not found: call InitTrig_text_lua()
+//Function not found: call InitTrig_check11_lua()
 //Function not found: call InitTrig____defineLibrary()
 //Function not found: call InitTrig__________baseLibrary()
 //Function not found: call InitTrig_11____________11plantRecord()
@@ -60805,7 +60823,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-//Function not found: call InitTrig_check11_lua()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -61040,9 +61057,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs102275035")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs190179118")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
@@ -61173,7 +61190,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs102275035 takes nothing returns nothing
+function jasshelper__initstructs190179118 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
