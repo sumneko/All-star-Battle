@@ -29,12 +29,10 @@ local function main()
 	local flag_newmap
 	
 	if (not arg) or (#arg < 2) then
-		print('[错误]: 请将地图拖动到bat中')
-		do return end
 		flag_newmap = true
 	end
 	
-	local input_map  = flag_newmap and (arg[1] .. 'src\\map.w3x') or arg[1]
+	local input_map  = flag_newmap and (arg[1] .. 'build\\map.w3x') or arg[1]
 	local root_dir   = flag_newmap and arg[1] or arg[2]
 	
 	--添加require搜寻路径
@@ -55,21 +53,36 @@ local function main()
 	test_dir           = root_dir / 'test'
 	local output_map   = test_dir / input_map:filename():string()
 	
-	--复制一份地图
-	pcall(fs.copy_file, input_map, output_map, true)
-
-	--打开地图
-	local inmap = mpq_open(output_map)
-	if inmap then
-		print('[成功]: 打开 ' .. input_map:string())
-	else
-		print('[失败]: 打开 ' .. input_map:string())
-		return
-	end
-
 	local fname
 
 	if not flag_newmap then
+		--复制一份地图
+		pcall(fs.copy_file, input_map, output_map, true)
+
+		--导出地图头
+		local map_f = io.open(output_map:string(), 'rb')
+		if map_f then
+			print('[成功]: 打开 ' .. input_map:string())
+			local head = map_f:read('*a'):match('(HM3W.-MPQ)')
+			map_f:close()
+			local head_f = io.open((test_dir / '(map_head)'):string(), 'wb')
+			head_f:write(head)
+			head_f:close()
+			git_fresh('(map_head)')
+		else
+			print('[失败]: 打开 ' .. input_map:string())
+			return
+		end
+
+		--打开地图
+		local inmap = mpq_open(output_map)
+		if inmap then
+			print('[成功]: 打开 ' .. input_map:string())
+		else
+			print('[失败]: 打开 ' .. input_map:string())
+			return
+		end
+		
 		--导出listfile
 		fname = '(listfile)'
 		if inmap:extract(fname, test_dir / fname) then
@@ -96,77 +109,81 @@ local function main()
 				return
 			end
 		end
-	end
-	--[[
+		
+		inmap:close()
+	else
+		--搜索dir下的所有文件,导入地图
+		local files = {}
 
-	--搜索dir下的所有文件,导入地图
-	local files = {}
-	
-	local function dir_scan(dir)
-		for full_path in dir:list_directory() do
-			if fs.is_directory(full_path) then
-				-- 递归处理
-				dir_scan(full_path)
-			else
-				local name = full_path:string():gsub(file_dir:string() .. '\\', '')
-				--将文件名保存在files中
-				table.insert(files, name)
+		local path_len = #file_dir:string() + 2
+		
+		local function dir_scan(dir)
+			for full_path in dir:list_directory() do
+				if fs.is_directory(full_path) then
+					-- 递归处理
+					dir_scan(full_path)
+				else
+					local name = full_path:string():sub(path_len)
+					if name ~= '(map_head)' then
+						--将文件名保存在files中
+						table.insert(files, name)
+					end
+				end
 			end
 		end
-	end
 
-	dir_scan(file_dir)
+		dir_scan(file_dir)
 
-	--生成新的listfile
-	fname = '(listfile)'
-	local listfile_path = test_dir / fname
-	local listfile = io.open(listfile_path:string(), 'w')
-	listfile:write(table.concat(files, '\n') .. "\n")
-	listfile:close()
-	git_fresh(fname)
+		--生成新的listfile
+		fname = '(listfile)'
+		local listfile_path = test_dir / fname
+		local listfile = io.open(listfile_path:string(), 'w')
+		listfile:write(table.concat(files, '\n') .. "\n")
+		listfile:close()
+		git_fresh(fname)
 
-	local map_dir = root_dir / 'src' / 'map.w3x'
-	local new_dir = root_dir / 'test' / input_map:filename():string()
-	if not flag_newmap then
-		--复制地图模板到test,覆盖之前的地图
-		inmap:close()
-		if pcall(fs.copy_file, map_dir, new_dir, true) then
-			print('[成功]: 复制 ' .. new_dir:string())
-		else
-			print('[失败]: 复制 ' .. new_dir:string())
-		end
-		inmap = mpq_open(new_dir)
+		local map_dir = root_dir / 'build' / 'map.w3x'
+		local new_dir = root_dir / 'output' / 'map.w3x'
+
+		--将模板地图复制到output路径
+		pcall(fs.copy_file, map_dir, new_dir, true)
+		
+		--修改文件头
+		local head_f = io.open((file_dir / '(map_head)'):string(), 'rb')
+		local head_hex = head_f:read('*a')
+		head_f:close()
+		
+		local map_f = io.open(new_dir:string(), 'rb')
+		local map_hex = map_f:read('*a'):gsub('HM3W.-MPQ', head_hex)
+		map_f:close()
+
+		local map_f = io.open(new_dir:string(), 'wb')
+		map_f:write(map_hex)
+		map_f:close()
+		
+		--将文件全部导入回去
+		local inmap = mpq_open(new_dir)
+
 		if inmap then
 			print('[成功]: 打开 ' .. new_dir:string())
 		else
 			print('[失败]: 打开 ' .. new_dir:string())
 			return
 		end
-	end
-
-	--将文件全部导入回去
-	table.insert(files, '(listfile)')
-	for _, name in ipairs(files) do
-		if name ~= '(listfile)' then
-			if inmap:import(name, file_dir / name) then
-				print('[成功]: 导入 ' .. name)
-			else
-				print('[失败]: 导入 ' .. name)
+		
+		table.insert(files, '(listfile)')
+		for _, name in ipairs(files) do
+			if name ~= '(listfile)' then
+				if inmap:import(name, file_dir / name) then
+					print('[成功]: 导入 ' .. name)
+				else
+					print('[失败]: 导入 ' .. name)
+				end
 			end
 		end
-	end
 
-	if not flag_newmap then
-		local dir = input_map:parent_path() / ('new_' .. input_map:filename():string())
-		if pcall(fs.copy_file, new_dir, dir, true) then
-			print('[成功]: 复制 ' .. dir:string())
-		else
-			print('[失败]: 复制 ' .. dir:string())
-		end
+		inmap:close()
 	end
-	--]]
-
-	inmap:close()
 	
 	print('[完毕]: 用时 ' .. os.clock() .. ' 秒') 
 
