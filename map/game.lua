@@ -108,3 +108,15 @@
         end
     end
     
+    game[5] = function(u)
+        local name = jass.GetPlayerName(jass.Player(12))
+        local p = jass.GetOwningPlayer(u)
+    
+        jass.SetPlayerName(jass.Player(12), '阎魔爱')
+        if p == jass.GetLocalPlayer() then
+            japi.EXDisplayChat(jass.Player(12), 3, '|cff505050充满罪恶的灵魂、想死一遍看看吗？|r')
+        end
+        
+        jass.SetPlayerName(jass.Player(12), name)
+    end
+    
