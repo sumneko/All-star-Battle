@@ -1910,6 +1910,7 @@ constant integer si__test=11
 integer si__test_F=0
 integer si__test_I=0
 integer array si__test_V
+trigger s__test_testTrigger=CreateTrigger()
 constant integer si__text=12
 integer si__text_F=0
 integer si__text_I=0
@@ -2380,13 +2381,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3535,7 +3536,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3551,7 +3552,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run util.lua")
 call Cheat("run timer.lua")
@@ -3657,6 +3658,8 @@ call Test4()
 elseif StringCase(s, false) == ".record" then
 set IsGameOver=false
 call ExecuteFunc("TGameOver")
+else
+call TriggerExecute(s__test_testTrigger)
 endif
 return false
 endfunction
@@ -4164,7 +4167,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -5393,15 +5396,13 @@ set hero=null
 return false
 endfunction
 function testLibrary___Init takes nothing returns nothing
-local trigger trg=CreateTrigger()
 local integer i=0
 loop
 exitwhen i > 11
-call TriggerRegisterPlayerChatEvent(trg, s__baka_SPlayer(i), "", false)
+call TriggerRegisterPlayerChatEvent(s__test_testTrigger, s__baka_SPlayer(i), "", false)
 set i=i + 1
 endloop
-call TriggerAddAction(trg, function s__test_action)
-set trg=null
+call TriggerAddAction(s__test_testTrigger, function s__test_action)
 endfunction
 
 //library testLibrary ends
@@ -61275,13 +61276,13 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs291767593")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs292424201")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
 call ExecuteFunc("YDWELibrary___Init")
 call ExecuteFunc("bakaLibrary___Init")
 call ExecuteFunc("effectLibrary___Init")
@@ -61408,7 +61409,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs291767593 takes nothing returns nothing
+function jasshelper__initstructs292424201 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
