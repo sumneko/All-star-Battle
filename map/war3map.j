@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -95,12 +95,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -2931,20 +2931,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2976,7 +2976,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3009,22 +3009,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3363,9 +3363,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3392,22 +3392,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3417,13 +3417,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -50071,7 +50071,23 @@ set gg_trg_shenqiang_2=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_shenqiang_2, udg_times[71])
 call TriggerAddAction(gg_trg_shenqiang_2, function Trig_shenqiang_2Actions)
 endfunction
+function Trig_hongmo_1Func009T takes nothing returns nothing
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) + 1 ))
+call s__maphack_SetHeight(udg_danwei2[77] , ( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 20.00 ) , 0.00)
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 15 ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+else
+endif
+endfunction
 function Trig_hongmo_1Actions takes nothing returns nothing
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 set udg_danwei2[77]=GetSpellAbilityUnit()
 set udg_dian2[77]=GetUnitLoc(udg_danwei2[77])
 set udg_zhengshu2[77]=0
@@ -50080,10 +50096,14 @@ call PlaySoundOnUnitBJ(gg_snd_parFir00, 100, udg_danwei2[77])
 call SetUnitAnimation(udg_danwei2[77], "spell channel")
 call StartTimerBJ(udg_times[77], true, 0.05)
 call UnitAddAbility(udg_danwei2[77], 0x41726176)
-call s__maphack_SetHeight(udg_danwei2[77] , 300.00 , 450.00)
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, 0)
+call TimerStart(ydl_timer, 0.05, true, function Trig_hongmo_1Func009T)
 call UnitRemoveAbility(udg_danwei2[77], 0x41726176)
 call PauseTimer(udg_times[84])
 call StartTimerBJ(udg_jishiqi[142], false, 0.00)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
 endfunction
 function InitTrig_hongmo_1 takes nothing returns nothing
 set gg_trg_hongmo_1=CreateTrigger()
@@ -50091,12 +50111,37 @@ call s__Event_AnyUnitSkill(gg_trg_hongmo_1 , 3 , 0x41303939)
 call TriggerAddAction(gg_trg_hongmo_1, function Trig_hongmo_1Actions)
 endfunction
 function Trig_hongmo_2Func001Func003Func008Func002Func001A takes nothing returns nothing
-set udg_danwei2[1]=GetEnumUnit()
-call UnitAddAbility(udg_danwei2[1], 0x41726176)
-call s__maphack_SetHeight(udg_danwei2[1] , 0.00 , 600.00)
-call UnitRemoveAbility(udg_danwei2[1], 0x41726176)
 call s__Unit_PauseUnitMU(udg_danwei2[1] , false , "红色不夜城")
-set udg_danwei2[1]=null
+endfunction
+function Trig_hongmo_2Func001Func003Func008Func002Func002Func002A takes nothing returns nothing
+call s__maphack_SetHeight(GetEnumUnit() , ( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 30.00 ) , 0.00)
+endfunction
+function Trig_hongmo_2Func001Func003Func008Func002Func002T takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
+call ForGroupBJ(udg_danweizu2[77], function Trig_hongmo_2Func001Func003Func008Func002Func002Func002A)
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
+call DestroyGroup(udg_danweizu2[77])
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+else
+endif
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function Trig_hongmo_2Func001Func003Func008Func004Func004T takes nothing returns nothing
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
+call s__maphack_SetHeight(udg_danwei2[77] , ( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 30.00 ) , 0.00)
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+else
+endif
 endfunction
 function Trig_hongmo_2Func001Func003Func008Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
@@ -50122,6 +50167,11 @@ endfunction
 function Trig_hongmo_2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
 if ( ( IsUnitPausedBJ(udg_danwei2[77]) == false ) ) then
 set udg_zhengshu2[77]=( udg_zhengshu2[77] + 1 )
 if ( ( udg_zhengshu2[77] <= 70 ) ) then
@@ -50146,14 +50196,17 @@ call DestroyGroup(udg_xuanqu)
 else
 if ( ( udg_zhengshu2[77] == 50 ) ) then
 call ForGroupBJ(udg_danweizu2[77], function Trig_hongmo_2Func001Func003Func008Func002Func001A)
-call GroupClear(udg_danweizu2[77])
-call DestroyGroup(udg_danweizu2[77])
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, 10)
+call TimerStart(ydl_timer, 0.05, true, function Trig_hongmo_2Func001Func003Func008Func002Func002T)
 else
 endif
 if ( ( udg_zhengshu2[77] == 60 ) ) then
 call AddUnitAnimationProperties(udg_danwei2[77], "channel", false)
 call UnitAddAbility(udg_danwei2[77], 0x41726176)
-call s__maphack_SetHeight(udg_danwei2[77] , 0.00 , 600.00)
+set ydl_timer=CreateTimer()
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x300B6E6B, 10)
+call TimerStart(ydl_timer, 0.05, true, function Trig_hongmo_2Func001Func003Func008Func004Func004T)
 call UnitRemoveAbility(udg_danwei2[77], 0x41726176)
 else
 endif
@@ -50169,8 +50222,10 @@ call RemoveLocation(udg_dian2[77])
 endif
 else
 endif
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_group=null
 set ydl_unit=null
+set ydl_timer=null
 endfunction
 function InitTrig_hongmo_2 takes nothing returns nothing
 set gg_trg_hongmo_2=CreateTrigger()
@@ -61292,7 +61347,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs292868898")
+call ExecuteFunc("jasshelper__initstructs293711911")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61425,7 +61480,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs292868898 takes nothing returns nothing
+function jasshelper__initstructs293711911 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
