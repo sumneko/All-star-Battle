@@ -4409,11 +4409,12 @@ function s__maphack_protect1 takes nothing returns nothing
 local integer i=0
 loop
 exitwhen i > s__maphack_visitorsCount
-if IsUnitVisible(s__maphack_visitors[i], s__sys_selfp) then
-call SetUnitFlyHeight(s__maphack_visitors[i], 10000, 0)
+if not IsUnitVisible(s__maphack_visitors[i], s__sys_selfp) then
+call SetUnitFlyHeight(s__maphack_visitors[i], s__maphack_mhHeight, 0)
 endif
 set i=i + 1
 endloop
+call TimerStart(s__maphack_protectTimer2, 0, false, function s__maphack_protect2)
 endfunction
 function s__maphack_timerFunc takes nothing returns nothing
 local integer i=0
@@ -4426,21 +4427,15 @@ set px=GetCameraTargetPositionX()
 set py=GetCameraTargetPositionX()
 loop
 exitwhen i > s__maphack_visitorsCount
+if GetRandomInt(1, 3) == 2 and GetUnitCurrentOrder(s__maphack_visitors[i]) == 0 then
 set cjlocgn_00000000=GetRandomInt(- 100, 100) * 70
 set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
-if GetUnitCurrentOrder(s__maphack_visitors[i]) == 0 then
 call IssuePointOrder(s__maphack_visitors[i], "move", cjlocgn_00000000, cjlocgn_00000001)
 endif
-set cjlocgn_00000000=GetUnitX(s__maphack_visitors[i])
-set cjlocgn_00000001=GetUnitY(s__maphack_visitors[i])
 call DestroyEffect(AddSpecialEffectTarget("Tsukiko.mdl", s__maphack_visitors[i], "origin"))
-if px - cjlocgn_00000000 < 1500 and px - cjlocgn_00000000 > - 1500 and py - cjlocgn_00000001 < 1500 and py - cjlocgn_00000001 > - 1500 and not IsVisibleToPlayer(cjlocgn_00000000, cjlocgn_00000001, s__sys_selfp) then
-call SetUnitFlyHeight(s__maphack_visitors[i], s__maphack_mhHeight, 0)
-endif
 set i=i + 1
 endloop
-call TimerStart(s__maphack_protectTimer1, 0.02, false, function s__maphack_protect1)
-call TimerStart(s__maphack_protectTimer2, 0.025, false, function s__maphack_protect2)
+call TimerStart(s__maphack_protectTimer1, 0.025, false, function s__maphack_protect1)
 endfunction
 function s__maphack_WaitToCheckReplay takes nothing returns nothing
 if s__sys_IsReplay == - 1 and s__sys_getTime() < 30 then
@@ -61354,7 +61349,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs305668249")
+call ExecuteFunc("jasshelper__initstructs306786121")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61487,7 +61482,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs305668249 takes nothing returns nothing
+function jasshelper__initstructs306786121 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
