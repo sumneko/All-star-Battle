@@ -4453,13 +4453,15 @@ call TimerStart(GetExpiredTimer(), 0.05, true, function s__maphack_TimerFunc)
 endif
 endfunction
 function s__maphack_InitS takes nothing returns nothing
+call TimerStart(CreateTimer(), 0.5, true, function s__maphack_WaitToCheckReplay)
+call SetAltMinimapIcon("null_16_16.blp")
+endfunction
+function s__maphack_AfterSP takes nothing returns nothing
 local integer i=0
 local player cjlocgn_00000000
 local integer cjlocgn_00000001
 local real cjlocgn_00000002
 local real cjlocgn_00000003
-call TimerStart(CreateTimer(), 0.5, true, function s__maphack_WaitToCheckReplay)
-call SetAltMinimapIcon("null_16_16.blp")
 loop
 exitwhen i > 9
 set cjlocgn_00000000=Player(i)
@@ -4468,7 +4470,7 @@ loop
 exitwhen cjlocgn_00000001 > 9
 set cjlocgn_00000002=GetRandomInt(- 100, 100) * 70
 set cjlocgn_00000003=GetRandomInt(- 100, 100) * 70
-if cjlocgn_00000000 == s__sys_selfp then
+if IsPlayerAlly(cjlocgn_00000000, s__sys_selfp) then
 set s__maphack_visitors[s__maphack_visitorsCount]=CreateUnit(cjlocgn_00000000, 0x48303048, cjlocgn_00000002, cjlocgn_00000003, 0)
 else
 set s__maphack_visitors[s__maphack_visitorsCount]=CreateUnit(cjlocgn_00000000, 0x48303047, cjlocgn_00000002, cjlocgn_00000003, 0)
@@ -4816,6 +4818,9 @@ else
 call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
+endfunction
+function s__baka_AfterSP takes nothing returns nothing
+call s__maphack_AfterSP()
 endfunction
 function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
@@ -8615,6 +8620,7 @@ call RemoveUnit(gg_unit_n00L_0068)
 call RemoveUnit(gg_unit_n00M_0069)
 set udg_DHK1[0]=( udg_DHK1[0] + "|cFFFF0000【自由选择】|r" )
 call StartTimerBJ(udg_jishiqi[136], false, 45.00)
+call s__baka_AfterSP()
 else
 if ( ( GetClickedButtonBJ() == udg_anniu[1] ) ) then
 set bj_forLoopAIndex=1
@@ -8634,6 +8640,7 @@ call RemoveUnit(gg_unit_n00L_0068)
 call RemoveUnit(gg_unit_n00M_0069)
 set udg_DHK1[0]=( udg_DHK1[0] + "|cFFFF0000【随机选择】|r" )
 call StartTimerBJ(udg_jishiqi[136], false, 5.00)
+call s__baka_AfterSP()
 else
 if ( ( GetClickedButtonBJ() == udg_anniu[2] ) ) then
 set bj_forLoopAIndex=1
@@ -8676,6 +8683,7 @@ set udg_anniu[0]=GetLastCreatedButtonBJ()
 call DialogAddButtonWithHotkeyBJ(udg_duihuakuang[3], "TRIGSTR_8768", 0x57)
 set udg_anniu[1]=GetLastCreatedButtonBJ()
 call DialogDisplay(s__baka_SPlayer(0), udg_duihuakuang[3], true)
+call s__baka_AfterSP()
 else
 if ( ( GetClickedButtonBJ() == udg_anniu[4] ) ) then
 if ( ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_PLAYING ) and ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_PLAYING ) ) then
@@ -8683,6 +8691,7 @@ set udg_zhengshu2[181]=1
 call PauseTimer(udg_jishiqi[60])
 call StartTimerBJ(udg_MS[0], false, 1.00)
 set udg_DHK1[0]=( udg_DHK1[0] + "|cFFFF0000【轮选模式】|r" )
+call s__baka_AfterSP()
 else
 call DisplayTimedTextToPlayer(s__baka_SPlayer(0), 0, 0, 5.00, "TRIGSTR_1304")
 call DialogClear(udg_duihuakuang[0])
@@ -8850,6 +8859,7 @@ call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_1203")
 set udg_DHK1[0]=( udg_DHK1[0] + "|cFFFF0000【随机征召】|r" )
 call PauseTimer(udg_jishiqi[60])
 call StartTimerBJ(udg_MS[4], false, 0.00)
+call s__baka_AfterSP()
 else
 if ( ( GetClickedButtonBJ() == udg_anniu[7] ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_8311")
@@ -61347,7 +61357,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs293711911")
+call ExecuteFunc("jasshelper__initstructs296078103")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61480,7 +61490,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs293711911 takes nothing returns nothing
+function jasshelper__initstructs296078103 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
