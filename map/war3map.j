@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase___yd_PlayerColor
-trigger array YDWEBase___AbilityCastingOverEventQueue
-integer array YDWEBase___AbilityCastingOverEventType
-integer YDWEBase___AbilityCastingOverEventNumber=0
+string array YDWEBase__yd_PlayerColor
+trigger array YDWEBase__AbilityCastingOverEventQueue
+integer array YDWEBase__AbilityCastingOverEventType
+integer YDWEBase__AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -186,10 +186,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -2386,13 +2386,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -2936,20 +2936,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
-if YDWEBase___AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
+if YDWEBase__AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
+if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
-set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
-set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
+set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
+set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
+set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2981,7 +2981,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3014,22 +3014,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase___yd_PlayerColor[3]="|cFF540081"
-set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase___yd_PlayerColor[8]="|cFF959697"
-set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase___yd_PlayerColor[10]="|cFF106246"
-set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase___yd_PlayerColor[12]="|cFF282828"
-set YDWEBase___yd_PlayerColor[13]="|cFF282828"
-set YDWEBase___yd_PlayerColor[14]="|cFF282828"
-set YDWEBase___yd_PlayerColor[15]="|cFF282828"
+set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase__yd_PlayerColor[3]="|cFF540081"
+set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase__yd_PlayerColor[8]="|cFF959697"
+set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase__yd_PlayerColor[10]="|cFF106246"
+set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase__yd_PlayerColor[12]="|cFF282828"
+set YDWEBase__yd_PlayerColor[13]="|cFF282828"
+set YDWEBase__yd_PlayerColor[14]="|cFF282828"
+set YDWEBase__yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3540,7 +3540,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3555,7 +3555,7 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 call Cheat("run base.lua")
 call Cheat("run util.lua")
 call Cheat("run timer.lua")
@@ -4170,7 +4170,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4279,29 +4279,29 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+if YDWELibrary__Iflush_first > 500 then
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
@@ -4309,10 +4309,10 @@ endloop
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4815,7 +4815,7 @@ endfunction
 function s__baka_AfterSP takes nothing returns nothing
 call s__maphack_AfterSP()
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -4835,7 +4835,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -4996,7 +4996,7 @@ local trigger trg=CreateTrigger()
 call TriggerAddAction(trg, function s__Event_damageEventAction)
 set trg=null
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 call s__Event_initDamageEvent()
 endfunction
@@ -5111,7 +5111,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -5133,7 +5133,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary___Init takes nothing returns nothing
+function objectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -5235,7 +5235,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary___Init takes nothing returns nothing
+function processLibrary__Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -5281,7 +5281,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -5325,7 +5325,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -5405,7 +5405,7 @@ set p=null
 set hero=null
 return false
 endfunction
-function testLibrary___Init takes nothing returns nothing
+function testLibrary__Init takes nothing returns nothing
 local integer i=0
 loop
 exitwhen i > 11
@@ -5435,7 +5435,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -5590,7 +5590,13 @@ endif
 endif
 endif
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function s__Unit_IsDead takes unit u returns boolean
+return GetUnitTypeId(u) == 0 or IsUnitType(u, UNIT_TYPE_DEAD)
+endfunction
+function s__Unit_IsAlive takes unit u returns boolean
+return not s__Unit_IsDead(u)
+endfunction
+function unitLibrary__Init takes nothing returns nothing
 endfunction
 
 //library unitLibrary ends
@@ -5611,7 +5617,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call PauseTimer(GetExpiredTimer())
@@ -5627,10 +5633,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -11548,7 +11554,7 @@ function Trig_game_gangshaoConditions takes nothing returns boolean
 return ( ( udg_Points == - 1 ) )
 endfunction
 function Trig_game_gangshaoActions takes nothing returns nothing
-if ( ( IsUnitAliveBJ(gg_unit_hhou_0121) == true ) ) then
+if ( ( s__Unit_IsAlive(gg_unit_hhou_0121) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(gg_unit_n018_0125)
 call CreateItemLoc(0x49303343, udg_dian2[0])
 set bj_forLoopAIndex=1
@@ -11564,7 +11570,7 @@ endloop
 call RemoveLocation(udg_dian2[0])
 else
 endif
-if ( ( IsUnitAliveBJ(gg_unit_hhou_0060) == true ) ) then
+if ( ( s__Unit_IsAlive(gg_unit_hhou_0060) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(gg_unit_n018_0122)
 call CreateItemLoc(0x49303343, udg_dian2[0])
 set bj_forLoopAIndex=6
@@ -11591,7 +11597,7 @@ function Trig_game_gangshao_2Conditions takes nothing returns boolean
 return ( ( udg_Points == - 1 ) )
 endfunction
 function Trig_game_gangshao_2Actions takes nothing returns nothing
-if ( ( IsUnitAliveBJ(gg_unit_hhou_0121) == true ) ) then
+if ( ( s__Unit_IsAlive(gg_unit_hhou_0121) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(gg_unit_n018_0125)
 call CreateItemLoc(0x49303344, udg_dian2[0])
 set bj_forLoopAIndex=1
@@ -11607,7 +11613,7 @@ endloop
 call RemoveLocation(udg_dian2[0])
 else
 endif
-if ( ( IsUnitAliveBJ(gg_unit_hhou_0060) == true ) ) then
+if ( ( s__Unit_IsAlive(gg_unit_hhou_0060) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(gg_unit_n018_0122)
 call CreateItemLoc(0x49303344, udg_dian2[0])
 set bj_forLoopAIndex=6
@@ -31331,7 +31337,7 @@ call TriggerRegisterTimerExpireEvent(gg_trg_PK_time_2, udg_Times[44])
 call TriggerAddAction(gg_trg_PK_time_2, function Trig_PK_time_2Actions)
 endfunction
 function Trig_PK_time_3Actions takes nothing returns nothing
-if ( ( IsUnitDeadBJ(udg_PK[1]) == true ) ) then
+if ( ( s__Unit_IsDead(udg_PK[1]) == true ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 10.00, ( GetHeroProperName(udg_PK[2]) + "|cFFFF0000获胜！5秒后退出单挑场|r" ))
 call PauseTimer(udg_jishiqi[137])
 call DestroyTimerDialog(udg_PKchuangkou[0])
@@ -31339,7 +31345,7 @@ call StartTimerBJ(udg_jishiqi[105], false, 5.00)
 call PauseTimer(udg_Times[44])
 call DisableTrigger(GetTriggeringTrigger())
 else
-if ( ( IsUnitDeadBJ(udg_PK[2]) == true ) ) then
+if ( ( s__Unit_IsDead(udg_PK[2]) == true ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 10.00, ( GetHeroProperName(udg_PK[1]) + "|cFFFF0000获胜！5秒后退出单挑场|r" ))
 call PauseTimer(udg_jishiqi[137])
 call DestroyTimerDialog(udg_PKchuangkou[0])
@@ -31790,7 +31796,7 @@ call TriggerAddAction(gg_trg_zhiyu_1, function Trig_zhiyu_1Actions)
 endfunction
 function Trig_zhiyu_2Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_Danwei[141])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_Danwei[141])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\ReviveDemon\\ReviveDemon.mdl", udg_danwei2[1], "origin"))
 if ( ( GetUnitAbilityLevel(udg_Danwei[141], 0x41304D50) > 0 ) and ( GetUnitLifePercent(udg_danwei2[1]) < 100.00 ) ) then
 set udg_shishu2[0]=GetRandomReal(0.90, 1.10)
@@ -31893,7 +31899,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_yuhuasongge_2Func001Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_Danwei[141])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu[3]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_Danwei[141])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu[3]) == false ) ) then
 call GroupAddUnit(udg_danweizu[3], udg_danwei2[1])
 call UnitAddAbility(udg_danwei2[1], 0x41304D52)
 else
@@ -32036,7 +32042,7 @@ call TriggerAddAction(gg_trg_sstc, function Trig_sstcActions)
 endfunction
 function Trig_sstc2Func003Func010A takes nothing returns nothing
 set udg_danwei[137]=GetEnumUnit()
-if ( ( udg_danwei[137] != udg_danwei[6] ) and ( IsUnitType(udg_danwei[137], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[137]) == true ) and ( IsUnitInGroup(udg_danwei[137], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[5], GetOwningPlayer(udg_danwei[137])) == true ) ) then
+if ( ( udg_danwei[137] != udg_danwei[6] ) and ( IsUnitType(udg_danwei[137], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[137]) == true ) and ( IsUnitInGroup(udg_danwei[137], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[5], GetOwningPlayer(udg_danwei[137])) == true ) ) then
 call UnitDamageTarget(udg_danwei[5], udg_danwei[137], ( 50.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[5], 0x41303349)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -32255,35 +32261,35 @@ call TriggerAddAction(gg_trg_qyzsg, function Trig_qyzsgActions)
 endfunction
 function Trig_qyzsg2Func002Func002A takes nothing returns nothing
 set udg_danwei[138]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[138], ( GetUnitState(udg_danwei[138], UNIT_STATE_LIFE) + 350.00 ))
 else
 endif
 endfunction
 function Trig_qyzsg2Func003Func001A takes nothing returns nothing
 set udg_danwei[138]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[138], ( GetUnitState(udg_danwei[138], UNIT_STATE_LIFE) + 350.00 ))
 else
 endif
 endfunction
 function Trig_qyzsg2Func004Func004A takes nothing returns nothing
 set udg_danwei[138]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[138], ( GetUnitState(udg_danwei[138], UNIT_STATE_LIFE) + 350.00 ))
 else
 endif
 endfunction
 function Trig_qyzsg2Func005Func004A takes nothing returns nothing
 set udg_danwei[138]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[138], ( GetUnitState(udg_danwei[138], UNIT_STATE_LIFE) + 350.00 ))
 else
 endif
 endfunction
 function Trig_qyzsg2Func006Func003A takes nothing returns nothing
 set udg_danwei[138]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[138], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[138]) == true ) and ( IsUnitEnemy(udg_danwei[138], GetOwningPlayer(udg_danwei[10])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[138], ( GetUnitState(udg_danwei[138], UNIT_STATE_LIFE) + 350.00 ))
 else
 endif
@@ -32956,7 +32962,7 @@ call TriggerAddAction(gg_trg_fwjj2, function Trig_fwjj2Actions)
 endfunction
 function Trig_fwjj3Func001Func021A takes nothing returns nothing
 set udg_danwei[140]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[140], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[140], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[140]) == true ) and ( IsUnitEnemy(udg_danwei[140], GetOwningPlayer(udg_danwei[22])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[140], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[140], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[140]) == true ) and ( IsUnitEnemy(udg_danwei[140], GetOwningPlayer(udg_danwei[22])) == true ) ) then
 call s__baka_IssueTargetOrder2(udg_danwei[183] , "thunderbolt" , udg_danwei[140])
 if ( ( GetUnitAbilityLevel(udg_danwei[22], 0x41304535) == 1 ) ) then
 call UnitDamageTarget(udg_danwei[22], udg_danwei[140], ( ( ( 40.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[22], 0x41303141), GetUnitAbilityLevel(udg_danwei[22], 0x41304534))) ) + ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei[22], 0x41304758)) ) ) + ( ( I2R(GetHeroAgi(udg_danwei[22], true)) * 2.50 ) + 25.00 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -33071,7 +33077,7 @@ call TriggerRegisterTimerExpireEvent(gg_trg_fwjj4, udg_times[350])
 call TriggerAddAction(gg_trg_fwjj4, function Trig_fwjj4Actions)
 endfunction
 function Trig_zjFunc003002003 takes nothing returns boolean
-return ( ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO) == true ) and ( ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[29])) == true ) and ( IsUnitAliveBJ(GetFilterUnit()) == true ) ) ) )
+return ( ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_HERO) == true ) and ( ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[29])) == true ) and ( s__Unit_IsAlive(GetFilterUnit()) == true ) ) ) )
 endfunction
 function Trig_zjFunc004A takes nothing returns nothing
 set udg_dian[24]=GetUnitLoc(GetEnumUnit())
@@ -33382,7 +33388,7 @@ call TriggerAddAction(gg_trg_trps, function Trig_trpsActions)
 endfunction
 function Trig_trps2Func009A takes nothing returns nothing
 set udg_danwei[141]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[141]) == true ) and ( IsUnitType(udg_danwei[141], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[141], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[141], GetOwningPlayer(udg_danwei[33])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[141]) == true ) and ( IsUnitType(udg_danwei[141], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[141], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[141], GetOwningPlayer(udg_danwei[33])) == true ) ) then
 call UnitDamageTarget(udg_danwei[33], udg_danwei[141], ( ( ( 250.00 + ( 2.00 * I2R(GetHeroAgi(udg_danwei[33], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -33995,7 +34001,7 @@ local group ydl_group
 local unit ydl_unit
 set udg_danwei[142]=GetEnumUnit()
 set udg_dian2[1]=GetUnitLoc(udg_danwei[142])
-if ( ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[142]) == true ) and ( IsUnitEnemy(udg_danwei[142], GetOwningPlayer(udg_danwei[38])) == true ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) ) then
+if ( ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[142]) == true ) and ( IsUnitEnemy(udg_danwei[142], GetOwningPlayer(udg_danwei[38])) == true ) and ( IsUnitType(udg_danwei[142], UNIT_TYPE_ANCIENT) == false ) ) then
 call PauseTimer(udg_jishiqi[15])
 set udg_danweizu[12]=YDWEGetUnitsInRangeOfLocAllNull(300.00 , udg_dian[205])
 call ForGroupBJ(udg_danweizu[12], function Trig_hwxj2Func001Func001Func014Func007Func014Func003Func003A)
@@ -34373,7 +34379,7 @@ call TriggerAddAction(gg_trg_zhuizongdaodan_1, function Trig_zhuizongdaodan_1Act
 endfunction
 function Trig_zhuizongdaodan_2Func001Func005Func011Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( udg_danwei2[1] != udg_danwei2[49] ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei2[1]) == true ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[48])) == true ) ) then
+if ( ( udg_danwei2[1] != udg_danwei2[49] ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei2[1]) == true ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[48])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[48], udg_danwei2[1], ( ( 25.00 + ( I2R(GetHeroInt(udg_danwei2[48], true)) * 0.50 ) ) + ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei2[48], 0x4130364F)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -34726,7 +34732,7 @@ call TriggerAddAction(gg_trg_dd, function Trig_ddActions)
 endfunction
 function Trig_dd2Func001Func004Func019A takes nothing returns nothing
 set udg_danwei[144]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[144], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[144], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[144]) == true ) and ( IsUnitEnemy(udg_danwei[144], GetOwningPlayer(udg_danwei[46])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[144], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[144], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[144]) == true ) and ( IsUnitEnemy(udg_danwei[144], GetOwningPlayer(udg_danwei[46])) == true ) ) then
 call UnitDamageTarget(udg_danwei[46], udg_danwei[144], ( ( 100.00 + ( I2R(GetHeroInt(udg_danwei[46], true)) * 1.50 ) ) + ( 200.00 * I2R(GetUnitAbilityLevel(udg_danwei[46], 0x41303042)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -34829,7 +34835,7 @@ call TriggerAddAction(gg_trg_weixingshexian_1, function Trig_weixingshexian_1Act
 endfunction
 function Trig_weixingshexian_2Func002Func003Func002A takes nothing returns nothing
 set udg_danwei[145]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[145]) == true ) and ( IsUnitType(udg_danwei[145], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[145], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[145], GetOwningPlayer(udg_danwei[50])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[145]) == true ) and ( IsUnitType(udg_danwei[145], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[145], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[145], GetOwningPlayer(udg_danwei[50])) == true ) ) then
 call UnitDamageTarget(udg_danwei[50], udg_danwei[145], ( I2R(GetHeroInt(udg_danwei[50], true)) * 0.50 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -34837,7 +34843,7 @@ set udg_danwei[145]=null
 endfunction
 function Trig_weixingshexian_2Func002Func003Func005Func007A takes nothing returns nothing
 set udg_danwei[145]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[145]) == true ) and ( IsUnitType(udg_danwei[145], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[145], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[145], GetOwningPlayer(udg_danwei[50])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[145]) == true ) and ( IsUnitType(udg_danwei[145], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[145], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[145], GetOwningPlayer(udg_danwei[50])) == true ) ) then
 call UnitDamageTarget(udg_danwei[50], udg_danwei[145], ( I2R(GetHeroInt(udg_danwei[50], true)) * 5.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -35298,7 +35304,7 @@ call TriggerAddAction(gg_trg_leiji_1, function Trig_leiji_1Actions)
 endfunction
 function Trig_leiji_2Func001Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[81])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[81])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 if ( ( DistanceBetweenPoints(udg_Dian[81], udg_dian2[0]) <= 175.00 ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[82]) == false ) ) then
@@ -35374,7 +35380,7 @@ call TriggerAddAction(gg_trg_sphl, function Trig_sphlActions)
 endfunction
 function Trig_sphl2Func003Func002Func003A takes nothing returns nothing
 set udg_danwei[146]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[146]) == true ) and ( IsUnitEnemy(udg_danwei[146], GetOwningPlayer(udg_danwei[57])) == true ) and ( IsUnitType(udg_danwei[146], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei[146], UNIT_TYPE_ANCIENT) == false ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[146]) == true ) and ( IsUnitEnemy(udg_danwei[146], GetOwningPlayer(udg_danwei[57])) == true ) and ( IsUnitType(udg_danwei[146], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei[146], UNIT_TYPE_ANCIENT) == false ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[146])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 9.00, AngleBetweenPoints(udg_dian2[0], udg_dian[53]))
 if ( ( DistanceBetweenPoints(udg_dian2[0], udg_dian[53]) >= 25.00 ) and ( IsTerrainPathableBJ(udg_dian2[1], PATHING_TYPE_WALKABILITY) == false ) ) then
@@ -35981,7 +35987,7 @@ call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_fzj2Func003Func007Func004A takes nothing returns nothing
 set udg_danwei[147]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[147], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[147], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[147]) == true ) and ( IsUnitEnemy(udg_danwei[147], GetOwningPlayer(udg_danwei[64])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[147], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[147], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[147]) == true ) and ( IsUnitEnemy(udg_danwei[147], GetOwningPlayer(udg_danwei[64])) == true ) ) then
 call UnitDamageTarget(udg_danwei[64], udg_danwei[147], ( 1.00 * I2R(GetHeroAgi(udg_danwei[64], true)) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("abilities\\weapons\\WyvernSpear\\WyvernSpearMissile.mdl", udg_danwei[147], "chest"))
 else
@@ -36190,7 +36196,7 @@ call TriggerAddAction(gg_trg_baoyujianzhen_2, function Trig_baoyujianzhen_2Actio
 endfunction
 function Trig_gmjz2Func003A takes nothing returns nothing
 set udg_danwei[148]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[148]) == true ) and ( IsUnitType(udg_danwei[148], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[148], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[148], GetOwningPlayer(udg_danwei[66])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[148]) == true ) and ( IsUnitType(udg_danwei[148], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[148], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[148], GetOwningPlayer(udg_danwei[66])) == true ) ) then
 call UnitDamageTarget(udg_danwei[66], udg_danwei[148], ( I2R(udg_zhengshu2[90]) * 3.75 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_METAL_MEDIUM_SLICE)
 else
 endif
@@ -36348,7 +36354,7 @@ call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_bf2Func001Func004Func009A takes nothing returns nothing
 set udg_danwei[149]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[149]) == true ) and ( IsUnitType(udg_danwei[149], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[149], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitEnemy(udg_danwei[149], GetOwningPlayer(udg_danwei[73])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[149]) == true ) and ( IsUnitType(udg_danwei[149], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[149], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitEnemy(udg_danwei[149], GetOwningPlayer(udg_danwei[73])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[149])
 call UnitDamageTarget(udg_danwei[73], udg_danwei[149], ( ( I2R(GetHeroInt(udg_danwei[73], true)) * 0.08 ) * ( 0.20 + ( ( DistanceBetweenPoints(udg_dian[69], udg_dian2[0]) * 0.01 ) * 0.08 ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 if ( ( DistanceBetweenPoints(udg_dian[69], udg_dian2[0]) < 400.00 ) ) then
@@ -37280,7 +37286,7 @@ call TriggerAddAction(gg_trg_anyingbu_1, function Trig_anyingbu_1Actions)
 endfunction
 function Trig_anyingbu_2Func001Func001Func001Func001Func001Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[159], udg_danwei2[1], ( ( ( ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[159], 0x41304F30)) ) + ( 1.00 * I2R(GetHeroAgi(udg_Danwei[159], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 else
@@ -37289,7 +37295,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_anyingbu_2Func001Func001Func001Func001Func005Func002A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
 else
 call GroupRemoveUnit(udg_xuanqu, udg_danwei2[1])
 endif
@@ -37297,7 +37303,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_anyingbu_2Func001Func001Func001Func001Func005Func003Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[159])) == true ) ) then
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "slow" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GlaiveMissile\\GlaiveMissileTarget.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[159], udg_danwei2[1], ( ( ( ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[159], 0x41304F30)) ) + ( 1.00 * I2R(GetHeroAgi(udg_Danwei[159], true)) ) ) * 1.00 ) * 0.50 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
@@ -37425,7 +37431,7 @@ call TriggerAddAction(gg_trg_huixuanbiao_1, function Trig_huixuanbiao_1Actions)
 endfunction
 function Trig_huixuanbiao_2Func002Func011A takes nothing returns nothing
 set udg_danwei[253]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[253], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[253], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[253]) == true ) and ( IsUnitEnemy(udg_danwei[253], GetOwningPlayer(udg_danwei[86])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[253], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[253], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[253]) == true ) and ( IsUnitEnemy(udg_danwei[253], GetOwningPlayer(udg_danwei[86])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl", udg_danwei[253], "chest"))
 call UnitDamageTarget(udg_danwei[86], udg_danwei[253], ( ( 10.00 + ( ( 10.00 * I2R(GetUnitAbilityLevel(udg_danwei[86], 0x41303256)) ) + 0.00 ) ) + 0.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_MEDIUM_SLICE)
 else
@@ -37495,7 +37501,7 @@ call TriggerAddAction(gg_trg_zhimigntiji, function Trig_zhimigntijiActions)
 endfunction
 function Trig_zhimingtiji2Func001Func004Func002Func001Func004A takes nothing returns nothing
 set udg_danwei[150]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[150], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[150]) == true ) and ( IsUnitEnemy(udg_danwei[150], GetOwningPlayer(udg_danwei[88])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[150], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[150]) == true ) and ( IsUnitEnemy(udg_danwei[150], GetOwningPlayer(udg_danwei[88])) == true ) ) then
 call UnitDamageTarget(udg_danwei[88], udg_danwei[150], ( 1.00 * I2R(GetHeroAgi(udg_danwei[88], true)) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Other\\Stampede\\StampedeMissileDeath.mdl", udg_danwei[150], "chest"))
 else
@@ -37590,7 +37596,7 @@ call TriggerAddAction(gg_trg_dizhen, function Trig_dizhenActions)
 endfunction
 function Trig_dizhen2Func002Func007A takes nothing returns nothing
 set udg_danwei[410]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[410], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei[410]) == false ) and ( IsUnitEnemy(udg_danwei[410], GetOwningPlayer(udg_danwei[105])) == true ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu[112]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[410], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu2[369]) == false ) and ( s__Unit_IsDead(udg_danwei[410]) == false ) and ( IsUnitEnemy(udg_danwei[410], GetOwningPlayer(udg_danwei[105])) == true ) and ( IsUnitInGroup(udg_danwei[410], udg_danweizu[112]) == false ) ) then
 call s__baka_IssueTargetOrder2(udg_danwei[106] , "slow" , udg_danwei[410])
 call UnitDamageTarget(udg_danwei[105], udg_danwei[410], ( ( ( 1.00 * I2R(GetHeroAgi(udg_danwei[105], true)) ) + ( 40.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_danwei[105], 0x41303056), GetUnitAbilityLevel(udg_danwei[105], 0x41304E32))) ) ) + ( 1.00 * I2R(GetHeroStr(udg_danwei[105], true)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_ROCK_HEAVY_BASH)
 call GroupAddUnit(udg_danweizu[112], udg_danwei[410])
@@ -37970,13 +37976,13 @@ call TriggerAddAction(gg_trg_shenpanjiasuo_2, function Trig_shenpanjiasuo_2Actio
 endfunction
 function Trig_shenshengzhicaiFunc006A takes nothing returns nothing
 set udg_danwei[154]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[154], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[154], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[154]) == true ) and ( IsUnitEnemy(udg_danwei[154], GetOwningPlayer(udg_danwei[128])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[154], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[154], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[154]) == true ) and ( IsUnitEnemy(udg_danwei[154], GetOwningPlayer(udg_danwei[128])) == true ) ) then
 call UnitDamageTarget(udg_danwei[128], udg_danwei[154], ( ( I2R(GetHeroInt(udg_danwei[128], true)) * 1.00 ) + ( 55.00 * I2R(GetUnitAbilityLevel(udg_danwei[128], 0x4155666E)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 set udg_dian[114]=GetUnitLoc(udg_danwei[154])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Resurrect\\ResurrectTarget.mdl", udg_dian[114]))
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\HolyBolt\\HolyBoltSpecialArt.mdl", udg_dian[114]))
 else
-if ( ( IsUnitType(udg_danwei[154], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[154], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[154]) == true ) and ( IsUnitEnemy(udg_danwei[154], GetOwningPlayer(udg_danwei[128])) == false ) ) then
+if ( ( IsUnitType(udg_danwei[154], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[154], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[154]) == true ) and ( IsUnitEnemy(udg_danwei[154], GetOwningPlayer(udg_danwei[128])) == false ) ) then
 call SetUnitLifeBJ(udg_danwei[154], ( GetUnitState(udg_danwei[154], UNIT_STATE_LIFE) + ( ( I2R(GetHeroInt(udg_danwei[128], true)) * 1 ) + ( 55.00 * I2R(GetUnitAbilityLevel(udg_danwei[128], 0x4155666E)) ) ) ))
 set udg_dian[114]=GetUnitLoc(udg_danwei[154])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Human\\Resurrect\\ResurrectTarget.mdl", udg_dian[114]))
@@ -38023,7 +38029,7 @@ call TriggerAddAction(gg_trg_huangjinxuanfeng, function Trig_huangjinxuanfengAct
 endfunction
 function Trig_huangjinxuanfeng2Func001Func006A takes nothing returns nothing
 set udg_danwei[155]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[155], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[155], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[155]) == true ) and ( IsUnitEnemy(udg_danwei[155], GetOwningPlayer(udg_danwei[130])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[155], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[155], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[155]) == true ) and ( IsUnitEnemy(udg_danwei[155], GetOwningPlayer(udg_danwei[130])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[155])
 set udg_dian2[1]=PolarProjectionBJ(udg_dian[117], ( ( DistanceBetweenPoints(udg_dian[117], udg_dian2[0]) * 0.97 ) - 2.00 ), ( AngleBetweenPoints(udg_dian[117], udg_dian2[0]) + ( 1500.00 / DistanceBetweenPoints(udg_dian[117], udg_dian2[0]) ) ))
 if ( ( IsTerrainPathableBJ(udg_dian2[1], PATHING_TYPE_WALKABILITY) == false ) ) then
@@ -38092,7 +38098,7 @@ call s__Event_AnyUnitSkill(gg_trg_aersaisideyizhi , 3 , 0x4130374B)
 call TriggerAddAction(gg_trg_aersaisideyizhi, function Trig_aersaisideyizhiActions)
 endfunction
 function Trig_aersaisideyizhi2Func005002003 takes nothing returns boolean
-return ( ( ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(GetFilterUnit()) == true ) ) and ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[133])) == true ) ) )
+return ( ( ( ( IsUnitType(GetFilterUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(GetFilterUnit()) == true ) ) and ( IsUnitEnemy(GetFilterUnit(), GetOwningPlayer(udg_danwei[133])) == true ) ) )
 endfunction
 function Trig_aersaisideyizhi2Func006A takes nothing returns nothing
 set udg_danwei[162]=GetEnumUnit()
@@ -38226,7 +38232,7 @@ endfunction
 function Trig_siwangchanrao2Func003Func005Func003Func007A takes nothing returns nothing
 set udg_danwei[152]=GetEnumUnit()
 set udg_dian[94]=GetUnitLoc(udg_danwei[152])
-if ( ( IsUnitType(udg_danwei[152], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[152], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[152]) == true ) and ( IsUnitEnemy(udg_danwei[152], GetOwningPlayer(udg_danwei[97])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[152], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[152], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[152]) == true ) and ( IsUnitEnemy(udg_danwei[152], GetOwningPlayer(udg_danwei[97])) == true ) ) then
 set udg_danwei2[1]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[97]), 0x65303557, udg_dian[94], AngleBetweenPoints(udg_dian[93], udg_dian[94]))
 call SetUnitScale(udg_danwei2[1], ( 0.25 + ( RMinBJ(( GetUnitState(udg_danwei[152], UNIT_STATE_LIFE) * 0.10 ), 600.00) / 600.00 ) ), ( 0.25 + ( RMinBJ(( GetUnitState(udg_danwei[152], UNIT_STATE_LIFE) * 0.10 ), 600.00) / 600.00 ) ), ( 0.25 + ( RMinBJ(( GetUnitState(udg_danwei[152], UNIT_STATE_LIFE) * 0.10 ), 600.00) / 600.00 ) ))
 call SetUnitLifeBJ(udg_danwei2[1], RMinBJ(( GetUnitState(udg_danwei[152], UNIT_STATE_LIFE) * 0.10 ), 300.00))
@@ -38310,7 +38316,7 @@ call TriggerAddAction(gg_trg_xiaowangyiji, function Trig_xiaowangyijiActions)
 endfunction
 function Trig_xiaowangyiji1Func001Func010A takes nothing returns nothing
 set udg_danwei[152]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[152], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[152], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[152]) == true ) and ( IsUnitEnemy(udg_danwei[152], GetOwningPlayer(udg_danwei[95])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[152], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[152], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[152]) == true ) and ( IsUnitEnemy(udg_danwei[152], GetOwningPlayer(udg_danwei[95])) == true ) ) then
 call UnitDamageTarget(udg_danwei[95], udg_danwei[152], GetUnitState(udg_danwei[104], UNIT_STATE_LIFE), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", udg_danwei[152], "chest"))
 else
@@ -38420,7 +38426,7 @@ call TriggerAddAction(gg_trg_heihuagognji, function Trig_heihuagognjiActions)
 endfunction
 function Trig_heihuagongji2Func001Func009A takes nothing returns nothing
 set udg_danwei[153]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[153]) == true ) and ( IsUnitInGroup(udg_danwei[153], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[153], GetOwningPlayer(udg_danwei[99])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[153]) == true ) and ( IsUnitInGroup(udg_danwei[153], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[153], GetOwningPlayer(udg_danwei[99])) == true ) ) then
 call UnitDamageTarget(udg_danwei[99], udg_danwei[153], ( 0.20 * ( ( I2R(GetHeroStr(udg_danwei[99], true)) * 2.50 ) + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei[99], 0x41303054)) ) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_CHOP)
 else
 endif
@@ -38807,7 +38813,7 @@ call TriggerAddAction(gg_trg_tiaoyue, function Trig_tiaoyueActions)
 endfunction
 function Trig_tiaoyue_2Func001Func001Func001Func012Func003A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
 call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 35.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 75.00 + I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -38873,7 +38879,7 @@ call TriggerAddAction(gg_trg_tiaoyue_2, function Trig_tiaoyue_2Actions)
 endfunction
 function Trig_tiaoyue_boxingFunc002Func001Func002Func001Func002Func011Func013A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
 call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 1.20 * I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -38881,7 +38887,7 @@ set udg_danwei[172]=null
 endfunction
 function Trig_tiaoyue_boxingFunc002Func001Func002Func011Func013A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
 call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 0.40 * I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -38889,7 +38895,7 @@ set udg_danwei[172]=null
 endfunction
 function Trig_tiaoyue_boxingFunc002Func011Func013A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[166])) == true ) ) then
 call UnitDamageTarget(udg_danwei[166], udg_danwei[172], ( ( 15.00 * I2R(GetUnitAbilityLevel(udg_danwei[166], 0x41303135)) ) + ( 0.25 * I2R(GetHeroAgi(udg_danwei[166], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -39082,7 +39088,7 @@ endfunction
 function Trig_xuanfengti_2Func001Func001Func003Func006Func007A takes nothing returns nothing
 set udg_danwei[169]=GetEnumUnit()
 set udg_dian2[0]=GetUnitLoc(udg_danwei[169])
-if ( ( IsUnitType(udg_danwei[169], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[169], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[169]) == true ) and ( IsUnitEnemy(udg_danwei[169], GetOwningPlayer(udg_danwei[168])) == true ) and ( IsUnitInGroup(udg_danwei[169], udg_Danweizu[128]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[169], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[169], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[169]) == true ) and ( IsUnitEnemy(udg_danwei[169], GetOwningPlayer(udg_danwei[168])) == true ) and ( IsUnitInGroup(udg_danwei[169], udg_Danweizu[128]) == false ) ) then
 call GroupAddUnit(udg_Danweizu[128], udg_danwei[169])
 call UnitAddAbility(udg_danwei[169], 0x41304C59)
 call UnitDamageTarget(udg_danwei[168], udg_danwei[169], ( ( 25.00 + ( 30.00 * I2R(GetUnitAbilityLevel(udg_danwei[168], 0x41303136)) ) ) + ( 1.50 * I2R(GetHeroAgi(udg_danwei[168], true)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WOOD_HEAVY_BASH)
@@ -39186,7 +39192,7 @@ call TriggerAddAction(gg_trg_shunshenlianxi, function Trig_shunshenlianxiActions
 endfunction
 function Trig_shunshenlianxi2Func001Func002Func002Func008A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[170])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[170])) == true ) ) then
 call UnitDamageTarget(udg_danwei[170], udg_danwei[172], ( ( I2R(GetHeroAgi(udg_danwei[170], true)) * 1.00 ) + ( 25.00 + ( 75.00 * I2R(GetUnitAbilityLevel(udg_danwei[170], 0x41303031)) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -39194,7 +39200,7 @@ set udg_danwei[172]=null
 endfunction
 function Trig_shunshenlianxi2Func001Func002Func003Func004A takes nothing returns nothing
 set udg_danwei[172]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[172]) == true ) and ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[170])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[172]) == true ) and ( IsUnitType(udg_danwei[172], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[172], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[172], GetOwningPlayer(udg_danwei[170])) == true ) ) then
 call UnitDamageTarget(udg_danwei[170], udg_danwei[172], ( ( I2R(GetHeroAgi(udg_danwei[170], true)) * 1.00 ) + ( 0.00 + ( 100.00 * I2R(GetUnitAbilityLevel(udg_danwei[170], 0x41303031)) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -40063,7 +40069,7 @@ call TriggerAddCondition(gg_trg_tufubaozha, Condition(function Trig_tufubaozhaCo
 call TriggerAddAction(gg_trg_tufubaozha, function Trig_tufubaozhaActions)
 endfunction
 function Trig_tufubaozha_2Func006A takes nothing returns nothing
-if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(GetEnumUnit()) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(udg_Danwei[146])) == true ) ) then
+if ( ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(GetEnumUnit()) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(udg_Danwei[146])) == true ) ) then
 call UnitDamageTarget(udg_Danwei[146], GetEnumUnit(), ( ( ( 0.00 + ( 0.25 * GetUnitState(udg_Danwei[146], UNIT_STATE_MAX_LIFE) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 call GroupRemoveUnit(udg_Danweizu[148], GetEnumUnit())
@@ -40158,7 +40164,7 @@ call RemoveLocation(udg_dian2[1])
 endfunction
 function Trig_kenyaoFunc001Func011Func007Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[146])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[146])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[147]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[146], udg_danwei2[1], ( ( ( ( 0.00 + ( 25.00 * I2R(GetUnitAbilityLevel(udg_Danwei[146], 0x41303657)) ) ) + ( 0.08 * GetUnitState(udg_Danwei[146], UNIT_STATE_MAX_LIFE) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call UnitAddAbility(udg_danwei2[1], 0x41303658)
@@ -40855,7 +40861,7 @@ call TriggerAddAction(gg_trg_jiujibisha2, function Trig_jiujibisha2Actions)
 endfunction
 function Trig_jiujibisha3Func002Func011A takes nothing returns nothing
 set udg_danwei[190]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[190], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[190], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
 call UnitDamageTarget(udg_danwei[188], udg_danwei[190], ( I2R(GetHeroInt(udg_danwei[188], true)) * 1.50 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -40863,7 +40869,7 @@ set udg_danwei[190]=null
 endfunction
 function Trig_jiujibisha3Func003Func006A takes nothing returns nothing
 set udg_danwei[190]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
 call UnitDamageTarget(udg_danwei[188], udg_danwei[190], ( I2R(GetHeroInt(udg_danwei[188], true)) * 2.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -40871,7 +40877,7 @@ set udg_danwei[190]=null
 endfunction
 function Trig_jiujibisha3Func004Func006A takes nothing returns nothing
 set udg_danwei[190]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
 call UnitDamageTarget(udg_danwei[188], udg_danwei[190], ( I2R(GetHeroInt(udg_danwei[188], true)) * 2.50 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -40879,7 +40885,7 @@ set udg_danwei[190]=null
 endfunction
 function Trig_jiujibisha3Func005Func006A takes nothing returns nothing
 set udg_danwei[190]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[190], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[190]) == true ) and ( IsUnitEnemy(udg_danwei[190], GetOwningPlayer(udg_danwei[188])) == true ) ) then
 call UnitDamageTarget(udg_danwei[188], udg_danwei[190], ( I2R(GetHeroInt(udg_danwei[188], true)) * 3.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -41138,7 +41144,7 @@ call TriggerAddAction(gg_trg_paoxiaochongji_1, function Trig_paoxiaochongji_1Act
 endfunction
 function Trig_paoxiaochongji_2Func001Func015A takes nothing returns nothing
 set udg_danwei[205]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[205], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[205], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[205]) == true ) and ( IsUnitEnemy(udg_danwei[205], GetOwningPlayer(udg_danwei[202])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[205], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[205], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[205]) == true ) and ( IsUnitEnemy(udg_danwei[205], GetOwningPlayer(udg_danwei[202])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei[205], "origin"))
 if ( ( IsUnitInGroup(udg_danwei[205], udg_Danweizu[70]) == false ) ) then
 call GroupAddUnit(udg_Danweizu[70], udg_danwei[205])
@@ -41393,7 +41399,7 @@ call TriggerAddAction(gg_trg_jianqizhan, function Trig_jianqizhanActions)
 endfunction
 function Trig_jianqizhan2Func004Func005A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[114]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei[212])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[114]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei[212])) == true ) ) then
 call UnitDamageTarget(udg_danwei[212], udg_danwei2[1], ( 20.00 + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei[212], 0x41303151)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_danweizu2[114], udg_danwei2[1])
 if ( ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) or ( ( udg_danwei2[1] == udg_danwei[213] ) and ( udg_danwei[213] != null ) ) ) ) then
@@ -41406,7 +41412,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_jianqizhan2Func004Func010A takes nothing returns nothing
 set udg_danwei[214]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[214]) == true ) and ( IsUnitInGroup(udg_danwei[214], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[214], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitEnemy(udg_danwei[214], GetOwningPlayer(udg_danwei[212])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[214]) == true ) and ( IsUnitInGroup(udg_danwei[214], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[214], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitEnemy(udg_danwei[214], GetOwningPlayer(udg_danwei[212])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[114]) == false ) ) then
 call UnitDamageTarget(udg_danwei[212], udg_danwei2[1], ( 20.00 + ( 40.00 * I2R(GetUnitAbilityLevel(udg_danwei[212], 0x41303151)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -41423,7 +41429,7 @@ set udg_zhengshu2[114]=( udg_zhengshu2[114] + 1 )
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[114])
 set udg_dian2[2]=GetUnitLoc(udg_danwei[213])
 if ( ( udg_zhengshu2[114] < 20 ) and ( IsTerrainPathableBJ(udg_dian2[0], PATHING_TYPE_FLYABILITY) == false ) ) then
-if ( ( udg_danwei[213] != null ) and ( IsUnitDeadBJ(udg_danwei[213]) == false ) ) then
+if ( ( udg_danwei[213] != null ) and ( s__Unit_IsDead(udg_danwei[213]) == false ) ) then
 call SetUnitFacing(udg_danwei2[114], AngleBetweenPoints(udg_dian2[0], udg_dian2[2]))
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], 80.00, GetUnitFacing(udg_danwei2[114]))
 set udg_aXUNHUAN[102]=114
@@ -41515,7 +41521,7 @@ call RemoveLocation(udg_dian2[2])
 endfunction
 function Trig_xiongzhan_2Func003Func001Func002Func008Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[1])
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[122], udg_danwei2[1], ( ( 2.00 * I2R(GetHeroStr(udg_danwei2[122], true)) ) + ( 25.00 * I2R(GetUnitAbilityLevel(udg_danwei2[122], 0x4130364B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
@@ -41528,7 +41534,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_xiongzhan_2Func003Func001Func005Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[122])) == true ) ) then
 call UnitDamageTarget(udg_danwei2[122], udg_danwei2[1], ( ( 1.00 * I2R(GetHeroStr(udg_danwei2[122], true)) ) + ( 20.00 * I2R(GetUnitAbilityLevel(udg_danwei2[122], 0x4130364B)) ) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_HEAVY_SLICE)
 call s__baka_IssueTargetOrderById2(udg_danwei2[2] , 852095 , udg_danwei2[1])
 else
@@ -41695,7 +41701,7 @@ call TriggerAddAction(gg_trg_bingjian_1, function Trig_bingjian_1Actions)
 endfunction
 function Trig_bingjian_2Func003Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[119]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[119])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[119]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[119])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_danwei2[119], udg_danwei2[1], ( 50.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_danwei2[119], 0x41303956)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_danweizu2[119], udg_danwei2[1])
@@ -41705,7 +41711,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_bingjian_2Func003Func011A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[119])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[119])) == true ) ) then
 call s__baka_IssueTargetOrderById2(udg_danwei2[120] , 852095 , udg_danwei2[1])
 call UnitDamageTarget(udg_danwei2[119], udg_danwei2[1], I2R(GetHeroInt(udg_danwei2[119], true)), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[119]) == false ) ) then
@@ -41938,7 +41944,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_penqijiFunc001Func003Func008Func006A takes nothing returns nothing
 set udg_danwei[217]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[217], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[217], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[217]) == true ) and ( IsUnitEnemy(udg_danwei[217], GetOwningPlayer(udg_danwei[216])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[217], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei[217], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[217]) == true ) and ( IsUnitEnemy(udg_danwei[217], GetOwningPlayer(udg_danwei[216])) == true ) ) then
 call UnitDamageTarget(udg_danwei[216], udg_danwei[217], ( ( ( I2R(GetHeroInt(udg_danwei[216], true)) * 0.08 ) + 5.60 ) + ( 4.80 * I2R(GetUnitAbilityLevel(udg_danwei[216], 0x41303152)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -42014,7 +42020,7 @@ call TriggerAddAction(gg_trg_bingdong, function Trig_bingdongActions)
 endfunction
 function Trig_bingdong2Func002Func002A takes nothing returns nothing
 set udg_danwei[222]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[222])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", udg_dian2[0]))
 call SetUnitTimeScale(udg_danwei[222], 1)
@@ -42028,7 +42034,7 @@ set udg_danwei[222]=null
 endfunction
 function Trig_bingdong2Func002Func019A takes nothing returns nothing
 set udg_danwei[222]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[222], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[222], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[222]) == true ) and ( IsUnitEnemy(udg_danwei[218], GetOwningPlayer(udg_danwei[222])) == true ) ) then
 call SetUnitTimeScale(udg_danwei[222], 0.00)
 call s__Unit_PauseUnitMU(udg_danwei[222] , true , "寒霜冰封")
 else
@@ -42112,7 +42118,7 @@ call TriggerAddAction(gg_trg_bigndognzhan, function Trig_bigndognzhanActions)
 endfunction
 function Trig_bingdognzhan2Func004Func001Func001Func003A takes nothing returns nothing
 set udg_danwei[225]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
 call UnitDamageTarget(udg_danwei[223], udg_danwei[225], ( I2R(GetHeroInt(udg_danwei[223], true)) * 2.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -42120,7 +42126,7 @@ set udg_danwei[225]=null
 endfunction
 function Trig_bingdognzhan2Func004Func001Func001Func012A takes nothing returns nothing
 set udg_danwei[225]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
 call UnitDamageTarget(udg_danwei[223], udg_danwei[225], ( I2R(GetHeroInt(udg_danwei[223], true)) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -42128,7 +42134,7 @@ set udg_danwei[225]=null
 endfunction
 function Trig_bingdognzhan2Func004Func001Func005A takes nothing returns nothing
 set udg_danwei[225]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[225], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[225], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[225]) == true ) and ( IsUnitEnemy(udg_danwei[225], GetOwningPlayer(udg_danwei[223])) == true ) ) then
 call UnitDamageTarget(udg_danwei[223], udg_danwei[225], ( I2R(GetHeroInt(udg_danwei[223], true)) * 1.00 ), true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -42670,7 +42676,7 @@ call TriggerAddAction(gg_trg_hualongdianjing_2, function Trig_hualongdianjing_2A
 endfunction
 function Trig_yanshiqiang_1Func013Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei2[1]) == true ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[123])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei2[1]) == true ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei2[123])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 if ( ( ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= 270.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= 450.00 ) ) or ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= - 90.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= 90.00 ) ) or ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= - 450.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= - 270.00 ) ) ) ) then
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 50.00, AngleBetweenPoints(udg_dian2[123], udg_dian2[124]))
@@ -42765,7 +42771,7 @@ call TriggerAddAction(gg_trg_yanshiqiang_1, function Trig_yanshiqiang_1Actions)
 endfunction
 function Trig_yanshiqiang_2Func003Func002Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei2[1]) == true ) and ( GetUnitTypeId(udg_danwei2[1]) != 0x6530304F ) ) then
+if ( ( IsUnitInGroup(udg_danwei2[1], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei2[1]) == true ) and ( GetUnitTypeId(udg_danwei2[1]) != 0x6530304F ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei2[1])
 if ( ( ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= 270.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= 450.00 ) ) or ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= - 90.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= 90.00 ) ) or ( ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) >= - 450.00 ) and ( ( AngleBetweenPoints(udg_dian2[123], udg_dian2[124]) - AngleBetweenPoints(udg_dian2[1], udg_dian2[0]) ) <= - 270.00 ) ) ) ) then
 set udg_dian2[2]=PolarProjectionBJ(udg_dian2[0], 15.00, AngleBetweenPoints(udg_dian2[123], udg_dian2[124]))
@@ -42873,7 +42879,7 @@ call TriggerAddAction(gg_trg_yanshiqiang_4, function Trig_yanshiqiang_4Actions)
 endfunction
 function Trig_gangcilianchengFunc012A takes nothing returns nothing
 set udg_danwei[233]=GetEnumUnit()
-if ( ( IsUnitInGroup(udg_danwei[233], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[233], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[233]) == true ) and ( IsUnitEnemy(udg_danwei[233], GetOwningPlayer(udg_danwei[230])) == true ) ) then
+if ( ( IsUnitInGroup(udg_danwei[233], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[233], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[233]) == true ) and ( IsUnitEnemy(udg_danwei[233], GetOwningPlayer(udg_danwei[230])) == true ) ) then
 set udg_dian2[0]=GetUnitLoc(udg_danwei[233])
 call s__baka_IssueTargetOrder2(udg_danwei[231] , "thunderbolt" , udg_danwei[233])
 if ( ( GetUnitAbilityLevel(udg_danwei[230], 0x41303232) == 1 ) ) then
@@ -42984,7 +42990,7 @@ call TriggerAddAction(gg_trg_ganghuajiazhi, function Trig_ganghuajiazhiActions)
 endfunction
 function Trig_zhenlizhimenFunc012A takes nothing returns nothing
 set udg_danwei[236]=GetEnumUnit()
-if ( ( IsUnitInGroup(udg_danwei[236], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[236], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitAliveBJ(udg_danwei[236]) == true ) and ( IsUnitEnemy(udg_danwei[236], GetOwningPlayer(udg_danwei[234])) == true ) and ( GetUnitDefaultMoveSpeed(udg_danwei[236]) > 0.00 ) ) then
+if ( ( IsUnitInGroup(udg_danwei[236], udg_danweizu2[369]) == false ) and ( IsUnitType(udg_danwei[236], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsAlive(udg_danwei[236]) == true ) and ( IsUnitEnemy(udg_danwei[236], GetOwningPlayer(udg_danwei[234])) == true ) and ( GetUnitDefaultMoveSpeed(udg_danwei[236]) > 0.00 ) ) then
 else
 call GroupRemoveUnit(udg_danweizu[51], udg_danwei[236])
 endif
@@ -43158,7 +43164,7 @@ endfunction
 function Trig_xianzhezhishi2Actions takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-if ( ( R2I(GetUnitLifePercent(udg_danwei[238])) <= 33 ) and ( IsUnitDeadBJ(udg_danwei[237]) == false ) and ( IsUnitDeadBJ(udg_danwei[238]) == false ) ) then
+if ( ( R2I(GetUnitLifePercent(udg_danwei[238])) <= 33 ) and ( s__Unit_IsDead(udg_danwei[237]) == false ) and ( s__Unit_IsDead(udg_danwei[238]) == false ) ) then
 if ( ( IsUnitType(udg_danwei[238], UNIT_TYPE_HERO) == true ) ) then
 call SetUnitLifePercentBJ(udg_danwei[237], ( GetUnitLifePercent(udg_danwei[237]) + 25.00 ))
 else
@@ -43713,7 +43719,7 @@ set udg_danwei[257]=null
 endfunction
 function Trig_diushoulei2Func002Func007Func001Func010A takes nothing returns nothing
 set udg_danwei[257]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[257], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[257], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[257]) == true ) and ( IsUnitEnemy(udg_danwei[257], GetOwningPlayer(udg_danwei[254])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[257], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[257], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[257]) == true ) and ( IsUnitEnemy(udg_danwei[257], GetOwningPlayer(udg_danwei[254])) == true ) ) then
 call UnitDamageTarget(udg_danwei[254], udg_danwei[257], ( ( 200.00 + ( I2R(GetHeroAgi(udg_danwei[254], true)) * 2.00 ) ) + ( 150.00 * I2R(GetUnitAbilityLevel(udg_danwei[254], 0x41303244)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 call GroupRemoveUnit(udg_danweizu[55], udg_danwei[257])
@@ -44188,7 +44194,7 @@ call TriggerAddAction(gg_trg_chongjidan_1, function Trig_chongjidan_1Actions)
 endfunction
 function Trig_chongjidan_2Func001Func001Func003Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
 else
 call GroupRemoveUnit(udg_Danweizu[110], udg_danwei2[1])
 endif
@@ -44331,7 +44337,7 @@ call TriggerAddAction(gg_trg_baoliedan_1, function Trig_baoliedan_1Actions)
 endfunction
 function Trig_baoliedan_2Func001Func001Func003Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( udg_danwei2[1] != udg_danwei[84] ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
+if ( ( udg_danwei2[1] != udg_danwei[84] ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
 set udg_Dian[113]=GetUnitLoc(udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\RocketMissile\\RocketMissile.mdl", udg_Dian[113]))
 call UnitDamageTarget(udg_Danwei[110], udg_danwei2[1], ( ( ( ( 0.00 + ( 25.00 * I2R(IMaxBJ(GetUnitAbilityLevel(udg_Danwei[110], 0x41304C48), GetUnitAbilityLevel(udg_Danwei[110], 0x41304C4A))) ) ) + ( 1.50 * I2R(GetHeroAgi(udg_Danwei[110], true)) ) ) * 1.00 ) * 1.00 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -44343,7 +44349,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_baoliedan_2Func001Func001Func003Func019A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) ) then
 else
 call GroupRemoveUnit(udg_Danweizu[110], udg_danwei2[1])
 endif
@@ -44497,7 +44503,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_huabu_2Func001Func001Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[111]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[110])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[111]) == false ) ) then
 if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) ) then
 call UnitDamageTarget(udg_Danwei[110], udg_danwei2[1], ( ( ( ( 10.00 + ( 10.00 * I2R(GetUnitAbilityLevel(udg_Danwei[110], 0x41304C49)) ) ) + ( 0.60 * I2R(GetHeroAgi(udg_Danwei[110], true)) ) ) * 1.00 ) * 1.00 ), false, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WOOD_HEAVY_BASH)
 else
@@ -45953,7 +45959,7 @@ call UnitAddAbility(udg_danwei[322], 0x41303942)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei[322]), 0x41303249, true)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_danwei[322]), 0x41303942, true)
 call PlaySoundOnUnitBJ(gg_snd_ManaShieldCaster1, 100, udg_danwei[322])
-if ( ( IsUnitAliveBJ(udg_danwei[322]) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[322]) == true ) ) then
 set udg_zhengshu[79]=0
 call ForGroupBJ(udg_Danweizu[37], function Trig_the_world_2Func009Func005A)
 else
@@ -46085,7 +46091,7 @@ call TriggerAddAction(gg_trg_chaosuzaisheng, function Trig_chaosuzaishengActions
 endfunction
 function Trig_chaosuzaisheng2Func002Func006A takes nothing returns nothing
 set udg_danwei[334]=GetEnumUnit()
-if ( ( IsUnitAliveBJ(udg_danwei[334]) == true ) and ( IsUnitType(udg_danwei[334], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[334], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[334], GetOwningPlayer(udg_danwei[333])) == true ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[334]) == true ) and ( IsUnitType(udg_danwei[334], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[334], udg_danweizu2[369]) == false ) and ( IsUnitEnemy(udg_danwei[334], GetOwningPlayer(udg_danwei[333])) == true ) ) then
 set udg_dian[246]=GetUnitLoc(udg_danwei[334])
 set udg_dian2[0]=PolarProjectionBJ(udg_dian[246], 40.00, AngleBetweenPoints(udg_dian[248], udg_dian[246]))
 if ( ( udg_zhengshu[86] == 1 ) ) then
@@ -46367,7 +46373,7 @@ call TriggerAddAction(gg_trg_zuihoudeyueya, function Trig_zuihoudeyueyaActions)
 endfunction
 function Trig_yueyatianchongFunc008Func004A takes nothing returns nothing
 set udg_danwei[340]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
 call UnitDamageTarget(udg_danwei[336], udg_danwei[340], udg_shishu2[339], true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\Bolt\\BoltImpact.mdl", udg_danwei[340], "chest"))
 call GroupAddUnit(udg_danweizu[68], udg_danwei[340])
@@ -46377,7 +46383,7 @@ set udg_danwei[340]=null
 endfunction
 function Trig_yueyatianchongFunc008Func009A takes nothing returns nothing
 set udg_danwei[340]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
 call UnitDamageTarget(udg_danwei[336], udg_danwei[340], udg_shishu2[339], true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl", udg_danwei[340], "chest"))
 call GroupAddUnit(udg_danweizu[68], udg_danwei[340])
@@ -46507,7 +46513,7 @@ call RemoveLocation(udg_dian2[0])
 endfunction
 function Trig_yueyatianchong2Func007A takes nothing returns nothing
 set udg_danwei[340]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
 call UnitDamageTarget(udg_danwei[336], udg_danwei[340], udg_shishu2[339], true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\Bolt\\BoltImpact.mdl", udg_danwei[340], "chest"))
 call GroupAddUnit(udg_danweizu[68], udg_danwei[340])
@@ -46569,7 +46575,7 @@ call RemoveLocation(udg_dian2[0])
 endfunction
 function Trig_yueyatianchong_heiFunc008A takes nothing returns nothing
 set udg_danwei[340]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[340], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[340]) == true ) and ( IsUnitEnemy(udg_danwei[340], GetOwningPlayer(udg_danwei[336])) == true ) and ( IsUnitInGroup(udg_danwei[340], udg_danweizu[68]) == false ) ) then
 call UnitDamageTarget(udg_danwei[336], udg_danwei[340], udg_shishu2[339], true, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl", udg_danwei[340], "chest"))
 call GroupAddUnit(udg_danweizu[68], udg_danwei[340])
@@ -46718,7 +46724,7 @@ call TriggerAddAction(gg_trg_shunbuzhan2, function Trig_shunbuzhan2Actions)
 endfunction
 function Trig_wuyue2Func002Func011Func004A takes nothing returns nothing
 set udg_danwei[345]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[345], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei[345]) == false ) and ( IsUnitEnemy(udg_danwei[345], GetOwningPlayer(udg_danwei[342])) == true ) and ( IsUnitInGroup(udg_danwei[345], udg_danweizu[152]) == false ) ) then
+if ( ( IsUnitType(udg_danwei[345], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei[345]) == false ) and ( IsUnitEnemy(udg_danwei[345], GetOwningPlayer(udg_danwei[342])) == true ) and ( IsUnitInGroup(udg_danwei[345], udg_danweizu[152]) == false ) ) then
 call UnitDamageTarget(udg_danwei[342], udg_danwei[345], ( ( ( ( GetUnitState(udg_danwei[344], UNIT_STATE_MAX_LIFE) * 0.33 ) + ( 3.00 * I2R(GetHeroAgi(udg_danwei[342], true)) ) ) * ( 1.00 + ( ( 0.05 / 2.00 ) * ( GetUnitState(udg_danwei[342], UNIT_STATE_MANA) / 100.00 ) ) ) ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_danweizu[152], udg_danwei[345])
 else
@@ -47389,7 +47395,7 @@ local group ydl_group
 local unit ydl_unit
 if ( ( ( IsUnitPausedBJ(udg_danwei[360]) == false ) or ( IsUnitType(udg_danwei[360], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[90]=( udg_zhengshu[90] + 1 )
-if ( ( IsUnitAliveBJ(udg_danwei[360]) == true ) and ( udg_zhengshu[90] <= 20 ) ) then
+if ( ( s__Unit_IsAlive(udg_danwei[360]) == true ) and ( udg_zhengshu[90] <= 20 ) ) then
 set udg_dian[272]=GetUnitLoc(udg_danwei[360])
 set udg_dian[273]=PolarProjectionBJ(udg_dian[272], 50.00, AngleBetweenPoints(udg_dian[271], udg_dian[270]))
 if ( ( IsTerrainPathableBJ(udg_dian[273], PATHING_TYPE_FLYABILITY) == false ) ) then
@@ -47426,7 +47432,7 @@ call TriggerAddAction(gg_trg_feitui2, function Trig_feitui2Actions)
 endfunction
 function Trig_zhanzhengjiantaFunc010A takes nothing returns nothing
 set udg_danwei[364]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[364], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[364], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[364]) == true ) and ( IsUnitEnemy(udg_danwei[364], GetOwningPlayer(udg_danwei[362])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[364], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[364], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[364]) == true ) and ( IsUnitEnemy(udg_danwei[364], GetOwningPlayer(udg_danwei[362])) == true ) ) then
 call UnitDamageTarget(udg_danwei[362], udg_danwei[364], ( ( ( 2.50 / 6.00 ) * I2R(GetHeroStr(udg_danwei[362], true)) ) + ( ( 50.00 / 6.00 ) * I2R(( GetUnitAbilityLevel(udg_danwei[362], 0x414F7773) - 0 )) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_METAL_HEAVY_BASH)
 else
 endif
@@ -47464,7 +47470,7 @@ call TriggerAddAction(gg_trg_zhanzhengjianta, function Trig_zhanzhengjiantaActio
 endfunction
 function Trig_zhanzhengjianta2Func001Func001Func011A takes nothing returns nothing
 set udg_danwei[364]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[364], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[364], udg_danweizu2[369]) == false ) and ( IsUnitAliveBJ(udg_danwei[364]) == true ) and ( IsUnitEnemy(udg_danwei[364], GetOwningPlayer(udg_danwei[362])) == true ) ) then
+if ( ( IsUnitType(udg_danwei[364], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[364], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[364]) == true ) and ( IsUnitEnemy(udg_danwei[364], GetOwningPlayer(udg_danwei[362])) == true ) ) then
 call UnitDamageTarget(udg_danwei[362], udg_danwei[364], ( ( ( 2.50 / 6.00 ) * I2R(GetHeroStr(udg_danwei[362], true)) ) + ( ( 50.00 / 6.00 ) * I2R(( GetUnitAbilityLevel(udg_danwei[362], 0x414F7773) - 0 )) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_METAL_HEAVY_BASH)
 else
 endif
@@ -47522,7 +47528,7 @@ endfunction
 function Trig_lianji2Actions takes nothing returns nothing
 if ( ( ( IsUnitPausedBJ(udg_danwei[365]) == false ) or ( IsUnitType(udg_danwei[365], UNIT_TYPE_DEAD) == true ) ) ) then
 set udg_zhengshu[92]=( udg_zhengshu[92] + 1 )
-if ( ( udg_zhengshu[92] <= 19 ) and ( IsUnitDeadBJ(udg_danwei[365]) == false ) and ( IsUnitDeadBJ(udg_danwei[366]) == false ) ) then
+if ( ( udg_zhengshu[92] <= 19 ) and ( s__Unit_IsDead(udg_danwei[365]) == false ) and ( s__Unit_IsDead(udg_danwei[366]) == false ) ) then
 set udg_dian[278]=GetUnitLoc(udg_danwei[365])
 set udg_dian[279]=PolarProjectionBJ(udg_dian[276], 500.00, ( AngleBetweenPoints(udg_dian[276], udg_dian[278]) + 144.00 ))
 call UnitDamageTarget(udg_danwei[365], udg_danwei[366], ( 0.35 * I2R(GetHeroStr(udg_danwei[365], true)) ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WOOD_HEAVY_BASH)
@@ -47657,7 +47663,7 @@ call TriggerAddAction(gg_trg_zhanshenzhufu_1, function Trig_zhanshenzhufu_1Actio
 endfunction
 function Trig_zhanshenzhufu_2Func001Func007Func006A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[121])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[121]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[121])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[121]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[121], udg_danwei2[1], ( ( 1.00 * I2R(GetHeroStr(udg_Danwei[121], true)) ) + ( 50.00 + ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[121], 0x41303643)) ) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei2[1], "chest"))
@@ -54970,7 +54976,7 @@ call TriggerAddCondition(gg_trg_mielong, Condition(function Trig_mielongConditio
 call TriggerAddAction(gg_trg_mielong, function Trig_mielongActions)
 endfunction
 function Trig_mielong3Actions takes nothing returns nothing
-if ( ( IsUnitDeadBJ(udg_danwei[415]) == false ) and ( R2I(GetUnitStateSwap(UNIT_STATE_LIFE, udg_danwei[415])) < ( ( R2I(GetUnitStateSwap(UNIT_STATE_MAX_LIFE, udg_danwei[415])) / 100 ) * ( 35 + ( 5 * GetUnitAbilityLevel(udg_danwei[415], 0x41304549) ) ) ) ) ) then
+if ( ( s__Unit_IsDead(udg_danwei[415]) == false ) and ( R2I(GetUnitStateSwap(UNIT_STATE_LIFE, udg_danwei[415])) < ( ( R2I(GetUnitStateSwap(UNIT_STATE_MAX_LIFE, udg_danwei[415])) / 100 ) * ( 35 + ( 5 * GetUnitAbilityLevel(udg_danwei[415], 0x41304549) ) ) ) ) ) then
 call SetUnitLifeBJ(udg_danwei[415], ( GetUnitState(udg_danwei[415], UNIT_STATE_LIFE) + ( 5.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_danwei[415], 0x41304549)) ) ) ))
 if ( ( udg_Ajnbuer[0] == true ) ) then
 set udg_Ajnbuer[0]=false
@@ -55065,7 +55071,7 @@ set udg_danwei[420]=null
 endfunction
 function Trig_huologn2Func002Func015Func002A takes nothing returns nothing
 set udg_danwei[421]=GetEnumUnit()
-if ( ( udg_danwei[421] != udg_danwei[418] ) and ( IsUnitType(udg_danwei[421], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei[421]) == false ) and ( IsUnitEnemy(udg_danwei[421], GetOwningPlayer(udg_danwei[417])) == true ) ) then
+if ( ( udg_danwei[421] != udg_danwei[418] ) and ( IsUnitType(udg_danwei[421], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei[421]) == false ) and ( IsUnitEnemy(udg_danwei[421], GetOwningPlayer(udg_danwei[417])) == true ) ) then
 call UnitDamageTarget(udg_danwei[417], udg_danwei[421], ( 10.00 + ( 5.00 * I2R(GetUnitAbilityLevel(udg_danwei[417], 0x4130454A)) ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_FIRE, WEAPON_TYPE_WHOKNOWS)
 else
 endif
@@ -55248,7 +55254,7 @@ call TriggerAddAction(gg_trg_zuzhou_1, function Trig_zuzhou_1Actions)
 endfunction
 function Trig_zuzhou_2Func001Func012Func011Func007A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[83])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[83])) == true ) ) then
 call UnitDamageTarget(udg_Danwei[83], udg_danwei2[1], ( ( ( ( 0.00 + ( 30.00 * I2R(GetUnitAbilityLevel(udg_Danwei[83], 0x41303750)) ) ) + ( 1.00 * I2R(GetHeroInt(udg_Danwei[83], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", GetEnumUnit(), "chest"))
 else
@@ -55343,7 +55349,7 @@ call TriggerAddAction(gg_trg_wuran_1, function Trig_wuran_1Actions)
 endfunction
 function Trig_wuran_2Func001Func012Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[154]) == true ) ) then
 call UnitRemoveAbility(udg_danwei2[1], 0x41304E36)
 call UnitRemoveBuffBJ(0x42303338, udg_danwei2[1])
@@ -55364,7 +55370,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_wuran_2Func001Func012Func014Func004A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[153]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[153]) == false ) ) then
 call GroupAddUnit(udg_Danweizu[153], udg_danwei2[1])
 call GroupAddUnit(udg_Danweizu[154], udg_danwei2[1])
 call UnitAddAbility(udg_danwei2[1], 0x41304E36)
@@ -55698,7 +55704,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_judu2Func001Func012Func015A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) ) then
 if ( ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_danwei[447])) == true ) ) then
 else
 if ( ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_danwei[447])) == true ) ) then
@@ -55905,7 +55911,7 @@ set udg_Danwei[37]=null
 endfunction
 function Trig_emeng_2Func012A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Demon\\DemonBoltImpact\\DemonBoltImpact.mdl", udg_danwei2[1], "origin"))
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call UnitDamageTarget(udg_Danwei[86], udg_danwei2[1], ( ( ( 100.00 + ( 1.00 * I2R(GetHeroInt(udg_Danwei[86], true)) ) ) / 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -55950,7 +55956,7 @@ call TriggerAddAction(gg_trg_emeng_2, function Trig_emeng_2Actions)
 endfunction
 function Trig_emeng_2_5Func001Func005Func005A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[86])) == true ) ) then
 if ( ( GetRandomInt(1, 7) == 1 ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Objects\\Spawnmodels\\Undead\\UndeadDissipate\\UndeadDissipate.mdl", udg_danwei2[1], "origin"))
 else
@@ -56147,7 +56153,7 @@ call TriggerAddAction(gg_trg_huaji_1, function Trig_huaji_1Actions)
 endfunction
 function Trig_huaji_2Func001Func001Func004Func005Func004A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[91])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[91])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[92]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[91], udg_danwei2[1], ( ( ( ( 0.00 + ( 35.00 * I2R(GetUnitAbilityLevel(udg_Danwei[91], 0x41304B4E)) ) ) + ( 1.20 * I2R(GetHeroStr(udg_Danwei[91], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call GroupAddUnit(udg_Danweizu[92], udg_danwei2[1])
@@ -56280,7 +56286,7 @@ call RemoveLocation(udg_Dian[91])
 endfunction
 function Trig_hengsao_2Func001Func001Func025A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[93])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[93])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[98]) == false ) ) then
 set udg_Zhengshu[118]=( udg_Zhengshu[118] + 1 )
 call UnitAddAbility(udg_danwei2[1], 0x4130484C)
@@ -56401,7 +56407,7 @@ call TriggerAddAction(gg_trg_tiaokan_1, function Trig_tiaokan_1Actions)
 endfunction
 function Trig_tiaokan_2Func001Func001Func004Func009A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[94])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[94])) == true ) ) then
 call UnitDamageTarget(udg_Danwei[94], udg_danwei2[1], ( ( ( ( 25.00 + ( 125.00 * I2R(GetUnitAbilityLevel(udg_Danwei[94], 0x41304B51)) ) ) + ( 2.00 * I2R(GetHeroStr(udg_Danwei[94], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\AncientProtectorMissile\\AncientProtectorMissile.mdl", udg_danwei2[1], "chest"))
@@ -56576,7 +56582,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_feifu_2Func001Func004Func004Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[96])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[96])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[96]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[96], udg_danwei2[1], ( ( ( ( 0.00 + ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[96], 0x41304B54)) ) ) + ( 0.60 * I2R(GetHeroStr(udg_Danwei[96], true)) ) ) * ( ( 1 + ( 0.02 * RAbsBJ(I2R(udg_Zhengshu[96])) ) ) * Pow(0.95, I2R(udg_Zhengshu[97])) ) ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call UnitAddAbility(udg_danwei2[1], 0x41305151)
@@ -56592,7 +56598,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_feifu_2Func001Func004Func013A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[96])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[96])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[96]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[96], udg_danwei2[1], ( ( ( ( 0.00 + ( 20.00 * I2R(GetUnitAbilityLevel(udg_Danwei[96], 0x41304B54)) ) ) + ( 0.60 * I2R(GetHeroStr(udg_Danwei[96], true)) ) ) * ( ( 1 + ( 0.02 * RAbsBJ(I2R(udg_Zhengshu[96])) ) ) * Pow(0.95, I2R(udg_Zhengshu[97])) ) ) * 1.00 ), true, false, ATTACK_TYPE_HERO, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_METAL_LIGHT_SLICE)
 call UnitAddAbility(udg_danwei2[1], 0x41305151)
@@ -57140,7 +57146,7 @@ set udg_Danwei[135]=null
 endfunction
 function Trig_hongzhishi_3Func001Func011A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[135]) == false ) ) then
 call UnitDamageTarget(udg_Danwei[132], udg_danwei2[1], ( ( ( ( 10.00 + ( 30.00 * I2R(GetUnitAbilityLevel(udg_Danwei[132], 0x41304D35)) ) ) + ( 1.20 * I2R(GetHeroInt(udg_Danwei[132], true)) ) ) * ( udg_Shishu[132] / 20.00 ) ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 call GroupAddUnit(udg_Danweizu[135], udg_danwei2[1])
@@ -57263,7 +57269,7 @@ call TriggerAddAction(gg_trg_molipingzhang_1, function Trig_molipingzhang_1Actio
 endfunction
 function Trig_molipingzhang_2Func001Func001Func001Func005A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[137]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[137]) == false ) ) then
 call GroupAddUnit(udg_Danweizu[137], udg_danwei2[1])
 if ( ( IsUnitAlly(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 call UnitAddAbility(udg_danwei2[1], 0x41304D4E)
@@ -57287,7 +57293,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_molipingzhang_2Func001Func001Func001Func008Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) ) then
 set udg_Dian[135]=GetUnitLoc(udg_Danwei[137])
 set udg_Dian[136]=GetUnitLoc(udg_danwei2[1])
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[137]) == false ) and ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[138]) == false ) and ( DistanceBetweenPoints(udg_Dian[135], udg_Dian[136]) > 250.00 ) ) then
@@ -57322,7 +57328,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_molipingzhang_2Func001Func001Func001Func008Func010A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitDeadBJ(udg_danwei2[1]) == false ) ) then
+if ( ( s__Unit_IsDead(udg_danwei2[1]) == false ) ) then
 set udg_Dian[135]=GetUnitLoc(udg_Danwei[137])
 set udg_Dian[136]=GetUnitLoc(udg_danwei2[1])
 if ( ( DistanceBetweenPoints(udg_Dian[135], udg_Dian[136]) > 280.00 ) ) then
@@ -57357,7 +57363,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_molipingzhang_2Func001Func006A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_HERO) == true ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 else
 call GroupRemoveUnit(udg_Danweizu[134], udg_danwei2[1])
 endif
@@ -57445,7 +57451,7 @@ call TriggerAddAction(gg_trg_jinghuazhiyu_1, function Trig_jinghuazhiyu_1Actions
 endfunction
 function Trig_jinghuazhiyu_2Func001Func001Func001Func001Func004Func003A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) ) then
 if ( ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\DeathandDecay\\DeathandDecayTarget.mdl", udg_danwei2[1], "origin"))
 if ( ( IsUnitInGroup(udg_danwei2[1], udg_Danweizu[139]) == false ) ) then
@@ -57640,7 +57646,7 @@ call TriggerAddAction(gg_trg_yuanhuanzhili_1, function Trig_yuanhuanzhili_1Actio
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func001Func001Func003Func013A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\OrbOfDeathMissile.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[132], udg_danwei2[1], ( ( ( 300.00 + ( 2.00 * I2R(GetHeroInt(udg_Danwei[132], true)) ) ) / 15.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -57676,7 +57682,7 @@ set ydl_unit=null
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func001Func003Func002Func008A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei2[1])
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[132], udg_danwei2[1], ( ( ( 100.00 + ( 1.00 * I2R(GetHeroInt(udg_Danwei[132], true)) ) ) * 1.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -57686,7 +57692,7 @@ set udg_danwei2[1]=null
 endfunction
 function Trig_yuanhuanzhili_2Func001Func001Func001Func001Func015Func003Func013A takes nothing returns nothing
 set udg_danwei2[1]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitDeadBJ(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
+if ( ( IsUnitType(udg_danwei2[1], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_danwei2[1], UNIT_TYPE_STRUCTURE) == false ) and ( s__Unit_IsDead(udg_danwei2[1]) == false ) and ( IsUnitEnemy(udg_danwei2[1], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
 call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\OrbOfDeath\\AnnihilationMissile.mdl", udg_danwei2[1], "chest"))
 call UnitDamageTarget(udg_Danwei[132], udg_danwei2[1], ( ( ( 300.00 + ( 2.00 * I2R(GetHeroInt(udg_Danwei[132], true)) ) ) / 15.00 ) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
@@ -61349,26 +61355,26 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs309660159")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs341029339")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary___Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary___Init")
-call ExecuteFunc("processLibrary___Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary___Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
+call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("objectLibrary__Init")
+call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -61482,7 +61488,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs309660159 takes nothing returns nothing
+function jasshelper__initstructs341029339 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
