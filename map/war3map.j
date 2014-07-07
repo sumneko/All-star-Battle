@@ -4427,7 +4427,6 @@ set cjlocgn_00000000=GetRandomInt(- 100, 100) * 70
 set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
 call IssuePointOrder(s__maphack_visitors[i], "move", cjlocgn_00000000, cjlocgn_00000001)
 endif
-call DestroyEffect(AddSpecialEffectTarget("Tsukiko.mdl", s__maphack_visitors[i], "origin"))
 set i=i + 1
 endloop
 call TimerStart(s__maphack_protectTimer1, GetRandomInt(20, 30) / 1000., false, function s__maphack_protect1)
@@ -61350,7 +61349,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs353636326")
+call ExecuteFunc("jasshelper__initstructs369635742")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61483,7 +61482,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs353636326 takes nothing returns nothing
+function jasshelper__initstructs369635742 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
