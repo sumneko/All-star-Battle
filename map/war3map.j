@@ -1837,7 +1837,8 @@ integer array si__baka_V
 player array s__baka_spplayer
 integer array s__baka_spid
 group array s__baka_g
-integer s__baka_thisVer=266
+integer s__baka_thisVer=267
+integer s__baka_thisVer2=0
 string s__baka_thatVerName=""
 group s__baka_CG1=CreateGroup()
 group s__baka_CG2=CreateGroup()
@@ -2383,13 +2384,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -4342,7 +4343,6 @@ set s__maphack_heroCount=s__maphack_heroCount - 1
 endif
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
-call BJDebugMsg("<FMH>添加[" + GetUnitName(hero) + "] 位置[" + I2S(i) + "] 计数:" + I2S(s__maphack_heroCount))
 endfunction
 function s__maphack_TimerFunc takes nothing returns nothing
 local integer i=1
@@ -4627,13 +4627,18 @@ endfunction
 function s__baka_getMapVerName takes integer ver returns string
 local string s1=I2S(ver / 100)
 local string s2=I2S(ModuloInteger(ver, 100) / 10)
-local string s3=sc__String_char2(ModuloInteger(ver, 10))
+local string s3=sc__String_char2(ModuloInteger(ver, 10) + s__baka_thisVer2)
 return s1 + "." + s2 + s3
 endfunction
-function s__baka_oldMap takes integer thatVer returns nothing
+function s__baka_oldMap takes integer thatVer,boolean flag returns nothing
 set s__baka_thatVerName=s__baka_getMapVerName(thatVer)
+if flag then
 call TimerStart(CreateTimer(), 1, false, function s__baka_oldMapTimerFunc)
-call TimerStart(CreateTimer(), 60, true, function s__baka_oldMapTimerFunc)
+call TimerStart(CreateTimer(), 300, true, function s__baka_oldMapTimerFunc)
+else
+call TimerStart(CreateTimer(), 1, false, null)
+call TimerStart(CreateTimer(), 300, true, null)
+endif
 endfunction
 function s__baka_newMap takes nothing returns boolean
 local integer thatVer=0
@@ -4654,8 +4659,9 @@ endif
 set x=x + 1
 endloop
 if thatVer > s__baka_thisVer then
-call s__baka_oldMap(thatVer)
+call s__baka_oldMap(thatVer , true)
 else
+call s__baka_oldMap(thatVer , false)
 set thatVer=s__baka_thisVer
 endif
 set x=0
@@ -4682,7 +4688,6 @@ if IsUnitInvisible(s__baka_CU, s__baka_SPlayer(5)) then
 call GroupRemoveUnit(s__baka_CG1, s__baka_CU)
 call GroupAddUnit(s__baka_CG2, s__baka_CU)
 call UnitAddType(s__baka_CU, UNIT_TYPE_SAPPER)
-call BJDebugMsg("万物离开视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check2 takes nothing returns nothing
@@ -4691,7 +4696,6 @@ if IsUnitVisible(s__baka_CU, s__baka_SPlayer(5)) then
 call GroupRemoveUnit(s__baka_CG2, s__baka_CU)
 call GroupAddUnit(s__baka_CG1, s__baka_CU)
 call UnitRemoveType(s__baka_CU, UNIT_TYPE_SAPPER)
-call BJDebugMsg("万物进入视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check3 takes nothing returns nothing
@@ -4700,7 +4704,6 @@ if IsUnitInvisible(s__baka_CU, s__baka_SPlayer(0)) then
 call GroupRemoveUnit(s__baka_CG3, s__baka_CU)
 call GroupAddUnit(s__baka_CG4, s__baka_CU)
 call UnitAddType(s__baka_CU, UNIT_TYPE_SAPPER)
-call BJDebugMsg("极寒离开视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_Check4 takes nothing returns nothing
@@ -4709,7 +4712,6 @@ if IsUnitVisible(s__baka_CU, s__baka_SPlayer(0)) then
 call GroupRemoveUnit(s__baka_CG4, s__baka_CU)
 call GroupAddUnit(s__baka_CG3, s__baka_CU)
 call UnitRemoveType(s__baka_CU, UNIT_TYPE_SAPPER)
-call BJDebugMsg("极寒进入视野:" + GetUnitName(s__baka_CU))
 endif
 endfunction
 function s__baka_CheckVisible takes nothing returns nothing
@@ -4727,7 +4729,6 @@ call GroupAddUnit(s__baka_CG3, s__baka_CU)
 endif
 call TriggerRegisterUnitEvent(s__baka_CheckDeath, s__baka_CU, EVENT_UNIT_DEATH)
 set s__baka_CheckCount=s__baka_CheckCount + 1
-call BJDebugMsg("<视野检查> 单位名称[" + GetUnitName(s__baka_CU) + "] 计数[" + I2S(s__baka_CheckCount) + "]")
 return false
 endfunction
 function s__baka_SummonDeath takes nothing returns boolean
@@ -4737,7 +4738,6 @@ call GroupRemoveUnit(s__baka_CG2, s__baka_CU)
 call GroupRemoveUnit(s__baka_CG3, s__baka_CU)
 call GroupRemoveUnit(s__baka_CG4, s__baka_CU)
 set s__baka_CheckCount=s__baka_CheckCount - 1
-call BJDebugMsg("<视野检查> 单位名称[" + GetUnitName(s__baka_CU) + "] 计数[" + I2S(s__baka_CheckCount) + "]")
 return false
 endfunction
 function s__baka_MoveLightningEx2 takes lightning whichBolt,boolean checkVisibility,real x1,real y1,real z1,real x2,real y2,real z2 returns boolean
@@ -61343,9 +61343,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs390451985")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs432003865")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
@@ -61438,8 +61438,9 @@ endif
 set x=x + 1
 endloop
 if thatVer > s__baka_thisVer then
-call s__baka_oldMap(thatVer)
+call s__baka_oldMap(thatVer , true)
 else
+call s__baka_oldMap(thatVer , false)
 set thatVer=s__baka_thisVer
 endif
 set x=0
@@ -61476,7 +61477,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs390451985 takes nothing returns nothing
+function jasshelper__initstructs432003865 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
