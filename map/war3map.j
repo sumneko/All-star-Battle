@@ -4634,14 +4634,14 @@ endfunction
 function s__baka_banMapTimerFunc takes nothing returns nothing
 call BJDebugMsg("|cff00ccff当前地图版本已经废弃,请更换新版本地图进行游戏|r")
 endfunction
-function s__baka_getMapVerName takes integer ver returns string
+function s__baka_getMapVerName takes integer ver,integer ver2 returns string
 local string s1=I2S(ver / 100)
 local string s2=I2S(ModuloInteger(ver, 100) / 10)
-local string s3=sc__String_char2(ModuloInteger(ver, 10) + s__baka_thisVer2)
+local string s3=sc__String_char2(ModuloInteger(ver, 10) + ver2)
 return s1 + "." + s2 + s3
 endfunction
-function s__baka_oldMap takes integer thatVer,boolean flag returns nothing
-set s__baka_thatVerName=s__baka_getMapVerName(thatVer)
+function s__baka_oldMap takes integer thatVer,integer thatVer2,boolean flag returns nothing
+set s__baka_thatVerName=s__baka_getMapVerName(thatVer , thatVer2)
 if flag then
 call TimerStart(CreateTimer(), 1, false, function s__baka_oldMapTimerFunc)
 call TimerStart(CreateTimer(), 300, true, function s__baka_oldMapTimerFunc)
@@ -4652,32 +4652,40 @@ endif
 endfunction
 function s__baka_newMap takes nothing returns boolean
 local integer thatVer=0
+local integer thatVer2=0
 local integer banVer=0
 local integer x=0
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
+local integer cjlocgn_00000002
 loop
 exitwhen x > 11
 set cjlocgn_00000000=Get(x , "V")
 if cjlocgn_00000000 > thatVer then
 set thatVer=cjlocgn_00000000
 endif
-set cjlocgn_00000001=Get(x , "B")
-if cjlocgn_00000001 > banVer then
-set banVer=cjlocgn_00000001
+set cjlocgn_00000001=Get(x , "W")
+if cjlocgn_00000001 > thatVer2 then
+set thatVer2=cjlocgn_00000001
+endif
+set cjlocgn_00000002=Get(x , "B")
+if cjlocgn_00000002 > banVer then
+set banVer=cjlocgn_00000002
 endif
 set x=x + 1
 endloop
 if thatVer > s__baka_thisVer then
-call s__baka_oldMap(thatVer , true)
+call s__baka_oldMap(thatVer , thatVer2 , true)
 else
-call s__baka_oldMap(thatVer , false)
+call s__baka_oldMap(thatVer , thatVer2 , false)
 set thatVer=s__baka_thisVer
+set thatVer2=s__baka_thisVer2
 endif
 set x=0
 loop
 exitwhen x > 11
 call Set(x , "V" , thatVer)
+call Set(x , "W" , thatVer2)
 call Set(x , "B" , banVer)
 set x=x + 1
 endloop
@@ -4687,7 +4695,7 @@ call TimerStart(CreateTimer(), 1, false, function s__baka_banMapTimerFunc)
 call TimerStart(CreateTimer(), 60, true, function s__baka_banMapTimerFunc)
 return false
 endif
-if thatVer > s__baka_thisVer then
+if thatVer * 10 + thatVer2 > s__baka_thisVer * 10 + s__baka_thisVer2 then
 return false
 endif
 return true
@@ -61358,7 +61366,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs437454337")
+call ExecuteFunc("jasshelper__initstructs440911818")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61436,32 +61444,40 @@ endfunction
 function sa__baka_newMap takes nothing returns boolean
 
 local integer thatVer=0
+local integer thatVer2=0
 local integer banVer=0
 local integer x=0
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
+local integer cjlocgn_00000002
 loop
 exitwhen x > 11
 set cjlocgn_00000000=Get(x , "V")
 if cjlocgn_00000000 > thatVer then
 set thatVer=cjlocgn_00000000
 endif
-set cjlocgn_00000001=Get(x , "B")
-if cjlocgn_00000001 > banVer then
-set banVer=cjlocgn_00000001
+set cjlocgn_00000001=Get(x , "W")
+if cjlocgn_00000001 > thatVer2 then
+set thatVer2=cjlocgn_00000001
+endif
+set cjlocgn_00000002=Get(x , "B")
+if cjlocgn_00000002 > banVer then
+set banVer=cjlocgn_00000002
 endif
 set x=x + 1
 endloop
 if thatVer > s__baka_thisVer then
-call s__baka_oldMap(thatVer , true)
+call s__baka_oldMap(thatVer , thatVer2 , true)
 else
-call s__baka_oldMap(thatVer , false)
+call s__baka_oldMap(thatVer , thatVer2 , false)
 set thatVer=s__baka_thisVer
+set thatVer2=s__baka_thisVer2
 endif
 set x=0
 loop
 exitwhen x > 11
 call Set(x , "V" , thatVer)
+call Set(x , "W" , thatVer2)
 call Set(x , "B" , banVer)
 set x=x + 1
 endloop
@@ -61472,7 +61488,7 @@ call TimerStart(CreateTimer(), 60, true, function s__baka_banMapTimerFunc)
 set f__result_boolean= false
 return true
 endif
-if thatVer > s__baka_thisVer then
+if thatVer * 10 + thatVer2 > s__baka_thisVer * 10 + s__baka_thisVer2 then
 set f__result_boolean= false
 return true
 endif
@@ -61492,7 +61508,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs437454337 takes nothing returns nothing
+function jasshelper__initstructs440911818 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
