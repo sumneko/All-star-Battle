@@ -1891,9 +1891,9 @@ boolean array s__process_enable
 integer array s__process_lastkey
 integer array s__process_nextkey
 integer array s__process_hashindex
-integer s__process_h_count=StringHash("过程数量")
+integer s__process_h_count=0
 integer array s__process_h_index
-integer s__process_h_max=StringHash("过程最大值")
+integer s__process_h_max=0
 constant integer si__Sound=9
 integer si__Sound_F=0
 integer si__Sound_I=0
@@ -1919,7 +1919,7 @@ constant integer si__Unit=13
 integer si__Unit_F=0
 integer si__Unit_I=0
 integer array si__Unit_V
-integer s__Unit_pause_count=StringHash("暂停计数")
+integer s__Unit_pause_count=0
 trigger st__maphack_SetHeight
 trigger st__maphack_GetHeight
 trigger st__baka_newMap
@@ -2384,13 +2384,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -2399,6 +2399,16 @@ endfunction
 function YDWEH2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
+function StringHash2 takes string s returns integer
+local integer r=StringHash(s)
+local string s2=LoadStr(YDHT, 76196625, r)
+if s2 == null then
+call SaveStr(YDHT, 76196625, r, s2)
+elseif s != s2 then
+call BJDebugMsg("|cffff8888<�ַ���ϣ��ͻ!���ͼ�㱨!>[" + s + "][" + s2 + "]|r")
+endif
+return r
+endfunction
 function YDWEFlushAllData takes nothing returns nothing
 call FlushParentHashtable(YDHT)
 endfunction
@@ -2406,442 +2416,442 @@ function YDWEFlushMissionByInteger takes integer i returns nothing
 call FlushChildHashtable(YDHT, i)
 endfunction
 function YDWEFlushMissionByString takes string s returns nothing
-call FlushChildHashtable(YDHT, StringHash(s))
+call FlushChildHashtable(YDHT, StringHash2(s))
 endfunction
 function YDWEFlushStoredIntegerByInteger takes integer i,integer j returns nothing
 call RemoveSavedInteger(YDHT, i, j)
 endfunction
 function YDWEFlushStoredIntegerByString takes string s1,string s2 returns nothing
-call RemoveSavedInteger(YDHT, StringHash(s1), StringHash(s2))
+call RemoveSavedInteger(YDHT, StringHash2(s1), StringHash2(s2))
 endfunction
 function YDWEHaveSavedIntegerByInteger takes integer i,integer j returns boolean
 return HaveSavedInteger(YDHT, i, j)
 endfunction
 function YDWEHaveSavedIntegerByString takes string s1,string s2 returns boolean
-return HaveSavedInteger(YDHT, StringHash(s1), StringHash(s2))
+return HaveSavedInteger(YDHT, StringHash2(s1), StringHash2(s2))
 endfunction
 function YDWESaveIntegerByInteger takes integer pTable,integer pKey,integer i returns nothing
 call SaveInteger(YDHT, pTable, pKey, i)
 endfunction
 function YDWESaveIntegerByString takes string pTable,string pKey,integer i returns nothing
-call SaveInteger(YDHT, StringHash(pTable), StringHash(pKey), i)
+call SaveInteger(YDHT, StringHash2(pTable), StringHash2(pKey), i)
 endfunction
 function YDWEGetIntegerByInteger takes integer pTable,integer pKey returns integer
 return LoadInteger(YDHT, pTable, pKey)
 endfunction
 function YDWEGetIntegerByString takes string pTable,string pKey returns integer
-return LoadInteger(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadInteger(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveRealByInteger takes integer pTable,integer pKey,real r returns nothing
 call SaveReal(YDHT, pTable, pKey, r)
 endfunction
 function YDWESaveRealByString takes string pTable,string pKey,real r returns nothing
-call SaveReal(YDHT, StringHash(pTable), StringHash(pKey), r)
+call SaveReal(YDHT, StringHash2(pTable), StringHash2(pKey), r)
 endfunction
 function YDWEGetRealByInteger takes integer pTable,integer pKey returns real
 return LoadReal(YDHT, pTable, pKey)
 endfunction
 function YDWEGetRealByString takes string pTable,string pKey returns real
-return LoadReal(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadReal(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveStringByInteger takes integer pTable,integer pKey,string s returns nothing
 call SaveStr(YDHT, pTable, pKey, s)
 endfunction
 function YDWESaveStringByString takes string pTable,string pKey,string s returns nothing
-call SaveStr(YDHT, StringHash(pTable), StringHash(pKey), s)
+call SaveStr(YDHT, StringHash2(pTable), StringHash2(pKey), s)
 endfunction
 function YDWEGetStringByInteger takes integer pTable,integer pKey returns string
 return LoadStr(YDHT, pTable, pKey)
 endfunction
 function YDWEGetStringByString takes string pTable,string pKey returns string
-return LoadStr(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadStr(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveBooleanByInteger takes integer pTable,integer pKey,boolean b returns nothing
 call SaveBoolean(YDHT, pTable, pKey, b)
 endfunction
 function YDWESaveBooleanByString takes string pTable,string pKey,boolean b returns nothing
-call SaveBoolean(YDHT, StringHash(pTable), StringHash(pKey), b)
+call SaveBoolean(YDHT, StringHash2(pTable), StringHash2(pKey), b)
 endfunction
 function YDWEGetBooleanByInteger takes integer pTable,integer pKey returns boolean
 return LoadBoolean(YDHT, pTable, pKey)
 endfunction
 function YDWEGetBooleanByString takes string pTable,string pKey returns boolean
-return LoadBoolean(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadBoolean(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveUnitByInteger takes integer pTable,integer pKey,unit u returns nothing
 call SaveUnitHandle(YDHT, pTable, pKey, u)
 endfunction
 function YDWESaveUnitByString takes string pTable,string pKey,unit u returns nothing
-call SaveUnitHandle(YDHT, StringHash(pTable), StringHash(pKey), u)
+call SaveUnitHandle(YDHT, StringHash2(pTable), StringHash2(pKey), u)
 endfunction
 function YDWEGetUnitByInteger takes integer pTable,integer pKey returns unit
 return LoadUnitHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetUnitByString takes string pTable,string pKey returns unit
-return LoadUnitHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadUnitHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveUnitIDByInteger takes integer pTable,integer pKey,integer uid returns nothing
 call SaveInteger(YDHT, pTable, pKey, uid)
 endfunction
 function YDWESaveUnitIDByString takes string pTable,string pKey,integer uid returns nothing
-call SaveInteger(YDHT, StringHash(pTable), StringHash(pKey), uid)
+call SaveInteger(YDHT, StringHash2(pTable), StringHash2(pKey), uid)
 endfunction
 function YDWEGetUnitIDByInteger takes integer pTable,integer pKey returns integer
 return LoadInteger(YDHT, pTable, pKey)
 endfunction
 function YDWEGetUnitIDByString takes string pTable,string pKey returns integer
-return LoadInteger(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadInteger(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveAbilityIDByInteger takes integer pTable,integer pKey,integer abid returns nothing
 call SaveInteger(YDHT, pTable, pKey, abid)
 endfunction
 function YDWESaveAbilityIDByString takes string pTable,string pKey,integer abid returns nothing
-call SaveInteger(YDHT, StringHash(pTable), StringHash(pKey), abid)
+call SaveInteger(YDHT, StringHash2(pTable), StringHash2(pKey), abid)
 endfunction
 function YDWEGetAbilityIDByInteger takes integer pTable,integer pKey returns integer
 return LoadInteger(YDHT, pTable, pKey)
 endfunction
 function YDWEGetAbilityIDByString takes string pTable,string pKey returns integer
-return LoadInteger(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadInteger(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESavePlayerByInteger takes integer pTable,integer pKey,player p returns nothing
 call SavePlayerHandle(YDHT, pTable, pKey, p)
 endfunction
 function YDWESavePlayerByString takes string pTable,string pKey,player p returns nothing
-call SavePlayerHandle(YDHT, StringHash(pTable), StringHash(pKey), p)
+call SavePlayerHandle(YDHT, StringHash2(pTable), StringHash2(pKey), p)
 endfunction
 function YDWEGetPlayerByInteger takes integer pTable,integer pKey returns player
 return LoadPlayerHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetPlayerByString takes string pTable,string pKey returns player
-return LoadPlayerHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadPlayerHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveItemByInteger takes integer pTable,integer pKey,item it returns nothing
 call SaveItemHandle(YDHT, pTable, pKey, it)
 endfunction
 function YDWESaveItemByString takes string pTable,string pKey,item it returns nothing
-call SaveItemHandle(YDHT, StringHash(pTable), StringHash(pKey), it)
+call SaveItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey), it)
 endfunction
 function YDWEGetItemByInteger takes integer pTable,integer pKey returns item
 return LoadItemHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetItemByString takes string pTable,string pKey returns item
-return LoadItemHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveItemIDByInteger takes integer pTable,integer pKey,integer itid returns nothing
 call SaveInteger(YDHT, pTable, pKey, itid)
 endfunction
 function YDWESaveItemIDByString takes string pTable,string pKey,integer itid returns nothing
-call SaveInteger(YDHT, StringHash(pTable), StringHash(pKey), itid)
+call SaveInteger(YDHT, StringHash2(pTable), StringHash2(pKey), itid)
 endfunction
 function YDWEGetItemIDByInteger takes integer pTable,integer pKey returns integer
 return LoadInteger(YDHT, pTable, pKey)
 endfunction
 function YDWEGetItemIDByString takes string pTable,string pKey returns integer
-return LoadInteger(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadInteger(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTimerByInteger takes integer pTable,integer pKey,timer t returns nothing
 call SaveTimerHandle(YDHT, pTable, pKey, t)
 endfunction
 function YDWESaveTimerByString takes string pTable,string pKey,timer t returns nothing
-call SaveTimerHandle(YDHT, StringHash(pTable), StringHash(pKey), t)
+call SaveTimerHandle(YDHT, StringHash2(pTable), StringHash2(pKey), t)
 endfunction
 function YDWEGetTimerByInteger takes integer pTable,integer pKey returns timer
 return LoadTimerHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTimerByString takes string pTable,string pKey returns timer
-return LoadTimerHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTimerHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTriggerByInteger takes integer pTable,integer pKey,trigger trg returns nothing
 call SaveTriggerHandle(YDHT, pTable, pKey, trg)
 endfunction
 function YDWESaveTriggerByString takes string pTable,string pKey,trigger trg returns nothing
-call SaveTriggerHandle(YDHT, StringHash(pTable), StringHash(pKey), trg)
+call SaveTriggerHandle(YDHT, StringHash2(pTable), StringHash2(pKey), trg)
 endfunction
 function YDWEGetTriggerByInteger takes integer pTable,integer pKey returns trigger
 return LoadTriggerHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTriggerByString takes string pTable,string pKey returns trigger
-return LoadTriggerHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTriggerHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveLocationByInteger takes integer pTable,integer pKey,location pt returns nothing
 call SaveLocationHandle(YDHT, pTable, pKey, pt)
 endfunction
 function YDWESaveLocationByString takes string pTable,string pKey,location pt returns nothing
-call SaveLocationHandle(YDHT, StringHash(pTable), StringHash(pKey), pt)
+call SaveLocationHandle(YDHT, StringHash2(pTable), StringHash2(pKey), pt)
 endfunction
 function YDWEGetLocationByInteger takes integer pTable,integer pKey returns location
 return LoadLocationHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetLocationByString takes string pTable,string pKey returns location
-return LoadLocationHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadLocationHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveGroupByInteger takes integer pTable,integer pKey,group g returns nothing
 call SaveGroupHandle(YDHT, pTable, pKey, g)
 endfunction
 function YDWESaveGroupByString takes string pTable,string pKey,group g returns nothing
-call SaveGroupHandle(YDHT, StringHash(pTable), StringHash(pKey), g)
+call SaveGroupHandle(YDHT, StringHash2(pTable), StringHash2(pKey), g)
 endfunction
 function YDWEGetGroupByInteger takes integer pTable,integer pKey returns group
 return LoadGroupHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetGroupByString takes string pTable,string pKey returns group
-return LoadGroupHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadGroupHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveMultiboardByInteger takes integer pTable,integer pKey,multiboard m returns nothing
 call SaveMultiboardHandle(YDHT, pTable, pKey, m)
 endfunction
 function YDWESaveMultiboardByString takes string pTable,string pKey,multiboard m returns nothing
-call SaveMultiboardHandle(YDHT, StringHash(pTable), StringHash(pKey), m)
+call SaveMultiboardHandle(YDHT, StringHash2(pTable), StringHash2(pKey), m)
 endfunction
 function YDWEGetMultiboardByInteger takes integer pTable,integer pKey returns multiboard
 return LoadMultiboardHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetMultiboardByString takes string pTable,string pKey returns multiboard
-return LoadMultiboardHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadMultiboardHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveMultiboardItemByInteger takes integer pTable,integer pKey,multiboarditem mt returns nothing
 call SaveMultiboardItemHandle(YDHT, pTable, pKey, mt)
 endfunction
 function YDWESaveMultiboardItemByString takes string pTable,string pKey,multiboarditem mt returns nothing
-call SaveMultiboardItemHandle(YDHT, StringHash(pTable), StringHash(pKey), mt)
+call SaveMultiboardItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey), mt)
 endfunction
 function YDWEGetMultiboardItemByInteger takes integer pTable,integer pKey returns multiboarditem
 return LoadMultiboardItemHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetMultiboardItemByString takes string pTable,string pKey returns multiboarditem
-return LoadMultiboardItemHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadMultiboardItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTextTagByInteger takes integer pTable,integer pKey,texttag tt returns nothing
 call SaveTextTagHandle(YDHT, pTable, pKey, tt)
 endfunction
 function YDWESaveTextTagByString takes string pTable,string pKey,texttag tt returns nothing
-call SaveTextTagHandle(YDHT, StringHash(pTable), StringHash(pKey), tt)
+call SaveTextTagHandle(YDHT, StringHash2(pTable), StringHash2(pKey), tt)
 endfunction
 function YDWEGetTextTagByInteger takes integer pTable,integer pKey returns texttag
 return LoadTextTagHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTextTagByString takes string pTable,string pKey returns texttag
-return LoadTextTagHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTextTagHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveLightningByInteger takes integer pTable,integer pKey,lightning ln returns nothing
 call SaveLightningHandle(YDHT, pTable, pKey, ln)
 endfunction
 function YDWESaveLightningByString takes string pTable,string pKey,lightning ln returns nothing
-call SaveLightningHandle(YDHT, StringHash(pTable), StringHash(pKey), ln)
+call SaveLightningHandle(YDHT, StringHash2(pTable), StringHash2(pKey), ln)
 endfunction
 function YDWEGetLightningByInteger takes integer pTable,integer pKey returns lightning
 return LoadLightningHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetLightningByString takes string pTable,string pKey returns lightning
-return LoadLightningHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadLightningHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveRegionByInteger takes integer pTable,integer pKey,region rn returns nothing
 call SaveRegionHandle(YDHT, pTable, pKey, rn)
 endfunction
 function YDWESaveRegionByString takes string pTable,string pKey,region rt returns nothing
-call SaveRegionHandle(YDHT, StringHash(pTable), StringHash(pKey), rt)
+call SaveRegionHandle(YDHT, StringHash2(pTable), StringHash2(pKey), rt)
 endfunction
 function YDWEGetRegionByInteger takes integer pTable,integer pKey returns region
 return LoadRegionHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetRegionByString takes string pTable,string pKey returns region
-return LoadRegionHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadRegionHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveRectByInteger takes integer pTable,integer pKey,rect rn returns nothing
 call SaveRectHandle(YDHT, pTable, pKey, rn)
 endfunction
 function YDWESaveRectByString takes string pTable,string pKey,rect rt returns nothing
-call SaveRectHandle(YDHT, StringHash(pTable), StringHash(pKey), rt)
+call SaveRectHandle(YDHT, StringHash2(pTable), StringHash2(pKey), rt)
 endfunction
 function YDWEGetRectByInteger takes integer pTable,integer pKey returns rect
 return LoadRectHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetRectByString takes string pTable,string pKey returns rect
-return LoadRectHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadRectHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveLeaderboardByInteger takes integer pTable,integer pKey,leaderboard lb returns nothing
 call SaveLeaderboardHandle(YDHT, pTable, pKey, lb)
 endfunction
 function YDWESaveLeaderboardByString takes string pTable,string pKey,leaderboard lb returns nothing
-call SaveLeaderboardHandle(YDHT, StringHash(pTable), StringHash(pKey), lb)
+call SaveLeaderboardHandle(YDHT, StringHash2(pTable), StringHash2(pKey), lb)
 endfunction
 function YDWEGetLeaderboardByInteger takes integer pTable,integer pKey returns leaderboard
 return LoadLeaderboardHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetLeaderboardByString takes string pTable,string pKey returns leaderboard
-return LoadLeaderboardHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadLeaderboardHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveEffectByInteger takes integer pTable,integer pKey,effect e returns nothing
 call SaveEffectHandle(YDHT, pTable, pKey, e)
 endfunction
 function YDWESaveEffectByString takes string pTable,string pKey,effect e returns nothing
-call SaveEffectHandle(YDHT, StringHash(pTable), StringHash(pKey), e)
+call SaveEffectHandle(YDHT, StringHash2(pTable), StringHash2(pKey), e)
 endfunction
 function YDWEGetEffectByInteger takes integer pTable,integer pKey returns effect
 return LoadEffectHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetEffectByString takes string pTable,string pKey returns effect
-return LoadEffectHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadEffectHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveDestructableByInteger takes integer pTable,integer pKey,destructable da returns nothing
 call SaveDestructableHandle(YDHT, pTable, pKey, da)
 endfunction
 function YDWESaveDestructableByString takes string pTable,string pKey,destructable da returns nothing
-call SaveDestructableHandle(YDHT, StringHash(pTable), StringHash(pKey), da)
+call SaveDestructableHandle(YDHT, StringHash2(pTable), StringHash2(pKey), da)
 endfunction
 function YDWEGetDestructableByInteger takes integer pTable,integer pKey returns destructable
 return LoadDestructableHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetDestructableByString takes string pTable,string pKey returns destructable
-return LoadDestructableHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadDestructableHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTriggerConditionByInteger takes integer pTable,integer pKey,triggercondition tc returns nothing
 call SaveTriggerConditionHandle(YDHT, pTable, pKey, tc)
 endfunction
 function YDWESaveTriggerConditionByString takes string pTable,string pKey,triggercondition tc returns nothing
-call SaveTriggerConditionHandle(YDHT, StringHash(pTable), StringHash(pKey), tc)
+call SaveTriggerConditionHandle(YDHT, StringHash2(pTable), StringHash2(pKey), tc)
 endfunction
 function YDWEGetTriggerConditionByInteger takes integer pTable,integer pKey returns triggercondition
 return LoadTriggerConditionHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTriggerConditionByString takes string pTable,string pKey returns triggercondition
-return LoadTriggerConditionHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTriggerConditionHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTriggerActionByInteger takes integer pTable,integer pKey,triggeraction ta returns nothing
 call SaveTriggerActionHandle(YDHT, pTable, pKey, ta)
 endfunction
 function YDWESaveTriggerActionByString takes string pTable,string pKey,triggeraction ta returns nothing
-call SaveTriggerActionHandle(YDHT, StringHash(pTable), StringHash(pKey), ta)
+call SaveTriggerActionHandle(YDHT, StringHash2(pTable), StringHash2(pKey), ta)
 endfunction
 function YDWEGetTriggerActionByInteger takes integer pTable,integer pKey returns triggeraction
 return LoadTriggerActionHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTriggerActionByString takes string pTable,string pKey returns triggeraction
-return LoadTriggerActionHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTriggerActionHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTriggerEventByInteger takes integer pTable,integer pKey,event et returns nothing
 call SaveTriggerEventHandle(YDHT, pTable, pKey, et)
 endfunction
 function YDWESaveTriggerEventByString takes string pTable,string pKey,event et returns nothing
-call SaveTriggerEventHandle(YDHT, StringHash(pTable), StringHash(pKey), et)
+call SaveTriggerEventHandle(YDHT, StringHash2(pTable), StringHash2(pKey), et)
 endfunction
 function YDWEGetTriggerEventByInteger takes integer pTable,integer pKey returns event
 return LoadTriggerEventHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTriggerEventByString takes string pTable,string pKey returns event
-return LoadTriggerEventHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTriggerEventHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveForceByInteger takes integer pTable,integer pKey,force fc returns nothing
 call SaveForceHandle(YDHT, pTable, pKey, fc)
 endfunction
 function YDWESaveForceByString takes string pTable,string pKey,force fc returns nothing
-call SaveForceHandle(YDHT, StringHash(pTable), StringHash(pKey), fc)
+call SaveForceHandle(YDHT, StringHash2(pTable), StringHash2(pKey), fc)
 endfunction
 function YDWEGetForceByInteger takes integer pTable,integer pKey returns force
 return LoadForceHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetForceByString takes string pTable,string pKey returns force
-return LoadForceHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadForceHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveBoolexprByInteger takes integer pTable,integer pKey,boolexpr be returns nothing
 call SaveBooleanExprHandle(YDHT, pTable, pKey, be)
 endfunction
 function YDWESaveBoolexprByString takes string pTable,string pKey,boolexpr be returns nothing
-call SaveBooleanExprHandle(YDHT, StringHash(pTable), StringHash(pKey), be)
+call SaveBooleanExprHandle(YDHT, StringHash2(pTable), StringHash2(pKey), be)
 endfunction
 function YDWEGetBoolexprByInteger takes integer pTable,integer pKey returns boolexpr
 return LoadBooleanExprHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetBoolexprByString takes string pTable,string pKey returns boolexpr
-return LoadBooleanExprHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadBooleanExprHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveSoundByInteger takes integer pTable,integer pKey,sound sd returns nothing
 call SaveSoundHandle(YDHT, pTable, pKey, sd)
 endfunction
 function YDWESaveSoundByString takes string pTable,string pKey,sound sd returns nothing
-call SaveSoundHandle(YDHT, StringHash(pTable), StringHash(pKey), sd)
+call SaveSoundHandle(YDHT, StringHash2(pTable), StringHash2(pKey), sd)
 endfunction
 function YDWEGetSoundByInteger takes integer pTable,integer pKey returns sound
 return LoadSoundHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetSoundByString takes string pTable,string pKey returns sound
-return LoadSoundHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadSoundHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTimerDialogByInteger takes integer pTable,integer pKey,timerdialog td returns nothing
 call SaveTimerDialogHandle(YDHT, pTable, pKey, td)
 endfunction
 function YDWESaveTimerDialogByString takes string pTable,string pKey,timerdialog td returns nothing
-call SaveTimerDialogHandle(YDHT, StringHash(pTable), StringHash(pKey), td)
+call SaveTimerDialogHandle(YDHT, StringHash2(pTable), StringHash2(pKey), td)
 endfunction
 function YDWEGetTimerDialogByInteger takes integer pTable,integer pKey returns timerdialog
 return LoadTimerDialogHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTimerDialogByString takes string pTable,string pKey returns timerdialog
-return LoadTimerDialogHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTimerDialogHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveTrackableByInteger takes integer pTable,integer pKey,trackable ta returns nothing
 call SaveTrackableHandle(YDHT, pTable, pKey, ta)
 endfunction
 function YDWESaveTrackableByString takes string pTable,string pKey,trackable ta returns nothing
-call SaveTrackableHandle(YDHT, StringHash(pTable), StringHash(pKey), ta)
+call SaveTrackableHandle(YDHT, StringHash2(pTable), StringHash2(pKey), ta)
 endfunction
 function YDWEGetTrackableByInteger takes integer pTable,integer pKey returns trackable
 return LoadTrackableHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetTrackableByString takes string pTable,string pKey returns trackable
-return LoadTrackableHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadTrackableHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveDialogByInteger takes integer pTable,integer pKey,dialog d returns nothing
 call SaveDialogHandle(YDHT, pTable, pKey, d)
 endfunction
 function YDWESaveDialogByString takes string pTable,string pKey,dialog d returns nothing
-call SaveDialogHandle(YDHT, StringHash(pTable), StringHash(pKey), d)
+call SaveDialogHandle(YDHT, StringHash2(pTable), StringHash2(pKey), d)
 endfunction
 function YDWEGetDialogByInteger takes integer pTable,integer pKey returns dialog
 return LoadDialogHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetDialogByString takes string pTable,string pKey returns dialog
-return LoadDialogHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadDialogHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveButtonByInteger takes integer pTable,integer pKey,button bt returns nothing
 call SaveButtonHandle(YDHT, pTable, pKey, bt)
 endfunction
 function YDWESaveButtonByString takes string pTable,string pKey,button bt returns nothing
-call SaveButtonHandle(YDHT, StringHash(pTable), StringHash(pKey), bt)
+call SaveButtonHandle(YDHT, StringHash2(pTable), StringHash2(pKey), bt)
 endfunction
 function YDWEGetButtonByInteger takes integer pTable,integer pKey returns button
 return LoadButtonHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetButtonByString takes string pTable,string pKey returns button
-return LoadButtonHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadButtonHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveQuestByInteger takes integer pTable,integer pKey,quest qt returns nothing
 call SaveQuestHandle(YDHT, pTable, pKey, qt)
 endfunction
 function YDWESaveQuestByString takes string pTable,string pKey,quest qt returns nothing
-call SaveQuestHandle(YDHT, StringHash(pTable), StringHash(pKey), qt)
+call SaveQuestHandle(YDHT, StringHash2(pTable), StringHash2(pKey), qt)
 endfunction
 function YDWEGetQuestByInteger takes integer pTable,integer pKey returns quest
 return LoadQuestHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetQuestByString takes string pTable,string pKey returns quest
-return LoadQuestHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadQuestHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWESaveQuestItemByInteger takes integer pTable,integer pKey,questitem qi returns nothing
 call SaveQuestItemHandle(YDHT, pTable, pKey, qi)
 endfunction
 function YDWESaveQuestItemByString takes string pTable,string pKey,questitem qi returns nothing
-call SaveQuestItemHandle(YDHT, StringHash(pTable), StringHash(pKey), qi)
+call SaveQuestItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey), qi)
 endfunction
 function YDWEGetQuestItemByInteger takes integer pTable,integer pKey returns questitem
 return LoadQuestItemHandle(YDHT, pTable, pKey)
 endfunction
 function YDWEGetQuestItemByString takes string pTable,string pKey returns questitem
-return LoadQuestItemHandle(YDHT, StringHash(pTable), StringHash(pKey))
+return LoadQuestItemHandle(YDHT, StringHash2(pTable), StringHash2(pKey))
 endfunction
 function YDWES2I takes string s returns integer
-return StringHash(s)
+return StringHash2(s)
 endfunction
 function YDWESaveAbilityHandleBJ takes integer AbilityID,integer key,integer missionKey,hashtable table returns nothing
 call SaveInteger(table, missionKey, key, AbilityID)
@@ -5223,9 +5233,11 @@ function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
-set s__process_h_index[i]=StringHash("过程" + I2S(i))
+set s__process_h_index[i]=StringHash2("过程" + I2S(i))
 set i=i + 1
 endloop
+set s__process_h_count=StringHash2("过程数量")
+set s__process_h_max=StringHash2("过程最大值")
 endfunction
 
 //library processLibrary ends
@@ -5552,7 +5564,7 @@ call SetUnitAbilityLevel(u, id, lv)
 return true
 endfunction
 function s__Unit_PauseUnitMU takes unit u,boolean b,string flag returns nothing
-local integer key=StringHash("暂停-" + flag)
+local integer key=StringHash2("暂停-" + flag)
 local integer h=GetHandleId(u)
 local integer count=LoadInteger(YDHT, h, s__Unit_pause_count)
 if b then
@@ -5582,6 +5594,7 @@ function s__Unit_IsAlive takes unit u returns boolean
 return not s__Unit_IsDead(u)
 endfunction
 function unitLibrary___Init takes nothing returns nothing
+set s__Unit_pause_count=StringHash2("暂停计数")
 endfunction
 
 //library unitLibrary ends
@@ -30075,7 +30088,7 @@ call TriggerAddCondition(gg_trg_zinengliang_3, Condition(function Trig_zinenglia
 call TriggerAddAction(gg_trg_zinengliang_3, function Trig_zinengliang_3Actions)
 endfunction
 function Trig_zinengliang_4Conditions takes nothing returns boolean
-return ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303135 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303057 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303134 ) ) and ( HaveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC) == false ) )
+return ( ( ( GetItemTypeId(GetManipulatedItem()) == 0x49303135 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303057 ) or ( GetItemTypeId(GetManipulatedItem()) == 0x49303134 ) ) and ( HaveSavedHandle(YDHT, StringHash2("绫叁紫月"), 0xF0CAF2FC) == false ) )
 endfunction
 function Trig_zinengliang_4Func002T takes nothing returns nothing
 local integer ydul_i
@@ -30115,14 +30128,14 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
-call RemoveSavedHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
+call RemoveSavedHandle(YDHT, StringHash2("绫叁紫月"), 0xF0CAF2FC)
 else
 endif
 endfunction
 function Trig_zinengliang_4Actions takes nothing returns nothing
 local timer ydl_timer
-call SaveTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC, CreateTimer())
-set ydl_timer=LoadTimerHandle(YDHT, StringHash("绫叁紫月"), 0xF0CAF2FC)
+call SaveTimerHandle(YDHT, StringHash2("绫叁紫月"), 0xF0CAF2FC, CreateTimer())
+set ydl_timer=LoadTimerHandle(YDHT, StringHash2("绫叁紫月"), 0xF0CAF2FC)
 call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0xA3319111, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7), 0xA3319111))
 call TimerStart(ydl_timer, 0.50, true, function Trig_zinengliang_4Func002T)
 set ydl_timer=null
@@ -61343,9 +61356,9 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs432003865")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs434004531")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
@@ -61477,7 +61490,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs432003865 takes nothing returns nothing
+function jasshelper__initstructs434004531 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
