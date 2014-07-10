@@ -1,6 +1,8 @@
     
     jass.hasLua = true
     
+    cmd.main()
+    
     timer.wait(5,
         function()
     
@@ -21,4 +23,6 @@
             jass.SetPlayerName(jass.Player(12), name)
         end
     )
+    
+    pcall(require, 'MoeUshio\\All-Star-Battle\\init.lua')
     

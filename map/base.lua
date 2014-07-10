@@ -24,16 +24,8 @@
 	sub(japi)
     
     print 'hello world'
-	--调用栈
-	function runtime.error_handle(msg)
-        runtime.console = true
-		print("---------------------------------------")
-		print("             LUA ERROR                 ")
-		print("---------------------------------------")
-		print(tostring(msg) .. "\n")
-		print(debug.traceback())
-		print("---------------------------------------")
-	end
+    
+    require 'cmd.lua'
 	--汇报错误啦
 	function debug.info(s, this)
 		local t = {}

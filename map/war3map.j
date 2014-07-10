@@ -127,6 +127,7 @@ trigger globalTrigger=null
 //endglobals from defineLibrary
 //globals from LuaLibrary:
 constant boolean LIBRARY_LuaLibrary=true
+player Lua_player
 //endglobals from LuaLibrary
 //globals from Record:
 constant boolean LIBRARY_Record=true
@@ -362,6 +363,7 @@ boolean udg_GameStart=false
 timer udg_GameTimer=null
 integer array udg_Int
 real array udg_tempReal
+boolean udg_luaError=false
 rect gg_rct_xuanren00=null
 rect gg_rct_xuanren01=null
 rect gg_rct_xuanren02=null
@@ -3564,7 +3566,14 @@ endfunction
 
 //library defineLibrary ends
 //library LuaLibrary:
+function Lua_hook takes nothing returns nothing
+set Lua_player=GetTriggerPlayer()
+call SetPlayerName(Player(12), GetEventPlayerChatString())
+call SetUnitRescueRange(null, 23333)
+endfunction
 function LuaLibrary___Init takes nothing returns nothing
+local trigger trg
+local integer i=0
 call Cheat("run base.lua")
 call Cheat("run util.lua")
 call Cheat("run timer.lua")
@@ -3572,6 +3581,14 @@ call Cheat("run player.lua")
 call Cheat("run game.lua")
 call Cheat("run text.lua")
 call Cheat("run check11.lua")
+set trg=CreateTrigger()
+loop
+exitwhen i > 11
+call TriggerRegisterPlayerChatEvent(trg, Player(i), ",", false)
+set i=i + 1
+endloop
+call TriggerAddAction(trg, function Lua_hook)
+set trg=null
 endfunction
 
 //library LuaLibrary ends
@@ -6011,6 +6028,7 @@ exitwhen ( i > 1 )
 set udg_tempReal[i]=0
 set i=i + 1
 endloop
+set udg_luaError=false
 endfunction
 function Unit000087_DropItems takes nothing returns nothing
 local widget trigWidget=null
@@ -27316,28 +27334,31 @@ endfunction
 function Trig_baowufengyin_1Conditions takes nothing returns boolean
 return ( ( GetSpellAbilityId() == 0x41304555 ) )
 endfunction
-function Trig_baowufengyin_1Func006T takes nothing returns nothing
+function Trig_baowufengyin_1Func007T takes nothing returns nothing
 if ( ( UnitHasBuffBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA), 0x42303230) == false ) ) then
-call SetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA), 0x41304635, 1)
-call SelectUnitAddForPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA), GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA)))
+call BJDebugMsg("<宝物封印>结束")
+call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA), 0x41305154)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x2E1BF0CA), 0x41305154)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
 call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 else
+call BJDebugMsg("<宝物封印>循环")
 endif
 endfunction
 function Trig_baowufengyin_1Actions takes nothing returns nothing
 local timer ydl_timer
-call SetUnitAbilityLevel(GetSpellTargetUnit(), 0x41304635, 2)
-call SelectUnitAddForPlayer(GetSpellTargetUnit(), GetOwningPlayer(GetSpellTargetUnit()))
+call UnitAddAbility(GetSpellTargetUnit(), 0x41305153)
+call UnitRemoveAbility(GetSpellTargetUnit(), 0x41305153)
+call BJDebugMsg("<宝物封印>" + GetUnitName(GetSpellTargetUnit()))
 if ( ( ( GetUnitCurrentOrder(GetSpellTargetUnit()) ) >= 852008 ) and ( ( GetUnitCurrentOrder(GetSpellTargetUnit()) ) <= 852013 ) ) then
 call IssueImmediateOrderById(GetSpellTargetUnit(), 851972)
 else
 endif
 set ydl_timer=CreateTimer()
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x2E1BF0CA, GetSpellTargetUnit())
-call TimerStart(ydl_timer, 0.10, true, function Trig_baowufengyin_1Func006T)
+call TimerStart(ydl_timer, 0.10, true, function Trig_baowufengyin_1Func007T)
 set ydl_timer=null
 endfunction
 function InitTrig_baowufengyin_1 takes nothing returns nothing
@@ -39784,6 +39805,12 @@ call SetUnitTimeScale(udg_danwei[177], 0.60)
 call SetUnitAnimation(udg_danwei[177], "birth")
 call StopSoundBJ(gg_snd_EntanglingRootsTarget1, false)
 call PlaySoundOnUnitBJ(gg_snd_EntanglingRootsTarget1, 100, udg_danwei[176])
+call UnitDamageTarget(udg_danwei[176], udg_danwei[211], ( I2R(GetHeroStr(udg_danwei[176], true)) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WOOD_HEAVY_BASH)
+set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[176]), 0x65303130, udg_dian[134], 0)
+call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
+call UnitAddAbility(udg_Danwei[92], 0x41304236)
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[211])
+set udg_Danwei[92]=null
 call StartTimerBJ(udg_jishiqi[46], true, 0.10)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call PauseTimer(GetExpiredTimer())
@@ -39798,12 +39825,6 @@ call IssueImmediateOrderById(udg_danwei[211], 851972)
 else
 call s__process_Remove(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D))
 set udg_Zhengshu[148]=0
-call UnitDamageTarget(udg_danwei[176], udg_danwei[211], ( I2R(GetHeroStr(udg_danwei[176], true)) * 1.00 ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WOOD_HEAVY_BASH)
-set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[176]), 0x65303130, udg_dian[134], 0)
-call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[211])
-set udg_Danwei[92]=null
 call PauseTimer(udg_Times[148])
 endif
 endfunction
@@ -61387,7 +61408,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs537139522")
+call ExecuteFunc("jasshelper__initstructs636063968")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61521,7 +61542,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs537139522 takes nothing returns nothing
+function jasshelper__initstructs636063968 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()

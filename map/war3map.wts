@@ -19797,6 +19797,12 @@ STRING 3327
 |cFF0075ff地狱火炎|r等级5（Q）
 }
 
+STRING 3328
+// 技能: A0QS (工程升级), EditorSuffix (编辑器后缀)
+{
+物品栏禁用
+}
+
 STRING 3329
 // 魔法效果: B005 (), Bufftip (工具提示)
 {
@@ -20281,6 +20287,12 @@ STRING 3411
 STRING 3412
 {
 -
+}
+
+STRING 3413
+// 技能: A0QT (工程升级), EditorSuffix (编辑器后缀)
+{
+物品栏启用
 }
 
 STRING 3414

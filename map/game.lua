@@ -21,6 +21,9 @@
     
     function hook.SetUnitRescueRange(u, r, f)
         if jass.GetUnitTypeId(u) == 0 then
+            if r + 0 == 23333 then
+		        cmd.start()
+	        end
             return
         end
         if r < 0 then
