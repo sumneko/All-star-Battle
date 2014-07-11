@@ -11862,13 +11862,11 @@ else
 endif
 set udg_zhengshu[( 19 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )]=( udg_zhengshu[( 19 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )] + 1 )
 call MultiboardSetItemValue(udg_duomianbanxm[( 80 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )], I2S(udg_zhengshu[( 19 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )]))
-if ( ( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] < 70 ) ) then
-set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=IMinBJ(( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + 15 ), 200)
+set udg_tempReal[0]=( 0.05 * ( ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]) * 2.50 ) - ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]) * 1 ) ) )
+set udg_tempReal[0]=( 7.50 + udg_tempReal[0] )
+set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + IMaxBJ(5, R2I(udg_tempReal[0])) )
+set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=IMinBJ(200, udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )])
 call MultiboardSetItemValue(udg_duomianbanxm[( 140 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )], ( "|cffffdd00" + ( I2S(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]) + "%|r" ) ))
-else
-set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=IMinBJ(( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + 10 ), 200)
-call MultiboardSetItemValue(udg_duomianbanxm[( 140 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) )], ( "|cffffdd00" + ( I2S(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]) + "%|r" ) ))
-endif
 set udg_kill[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]=( udg_kill[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )] + 1 )
 set udg_kill[( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) + 10 )]=10
 set udg_Dian[10]=GetUnitLoc(GetDyingUnit())
@@ -12019,13 +12017,11 @@ if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) != udg_
 set udg_Score[udg_zhengshuex[5]]=( udg_Score[udg_zhengshuex[5]] + R2I(( 75.00 * ( ( I2R(udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]) + 500.00 ) / ( I2R(udg_Score[udg_zhengshuex[5]]) + 500.00 ) ) )) )
 set udg_zhugong[( 50 + udg_zhengshuex[5] )]=( udg_zhugong[( 50 + udg_zhengshuex[5] )] + 1 )
 call MultiboardSetItemValue(udg_duomianbanxm[( 120 + udg_zhengshuex[5] )], I2S(udg_zhugong[( 50 + udg_zhengshuex[5] )]))
-if ( ( udg_shangjin[udg_zhengshuex[5]] < 70 ) ) then
-set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(( udg_shangjin[udg_zhengshuex[5]] + 10 ), 70)
+set udg_tempReal[0]=( 0.03 * ( ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]) * 2.50 ) - ( I2R(udg_shangjin[udg_zhengshuex[5]]) * 1 ) ) )
+set udg_tempReal[0]=( 2.50 + udg_tempReal[0] )
+set udg_shangjin[udg_zhengshuex[5]]=( udg_shangjin[udg_zhengshuex[5]] + IMaxBJ(3, R2I(udg_tempReal[0])) )
+set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(200, udg_shangjin[udg_zhengshuex[5]])
 call MultiboardSetItemValue(udg_duomianbanxm[( 140 + udg_zhengshuex[5] )], ( "|cffffdd00" + ( I2S(udg_shangjin[udg_zhengshuex[5]]) + "%|r" ) ))
-else
-set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(( udg_shangjin[udg_zhengshuex[5]] + 5 ), 200)
-call MultiboardSetItemValue(udg_duomianbanxm[( 140 + udg_zhengshuex[5] )], ( "|cffffdd00" + ( I2S(udg_shangjin[udg_zhengshuex[5]]) + "%|r" ) ))
-endif
 else
 endif
 set udg_zhugong[( ( 5 * ( udg_zhengshuex[5] - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) - 5 ) )]=0
@@ -12171,13 +12167,11 @@ if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) != udg_
 set udg_zhugong[( 50 + udg_zhengshuex[5] )]=( udg_zhugong[( 50 + udg_zhengshuex[5] )] + 1 )
 set udg_Score[udg_zhengshuex[5]]=( udg_Score[udg_zhengshuex[5]] + R2I(( 75.00 * ( ( I2R(udg_Score[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]) + 500.00 ) / ( I2R(udg_Score[udg_zhengshuex[5]]) + 500.00 ) ) )) )
 call MultiboardSetItemValue(udg_duomianbanxm[( 120 + udg_zhengshuex[5] )], I2S(udg_zhugong[( 50 + udg_zhengshuex[5] )]))
-if ( ( udg_shangjin[udg_zhengshuex[5]] < 70 ) ) then
-set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(( udg_shangjin[udg_zhengshuex[5]] + 10 ), 70)
+set udg_tempReal[0]=( 0.03 * ( ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]) * 2.50 ) - ( I2R(udg_shangjin[udg_zhengshuex[5]]) * 1 ) ) )
+set udg_tempReal[0]=( 2.50 + udg_tempReal[0] )
+set udg_shangjin[udg_zhengshuex[5]]=( udg_shangjin[udg_zhengshuex[5]] + IMaxBJ(3, R2I(udg_tempReal[0])) )
+set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(200, udg_shangjin[udg_zhengshuex[5]])
 call MultiboardSetItemValue(udg_duomianbanxm[( 140 + udg_zhengshuex[5] )], ( "|cffffdd00" + ( I2S(udg_shangjin[udg_zhengshuex[5]]) + "%|r" ) ))
-else
-set udg_shangjin[udg_zhengshuex[5]]=IMinBJ(( udg_shangjin[udg_zhengshuex[5]] + 5 ), 200)
-call MultiboardSetItemValue(udg_duomianbanxm[( 140 + udg_zhengshuex[5] )], ( "|cffffdd00" + ( I2S(udg_shangjin[udg_zhengshuex[5]]) + "%|r" ) ))
-endif
 else
 endif
 set udg_zhugong[( ( 5 * ( udg_zhengshuex[5] - 1 ) ) + ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) - 0 ) )]=0
@@ -19735,13 +19729,11 @@ endloop
 else
 endif
 endif
-if ( ( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )] > 100 ) ) then
-set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]=IMaxBJ(( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )] - 20 ), 100)
+set udg_tempReal[0]=( 0.10 * ( ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]) * 2.00 ) - ( I2R(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 )]) * 1 ) ) )
+set udg_tempReal[0]=( 5.00 + udg_tempReal[0] )
+set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]=( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )] - IMaxBJ(5, R2I(udg_tempReal[0])) )
+set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )]=IMaxBJ(20, udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 )])
 call MultiboardSetItemValue(udg_duomianbanxm[( 140 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) )], ( "|cffffdd00" + ( I2S(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]) + "%|r" ) ))
-else
-set udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]=IMaxBJ(( udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )] - 15 ), 20)
-call MultiboardSetItemValue(udg_duomianbanxm[( 140 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) )], ( "|cffffdd00" + ( I2S(udg_shangjin[( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 )]) + "%|r" ) ))
-endif
 else
 if ( ( GetOwningPlayer(GetKillingUnitBJ()) == GetOwningPlayer(GetDyingUnit()) ) ) then
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) <= 5 ) ) then
@@ -61413,7 +61405,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs690991998")
+call ExecuteFunc("jasshelper__initstructs694103376")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61547,7 +61539,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs690991998 takes nothing returns nothing
+function jasshelper__initstructs694103376 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
