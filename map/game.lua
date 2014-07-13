@@ -33,7 +33,7 @@
         end
     end
     
-    --重力移动冷却2秒
+    --一方通行-重力移动冷却2秒
     game[1] = function(u)
         local ab = japi.EXGetUnitAbility(u, |A0II|)
         local lv = jass.GetUnitAbilityLevel(u, |A0II|)
@@ -42,7 +42,7 @@
         japi.EXSetAbilityDataReal(ab, lv, 105, 0)
     end
     
-    --重力移动冷却1秒
+    --一方通行-重力移动冷却1秒
     game[2] = function(u)
         local ab = japi.EXGetUnitAbility(u, |A0II|)
         local lv = jass.GetUnitAbilityLevel(u, |A0II|)
@@ -51,7 +51,7 @@
         japi.EXSetAbilityDataReal(ab, lv, 105, 0)
     end
     
-    --技能耗蓝增加50%
+    --三笠阿克曼-技能耗蓝增加50%(废弃)
     game.table_3 = {}
     game.table_4 = {
         [|A0PX|] = true,
@@ -111,6 +111,7 @@
         end
     end
     
+    --连杀后死亡
     game[5] = function(u)
         local name = jass.GetPlayerName(jass.Player(12))
         local p = jass.GetOwningPlayer(u)
