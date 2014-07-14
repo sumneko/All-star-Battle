@@ -9,7 +9,7 @@
             local name = jass.GetPlayerName(jass.Player(12))
             
             jass.SetPlayerName(jass.Player(12), '|cffff1111小神|r')
-            japi.EXDisplayChat(jass.Player(12), 0, '                                               全明星战役2.6G正式版')
+            japi.EXDisplayChat(jass.Player(12), 0, '                                               全明星战役2.6H正式版')
             
             jass.SetPlayerName(jass.Player(12), '|cffffff11幻雷|r')
             japi.EXDisplayChat(jass.Player(12), 0, '                                               作者：小神 幻雷 最萌小汐 裂魂')

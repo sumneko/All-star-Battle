@@ -23,7 +23,7 @@ STRING 3
 
 STRING 4
 {
-全明星战役2.6G正式版
+全明星战役2.6H正式版
 }
 
 STRING 5
@@ -772,6 +772,11 @@ STRING 131
 // 物品: I00H (锥炎标枪合成书), Hotkey (热键)
 {
 F
+}
+
+STRING 132
+{
+|cff00ff00全明星战役|cffffff002.6H正式版
 }
 
 STRING 133
@@ -23999,7 +24004,7 @@ STRING 4033
 
 STRING 4034
 {
-|cFFFFFF00全明星战役2.6G正式版|r
+|cFFFFFF00全明星战役2.6H正式版|r
 }
 
 STRING 4035
@@ -32147,11 +32152,6 @@ STRING 5393
 STRING 5394
 {
 |cffffcc00物品栏已满|r
-}
-
-STRING 5395
-{
-|cff00ff00全明星战役|cffffff002.6G正式版
 }
 
 STRING 5396
