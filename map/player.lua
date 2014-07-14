@@ -21,6 +21,16 @@
 		setColor = function(this, c)
 			jass.SetPlayerColor(this.handle, c)
 		end,
+        
+        --设置名字
+        setName = function(this, name)
+            jass.SetPlayerName(this.handle, name)
+        end,
+        
+        --发送聊天信息(japi)
+        chat = function(this, state, text)
+            japi.EXDisplayChat(this.handle, state, text)
+        end,
 	}
 	
 	function player.__call(_, i)
