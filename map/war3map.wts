@@ -16284,6 +16284,30 @@ STRING 2726
 学习|cFF3366FF钢化皮肤|r（E）
 }
 
+STRING 2727
+// 技能: A0QU (萌萌哒), Name (名字)
+{
+萌萌哒
+}
+
+STRING 2728
+// 技能: A0QU (萌萌哒), EditorSuffix (编辑器后缀)
+{
+无图标
+}
+
+STRING 2729
+// 技能: A0QV (萌萌哒), Name (名字)
+{
+萌萌哒
+}
+
+STRING 2730
+// 技能: A0QV (萌萌哒), EditorSuffix (编辑器后缀)
+{
+看到就崩溃哦
+}
+
 STRING 2732
 // 物品: sreg (尘土之影), Tip (提示工具 - 基础)
 {
