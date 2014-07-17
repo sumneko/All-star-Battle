@@ -3931,6 +3931,11 @@ Unit.Move=0,unit,real,real
 _Unit.Move_Defaults=GetTriggerUnit,0,50
 _Unit.Move_Category=TC_MU_UNIT
 
+Unit.DummyAttack=0,unit,unitcode,unit,integer,boolean,boolean,boolean,boolean
+_Unit.DummyAttack_Defaults=GetTriggerUnit,_,GetTriggerUnit,1,true,true,true,true
+_Unit.DummyAttack_Category=TC_MU_UNIT
+
+
 //过程库
 process.Remove=0,integer
 _process.Remove_Defaults=_
