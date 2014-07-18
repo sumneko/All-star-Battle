@@ -4987,7 +4987,7 @@ ratt
 }
 
 STRING 836
-// 科技: Robs (Berserker Strength), class (升级类型)
+// 科技: Robs (狂暴力量), class (升级类型)
 {
 melee
 }
@@ -5053,79 +5053,79 @@ STRING 846
 }
 
 STRING 847
-// 科技: Robs (Berserker Strength), effect3 (效果 3)
+// 科技: Robs (狂暴力量), effect3 (效果 3)
 {
 rarm
 }
 
 STRING 848
-// 科技: Robs (Berserker Strength), effect2 (效果 2)
+// 科技: Robs (狂暴力量), effect2 (效果 2)
 {
 ratt
 }
 
 STRING 849
-// 科技: R000 (Berserker Strength), effect1 (效果 1)
+// 科技: R000 (狂暴力量), effect1 (效果 1)
 {
 rhpo
 }
 
 STRING 850
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(1级)
 }
 
 STRING 851
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(2级)
 }
 
 STRING 852
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(3级)
 }
 
 STRING 853
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(4级)
 }
 
 STRING 854
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(5级)
 }
 
 STRING 855
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(6级)
 }
 
 STRING 856
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(7级)
 }
 
 STRING 857
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(8级)
 }
 
 STRING 858
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(9级)
 }
 
 STRING 859
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(10级)
 }
@@ -18680,7 +18680,7 @@ STRING 3131
 }
 
 STRING 3132
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18717,7 +18717,7 @@ STRING 3138
 }
 
 STRING 3139
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18759,7 +18759,7 @@ STRING 3145
 }
 
 STRING 3146
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18771,7 +18771,7 @@ STRING 3147
 }
 
 STRING 3148
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18787,7 +18787,7 @@ STRING 3150
 }
 
 STRING 3151
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18927,7 +18927,7 @@ STRING 3174
 }
 
 STRING 3175
-// 科技: Robs (Berserker Strength), effect4 (效果 4)
+// 科技: Robs (狂暴力量), effect4 (效果 4)
 {
 rmvx
 }
@@ -20578,7 +20578,7 @@ STRING 3456
 }
 
 STRING 3457
-// 科技: R000 (Berserker Strength), class (升级类型)
+// 科技: R000 (狂暴力量), class (升级类型)
 {
 melee
 }
@@ -29825,7 +29825,7 @@ STRING 4997
 }
 
 STRING 4998
-// 科技: R000 (Berserker Strength), effect3 (效果 3)
+// 科技: R000 (狂暴力量), effect3 (效果 3)
 {
 rarm
 }
@@ -30376,7 +30376,7 @@ STRING 5089
 }
 
 STRING 5090
-// 科技: R000 (Berserker Strength), effect2 (效果 2)
+// 科技: R000 (狂暴力量), effect2 (效果 2)
 {
 ratt
 }
@@ -41157,7 +41157,7 @@ STRING 6894
 }
 
 STRING 6895
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41175,7 +41175,7 @@ STRING 6897
 }
 
 STRING 6898
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41239,43 +41239,43 @@ STRING 6909
 }
 
 STRING 6910
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6911
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6912
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6913
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6914
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6915
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6916
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41293,7 +41293,7 @@ STRING 6918
 }
 
 STRING 6919
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
