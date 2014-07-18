@@ -542,6 +542,9 @@ baka.Sp="洗牌"
 baka.Sp="将1-10号玩家随机重新洗牌,并自动重新设置颜色与结盟关系."
 baka.SPHint="你之后用整数转化玩家/获取玩家的索引均为洗牌后的结果"
 
+baka.hookImage="截取下一个新建单位的阴影图像"
+baka.hookImage="截取下一个新建单位的阴影图像"
+
 maphack.InitHero="加入反全图"
 maphack.InitHero="将 ",~单位," 加入反全图系统"
 maphack.InitHeroHint="注册英雄会自动加入"

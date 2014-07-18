@@ -3891,6 +3891,9 @@ _baka.lucky_Category=TC_MU_BAKA
 baka.Sp=0
 _baka.Sp_Category=TC_MU_BAKA
 
+baka.hookImage=0
+_baka.hookImage_Category=TC_MU_BAKA
+
 maphack.InitHero=0,unit
 _maphack.InitHero_Defaults=GetTriggerUnit
 _maphack.InitHero_Category=TC_MU_BAKA
