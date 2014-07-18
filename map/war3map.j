@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -47,10 +47,10 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
@@ -98,12 +98,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -367,6 +367,7 @@ timer udg_GameTimer=null
 integer array udg_Int
 real array udg_tempReal
 boolean udg_luaError=false
+location array udg_tempLocs
 rect gg_rct_xuanren00=null
 rect gg_rct_xuanren01=null
 rect gg_rct_xuanren02=null
@@ -1832,6 +1833,7 @@ unit array s__maphack_heroes
 integer s__maphack_heroCount=0
 integer array s__maphack_heroState
 real array s__maphack_heroHeight
+image array s__maphack_heroShadow
 unit array s__maphack_visitors
 integer s__maphack_visitorsCount=0
 timer s__maphack_check_timer=CreateTimer()
@@ -1854,6 +1856,7 @@ group s__baka_CG4=CreateGroup()
 unit s__baka_CU=null
 trigger s__baka_CheckDeath=CreateTrigger()
 integer s__baka_CheckCount=0
+image s__baka_Image=null
 constant integer si__Effect=4
 integer si__Effect_F=0
 integer si__Effect_I=0
@@ -1929,9 +1932,9 @@ integer si__Unit_I=0
 integer array si__Unit_V
 integer s__Unit_pause_count=0
 unit array s__Unit_r_g1
-integer s__Unit_r_i1
+integer s__Unit_r_i1=0
 unit array s__Unit_r_g2
-integer s__Unit_r_i2
+integer s__Unit_r_i2=0
 trigger st__maphack_SetHeight
 trigger st__maphack_GetHeight
 trigger st__baka_newMap
@@ -2325,14 +2328,34 @@ endfunction
 
 //Generated method caller for maphack.SetHeight
 function sc__maphack_SetHeight takes unit u,real h,real r returns nothing
+local integer i=1
 if IsUnitType(u, UNIT_TYPE_ANCIENT) then
 return
 endif
+loop
+exitwhen i > s__maphack_heroCount
+if s__maphack_heroes[i] == u then
+set s__maphack_heroHeight[i]=h
+if s__maphack_heroState[i] != 2 then
+call SetUnitFlyHeight(u, h, 0)
+endif
+return
+endif
+set i=i + 1
+endloop
 call SetUnitFlyHeight(u, h, r)
 endfunction
 
 //Generated method caller for maphack.GetHeight
 function sc__maphack_GetHeight takes unit u returns real
+local integer i=1
+loop
+exitwhen i > s__maphack_heroCount
+if s__maphack_heroes[i] == u then
+return s__maphack_heroHeight[i]
+endif
+set i=i + 1
+endloop
 return GetUnitFlyHeight(u)
 endfunction
 
@@ -2936,20 +2959,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -2981,7 +3004,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3014,22 +3037,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3392,9 +3415,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3421,22 +3444,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3446,13 +3469,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -4378,6 +4401,7 @@ endloop
 set s__maphack_heroes[i]=hero
 set s__maphack_heroState[i]=0
 set s__maphack_heroHeight[i]=0
+set s__maphack_heroShadow[i]=s__baka_Image
 if i > s__maphack_heroCount then
 set s__maphack_heroCount=i
 elseif GetUnitTypeId(s__maphack_heroes[s__maphack_heroCount]) == 0 then
@@ -4385,6 +4409,7 @@ set s__maphack_heroCount=s__maphack_heroCount - 1
 endif
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
+call BJDebugMsg("<FMH>添加[" + GetUnitName(hero) + "] 位置[" + I2S(i) + "] 计数:" + I2S(s__maphack_heroCount))
 if IsUnitAlly(hero, s__sys_selfp) or IsPlayerObserver(s__sys_selfp) then
 call UnitAddAbility(hero, 0x41305155)
 call UnitMakeAbilityPermanent(hero, true, 0x41305155)
@@ -4392,6 +4417,30 @@ else
 call UnitAddAbility(hero, 0x41305156)
 call UnitMakeAbilityPermanent(hero, true, 0x41305156)
 endif
+endfunction
+function s__maphack_zip takes nothing returns nothing
+local integer i=1
+local integer cjlocgn_00000000
+loop
+exitwhen i > s__maphack_heroCount
+if GetUnitTypeId(s__maphack_heroes[i]) == 0 then
+set cjlocgn_00000000=s__maphack_heroCount
+loop
+exitwhen cjlocgn_00000000 <= i
+if GetUnitTypeId(s__maphack_heroes[cjlocgn_00000000]) != 0 then
+set s__maphack_heroes[i]=s__maphack_heroes[cjlocgn_00000000]
+set s__maphack_heroState[i]=s__maphack_heroState[cjlocgn_00000000]
+set s__maphack_heroHeight[i]=s__maphack_heroHeight[cjlocgn_00000000]
+set s__maphack_heroShadow[i]=s__maphack_heroShadow[cjlocgn_00000000]
+set s__maphack_heroes[cjlocgn_00000000]=null
+set cjlocgn_00000000=0
+endif
+set cjlocgn_00000000=cjlocgn_00000000 - 1
+endloop
+set s__maphack_heroCount=s__maphack_heroCount - 1
+endif
+set i=i + 1
+endloop
 endfunction
 function s__maphack_TimerFunc takes nothing returns nothing
 local integer i=1
@@ -4401,23 +4450,47 @@ if IsUnitVisible(s__maphack_heroes[i], s__sys_selfp) then
 if s__maphack_heroState[i] != 1 then
 set s__maphack_heroState[i]=1
 call UnitSetUsesAltIcon(s__maphack_heroes[i], false)
+call SetUnitFlyHeight(s__maphack_heroes[i], s__maphack_heroHeight[i], 0)
+call SetImageColor(s__maphack_heroShadow[i], 255, 255, 255, 255)
 endif
-else
+elseif GetUnitTypeId(s__maphack_heroes[i]) != 0 then
 if s__maphack_heroState[i] != 2 then
 set s__maphack_heroState[i]=2
 call UnitSetUsesAltIcon(s__maphack_heroes[i], true)
+call SetUnitFlyHeight(s__maphack_heroes[i], 10000, 0)
+call SetImageColor(s__maphack_heroShadow[i], 255, 255, 255, 0)
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function s__maphack_SetHeight takes unit u,real h,real r returns nothing
+local integer i=1
 if IsUnitType(u, UNIT_TYPE_ANCIENT) then
 return
 endif
+loop
+exitwhen i > s__maphack_heroCount
+if s__maphack_heroes[i] == u then
+set s__maphack_heroHeight[i]=h
+if s__maphack_heroState[i] != 2 then
+call SetUnitFlyHeight(u, h, 0)
+endif
+return
+endif
+set i=i + 1
+endloop
 call SetUnitFlyHeight(u, h, r)
 endfunction
 function s__maphack_GetHeight takes unit u returns real
+local integer i=1
+loop
+exitwhen i > s__maphack_heroCount
+if s__maphack_heroes[i] == u then
+return s__maphack_heroHeight[i]
+endif
+set i=i + 1
+endloop
 return GetUnitFlyHeight(u)
 endfunction
 function s__maphack_timerFunc3 takes nothing returns nothing
@@ -4457,17 +4530,30 @@ call TimerStart(CreateTimer(), 0.03, false, function s__maphack_timerFunc3)
 endfunction
 function s__maphack_timerFunc takes nothing returns nothing
 local integer i=0
-local real cjlocgn_00000000
+local player cjlocgn_00000000
 local real cjlocgn_00000001
+local real cjlocgn_00000002
 local unit hero
 local player p
 call TimerStart(GetExpiredTimer(), GetRandomInt(5, 15), false, function s__maphack_timerFunc)
 loop
 exitwhen i > s__maphack_visitorsCount
 if GetRandomInt(1, 3) == 2 and GetUnitCurrentOrder(s__maphack_visitors[i]) == 0 then
-set cjlocgn_00000000=GetRandomInt(- 100, 100) * 70
+set cjlocgn_00000000=GetOwningPlayer(s__maphack_visitors[i])
+call RemoveUnit(s__maphack_visitors[i])
 set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
-call IssuePointOrder(s__maphack_visitors[i], "move", cjlocgn_00000000, cjlocgn_00000001)
+set cjlocgn_00000002=GetRandomInt(- 100, 100) * 70
+if IsPlayerAlly(cjlocgn_00000000, s__sys_selfp) then
+set s__maphack_visitors[i]=CreateUnit(cjlocgn_00000000, 0x48303048, cjlocgn_00000001, cjlocgn_00000002, 0)
+else
+set s__maphack_visitors[i]=CreateUnit(cjlocgn_00000000, 0x48303047, cjlocgn_00000001, cjlocgn_00000002, 0)
+endif
+call UnitSetUsesAltIcon(s__maphack_visitors[i], true)
+call SetUnitFlyHeight(s__maphack_visitors[i], 10000, 0)
+call SetHeroLevel(s__maphack_visitors[i], 30, false)
+set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
+set cjlocgn_00000002=GetRandomInt(- 100, 100) * 70
+call IssuePointOrder(s__maphack_visitors[i], "move", cjlocgn_00000001, cjlocgn_00000002)
 call UnitSetUsesAltIcon(s__maphack_visitors[i], true)
 endif
 set i=i + 1
@@ -4481,10 +4567,10 @@ set i=0
 loop
 exitwhen i > 9
 set hero=udg_player[i + 1]
-set cjlocgn_00000000=GetUnitX(hero)
-set cjlocgn_00000001=GetUnitY(hero)
-if not IsVisibleToPlayer(cjlocgn_00000000, cjlocgn_00000001, p) and not IsVisibleToPlayer(cjlocgn_00000000 + 256, cjlocgn_00000001, p) and not IsVisibleToPlayer(cjlocgn_00000000 - 256, cjlocgn_00000001, p) and not IsVisibleToPlayer(cjlocgn_00000000, cjlocgn_00000001 + 256, p) and not IsVisibleToPlayer(cjlocgn_00000000, cjlocgn_00000001 - 256, p) then
-set s__maphack_check_unit[i]=CreateUnit(Player(i), 0x65303855, cjlocgn_00000000, cjlocgn_00000001, 0)
+set cjlocgn_00000001=GetUnitX(hero)
+set cjlocgn_00000002=GetUnitY(hero)
+if not IsVisibleToPlayer(cjlocgn_00000001, cjlocgn_00000002, p) and not IsVisibleToPlayer(cjlocgn_00000001 + 256, cjlocgn_00000002, p) and not IsVisibleToPlayer(cjlocgn_00000001 - 256, cjlocgn_00000002, p) and not IsVisibleToPlayer(cjlocgn_00000001, cjlocgn_00000002 + 256, p) and not IsVisibleToPlayer(cjlocgn_00000001, cjlocgn_00000002 - 256, p) then
+set s__maphack_check_unit[i]=CreateUnit(Player(i), 0x65303855, cjlocgn_00000001, cjlocgn_00000002, 0)
 endif
 set i=i + 1
 endloop
@@ -4537,6 +4623,7 @@ endloop
 set i=i + 1
 endloop
 call TimerStart(CreateTimer(), 5, false, function s__maphack_timerFunc)
+call TimerStart(CreateTimer(), GetRandomInt(60, 120), true, function s__maphack_zip)
 endfunction
 function s__baka_lucky takes unit u,real r,boolean b returns nothing
 local integer i=GetPlayerId(GetOwningPlayer(u))
@@ -4864,13 +4951,28 @@ endfunction
 function s__baka_InitHero takes unit hero returns nothing
 call UnitAddAbility(hero, 0x41726176)
 call UnitRemoveAbility(hero, 0x41726176)
-call s__maphack_InitHero(hero)
 if IsUnitAlly(hero, s__baka_SPlayer(0)) then
 call GroupAddUnit(s__baka_CG1, hero)
 else
 call GroupAddUnit(s__baka_CG3, hero)
 endif
 call UnitWakeUp(hero)
+endfunction
+function s__baka_hookImage takes nothing returns nothing
+set s__baka_Image=CreateImage("Shadow", 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+call DestroyImage(s__baka_Image)
+endfunction
+function s__baka_CreateNUnitsAtLoc2 takes integer count,integer unitId,player whichPlayer,location loc,real face returns group
+call GroupClear(bj_lastCreatedGroup)
+loop
+set count=count - 1
+exitwhen count < 0
+call s__baka_hookImage()
+set bj_lastCreatedUnit=CreateUnitAtLoc(whichPlayer, unitId, loc, face)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call GroupAddUnit(bj_lastCreatedGroup, bj_lastCreatedUnit)
+endloop
+return bj_lastCreatedGroup
 endfunction
 function s__baka_AfterSP takes nothing returns nothing
 call s__maphack_AfterSP()
@@ -8031,7 +8133,7 @@ set gg_trg_suijiduiwu=CreateTrigger()
 call TriggerRegisterTimerEventSingle(gg_trg_suijiduiwu, 0.00)
 call TriggerAddAction(gg_trg_suijiduiwu, function Trig_suijiduiwuActions)
 endfunction
-function Trig_chushihuaFunc013T takes nothing returns nothing
+function Trig_chushihuaFunc014T takes nothing returns nothing
 call DestroyFogModifier(udg_kejiandu[10])
 call DestroyFogModifier(udg_kejiandu[11])
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
@@ -8041,6 +8143,7 @@ call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_chushihuaActions takes nothing returns nothing
 local timer ydl_timer
+call TriggerExecute(gg_trg_FMH)
 set udg_zhengshu[72]=0
 set udg_zhengshu[73]=0
 set udg_zhengshu[120]=0
@@ -8053,7 +8156,7 @@ set udg_kejiandu[10]=GetLastCreatedFogModifier()
 call CreateFogModifierRectBJ(true, s__baka_SPlayer(5), FOG_OF_WAR_VISIBLE, GetEntireMapRect())
 set udg_kejiandu[11]=GetLastCreatedFogModifier()
 set ydl_timer=CreateTimer()
-call TimerStart(ydl_timer, 1.00, false, function Trig_chushihuaFunc013T)
+call TimerStart(ydl_timer, 1.00, false, function Trig_chushihuaFunc014T)
 set udg_buer[0]=true
 set udg_buer[3]=true
 set udg_buer[6]=true
@@ -8061,73 +8164,73 @@ set udg_buer[7]=true
 set udg_buer[8]=true
 set udg_buer[9]=true
 set udg_buer[10]=true
-call CreateNUnitsAtLoc(1, 0x456D6F6F, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren02), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x456D6F6F , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren02) , 270.00)
 set udg_hero[0]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x45776172, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren01), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x45776172 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren01) , 270.00)
 set udg_hero[1]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48757468, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren00), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48757468 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren00) , 270.00)
 set udg_hero[2]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4E74696E, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren05), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4E74696E , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren05) , 270.00)
 set udg_hero[3]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4870616C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren06), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4870616C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren06) , 270.00)
 set udg_hero[4]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48616D67, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren07), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48616D67 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren07) , 270.00)
 set udg_hero[5]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x486D6B67, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren08), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x486D6B67 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren08) , 270.00)
 set udg_hero[6]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48767764, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren03), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48767764 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren03) , 270.00)
 set udg_hero[9]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48617266, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren04), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48617266 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren04) , 270.00)
 set udg_hero[10]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F746368, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren09), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F746368 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren09) , 270.00)
 set udg_hero[12]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4564656D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren10), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4564656D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren10) , 270.00)
 set udg_hero[13]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x45777264, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren11), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x45777264 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren11) , 270.00)
 set udg_hero[14]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x55647265, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren12), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x55647265 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren12) , 270.00)
 set udg_hero[15]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F736864, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren13), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F736864 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren13) , 270.00)
 set udg_hero[16]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F626C61, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren14), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F626C61 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren14) , 270.00)
 set udg_hero[17]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x45696C6C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren15), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x45696C6C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren15) , 270.00)
 set udg_hero[18]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F726578, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_16), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F726578 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_16) , 270.00)
 set udg_hero[19]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F666172, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_17), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F666172 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_17) , 270.00)
 set udg_hero[20]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x456B6565, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_18), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x456B6565 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_18) , 270.00)
 set udg_hero[21]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48626C6D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_19), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48626C6D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_19) , 270.00)
 set udg_hero[22]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x45657669, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_20), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x45657669 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_20) , 270.00)
 set udg_hero[23]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x45667572, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren21), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x45667572 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren21) , 270.00)
 set udg_hero[24]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F636268, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren22), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F636268 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren22) , 270.00)
 set udg_hero[25]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48303030, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren23), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48303030 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren23) , 270.00)
 set udg_hero[26]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4F73616D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren24), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4F73616D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren24) , 270.00)
 set udg_hero[27]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x556C6963, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren25), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x556C6963 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren25) , 270.00)
 set udg_hero[28]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x486B616C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren26), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x486B616C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren26) , 270.00)
 set udg_hero[29]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x486D6272, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren27), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x486D6272 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren27) , 270.00)
 set udg_hero[30]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x48303036, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren28), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x48303036 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren28) , 270.00)
 set udg_hero[31]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x55646561, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren31), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x55646561 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren31) , 270.00)
 set udg_hero[34]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4830304A, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren32), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304A , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren32) , 270.00)
 set udg_hero[35]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4830304C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren34), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren34) , 270.00)
 set udg_hero[37]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4830304E, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren35), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304E , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren35) , 270.00)
 set udg_hero[38]=bj_lastCreatedUnit
-call CreateNUnitsAtLoc(1, 0x4830304F, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren36), 270.00)
+call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304F , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren36) , 270.00)
 set udg_hero[39]=bj_lastCreatedUnit
 call GroupAddUnit(udg_danweizu[0], udg_hero[0])
 call GroupAddUnit(udg_danweizu[0], udg_hero[1])
@@ -8180,8 +8283,8 @@ call SetForceAllianceStateBJ(udg_jiemeng[0], bj_FORCE_PLAYER[10], bj_ALLIANCE_AL
 call SetForceAllianceStateBJ(bj_FORCE_PLAYER[10], udg_jiemeng[0], bj_ALLIANCE_ALLIED_VISION)
 call SetForceAllianceStateBJ(udg_jiemeng[1], bj_FORCE_PLAYER[11], bj_ALLIANCE_ALLIED_VISION)
 call SetForceAllianceStateBJ(bj_FORCE_PLAYER[11], udg_jiemeng[1], bj_ALLIANCE_ALLIED_VISION)
-call SetPlayerName(s__baka_SPlayer(10), "TRIGSTR_7079")
-call SetPlayerName(s__baka_SPlayer(11), "TRIGSTR_7081")
+call SetPlayerName(s__baka_SPlayer(10), "TRIGSTR_5403")
+call SetPlayerName(s__baka_SPlayer(11), "TRIGSTR_5536")
 call YDWESetPlayerColorBJNull(s__baka_SPlayer(10) , PLAYER_COLOR_AQUA , true)
 call YDWESetPlayerColorBJNull(s__baka_SPlayer(11) , PLAYER_COLOR_BROWN , true)
 call SetUnitTimeScale(gg_unit_e05G_0101, 0.00)
@@ -8469,14 +8572,16 @@ set udg_danwei[0]=GroupPickRandomUnit(udg_danweizu[0])
 set udg_danwei2[0]=udg_danwei[0]
 call ModifyHeroSkillPoints(udg_danwei2[0], bj_MODIFYMETHOD_SET, 1)
 call UnitRemoveAbility(udg_danwei2[0], 0x416E6532)
-call InitPlayerHero(udg_danwei2[0])
 set udg_a[GetUnitPointValue(udg_danwei2[0])]=true
 call TriggerExecute(gg_trg_All_skills)
 set udg_danwei2[0]=null
 set udg_suijixuanren[( s__baka_SGetPlayerId(GetEnumPlayer()) + 1 )]=udg_danwei[0]
 set udg_point[8]=GetPlayerStartLocationLoc(GetEnumPlayer())
 call GroupRemoveUnit(udg_danweizu[0], udg_danwei[0])
+call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), GetEnumPlayer(), udg_point[8], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call InitPlayerHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )]=bj_lastCreatedUnit
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(bj_lastCreatedUnit)])
@@ -8595,9 +8700,11 @@ set udg_danwei2[0]=null
 call GroupRemoveUnit(udg_danweizu[0], udg_danwei[0])
 set udg_suijixuanren[( s__baka_SGetPlayerId(GetEnumPlayer()) + 1 )]=udg_danwei[0]
 set udg_point[8]=GetPlayerStartLocationLoc(GetEnumPlayer())
+call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), GetEnumPlayer(), udg_point[8], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call InitPlayerHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(GetEnumPlayer()) + 1 )]=bj_lastCreatedUnit
-call InitPlayerHero(udg_player[( s__baka_SGetPlayerId(GetEnumPlayer()) + 1 )])
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, bj_lastCreatedUnit, EVENT_UNIT_DAMAGED)
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(bj_lastCreatedUnit)])
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( GetPlayerName(GetEnumPlayer()) + ( "|cFF33FF33随机了|r" + GetHeroProperName(udg_player[( s__baka_SGetPlayerId(GetEnumPlayer()) + 1 )]) ) ))
@@ -10993,7 +11100,9 @@ set udg_danwei2[0]=null
 call GroupRemoveUnit(udg_danweizu[0], udg_danwei[0])
 set udg_suijixuanren[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[161] - 1)) + 1 )]=udg_danwei[0]
 set udg_point[8]=GetPlayerStartLocationLoc(s__baka_SPlayer(udg_zhengshu2[161] - 1))
+call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), s__baka_SPlayer(udg_zhengshu2[161] - 1), udg_point[8], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[161] - 1)) + 1 )]=bj_lastCreatedUnit
 call InitPlayerHero(bj_lastCreatedUnit)
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
@@ -11076,7 +11185,9 @@ set udg_danwei2[0]=null
 call GroupRemoveUnit(udg_danweizu[0], udg_danwei[0])
 set udg_suijixuanren[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[180] - 1)) + 1 )]=udg_danwei[0]
 set udg_point[8]=GetPlayerStartLocationLoc(s__baka_SPlayer(udg_zhengshu2[180] - 1))
+call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), s__baka_SPlayer(udg_zhengshu2[180] - 1), udg_point[8], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(s__baka_SPlayer(udg_zhengshu2[180] - 1)) + 1 )]=bj_lastCreatedUnit
 call InitPlayerHero(bj_lastCreatedUnit)
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
@@ -11172,7 +11283,9 @@ set udg_danwei2[0]=null
 call GroupRemoveUnit(udg_danweizu[0], udg_danwei[0])
 set udg_suijixuanren[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=udg_danwei[0]
 set udg_point[8]=GetPlayerStartLocationLoc(GetTriggerPlayer())
+call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), GetTriggerPlayer(), udg_point[8], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=bj_lastCreatedUnit
 call InitPlayerHero(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
@@ -31685,6 +31798,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG2)
 call ForGroupBJ(udg_xuanqu, function Trig_zhizhu_1Func002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG2)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303034, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 120.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31693,6 +31807,7 @@ set bj_forLoopAIndexEnd=2
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], ( ( 150.00 * I2R(bj_forLoopAIndex) ) - 225.00 ), 30.00)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303143, GetLocationX(udg_dian2[1]), GetLocationY(udg_dian2[1]), 95.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31707,6 +31822,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG3)
 call ForGroupBJ(udg_xuanqu, function Trig_zhizhu_1Func006A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG3)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303034, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 90.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31715,6 +31831,7 @@ set bj_forLoopAIndexEnd=2
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], ( ( 150.00 * I2R(bj_forLoopAIndex) ) - 225.00 ), 0.00)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303143, GetLocationX(udg_dian2[1]), GetLocationY(udg_dian2[1]), 90.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31734,6 +31851,7 @@ set bj_forLoopAIndexEnd=4
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], ( ( 40.00 * I2R(bj_forLoopAIndex) ) - 100.00 ), 120.00)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303142, GetLocationX(udg_dian2[1]), GetLocationY(udg_dian2[1]), 30.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31753,6 +31871,7 @@ set bj_forLoopAIndexEnd=4
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
 set udg_dian2[1]=PolarProjectionBJ(udg_dian2[0], ( ( 40.00 * I2R(bj_forLoopAIndex) ) - 100.00 ), 315.00)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303142, GetLocationX(udg_dian2[1]), GetLocationY(udg_dian2[1]), 225.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31802,6 +31921,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG5)
 call ForGroupBJ(udg_xuanqu, function Trig_juxiongFunc002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG5)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E706C67, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 315.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31817,6 +31937,7 @@ set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=2
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E706C67, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 135.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31830,6 +31951,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG7)
 call ForGroupBJ(udg_xuanqu, function Trig_juxiongFunc010A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG7)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E706C67, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31848,21 +31970,27 @@ endfunction
 function Trig_jumoActions takes nothing returns nothing
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, "TRIGSTR_2260")
 set udg_dian2[0]=GetRectCenter(gg_rct_YG1)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303044, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
-set udg_danwei2[1]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
-set udg_danwei2[2]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
 call s__maphack_InitHero(udg_danwei2[0])
+call s__baka_hookImage()
+set udg_danwei2[1]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
 call s__maphack_InitHero(udg_danwei2[1])
+call s__baka_hookImage()
+set udg_danwei2[2]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0)
 call s__maphack_InitHero(udg_danwei2[2])
 set udg_danwei2[0]=null
 set udg_danwei2[1]=null
 set udg_danwei2[2]=null
 set udg_dian2[0]=GetRectCenter(gg_rct_YG4)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303044, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
-set udg_danwei2[1]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
-set udg_danwei2[2]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
 call s__maphack_InitHero(udg_danwei2[0])
+call s__baka_hookImage()
+set udg_danwei2[1]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
 call s__maphack_InitHero(udg_danwei2[1])
+call s__baka_hookImage()
+set udg_danwei2[2]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
 call s__maphack_InitHero(udg_danwei2[2])
 set udg_danwei2[0]=null
 set udg_danwei2[1]=null
@@ -31897,6 +32025,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG1)
 call ForGroupBJ(udg_xuanqu, function Trig_jumo_2Func002A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG1)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303044, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31904,6 +32033,7 @@ set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=2
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 0.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31917,6 +32047,7 @@ set udg_xuanqu=YDWEGetUnitsInRectAllNull(gg_rct_YG4)
 call ForGroupBJ(udg_xuanqu, function Trig_jumo_2Func006A)
 if ( ( IsUnitGroupEmptyBJ(udg_xuanqu) == true ) ) then
 set udg_dian2[0]=GetRectCenter(gg_rct_YG4)
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303044, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31924,6 +32055,7 @@ set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=2
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+call s__baka_hookImage()
 set udg_danwei2[0]=CreateUnit(s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), 0x6E303045, GetLocationX(udg_dian2[0]), GetLocationY(udg_dian2[0]), 225.00)
 call s__maphack_InitHero(udg_danwei2[0])
 set udg_danwei2[0]=null
@@ -31943,7 +32075,12 @@ call TriggerRegisterTimerExpireEvent(gg_trg_jumo_2, udg_youxixitong[3])
 call TriggerAddAction(gg_trg_jumo_2, function Trig_jumo_2Actions)
 endfunction
 function Trig_FMHFunc001A takes nothing returns nothing
-call s__maphack_InitHero(GetEnumUnit())
+set udg_tempLocs[0]=GetUnitLoc(GetEnumUnit())
+call RemoveUnit(GetEnumUnit())
+call s__baka_hookImage()
+call CreateNUnitsAtLoc(1, 0x6E62616E, s__baka_SPlayer(PLAYER_NEUTRAL_AGGRESSIVE), udg_tempLocs[0], bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call RemoveLocation(udg_tempLocs[0])
 endfunction
 function Trig_FMHActions takes nothing returns nothing
 local group ydl_group
@@ -31954,7 +32091,6 @@ set ydl_unit=null
 endfunction
 function InitTrig_FMH takes nothing returns nothing
 set gg_trg_FMH=CreateTrigger()
-call TriggerRegisterTimerEventSingle(gg_trg_FMH, 1.00)
 call TriggerAddAction(gg_trg_FMH, function Trig_FMHActions)
 endfunction
 function Trig_zhiyu_1Actions takes nothing returns nothing
@@ -61546,7 +61682,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs393457828")
+call ExecuteFunc("jasshelper__initstructs426324103")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61680,7 +61816,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs393457828 takes nothing returns nothing
+function jasshelper__initstructs426324103 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
