@@ -29944,6 +29944,12 @@ STRING 5015
 ratt
 }
 
+STRING 5016
+// 技能: A0KO (眩晕), Researchhotkey (热键 - 学习)
+{
+Q
+}
+
 STRING 5017
 // 技能: A0MA (加速50%), Name (名字)
 {
@@ -30046,13 +30052,13 @@ STRING 5033
 }
 
 STRING 5034
-// 技能: A0KO (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KP (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 5035
-// 技能: A0KP (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KR (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -30220,7 +30226,7 @@ E
 }
 
 STRING 5063
-// 技能: A0KR (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KT (|cffff7575投掷飞斧|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -30537,7 +30543,7 @@ STRING 5115
 }
 
 STRING 5116
-// 技能: A0KT (|cffff7575投掷飞斧|r), Researchhotkey (热键 - 学习)
+// 技能: A0KT (|cffff7575投掷飞斧|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -30920,13 +30926,13 @@ STRING 5179
 }
 
 STRING 5180
-// 技能: A0KT (|cffff7575投掷飞斧|r), Hotkey (热键 - 普通)
+// 技能: A08N (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 5181
-// 技能: A08N (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0GZ (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -31081,7 +31087,7 @@ E
 }
 
 STRING 5207
-// 技能: A0GZ (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KV (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -32004,7 +32010,7 @@ STRING 5362
 }
 
 STRING 5363
-// 技能: A0KV (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KW (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -32828,7 +32834,7 @@ E
 }
 
 STRING 5508
-// 技能: A0KW (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KX (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -32954,7 +32960,7 @@ STRING 5528
 }
 
 STRING 5529
-// 技能: A0KX (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KY (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -33275,7 +33281,7 @@ E
 }
 
 STRING 5583
-// 技能: A0KY (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0KZ (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -33459,7 +33465,7 @@ A
 }
 
 STRING 5614
-// 技能: A0KZ (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0L6 (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -34595,7 +34601,7 @@ STRING 5800
 }
 
 STRING 5801
-// 技能: A0L6 (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0L9 (|cFFffff00巨镰飞刃|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -34703,7 +34709,7 @@ STRING 5818
 }
 
 STRING 5819
-// 技能: A0L9 (|cFFffff00巨镰飞刃|r), Researchhotkey (热键 - 学习)
+// 技能: A0L9 (|cFFffff00巨镰飞刃|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -34780,7 +34786,7 @@ STRING 5831
 }
 
 STRING 5832
-// 技能: A0L9 (|cFFffff00巨镰飞刃|r), Hotkey (热键 - 普通)
+// 技能: A0LA (|cffffdd25闪电突袭|R), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -34879,7 +34885,7 @@ STRING 5847
 }
 
 STRING 5848
-// 技能: A0LA (|cffffdd25闪电突袭|R), Hotkey (热键 - 普通)
+// 技能: A0LE (|cff00ffff冲击弹|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -35029,7 +35035,7 @@ STRING 5872
 }
 
 STRING 5873
-// 技能: A0LE (|cff00ffff冲击弹|r), Researchhotkey (热键 - 学习)
+// 技能: A0LE (|cff00ffff冲击弹|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -35184,7 +35190,7 @@ STRING 5898
 }
 
 STRING 5899
-// 技能: A0LE (|cff00ffff冲击弹|r), Hotkey (热键 - 普通)
+// 技能: A0LG (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -35501,7 +35507,7 @@ STRING 5951
 }
 
 STRING 5952
-// 技能: A0LG (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0LF (|cff00ffff冲击弹|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -35591,7 +35597,7 @@ STRING 5966
 }
 
 STRING 5967
-// 技能: A0LF (|cff00ffff冲击弹|r), Researchhotkey (热键 - 学习)
+// 技能: A0LF (|cff00ffff冲击弹|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -35717,7 +35723,7 @@ STRING 5987
 }
 
 STRING 5988
-// 技能: A0LF (|cff00ffff冲击弹|r), Hotkey (热键 - 普通)
+// 技能: A0LT (|cFF2575ff三段冲拳|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -35789,7 +35795,7 @@ STRING 5999
 }
 
 STRING 6000
-// 技能: A0LT (|cFF2575ff三段冲拳|r), Researchhotkey (热键 - 学习)
+// 技能: A0LV (|cFF2575ff三段冲拳|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -35951,7 +35957,7 @@ STRING 6026
 }
 
 STRING 6027
-// 技能: A0LV (|cFF2575ff三段冲拳|r), Researchhotkey (热键 - 学习)
+// 技能: A0M0 (|cff99ffff波形延迟|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -36089,7 +36095,7 @@ STRING 6049
 }
 
 STRING 6050
-// 技能: A0M0 (|cff99ffff波形延迟|r), Hotkey (热键 - 普通)
+// 技能: A0M0 (|cff99ffff波形延迟|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -36233,7 +36239,7 @@ STRING 6072
 }
 
 STRING 6073
-// 技能: A0M0 (|cff99ffff波形延迟|r), Researchhotkey (热键 - 学习)
+// 技能: A0M4 (|cFFff50aa彩焰射击|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -36691,13 +36697,13 @@ W
 }
 
 STRING 6147
-// 技能: A0M4 (|cFFff50aa彩焰射击|r), Hotkey (热键 - 普通)
+// 技能: A0M4 (|cFFff50aa彩焰射击|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 6148
-// 技能: A0M4 (|cFFff50aa彩焰射击|r), Researchhotkey (热键 - 学习)
+// 技能: A0M7 (|cFFaa30ff虹之矢|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -36931,7 +36937,7 @@ W
 }
 
 STRING 6184
-// 技能: A0M7 (|cFFaa30ff虹之矢|r), Researchhotkey (热键 - 学习)
+// 技能: A0MH (|cffaaaaff谐波叠加|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -37189,7 +37195,7 @@ STRING 6224
 }
 
 STRING 6225
-// 技能: A0MH (|cffaaaaff谐波叠加|r), Researchhotkey (热键 - 学习)
+// 技能: A09Y (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -37466,13 +37472,13 @@ STRING 6268
 }
 
 STRING 6269
-// 技能: A09Y (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0N2 (|cFFFF6633震裂|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 6270
-// 技能: A0N2 (|cFFFF6633震裂|r), Researchhotkey (热键 - 学习)
+// 技能: A0N2 (|cFFFF6633震裂|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -37597,7 +37603,7 @@ STRING 6290
 }
 
 STRING 6291
-// 技能: A0N2 (|cFFFF6633震裂|r), Hotkey (热键 - 普通)
+// 技能: A0O8 (|cFFaa30ff四之弹|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -37693,7 +37699,7 @@ STRING 6306
 }
 
 STRING 6307
-// 技能: A0O8 (|cFFaa30ff四之弹|r), Researchhotkey (热键 - 学习)
+// 技能: A0O9 (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -37998,13 +38004,13 @@ STRING 6356
 }
 
 STRING 6357
-// 技能: A0O9 (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0OI (|cFFaa30ff时间瞬移|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 6358
-// 技能: A0OI (|cFFaa30ff时间瞬移|r), Researchhotkey (热键 - 学习)
+// 技能: A0OK (|cFFaa30ff疯狂射击|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -38076,7 +38082,7 @@ STRING 6369
 }
 
 STRING 6370
-// 技能: A0OK (|cFFaa30ff疯狂射击|r), Researchhotkey (热键 - 学习)
+// 技能: A0ON (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -38592,7 +38598,7 @@ STRING 6455
 }
 
 STRING 6456
-// 技能: A0ON (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0OP (|cFFff50aa爆裂火枪|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -38844,7 +38850,7 @@ STRING 6496
 }
 
 STRING 6497
-// 技能: A0OP (|cFFff50aa爆裂火枪|r), Researchhotkey (热键 - 学习)
+// 技能: A0OP (|cFFff50aa爆裂火枪|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -39402,7 +39408,7 @@ STRING 6589
 }
 
 STRING 6590
-// 技能: A0OP (|cFFff50aa爆裂火枪|r), Hotkey (热键 - 普通)
+// 技能: A0OU (|cFFff50aa爆裂火枪|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -39930,7 +39936,7 @@ STRING 6674
 }
 
 STRING 6675
-// 技能: A0OU (|cFFff50aa爆裂火枪|r), Researchhotkey (热键 - 学习)
+// 技能: A0OU (|cFFff50aa爆裂火枪|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -40056,7 +40062,7 @@ STRING 6695
 }
 
 STRING 6696
-// 技能: A0OU (|cFFff50aa爆裂火枪|r), Hotkey (热键 - 普通)
+// 技能: A0OX (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -40661,13 +40667,13 @@ STRING 6795
 }
 
 STRING 6796
-// 技能: A0OX (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0P6 (|cFF1585cc电磁力牵引|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 6797
-// 技能: A0P6 (|cFF1585cc电磁力牵引|r), Researchhotkey (热键 - 学习)
+// 技能: A0P6 (|cFF1585cc电磁力牵引|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -41067,7 +41073,7 @@ STRING 6863
 }
 
 STRING 6864
-// 技能: A0P6 (|cFF1585cc电磁力牵引|r), Hotkey (热键 - 普通)
+// 技能: A0PB (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -42350,10 +42356,22 @@ STRING 7078
 该单位被光矢命中，降低了移动速度、魔法抗性、闪避率。
 }
 
+STRING 7079
+// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff退步箭|r等级1（Q）
+}
+
 STRING 7080
 // 物品: I00G (锥炎标枪), Name (名字)
 {
 锥炎标枪
+}
+
+STRING 7081
+// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff退步箭|r等级2（Q）
 }
 
 STRING 7082
@@ -42644,13 +42662,13 @@ STRING 7127
 }
 
 STRING 7128
-// 技能: A0PB (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0PE (|cFFff0050最后的月牙天冲|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
 STRING 7129
-// 技能: A0PE (|cFFff0050最后的月牙天冲|r), Researchhotkey (热键 - 学习)
+// 技能: A0PG (|cFFff6025飞焰|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -44814,7 +44832,7 @@ STRING 7493
 }
 
 STRING 7494
-// 技能: A0PG (|cFFff6025飞焰|r), Researchhotkey (热键 - 学习)
+// 技能: A0PJ (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -46670,7 +46688,7 @@ STRING 7804
 }
 
 STRING 7805
-// 技能: A0PJ (眩晕), Researchhotkey (热键 - 学习)
+// 技能: A0PL (追风箭), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -46685,12 +46703,6 @@ STRING 7807
 // 技能: A00L (猛击), Ubertip (提示工具 - 普通 - 扩展)
 {
 灰熊的攻击有30%几率造成2倍伤害并且击晕0.1秒
-}
-
-STRING 7808
-// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff强击箭|r等级1（Q）
 }
 
 STRING 7809
@@ -47700,7 +47712,7 @@ STRING 7977
 }
 
 STRING 7978
-// 技能: A0PL (追风箭), Hotkey (热键 - 普通)
+// 技能: A0PL (追风箭), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -47778,13 +47790,13 @@ STRING 7990
 }
 
 STRING 7991
-// 技能: A0PL (追风箭), Researchhotkey (热键 - 学习)
+// 技能: A0PX (|cFF998815立体机动|r), Hotkey (热键 - 普通)
 {
 Q
 }
 
 STRING 7992
-// 技能: A0PX (|cFF998815立体机动|r), Hotkey (热键 - 普通)
+// 技能: A0PX (|cFF998815立体机动|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -48706,27 +48718,15 @@ STRING 8146
 }
 
 STRING 8147
-// 技能: A0PX (|cFF998815立体机动|r), Researchhotkey (热键 - 学习)
-{
-Q
-}
-
-STRING 8148
 // 技能: A0PY (眩晕), Researchhotkey (热键 - 学习)
 {
 Q
 }
 
-STRING 8149
-// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+STRING 8148
+// 技能: A0QO (自身移动), Hotkey (热键 - 普通)
 {
-|cFF75ccff强击箭|r等级2（Q）
-}
-
-STRING 8150
-// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff强击箭|r等级3（Q）
+Q
 }
 
 STRING 8151
@@ -48769,18 +48769,6 @@ STRING 8157
 // 技能: A0Q1 (|cFFFFdd25回旋风暴|r), Name (名字)
 {
 |cFFFFdd25回旋风暴|r
-}
-
-STRING 8158
-// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff强击箭|r等级4（Q）
-}
-
-STRING 8159
-// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff强击箭|r等级5（Q）
 }
 
 STRING 8160
@@ -49446,7 +49434,7 @@ STRING 8270
 }
 
 STRING 8271
-// 技能: A0QO (自身移动), Hotkey (热键 - 普通)
+// 技能: A0QO (自身移动), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -50410,7 +50398,7 @@ STRING 8432
 }
 
 STRING 8433
-// 技能: A0QO (自身移动), Researchhotkey (热键 - 学习)
+// 技能: A0QW (|cFF75ccff强击箭|r), Hotkey (热键 - 普通)
 {
 Q
 }
@@ -50603,7 +50591,7 @@ STRING 8466
 }
 
 STRING 8467
-// 技能: A0QW (|cFF75ccff强击箭|r), Hotkey (热键 - 普通)
+// 技能: A0QW (|cFF75ccff强击箭|r), Researchhotkey (热键 - 学习)
 {
 Q
 }
@@ -50693,21 +50681,9 @@ STRING 8481
 }
 
 STRING 8482
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Hotkey (热键 - 普通)
+// 技能: A0QY (|cFF75ccff锋刃箭|r), Researchhotkey (热键 - 学习)
 {
 W
-}
-
-STRING 8483
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff锋刃箭|r等级1（W）
-}
-
-STRING 8484
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff锋刃箭|r等级2（W）
 }
 
 STRING 8485
@@ -50722,22 +50698,10 @@ STRING 8486
 能反射任何伤害
 }
 
-STRING 8487
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff锋刃箭|r等级3（W）
-}
-
 STRING 8488
 // 单位: H000 (永远的红色幼月), Propernames (称谓)
 {
 蕾米莉亚·斯卡雷特
-}
-
-STRING 8489
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff锋刃箭|r等级4（W）
 }
 
 STRING 8490
@@ -50756,12 +50720,6 @@ STRING 8492
 // 技能: A0AU (粉碎), Researchtip (提示工具 - 学习)
 {
 学习|cFFFFff00剑盾精通|r（D）
-}
-
-STRING 8493
-// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
-{
-|cFF75ccff锋刃箭|r等级5（W）
 }
 
 STRING 8494
@@ -51238,58 +51196,16 @@ STRING 8572
 |cFFaaffff箭术精通|r等级5
 }
 
-STRING 8573
-// 技能: A0R0 (箭术精通), Researchubertip (提示工具 - 学习 - 扩展)
-{
-提高20%的移动速度并且攻击时有5%/15%/25%/35%/45%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：3/4/5/6/7秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
-}
-
-STRING 8574
-// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
-{
-提高20%的移动速度并且攻击时有5%几率连，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：3秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
-}
-
-STRING 8575
-// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
-{
-提高20%的移动速度并且攻击时有15%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：4秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
-}
-
-STRING 8576
-// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
-{
-提高20%的移动速度并且攻击时有25%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：5秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
-}
-
 STRING 8577
 // 单位: e009 (等离子炮), Name (名字)
 {
 等离子炮
 }
 
-STRING 8578
-// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
-{
-提高20%的移动速度并且攻击时有35%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：6秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
-}
-
 STRING 8579
 // 技能: A089 (等离子炮), Name (名字)
 {
 等离子炮
-}
-
-STRING 8580
-// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
-{
-提高20%的移动速度并且攻击时有45%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：7秒|n|n|cffffcc00[强击箭]→[退步箭]命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
-[锋刃箭]→[贯通箭]该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
 }
 
 STRING 8581
@@ -51316,10 +51232,70 @@ STRING 8584
 移动速度提升并有几率连击
 }
 
+STRING 8585
+// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff退步箭|r等级3（Q）
+}
+
+STRING 8586
+// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff退步箭|r等级4（Q）
+}
+
+STRING 8587
+// 技能: A0QX (|cFF75ccff退步箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff退步箭|r等级5（Q）
+}
+
+STRING 8588
+// 技能: A0QX (|cFF75ccff退步箭|r), Researchhotkey (热键 - 学习)
+{
+Q
+}
+
+STRING 8589
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Hotkey (热键 - 普通)
+{
+W
+}
+
+STRING 8590
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff贯通箭|r等级1（W）
+}
+
+STRING 8591
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff贯通箭|r等级2（W）
+}
+
+STRING 8592
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff贯通箭|r等级3（W）
+}
+
 STRING 8593
 // 技能: A089 (等离子炮), Tip (提示工具 - 普通)
 {
 |cFF00ffff等离子炮|r（D）
+}
+
+STRING 8594
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff贯通箭|r等级4（W）
+}
+
+STRING 8595
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Tip (提示工具 - 普通)
+{
+|cFF75ccff贯通箭|r等级5（W）
 }
 
 STRING 8596
@@ -51356,6 +51332,54 @@ STRING 8601
 // 技能: A082 (动量冲击), Tip (提示工具 - 普通)
 {
 |cFF33ccFF动量冲击|r等级5（W）
+}
+
+STRING 8602
+// 技能: A0QZ (|cFF75ccff贯通箭|r), Researchhotkey (热键 - 学习)
+{
+W
+}
+
+STRING 8603
+// 技能: A0R0 (箭术精通), Researchubertip (提示工具 - 学习 - 扩展)
+{
+提高20%的移动速度并且攻击时有5%/15%/25%/35%/45%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：3/4/5/6/7秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
+}
+
+STRING 8604
+// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
+{
+提高20%的移动速度并且攻击时有5%几率连，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：3秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
+}
+
+STRING 8605
+// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
+{
+提高20%的移动速度并且攻击时有15%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：4秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
+}
+
+STRING 8606
+// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
+{
+提高20%的移动速度并且攻击时有25%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：5秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
+}
+
+STRING 8607
+// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
+{
+提高20%的移动速度并且攻击时有35%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：6秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
+}
+
+STRING 8608
+// 技能: A0R0 (箭术精通), Ubertip (提示工具 - 普通 - 扩展)
+{
+提高20%的移动速度并且攻击时有45%几率连击，在这个状态下可以强化一次[强击箭]或[锋刃箭]|n|n|cff00ffff持续时间：7秒|n|n|cffffcc00[强击箭]→[退步箭]|n命中造成1秒的眩晕，击退距离提高到750距离外，并且游侠释放这个技能同时后退500距离|n
+[锋刃箭]→[贯通箭]|n该技能可最多穿透4个目标，所有命中目标都造成1秒的眩晕
 }
 
 STRING 8659
