@@ -31,6 +31,10 @@ Event.AnyUnitSkill="任意单位使用指定技能"
 Event.AnyUnitSkill="任意单位 ",~阶段," ",~技能
 Event.AnyUnitSkillHint="每个阶段与技能的组合下只能存放一个触发器"
 
+Event.AnyUnitDamage="任意单位受到伤害"
+Event.AnyUnitDamage=~单位选项," 受到 ",~伤害选项
+Event.AnyUnitDamageHint="该事件不会被0伤害驱动"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"
@@ -7705,6 +7709,11 @@ GetUnitsInRectOfPlayerHint="会创建单位组."
 GetUnitsInRectMatching="矩形区域内的单位(指定条件)"
 GetUnitsInRectMatching=~矩形区域," 内满足 ",~条件," 的所有单位"
 GetUnitsInRectMatchingHint="使用'匹配单位'指代条件中用于比较的单位. 会创建单位组."
+
+//最萌小汐
+Unit.GetUnitInLineAll="直线区域内的单位"
+Unit.GetUnitInLineAll="起点为 ",~点," (清除该点 ",~布尔," ),方向为 ",~角度," ,长 ",~实数," 半宽 ",~实数," 的直线范围内所有单位"
+Unit.GetUnitInLineAllHint="注意是半宽.会创建单位组."
 
 GetUnitsInRangeOfLocAll="圆范围内单位"
 GetUnitsInRangeOfLocAll="半径为 ",~Radius," 圆心为 ",~指定点," 的圆范围内所有单位"

@@ -388,6 +388,8 @@ ChatRecipient=0,0,0,频道类型,integer
 
 //最萌小汐
 skillType=0,0,0,技能阶段,integer
+damageTypeA=0,0,0,单位类型,integer
+damageTypeB=0,0,0,伤害类型,integer
 typename=0,0,0,变量类型,scriptcode
 removeWhichLocation=0,0,0,清除哪个点,integer
 DisOrAng=0,0,0,距离/方向,integer
@@ -436,6 +438,14 @@ skillTypeB=0,skillType,2,开始施放
 skillTypeC=0,skillType,3,发动了
 skillTypeD=0,skillType,4,停止施放
 skillTypeE=0,skillType,5,结束施放
+
+damageTypeA1=0,damageTypeA,0,任意单位
+damageTypeA2=0,damageTypeA,1,英雄单位
+damageTypeA3=0,damageTypeA,2,普通单位
+
+damageTypeB1=0,damageTypeB,0,任意伤害
+damageTypeB2=0,damageTypeB,1,攻击伤害
+damageTypeB3=0,damageTypeB,2,非攻击伤害
 
 //YDWE 修改属性
 bonusTypeC=0,bonusType,3,攻击
@@ -3340,7 +3350,11 @@ Event.AnyUnitSkill=0,skillType,abilcode
 _Event.AnyUnitSkill_Defaults=skillTypeC,_
 _Event.AnyUnitSkill_Category=TC_MU_EVENT
 
+Event.AnyUnitDamage=0,damageTypeA,damageTypeB
+_Event.AnyUnitDamage_Defaults=damageTypeA1,damageTypeB1
+_Event.AnyUnitDamage_Category=TC_MU_EVENT
 
+//
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
 _YDWEDisableRegister_Category=TC_NOTHING
@@ -11107,6 +11121,11 @@ _GetUnitsInRectOfPlayer_Category=TC_NOTHING
 GetUnitsInRectMatching=0,1,group,rect,boolexpr
 _GetUnitsInRectMatching_Defaults=GetPlayableMapRect,_
 _GetUnitsInRectMatching_Category=TC_NOTHING
+
+//最萌小汐
+Unit.GetUnitInLineAll=0,1,group,location,boolean,real,real,real
+_Unit.GetUnitInLineAll_Defaults=GetUnitLoc,true,0,1000,200
+_Unit.GetUnitInLineAll_Category=TC_MU_UNIT
 
 GetUnitsInRangeOfLocAll=0,1,group,real,location
 _GetUnitsInRangeOfLocAll_Defaults=512,GetRectCenter
