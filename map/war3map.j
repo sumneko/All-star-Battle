@@ -37,6 +37,7 @@ constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
 //endglobals from YDWEEnumDestructablesInCircleBJFilterNull
 //globals from YDWEGetForceOfPlayerNull:
 constant boolean LIBRARY_YDWEGetForceOfPlayerNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetForceOfPlayerNull
 //globals from YDWEGetInventoryIndexOfItemTypeBJNull:
 constant boolean LIBRARY_YDWEGetInventoryIndexOfItemTypeBJNull=true
@@ -47,13 +48,13 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRangeOfLocMatchingNull
 //globals from YDWEGetUnitsInRectMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
@@ -63,7 +64,6 @@ constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEGetUnitsOfPlayerAndTypeIdNull:
 constant boolean LIBRARY_YDWEGetUnitsOfPlayerAndTypeIdNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsOfPlayerAndTypeIdNull
 //globals from YDWEMakeUnitsPassiveForPlayerNull:
 constant boolean LIBRARY_YDWEMakeUnitsPassiveForPlayerNull=true
@@ -193,10 +193,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary__U=null
-unit array YDWELibrary__Uflush_units
-integer YDWELibrary__Iflush_first=0
-integer YDWELibrary__Iflush_top=0
+unit YDWELibrary___U=null
+unit array YDWELibrary___Uflush_units
+integer YDWELibrary___Iflush_first=0
+integer YDWELibrary___Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -1196,6 +1196,7 @@ trigger gg_trg_zf2=null
 trigger gg_trg_zhuanshuyijian_1=null
 trigger gg_trg_zhuanzhuyijian_2=null
 trigger gg_trg_QJJ_TBJ=null
+trigger gg_trg_FRJ_GTJ=null
 trigger gg_trg_JSJT=null
 trigger gg_trg_fzj=null
 trigger gg_trg_fzj2=null
@@ -1810,7 +1811,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_FRJ_GTJ=null
 
 trigger l__library_init
 
@@ -3761,7 +3761,7 @@ function s__AI_Init takes nothing returns nothing
 call Debug("开启AI")
 call TimerStart(CreateTimer(), 3, true, function s__AI_check_AI)
 endfunction
-function AIlibrary__Init takes nothing returns nothing
+function AIlibrary___Init takes nothing returns nothing
 endfunction
 
 //library AIlibrary ends
@@ -4501,42 +4501,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary__FlushUnit_Add takes nothing returns nothing
+function YDWELibrary___FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary__U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
+set YDWELibrary___U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
 loop
-set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
-exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
+set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
+exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
 endloop
-if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
-set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
+if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
+set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
-if YDWELibrary__Iflush_first > 500 then
+if YDWELibrary___Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary__Iflush_top
+set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary__U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
-set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary__Iflush_first=cjlocgn_00000000
+set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary___U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
+set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary___Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary__Init takes nothing returns nothing
+function YDWELibrary___Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -4703,17 +4703,12 @@ loop
 exitwhen i > s__maphack_visitorsCount
 if GetRandomInt(1, 3) == 2 and GetUnitCurrentOrder(s__maphack_visitors[i]) == 0 then
 set cjlocgn_00000000=GetOwningPlayer(s__maphack_visitors[i])
-call RemoveUnit(s__maphack_visitors[i])
 set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
 set cjlocgn_00000002=GetRandomInt(- 100, 100) * 70
-if IsPlayerAlly(cjlocgn_00000000, s__sys_selfp) then
-set s__maphack_visitors[i]=CreateUnit(cjlocgn_00000000, 0x48303048, cjlocgn_00000001, cjlocgn_00000002, 0)
-else
-set s__maphack_visitors[i]=CreateUnit(cjlocgn_00000000, 0x48303047, cjlocgn_00000001, cjlocgn_00000002, 0)
-endif
+call SetUnitX(s__maphack_visitors[i], cjlocgn_00000001)
+call SetUnitY(s__maphack_visitors[i], cjlocgn_00000002)
 call UnitSetUsesAltIcon(s__maphack_visitors[i], true)
 call SetUnitFlyHeight(s__maphack_visitors[i], 10000, 0)
-call SetHeroLevel(s__maphack_visitors[i], 30, false)
 set cjlocgn_00000001=GetRandomInt(- 100, 100) * 70
 set cjlocgn_00000002=GetRandomInt(- 100, 100) * 70
 call IssuePointOrder(s__maphack_visitors[i], "move", cjlocgn_00000001, cjlocgn_00000002)
@@ -4921,6 +4916,7 @@ call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_SHARE
 call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_HELP_REQUEST, false)
 call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[11], s__baka_spplayer[x], false)
 call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, false)
+call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[x], ALLIANCE_HELP_REQUEST, false)
 set x=x + 1
 endloop
 set x=5
@@ -4945,6 +4941,7 @@ call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_SHARE
 call SetPlayerAlliance(s__baka_spplayer[11], s__baka_spplayer[x], ALLIANCE_HELP_REQUEST, false)
 call SetPlayerAllianceStateAllyBJ(s__baka_spplayer[10], s__baka_spplayer[x], false)
 call SetPlayerAlliance(s__baka_spplayer[10], s__baka_spplayer[x], ALLIANCE_SHARED_VISION, false)
+call SetPlayerAlliance(s__baka_spplayer[x], s__baka_spplayer[x], ALLIANCE_HELP_REQUEST, false)
 set x=x + 1
 endloop
 call s__baka_OB()
@@ -5460,7 +5457,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -5571,7 +5568,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary__Init takes nothing returns nothing
+function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -5775,7 +5772,7 @@ function s__test_check takes nothing returns nothing
 call s__test_check_func1()
 call TimerStart(CreateTimer(), 10, true, function s__test_check_func1)
 endfunction
-function testLibrary__Init takes nothing returns nothing
+function testLibrary___Init takes nothing returns nothing
 local integer i=0
 loop
 exitwhen i > 11
@@ -5927,9 +5924,54 @@ local boolean result=IssuePointOrderByIdLoc(u, id, loc)
 call RemoveLocation(loc)
 return result
 endfunction
+function s__Unit_GetUnitInLineAll takes location loc,boolean flag,real ang,real len,real dis returns group
+local real x1=GetLocationX(loc)
+local real y1=GetLocationY(loc)
+local real x2
+local real y2
+local real x0
+local real y0
+local real A
+local real B
+local real C
+local real s
+local group g
+local unit cjlocgn_00000000
+local real cjlocgn_00000001
+local real cjlocgn_00000002
+local real cjlocgn_00000003
+if flag then
+call RemoveLocation(loc)
+endif
+set x2=x1 + len * Cos(ang * bj_DEGTORAD)
+set y2=y1 + len * Sin(ang * bj_DEGTORAD)
+set x0=( x1 + x2 ) / 2
+set y0=( y1 + y2 ) / 2
+set A=y1 - y2
+set B=x2 - x1
+set C=- A * x1 - B * y1
+set s=SquareRoot(A * A + B * B)
+set g=CreateGroup()
+call GroupEnumUnitsInRange(g, x0, y0, len / 2, null)
+set s__sys_g=CreateGroup()
+loop
+set cjlocgn_00000000=FirstOfGroup(g)
+exitwhen cjlocgn_00000000 == null
+call GroupRemoveUnit(g, cjlocgn_00000000)
+set cjlocgn_00000001=GetUnitX(cjlocgn_00000000)
+set cjlocgn_00000002=GetUnitY(cjlocgn_00000000)
+set cjlocgn_00000003=( A * cjlocgn_00000001 + B * cjlocgn_00000002 + C ) / s
+if cjlocgn_00000003 > - dis and cjlocgn_00000003 < dis then
+call GroupAddUnit(s__sys_g, cjlocgn_00000000)
+endif
+endloop
+call DestroyGroup(g)
+set g=null
+return s__sys_g
+endfunction
 function s__Unit_GetUnitsInRangeOfLocMatchingMU takes real radius,location whichLocation,boolexpr filter returns group
 local group g=CreateGroup()
-call GroupEnumUnitsInRangeOfLoc(g, whichLocation, radius + 24, filter)
+call GroupEnumUnitsInRangeOfLoc(g, whichLocation, radius, filter)
 call RemoveLocation(whichLocation)
 call DestroyBoolExpr(filter)
 set s__sys_g=g
@@ -8357,73 +8399,73 @@ set udg_buer[7]=true
 set udg_buer[8]=true
 set udg_buer[9]=true
 set udg_buer[10]=true
-call s__baka_CreateNUnitsAtLoc2(1 , 0x456D6F6F , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren02) , 270.00)
+call CreateNUnitsAtLoc(1, 0x456D6F6F, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren02), 270.00)
 set udg_hero[0]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x45776172 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren01) , 270.00)
+call CreateNUnitsAtLoc(1, 0x45776172, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren01), 270.00)
 set udg_hero[1]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48757468 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren00) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48757468, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren00), 270.00)
 set udg_hero[2]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4E74696E , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren05) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4E74696E, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren05), 270.00)
 set udg_hero[3]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4870616C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren06) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4870616C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren06), 270.00)
 set udg_hero[4]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48616D67 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren07) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48616D67, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren07), 270.00)
 set udg_hero[5]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x486D6B67 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren08) , 270.00)
+call CreateNUnitsAtLoc(1, 0x486D6B67, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren08), 270.00)
 set udg_hero[6]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48767764 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren03) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48767764, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren03), 270.00)
 set udg_hero[9]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48617266 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren04) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48617266, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren04), 270.00)
 set udg_hero[10]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F746368 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren09) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F746368, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren09), 270.00)
 set udg_hero[12]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4564656D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren10) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4564656D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren10), 270.00)
 set udg_hero[13]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x45777264 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren11) , 270.00)
+call CreateNUnitsAtLoc(1, 0x45777264, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren11), 270.00)
 set udg_hero[14]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x55647265 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren12) , 270.00)
+call CreateNUnitsAtLoc(1, 0x55647265, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren12), 270.00)
 set udg_hero[15]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F736864 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren13) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F736864, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren13), 270.00)
 set udg_hero[16]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F626C61 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren14) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F626C61, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren14), 270.00)
 set udg_hero[17]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x45696C6C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren15) , 270.00)
+call CreateNUnitsAtLoc(1, 0x45696C6C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren15), 270.00)
 set udg_hero[18]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F726578 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_16) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F726578, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_16), 270.00)
 set udg_hero[19]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F666172 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_17) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F666172, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_17), 270.00)
 set udg_hero[20]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x456B6565 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_18) , 270.00)
+call CreateNUnitsAtLoc(1, 0x456B6565, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_18), 270.00)
 set udg_hero[21]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48626C6D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_19) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48626C6D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_19), 270.00)
 set udg_hero[22]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x45657669 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren_20) , 270.00)
+call CreateNUnitsAtLoc(1, 0x45657669, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren_20), 270.00)
 set udg_hero[23]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x45667572 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren21) , 270.00)
+call CreateNUnitsAtLoc(1, 0x45667572, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren21), 270.00)
 set udg_hero[24]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F636268 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren22) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F636268, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren22), 270.00)
 set udg_hero[25]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48303030 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren23) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48303030, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren23), 270.00)
 set udg_hero[26]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4F73616D , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren24) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4F73616D, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren24), 270.00)
 set udg_hero[27]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x556C6963 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren25) , 270.00)
+call CreateNUnitsAtLoc(1, 0x556C6963, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren25), 270.00)
 set udg_hero[28]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x486B616C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren26) , 270.00)
+call CreateNUnitsAtLoc(1, 0x486B616C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren26), 270.00)
 set udg_hero[29]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x486D6272 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren27) , 270.00)
+call CreateNUnitsAtLoc(1, 0x486D6272, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren27), 270.00)
 set udg_hero[30]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x48303036 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren28) , 270.00)
+call CreateNUnitsAtLoc(1, 0x48303036, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren28), 270.00)
 set udg_hero[31]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x55646561 , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren31) , 270.00)
+call CreateNUnitsAtLoc(1, 0x55646561, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren31), 270.00)
 set udg_hero[34]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304A , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren32) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4830304A, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren32), 270.00)
 set udg_hero[35]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304C , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren34) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4830304C, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren34), 270.00)
 set udg_hero[37]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304E , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren35) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4830304E, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren35), 270.00)
 set udg_hero[38]=bj_lastCreatedUnit
-call s__baka_CreateNUnitsAtLoc2(1 , 0x4830304F , s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE) , GetRectCenter(gg_rct_xuanren36) , 270.00)
+call CreateNUnitsAtLoc(1, 0x4830304F, s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), GetRectCenter(gg_rct_xuanren36), 270.00)
 set udg_hero[39]=bj_lastCreatedUnit
 call GroupAddUnit(udg_danweizu[0], udg_hero[0])
 call GroupAddUnit(udg_danweizu[0], udg_hero[1])
@@ -8482,6 +8524,7 @@ loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
 call SetPlayerAlliance(s__baka_SPlayer(10), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
 call SetPlayerAlliance(s__baka_SPlayer(11), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
+call SetPlayerAlliance(s__baka_SPlayer(bj_forLoopAIndex - 1), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
 call SetPlayerName(s__baka_SPlayer(10), "TRIGSTR_5403")
@@ -9006,27 +9049,25 @@ call ClearTextMessagesBJ(udg_LINSHIWANJIAZU)
 call DestroyForce(udg_LINSHIWANJIAZU)
 call StopSoundBJ(gg_snd_AutoCastButtonClick1, false)
 call PlaySoundBJ(gg_snd_AutoCastButtonClick1)
-set udg_danwei2[0]=GetTriggerUnit()
-call ModifyHeroSkillPoints(udg_danwei2[0], bj_MODIFYMETHOD_SET, 1)
-call UnitRemoveAbility(udg_danwei2[0], 0x416E6532)
 set udg_a[GetUnitPointValue(udg_danwei2[0])]=true
 call TriggerExecute(gg_trg_All_skills)
-set udg_danwei2[0]=null
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(GetTriggerUnit())])
 set udg_choose_ture[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=false
-call SetUnitOwner(GetTriggerUnit(), GetTriggerPlayer(), true)
 set udg_hero_choose[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=null
-call SetUnitPositionLoc(GetTriggerUnit(), GetPlayerStartLocationLoc(GetOwningPlayer(GetTriggerUnit())))
-call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, GetTriggerUnit(), EVENT_UNIT_DAMAGED)
-set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=GetTriggerUnit()
-call InitPlayerHero(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
+call s__baka_hookImage()
+call CreateNUnitsAtLoc(1, GetUnitTypeId(GetTriggerUnit()), GetTriggerPlayer(), GetPlayerStartLocationLoc(GetTriggerPlayer()), bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call InitPlayerHero(bj_lastCreatedUnit)
+call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, bj_lastCreatedUnit, EVENT_UNIT_DAMAGED)
+set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=bj_lastCreatedUnit
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( GetPlayerName(GetTriggerPlayer()) + ( "|cFF0066FF选择了|r" + GetHeroProperName(GetTriggerUnit()) ) ))
 call PanCameraToTimedLocForPlayer(GetTriggerPlayer(), GetPlayerStartLocationLoc(GetTriggerPlayer()), 0.50)
-call SelectUnitForPlayerSingle(GetTriggerUnit(), GetTriggerPlayer())
+call SelectUnitForPlayerSingle(bj_lastCreatedUnit, GetTriggerPlayer())
 call SetPlayerName(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), ( GetPlayerName(GetTriggerPlayer()) + ( "（" + ( GetHeroProperName(GetTriggerUnit()) + "）" ) ) ))
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), 0x41303646, false)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), 0x41303648, false)
 call GroupRemoveUnit(udg_danweizu[0], GetTriggerUnit())
+call RemoveUnit(GetTriggerUnit())
 else
 set udg_LINSHIWANJIAZU=YDWEGetPlayersMatchingNull(Condition(function Trig_choose_heroFunc001Func004002001))
 call ClearTextMessagesBJ(udg_LINSHIWANJIAZU)
@@ -11481,8 +11522,8 @@ set udg_point[8]=GetPlayerStartLocationLoc(GetTriggerPlayer())
 call s__baka_hookImage()
 call CreateNUnitsAtLoc(1, GetUnitTypeId(udg_danwei[0]), GetTriggerPlayer(), udg_point[8], bj_UNIT_FACING)
 call s__maphack_InitHero(bj_lastCreatedUnit)
+call InitPlayerHero(bj_lastCreatedUnit)
 set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=bj_lastCreatedUnit
-call InitPlayerHero(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
 call TriggerRegisterUnitEvent(gg_trg_renyishanghai_hero, udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 )], EVENT_UNIT_DAMAGED)
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetOwningPlayer(bj_lastCreatedUnit)) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(bj_lastCreatedUnit)])
 if ( ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) <= 5 ) ) then
@@ -11611,18 +11652,20 @@ set udg_danwei2[0]=null
 call YDWEMultiboardSetItemIconBJNull(udg_duomianban[0] , 1 , ( ( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 ) + 1 ) , udg_touxiang[GetUnitPointValue(GetTriggerUnit())])
 call PanCameraToTimedLocForPlayer(GetTriggerPlayer(), GetPlayerStartLocationLoc(GetTriggerPlayer()), 0.50)
 set udg_choose_ture[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=false
-call SetUnitOwner(GetTriggerUnit(), GetTriggerPlayer(), true)
 set udg_hero_choose[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=null
-call SetUnitPositionLoc(GetTriggerUnit(), GetPlayerStartLocationLoc(GetOwningPlayer(GetTriggerUnit())))
-set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=GetTriggerUnit()
+call s__baka_hookImage()
+call CreateNUnitsAtLoc(1, GetUnitTypeId(GetTriggerUnit()), GetTriggerPlayer(), GetPlayerStartLocationLoc(GetTriggerPlayer()), bj_UNIT_FACING)
+call s__maphack_InitHero(bj_lastCreatedUnit)
+call InitPlayerHero(bj_lastCreatedUnit)
+set udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=bj_lastCreatedUnit
 call ModifyHeroSkillPoints(GetTriggerUnit(), bj_MODIFYMETHOD_SET, 0)
-call InitPlayerHero(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )])
 call QuestMessageBJ(GetPlayersAll(), bj_QUESTMESSAGE_UPDATED, ( GetPlayerName(GetTriggerPlayer()) + ( "|cFF0066FF选择了|r" + GetHeroProperName(GetTriggerUnit()) ) ))
 call SetPlayerName(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), ( GetPlayerName(GetTriggerPlayer()) + ( "（" + ( GetHeroProperName(GetTriggerUnit()) + "）" ) ) ))
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), 0x41303646, false)
 call SetPlayerAbilityAvailable(GetOwningPlayer(udg_player[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]), 0x41303648, false)
-call SelectUnitForPlayerSingle(GetTriggerUnit(), GetTriggerPlayer())
+call SelectUnitForPlayerSingle(bj_lastCreatedUnit, GetTriggerPlayer())
 call GroupRemoveUnit(udg_danweizu[0], GetTriggerUnit())
+call RemoveUnit(GetTriggerUnit())
 else
 set udg_hero_choose[( s__baka_SGetPlayerId(GetTriggerPlayer()) + 1 )]=GetTriggerUnit()
 call DisplayTimedTextToPlayer(GetTriggerPlayer(), 0, 0, 3.00, "TRIGSTR_8317")
@@ -36281,6 +36324,137 @@ call s__Event_AnyUnitSkill(gg_trg_QJJ_TBJ , 3 , 0x41305157)
 call s__Event_AnyUnitSkill(gg_trg_QJJ_TBJ , 3 , 0x41305158)
 call TriggerAddAction(gg_trg_QJJ_TBJ, function Trig_QJJ_TBJActions)
 endfunction
+function Trig_FRJ_GTJFunc009T takes nothing returns nothing
+local group ydl_group
+local unit ydl_unit
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
+call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848) == true ) ) then
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8, YDWEAngleBetweenUnits(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)))
+else
+endif
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) ) then
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), GetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), 125.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) and ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9))) == true ) ) then
+call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) - 1 ))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887) / 2.00 ))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04) * ( 1.00 + RMinBJ(1.00, ( ( 1750.00 - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) ) / 1250.00 )) ) ))
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), ydl_unit, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), ydl_unit, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x89D04DF2) == true ) ) then
+call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(ydl_unit) , 0x65303130 , GetUnitLoc(ydl_unit) , 0))
+call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x41304236)
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E) , 852095 , ydl_unit)
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E))
+else
+endif
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
+else
+endif
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848) == true ) ) then
+if ( ( YDWEDistanceBetweenUnits(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) < 125.00 ) ) then
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887) / 2.00 ))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04) * ( 1.00 + RMinBJ(1.00, ( ( 1750.00 - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) ) / 1250.00 )) ) ))
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x89D04DF2) == true ) ) then
+call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) , 0x65303130 , GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) , 0))
+call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x41304236)
+call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15))
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E))
+else
+endif
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) ) then
+call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848, false)
+else
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, - 1.00)
+endif
+else
+endif
+else
+if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) == 0 ) ) then
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, - 1.00)
+else
+endif
+endif
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call PauseTimer(GetExpiredTimer())
+call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+else
+endif
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function Trig_FRJ_GTJActions takes nothing returns nothing
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
+if ( ( GetSpellAbilityId() == 0x4130515A ) ) then
+call TimerStart(LoadTimerHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xE7E09F7F), 0.00, false, null)
+call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2, true)
+else
+call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2, false)
+endif
+if ( ( GetSpellTargetUnit() == null ) ) then
+call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848, false)
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8, s__math_U2L(GetTriggerUnit() , GetSpellTargetLoc() , 1 , true))
+if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 5)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 1)
+endif
+else
+call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848, true)
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8, YDWEAngleBetweenUnits(GetTriggerUnit() , GetSpellTargetUnit()))
+if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 4)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 0)
+endif
+endif
+call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(GetTriggerUnit()) , 0x68303045 , GetUnitLoc(GetTriggerUnit()) , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)))
+if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
+call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 4.00, 4.00, 4.00)
+else
+endif
+set ydl_timer=CreateTimer()
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x9375D887, ( ( 25.00 + ( 25.00 * I2R(GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())) ) ) + ( 1.20 * I2R(GetHeroAgi(GetTriggerUnit(), true)) ) ))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x00BF2B95, 2000.00)
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x7D7428EE, 1750.00)
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x883E8A15, GetSpellTargetUnit())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x458B7DE9, GetTriggerUnit())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xC367145E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC367145E))
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0xE6FC2848, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848))
+call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x89D04DF2, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xB9A583B8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8))
+call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xA054799A, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x62069E04, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62069E04))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+call TimerStart(ydl_timer, 0.04, true, function Trig_FRJ_GTJFunc009T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
+endfunction
+function InitTrig_FRJ_GTJ takes nothing returns nothing
+set gg_trg_FRJ_GTJ=CreateTrigger()
+call s__Event_AnyUnitSkill(gg_trg_FRJ_GTJ , 3 , 0x41305159)
+call s__Event_AnyUnitSkill(gg_trg_FRJ_GTJ , 3 , 0x4130515A)
+call TriggerAddAction(gg_trg_FRJ_GTJ, function Trig_FRJ_GTJActions)
+endfunction
 function Trig_JSJTConditions takes nothing returns boolean
 return ( ( GetLearnedSkill() == 0x41305230 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) and ( HaveSavedHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xE7E09F7F) == false ) )
 endfunction
@@ -60438,137 +60612,6 @@ function InitTrig_undef takes nothing returns nothing
 set gg_trg_undef=CreateTrigger()
 call TriggerAddAction(gg_trg_undef, function Trig_undefActions)
 endfunction
-function Trig_FRJ_GTJFunc009T takes nothing returns nothing
-local group ydl_group
-local unit ydl_unit
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
-call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
-if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848) == true ) ) then
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8, YDWEAngleBetweenUnits(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)))
-else
-endif
-if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) ) then
-set ydl_group=CreateGroup()
-call GroupEnumUnitsInRange(ydl_group, GetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), GetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), 125.00, null)
-loop
-set ydl_unit=FirstOfGroup(ydl_group)
-exitwhen ydl_unit == null
-call GroupRemoveUnit(ydl_group, ydl_unit)
-if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) and ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9))) == true ) ) then
-call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) - 1 ))
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887) / 2.00 ))
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04) * ( 1.00 + RMinBJ(1.00, ( ( 1750.00 - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) ) / 1250.00 )) ) ))
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), ydl_unit, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), ydl_unit, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x89D04DF2) == true ) ) then
-call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(ydl_unit) , 0x65303130 , GetUnitLoc(ydl_unit) , 0))
-call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x41304236)
-call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E) , 852095 , ydl_unit)
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E))
-else
-endif
-else
-endif
-endloop
-call DestroyGroup(ydl_group)
-else
-endif
-if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848) == true ) ) then
-if ( ( YDWEDistanceBetweenUnits(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) < 125.00 ) ) then
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x9375D887) / 2.00 ))
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04) * ( 1.00 + RMinBJ(1.00, ( ( 1750.00 - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) ) / 1250.00 )) ) ))
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_NORMAL, WEAPON_TYPE_WHOKNOWS)
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15), LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x62069E04), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x89D04DF2) == true ) ) then
-call SaveUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) , 0x65303130 , GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15)) , 0))
-call UnitAddAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x41304236)
-call s__baka_IssueTargetOrderById2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E) , 852095 , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15))
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E))
-else
-endif
-if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) > 0 ) ) then
-call SaveBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xE6FC2848, false)
-else
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, - 1.00)
-endif
-else
-endif
-else
-if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) == 0 ) ) then
-call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, - 1.00)
-else
-endif
-endif
-if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-else
-endif
-set ydl_group=null
-set ydl_unit=null
-endfunction
-function Trig_FRJ_GTJActions takes nothing returns nothing
-local timer ydl_timer
-local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
-set ydl_localvar_step=ydl_localvar_step + 3
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
-if ( ( GetSpellAbilityId() == 0x4130515A ) ) then
-call TimerStart(LoadTimerHandle(YDHT, GetHandleId(GetTriggerUnit()), 0xE7E09F7F), 0.00, false, null)
-call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2, true)
-else
-call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2, false)
-endif
-if ( ( GetSpellTargetUnit() == null ) ) then
-call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848, false)
-call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8, s__math_U2L(GetTriggerUnit() , GetSpellTargetLoc() , 1 , true))
-if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 5)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 1)
-endif
-else
-call SaveBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848, true)
-call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8, YDWEAngleBetweenUnits(GetTriggerUnit() , GetSpellTargetUnit()))
-if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 4)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A, 0)
-endif
-endif
-call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(GetTriggerUnit()) , 0x68303045 , GetUnitLoc(GetTriggerUnit()) , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)))
-if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
-call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 4.00, 4.00, 4.00)
-else
-endif
-set ydl_timer=CreateTimer()
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0x9375D887, ( ( 25.00 + ( 25.00 * I2R(GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())) ) ) + ( 1.20 * I2R(GetHeroAgi(GetTriggerUnit(), true)) ) ))
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0x00BF2B95, 2000.00)
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0x7D7428EE, 1750.00)
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x883E8A15, GetSpellTargetUnit())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x458B7DE9, GetTriggerUnit())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xC367145E, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xC367145E))
-call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0xE6FC2848, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE6FC2848))
-call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x89D04DF2, LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2))
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0xB9A583B8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8))
-call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xA054799A, LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xA054799A))
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
-call SaveReal(YDHT, GetHandleId(ydl_timer), 0x62069E04, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62069E04))
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
-call TimerStart(ydl_timer, 0.04, true, function Trig_FRJ_GTJFunc009T)
-call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
-set ydl_timer=null
-endfunction
-function InitTrig_FRJ_GTJ takes nothing returns nothing
-set gg_trg_FRJ_GTJ=CreateTrigger()
-call s__Event_AnyUnitSkill(gg_trg_FRJ_GTJ , 3 , 0x41305159)
-call s__Event_AnyUnitSkill(gg_trg_FRJ_GTJ , 3 , 0x4130515A)
-call TriggerAddAction(gg_trg_FRJ_GTJ, function Trig_FRJ_GTJActions)
-endfunction
 function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_Lua___LuaLibrary()
 //Function not found: call InitTrig_base_lua()
@@ -61037,6 +61080,7 @@ call InitTrig_guangdun_xuexi()
 call InitTrig_guangdun_2()
 call InitTrig_guangdun_3()
 call InitTrig_QJJ_TBJ()
+call InitTrig_FRJ_GTJ()
 call InitTrig_JSJT()
 call InitTrig_fzj()
 call InitTrig_fzj2()
@@ -61552,7 +61596,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-call InitTrig_FRJ_GTJ()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -61787,24 +61830,24 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs522530044")
+call ExecuteFunc("jasshelper__initstructs593949860")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("AIlibrary__Init")
+call ExecuteFunc("AIlibrary___Init")
 call ExecuteFunc("LuaLibrary___Init")
 call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary__Init")
+call ExecuteFunc("YDWELibrary___Init")
 call ExecuteFunc("bakaLibrary___Init")
 call ExecuteFunc("effectLibrary___Init")
 call ExecuteFunc("eventLibrary___Init")
 call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary__Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("processLibrary___Init")
 call ExecuteFunc("soundLibrary___Init")
 call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary__Init")
+call ExecuteFunc("testLibrary___Init")
 call ExecuteFunc("textLibrary___Init")
 call ExecuteFunc("unitLibrary___Init")
 call ExecuteFunc("RecordFix___Init")
@@ -61927,7 +61970,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs522530044 takes nothing returns nothing
+function jasshelper__initstructs593949860 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
