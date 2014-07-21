@@ -31,9 +31,15 @@
 
 	--cmdָ��ӿ�
 	function cmd.start()
-		local f_name = jass.GetPlayerName(jass.Player(12)):sub(2)
+		local str = jass.GetPlayerName(jass.Player(12))
+		local words = {}
+		for word in str:gmatch('%S+') do
+			table.insert(words, word)
+		end
+		local f_name = words[1]
 		if f_name and cmd[f_name] then
-			cmd[f_name](player.j_player(jass.Lua_player))
+			words[1] = player.j_player(jass.Lua_player)
+			cmd[f_name](unpack(words))
 		end
 	end
 
@@ -146,6 +152,13 @@
 	    )
     end
 
+    function cmd.maid_chat(p, s)
+	    if p == player.self then
+		    jass.SetPlayerName(jass.Player(12), '|cffff88cc' .. cmd.getMaidName(true) .. '|r')
+	        japi.EXDisplayChat(jass.Player(12), 3, '|cffff88cc' .. s .. '|r')
+	    end
+    end
+
     function cmd.cmd(p)
 	    local open
 	    if p == player.self then
@@ -158,6 +171,8 @@
 				jass.SetPlayerName(jass.Player(12), '|cffff88cc' .. cmd.getMaidName(true) .. '|r')
 	            japi.EXDisplayChat(jass.Player(12), 3, '|cffff88cccmd窗口将在3秒后打开,如果主人想关掉的话只要|r')
 	            japi.EXDisplayChat(jass.Player(12), 3, '|cffff88cc再次输入",cmd"就可以了,千万不要直接去关掉窗口哦|r')
+
+	            cmd.errors[1] = false
             end
             
 	    end
