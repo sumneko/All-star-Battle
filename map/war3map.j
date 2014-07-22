@@ -98,12 +98,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent__DamageEventQueue
-integer YDWETriggerEvent__DamageEventNumber=0
+trigger array YDWETriggerEvent___DamageEventQueue
+integer YDWETriggerEvent___DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent__MoveItemEventTrigger=null
-trigger array YDWETriggerEvent__MoveItemEventQueue
-integer YDWETriggerEvent__MoveItemEventNumber=0
+trigger YDWETriggerEvent___MoveItemEventTrigger=null
+trigger array YDWETriggerEvent___MoveItemEventQueue
+integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -121,12 +121,6 @@ boolean hasLua=false
 //endglobals from baseLibrary
 //globals from defineLibrary:
 constant boolean LIBRARY_defineLibrary=true
-hashtable globalHashtable=InitHashtable()
-integer globalDataIndex=0
-integer globalDataIndex2=0
-timer globalTimer=null
-integer globalTriggerIndex=0
-trigger globalTrigger=null
 //endglobals from defineLibrary
 //globals from AIlibrary:
 constant boolean LIBRARY_AIlibrary=true
@@ -193,10 +187,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary__U=null
-unit array YDWELibrary__Uflush_units
-integer YDWELibrary__Iflush_first=0
-integer YDWELibrary__Iflush_top=0
+unit YDWELibrary___U=null
+unit array YDWELibrary___Uflush_units
+integer YDWELibrary___Iflush_first=0
+integer YDWELibrary___Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -1198,8 +1192,7 @@ trigger gg_trg_zhuanzhuyijian_2=null
 trigger gg_trg_QJJ_TBJ=null
 trigger gg_trg_FRJ_GTJ=null
 trigger gg_trg_JSJT=null
-trigger gg_trg_fzj=null
-trigger gg_trg_fzj2=null
+trigger gg_trg_GLFZJ=null
 trigger gg_trg_gmjz=null
 trigger gg_trg_baoyujianzhen_2=null
 trigger gg_trg_gmjz2=null
@@ -2464,13 +2457,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3377,8 +3370,6 @@ else
 call TriggerSleepAction(bj_POLLED_WAIT_INTERVAL)
 endif
 endloop
-call PauseTimer(t)
-call FlushChildHashtable(globalHashtable, GetHandleId(t))
 call DestroyTimer(t)
 endif
 set t=null
@@ -3480,9 +3471,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent__DamageEventNumber
-if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent___DamageEventNumber
+if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3509,22 +3500,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__DamageEventNumber == 0 then
+if YDWETriggerEvent___DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
-set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
+set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
+set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
-if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
+if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -3534,13 +3525,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent__MoveItemEventNumber == 0 then
-set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent___MoveItemEventNumber == 0 then
+set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
-set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
+set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
+set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -3608,8 +3599,6 @@ function s__sys_CheckReplayTimed takes nothing returns nothing
 local real x
 local real y
 if not s__sys_IsPlayer(s__sys_firstPlayer) then
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set s__sys_IsReplay=0
 return
@@ -3630,8 +3619,6 @@ endif
 else
 set s__sys_IsReplay=0
 endif
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function s__sys_CheckReplay takes nothing returns nothing
@@ -3653,7 +3640,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary__Init takes nothing returns nothing
+function baseLibrary___Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -3753,8 +3740,6 @@ endif
 set i=i + 1
 endloop
 if flag then
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 call Debug("启用AI")
 endif
@@ -3763,7 +3748,7 @@ function s__AI_Init takes nothing returns nothing
 call Debug("开启AI")
 call TimerStart(CreateTimer(), 3, true, function s__AI_check_AI)
 endfunction
-function AIlibrary__Init takes nothing returns nothing
+function AIlibrary___Init takes nothing returns nothing
 endfunction
 
 //library AIlibrary ends
@@ -3778,7 +3763,7 @@ if SubString(GetEventPlayerChatString(), 0, 1) == "," then
 call Lua_hook(GetTriggerPlayer() , SubString(GetEventPlayerChatString(), 1, - 1))
 endif
 endfunction
-function LuaLibrary__Init takes nothing returns nothing
+function LuaLibrary___Init takes nothing returns nothing
 local trigger trg
 local integer i=0
 call Cheat("run base.lua")
@@ -3833,7 +3818,6 @@ return false
 endfunction
 function Test4_1 takes nothing returns boolean
 call KillUnit(GetTriggerUnit())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 return false
 endfunction
@@ -4238,12 +4222,10 @@ if IsGameOver then
 return
 endif
 set Hero[id]=hero
-call FlushChildHashtable(globalHashtable, GetHandleId(MU_KillHero[id]))
 call DestroyTrigger(MU_KillHero[id])
 set MU_KillHero[id]=CreateTrigger()
 call TriggerRegisterUnitEvent(MU_KillHero[id], hero, EVENT_UNIT_DEATH)
 call TriggerAddCondition(MU_KillHero[id], Condition(function KillHero))
-call FlushChildHashtable(globalHashtable, GetHandleId(MU_DamageHero[id]))
 call DestroyTrigger(MU_DamageHero[id])
 set MU_DamageHero[id]=CreateTrigger()
 call TriggerRegisterUnitEvent(MU_DamageHero[id], hero, EVENT_UNIT_DAMAGED)
@@ -4313,8 +4295,6 @@ endif
 call Save()
 endfunction
 function RunB takes nothing returns nothing
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set MaxExp=999999
 call RunAway(1)
@@ -4325,8 +4305,6 @@ local trigger trg=CreateTrigger()
 local real r1=0
 local real r2=0
 local integer rs=0
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set IsGameOver=true
 if not s__sys_JAPI then
@@ -4399,7 +4377,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record__Init takes nothing returns nothing
+function Record___Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -4465,8 +4443,6 @@ call SetUnitFacing(hero, angle)
 else
 call sc__maphack_SetHeight(hero , OriginHeight , 99999)
 call SetUnitPathing(hero, true)
-call PauseTimer(t)
-call FlushChildHashtable(globalHashtable, GetHandleId(t))
 call DestroyTimer(t)
 call YDWEFlushMissionByString(I2S(YDWEH2I(t)))
 call YDWESaveIntegerByString(I2S(YDWEH2I(hero)) , "lvUnitMove" , 0)
@@ -4508,42 +4484,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary__FlushUnit_Add takes nothing returns nothing
+function YDWELibrary___FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary__U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
+set YDWELibrary___U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
 loop
-set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
-exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
+set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
+exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
 endloop
-if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
-set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
+if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
+set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
-if YDWELibrary__Iflush_first > 500 then
+if YDWELibrary___Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary__Iflush_top
+set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary__U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
-set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary__Iflush_first=cjlocgn_00000000
+set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary___U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
+set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary___Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary__Init takes nothing returns nothing
+function YDWELibrary___Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -5163,7 +5139,7 @@ endfunction
 function s__baka_AfterSP takes nothing returns nothing
 call s__maphack_AfterSP()
 endfunction
-function bakaLibrary__Init takes nothing returns nothing
+function bakaLibrary___Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -5183,7 +5159,7 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
-function effectLibrary__Init takes nothing returns nothing
+function effectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -5331,7 +5307,6 @@ set cjlocgn_00000003=cjlocgn_00000003 + 1
 endloop
 endif
 endif
-call FlushChildHashtable(globalHashtable, GetHandleId(trg))
 call DestroyTrigger(trg)
 endfunction
 function s__Event_damageEventAction takes nothing returns nothing
@@ -5343,7 +5318,7 @@ if IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) and not IsUnitType(GetTriggerUni
 if attack then
 loop
 exitwhen i > s__Event_damageCount1
-if TriggerEvaluate(s__Event_damageEventTrigger1[i]) then
+if IsTriggerEnabled(s__Event_damageEventTrigger1[i]) and TriggerEvaluate(s__Event_damageEventTrigger1[i]) then
 call TriggerExecute(s__Event_damageEventTrigger1[i])
 endif
 set i=i + 1
@@ -5351,7 +5326,7 @@ endloop
 else
 loop
 exitwhen i > s__Event_damageCount2
-if TriggerEvaluate(s__Event_damageEventTrigger2[i]) then
+if IsTriggerEnabled(s__Event_damageEventTrigger2[i]) and TriggerEvaluate(s__Event_damageEventTrigger2[i]) then
 call TriggerExecute(s__Event_damageEventTrigger2[i])
 endif
 set i=i + 1
@@ -5361,7 +5336,7 @@ else
 if attack then
 loop
 exitwhen i > s__Event_damageCount3
-if TriggerEvaluate(s__Event_damageEventTrigger3[i]) then
+if IsTriggerEnabled(s__Event_damageEventTrigger3[i]) and TriggerEvaluate(s__Event_damageEventTrigger3[i]) then
 call TriggerExecute(s__Event_damageEventTrigger3[i])
 endif
 set i=i + 1
@@ -5369,7 +5344,7 @@ endloop
 else
 loop
 exitwhen i > s__Event_damageCount4
-if TriggerEvaluate(s__Event_damageEventTrigger4[i]) then
+if IsTriggerEnabled(s__Event_damageEventTrigger4[i]) and TriggerEvaluate(s__Event_damageEventTrigger4[i]) then
 call TriggerExecute(s__Event_damageEventTrigger4[i])
 endif
 set i=i + 1
@@ -5382,7 +5357,7 @@ set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function s__Event_damageEventAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endfunction
-function eventLibrary__Init takes nothing returns nothing
+function eventLibrary___Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 call s__Event_initDamageEvent()
 endfunction
@@ -5497,7 +5472,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary__Init takes nothing returns nothing
+function mathLibrary___Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -5519,7 +5494,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -5630,7 +5605,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary__Init takes nothing returns nothing
+function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -5678,7 +5653,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary__Init takes nothing returns nothing
+function soundLibrary___Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -5722,7 +5697,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary__Init takes nothing returns nothing
+function stringLibrary___Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -5817,8 +5792,6 @@ return false
 endfunction
 function s__test_check_func1 takes nothing returns nothing
 if s__test_check_timer > 1000 then
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 return
 endif
@@ -5834,7 +5807,7 @@ function s__test_check takes nothing returns nothing
 call s__test_check_func1()
 call TimerStart(CreateTimer(), 10, true, function s__test_check_func1)
 endfunction
-function testLibrary__Init takes nothing returns nothing
+function testLibrary___Init takes nothing returns nothing
 local integer i=0
 loop
 exitwhen i > 11
@@ -5866,7 +5839,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary__Init takes nothing returns nothing
+function textLibrary___Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -6146,7 +6119,6 @@ endif
 if not flag then
 call PauseUnit(dummy, true)
 call s__Unit_RemoveLater(dummy)
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 call FlushChildHashtable(YDHT, h)
 endif
@@ -6205,7 +6177,7 @@ endif
 set dummy=null
 set attack_trg=null
 endfunction
-function unitLibrary__Init takes nothing returns nothing
+function unitLibrary___Init takes nothing returns nothing
 set s__Unit_pause_count=StringHash2("暂停计数")
 call TimerStart(CreateTimer(), GetRandomInt(30, 60), true, function s__Unit_RemoveLater_timer)
 endfunction
@@ -6228,11 +6200,9 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix__StartLua takes nothing returns nothing
+function RecordFix___StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 loop
 exitwhen i > 11
@@ -6244,10 +6214,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix__Init takes nothing returns nothing
+function RecordFix___Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
 endfunction
 
 //library RecordFix ends
@@ -6648,7 +6618,6 @@ call WidgetDropItem(trigWidget, itemID)
 endif
 endif
 set bj_lastDyingWidget=null
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 endfunction
 function Unit000088_DropItems takes nothing returns nothing
@@ -6677,7 +6646,6 @@ call WidgetDropItem(trigWidget, itemID)
 endif
 endif
 set bj_lastDyingWidget=null
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 endfunction
 function Unit000089_DropItems takes nothing returns nothing
@@ -6706,7 +6674,6 @@ call WidgetDropItem(trigWidget, itemID)
 endif
 endif
 set bj_lastDyingWidget=null
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 endfunction
 function Unit000090_DropItems takes nothing returns nothing
@@ -6735,7 +6702,6 @@ call WidgetDropItem(trigWidget, itemID)
 endif
 endif
 set bj_lastDyingWidget=null
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 endfunction
 function InitSounds takes nothing returns nothing
@@ -8434,8 +8400,6 @@ function Trig_chushihuaFunc014T takes nothing returns nothing
 call DestroyFogModifier(udg_kejiandu[10])
 call DestroyFogModifier(udg_kejiandu[11])
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_chushihuaActions takes nothing returns nothing
@@ -8966,17 +8930,11 @@ call RemoveRect(gg_rct_xuanren34)
 call RemoveRect(gg_rct_xuanren35)
 call RemoveRect(gg_rct_xuanren36)
 call DialogClear(udg_duihuakuang[0])
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_choose_hero))
 call DestroyTrigger(gg_trg_choose_hero)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chushihua))
 call DestroyTrigger(gg_trg_chushihua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_all_random))
 call DestroyTrigger(gg_trg_all_random)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duihuakuang2))
 call DestroyTrigger(gg_trg_duihuakuang2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_time_0))
 call DestroyTrigger(gg_trg_time_0)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_OB))
 call DestroyTrigger(gg_trg_OB)
 set ydl_group=null
 set ydl_unit=null
@@ -9077,15 +9035,10 @@ call RemoveRect(gg_rct_xuanren29)
 call RemoveRect(gg_rct_xuanren30)
 call RemoveRect(gg_rct_xuanren31)
 call DialogClear(udg_duihuakuang[0])
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_choose_hero))
 call DestroyTrigger(gg_trg_choose_hero)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chushihua))
 call DestroyTrigger(gg_trg_chushihua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_all_random))
 call DestroyTrigger(gg_trg_all_random)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duihuakuang2))
 call DestroyTrigger(gg_trg_duihuakuang2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_time_0))
 call DestroyTrigger(gg_trg_time_0)
 endfunction
 function InitTrig_all_random takes nothing returns nothing
@@ -9710,878 +9663,481 @@ call TriggerAddAction(gg_trg_All_skills, function Trig_All_skillsActions)
 endfunction
 function Trig_Delete_triggerActions takes nothing returns nothing
 if ( ( udg_a[0] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_syslzj))
 call DestroyTrigger(gg_trg_syslzj)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_syslzj2))
 call DestroyTrigger(gg_trg_syslzj2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_syslzj_3))
 call DestroyTrigger(gg_trg_syslzj_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fwjj))
 call DestroyTrigger(gg_trg_fwjj)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fwjj2))
 call DestroyTrigger(gg_trg_fwjj2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fwjj3))
 call DestroyTrigger(gg_trg_fwjj3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fwjj4))
 call DestroyTrigger(gg_trg_fwjj4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zj))
 call DestroyTrigger(gg_trg_zj)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yylxx))
 call DestroyTrigger(gg_trg_yylxx)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yylxx2))
 call DestroyTrigger(gg_trg_yylxx2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yylxx3))
 call DestroyTrigger(gg_trg_yylxx3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yylxx4))
 call DestroyTrigger(gg_trg_yylxx4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_molifangchu_1))
 call DestroyTrigger(gg_trg_molifangchu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_molifangchu_2))
 call DestroyTrigger(gg_trg_molifangchu_2)
 else
 endif
 if ( ( udg_a[1] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sstc))
 call DestroyTrigger(gg_trg_sstc)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sstc2))
 call DestroyTrigger(gg_trg_sstc2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_star_1))
 call DestroyTrigger(gg_trg_star_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_star_2))
 call DestroyTrigger(gg_trg_star_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_star_3))
 call DestroyTrigger(gg_trg_star_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_star_4))
 call DestroyTrigger(gg_trg_star_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_qyzsg))
 call DestroyTrigger(gg_trg_qyzsg)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_qyzsg2))
 call DestroyTrigger(gg_trg_qyzsg2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhiyu_1))
 call DestroyTrigger(gg_trg_zhiyu_1)
 else
 endif
 if ( ( udg_a[2] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_trps))
 call DestroyTrigger(gg_trg_trps)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_trps2))
 call DestroyTrigger(gg_trg_trps2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tianporangsui))
 call DestroyTrigger(gg_trg_tianporangsui)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hwzs))
 call DestroyTrigger(gg_trg_hwzs)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hwzs2))
 call DestroyTrigger(gg_trg_hwzs2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hwzs3))
 call DestroyTrigger(gg_trg_hwzs3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hwxj))
 call DestroyTrigger(gg_trg_hwxj)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hwxj2))
 call DestroyTrigger(gg_trg_hwxj2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baka_1))
 call DestroyTrigger(gg_trg_baka_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baka_2))
 call DestroyTrigger(gg_trg_baka_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baka_5))
 call DestroyTrigger(gg_trg_baka_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baka_6))
 call DestroyTrigger(gg_trg_baka_6)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhidianzhena_1))
 call DestroyTrigger(gg_trg_zhidianzhena_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhidianzhena_3))
 call DestroyTrigger(gg_trg_zhidianzhena_3)
 else
 endif
 if ( ( udg_a[3] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhuizongdaodan_1))
 call DestroyTrigger(gg_trg_zhuizongdaodan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhuizongdaodan_2))
 call DestroyTrigger(gg_trg_zhuizongdaodan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_danmu_1))
 call DestroyTrigger(gg_trg_danmu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_danmu_2))
 call DestroyTrigger(gg_trg_danmu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_daodanqishe_1))
 call DestroyTrigger(gg_trg_daodanqishe_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_daodanqishe_2))
 call DestroyTrigger(gg_trg_daodanqishe_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dd))
 call DestroyTrigger(gg_trg_dd)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dd2))
 call DestroyTrigger(gg_trg_dd2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_weixingshexian_0))
 call DestroyTrigger(gg_trg_weixingshexian_0)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_weixingshexian_1))
 call DestroyTrigger(gg_trg_weixingshexian_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_weixingshexian_2))
 call DestroyTrigger(gg_trg_weixingshexian_2)
 else
 endif
 if ( ( udg_a[4] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_siwangchanrao_1))
 call DestroyTrigger(gg_trg_siwangchanrao_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_siwangchanrao_2))
 call DestroyTrigger(gg_trg_siwangchanrao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaowangyiji))
 call DestroyTrigger(gg_trg_xiaowangyiji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaowangyiji1))
 call DestroyTrigger(gg_trg_xiaowangyiji1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaowangyiji2))
 call DestroyTrigger(gg_trg_xiaowangyiji2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heihuagognji))
 call DestroyTrigger(gg_trg_heihuagognji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heihuagongji2))
 call DestroyTrigger(gg_trg_heihuagongji2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heianyishi))
 call DestroyTrigger(gg_trg_heianyishi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heianyishi2))
 call DestroyTrigger(gg_trg_heianyishi2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heianzuzhou_1))
 call DestroyTrigger(gg_trg_heianzuzhou_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_heianzuzhou_2))
 call DestroyTrigger(gg_trg_heianzuzhou_2)
 else
 endif
 if ( ( udg_a[5] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lz))
 call DestroyTrigger(gg_trg_lz)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lz2))
 call DestroyTrigger(gg_trg_lz2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lz3))
 call DestroyTrigger(gg_trg_lz3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_wuyun_1))
 call DestroyTrigger(gg_trg_wuyun_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_wuyun_2))
 call DestroyTrigger(gg_trg_wuyun_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sphl))
 call DestroyTrigger(gg_trg_sphl)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sphl2))
 call DestroyTrigger(gg_trg_sphl2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sjqh))
 call DestroyTrigger(gg_trg_sjqh)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sjqh2))
 call DestroyTrigger(gg_trg_sjqh2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_guangdun_xuexi))
 call DestroyTrigger(gg_trg_guangdun_xuexi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_guangdun_2))
 call DestroyTrigger(gg_trg_guangdun_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_guangdun_3))
 call DestroyTrigger(gg_trg_guangdun_3)
 else
 endif
 if ( ( udg_a[6] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dizhen))
 call DestroyTrigger(gg_trg_dizhen)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dizhen2))
 call DestroyTrigger(gg_trg_dizhen2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xunsu))
 call DestroyTrigger(gg_trg_xunsu)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xunsu_2))
 call DestroyTrigger(gg_trg_xunsu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jiandun))
 call DestroyTrigger(gg_trg_jiandun)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dunji_1))
 call DestroyTrigger(gg_trg_dunji_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dunji_2))
 call DestroyTrigger(gg_trg_dunji_2)
 else
 endif
 if ( ( udg_a[9] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fzj))
-call DestroyTrigger(gg_trg_fzj)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fzj2))
-call DestroyTrigger(gg_trg_fzj2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_JSJT))
+call DestroyTrigger(gg_trg_GLFZJ)
 call DestroyTrigger(gg_trg_JSJT)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_gmjz))
 call DestroyTrigger(gg_trg_gmjz)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_gmjz2))
 call DestroyTrigger(gg_trg_gmjz2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baoyujianzhen_2))
 call DestroyTrigger(gg_trg_baoyujianzhen_2)
 else
 endif
 if ( ( udg_a[10] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shenpanjiasuo_1))
 call DestroyTrigger(gg_trg_shenpanjiasuo_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shenpanjiasuo_2))
 call DestroyTrigger(gg_trg_shenpanjiasuo_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shenshengzhicai))
 call DestroyTrigger(gg_trg_shenshengzhicai)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huangjinxuanfeng))
 call DestroyTrigger(gg_trg_huangjinxuanfeng)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huangjinxuanfeng2))
 call DestroyTrigger(gg_trg_huangjinxuanfeng2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_aersaisideyizhi))
 call DestroyTrigger(gg_trg_aersaisideyizhi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_aersaisideyizhi2))
 call DestroyTrigger(gg_trg_aersaisideyizhi2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_aersaisideyizhi3))
 call DestroyTrigger(gg_trg_aersaisideyizhi3)
 else
 endif
 if ( ( udg_a[12] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rongjiangjushi_1))
 call DestroyTrigger(gg_trg_rongjiangjushi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rongjiangjushi_2))
 call DestroyTrigger(gg_trg_rongjiangjushi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bf))
 call DestroyTrigger(gg_trg_bf)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bf2))
 call DestroyTrigger(gg_trg_bf2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huixiong))
 call DestroyTrigger(gg_trg_huixiong)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huixiong_2))
 call DestroyTrigger(gg_trg_huixiong_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huixiong_4))
 call DestroyTrigger(gg_trg_huixiong_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langrenxingtai))
 call DestroyTrigger(gg_trg_langrenxingtai)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langrenxingtai_2))
 call DestroyTrigger(gg_trg_langrenxingtai_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langren_up))
 call DestroyTrigger(gg_trg_langren_up)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mengshouzhixi_1))
 call DestroyTrigger(gg_trg_mengshouzhixi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mengshouzhixi_2))
 call DestroyTrigger(gg_trg_mengshouzhixi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mengshouzhinu_2))
 call DestroyTrigger(gg_trg_mengshouzhinu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mengshouzhinu_3))
 call DestroyTrigger(gg_trg_mengshouzhinu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yanzhua))
 call DestroyTrigger(gg_trg_yanzhua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huitianmiedi_1))
 call DestroyTrigger(gg_trg_huitianmiedi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huitianmiedi_2))
 call DestroyTrigger(gg_trg_huitianmiedi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huitianmiedi_3))
 call DestroyTrigger(gg_trg_huitianmiedi_3)
 else
 endif
 if ( ( udg_a[13] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_qianxing_3))
 call DestroyTrigger(gg_trg_qianxing_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunshenlianzhan))
 call DestroyTrigger(gg_trg_shunshenlianzhan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huixuanbiao_1))
 call DestroyTrigger(gg_trg_huixuanbiao_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huixuanbiao_2))
 call DestroyTrigger(gg_trg_huixuanbiao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhimigntiji))
 call DestroyTrigger(gg_trg_zhimigntiji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhimingtiji2))
 call DestroyTrigger(gg_trg_zhimingtiji2)
 else
 endif
 if ( ( udg_a[14] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_quanliyiji_2))
 call DestroyTrigger(gg_trg_quanliyiji_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_quanliyiji))
 call DestroyTrigger(gg_trg_quanliyiji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_quanliyiji_3))
 call DestroyTrigger(gg_trg_quanliyiji_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tiaoyue))
 call DestroyTrigger(gg_trg_tiaoyue)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tiaoyue_2))
 call DestroyTrigger(gg_trg_tiaoyue_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tiaoyue_boxing))
 call DestroyTrigger(gg_trg_tiaoyue_boxing)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuanfengti_1))
 call DestroyTrigger(gg_trg_xuanfengti_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuanfengti_2))
 call DestroyTrigger(gg_trg_xuanfengti_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunshenlianxi))
 call DestroyTrigger(gg_trg_shunshenlianxi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunshenlianxi2))
 call DestroyTrigger(gg_trg_shunshenlianxi2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_1))
 call DestroyTrigger(gg_trg_sanlianhengda_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_1_5))
 call DestroyTrigger(gg_trg_sanlianhengda_1_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_2))
 call DestroyTrigger(gg_trg_sanlianhengda_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_2_5))
 call DestroyTrigger(gg_trg_sanlianhengda_2_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_2_9))
 call DestroyTrigger(gg_trg_sanlianhengda_2_9)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_3))
 call DestroyTrigger(gg_trg_sanlianhengda_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_3_5))
 call DestroyTrigger(gg_trg_sanlianhengda_3_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sanlianhengda_4))
 call DestroyTrigger(gg_trg_sanlianhengda_4)
 else
 endif
 if ( ( udg_a[15] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rougou_1))
 call DestroyTrigger(gg_trg_rougou_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rougou_2))
 call DestroyTrigger(gg_trg_rougou_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_guishou))
 call DestroyTrigger(gg_trg_guishou)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_guishou2))
 call DestroyTrigger(gg_trg_guishou2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_qiangxingliliang))
 call DestroyTrigger(gg_trg_qiangxingliliang)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_qiangxingliliang_2))
 call DestroyTrigger(gg_trg_qiangxingliliang_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fushiwenyi_1))
 call DestroyTrigger(gg_trg_fushiwenyi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fushiwenyi_2))
 call DestroyTrigger(gg_trg_fushiwenyi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_kenyao))
 call DestroyTrigger(gg_trg_kenyao)
 else
 endif
 if ( ( udg_a[16] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dianciliqianyin_1))
 call DestroyTrigger(gg_trg_dianciliqianyin_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dianciliqianyin_2))
 call DestroyTrigger(gg_trg_dianciliqianyin_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fangdian_1))
 call DestroyTrigger(gg_trg_fangdian_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_fangdian_2))
 call DestroyTrigger(gg_trg_fangdian_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_leijian))
 call DestroyTrigger(gg_trg_leijian)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaodiancipao_1))
 call DestroyTrigger(gg_trg_chaodiancipao_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaodiancipao_2))
 call DestroyTrigger(gg_trg_chaodiancipao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaodiancipao_3))
 call DestroyTrigger(gg_trg_chaodiancipao_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jiujibisha))
 call DestroyTrigger(gg_trg_jiujibisha)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jiujibisha2))
 call DestroyTrigger(gg_trg_jiujibisha2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jiujibisha3))
 call DestroyTrigger(gg_trg_jiujibisha3)
 else
 endif
 if ( ( udg_a[17] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuesezhuahen))
 call DestroyTrigger(gg_trg_xuesezhuahen)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuesezhuahen2))
 call DestroyTrigger(gg_trg_xuesezhuahen2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langxi))
 call DestroyTrigger(gg_trg_langxi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_paoxiaochongji_1))
 call DestroyTrigger(gg_trg_paoxiaochongji_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_paoxiaochongji_2))
 call DestroyTrigger(gg_trg_paoxiaochongji_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_paoxiaochongji_3))
 call DestroyTrigger(gg_trg_paoxiaochongji_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langdebenneng))
 call DestroyTrigger(gg_trg_langdebenneng)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langdebenneng_2))
 call DestroyTrigger(gg_trg_langdebenneng_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_langshenhoujiao))
 call DestroyTrigger(gg_trg_langshenhoujiao)
 else
 endif
 if ( ( udg_a[18] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jianqizhan))
 call DestroyTrigger(gg_trg_jianqizhan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jianqizhan2))
 call DestroyTrigger(gg_trg_jianqizhan2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiongzhan_1))
 call DestroyTrigger(gg_trg_xiongzhan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiongzhan_2))
 call DestroyTrigger(gg_trg_xiongzhan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yidaorp_1))
 call DestroyTrigger(gg_trg_yidaorp_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaojiu_1))
 call DestroyTrigger(gg_trg_chaojiu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaojiu_2))
 call DestroyTrigger(gg_trg_chaojiu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hualongdianjing_1))
 call DestroyTrigger(gg_trg_hualongdianjing_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hualongdianjing_2))
 call DestroyTrigger(gg_trg_hualongdianjing_2)
 else
 endif
 if ( ( udg_a[19] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yanshiqiang_1))
 call DestroyTrigger(gg_trg_yanshiqiang_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yanshiqiang_2))
 call DestroyTrigger(gg_trg_yanshiqiang_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yanshiqiang_3))
 call DestroyTrigger(gg_trg_yanshiqiang_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yanshiqiang_4))
 call DestroyTrigger(gg_trg_yanshiqiang_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_gangciliancheng))
 call DestroyTrigger(gg_trg_gangciliancheng)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_gangciliancheng_2))
 call DestroyTrigger(gg_trg_gangciliancheng_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_ganghuajiazhi))
 call DestroyTrigger(gg_trg_ganghuajiazhi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhenlizhimen))
 call DestroyTrigger(gg_trg_zhenlizhimen)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhenlizhimen_2))
 call DestroyTrigger(gg_trg_zhenlizhimen_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi))
 call DestroyTrigger(gg_trg_xianzhezhishi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi2))
 call DestroyTrigger(gg_trg_xianzhezhishi2)
 else
 endif
 if ( ( udg_a[20] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diyuhuoyan_1))
 call DestroyTrigger(gg_trg_diyuhuoyan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diyuhuoyan_2))
 call DestroyTrigger(gg_trg_diyuhuoyan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diyuhuoyan_3))
 call DestroyTrigger(gg_trg_diyuhuoyan_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lunrudao_1))
 call DestroyTrigger(gg_trg_lunrudao_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lunrudao_2))
 call DestroyTrigger(gg_trg_lunrudao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lunrudao_3))
 call DestroyTrigger(gg_trg_lunrudao_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhuan_1))
 call DestroyTrigger(gg_trg_xuhuan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhuan_2))
 call DestroyTrigger(gg_trg_xuhuan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhuan_2))
 call DestroyTrigger(gg_trg_xuhuan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhuan_3))
 call DestroyTrigger(gg_trg_xuhuan_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diyuweituo_1))
 call DestroyTrigger(gg_trg_diyuweituo_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diyuweituo_2))
 call DestroyTrigger(gg_trg_diyuweituo_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuanheng_1))
 call DestroyTrigger(gg_trg_yuanheng_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuanheng_2))
 call DestroyTrigger(gg_trg_yuanheng_2)
 else
 endif
 if ( ( udg_a[21] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diushoulei))
 call DestroyTrigger(gg_trg_diushoulei)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_diushoulei2))
 call DestroyTrigger(gg_trg_diushoulei2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duochongjuji_1))
 call DestroyTrigger(gg_trg_duochongjuji_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duochongjuji_2))
 call DestroyTrigger(gg_trg_duochongjuji_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duochongjuji_3))
 call DestroyTrigger(gg_trg_duochongjuji_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_houkongfan))
 call DestroyTrigger(gg_trg_houkongfan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_houkognfan2))
 call DestroyTrigger(gg_trg_houkognfan2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chongjidan_1))
 call DestroyTrigger(gg_trg_chongjidan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chongjidan_2))
 call DestroyTrigger(gg_trg_chongjidan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chongjidan_3))
 call DestroyTrigger(gg_trg_chongjidan_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baoliedan_1))
 call DestroyTrigger(gg_trg_baoliedan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baoliedan_2))
 call DestroyTrigger(gg_trg_baoliedan_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_baoliedan_3))
 call DestroyTrigger(gg_trg_baoliedan_3)
 else
 endif
 if ( ( udg_a[22] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaoyefuka__1))
 call DestroyTrigger(gg_trg_xiaoyefuka__1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaoyefuka_0))
 call DestroyTrigger(gg_trg_xiaoyefuka_0)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaoyefuka_1))
 call DestroyTrigger(gg_trg_xiaoyefuka_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xiaoyefuka_2))
 call DestroyTrigger(gg_trg_xiaoyefuka_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_time_shoubiao))
 call DestroyTrigger(gg_trg_time_shoubiao)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_time_shoubiao_2))
 call DestroyTrigger(gg_trg_time_shoubiao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunyimoshu_1))
 call DestroyTrigger(gg_trg_shunyimoshu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunyimoshu_2))
 call DestroyTrigger(gg_trg_shunyimoshu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_houzuoli_16))
 call DestroyTrigger(gg_trg_houzuoli_16)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tansheyinren_2_1))
 call DestroyTrigger(gg_trg_tansheyinren_2_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tansheyinren_2_2))
 call DestroyTrigger(gg_trg_tansheyinren_2_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidao))
 call DestroyTrigger(gg_trg_feidao)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidao_the_world))
 call DestroyTrigger(gg_trg_feidao_the_world)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidao_2))
 call DestroyTrigger(gg_trg_feidao_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidaoqishe_1))
 call DestroyTrigger(gg_trg_feidaoqishe_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jishufeidaoqishe_1))
 call DestroyTrigger(gg_trg_jishufeidaoqishe_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jishufeidaoqishe_2))
 call DestroyTrigger(gg_trg_jishufeidaoqishe_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidaoqishe_the_world))
 call DestroyTrigger(gg_trg_feidaoqishe_the_world)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidaoqishe_2))
 call DestroyTrigger(gg_trg_feidaoqishe_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feidaoqishe_2_jishu))
 call DestroyTrigger(gg_trg_feidaoqishe_2_jishu)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sharenmuou_1))
 call DestroyTrigger(gg_trg_sharenmuou_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sharenmuou_2))
 call DestroyTrigger(gg_trg_sharenmuou_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_sharenmuou_3))
 call DestroyTrigger(gg_trg_sharenmuou_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yemuhuanyingsharengui_1))
 call DestroyTrigger(gg_trg_yemuhuanyingsharengui_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yemuhuanyingsharengui_2))
 call DestroyTrigger(gg_trg_yemuhuanyingsharengui_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_the_world_1))
 call DestroyTrigger(gg_trg_the_world_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_the_world_2))
 call DestroyTrigger(gg_trg_the_world_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_the_world_3))
 call DestroyTrigger(gg_trg_the_world_3)
 else
 endif
 if ( ( udg_a[23] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaosuzaisheng))
 call DestroyTrigger(gg_trg_chaosuzaisheng)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chaosuzaisheng2))
 call DestroyTrigger(gg_trg_chaosuzaisheng2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunbu_1))
 call DestroyTrigger(gg_trg_shunbu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_wanjie))
 call DestroyTrigger(gg_trg_wanjie)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_wanjie3))
 call DestroyTrigger(gg_trg_wanjie3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhua_1))
 call DestroyTrigger(gg_trg_xuhua_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xuhua_2))
 call DestroyTrigger(gg_trg_xuhua_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yueyatianchong))
 call DestroyTrigger(gg_trg_yueyatianchong)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yueyatianchong2))
 call DestroyTrigger(gg_trg_yueyatianchong2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yueyatianchong_hei))
 call DestroyTrigger(gg_trg_yueyatianchong_hei)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunbuzhan))
 call DestroyTrigger(gg_trg_shunbuzhan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shunbuzhan2))
 call DestroyTrigger(gg_trg_shunbuzhan2)
 else
 endif
 if ( ( udg_a[24] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zishenyidong_1))
 call DestroyTrigger(gg_trg_zishenyidong_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zishenyidong_2))
 call DestroyTrigger(gg_trg_zishenyidong_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yidongjinzhi))
 call DestroyTrigger(gg_trg_yidongjinzhi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yidongjinzhi_2))
 call DestroyTrigger(gg_trg_yidongjinzhi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tieshi_1))
 call DestroyTrigger(gg_trg_tieshi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tieshi_2))
 call DestroyTrigger(gg_trg_tieshi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tieshi_3))
 call DestroyTrigger(gg_trg_tieshi_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tieshi_4))
 call DestroyTrigger(gg_trg_tieshi_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chumoyidong))
 call DestroyTrigger(gg_trg_chumoyidong)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chumoyidong_star))
 call DestroyTrigger(gg_trg_chumoyidong_star)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shoukao))
 call DestroyTrigger(gg_trg_shoukao)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duochongtieshi))
 call DestroyTrigger(gg_trg_duochongtieshi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duochongtieshi_2))
 call DestroyTrigger(gg_trg_duochongtieshi_2)
 else
 endif
 if ( ( udg_a[25] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feitui))
 call DestroyTrigger(gg_trg_feitui)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_feitui2))
 call DestroyTrigger(gg_trg_feitui2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhanzhengjianta))
 call DestroyTrigger(gg_trg_zhanzhengjianta)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhanzhengjianta2))
 call DestroyTrigger(gg_trg_zhanzhengjianta2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lianji))
 call DestroyTrigger(gg_trg_lianji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lianji2))
 call DestroyTrigger(gg_trg_lianji2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yexingkuangben_1))
 call DestroyTrigger(gg_trg_yexingkuangben_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yexingkuangben_2))
 call DestroyTrigger(gg_trg_yexingkuangben_2)
 else
 endif
 if ( ( udg_a[26] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_combo))
 call DestroyTrigger(gg_trg_combo)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yefu_tuji_1))
 call DestroyTrigger(gg_trg_yefu_tuji_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yefu_tuji_2))
 call DestroyTrigger(gg_trg_yefu_tuji_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_emo_1))
 call DestroyTrigger(gg_trg_emo_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_emo_2))
 call DestroyTrigger(gg_trg_emo_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_emo_1))
 call DestroyTrigger(gg_trg_emo_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_Damon_Lord_Walk_0))
 call DestroyTrigger(gg_trg_Damon_Lord_Walk_0)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_Damon_Lord_Walk_1))
 call DestroyTrigger(gg_trg_Damon_Lord_Walk_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_Damon_Lord_Walk_2))
 call DestroyTrigger(gg_trg_Damon_Lord_Walk_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_Damon_Lord_Walk_3))
 call DestroyTrigger(gg_trg_Damon_Lord_Walk_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shenqiang_1))
 call DestroyTrigger(gg_trg_shenqiang_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shenqiang_2))
 call DestroyTrigger(gg_trg_shenqiang_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hongmo_1))
 call DestroyTrigger(gg_trg_hongmo_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_hongmo_2))
 call DestroyTrigger(gg_trg_hongmo_2)
 else
 endif
 if ( ( udg_a[27] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhonglifeixing_star))
 call DestroyTrigger(gg_trg_zhonglifeixing_star)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhonglifeixing_1))
 call DestroyTrigger(gg_trg_zhonglifeixing_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhonglifeixing_2))
 call DestroyTrigger(gg_trg_zhonglifeixing_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhonglifeixing_3))
 call DestroyTrigger(gg_trg_zhonglifeixing_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_zhonglifeixing_move))
 call DestroyTrigger(gg_trg_zhonglifeixing_move)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shiliangfantan_1))
 call DestroyTrigger(gg_trg_shiliangfantan_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shiliangfantan2))
 call DestroyTrigger(gg_trg_shiliangfantan2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shiliangfantan3))
 call DestroyTrigger(gg_trg_shiliangfantan3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shanghaimianyi))
 call DestroyTrigger(gg_trg_shanghaimianyi)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_blood_1))
 call DestroyTrigger(gg_trg_blood_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_blood_2))
 call DestroyTrigger(gg_trg_blood_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dongliangchongji_1))
 call DestroyTrigger(gg_trg_dongliangchongji_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dongliangchongji_2A))
 call DestroyTrigger(gg_trg_dongliangchongji_2A)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dongliangchongji_2B))
 call DestroyTrigger(gg_trg_dongliangchongji_2B)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_doom_1))
 call DestroyTrigger(gg_trg_doom_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_doom_2))
 call DestroyTrigger(gg_trg_doom_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_doom_3))
 call DestroyTrigger(gg_trg_doom_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_doom_4))
 call DestroyTrigger(gg_trg_doom_4)
 else
 endif
 if ( ( udg_a[28] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingjian_1))
 call DestroyTrigger(gg_trg_bingjian_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingjian_2))
 call DestroyTrigger(gg_trg_bingjian_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingbi_1))
 call DestroyTrigger(gg_trg_bingbi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingbi_2))
 call DestroyTrigger(gg_trg_bingbi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lianzhan))
 call DestroyTrigger(gg_trg_lianzhan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lianzhan2))
 call DestroyTrigger(gg_trg_lianzhan2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_penqiji))
 call DestroyTrigger(gg_trg_penqiji)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingdong))
 call DestroyTrigger(gg_trg_bingdong)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingdong2))
 call DestroyTrigger(gg_trg_bingdong2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bigndognzhan))
 call DestroyTrigger(gg_trg_bigndognzhan)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_bingdognzhan2))
 call DestroyTrigger(gg_trg_bingdognzhan2)
 else
 endif
 if ( ( udg_a[29] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansuzuhe))
 call DestroyTrigger(gg_trg_yuansuzuhe)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansupeizhi_0))
 call DestroyTrigger(gg_trg_yuansupeizhi_0)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansupeizhi_1))
 call DestroyTrigger(gg_trg_yuansupeizhi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansupeizhi_2))
 call DestroyTrigger(gg_trg_yuansupeizhi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansupeizhi_2_5))
 call DestroyTrigger(gg_trg_yuansupeizhi_2_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansupeizhi_3))
 call DestroyTrigger(gg_trg_yuansupeizhi_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_linglihuifu))
 call DestroyTrigger(gg_trg_linglihuifu)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansu_lv24))
 call DestroyTrigger(gg_trg_yuansu_lv24)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansu_cdlevel))
 call DestroyTrigger(gg_trg_yuansu_cdlevel)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansu_cd))
 call DestroyTrigger(gg_trg_yuansu_cd)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuansu_cd_2))
 call DestroyTrigger(gg_trg_yuansu_cd_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huofu_a_1))
 call DestroyTrigger(gg_trg_huofu_a_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huofu_a_2))
 call DestroyTrigger(gg_trg_huofu_a_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huofu_b_1))
 call DestroyTrigger(gg_trg_huofu_b_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huofu_b_2))
 call DestroyTrigger(gg_trg_huofu_b_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huojinfu_1))
 call DestroyTrigger(gg_trg_huojinfu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huojinfu_2))
 call DestroyTrigger(gg_trg_huojinfu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huotufu_1))
 call DestroyTrigger(gg_trg_huotufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huoshuifu_1))
 call DestroyTrigger(gg_trg_huoshuifu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_huoshuifu_2))
 call DestroyTrigger(gg_trg_huoshuifu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_a_1))
 call DestroyTrigger(gg_trg_shuifu_a_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_a_2))
 call DestroyTrigger(gg_trg_shuifu_a_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_b_1))
 call DestroyTrigger(gg_trg_shuifu_b_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuifu_b_2))
 call DestroyTrigger(gg_trg_shuifu_b_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuitu_1))
 call DestroyTrigger(gg_trg_shuitu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuitu_2))
 call DestroyTrigger(gg_trg_shuitu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuitu_3))
 call DestroyTrigger(gg_trg_shuitu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuimufu_1))
 call DestroyTrigger(gg_trg_shuimufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuimufu_2))
 call DestroyTrigger(gg_trg_shuimufu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuimufu_3))
 call DestroyTrigger(gg_trg_shuimufu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuimufu_4))
 call DestroyTrigger(gg_trg_shuimufu_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuijinfu_1))
 call DestroyTrigger(gg_trg_shuijinfu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shuijinfu_2))
 call DestroyTrigger(gg_trg_shuijinfu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinfu_a_1))
 call DestroyTrigger(gg_trg_jinfu_a_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinfu_a_2))
 call DestroyTrigger(gg_trg_jinfu_a_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinfu_b_1))
 call DestroyTrigger(gg_trg_jinfu_b_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinfu_b_2))
 call DestroyTrigger(gg_trg_jinfu_b_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mufu_a_1))
 call DestroyTrigger(gg_trg_mufu_a_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mufu_a_2))
 call DestroyTrigger(gg_trg_mufu_a_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mufu_b_1))
 call DestroyTrigger(gg_trg_mufu_b_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mufu_b_2))
 call DestroyTrigger(gg_trg_mufu_b_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_mufu_b_3))
 call DestroyTrigger(gg_trg_mufu_b_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rimufu_1))
 call DestroyTrigger(gg_trg_rimufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rimufu_2))
 call DestroyTrigger(gg_trg_rimufu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinmufu_1))
 call DestroyTrigger(gg_trg_jinmufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_jinmufu_2))
 call DestroyTrigger(gg_trg_jinmufu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuemufu_1))
 call DestroyTrigger(gg_trg_yuemufu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuemufu_2))
 call DestroyTrigger(gg_trg_yuemufu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tufu_a_1))
 call DestroyTrigger(gg_trg_tufu_a_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tufu_a_2))
 call DestroyTrigger(gg_trg_tufu_a_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tufu_a_3))
 call DestroyTrigger(gg_trg_tufu_a_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tufu_b_1))
 call DestroyTrigger(gg_trg_tufu_b_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tufu_b_2))
 call DestroyTrigger(gg_trg_tufu_b_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tujinfu_1))
 call DestroyTrigger(gg_trg_tujinfu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tujinfu_1_5))
 call DestroyTrigger(gg_trg_tujinfu_1_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tujinfu_2))
 call DestroyTrigger(gg_trg_tujinfu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tujinfu_3))
 call DestroyTrigger(gg_trg_tujinfu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rifu_1))
 call DestroyTrigger(gg_trg_rifu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rifu_2))
 call DestroyTrigger(gg_trg_rifu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_rifu_3))
 call DestroyTrigger(gg_trg_rifu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuefu_1))
 call DestroyTrigger(gg_trg_yuefu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuefu_2))
 call DestroyTrigger(gg_trg_yuefu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_riyuefu_1))
 call DestroyTrigger(gg_trg_riyuefu_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_riyuefu_2))
 call DestroyTrigger(gg_trg_riyuefu_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_riyuefu_3))
 call DestroyTrigger(gg_trg_riyuefu_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi_1))
 call DestroyTrigger(gg_trg_xianzhezhishi_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi_2))
 call DestroyTrigger(gg_trg_xianzhezhishi_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi_3))
 call DestroyTrigger(gg_trg_xianzhezhishi_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_xianzhezhishi_4))
 call DestroyTrigger(gg_trg_xianzhezhishi_4)
 else
 endif
 if ( ( udg_a[30] == false ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dierjiefang_1))
 call DestroyTrigger(gg_trg_dierjiefang_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dierjiefang_2))
 call DestroyTrigger(gg_trg_dierjiefang_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dierjiefang_2_5))
 call DestroyTrigger(gg_trg_dierjiefang_2_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dierjiefang_3))
 call DestroyTrigger(gg_trg_dierjiefang_3)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_dierjiefang_4))
 call DestroyTrigger(gg_trg_dierjiefang_4)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yinjia))
 call DestroyTrigger(gg_trg_yinjia)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yinjia2))
 call DestroyTrigger(gg_trg_yinjia2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tiejia_1))
 call DestroyTrigger(gg_trg_tiejia_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_tiejia_2))
 call DestroyTrigger(gg_trg_tiejia_2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuanwuwufeng))
 call DestroyTrigger(gg_trg_yuanwuwufeng)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yuanwuwufeng2))
 call DestroyTrigger(gg_trg_yuanwuwufeng2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yinsufengbao_1))
 call DestroyTrigger(gg_trg_yinsufengbao_1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_yinsufengbao_2))
 call DestroyTrigger(gg_trg_yinsufengbao_2)
 else
 endif
@@ -10642,23 +10198,14 @@ call SetUnitVertexColor(udg_danwei2[181], 255, 255, 255, 100)
 call RemoveLocation(udg_dian2[0])
 call StartTimerBJ(udg_times[180], false, 3.00)
 call DialogClear(udg_duihuakuang[0])
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duihuakuang2))
 call DestroyTrigger(gg_trg_duihuakuang2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chushihua))
 call DestroyTrigger(gg_trg_chushihua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_all_random))
 call DestroyTrigger(gg_trg_all_random)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_OB))
 call DestroyTrigger(gg_trg_OB)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_5))
 call DestroyTrigger(gg_trg_lx0_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_1212))
 call DestroyTrigger(gg_trg_lx0_6_1212)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_2121))
 call DestroyTrigger(gg_trg_lx0_6_2121)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero1))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero6))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero6)
 else
 if ( ( GetClickedButtonBJ() == udg_anniu[0] ) ) then
@@ -10765,23 +10312,14 @@ set udg_dian2[0]=GetRectCenter(gg_rct_lunxuan_2)
 set udg_danwei2[181]=CreateUnitAtLoc(s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), 0x65303434, udg_dian2[0], 270.00)
 call SetUnitVertexColor(udg_danwei2[181], 255, 255, 255, 100)
 call RemoveLocation(udg_dian2[0])
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duihuakuang2))
 call DestroyTrigger(gg_trg_duihuakuang2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chushihua))
 call DestroyTrigger(gg_trg_chushihua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_all_random))
 call DestroyTrigger(gg_trg_all_random)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_OB))
 call DestroyTrigger(gg_trg_OB)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_5))
 call DestroyTrigger(gg_trg_lx0_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_1212))
 call DestroyTrigger(gg_trg_lx0_6_1212)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_2121))
 call DestroyTrigger(gg_trg_lx0_6_2121)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero1))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero6))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero6)
 call StartTimerBJ(udg_times[180], false, 3.00)
 call DialogClear(udg_duihuakuang[0])
@@ -10849,23 +10387,14 @@ set udg_dian2[0]=GetRectCenter(gg_rct_lunxuan_2)
 set udg_danwei2[181]=CreateUnitAtLoc(s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), 0x65303434, udg_dian2[0], 270.00)
 call SetUnitVertexColor(udg_danwei2[181], 255, 255, 255, 100)
 call RemoveLocation(udg_dian2[0])
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_duihuakuang2))
 call DestroyTrigger(gg_trg_duihuakuang2)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_chushihua))
 call DestroyTrigger(gg_trg_chushihua)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_all_random))
 call DestroyTrigger(gg_trg_all_random)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_OB))
 call DestroyTrigger(gg_trg_OB)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_5))
 call DestroyTrigger(gg_trg_lx0_5)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_1212))
 call DestroyTrigger(gg_trg_lx0_6_1212)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_6_2121))
 call DestroyTrigger(gg_trg_lx0_6_2121)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero1))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero1)
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_lx0_7_ban_hero6))
 call DestroyTrigger(gg_trg_lx0_7_ban_hero6)
 call StartTimerBJ(udg_times[180], false, 3.00)
 call DialogClear(udg_duihuakuang[0])
@@ -11979,7 +11508,6 @@ if ( ( udg_Zhengshu[131] > 0 ) ) then
 set udg_Zhengshu[131]=( udg_Zhengshu[131] - 1 )
 call YDWEMultiboardSetItemValueBJNull(udg_duomianban[0] , 1 , 13 , ( "|cffffddaa游戏开始剩余时间：|r|cffff9900 " + ( I2S(udg_Zhengshu[131]) + " |r|cffffddaa秒|r " ) ))
 else
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_test_djcs))
 call DestroyTrigger(gg_trg_test_djcs)
 call PauseTimer(udg_Times[131])
 call YDWEMultiboardSetItemValueBJNull(udg_duomianban[0] , 1 , 13 , "TRIGSTR_6279")
@@ -21168,7 +20696,6 @@ call TriggerAddAction(gg_trg_test_djcs, function Trig_test_djcsActions)
 endfunction
 function Trig_djcsActions takes nothing returns nothing
 if ( ( ( udg_test == 1 ) or ( ( ( GetPlayerController(s__baka_SPlayer(1)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(5)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(6)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(2)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(3)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(4)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(7)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(8)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(9)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_EMPTY ) ) ) ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_shengfupanding2))
 call DestroyTrigger(gg_trg_shengfupanding2)
 if ( ( GetTriggerExecCount(GetTriggeringTrigger()) == 1 ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 10.00, "TRIGSTR_3263")
@@ -21196,7 +20723,6 @@ call TriggerAddAction(gg_trg_djcs, function Trig_djcsActions)
 endfunction
 function Trig_cxxrActions takes nothing returns nothing
 if ( ( ( udg_test == 1 ) or ( ( ( GetPlayerController(s__baka_SPlayer(1)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(1)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(5)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(5)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(6)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(6)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(2)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(2)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(3)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(3)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(4)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(4)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(7)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(7)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(8)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(8)) == PLAYER_SLOT_STATE_EMPTY ) ) and ( ( GetPlayerController(s__baka_SPlayer(9)) == MAP_CONTROL_COMPUTER ) or ( GetPlayerSlotState(s__baka_SPlayer(9)) == PLAYER_SLOT_STATE_EMPTY ) ) ) ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(gg_trg_Delete_trigger))
 call DestroyTrigger(gg_trg_Delete_trigger)
 set udg_Dian[11]=Location(- 5775.00, 6225.00)
 call PanCameraToTimedLocForPlayer(GetTriggerPlayer(), udg_Dian[11], 0)
@@ -23091,7 +22617,6 @@ call TriggerAddAction(gg_trg_HeroSkillPoint, function Trig_HeroSkillPointActions
 endfunction
 function Trig_StayHomeActions takes nothing returns nothing
 if ( ( udg_GameStart == true ) ) then
-call FlushChildHashtable(globalHashtable, GetHandleId(GetTriggeringTrigger()))
 call DestroyTrigger(GetTriggeringTrigger())
 else
 if ( ( ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303039 ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x6E303038 ) ) ) then
@@ -26963,8 +26488,6 @@ endfunction
 function Trig_nengliangzhirenFunc003Func004T takes nothing returns nothing
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), 0x41304E4C)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_nengliangzhirenActions takes nothing returns nothing
@@ -27496,8 +27019,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9C
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x41305143)
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF), 0x41305144)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_yuexiFunc001Func001Func002Func003Func004Func016T takes nothing returns nothing
@@ -27520,8 +27041,6 @@ else
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
 call DestroyLightning(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x748ACBAC))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -27601,8 +27120,6 @@ endif
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x61E1A70B))
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x4D6303C9))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -27677,8 +27194,6 @@ endif
 else
 endif
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -28233,8 +27748,6 @@ function Trig_yingyan_1Func006T takes nothing returns nothing
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE), 0x41304E57)
 call UnitRemoveBuffBJ(0x42303348, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_yingyan_1Actions takes nothing returns nothing
@@ -28364,8 +27877,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6C
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), 0x41305146)
 call UnitRemoveBuffBJ(0x42303356, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_yuyi_1Actions takes nothing returns nothing
@@ -29655,8 +29166,6 @@ call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6
 else
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -29678,8 +29187,6 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDH
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_xingchenzhiren_1Func002Func008T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -29742,8 +29249,6 @@ call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6
 else
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x9CB980BF))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -29765,8 +29270,6 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x9CB980BF, LoadUnitHandle(YDH
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x41F5BFF0, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x41F5BFF0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_xingchenzhiren_2Func001Func008T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -30238,8 +29741,6 @@ set ydul_i=ydul_i + 1
 endloop
 if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0xA3319111) == false ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 call RemoveSavedHandle(YDHT, StringHash2("绫叁紫月"), 0xF0CAF2FC)
 else
@@ -35738,27 +35239,40 @@ else
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), true)
 call s__process_Remove(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_QJJ_TBJFunc011Func020Func009Func003T takes nothing returns nothing
+function Trig_QJJ_TBJFunc014Func010Func009Func003T takes nothing returns nothing
 if ( ( s__process_IsEnable(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D)) == true ) and ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB) > 0.00 ) ) then
 call s__Unit_Move2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x25A07085) , 25.00 , PATHING_TYPE_WALKABILITY)
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB) - 25.00 ))
 else
 call s__process_Remove(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_QJJ_TBJFunc011T takes nothing returns nothing
+function Trig_QJJ_TBJFunc014T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
 local timer ydl_timer
+if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
+call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x16F769F8))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+set ydl_group=null
+set ydl_unit=null
+set ydl_timer=null
+return
+else
+endif
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+set ydl_group=null
+set ydl_unit=null
+set ydl_timer=null
+return
+else
+endif
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
 call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
@@ -35796,18 +35310,13 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x23F1A87D, s__process_Create(Loa
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x25A07085, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x25A07085))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x56CE87BB, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x883E8A15, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15))
-call TimerStart(ydl_timer, 0.02, true, function Trig_QJJ_TBJFunc011Func020Func009Func003T)
+call TimerStart(ydl_timer, 0.02, true, function Trig_QJJ_TBJFunc014Func010Func009Func003T)
 else
 endif
 else
 endif
 if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
-call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x16F769F8))
 call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
 else
 endif
 set ydl_group=null
@@ -35846,9 +35355,11 @@ else
 call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x56CE87BB, 600.00)
 endif
 call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(GetTriggerUnit()) , 0x68303049 , GetUnitLoc(GetTriggerUnit()) , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)))
+call SetUnitPositionLoc(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), GetUnitLoc(GetTriggerUnit()))
 if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
 call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 2.00, 2.00, 2.00)
 else
+call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 1.50, 1.50, 1.50)
 endif
 set ydl_timer=CreateTimer()
 call SaveLocationHandle(YDHT, GetHandleId(ydl_timer), 0x16F769F8, GetUnitLoc(GetTriggerUnit()))
@@ -35866,7 +35377,7 @@ call SaveBoolean(YDHT, GetHandleId(ydl_timer), 0x89D04DF2, LoadBoolean(YDHT, Get
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xB9A583B8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
-call TimerStart(ydl_timer, 0.04, true, function Trig_QJJ_TBJFunc011T)
+call TimerStart(ydl_timer, 0.04, true, function Trig_QJJ_TBJFunc014T)
 call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
@@ -35876,9 +35387,23 @@ call s__Event_AnyUnitSkill(gg_trg_QJJ_TBJ , 3 , 0x41305157)
 call s__Event_AnyUnitSkill(gg_trg_QJJ_TBJ , 3 , 0x41305158)
 call TriggerAddAction(gg_trg_QJJ_TBJ, function Trig_QJJ_TBJActions)
 endfunction
-function Trig_FRJ_GTJFunc009T takes nothing returns nothing
+function Trig_FRJ_GTJFunc012T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
+if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
 call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
@@ -35942,10 +35467,6 @@ endif
 endif
 if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
 call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
 else
 endif
 set ydl_group=null
@@ -35981,9 +35502,11 @@ call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 
 endif
 endif
 call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(GetTriggerUnit()) , 0x68303045 , GetUnitLoc(GetTriggerUnit()) , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)))
+call SetUnitPositionLoc(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), GetUnitLoc(GetTriggerUnit()))
 if ( ( LoadBoolean(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x89D04DF2) == true ) ) then
 call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 4.00, 4.00, 4.00)
 else
+call SetUnitScale(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), 3.00, 3.00, 3.00)
 endif
 set ydl_timer=CreateTimer()
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x9375D887, ( ( 25.00 + ( 25.00 * I2R(GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())) ) ) + ( 1.20 * I2R(GetHeroAgi(GetTriggerUnit(), true)) ) ))
@@ -35999,7 +35522,7 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xA054799A, LoadInteger(YDHT, Get
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x62069E04, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62069E04))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
-call TimerStart(ydl_timer, 0.04, true, function Trig_FRJ_GTJFunc009T)
+call TimerStart(ydl_timer, 0.04, true, function Trig_FRJ_GTJFunc012T)
 call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
 set ydl_timer=null
 endfunction
@@ -36044,27 +35567,7 @@ call TriggerRegisterAnyUnitEventBJ(gg_trg_JSJT, EVENT_PLAYER_HERO_SKILL)
 call TriggerAddCondition(gg_trg_JSJT, Condition(function Trig_JSJTConditions))
 call TriggerAddAction(gg_trg_JSJT, function Trig_JSJTActions)
 endfunction
-function Trig_fzjActions takes nothing returns nothing
-set udg_danwei[64]=GetTriggerUnit()
-set udg_dian[64]=GetSpellTargetLoc()
-set udg_dian[65]=GetUnitLoc(udg_danwei[64])
-set udg_danwei[65]=CreateUnitAtLoc(GetOwningPlayer(udg_danwei[64]), 0x65303051, PolarProjectionBJ(udg_dian[65], 64.00, AngleBetweenPoints(udg_dian[65], udg_dian[64])), AngleBetweenPoints(udg_dian[65], udg_dian[64]))
-call GroupAddUnit(udg_DAZE[0], udg_danwei[65])
-call GroupAddUnit(udg_DAZE[1], udg_danwei[65])
-call PlaySoundOnUnitBJ(gg_snd_TinkerMissileLaunch101, 100, udg_danwei[65])
-call UnitApplyTimedLife(udg_danwei[65], 0x42487765, 0.60)
-call UnitAddAbility(udg_danwei[65], 0x41726176)
-call s__maphack_SetHeight(udg_danwei[65] , 50.00 , 0.00)
-call RemoveLocation(udg_dian[65])
-call RemoveLocation(udg_dian[64])
-call StartTimerBJ(udg_jishiqi[23], true, ( 0.05 - ( 0.01 * I2R(GetUnitAbilityLevel(udg_danwei[64], 0x41303048)) ) ))
-endfunction
-function InitTrig_fzj takes nothing returns nothing
-set gg_trg_fzj=CreateTrigger()
-call s__Event_AnyUnitSkill(gg_trg_fzj , 3 , 0x41303048)
-call TriggerAddAction(gg_trg_fzj, function Trig_fzjActions)
-endfunction
-function Trig_fzj2Func003Func006A takes nothing returns nothing
+function Trig_GLFZJFunc019Func014A takes nothing returns nothing
 set udg_danwei2[0]=GetEnumUnit()
 set udg_dian2[1]=GetUnitLoc(udg_danwei2[0])
 if ( ( DistanceBetweenPoints(udg_dian[66], udg_dian2[1]) <= 175.00 ) ) then
@@ -36074,7 +35577,7 @@ endif
 set udg_danwei2[0]=null
 call RemoveLocation(udg_dian2[1])
 endfunction
-function Trig_fzj2Func003Func007Func004A takes nothing returns nothing
+function Trig_GLFZJFunc019Func015Func004A takes nothing returns nothing
 set udg_danwei[147]=GetEnumUnit()
 if ( ( IsUnitType(udg_danwei[147], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[147], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[147]) == true ) and ( IsUnitEnemy(udg_danwei[147], GetOwningPlayer(udg_danwei[64])) == true ) ) then
 call UnitDamageTarget(udg_danwei[64], udg_danwei[147], ( 1.00 * I2R(GetHeroAgi(udg_danwei[64], true)) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
@@ -36083,38 +35586,68 @@ else
 endif
 set udg_danwei[147]=null
 endfunction
-function Trig_fzj2Actions takes nothing returns nothing
+function Trig_GLFZJFunc019T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
-set udg_dian[66]=GetUnitLoc(udg_danwei[65])
-set udg_dian2[0]=PolarProjectionBJ(udg_dian[66], 93.75, GetUnitFacing(udg_danwei[65]))
-if ( ( IsTerrainPathableBJ(udg_dian[66], PATHING_TYPE_FLYABILITY) == false ) and ( IsUnitType(udg_danwei[65], UNIT_TYPE_DEAD) == false ) ) then
-call SetUnitX(udg_danwei[65], GetLocationX(udg_dian2[0]))
-call SetUnitY(udg_danwei[65], GetLocationY(udg_dian2[0]))
+if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
+call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
 call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", udg_dian2[0]))
 set udg_zhengshuex[0]=0
-call ForGroupBJ(udg_danweizu2[76], function Trig_fzj2Func003Func006A)
+call ForGroupBJ(udg_danweizu2[76], function Trig_GLFZJFunc019Func014A)
 if ( ( udg_zhengshuex[0] == 0 ) and ( GetUnitAbilityLevel(udg_danwei[65], 0x41304651) == 0 ) ) then
 set udg_danweizu[18]=YDWEGetUnitsInRangeOfLocAllNull(256.00 , udg_dian[66])
-call ForGroupBJ(udg_danweizu[18], function Trig_fzj2Func003Func007Func004A)
+call ForGroupBJ(udg_danweizu[18], function Trig_GLFZJFunc019Func015Func004A)
 call DestroyGroup(udg_danweizu[18])
 else
 endif
-else
-call KillUnit(udg_danwei[65])
-call PauseTimer(udg_jishiqi[23])
-set udg_danwei[64]=null
-set udg_danwei[65]=null
-endif
-call RemoveLocation(udg_dian[66])
-call RemoveLocation(udg_dian2[0])
 set ydl_group=null
 set ydl_unit=null
 endfunction
-function InitTrig_fzj2 takes nothing returns nothing
-set gg_trg_fzj2=CreateTrigger()
-call TriggerRegisterTimerExpireEvent(gg_trg_fzj2, udg_jishiqi[23])
-call TriggerAddAction(gg_trg_fzj2, function Trig_fzj2Actions)
+function Trig_GLFZJActions takes nothing returns nothing
+local timer ydl_timer
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
+call SaveReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8, s__math_U2L(GetTriggerUnit() , GetSpellTargetLoc() , 1 , true))
+call SaveUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(GetTriggerUnit()) , 0x65303051 , s__math_PolarProjectionMU(GetUnitLoc(GetTriggerUnit()) , 64.00 , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)) , LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8)))
+call SetUnitPositionLoc(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA), GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA)))
+call PlaySoundOnUnitBJ(gg_snd_TinkerMissileLaunch101, 100, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+set udg_tempReal[1]=2343.75
+set udg_tempReal[2]=3125.00
+set udg_tempReal[1]=4687.50
+set udg_tempReal[4]=1400.00
+set udg_tempReal[5]=1875.00
+set udg_tempReal[6]=2800.00
+set ydl_timer=CreateTimer()
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x00BF2B95, udg_tempReal[GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())])
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x7D7428EE, udg_tempReal[( GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId()) + 3 )])
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xB9A583B8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
+call TimerStart(ydl_timer, 0.04, true, function Trig_GLFZJFunc019T)
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
+endfunction
+function InitTrig_GLFZJ takes nothing returns nothing
+set gg_trg_GLFZJ=CreateTrigger()
+call s__Event_AnyUnitSkill(gg_trg_GLFZJ , 3 , 0x41303048)
+call TriggerAddAction(gg_trg_GLFZJ, function Trig_GLFZJActions)
 endfunction
 function Trig_gmjzActions takes nothing returns nothing
 set udg_zhengshu[38]=0
@@ -36426,8 +35959,6 @@ endfunction
 function Trig_huixiong_2Func001Func003T takes nothing returns nothing
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x902C88F4))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_huixiong_2Actions takes nothing returns nothing
@@ -36902,8 +36433,6 @@ endfunction
 function Trig_qianxing_1Func004T takes nothing returns nothing
 call EnableTrigger(gg_trg_qianxing_3)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_qianxing_1Actions takes nothing returns nothing
@@ -39779,8 +39308,6 @@ call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_danwei[211])
 set udg_Danwei[92]=null
 call StartTimerBJ(udg_jishiqi[46], true, 0.10)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_guishouFunc006T takes nothing returns nothing
@@ -45734,8 +45261,6 @@ call DisableTrigger(gg_trg_xiaoyefuka_1)
 call IssueImmediateOrderById(udg_danwei[307], 852526)
 call EnableTrigger(gg_trg_xiaoyefuka_1)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_yemuhuanyingsharengui_1Actions takes nothing returns nothing
@@ -46158,8 +45683,6 @@ call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7
 call SetUnitVertexColor(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), 255, 255, 255, 255)
 call s__process_Remove(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 else
@@ -47771,8 +47294,6 @@ endfunction
 function Trig_zhonglifeixing_starFunc004Func003Func001T takes nothing returns nothing
 call SetPlayerAbilityAvailable(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9)), 0x41304949, true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_zhonglifeixing_starActions takes nothing returns nothing
@@ -47925,8 +47446,6 @@ endfunction
 function Trig_zhonglifeixing_moveFunc001Func001Func004Func001T takes nothing returns nothing
 call SetPlayerAbilityAvailable(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0)), 0x41304949, true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_zhonglifeixing_moveFunc001Func001Func014Func002Func019A takes nothing returns nothing
@@ -47936,8 +47455,6 @@ endfunction
 function Trig_zhonglifeixing_moveFunc001Func005Func001T takes nothing returns nothing
 call SetPlayerAbilityAvailable(GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0)), 0x41304949, true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_zhonglifeixing_moveActions takes nothing returns nothing
@@ -50104,8 +49621,6 @@ call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger
 call s__maphack_SetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0) , ( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 20.00 ) , 0.00)
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 15 ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 else
 endif
@@ -50153,8 +49668,6 @@ call ForGroupBJ(udg_danweizu2[77], function Trig_hongmo_2Func001Func003Func008Fu
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
 call DestroyGroup(udg_danweizu2[77])
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 else
 endif
@@ -50166,8 +49679,6 @@ call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger
 call s__maphack_SetHeight(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0) , ( I2R(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B)) * 30.00 ) , 0.00)
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 else
 endif
@@ -51082,8 +50593,6 @@ call GroupAddUnit(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
 if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 call BJDebugMsg("[火土符]-火焰马甲创建结束")
 else
@@ -51110,8 +50619,6 @@ call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62
 if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788) == true ) ) then
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x691E9C62))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 call BJDebugMsg("[火土符]-火焰马甲移动结束")
 else
@@ -51170,8 +50677,6 @@ if ( ( LoadBoolean(YDHT, GetHandleId(GetExpiredTimer()), 0x14B2F788) == true ) )
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440))
 call YDWEFlushMissionByInteger(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xDB7C34FA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 call BJDebugMsg("[火土符]-全部结束")
 else
@@ -51194,8 +50699,6 @@ call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x691E9C62, LoadGroupHandle(Y
 call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0x60E03440, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x60E03440))
 call TimerStart(ydl_timer, 0.20, true, function Trig_huotufu_1Func014Func005T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -55665,8 +55168,6 @@ function Trig_linghunsuolian_1Func008T takes nothing returns nothing
 call UnitAddAbility(udg_Danwei[86], 0x41304B36)
 call UnitRemoveAbility(udg_Danwei[86], 0x41304B35)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_linghunsuolian_1Actions takes nothing returns nothing
@@ -56849,8 +56350,6 @@ local unit ydl_unit
 call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x38601DA8), function Trig_caiyansheji_2Func001Func001Func012Func001A)
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x38601DA8))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_group=null
 set ydl_unit=null
@@ -57097,8 +56596,6 @@ call DisableTrigger(gg_trg_hongzhishi_2_7)
 call IssueImmediateOrderById(udg_Danwei[132], 851972)
 call EnableTrigger(gg_trg_hongzhishi_2_7)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_hongzhishi_2_5Actions takes nothing returns nothing
@@ -57127,8 +56624,6 @@ call DisableTrigger(gg_trg_hongzhishi_2_7)
 call IssueImmediateOrderById(udg_Danwei[132], 851972)
 call EnableTrigger(gg_trg_hongzhishi_2_7)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_hongzhishi_2_6Actions takes nothing returns nothing
@@ -58486,8 +57981,6 @@ call SetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), 
 call SaveInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B, ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) - 1 ))
 if ( ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x300B6E6B) == 0 ) or ( IsUnitType(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62274AD0), UNIT_TYPE_DEAD) == true ) ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 else
 endif
@@ -58793,8 +58286,6 @@ else
 endif
 call s__Unit_PauseUnitMU(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC58841DE) , false , "食时之城镜像")
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_shishizhicheng_3Actions takes nothing returns nothing
@@ -58832,8 +58323,6 @@ endfunction
 function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func004Func001Func008T takes nothing returns nothing
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_litijidongFunc003Func013Func005Func001Func001Func001Func012Func003A takes nothing returns nothing
@@ -58845,8 +58334,6 @@ endfunction
 function Trig_litijidongFunc003Func013Func005Func003Func007Func001Func008T takes nothing returns nothing
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_litijidongFunc003Func013Func005Func003Func013Func003A takes nothing returns nothing
@@ -59040,8 +58527,6 @@ endif
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
 call DestroyLightning(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
@@ -59217,8 +58702,6 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x80A9ADA7, LoadInteger(YDHT, Get
 call SaveInteger(YDHT, GetHandleId(ydl_timer), 0xAF4CC8D0, LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xAF4CC8D0))
 call TimerStart(ydl_timer, 0.03, true, function Trig_litijidongFunc003Func013T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -59333,8 +58816,6 @@ call ForGroupBJ(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xBF0EA2EC))
 call DestroyGroup(LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
@@ -59376,8 +58857,6 @@ call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xBF0EA2EC, LoadGroupHandle(Y
 call SaveGroupHandle(YDHT, GetHandleId(ydl_timer), 0xEB494D94, LoadGroupHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xEB494D94))
 call TimerStart(ydl_timer, 0.02, true, function Trig_xuanfengzhanFunc002Func002Func002Func020Func010T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -59435,8 +58914,6 @@ call TimerStart(ydl_timer, 0.30, false, function Trig_xuanfengzhanFunc002Func002
 endif
 endif
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -59512,8 +58989,6 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDH
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x293DF2F5))
 call TimerStart(ydl_timer, 5.00, false, function Trig_shuangdaozhanFunc002Func001Func007Func002Func006T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 set ydl_timer=null
@@ -59622,8 +59097,6 @@ endif
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
 call DestroyLightning(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
@@ -59693,8 +59166,6 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x293DF2F5, LoadUnitHandle(YDH
 call TimerStart(ydl_timer, 0.03, true, function Trig_shuangdaozhanFunc002Func001Func007T)
 endif
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -59745,8 +59216,6 @@ function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func010T take
 call SetUnitPathing(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x6CD84461), true)
 call UnitApplyTimedLife(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xC367145E), 0x42487765, 0.50)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_huixuanzhanFunc002Func015Func005Func002Func001Func002Func021A takes nothing returns nothing
@@ -59928,8 +59397,6 @@ endif
 call RemoveUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x1B1E869E))
 call DestroyLightning(LoadLightningHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x8AD04E87))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x99149280))
@@ -60107,8 +59574,6 @@ call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xC367145E, LoadUnitHandle(YDH
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x0BA49B00, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x0BA49B00))
 call TimerStart(ydl_timer, 0.03, true, function Trig_huixuanzhanFunc002Func015T)
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_timer=null
 endfunction
@@ -60172,8 +59637,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E42)
 call UnitRemoveBuffBJ(0x42303341, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -60186,8 +59649,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E44)
 call UnitRemoveBuffBJ(0x42303342, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -60201,8 +59662,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E47)
 call UnitRemoveBuffBJ(0x42303343, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -60215,8 +59674,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E48)
 call UnitRemoveBuffBJ(0x42303344, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -60229,8 +59686,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304F48)
 call UnitRemoveBuffBJ(0x4230334B, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
@@ -60253,8 +59708,6 @@ call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDA
 call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4D)
 call UnitRemoveBuffBJ(0x42303345, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call PauseTimer(GetExpiredTimer())
-call FlushChildHashtable(globalHashtable, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endfunction
 function Trig_DamageAttackActions takes nothing returns nothing
@@ -61138,8 +60591,7 @@ call InitTrig_guangdun_3()
 call InitTrig_QJJ_TBJ()
 call InitTrig_FRJ_GTJ()
 call InitTrig_JSJT()
-call InitTrig_fzj()
-call InitTrig_fzj2()
+call InitTrig_GLFZJ()
 call InitTrig_gmjz()
 call InitTrig_baoyujianzhen_2()
 call InitTrig_gmjz2()
@@ -61887,27 +61339,27 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs654888499")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
-call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
+call ExecuteFunc("jasshelper__initstructs732505643")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
+call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("AIlibrary__Init")
-call ExecuteFunc("LuaLibrary__Init")
-call ExecuteFunc("Record__Init")
-call ExecuteFunc("YDWELibrary__Init")
-call ExecuteFunc("bakaLibrary__Init")
-call ExecuteFunc("effectLibrary__Init")
-call ExecuteFunc("eventLibrary__Init")
-call ExecuteFunc("mathLibrary__Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary__Init")
-call ExecuteFunc("soundLibrary__Init")
-call ExecuteFunc("stringLibrary__Init")
-call ExecuteFunc("testLibrary__Init")
-call ExecuteFunc("textLibrary__Init")
-call ExecuteFunc("unitLibrary__Init")
-call ExecuteFunc("RecordFix__Init")
+call ExecuteFunc("baseLibrary___Init")
+call ExecuteFunc("AIlibrary___Init")
+call ExecuteFunc("LuaLibrary___Init")
+call ExecuteFunc("Record___Init")
+call ExecuteFunc("YDWELibrary___Init")
+call ExecuteFunc("bakaLibrary___Init")
+call ExecuteFunc("effectLibrary___Init")
+call ExecuteFunc("eventLibrary___Init")
+call ExecuteFunc("mathLibrary___Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("processLibrary___Init")
+call ExecuteFunc("soundLibrary___Init")
+call ExecuteFunc("stringLibrary___Init")
+call ExecuteFunc("testLibrary___Init")
+call ExecuteFunc("textLibrary___Init")
+call ExecuteFunc("unitLibrary___Init")
+call ExecuteFunc("RecordFix___Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -62027,7 +61479,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs654888499 takes nothing returns nothing
+function jasshelper__initstructs732505643 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
