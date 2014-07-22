@@ -27,17 +27,16 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase___yd_PlayerColor
-trigger array YDWEBase___AbilityCastingOverEventQueue
-integer array YDWEBase___AbilityCastingOverEventType
-integer YDWEBase___AbilityCastingOverEventNumber=0
+string array YDWEBase__yd_PlayerColor
+trigger array YDWEBase__AbilityCastingOverEventQueue
+integer array YDWEBase__AbilityCastingOverEventType
+integer YDWEBase__AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
 //endglobals from YDWEEnumDestructablesInCircleBJFilterNull
 //globals from YDWEGetForceOfPlayerNull:
 constant boolean LIBRARY_YDWEGetForceOfPlayerNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetForceOfPlayerNull
 //globals from YDWEGetInventoryIndexOfItemTypeBJNull:
 constant boolean LIBRARY_YDWEGetInventoryIndexOfItemTypeBJNull=true
@@ -48,6 +47,7 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
@@ -60,10 +60,10 @@ constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEGetUnitsOfPlayerAndTypeIdNull:
 constant boolean LIBRARY_YDWEGetUnitsOfPlayerAndTypeIdNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsOfPlayerAndTypeIdNull
 //globals from YDWEMakeUnitsPassiveForPlayerNull:
 constant boolean LIBRARY_YDWEMakeUnitsPassiveForPlayerNull=true
@@ -969,6 +969,7 @@ trigger gg_trg_StayHome=null
 trigger gg_trg_hp1_2=null
 trigger gg_trg_hp2_2=null
 trigger gg_trg_renyishanghai=null
+trigger gg_trg_DamageAttack=null
 trigger gg_trg_renyishanghai_hero=null
 trigger gg_trg_gongxiangwupin=null
 trigger gg_trg_zhuangbei=null
@@ -1804,7 +1805,6 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_DamageAttack=null
 
 trigger l__library_init
 
@@ -3017,20 +3017,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
-if YDWEBase___AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
+if YDWEBase__AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
+if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
-set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
-set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
+set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
+set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
+set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -3062,7 +3062,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3095,22 +3095,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase___yd_PlayerColor[3]="|cFF540081"
-set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase___yd_PlayerColor[8]="|cFF959697"
-set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase___yd_PlayerColor[10]="|cFF106246"
-set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase___yd_PlayerColor[12]="|cFF282828"
-set YDWEBase___yd_PlayerColor[13]="|cFF282828"
-set YDWEBase___yd_PlayerColor[14]="|cFF282828"
-set YDWEBase___yd_PlayerColor[15]="|cFF282828"
+set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase__yd_PlayerColor[3]="|cFF540081"
+set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase__yd_PlayerColor[8]="|cFF959697"
+set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase__yd_PlayerColor[10]="|cFF106246"
+set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase__yd_PlayerColor[12]="|cFF282828"
+set YDWEBase__yd_PlayerColor[13]="|cFF282828"
+set YDWEBase__yd_PlayerColor[14]="|cFF282828"
+set YDWEBase__yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -5159,6 +5159,12 @@ if b then
 call RemoveLocation(where)
 endif
 endfunction
+function s__Effect_AddSpecialEffectLoc2 takes string s,location loc returns effect
+local real x=GetLocationX(loc)
+local real y=GetLocationY(loc)
+call RemoveLocation(loc)
+return AddSpecialEffect(s, x, y)
+endfunction
 function effectLibrary___Init takes nothing returns nothing
 endfunction
 
@@ -5781,6 +5787,7 @@ set cjlocgn_00000003=StringHash2(s__baka_getMapVerName(s__baka_thisVer) + GetPla
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/22/ - 22:33:10],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -5996,7 +6003,10 @@ call GroupRemoveUnit(g, cjlocgn_00000000)
 set cjlocgn_00000001=GetUnitX(cjlocgn_00000000)
 set cjlocgn_00000002=GetUnitY(cjlocgn_00000000)
 set cjlocgn_00000003=( A * cjlocgn_00000001 + B * cjlocgn_00000002 + C ) / s
-if cjlocgn_00000003 > - dis and cjlocgn_00000003 < dis then
+if cjlocgn_00000003 < 0 then
+set cjlocgn_00000003=- cjlocgn_00000003
+endif
+if cjlocgn_00000003 < dis then
 call GroupAddUnit(s__sys_g, cjlocgn_00000000)
 endif
 endloop
@@ -8548,11 +8558,13 @@ set bj_forLoopAIndex=1
 set bj_forLoopAIndexEnd=10
 loop
 exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+call SetPlayerAlliance(s__baka_SPlayer(PLAYER_NEUTRAL_PASSIVE), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_SHARED_CONTROL, true)
 call SetPlayerAlliance(s__baka_SPlayer(10), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
 call SetPlayerAlliance(s__baka_SPlayer(11), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
 call SetPlayerAlliance(s__baka_SPlayer(bj_forLoopAIndex - 1), s__baka_SPlayer(bj_forLoopAIndex - 1), ALLIANCE_HELP_REQUEST, false)
 set bj_forLoopAIndex=bj_forLoopAIndex + 1
 endloop
+call ClearTextMessages()
 call SetPlayerName(s__baka_SPlayer(10), "TRIGSTR_5403")
 call SetPlayerName(s__baka_SPlayer(11), "TRIGSTR_5536")
 call YDWESetPlayerColorBJNull(s__baka_SPlayer(10) , PLAYER_COLOR_AQUA , true)
@@ -22802,6 +22814,499 @@ set gg_trg_renyishanghai=CreateTrigger()
 call s__Event_AnyUnitDamage(gg_trg_renyishanghai , 0 , 0)
 call TriggerAddAction(gg_trg_renyishanghai, function Trig_renyishanghaiActions)
 endfunction
+function Trig_DamageAttackFunc002Func001Func003Func007T takes nothing returns nothing
+if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA) == 1 ) ) then
+call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA, 0)
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 45.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E43)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E42)
+call UnitRemoveBuffBJ(0x42303341, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endif
+endfunction
+function Trig_DamageAttackFunc002Func002Func003Func007T takes nothing returns nothing
+if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) > 0 ) ) then
+call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) - 1 ))
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E45)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E44)
+call UnitRemoveBuffBJ(0x42303342, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endif
+endfunction
+function Trig_DamageAttackFunc002Func003Func003Func008T takes nothing returns nothing
+if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x71BB96BD) == 1 ) ) then
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), "origin"))
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x71BB96BD, 0)
+else
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E46)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E47)
+call UnitRemoveBuffBJ(0x42303343, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endif
+endfunction
+function Trig_DamageAttackFunc002Func006Func007T takes nothing returns nothing
+if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B) == 1 ) ) then
+call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B, 0)
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E49)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E48)
+call UnitRemoveBuffBJ(0x42303344, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endif
+endfunction
+function Trig_DamageAttackFunc003Func003Func007T takes nothing returns nothing
+if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) > 0 ) ) then
+call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) - 1 ))
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), ( 5.00 + ( 15.00 * I2R(GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), 0x41303549)) ) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304F47)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304F48)
+call UnitRemoveBuffBJ(0x4230334B, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endif
+endfunction
+function Trig_DamageAttackFunc005Func003Func005A takes nothing returns nothing
+if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_danweizu2[369]) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_FLYING) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ) + ( GetEventDamage() * 0.50 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+endif
+endfunction
+function Trig_DamageAttackFunc008Func002Func011Func009A takes nothing returns nothing
+if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_Danweizu[161]) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.80 ) + ( GetEventDamage() * 0.80 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GyroCopter\\GyroCopterImpact.mdl", GetEnumUnit(), "chest"))
+call GroupAddUnit(udg_Danweizu[161], GetEnumUnit())
+else
+endif
+endfunction
+function Trig_DamageAttackFunc010Func005Func007T takes nothing returns nothing
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4E)
+call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4D)
+call UnitRemoveBuffBJ(0x42303345, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
+call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
+call DestroyTimer(GetExpiredTimer())
+endfunction
+function Trig_DamageAttackActions takes nothing returns nothing
+local timer ydl_timer
+local group ydl_group
+local unit ydl_unit
+local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
+set ydl_localvar_step=ydl_localvar_step + 3
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
+call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
+if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x49303453) == true ) ) ) then
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303344) == false ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E49)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E48)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 0)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func006Func007T)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 1)
+endif
+else
+if ( ( GetUnitAbilityLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 )], 0x41304F32) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303341) == false ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 45.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E43)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E42)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 0)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func001Func003Func007T)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 1)
+endif
+else
+endif
+if ( ( GetUnitAbilityLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 )], 0x41304F31) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303342) == false ) ) then
+call UnitAddAbility(GetTriggerUnit(), 0x41304E45)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E44)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 4)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func002Func003Func007T)
+else
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 4)
+endif
+else
+endif
+if ( ( GetUnitAbilityLevel(udg_player[( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 )], 0x41304F33) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303343) == false ) ) then
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", GetTriggerUnit(), "origin"))
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E46)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E47)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 0)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func003Func003Func008T)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 1)
+endif
+else
+endif
+endif
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303549) >= 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230334B) == false ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( 5.00 + ( 15.00 * I2R(GetUnitAbilityLevel(GetEventDamageSource(), 0x41303549)) ) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call UnitAddAbility(GetTriggerUnit(), 0x41304F47)
+call UnitAddAbility(GetTriggerUnit(), 0x41304F48)
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 2)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc003Func003Func007T)
+else
+call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 3)
+endif
+else
+endif
+if ( ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303053)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303051)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303232)) == true ) ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) ) then
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303232)) == true ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 50.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 50.00 ))
+else
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303051)) == true ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 30.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 30.00 ))
+else
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303053)) == true ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 20.00 ))
+else
+endif
+endif
+endif
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl", GetTriggerUnit(), "origin"))
+else
+endif
+else
+endif
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930324C)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( GetRandomInt(1, 100) <= 15 ) ) then
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\ChimaeraLightningMissile\\ChimaeraLightningMissile.mdl", GetTriggerUnit(), "origin"))
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 1 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_Dian[75])
+call ForGroupBJ(udg_Danweizu[76], function Trig_DamageAttackFunc005Func003Func005A)
+call DestroyGroup(udg_Danweizu[76])
+call DestroyEffect(AddSpecialEffectLoc("war3mapImported\\A6_zisepili.mdx", udg_Dian[75]))
+set udg_jubuzs1=1
+loop
+exitwhen udg_jubuzs1 > 9
+set udg_Dian[76]=PolarProjectionBJ(udg_Dian[75], 100.00, ( 40.00 * I2R(udg_jubuzs1) ))
+call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl", udg_Dian[76]))
+call RemoveLocation(udg_Dian[76])
+set udg_jubuzs1=udg_jubuzs1 + 1
+endloop
+call RemoveLocation(udg_Dian[75])
+else
+endif
+else
+endif
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930324D)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( GetRandomInt(1, 100) <= 15 ) ) then
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\WingedSerpentMissile\\WingedSerpentMissile.mdl", GetTriggerUnit(), "chest"))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GreenDragonMissile\\GreenDragonMissile.mdl", GetTriggerUnit(), "chest"))
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+endif
+else
+endif
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303335)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+if ( ( ( ( GetUnitTypeId(GetEventDamageSource()) != 0x48303044 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4E303139 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4830304D ) and ( GetRandomInt(1, 100) <= 15 ) ) or ( ( ( GetUnitTypeId(GetEventDamageSource()) == 0x48303044 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x4E303139 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x4830304D ) ) and ( GetRandomInt(1, 100) <= 5 ) ) ) ) then
+set udg_Dian[75]=GetUnitLoc(GetEventDamageSource())
+set udg_Dian[76]=GetUnitLoc(GetTriggerUnit())
+set udg_Danwei[75]=CreateUnitAtLoc(GetOwningPlayer(GetEventDamageSource()), 0x65303755, udg_Dian[75], AngleBetweenPoints(udg_Dian[75], udg_Dian[76]))
+call SetUnitUserData(udg_Danwei[75], R2I(( ( DistanceBetweenPoints(udg_Dian[75], udg_Dian[76]) / 60.00 ) + 1 )))
+call GroupAddUnit(udg_DAZE[0], udg_Danwei[75])
+call GroupAddUnit(udg_DAZE[1], udg_Danwei[75])
+call GroupAddUnit(udg_Danweizu[143], udg_Danwei[75])
+set udg_Danwei[75]=null
+call StopSoundBJ(gg_snd_PhaseShift1, false)
+call PlaySoundOnUnitBJ(gg_snd_PhaseShift1, 100, GetTriggerUnit())
+call RemoveLocation(udg_Dian[75])
+call RemoveLocation(udg_Dian[76])
+else
+endif
+else
+endif
+if ( ( GetUnitTypeId(GetEventDamageSource()) == 0x4830304E ) ) then
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304F4D) >= 1 ) ) then
+call UnitRemoveAbility(GetEventDamageSource(), 0x41304F4D)
+call UnitRemoveAbility(GetEventDamageSource(), 0x41304F56)
+call StopSoundBJ(gg_snd_RIFLE3HD, false)
+call PlaySoundOnUnitBJ(gg_snd_RIFLE3HD, 100, GetEventDamageSource())
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GyroCopter\\GyroCopterImpact.mdl", GetTriggerUnit(), "chest"))
+if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 1 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ), false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+endif
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+set udg_Dian[76]=GetUnitLoc(GetEventDamageSource())
+call GroupClear(udg_Danweizu[161])
+set udg_jubuzs1=1
+loop
+exitwhen udg_jubuzs1 > 4
+set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 * I2R(udg_jubuzs1) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
+call CreateNUnitsAtLoc(1, 0x65303831, GetOwningPlayer(GetEventDamageSource()), udg_Dian[161], AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
+call UnitApplyTimedLife(bj_lastCreatedUnit, 0x42487765, 2.00)
+call SetUnitScale(bj_lastCreatedUnit, ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ))
+call SetUnitTimeScale(bj_lastCreatedUnit, ( 3.00 - ( 0.50 * I2R(udg_jubuzs1) ) ))
+call RemoveLocation(udg_Dian[161])
+set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 + ( 40.00 * I2R(udg_jubuzs1) ) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
+set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(( 100.00 + ( 25.00 * I2R(udg_jubuzs1) ) ) , udg_Dian[161])
+call ForGroupBJ(udg_Danweizu[76], function Trig_DamageAttackFunc008Func002Func011Func009A)
+call DestroyGroup(udg_Danweizu[76])
+call RemoveLocation(udg_Dian[161])
+set udg_jubuzs1=udg_jubuzs1 + 1
+endloop
+call RemoveLocation(udg_Dian[75])
+call RemoveLocation(udg_Dian[76])
+else
+endif
+else
+endif
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304A54) == 1 ) ) then
+if ( ( GetUnitTypeId(GetEventDamageSource()) != 0x48303042 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4E303139 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4830304D ) ) then
+call StartTimerBJ(udg_jishiqi[( 159 + ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) )], false, 1.00)
+else
+endif
+call UnitRemoveAbility(GetEventDamageSource(), 0x41304A54)
+if ( ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x686D7474 ) ) ) then
+set udg_zhengshuex[0]=R2I(( I2R(GetHeroInt(GetEventDamageSource(), true)) * GetRandomReal(0.20, 0.30) ))
+else
+set udg_zhengshuex[0]=R2I(( I2R(GetHeroInt(GetEventDamageSource(), true)) * GetRandomReal(0.40, 0.60) ))
+endif
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\SpiritOfVengeanceMissile\\SpiritOfVengeanceMissile.mdl", GetTriggerUnit(), "chest"))
+if ( ( GetHeroInt(GetEventDamageSource(), true) > GetHeroStr(GetEventDamageSource(), true) ) and ( GetHeroInt(GetEventDamageSource(), true) > GetHeroAgi(GetEventDamageSource(), true) ) ) then
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl", GetTriggerUnit(), "chest"))
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), I2R(udg_zhengshuex[0]), true, true, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+else
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(udg_zhengshuex[0]) * 0.50 ), true, true, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+endif
+else
+endif
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304E4C) == 1 ) and ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303345) == false ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+call UnitRemoveAbility(GetEventDamageSource(), 0x41304E4C)
+if ( ( GetUnitState(GetEventDamageSource(), UNIT_STATE_MANA) >= 200.00 ) ) then
+call SetUnitManaBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_MANA) - 200.00 ))
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 200.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
+call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\lianzhanbo.mdx", GetTriggerUnit(), "chest"))
+call UnitAddAbility(GetTriggerUnit(), 0x41304E4E)
+call UnitAddAbility(GetTriggerUnit(), 0x41304E4D)
+set ydl_timer=CreateTimer()
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
+call TimerStart(ydl_timer, 2.00, false, function Trig_DamageAttackFunc010Func005Func007T)
+else
+endif
+else
+endif
+if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
+set udg_jubuss1=0.00
+set udg_jubuzs1=( GetHeroAgi(GetEventDamageSource(), true) / 15 )
+if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930344A)) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
+else
+endif
+set udg_jubuzs1=15
+if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303348) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
+else
+endif
+set udg_jubuzs1=0
+set udg_jubuzs2=1
+loop
+exitwhen udg_jubuzs2 > 6
+if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x7372746C ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x73726264 ) ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
+else
+endif
+set udg_jubuzs2=udg_jubuzs2 + 1
+endloop
+set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.50)
+else
+endif
+set udg_jubuzs1=0
+set udg_jubuzs2=1
+loop
+exitwhen udg_jubuzs2 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x74656C73 ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
+else
+endif
+set udg_jubuzs2=udg_jubuzs2 + 1
+endloop
+set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
+else
+endif
+set udg_jubuzs1=0
+set udg_jubuzs2=1
+loop
+exitwhen udg_jubuzs2 > 6
+if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x72617466 ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303453 ) ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
+else
+endif
+set udg_jubuzs2=udg_jubuzs2 + 1
+endloop
+set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.50)
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
+call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
+call UnitAddAbility(udg_Danwei[92], 0x41303551)
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
+set udg_Danwei[92]=null
+call RemoveLocation(udg_Dian[75])
+else
+endif
+set udg_jubuzs1=0
+set udg_jubuzs2=1
+loop
+exitwhen udg_jubuzs2 > 6
+if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303239 ) ) then
+set udg_jubuzs1=( udg_jubuzs1 + 1 )
+else
+endif
+set udg_jubuzs2=udg_jubuzs2 + 1
+endloop
+set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
+if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.80)
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
+call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
+call UnitAddAbility(udg_Danwei[92], 0x41303551)
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
+set udg_Danwei[92]=null
+call RemoveLocation(udg_Dian[75])
+else
+endif
+if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303045) == true ) ) then
+set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
+call UnitRemoveBuffBJ(0x42303045, GetTriggerUnit())
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl", GetTriggerUnit(), "chest"))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", GetTriggerUnit(), "chest"))
+if ( ( udg_Points == - 1 ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_LIFE) * 0.05 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+else
+endif
+else
+endif
+if ( ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) > GetEventDamage() ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303251) == 1 ) ) then
+set udg_jubuss1=( udg_jubuss1 + 1 )
+set udg_danwei[278]=GetEventDamageSource()
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetUnitAbilityLevel(GetEventDamageSource(), 0x41556373)) * 25.00 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+call StartTimerBJ(udg_jishiqi[80], false, 8.00)
+call UnitRemoveAbility(udg_danwei[278], 0x41303251)
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl", GetTriggerUnit(), "chest"))
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
+call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
+call UnitAddAbility(udg_Danwei[92], 0x41304236)
+call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
+set udg_Danwei[92]=null
+call RemoveLocation(udg_Dian[75])
+else
+endif
+if ( ( udg_jubuss1 > 0.00 ) ) then
+call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetEventDamage() * udg_jubuss1 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
+call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\jianqibo.mdx", GetTriggerUnit(), "chest"))
+set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
+if ( ( ( udg_jubuss1 / 10.00 ) == ( I2R(R2I(udg_jubuss1)) / 10.00 ) ) ) then
+call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( I2S(R2I(( udg_jubuss1 + 1 ))) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
+else
+call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( R2SW(( udg_jubuss1 + 1.00 ), 1, 1) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
+endif
+call SetTextTagVelocity(bj_lastCreatedTextTag, 0.00, 0.03)
+call SetTextTagPermanent(bj_lastCreatedTextTag, false)
+call SetTextTagFadepoint(bj_lastCreatedTextTag, 1.50)
+call SetTextTagLifespan(bj_lastCreatedTextTag, 4.00)
+call SetTextTagVisibility(bj_lastCreatedTextTag, false)
+set udg_wanjiazu[0]=CreateForce()
+set udg_jubuzs1=1
+loop
+exitwhen udg_jubuzs1 > 10
+if ( ( IsUnitVisible(GetTriggerUnit(), s__baka_SPlayer(udg_jubuzs1 - 1)) == true ) ) then
+call ForceAddPlayer(udg_wanjiazu[0], s__baka_SPlayer(udg_jubuzs1 - 1))
+else
+endif
+set udg_jubuzs1=udg_jubuzs1 + 1
+endloop
+call ShowTextTagForceBJ(true, bj_lastCreatedTextTag, udg_wanjiazu[0])
+call DestroyForce(udg_wanjiazu[0])
+call RemoveLocation(udg_Dian[75])
+else
+endif
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 4 ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.35 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 3 ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.30 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 2 ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.25 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 1 ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.20 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+endif
+endif
+endif
+endif
+if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303349) == true ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.15 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x4230334A) == true ) ) then
+call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.10 ) ))
+call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
+else
+endif
+endif
+else
+endif
+call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
+set ydl_timer=null
+set ydl_group=null
+set ydl_unit=null
+endfunction
+function InitTrig_DamageAttack takes nothing returns nothing
+set gg_trg_DamageAttack=CreateTrigger()
+call s__Event_AnyUnitDamage(gg_trg_DamageAttack , 0 , 1)
+call TriggerAddAction(gg_trg_DamageAttack, function Trig_DamageAttackActions)
+endfunction
 function Trig_renyishanghai_heroActions takes nothing returns nothing
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 10 ) and ( GetEventDamage() < 100000.00 ) ) then
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetEventDamageSource())) + 1 ) <= 5 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetTriggerUnit())) + 1 ) >= 6 ) ) then
@@ -35242,7 +35747,7 @@ call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 endif
 endfunction
-function Trig_QJJ_TBJFunc014Func010Func009Func003T takes nothing returns nothing
+function Trig_QJJ_TBJFunc014Func014Func009Func003T takes nothing returns nothing
 if ( ( s__process_IsEnable(LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0x23F1A87D)) == true ) and ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB) > 0.00 ) ) then
 call s__Unit_Move2(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x25A07085) , 25.00 , PATHING_TYPE_WALKABILITY)
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB) - 25.00 ))
@@ -35256,8 +35761,11 @@ function Trig_QJJ_TBJFunc014T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
 local timer ydl_timer
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+else
+endif
 if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
-call RemoveLocation(LoadLocationHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x16F769F8))
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
 set ydl_group=null
@@ -35266,7 +35774,7 @@ set ydl_timer=null
 return
 else
 endif
-if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
 set ydl_group=null
 set ydl_unit=null
 set ydl_timer=null
@@ -35310,13 +35818,9 @@ call SaveInteger(YDHT, GetHandleId(ydl_timer), 0x23F1A87D, s__process_Create(Loa
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x25A07085, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x25A07085))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x56CE87BB, LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x56CE87BB))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x883E8A15, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x883E8A15))
-call TimerStart(ydl_timer, 0.02, true, function Trig_QJJ_TBJFunc014Func010Func009Func003T)
+call TimerStart(ydl_timer, 0.02, true, function Trig_QJJ_TBJFunc014Func014Func009Func003T)
 else
 endif
-else
-endif
-if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
 else
 endif
 set ydl_group=null
@@ -35390,6 +35894,10 @@ endfunction
 function Trig_FRJ_GTJFunc012T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+else
+endif
 if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
@@ -35398,7 +35906,7 @@ set ydl_unit=null
 return
 else
 endif
-if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
 set ydl_group=null
 set ydl_unit=null
 return
@@ -35464,10 +35972,6 @@ if ( ( LoadInteger(YDHT, GetHandleId(GetExpiredTimer()), 0xA054799A) == 0 ) ) th
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, - 1.00)
 else
 endif
-endif
-if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
-call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
-else
 endif
 set ydl_group=null
 set ydl_unit=null
@@ -35567,28 +36071,13 @@ call TriggerRegisterAnyUnitEventBJ(gg_trg_JSJT, EVENT_PLAYER_HERO_SKILL)
 call TriggerAddCondition(gg_trg_JSJT, Condition(function Trig_JSJTConditions))
 call TriggerAddAction(gg_trg_JSJT, function Trig_JSJTActions)
 endfunction
-function Trig_GLFZJFunc019Func014A takes nothing returns nothing
-set udg_danwei2[0]=GetEnumUnit()
-set udg_dian2[1]=GetUnitLoc(udg_danwei2[0])
-if ( ( DistanceBetweenPoints(udg_dian[66], udg_dian2[1]) <= 175.00 ) ) then
-set udg_zhengshuex[0]=1
-else
-endif
-set udg_danwei2[0]=null
-call RemoveLocation(udg_dian2[1])
-endfunction
-function Trig_GLFZJFunc019Func015Func004A takes nothing returns nothing
-set udg_danwei[147]=GetEnumUnit()
-if ( ( IsUnitType(udg_danwei[147], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(udg_danwei[147], udg_danweizu2[369]) == false ) and ( s__Unit_IsAlive(udg_danwei[147]) == true ) and ( IsUnitEnemy(udg_danwei[147], GetOwningPlayer(udg_danwei[64])) == true ) ) then
-call UnitDamageTarget(udg_danwei[64], udg_danwei[147], ( 1.00 * I2R(GetHeroAgi(udg_danwei[64], true)) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call DestroyEffect(AddSpecialEffectTarget("abilities\\weapons\\WyvernSpear\\WyvernSpearMissile.mdl", udg_danwei[147], "chest"))
-else
-endif
-set udg_danwei[147]=null
-endfunction
 function Trig_GLFZJFunc019T takes nothing returns nothing
 local group ydl_group
 local unit ydl_unit
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) < 0.00 ) ) then
+call KillUnit(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))
+else
+endif
 if ( ( s__Unit_IsDead(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
 call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
 call DestroyTimer(GetExpiredTimer())
@@ -35597,7 +36086,7 @@ set ydl_unit=null
 return
 else
 endif
-if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == false ) ) then
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) == true ) ) then
 set ydl_group=null
 set ydl_unit=null
 return
@@ -35606,15 +36095,31 @@ endif
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x00BF2B95) * 0.04 ))
 call s__Unit_Move(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C))
 call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x7D7428EE) - LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xE978590C) ))
-call DestroyEffect(AddSpecialEffectLoc("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl", udg_dian2[0]))
-set udg_zhengshuex[0]=0
-call ForGroupBJ(udg_danweizu2[76], function Trig_GLFZJFunc019Func014A)
-if ( ( udg_zhengshuex[0] == 0 ) and ( GetUnitAbilityLevel(udg_danwei[65], 0x41304651) == 0 ) ) then
-set udg_danweizu[18]=YDWEGetUnitsInRangeOfLocAllNull(256.00 , udg_dian[66])
-call ForGroupBJ(udg_danweizu[18], function Trig_GLFZJFunc019Func015Func004A)
-call DestroyGroup(udg_danweizu[18])
+call DestroyEffect(s__Effect_AddSpecialEffectLoc2("Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl" , GetUnitLoc(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA))))
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), GetUnitY(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)), 256.00, null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9))) == true ) and ( YDWEGetBooleanByInteger(YDWEH2I(GetExpiredTimer()) , YDWEH2I(ydl_unit)) == false ) ) then
+call YDWESaveBooleanByInteger(YDWEH2I(GetExpiredTimer()) , YDWEH2I(ydl_unit) , true)
+call DestroyEffect(AddSpecialEffectTarget("abilities\\weapons\\WyvernSpear\\WyvernSpearMissile.mdl", ydl_unit, "chest"))
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x48F58D53, ( YDWEDistanceBetweenUnits(ydl_unit , LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA)) * SinBJ(s__math_Angle(LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0xB9A583B8) , YDWEAngleBetweenUnits(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x62DD4FAA) , ydl_unit))) ))
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x48F58D53) < 64.00 ) ) then
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x97CB71E8, 6.00)
+else
+if ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x48F58D53) > 192.00 ) ) then
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x97CB71E8, 4.00)
+else
+call SaveReal(YDHT, GetHandleId(GetExpiredTimer()), 0x97CB71E8, ( 6.00 - ( ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x48F58D53) - 64.00 ) / 64.00 ) ))
+endif
+endif
+call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x458B7DE9), ydl_unit, ( LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x97CB71E8) * LoadReal(YDHT, GetHandleId(GetExpiredTimer()), 0x962CCF67) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
 else
 endif
+endloop
+call DestroyGroup(ydl_group)
 set ydl_group=null
 set ydl_unit=null
 endfunction
@@ -35630,13 +36135,17 @@ call SetUnitPositionLoc(LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger())
 call PlaySoundOnUnitBJ(gg_snd_TinkerMissileLaunch101, 100, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
 set udg_tempReal[1]=2343.75
 set udg_tempReal[2]=3125.00
-set udg_tempReal[1]=4687.50
+set udg_tempReal[3]=4687.50
 set udg_tempReal[4]=1400.00
 set udg_tempReal[5]=1875.00
 set udg_tempReal[6]=2800.00
 set ydl_timer=CreateTimer()
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x00BF2B95, udg_tempReal[GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())])
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0x7D7428EE, udg_tempReal[( GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId()) + 3 )])
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x962CCF67, I2R(GetHeroAgi(GetTriggerUnit(), true)))
+call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x458B7DE9, GetTriggerUnit())
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x48F58D53, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x48F58D53))
+call SaveReal(YDHT, GetHandleId(ydl_timer), 0x97CB71E8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x97CB71E8))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xB9A583B8, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xB9A583B8))
 call SaveReal(YDHT, GetHandleId(ydl_timer), 0xE978590C, LoadReal(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0xE978590C))
 call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x62DD4FAA, LoadUnitHandle(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step, 0x62DD4FAA))
@@ -59628,499 +60137,6 @@ function InitTrig_undef takes nothing returns nothing
 set gg_trg_undef=CreateTrigger()
 call TriggerAddAction(gg_trg_undef, function Trig_undefActions)
 endfunction
-function Trig_DamageAttackFunc002Func001Func003Func007T takes nothing returns nothing
-if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA) == 1 ) ) then
-call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x03383BCA, 0)
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 45.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E43)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E42)
-call UnitRemoveBuffBJ(0x42303341, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endif
-endfunction
-function Trig_DamageAttackFunc002Func002Func003Func007T takes nothing returns nothing
-if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) > 0 ) ) then
-call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0E86BC06) - 1 ))
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E45)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E44)
-call UnitRemoveBuffBJ(0x42303342, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endif
-endfunction
-function Trig_DamageAttackFunc002Func003Func003Func008T takes nothing returns nothing
-if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x71BB96BD) == 1 ) ) then
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), "origin"))
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x71BB96BD, 0)
-else
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E46)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E47)
-call UnitRemoveBuffBJ(0x42303343, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endif
-endfunction
-function Trig_DamageAttackFunc002Func006Func007T takes nothing returns nothing
-if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B) == 1 ) ) then
-call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x730DDB0B, 0)
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E49)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E48)
-call UnitRemoveBuffBJ(0x42303344, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endif
-endfunction
-function Trig_DamageAttackFunc003Func003Func007T takes nothing returns nothing
-if ( ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) > 0 ) ) then
-call SaveInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9, ( LoadInteger(YDHT, GetHandleId(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA)), 0x0AB1D6D9) - 1 ))
-call UnitDamageTarget(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), ( 5.00 + ( 15.00 * I2R(GetUnitAbilityLevel(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0x07D15ED5), 0x41303549)) ) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304F47)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304F48)
-call UnitRemoveBuffBJ(0x4230334B, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endif
-endfunction
-function Trig_DamageAttackFunc005Func003Func005A takes nothing returns nothing
-if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_danweizu2[369]) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_FLYING) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ) + ( GetEventDamage() * 0.50 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-endif
-endfunction
-function Trig_DamageAttackFunc008Func002Func011Func009A takes nothing returns nothing
-if ( ( GetEnumUnit() != GetTriggerUnit() ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(GetEnumUnit(), UNIT_TYPE_DEAD) == false ) and ( IsUnitInGroup(GetEnumUnit(), udg_Danweizu[161]) == false ) and ( IsUnitEnemy(GetEnumUnit(), GetOwningPlayer(GetEventDamageSource())) == true ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetEnumUnit(), ( ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.80 ) + ( GetEventDamage() * 0.80 ) ), true, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GyroCopter\\GyroCopterImpact.mdl", GetEnumUnit(), "chest"))
-call GroupAddUnit(udg_Danweizu[161], GetEnumUnit())
-else
-endif
-endfunction
-function Trig_DamageAttackFunc010Func005Func007T takes nothing returns nothing
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4E)
-call UnitRemoveAbility(LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA), 0x41304E4D)
-call UnitRemoveBuffBJ(0x42303345, LoadUnitHandle(YDHT, GetHandleId(GetExpiredTimer()), 0xDAA2C2DA))
-call FlushChildHashtable(YDHT, GetHandleId(GetExpiredTimer()))
-call DestroyTimer(GetExpiredTimer())
-endfunction
-function Trig_DamageAttackActions takes nothing returns nothing
-local timer ydl_timer
-local group ydl_group
-local unit ydl_unit
-local integer ydl_localvar_step=LoadInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76)
-set ydl_localvar_step=ydl_localvar_step + 3
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xCFDE6C76, ydl_localvar_step)
-call SaveInteger(YDHT, GetHandleId(GetTriggeringTrigger()), 0xECE825E7, ydl_localvar_step)
-if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) and ( ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x72617466) == true ) or ( YDWEUnitHasItemOfTypeBJNull(GetEventDamageSource() , 0x49303453) == true ) ) ) then
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303344) == false ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 100.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E49)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E48)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 0)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func006Func007T)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x730DDB0B, 1)
-endif
-else
-if ( ( GetUnitAbilityLevel(udg_player[GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource()))], 0x41304F32) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303341) == false ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 45.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E43)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E42)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 0)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func001Func003Func007T)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x03383BCA, 1)
-endif
-else
-endif
-if ( ( GetUnitAbilityLevel(udg_player[GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource()))], 0x41304F31) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303342) == false ) ) then
-call UnitAddAbility(GetTriggerUnit(), 0x41304E45)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E44)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 4)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func002Func003Func007T)
-else
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0E86BC06, 4)
-endif
-else
-endif
-if ( ( GetUnitAbilityLevel(udg_player[GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource()))], 0x41304F33) == 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303343) == false ) ) then
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl", GetTriggerUnit(), "origin"))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E46)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E47)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 0)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc002Func003Func003Func008T)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x71BB96BD, 1)
-endif
-else
-endif
-endif
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303549) >= 1 ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x4230334B) == false ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( 5.00 + ( 15.00 * I2R(GetUnitAbilityLevel(GetEventDamageSource(), 0x41303549)) ) ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call UnitAddAbility(GetTriggerUnit(), 0x41304F47)
-call UnitAddAbility(GetTriggerUnit(), 0x41304F48)
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 2)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0x07D15ED5, GetEventDamageSource())
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 1.00, true, function Trig_DamageAttackFunc003Func003Func007T)
-else
-call SaveInteger(YDHT, GetHandleId(GetTriggerUnit()), 0x0AB1D6D9, 3)
-endif
-else
-endif
-if ( ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303053)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303051)) == true ) or ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303232)) == true ) ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_MANA) > 0.00 ) ) then
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303232)) == true ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 50.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 50.00 ))
-else
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303051)) == true ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 30.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 30.00 ))
-else
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303053)) == true ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 20.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call SetUnitManaBJ(GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MANA) - 20.00 ))
-else
-endif
-endif
-endif
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Human\\Feedback\\ArcaneTowerAttack.mdl", GetTriggerUnit(), "origin"))
-else
-endif
-else
-endif
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930324C)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( GetRandomInt(1, 100) <= 15 ) ) then
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\ChimaeraLightningMissile\\ChimaeraLightningMissile.mdl", GetTriggerUnit(), "origin"))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 1 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(400.00 , udg_Dian[75])
-call ForGroupBJ(udg_Danweizu[76], function Trig_DamageAttackFunc005Func003Func005A)
-call DestroyGroup(udg_Danweizu[76])
-call DestroyEffect(AddSpecialEffectLoc("war3mapImported\\A6_zisepili.mdx", udg_Dian[75]))
-set udg_jubuzs1=1
-loop
-exitwhen udg_jubuzs1 > 9
-set udg_Dian[76]=PolarProjectionBJ(udg_Dian[75], 100.00, ( 40.00 * I2R(udg_jubuzs1) ))
-call DestroyEffect(AddSpecialEffectLoc("Abilities\\Weapons\\FarseerMissile\\FarseerMissile.mdl", udg_Dian[76]))
-call RemoveLocation(udg_Dian[76])
-set udg_jubuzs1=udg_jubuzs1 + 1
-endloop
-call RemoveLocation(udg_Dian[75])
-else
-endif
-else
-endif
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930324D)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( GetRandomInt(1, 100) <= 15 ) ) then
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\WingedSerpentMissile\\WingedSerpentMissile.mdl", GetTriggerUnit(), "chest"))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GreenDragonMissile\\GreenDragonMissile.mdl", GetTriggerUnit(), "chest"))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-endif
-else
-endif
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x49303335)) == true ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-if ( ( ( ( GetUnitTypeId(GetEventDamageSource()) != 0x48303044 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4E303139 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4830304D ) and ( GetRandomInt(1, 100) <= 15 ) ) or ( ( ( GetUnitTypeId(GetEventDamageSource()) == 0x48303044 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x4E303139 ) or ( GetUnitTypeId(GetEventDamageSource()) == 0x4830304D ) ) and ( GetRandomInt(1, 100) <= 5 ) ) ) ) then
-set udg_Dian[75]=GetUnitLoc(GetEventDamageSource())
-set udg_Dian[76]=GetUnitLoc(GetTriggerUnit())
-set udg_Danwei[75]=CreateUnitAtLoc(GetOwningPlayer(GetEventDamageSource()), 0x65303755, udg_Dian[75], AngleBetweenPoints(udg_Dian[75], udg_Dian[76]))
-call SetUnitUserData(udg_Danwei[75], R2I(( ( DistanceBetweenPoints(udg_Dian[75], udg_Dian[76]) / 60.00 ) + 1 )))
-call GroupAddUnit(udg_DAZE[0], udg_Danwei[75])
-call GroupAddUnit(udg_DAZE[1], udg_Danwei[75])
-call GroupAddUnit(udg_Danweizu[143], udg_Danwei[75])
-set udg_Danwei[75]=null
-call StopSoundBJ(gg_snd_PhaseShift1, false)
-call PlaySoundOnUnitBJ(gg_snd_PhaseShift1, 100, GetTriggerUnit())
-call RemoveLocation(udg_Dian[75])
-call RemoveLocation(udg_Dian[76])
-else
-endif
-else
-endif
-if ( ( GetUnitTypeId(GetEventDamageSource()) == 0x4830304E ) ) then
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304F4D) >= 1 ) ) then
-call UnitRemoveAbility(GetEventDamageSource(), 0x41304F4D)
-call UnitRemoveAbility(GetEventDamageSource(), 0x41304F56)
-call StopSoundBJ(gg_snd_RIFLE3HD, false)
-call PlaySoundOnUnitBJ(gg_snd_RIFLE3HD, 100, GetEventDamageSource())
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\GyroCopter\\GyroCopterImpact.mdl", GetTriggerUnit(), "chest"))
-if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 1 ), false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetHeroAgi(GetEventDamageSource(), true)) * 0.50 ), false, false, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-endif
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-set udg_Dian[76]=GetUnitLoc(GetEventDamageSource())
-call GroupClear(udg_Danweizu[161])
-set udg_jubuzs1=1
-loop
-exitwhen udg_jubuzs1 > 4
-set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 * I2R(udg_jubuzs1) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
-call CreateNUnitsAtLoc(1, 0x65303831, GetOwningPlayer(GetEventDamageSource()), udg_Dian[161], AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
-call UnitApplyTimedLife(bj_lastCreatedUnit, 0x42487765, 2.00)
-call SetUnitScale(bj_lastCreatedUnit, ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ), ( 0.40 + ( 0.40 * I2R(udg_jubuzs1) ) ))
-call SetUnitTimeScale(bj_lastCreatedUnit, ( 3.00 - ( 0.50 * I2R(udg_jubuzs1) ) ))
-call RemoveLocation(udg_Dian[161])
-set udg_Dian[161]=PolarProjectionBJ(udg_Dian[75], ( 40.00 + ( 40.00 * I2R(udg_jubuzs1) ) ), AngleBetweenPoints(udg_Dian[76], udg_Dian[75]))
-set udg_Danweizu[76]=YDWEGetUnitsInRangeOfLocAllNull(( 100.00 + ( 25.00 * I2R(udg_jubuzs1) ) ) , udg_Dian[161])
-call ForGroupBJ(udg_Danweizu[76], function Trig_DamageAttackFunc008Func002Func011Func009A)
-call DestroyGroup(udg_Danweizu[76])
-call RemoveLocation(udg_Dian[161])
-set udg_jubuzs1=udg_jubuzs1 + 1
-endloop
-call RemoveLocation(udg_Dian[75])
-call RemoveLocation(udg_Dian[76])
-else
-endif
-else
-endif
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304A54) == 1 ) ) then
-if ( ( GetUnitTypeId(GetEventDamageSource()) != 0x48303042 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4E303139 ) and ( GetUnitTypeId(GetEventDamageSource()) != 0x4830304D ) ) then
-call StartTimerBJ(udg_jishiqi[( 159 + GetConvertedPlayerId(GetOwningPlayer(GetEventDamageSource())) )], false, 1.00)
-else
-endif
-call UnitRemoveAbility(GetEventDamageSource(), 0x41304A54)
-if ( ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == true ) or ( GetUnitTypeId(GetTriggerUnit()) == 0x686D7474 ) ) ) then
-set udg_zhengshuex[0]=R2I(( I2R(GetHeroInt(GetEventDamageSource(), true)) * GetRandomReal(0.20, 0.30) ))
-else
-set udg_zhengshuex[0]=R2I(( I2R(GetHeroInt(GetEventDamageSource(), true)) * GetRandomReal(0.40, 0.60) ))
-endif
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\SpiritOfVengeanceMissile\\SpiritOfVengeanceMissile.mdl", GetTriggerUnit(), "chest"))
-if ( ( GetHeroInt(GetEventDamageSource(), true) > GetHeroStr(GetEventDamageSource(), true) ) and ( GetHeroInt(GetEventDamageSource(), true) > GetHeroAgi(GetEventDamageSource(), true) ) ) then
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\DragonHawkMissile\\DragonHawkMissile.mdl", GetTriggerUnit(), "chest"))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), I2R(udg_zhengshuex[0]), true, true, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-else
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(udg_zhengshuex[0]) * 0.50 ), true, true, ATTACK_TYPE_MAGIC, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-endif
-else
-endif
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41304E4C) == 1 ) and ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303345) == false ) and ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-call UnitRemoveAbility(GetEventDamageSource(), 0x41304E4C)
-if ( ( GetUnitState(GetEventDamageSource(), UNIT_STATE_MANA) >= 200.00 ) ) then
-call SetUnitManaBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_MANA) - 200.00 ))
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), 200.00, false, false, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_MAGIC, WEAPON_TYPE_WHOKNOWS)
-call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\lianzhanbo.mdx", GetTriggerUnit(), "chest"))
-call UnitAddAbility(GetTriggerUnit(), 0x41304E4E)
-call UnitAddAbility(GetTriggerUnit(), 0x41304E4D)
-set ydl_timer=CreateTimer()
-call SaveUnitHandle(YDHT, GetHandleId(ydl_timer), 0xDAA2C2DA, GetTriggerUnit())
-call TimerStart(ydl_timer, 2.00, false, function Trig_DamageAttackFunc010Func005Func007T)
-else
-endif
-else
-endif
-if ( ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_STRUCTURE) == false ) ) then
-set udg_jubuss1=0.00
-set udg_jubuzs1=( GetHeroAgi(GetEventDamageSource(), true) / 15 )
-if ( ( IsItemOwned(YDWEGetItemOfTypeFromUnitBJNull(GetEventDamageSource() , 0x4930344A)) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
-else
-endif
-set udg_jubuzs1=15
-if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303348) == true ) and ( GetRandomInt(1, 100) <= udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
-else
-endif
-set udg_jubuzs1=0
-set udg_jubuzs2=1
-loop
-exitwhen udg_jubuzs2 > 6
-if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x7372746C ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x73726264 ) ) ) then
-set udg_jubuzs1=( udg_jubuzs1 + 1 )
-else
-endif
-set udg_jubuzs2=udg_jubuzs2 + 1
-endloop
-set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.50)
-else
-endif
-set udg_jubuzs1=0
-set udg_jubuzs2=1
-loop
-exitwhen udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x74656C73 ) ) then
-set udg_jubuzs1=( udg_jubuzs1 + 1 )
-else
-endif
-set udg_jubuzs2=udg_jubuzs2 + 1
-endloop
-set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
-else
-endif
-set udg_jubuzs1=0
-set udg_jubuzs2=1
-loop
-exitwhen udg_jubuzs2 > 6
-if ( ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x72617466 ) or ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303453 ) ) ) then
-set udg_jubuzs1=( udg_jubuzs1 + 1 )
-else
-endif
-set udg_jubuzs2=udg_jubuzs2 + 1
-endloop
-set udg_jubuzs1=R2I(( Pow(0.85, I2R(udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.50)
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
-call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
-set udg_Danwei[92]=null
-call RemoveLocation(udg_Dian[75])
-else
-endif
-set udg_jubuzs1=0
-set udg_jubuzs2=1
-loop
-exitwhen udg_jubuzs2 > 6
-if ( ( GetItemTypeId(UnitItemInSlotBJ(GetEventDamageSource(), udg_jubuzs2)) == 0x49303239 ) ) then
-set udg_jubuzs1=( udg_jubuzs1 + 1 )
-else
-endif
-set udg_jubuzs2=udg_jubuzs2 + 1
-endloop
-set udg_jubuzs1=R2I(( Pow(0.80, I2R(udg_jubuzs1)) * 100.00 ))
-if ( ( GetRandomInt(1, 100) > udg_jubuzs1 ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 0.80)
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
-call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-call UnitAddAbility(udg_Danwei[92], 0x41303551)
-call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
-set udg_Danwei[92]=null
-call RemoveLocation(udg_Dian[75])
-else
-endif
-if ( ( UnitHasBuffBJ(GetTriggerUnit(), 0x42303045) == true ) ) then
-set udg_jubuss1=RMaxBJ(udg_jubuss1, 1.00)
-call UnitRemoveBuffBJ(0x42303045, GetTriggerUnit())
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\FaerieDragonMissile\\FaerieDragonMissile.mdl", GetTriggerUnit(), "chest"))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Items\\StaffOfPurification\\PurificationTarget.mdl", GetTriggerUnit(), "chest"))
-if ( ( udg_Points == - 1 ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetUnitState(GetTriggerUnit(), UNIT_STATE_MAX_LIFE) * 0.05 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-else
-endif
-else
-endif
-if ( ( ( GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) > GetEventDamage() ) or ( IsUnitType(GetTriggerUnit(), UNIT_TYPE_HERO) == true ) ) and ( GetUnitAbilityLevel(GetEventDamageSource(), 0x41303251) == 1 ) ) then
-set udg_jubuss1=( udg_jubuss1 + 1 )
-set udg_danwei[278]=GetEventDamageSource()
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( I2R(GetUnitAbilityLevel(GetEventDamageSource(), 0x41556373)) * 25.00 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-call StartTimerBJ(udg_jishiqi[80], false, 8.00)
-call UnitRemoveAbility(udg_danwei[278], 0x41303251)
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl", GetTriggerUnit(), "chest"))
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(GetTriggerUnit()), 0x65303130, udg_Dian[75], 0)
-call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-call UnitAddAbility(udg_Danwei[92], 0x41304236)
-call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , GetTriggerUnit())
-set udg_Danwei[92]=null
-call RemoveLocation(udg_Dian[75])
-else
-endif
-if ( ( udg_jubuss1 > 0.00 ) ) then
-call UnitDamageTarget(GetEventDamageSource(), GetTriggerUnit(), ( GetEventDamage() * udg_jubuss1 ), false, false, ATTACK_TYPE_CHAOS, DAMAGE_TYPE_ENHANCED, WEAPON_TYPE_WHOKNOWS)
-call DestroyEffect(AddSpecialEffectTarget("war3mapImported\\jianqibo.mdx", GetTriggerUnit(), "chest"))
-set udg_Dian[75]=GetUnitLoc(GetTriggerUnit())
-if ( ( ( udg_jubuss1 / 10.00 ) == ( I2R(R2I(udg_jubuss1)) / 10.00 ) ) ) then
-call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( I2S(R2I(( udg_jubuss1 + 1 ))) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
-else
-call CreateTextTagLocBJ(( I2S(R2I(( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ))) + ( "（" + ( R2SW(( udg_jubuss1 + 1.00 ), 1, 1) + "×）" ) ) ), udg_Dian[75], 0, 9.00, 100.00, 0.00, 0.00, 0.00)
-endif
-call SetTextTagVelocity(bj_lastCreatedTextTag, 0.00, 0.03)
-call SetTextTagPermanent(bj_lastCreatedTextTag, false)
-call SetTextTagFadepoint(bj_lastCreatedTextTag, 1.50)
-call SetTextTagLifespan(bj_lastCreatedTextTag, 4.00)
-call SetTextTagVisibility(bj_lastCreatedTextTag, false)
-set udg_wanjiazu[0]=CreateForce()
-set udg_jubuzs1=1
-loop
-exitwhen udg_jubuzs1 > 10
-if ( ( IsUnitVisible(GetTriggerUnit(), ConvertedPlayer(udg_jubuzs1)) == true ) ) then
-call ForceAddPlayer(udg_wanjiazu[0], ConvertedPlayer(udg_jubuzs1))
-else
-endif
-set udg_jubuzs1=udg_jubuzs1 + 1
-endloop
-call ShowTextTagForceBJ(true, bj_lastCreatedTextTag, udg_wanjiazu[0])
-call DestroyForce(udg_wanjiazu[0])
-call RemoveLocation(udg_Dian[75])
-else
-endif
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 4 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.35 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 3 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.30 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 2 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.25 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-if ( ( GetUnitAbilityLevel(GetEventDamageSource(), 0x4130354A) == 1 ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.20 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-endif
-endif
-endif
-endif
-if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x42303349) == true ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.15 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-if ( ( UnitHasBuffBJ(GetEventDamageSource(), 0x4230334A) == true ) ) then
-call SetUnitLifeBJ(GetEventDamageSource(), ( GetUnitState(GetEventDamageSource(), UNIT_STATE_LIFE) + ( ( GetEventDamage() * ( 1.00 + udg_jubuss1 ) ) * 0.10 ) ))
-call DestroyEffect(AddSpecialEffectTarget("Abilities\\Spells\\Undead\\VampiricAura\\VampiricAuraTarget.mdl", GetEventDamageSource(), "origin"))
-else
-endif
-endif
-else
-endif
-call FlushChildHashtable(YDHT, GetHandleId(GetTriggeringTrigger()) * ydl_localvar_step)
-set ydl_timer=null
-set ydl_group=null
-set ydl_unit=null
-endfunction
-function InitTrig_DamageAttack takes nothing returns nothing
-set gg_trg_DamageAttack=CreateTrigger()
-call s__Event_AnyUnitDamage(gg_trg_DamageAttack , 0 , 1)
-call TriggerAddAction(gg_trg_DamageAttack, function Trig_DamageAttackActions)
-endfunction
 function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_Lua___LuaLibrary()
 //Function not found: call InitTrig_base_lua()
@@ -60383,6 +60399,7 @@ call InitTrig_money_balabala()
 call InitTrig_HeroSkillPoint()
 call InitTrig_StayHome()
 call InitTrig_renyishanghai()
+call InitTrig_DamageAttack()
 call InitTrig_renyishanghai_hero()
 call InitTrig_gongxiangwupin()
 call InitTrig_zhuangbei_new()
@@ -61104,7 +61121,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_undef()
-call InitTrig_DamageAttack()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -61339,7 +61355,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs732505643")
+call ExecuteFunc("jasshelper__initstructs774721510")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61479,7 +61495,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs732505643 takes nothing returns nothing
+function jasshelper__initstructs774721510 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
