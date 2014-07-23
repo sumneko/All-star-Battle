@@ -27,10 +27,10 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
@@ -1960,6 +1960,7 @@ trigger st__maphack_GetHeight
 trigger st__baka_SPlayer
 trigger st__baka_newMap
 trigger st__baka_InitHero
+trigger st__Event_AnyUnitDamage
 trigger st__Sound_SaveSound
 trigger st__String_char2
 unit f__arg_unit1
@@ -1967,6 +1968,7 @@ real f__arg_real1
 real f__arg_real2
 integer f__arg_integer1
 integer f__arg_integer2
+trigger f__arg_trigger1
 string f__arg_string1
 string f__arg_string2
 boolean f__arg_boolean1
@@ -2250,6 +2252,61 @@ function s__math_deallocate takes integer this returns nothing
     endif
     set si__math_V[this]=si__math_F
     set si__math_F=this
+endfunction
+
+//Generated method caller for Event.AnyUnitDamage
+function sc__Event_AnyUnitDamage takes trigger trg,integer i1,integer i2 returns nothing
+local boolean hero
+local boolean nothero
+local boolean attack
+local boolean notattack
+local integer h
+if i1 == 0 then
+set hero=true
+set nothero=true
+elseif i1 == 1 then
+set hero=true
+set nothero=false
+else
+set hero=false
+set nothero=true
+endif
+if i2 == 0 then
+set attack=true
+set notattack=true
+elseif i2 == 1 then
+set attack=true
+set notattack=false
+else
+set attack=false
+set notattack=true
+endif
+set h=GetHandleId(trg)
+call SaveInteger(s__Event_HT, h, 0, 1)
+if hero then
+if attack then
+set s__Event_damageEventTrigger1[s__Event_damageCount1]=trg
+call SaveInteger(s__Event_HT, h, 1, 1)
+set s__Event_damageCount1=s__Event_damageCount1 + 1
+endif
+if notattack then
+set s__Event_damageEventTrigger2[s__Event_damageCount2]=trg
+call SaveInteger(s__Event_HT, h, 2, 1)
+set s__Event_damageCount2=s__Event_damageCount2 + 1
+endif
+endif
+if nothero then
+if attack then
+set s__Event_damageEventTrigger3[s__Event_damageCount3]=trg
+call SaveInteger(s__Event_HT, h, 3, 1)
+set s__Event_damageCount3=s__Event_damageCount3 + 1
+endif
+if notattack then
+set s__Event_damageEventTrigger4[s__Event_damageCount4]=trg
+call SaveInteger(s__Event_HT, h, 4, 1)
+set s__Event_damageCount4=s__Event_damageCount4 + 1
+endif
+endif
 endfunction
 
 //Generated allocator of Event
@@ -3015,20 +3072,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -3060,7 +3117,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3093,22 +3150,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -4751,12 +4808,19 @@ function s__maphack_InitS takes nothing returns nothing
 call TimerStart(CreateTimer(), 0.5, true, function s__maphack_WaitToCheckReplay)
 call SetAltMinimapIcon("null_16_16.blp")
 endfunction
+function s__maphack_cj_anonym__2 takes nothing returns nothing
+//# optional
+if GetOwningPlayer(GetTriggerUnit()) == Player(12) and GetOwningPlayer(GetEventDamageSource()) == s__sys_selfp and not IsUnitVisible(GetTriggerUnit(), s__sys_selfp) then
+call SetUnitFlyHeight(GetTriggerUnit(), 0, 0)
+endif
+endfunction  
 function s__maphack_AfterSP takes nothing returns nothing
 local integer i=0
 local player cjlocgn_00000000
 local integer cjlocgn_00000001
 local real cjlocgn_00000002
 local real cjlocgn_00000003
+local trigger trg
 loop
 exitwhen i > 9
 set cjlocgn_00000000=Player(i)
@@ -4780,6 +4844,9 @@ set i=i + 1
 endloop
 call TimerStart(CreateTimer(), 5, false, function s__maphack_timerFunc)
 call TimerStart(CreateTimer(), GetRandomInt(60, 120), true, function s__maphack_zip)
+set trg=CreateTrigger()
+call sc__Event_AnyUnitDamage(trg , 2 , 0)
+call TriggerAddCondition(trg, Condition(function s__maphack_cj_anonym__2))
 endfunction
 function s__baka_lucky takes unit u,real r,boolean b returns nothing
 local integer i=GetPlayerId(GetOwningPlayer(u))
@@ -5785,7 +5852,7 @@ set cjlocgn_00000003=StringHash2(s__baka_getMapVerName(s__baka_thisVer) + GetPla
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
-call BJDebugMsg("|cffff8888本地图保存于[2014/07/23/ - 15:50:49],请注意确认版本")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/23/ - 17:22:00],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -61345,7 +61412,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs18272038")
+call ExecuteFunc("jasshelper__initstructs23743679")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61421,6 +61488,10 @@ call StopSound(bj_lastPlayedSound, false, false)
 set f__result_sound= bj_lastPlayedSound
    return true
 endfunction
+function sa__Event_AnyUnitDamage takes nothing returns boolean
+    call s__Event_AnyUnitDamage(f__arg_trigger1,f__arg_integer1,f__arg_integer2)
+   return true
+endfunction
 function sa__baka_SPlayer takes nothing returns boolean
 local integer i=f__arg_integer1
 set f__result_player= s__baka_spplayer[i]
@@ -61485,11 +61556,13 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs18272038 takes nothing returns nothing
+function jasshelper__initstructs23743679 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
     call TriggerAddCondition(st__Sound_SaveSound,Condition( function sa__Sound_SaveSound))
+    set st__Event_AnyUnitDamage=CreateTrigger()
+    call TriggerAddCondition(st__Event_AnyUnitDamage,Condition( function sa__Event_AnyUnitDamage))
     set st__baka_SPlayer=CreateTrigger()
     call TriggerAddCondition(st__baka_SPlayer,Condition( function sa__baka_SPlayer))
     set st__baka_newMap=CreateTrigger()
