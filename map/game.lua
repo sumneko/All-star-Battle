@@ -124,3 +124,33 @@
         jass.SetPlayerName(jass.Player(12), name)
     end
     
+    --克劳德暴击触发
+    game.table_6 = setmetatable({}, {__index = function() return 0 end})
+    game.table_7 = setmetatable({}, {__index = function() return 0 end})
+    
+    game[6] = function(u)
+        game.table_6[u] = game.table_6[u] + 1
+    end
+    
+    game[7] = function(u)
+        game.table_7[u] = game.table_7[u] + 1
+        if game.table_7[u] > 5 and jass.GetRandomInt(1, 20) == 8 then
+            jass.SetPlayerName(jass.Player(12), '|cffff88cc' .. cmd.getMaidName(true) .. '|r')
+            if jass.GetOwningPlayer(u) == jass.GetLocalPlayer() then
+                japi.EXDisplayChat(jass.Player(12), 3, ('|cffff88cc主人,从您学习了[一刀两断]后一共攻击了%d次,其中暴击了%d次|r'):format(game.table_6[u], game.table_7[u]))
+                local s = game.table_7[u] / game.table_6[u] * 100
+                local w
+                if s > 33 then
+                    w = '赶紧去买彩票吧!'
+                elseif s > 25 then
+                    w = 'RP真不错啊!'
+                elseif s < 15 then
+                    w = '建议洗把脸再回来玩?'
+                else
+                    w = 'RP一般般啦'
+                end
+                japi.EXDisplayChat(jass.Player(12), 3, ('|cffff88cc综合暴击率为%.2f%%,%s|r'):format(s, w))
+            end
+        end
+    end
+    

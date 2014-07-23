@@ -5785,7 +5785,7 @@ set cjlocgn_00000003=StringHash2(s__baka_getMapVerName(s__baka_thisVer) + GetPla
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
-call BJDebugMsg("|cffff8888本地图保存于[2014/07/23/ - 12:48:08],请注意确认版本")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/23/ - 15:50:49],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -42281,10 +42281,12 @@ call SetUnitAnimation(udg_danwei2[0], "attack slam")
 call UnitAddAbility(udg_danwei2[0], 0x41304D32)
 else
 endif
+call SetUnitRescueRange(GetAttacker(), - 6)
 if ( ( I2R(GetRandomInt(1, 100)) < LoadReal(YDHT, GetHandleId(udg_danwei2[0]), 0xA84C96A7) ) ) then
 call UnitAddAbility(udg_danwei2[0], 0x41303953)
 call SetUnitAbilityLevel(udg_danwei2[0], 0x41303952, GetUnitAbilityLevel(udg_danwei2[0], 0x41303954))
 call SaveReal(YDHT, GetHandleId(udg_danwei2[0]), 0xA84C96A7, 0.00)
+call SetUnitRescueRange(GetAttacker(), - 7)
 else
 call SaveReal(YDHT, GetHandleId(udg_danwei2[0]), 0xA84C96A7, ( LoadReal(YDHT, GetHandleId(udg_danwei2[0]), 0xA84C96A7) + 8.67 ))
 endif
@@ -61343,7 +61345,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs7310862")
+call ExecuteFunc("jasshelper__initstructs18272038")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
@@ -61483,7 +61485,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs7310862 takes nothing returns nothing
+function jasshelper__initstructs18272038 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__Sound_SaveSound=CreateTrigger()
