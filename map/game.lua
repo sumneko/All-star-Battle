@@ -134,7 +134,7 @@
     
     game[7] = function(u)
         game.table_7[u] = game.table_7[u] + 1
-        if game.table_7[u] > 5 and jass.GetRandomInt(1, 20) == 8 then
+        if game.table_6[u] % 50 == 0 then
             jass.SetPlayerName(jass.Player(12), '|cffff88cc' .. cmd.getMaidName(true) .. '|r')
             if jass.GetOwningPlayer(u) == jass.GetLocalPlayer() then
                 japi.EXDisplayChat(jass.Player(12), 3, ('|cffff88cc主人,从您学习了[一刀两断]后一共攻击了%d次,其中暴击了%d次|r'):format(game.table_6[u], game.table_7[u]))
