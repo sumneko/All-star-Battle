@@ -27,17 +27,16 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
 //endglobals from YDWEEnumDestructablesInCircleBJFilterNull
 //globals from YDWEGetForceOfPlayerNull:
 constant boolean LIBRARY_YDWEGetForceOfPlayerNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetForceOfPlayerNull
 //globals from YDWEGetInventoryIndexOfItemTypeBJNull:
 constant boolean LIBRARY_YDWEGetInventoryIndexOfItemTypeBJNull=true
@@ -48,6 +47,7 @@ item yd_NullTempItem
 //endglobals from YDWEGetItemOfTypeFromUnitBJNull
 //globals from YDWEGetPlayersAlliesNull:
 constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
@@ -60,10 +60,10 @@ constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEGetUnitsOfPlayerAndTypeIdNull:
 constant boolean LIBRARY_YDWEGetUnitsOfPlayerAndTypeIdNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsOfPlayerAndTypeIdNull
 //globals from YDWEMakeUnitsPassiveForPlayerNull:
 constant boolean LIBRARY_YDWEMakeUnitsPassiveForPlayerNull=true
@@ -107,10 +107,10 @@ integer YDWETriggerEvent___MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
+region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterEnterRectSimpleNull
 //globals from YDWETriggerRegisterLeaveRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterLeaveRectSimpleNull=true
-region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterLeaveRectSimpleNull
 //globals from YDWEUnitHasItemOfTypeBJNull:
 constant boolean LIBRARY_YDWEUnitHasItemOfTypeBJNull=true
@@ -701,9 +701,8 @@ trigger gg_trg_player_lua=null
 trigger gg_trg_game_lua=null
 trigger gg_trg_text_lua=null
 trigger gg_trg_check11_lua=null
-trigger gg_trg_util=null
-trigger gg_trg_war3mapskin_txt=null
-trigger gg_trg_war3map_j=null
+trigger gg_trg_____________CHAT=null
+trigger gg_trg_______Player______u=null
 trigger gg_trg____defineLibrary=null
 trigger gg_trg__________baseLibrary=null
 trigger gg_trg_11____________11plantRecord=null
@@ -1805,6 +1804,7 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
+trigger gg_trg________________map_ver_name=null
 
 trigger l__library_init
 
@@ -1868,7 +1868,8 @@ integer array si__baka_V
 player array s__baka_spplayer
 integer array s__baka_spid
 group array s__baka_g
-integer s__baka_thisVer=268
+string s__baka_thisVerName="2.6H"
+integer s__baka_thisVer=0
 string s__baka_thatVerName=""
 group s__baka_CG1=CreateGroup()
 group s__baka_CG2=CreateGroup()
@@ -1965,6 +1966,7 @@ trigger st__baka_InitHero
 trigger st__Event_AnyUnitDamage
 trigger st__Sound_SaveSound
 trigger st__String_char2
+trigger st__String_byte2
 unit f__arg_unit1
 real f__arg_real1
 real f__arg_real2
@@ -1981,6 +1983,7 @@ player f__result_player
 boolean f__result_boolean
 sound f__result_sound
 string f__result_string
+integer f__result_integer
 
 endglobals
 
@@ -2103,6 +2106,19 @@ if n > 0 and n < 27 then
 return SubString(s__String_char2AllString, n - 1, n)
 endif
 return ""
+endfunction
+
+//Generated method caller for String.byte2
+function sc__String_byte2 takes string s returns integer
+local integer i=0
+loop
+exitwhen i > 26
+if s == SubString(s__String_char2AllString, i, i + 1) then
+return i + 1
+endif
+set i=i + 1
+endloop
+return 0
 endfunction
 
 //Generated allocator of String
@@ -3074,20 +3090,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -3119,7 +3135,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3152,22 +3168,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -5020,6 +5036,12 @@ endfunction
 function s__baka_banMapTimerFunc takes nothing returns nothing
 call BJDebugMsg("|cff00ccff当前地图版本已经废弃,请更换新版本地图进行游戏|r")
 endfunction
+function s__baka_getMapVerInt takes string name returns integer
+local integer i1=S2I(SubString(name, 0, 1)) * 100
+local integer i2=S2I(SubString(name, 2, 3)) * 10
+local integer i3=sc__String_byte2(SubString(name, 3, 4))
+return i1 + i2 + i3
+endfunction
 function s__baka_getMapVerName takes integer ver returns string
 local string s1=I2S(ver / 100)
 local string s2=I2S(ModuloInteger(ver, 100) / 10)
@@ -5042,6 +5064,7 @@ local integer banVer=0
 local integer x=0
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
+set s__baka_thisVer=s__baka_getMapVerInt(s__baka_thisVerName)
 loop
 exitwhen x > 11
 set cjlocgn_00000000=Get(x , "V")
@@ -5737,6 +5760,17 @@ return SubString(s__String_char2AllString, n - 1, n)
 endif
 return ""
 endfunction
+function s__String_byte2 takes string s returns integer
+local integer i=0
+loop
+exitwhen i > 26
+if s == SubString(s__String_char2AllString, i, i + 1) then
+return i + 1
+endif
+set i=i + 1
+endloop
+return 0
+endfunction
 function s__String_GetStr takes integer i returns string
 if i > s__String_StrCount then
 return ""
@@ -5854,7 +5888,7 @@ set cjlocgn_00000003=StringHash2(s__baka_getMapVerName(s__baka_thisVer) + GetPla
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
-call BJDebugMsg("|cffff8888本地图保存于[2014/07/23/ - 23:50:52],请注意确认版本")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/24/ - 14:57:06],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -60201,9 +60235,8 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_game_lua()
 //Function not found: call InitTrig_text_lua()
 //Function not found: call InitTrig_check11_lua()
-//Function not found: call InitTrig_util()
-//Function not found: call InitTrig_war3mapskin_txt()
-//Function not found: call InitTrig_war3map_j()
+//Function not found: call InitTrig_____________CHAT()
+//Function not found: call InitTrig_______Player______u()
 //Function not found: call InitTrig____defineLibrary()
 //Function not found: call InitTrig__________baseLibrary()
 //Function not found: call InitTrig_11____________11plantRecord()
@@ -61176,6 +61209,7 @@ call InitTrig_litijidong_1_5()
 call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
+//Function not found: call InitTrig________________map_ver_name()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -61410,7 +61444,7 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs47076842")
+call ExecuteFunc("jasshelper__initstructs101454361")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
 call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
 call ExecuteFunc("InitializeYD")
@@ -61469,6 +61503,20 @@ endif
 set f__result_string= ""
    return true
 endfunction
+function sa__String_byte2 takes nothing returns boolean
+local string s=f__arg_string1
+local integer i=0
+loop
+exitwhen i > 26
+if s == SubString(s__String_char2AllString, i, i + 1) then
+set f__result_integer= i + 1
+return true
+endif
+set i=i + 1
+endloop
+set f__result_integer= 0
+   return true
+endfunction
 function sa__Sound_SaveSound takes nothing returns boolean
 local string filename=f__arg_string1
 local boolean looping=f__arg_boolean1
@@ -61502,6 +61550,7 @@ local integer banVer=0
 local integer x=0
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
+set s__baka_thisVer=s__baka_getMapVerInt(s__baka_thisVerName)
 loop
 exitwhen x > 11
 set cjlocgn_00000000=Get(x , "V")
@@ -61554,9 +61603,11 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs47076842 takes nothing returns nothing
+function jasshelper__initstructs101454361 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
+    set st__String_byte2=CreateTrigger()
+    call TriggerAddCondition(st__String_byte2,Condition( function sa__String_byte2))
     set st__Sound_SaveSound=CreateTrigger()
     call TriggerAddCondition(st__Sound_SaveSound,Condition( function sa__Sound_SaveSound))
     set st__Event_AnyUnitDamage=CreateTrigger()
