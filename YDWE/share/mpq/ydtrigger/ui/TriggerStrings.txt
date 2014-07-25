@@ -3527,6 +3527,10 @@ AddSpecialEffectLocBJ="创建特效(指定点)"
 AddSpecialEffectLocBJ="在 ",~指定点," 创建特效: ",~Model File
 AddSpecialEffectLocBJHint=
 
+Effect.AddSpecialEffectLocMU="创建特效(指定点) - <特效库>"
+Effect.AddSpecialEffectLocMU="在 ",~指定点," 创建特效: ",~Model File," (清除该点)"
+Effect.AddSpecialEffectLocMUHint=
+
 AddSpecialEffectTargetUnitBJ="创建特效(绑定单位)"
 AddSpecialEffectTargetUnitBJ="创建并绑定特效到 ",~Attachment Point," 对 ",~单位," ,使用模型: ",~Model File
 AddSpecialEffectTargetUnitBJHint=
@@ -7923,6 +7927,10 @@ AddSpecialEffectHint=会创建特效.
 AddSpecialEffectLoc="新建特效(创建到点) [R]"
 AddSpecialEffectLoc="新建特效 ",~Model File," 在 ",~指定点," 处"
 AddSpecialEffectLocHint=会创建特效.
+
+Effect.AddSpecialEffectLoc2="新建特效(创建到点)"
+Effect.AddSpecialEffectLoc2="新建特效 ",~Model File," 在 ",~指定点," 处 (清除该点)"
+Effect.AddSpecialEffectLoc2Hint=会创建特效吗
 
 AddSpecialEffectTarget="新建特效(创建到单位) [R]"
 AddSpecialEffectTarget="新建特效 ",~Model File," 并绑定到 ",~单位," 的 ",~Attachment Point," 附加点上"

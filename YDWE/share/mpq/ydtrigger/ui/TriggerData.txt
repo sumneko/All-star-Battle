@@ -7292,6 +7292,10 @@ AddSpecialEffectLocBJ=0,location,modelfile
 _AddSpecialEffectLocBJ_Defaults=_,"Abilities\Spells\Human\ThunderClap\ThunderClapCaster.mdl"
 _AddSpecialEffectLocBJ_Category=TC_SPECIALEFFECT
 
+Effect.AddSpecialEffectLocMU=0,location,modelfile
+_Effect.AddSpecialEffectLocMU_Defaults=_,"Abilities\Spells\Human\ThunderClap\ThunderClapCaster.mdl"
+_Effect.AddSpecialEffectLocMU_Category=TC_SPECIALEFFECT
+
 AddSpecialEffectTargetUnitBJ=0,string,unit,modelfile
 _AddSpecialEffectTargetUnitBJ_Defaults="overhead",GetTriggerUnit,"Abilities\Spells\Other\TalkToMe\TalkToMe.mdl"
 _AddSpecialEffectTargetUnitBJ_Category=TC_SPECIALEFFECT
@@ -9579,7 +9583,7 @@ _math.U2L_Category=TC_MU_MATH
 
 math.Angle=0,1,real,real,real
 _math.Angle_Defaults=0,180
-_math.Angle_Category=TC_MU_MATH 
+_math.Angle_Category=TC_MU_MATH
 
 GetLocationX=0,1,real,location
 _GetLocationX_Category=TC_NOTHING
@@ -11327,6 +11331,10 @@ _AddSpecialEffect_Category=TC_NOTHING
 AddSpecialEffectLoc=0,1,effect,modelfile,location
 _AddSpecialEffectLoc_Defaults="Abilities\Spells\Other\TalkToMe\TalkToMe.mdl",_
 _AddSpecialEffectLoc_Category=TC_NOTHING
+
+Effect.AddSpecialEffectLoc2=0,1,effect,modelfile,location
+_Effect.AddSpecialEffectLoc2_Defaults="Abilities\Spells\Human\ThunderClap\ThunderClapCaster.mdl",_
+_Effect.AddSpecialEffectLoc2_Category=TC_MU_EFFECT
 
 AddSpecialEffectTarget=0,1,effect,modelfile,unit,string
 _AddSpecialEffectTarget_Defaults="Abilities\Spells\Other\TalkToMe\TalkToMe.mdl",GetTriggerUnit,"overhead"
