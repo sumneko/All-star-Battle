@@ -3,11 +3,11 @@
 //HashTable
 //===========================================================================
 globals
-//È«¾Ö¹şÏ£±í 
+
 #ifndef YDWE_HASHTABLE_DEFVAR
 #define YDWE_HASHTABLE_DEFVAR
 	hashtable YDHT = null
-#endif  
+#endif
 endglobals
 
 //===========================================================================
@@ -17,20 +17,20 @@ function YDWEH2I takes handle h returns integer
     return GetHandleId(h)
 endfunction
 
-//¹şÏ£³åÍ»²âÊÔ
-	int StringHash2(string s){
-	    int r = Strin##gHash(s)
-	    string s2 = LoadStr(YDHT, 76196625, r)
+//å“ˆå¸Œå†²çªæµ‹è¯•
+	function StringHash2 takes string s returns integer
+	    local integer r = Strin##gHash(s)
+	    local string s2 = LoadStr(YDHT, 76196625, r)
 	    if s2 == null then
-	        SaveStr(YDHT, 76196625, r, s2)
+	        call SaveStr(YDHT, 76196625, r, s2)
 	    elseif s != s2 then
-	        BJDebugMsg("|cffff8888<×Ö·û¹şÏ£³åÍ»!Çë½ØÍ¼»ã±¨!>[" + s + "][" + s2 + "]|r")
+	        call BJDebugMsg("|cffff8888<å­—ç¬¦å“ˆå¸Œå†²çª!è¯·æˆªå›¾æ±‡æŠ¥!>[" + s + "][" + s2 + "]|r")
 	    endif
 	    return r
-	}
+	endfunction
 
 
-//Çå¿Õ
+//æ¸…ç©º
 function YDWEFlushAllData takes nothing returns nothing
     call FlushParentHashtable(YDHT)
 endfunction
