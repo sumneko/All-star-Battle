@@ -63,6 +63,23 @@ STRING 10
 saber
 }
 
+STRING 11
+{
+ 
+ 
+|cFFCC6600混战模式|r
+-全明星战役四周年庆开放！
+-初始30级满级
+-初始金钱20000
+-每5分钟增加金钱5000
+-死亡时间固定为15s
+-进入血池可以清空你的CD
+-站在中间的塔周围（非隐身）可以占领，每占领1分钟将会为占领者带来大量的经济收益，占领越久，每次的收益越大
+-现在地图中间的塔将会始终为所有玩家提供视野！
+-现在生命灯将会出售核弹和拦截导弹了！
+
+}
+
 STRING 12
 // 技能: A0JI (石墙破坏), Name (名字)
 {
@@ -4981,7 +4998,7 @@ ratt
 }
 
 STRING 836
-// 科技: Robs (Berserker Strength), class (升级类型)
+// 科技: Robs (狂暴力量), class (升级类型)
 {
 melee
 }
@@ -5047,79 +5064,79 @@ STRING 846
 }
 
 STRING 847
-// 科技: Robs (Berserker Strength), effect3 (效果 3)
+// 科技: Robs (狂暴力量), effect3 (效果 3)
 {
 rarm
 }
 
 STRING 848
-// 科技: Robs (Berserker Strength), effect2 (效果 2)
+// 科技: Robs (狂暴力量), effect2 (效果 2)
 {
 ratt
 }
 
 STRING 849
-// 科技: R000 (Berserker Strength), effect1 (效果 1)
+// 科技: R000 (狂暴力量), effect1 (效果 1)
 {
 rhpo
 }
 
 STRING 850
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(1级)
 }
 
 STRING 851
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(2级)
 }
 
 STRING 852
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(3级)
 }
 
 STRING 853
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(4级)
 }
 
 STRING 854
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(5级)
 }
 
 STRING 855
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(6级)
 }
 
 STRING 856
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(7级)
 }
 
 STRING 857
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(8级)
 }
 
 STRING 858
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(9级)
 }
 
 STRING 859
-// 科技: R000 (Berserker Strength), Name (名字)
+// 科技: R000 (狂暴力量), Name (名字)
 {
 关卡威力(10级)
 }
@@ -7430,6 +7447,11 @@ STRING 1246
 小强
 }
 
+STRING 1247
+{
+混战选项
+}
+
 STRING 1248
 // 物品: I02Q (雷鸣符石), Ubertip (提示工具 - 扩展)
 {
@@ -7522,6 +7544,11 @@ STRING 1263
 // 技能: A0M4 (|cFFff50aa彩焰射击|r), Tip (提示工具 - 普通)
 {
 |cFFff50aa彩焰射击|r等级2（Q）
+}
+
+STRING 1264
+{
+人头数：|cFF00FF00100|r|cffffcc00(Q)|r
 }
 
 STRING 1265
@@ -8619,6 +8646,11 @@ STRING 1450
 // 单位: n00R (生命灯), Name (名字)
 {
 生命灯
+}
+
+STRING 1451
+{
+时间：|cFF00FF0020分钟|r|cffffcc00(D)|r
 }
 
 STRING 1452
@@ -18650,7 +18682,7 @@ STRING 3131
 }
 
 STRING 3132
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18687,7 +18719,7 @@ STRING 3138
 }
 
 STRING 3139
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18729,7 +18761,7 @@ STRING 3145
 }
 
 STRING 3146
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18741,7 +18773,7 @@ STRING 3147
 }
 
 STRING 3148
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18757,7 +18789,7 @@ STRING 3150
 }
 
 STRING 3151
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战升级
 }
@@ -18897,7 +18929,7 @@ STRING 3174
 }
 
 STRING 3175
-// 科技: Robs (Berserker Strength), effect4 (效果 4)
+// 科技: Robs (狂暴力量), effect4 (效果 4)
 {
 rmvx
 }
@@ -19318,6 +19350,11 @@ STRING 3247
 // 技能: A0CY (元素-金木符), Researchhotkey (热键 - 学习)
 {
 Q
+}
+
+STRING 3248
+{
+|cffffffff娱乐：|r|cFFCC6600混战模式|r|cffffcc00(T)|r
 }
 
 STRING 3249
@@ -20314,6 +20351,11 @@ STRING 3418
 影之石
 }
 
+STRING 3420
+{
+|cffffffff娱乐：|r|cFFCC6600混战模式|r|cffffcc00(T)|r
+}
+
 STRING 3421
 // 魔法效果: B00Z (), EditorSuffix (编辑器后缀)
 {
@@ -20499,6 +20541,12 @@ STRING 3451
 R
 }
 
+STRING 3452
+{
+ 
+模式--人头数：|cFF00FF00100|r|cffffcc00(Q)|r
+}
+
 STRING 3454
 // 物品: I03B (净化权杖(还原)), Name (名字)
 {
@@ -20518,7 +20566,7 @@ STRING 3456
 }
 
 STRING 3457
-// 科技: R000 (Berserker Strength), class (升级类型)
+// 科技: R000 (狂暴力量), class (升级类型)
 {
 melee
 }
@@ -28549,6 +28597,11 @@ STRING 4799
 学习|cFFFFFF33誓约胜利之剑|r(R)
 }
 
+STRING 4800
+{
+游戏模式
+}
+
 STRING 4801
 {
 |cffffcc00物品栏已满|r
@@ -29017,6 +29070,11 @@ STRING 4877
 将2体音速手刃交叉后以音叉形式向自身周围|cffffff00500范围|r发出音波攻击，使受到冲击的敌人逐渐击退，|cffffcc00降低70%攻击速度和移动速度|r，并且在受到音波冲击下不能使用技能，否则会受到极大伤害和|cff00ffff2秒的眩晕|r|n|n|cffff9900每秒伤害：225+力量×1|n施法伤害：300+力量×2|n|n|cff757575持续施法：4秒|n间隔时间：50秒
 }
 
+STRING 4878
+{
+常规：自由选择|cffffcc00(Q)|r
+}
+
 STRING 4879
 // 单位: e07T (热血标枪), Name (名字)
 {
@@ -29045,6 +29103,11 @@ STRING 4882
 // 技能: A048 (虚化增加属性), EditorSuffix (编辑器后缀)
 {
 1级
+}
+
+STRING 4883
+{
+|cffffffff常规：全体随机|r|cffffcc00(W)|r
 }
 
 STRING 4884
@@ -29735,7 +29798,7 @@ STRING 4997
 }
 
 STRING 4998
-// 科技: R000 (Berserker Strength), effect3 (效果 3)
+// 科技: R000 (狂暴力量), effect3 (效果 3)
 {
 rarm
 }
@@ -30286,7 +30349,7 @@ STRING 5089
 }
 
 STRING 5090
-// 科技: R000 (Berserker Strength), effect2 (效果 2)
+// 科技: R000 (狂暴力量), effect2 (效果 2)
 {
 ratt
 }
@@ -33362,6 +33425,11 @@ STRING 5616
 死神代理
 }
 
+STRING 5617
+{
+|cffffffff比赛：|r|cFF00FF00轮选模式|r|cffffcc00(D)|r
+}
+
 STRING 5618
 // 单位: Efur (空间移动能力者), Name (名字)
 {
@@ -36100,6 +36168,12 @@ STRING 6070
 |cFF66FFFF极寒冷气|r等级2（R）
 }
 
+STRING 6071
+{
+ 
+模式--时间：|cFF00FF0020分钟|r|cffffcc00(D)|r
+}
+
 STRING 6072
 // 技能: A0QX (|cFF75ccff强击箭|r), Researchtip (提示工具 - 学习)
 {
@@ -37378,6 +37452,11 @@ STRING 6275
 // 单位: e08P (三笠), EditorSuffix (名字 - 编辑器后缀)
 {
 旋风
+}
+
+STRING 6276
+{
+游戏模式
 }
 
 STRING 6277
@@ -39370,6 +39449,11 @@ STRING 6606
 物理攻击有20%几率（伪随机）造成2.5倍威力的致命一击并且300范围内100%溅射，如同刀名“一刀两段”(破坏剑)|n|n|cffffcc00额外被动地提高15点力量
 }
 
+STRING 6607
+{
+常规：自由选择|cffffcc00(Q)|r
+}
+
 STRING 6608
 // 技能: A0MJ (特效), Name (名字)
 {
@@ -41112,7 +41196,7 @@ STRING 6894
 }
 
 STRING 6895
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41130,7 +41214,7 @@ STRING 6897
 }
 
 STRING 6898
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41194,43 +41278,43 @@ STRING 6909
 }
 
 STRING 6910
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6911
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6912
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6913
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6914
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6915
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
 
 STRING 6916
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41248,7 +41332,7 @@ STRING 6918
 }
 
 STRING 6919
-// 科技: Robs (Berserker Strength), Name (名字)
+// 科技: Robs (狂暴力量), Name (名字)
 {
 近战兵升级
 }
@@ -41723,6 +41807,16 @@ STRING 6998
 // 技能: A07P (|cFFaa50ff幽冥诅咒|r), Name (名字)
 {
 |cFFaa50ff幽冥诅咒|r
+}
+
+STRING 6999
+{
+|cffffffff常规：全体随机|r|cffffcc00(W)|r
+}
+
+STRING 7000
+{
+|cffffffff比赛：|r|cFF00FF00轮选模式|r|cffffcc00(D)|r
 }
 
 STRING 7001
@@ -43690,6 +43784,11 @@ STRING 7327
 // 技能: A0NN (特效), EditorSuffix (编辑器后缀)
 {
 能量之刃 目标
+}
+
+STRING 7328
+{
+|cFFCC6600【混战模式】r|-时间到！
 }
 
 STRING 7329
@@ -46488,6 +46587,21 @@ STRING 7798
 |cffff2626移动速度：|r|cffffff00300|r
 }
 
+STRING 7799
+{
+|cff00ffff极冬酷寒|r 胜！
+}
+
+STRING 7800
+{
+|cff00ffff极冬酷寒|r 胜！
+}
+
+STRING 7801
+{
+|cFFFFCC33人头相等，发放1W块钱，率先取得人头的一方将会获得胜利！r|
+}
+
 STRING 7802
 // 技能: A0QW (|cFF75ccff退步箭|r), Researchtip (提示工具 - 学习)
 {
@@ -47068,6 +47182,11 @@ STRING 7901
 // 技能: A094 (|cFFff8000恶魔突进|r), Ubertip (提示工具 - 普通 - 扩展)
 {
 迅速|cffffff00向前突进600距离|r并打击路径上的敌人并使其在|cffff80001秒内降低80%攻击、移动速度|r，对第一个单位造成额外打击(+1 combo hit)|n|n|cffff5050伤害：敏捷×1+80|n|cffffcccc额外伤害：敏捷×0.5，强化伤害(2hit以上)|n|n|cff757575间隔时间：6秒|n|n|cffffff00若成功命中敌人可刷新1次冷却时间
+}
+
+STRING 7903
+{
+提示：将玩家赶出星辰之塔的范围即可打断占领，如果不打断占领将会使其获得更多的经济
 }
 
 STRING 7904
