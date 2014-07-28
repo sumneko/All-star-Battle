@@ -50,7 +50,6 @@ integer array YDWEGeneralBounsSystem___MinBonus
 //endglobals from YDWEGeneralBounsSystem
 //globals from YDWEGetForceOfPlayerNull:
 constant boolean LIBRARY_YDWEGetForceOfPlayerNull=true
-force yd_NullTempForce
 //endglobals from YDWEGetForceOfPlayerNull
 //globals from YDWEGetInventoryIndexOfItemTypeBJNull:
 constant boolean LIBRARY_YDWEGetInventoryIndexOfItemTypeBJNull=true
@@ -64,16 +63,17 @@ constant boolean LIBRARY_YDWEGetPlayersAlliesNull=true
 //endglobals from YDWEGetPlayersAlliesNull
 //globals from YDWEGetPlayersMatchingNull:
 constant boolean LIBRARY_YDWEGetPlayersMatchingNull=true
+force yd_NullTempForce
 //endglobals from YDWEGetPlayersMatchingNull
 //globals from YDWEGetUnitsInRangeOfLocMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRangeOfLocMatchingNull=true
 //endglobals from YDWEGetUnitsInRangeOfLocMatchingNull
 //globals from YDWEGetUnitsInRectMatchingNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectMatchingNull=true
-group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectMatchingNull
 //globals from YDWEGetUnitsInRectOfPlayerNull:
 constant boolean LIBRARY_YDWEGetUnitsInRectOfPlayerNull=true
+group yd_NullTempGroup
 //endglobals from YDWEGetUnitsInRectOfPlayerNull
 //globals from YDWEGetUnitsOfPlayerAndTypeIdNull:
 constant boolean LIBRARY_YDWEGetUnitsOfPlayerAndTypeIdNull=true
@@ -123,10 +123,10 @@ integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
-region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterEnterRectSimpleNull
 //globals from YDWETriggerRegisterLeaveRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterLeaveRectSimpleNull=true
+region yd_NullTempRegion
 //endglobals from YDWETriggerRegisterLeaveRectSimpleNull
 //globals from YDWEUnitHasItemOfTypeBJNull:
 constant boolean LIBRARY_YDWEUnitHasItemOfTypeBJNull=true
@@ -206,10 +206,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary___U=null
-unit array YDWELibrary___Uflush_units
-integer YDWELibrary___Iflush_first=0
-integer YDWELibrary___Iflush_top=0
+unit YDWELibrary__U=null
+unit array YDWELibrary__Uflush_units
+integer YDWELibrary__Iflush_first=0
+integer YDWELibrary__Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -726,6 +726,12 @@ trigger gg_trg_player_lua=null
 trigger gg_trg_game_lua=null
 trigger gg_trg_text_lua=null
 trigger gg_trg_check11_lua=null
+trigger gg_trg_______________________001=null
+trigger gg_trg_______Player_______002=null
+trigger gg_trg_________________003=null
+trigger gg_trg____________________004=null
+trigger gg_trg______________005=null
+trigger gg_trg________________null_006=null
 trigger gg_trg____defineLibrary=null
 trigger gg_trg__________baseLibrary=null
 trigger gg_trg_11____________11plantRecord=null
@@ -858,6 +864,8 @@ trigger gg_trg_jinru=null
 trigger gg_trg_likai=null
 trigger gg_trg_siwang=null
 trigger gg_trg_TEST=null
+trigger gg_trg_TEST2=null
+trigger gg_trg_TEST2_______u=null
 trigger gg_trg_jishi01=null
 trigger gg_trg_jishi02=null
 trigger gg_trg_jishi03=null
@@ -1844,21 +1852,15 @@ unit gg_unit_n018_0122=null
 unit gg_unit_hhou_0060=null
 unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
-trigger gg_trg_______________________001=null
-trigger gg_trg_______Player_______002=null
-trigger gg_trg_________________003=null
-trigger gg_trg____________________004=null
-trigger gg_trg______________005=null
-trigger gg_trg________________null_006=null
 integer ydg_var_index=0
 boolean array ydg_boolean_0xFA4993B9
 group array ydg_group_0x38601DA8
-string MU_UPDATE_RESULT_1="优化逆天计时器用时0.74秒"
-string MU_UPDATE_RESULT_2="修正逆天计时器嵌套传参错误用时0.13秒"
-string MU_UPDATE_RESULT_3="优化逆天触发器用时0.71秒"
-string MU_UPDATE_RESULT_4="优化逆天局部变量中的选取用时0.23秒"
-string MU_UPDATE_RESULT_5="优化逆天局部变量用时0.91秒"
-string MU_UPDATE_RESULT_6="优化总用时2.71秒"
+string MU_UPDATE_RESULT_1="优化逆天计时器用时0.71秒"
+string MU_UPDATE_RESULT_2="修正逆天计时器嵌套传参错误用时0.15秒"
+string MU_UPDATE_RESULT_3="优化逆天触发器用时0.69秒"
+string MU_UPDATE_RESULT_4="优化逆天局部变量中的选取用时0.24秒"
+string MU_UPDATE_RESULT_5="优化逆天局部变量用时0.92秒"
+string MU_UPDATE_RESULT_6="优化总用时2.70秒"
 
 trigger l__library_init
 
@@ -4252,7 +4254,7 @@ function s__AI_Init takes nothing returns nothing
 call Debug("开启AI")
 call TimerStart(CreateTimer(), 3, true, function s__AI_check_AI)
 endfunction
-function AIlibrary___Init takes nothing returns nothing
+function AIlibrary__Init takes nothing returns nothing
 endfunction
 
 //library AIlibrary ends
@@ -4994,42 +4996,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary___FlushUnit_Add takes nothing returns nothing
+function YDWELibrary__FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary___U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
+set YDWELibrary__U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
 loop
-set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
-exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
+set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
+exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
 endloop
-if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
-set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
+if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
+set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
 endif
-if YDWELibrary___Iflush_first > 500 then
+if YDWELibrary__Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary___Iflush_top
+set cjlocgn_00000000=YDWELibrary__Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary___U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
-set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary___Iflush_first=cjlocgn_00000000
+set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary__U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
+set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary__Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary___Init takes nothing returns nothing
+function YDWELibrary__Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -6138,7 +6140,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary___Init takes nothing returns nothing
+function processLibrary__Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -6321,11 +6323,11 @@ endloop
 elseif s == ".key" then
 if s__test_check_timer < 1000 then
 set cjlocgn_00000000=S2I(s__String_GetStr(2))
-set cjlocgn_00000003=StringHash2(s__baka_getMapVerName(s__baka_thisVer) + GetPlayerName(p) + "呜喵")
+set cjlocgn_00000003=StringHash2(s__baka_thisVerName + GetPlayerName(p) + "呜喵")
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
-call BJDebugMsg("|cffff8888本地图保存于[2014/07/28/ - 10:01:47],请注意确认版本")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/28/ - 19:34:00],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -6360,6 +6362,7 @@ call TriggerRegisterPlayerChatEvent(s__test_testTrigger, s__baka_SPlayer(i), "",
 set i=i + 1
 endloop
 call TriggerAddAction(s__test_testTrigger, function s__test_action)
+call s__test_check()
 endfunction
 
 //library testLibrary ends
@@ -10071,8 +10074,12 @@ set udg_anniu[10]=GetLastCreatedButtonBJ()
 call DialogDisplay(s__baka_SPlayer(0), udg_duihuakuang[0], true)
 call ForGroupBJ(YDWEGetUnitsOfPlayerAllNull(s__baka_SPlayer(10)), function Trig_duihuakuang2Func002Func009Func003Func004Func002Func002Func001Func001Func001Func012A)
 call ForGroupBJ(YDWEGetUnitsOfPlayerAllNull(s__baka_SPlayer(11)), function Trig_duihuakuang2Func002Func009Func003Func004Func002Func002Func001Func001Func001Func013A)
-call TriggerExecute(gg_trg_GH)
 call DisableTrigger(gg_trg_GH_2)
+call DisableTrigger(gg_trg_GH_3)
+call CreateNUnitsAtLoc(1, 0x486D6B67, s__baka_SPlayer(10), GetRectCenter(gg_rct_GH), bj_UNIT_FACING)
+call RemoveUnit(GetLastCreatedUnit())
+call CreateNUnitsAtLoc(1, 0x486D6B67, s__baka_SPlayer(11), GetRectCenter(gg_rct_GH), bj_UNIT_FACING)
+call RemoveUnit(GetLastCreatedUnit())
 call DisableTrigger(gg_trg_Go)
 call DisableTrigger(gg_trg_zhizhu_1)
 call DisableTrigger(gg_trg_juxiong)
@@ -12173,12 +12180,12 @@ call SetPlayerStateBJ(s__baka_SPlayer(bj_forLoopAIndex - 1), PLAYER_STATE_RESOUR
 call AdjustPlayerStateBJ(1, s__baka_SPlayer(bj_forLoopAIndex - 1), PLAYER_STATE_RESOURCE_LUMBER)
 if ( ( ModuloInteger(GetPlayerState(s__baka_SPlayer(0), PLAYER_STATE_RESOURCE_LUMBER), 5) == 0 ) ) then
 if ( ( GetPlayerState(s__baka_SPlayer(0), PLAYER_STATE_RESOURCE_LUMBER) < 20 ) ) then
-set bj_forLoopAIndex=1
-set bj_forLoopAIndexEnd=10
+set bj_forLoopBIndex=1
+set bj_forLoopBIndexEnd=10
 loop
-exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
-call AdjustPlayerStateBJ(5000, s__baka_SPlayer(bj_forLoopAIndex - 1), PLAYER_STATE_RESOURCE_GOLD)
-set bj_forLoopAIndex=bj_forLoopAIndex + 1
+exitwhen bj_forLoopBIndex > bj_forLoopBIndexEnd
+call AdjustPlayerStateBJ(5000, s__baka_SPlayer(bj_forLoopBIndex - 1), PLAYER_STATE_RESOURCE_GOLD)
+set bj_forLoopBIndex=bj_forLoopBIndex + 1
 endloop
 else
 endif
@@ -12188,24 +12195,24 @@ else
 endif
 if ( ( udg_hunzhan == 0 ) ) then
 else
-if ( ( GetPlayerState(s__baka_SPlayer(0), PLAYER_STATE_RESOURCE_LUMBER) == 20 ) and ( udg_hunzhan == - 2 ) ) then
+if ( ( GetPlayerState(s__baka_SPlayer(0), PLAYER_STATE_RESOURCE_LUMBER) == 20 ) and ( GetPlayerState(s__baka_SPlayer(1 - 1), PLAYER_STATE_RESOURCE_FOOD_USED) == 0 ) and ( udg_hunzhan == - 2 ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_7328")
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, udg_DHK1[1])
 if ( ( udg_FS > udg_FSDL ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_7799")
-call KillUnit(gg_unit_e05G_0101)
+call KillUnit(gg_unit_hcas_0020)
 else
 if ( ( udg_FS < udg_FSDL ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_7800")
 call KillUnit(gg_unit_hcas_0015)
 else
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_7801")
-set bj_forLoopAIndex=1
-set bj_forLoopAIndexEnd=10
+set bj_forLoopBIndex=1
+set bj_forLoopBIndexEnd=10
 loop
-exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
-call AdjustPlayerStateBJ(10000, s__baka_SPlayer(bj_forLoopAIndex - 1), PLAYER_STATE_RESOURCE_GOLD)
-set bj_forLoopAIndex=bj_forLoopAIndex + 1
+exitwhen bj_forLoopBIndex > bj_forLoopBIndexEnd
+call AdjustPlayerStateBJ(10000, s__baka_SPlayer(bj_forLoopBIndex - 1), PLAYER_STATE_RESOURCE_GOLD)
+set bj_forLoopBIndex=bj_forLoopBIndex + 1
 endloop
 set udg_hunzhan=- 3
 endif
@@ -13230,7 +13237,7 @@ if ( ( udg_hunzhan != 0 ) ) then
 if ( ( udg_hunzhan == - 3 ) ) then
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) <= 5 ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_3453")
-call KillUnit(gg_unit_e05G_0101)
+call KillUnit(gg_unit_hcas_0020)
 else
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) >= 6 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetDyingUnit())) + 1 ) <= 10 ) ) then
 call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_3419")
@@ -13402,9 +13409,33 @@ call TimerDialogDisplayForPlayerBJ(true, GetLastCreatedTimerDialogBJ(), GetOwnin
 if ( ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) >= 1 ) and ( ( s__baka_SGetPlayerId(GetOwningPlayer(GetKillingUnitBJ())) + 1 ) <= 12 ) and ( IsUnitEnemy(GetKillingUnitBJ(), GetOwningPlayer(GetDyingUnit())) == true ) ) then
 if ( ( IsUnitAlly(GetDyingUnit(), s__baka_SPlayer(10)) == true ) ) then
 set udg_FSDL=( udg_FSDL + 1 )
+if ( ( udg_hunzhan == - 1 ) ) then
+if ( ( udg_FSDL == 100 ) ) then
+call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_1309")
+call KillUnit(gg_unit_hcas_0015)
+else
+if ( ( udg_FSDL >= 90 ) ) then
+call DisplayTimedTextToForce(GetPlayersAll(), 20.00, ( "|cff00ffff极冬酷寒|r 还有" + ( I2S(( 100 - udg_FSDL )) + "个人头就会获得胜利！" ) ))
+else
+endif
+endif
+else
+endif
 else
 if ( ( IsUnitAlly(GetDyingUnit(), s__baka_SPlayer(11)) == true ) ) then
 set udg_FS=( udg_FS + 1 )
+if ( ( udg_hunzhan == - 1 ) ) then
+if ( ( udg_FS == 100 ) ) then
+call DisplayTimedTextToForce(GetPlayersAll(), 20.00, "TRIGSTR_1308")
+call KillUnit(gg_unit_hcas_0020)
+else
+if ( ( udg_FS >= 90 ) ) then
+call DisplayTimedTextToForce(GetPlayersAll(), 20.00, ( "|cffffcc00万物复苏|r 还有" + ( I2S(( 100 - udg_FS )) + "个人头就会获得胜利！" ) ))
+else
+endif
+endif
+else
+endif
 else
 endif
 endif
@@ -13452,6 +13483,7 @@ function InitTrig_fh01 takes nothing returns nothing
 set gg_trg_fh01=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh01, udg_FH[1])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh01, udg_FH[11])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh01, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh01, function Trig_fh01Actions)
 endfunction
 function Trig_fh02Actions takes nothing returns nothing
@@ -13488,6 +13520,7 @@ function InitTrig_fh02 takes nothing returns nothing
 set gg_trg_fh02=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh02, udg_FH[2])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh02, udg_FH[12])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh02, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh02, function Trig_fh02Actions)
 endfunction
 function Trig_fh03Actions takes nothing returns nothing
@@ -13524,6 +13557,7 @@ function InitTrig_fh03 takes nothing returns nothing
 set gg_trg_fh03=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh03, udg_FH[3])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh03, udg_FH[13])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh03, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh03, function Trig_fh03Actions)
 endfunction
 function Trig_fh04Actions takes nothing returns nothing
@@ -13560,6 +13594,7 @@ function InitTrig_fh04 takes nothing returns nothing
 set gg_trg_fh04=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh04, udg_FH[4])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh04, udg_FH[14])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh04, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh04, function Trig_fh04Actions)
 endfunction
 function Trig_fh05Actions takes nothing returns nothing
@@ -13596,6 +13631,7 @@ function InitTrig_fh05 takes nothing returns nothing
 set gg_trg_fh05=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh05, udg_FH[5])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh05, udg_FH[15])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh05, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh05, function Trig_fh05Actions)
 endfunction
 function Trig_fh06Actions takes nothing returns nothing
@@ -13632,6 +13668,7 @@ function InitTrig_fh06 takes nothing returns nothing
 set gg_trg_fh06=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh06, udg_FH[6])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh06, udg_FH[16])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh06, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh06, function Trig_fh06Actions)
 endfunction
 function Trig_fh07Actions takes nothing returns nothing
@@ -13668,6 +13705,7 @@ function InitTrig_fh07 takes nothing returns nothing
 set gg_trg_fh07=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh07, udg_FH[7])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh07, udg_FH[17])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh07, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh07, function Trig_fh07Actions)
 endfunction
 function Trig_fh08Actions takes nothing returns nothing
@@ -13704,6 +13742,7 @@ function InitTrig_fh08 takes nothing returns nothing
 set gg_trg_fh08=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh08, udg_FH[8])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh08, udg_FH[18])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh08, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh08, function Trig_fh08Actions)
 endfunction
 function Trig_fh09Actions takes nothing returns nothing
@@ -13740,6 +13779,7 @@ function InitTrig_fh09 takes nothing returns nothing
 set gg_trg_fh09=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh09, udg_FH[9])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh09, udg_FH[19])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh09, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh09, function Trig_fh09Actions)
 endfunction
 function Trig_fh10Actions takes nothing returns nothing
@@ -13776,6 +13816,7 @@ function InitTrig_fh10 takes nothing returns nothing
 set gg_trg_fh10=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_fh10, udg_FH[10])
 call TriggerRegisterTimerExpireEvent(gg_trg_fh10, udg_FH[20])
+call TriggerRegisterPlayerChatEvent(gg_trg_fh10, s__baka_SPlayer(0), "-reborn", true)
 call TriggerAddAction(gg_trg_fh10, function Trig_fh10Actions)
 endfunction
 function Trig_jishiqi79Actions takes nothing returns nothing
@@ -16940,6 +16981,28 @@ set gg_trg_TEST=CreateTrigger()
 call TriggerRegisterPlayerChatEvent(gg_trg_TEST, s__baka_SPlayer(0), "-hztest", true)
 call TriggerAddCondition(gg_trg_TEST, Condition(function Trig_TESTConditions))
 call TriggerAddAction(gg_trg_TEST, function Trig_TESTActions)
+endfunction
+function Trig_TEST2Actions takes nothing returns nothing
+call AdjustPlayerStateBJ(1, s__baka_SPlayer(0), PLAYER_STATE_RESOURCE_LUMBER)
+endfunction
+function InitTrig_TEST2 takes nothing returns nothing
+set gg_trg_TEST2=CreateTrigger()
+call TriggerRegisterPlayerChatEvent(gg_trg_TEST2, s__baka_SPlayer(0), "-tree", true)
+call TriggerAddAction(gg_trg_TEST2, function Trig_TEST2Actions)
+endfunction
+function Trig_TEST2_______uActions takes nothing returns nothing
+set bj_forLoopAIndex=1
+set bj_forLoopAIndexEnd=10
+loop
+exitwhen bj_forLoopAIndex > bj_forLoopAIndexEnd
+call BJDebugMsg(I2S(udg_HZzhengshu1[bj_forLoopAIndex]))
+set bj_forLoopAIndex=bj_forLoopAIndex + 1
+endloop
+endfunction
+function InitTrig_TEST2_______u takes nothing returns nothing
+set gg_trg_TEST2_______u=CreateTrigger()
+call TriggerRegisterPlayerChatEvent(gg_trg_TEST2_______u, s__baka_SPlayer(0), "-zhengshu", true)
+call TriggerAddAction(gg_trg_TEST2_______u, function Trig_TEST2_______uActions)
 endfunction
 function Trig_jishi01Conditions takes nothing returns boolean
 return ( ( s__Unit_IsAlive(udg_player[1]) == true ) and ( RectContainsUnit(gg_rct_GH, udg_player[1]) == true ) )
@@ -59876,6 +59939,12 @@ function InitCustomTriggers takes nothing returns nothing
 //Function not found: call InitTrig_game_lua()
 //Function not found: call InitTrig_text_lua()
 //Function not found: call InitTrig_check11_lua()
+//Function not found: call InitTrig_______________________001()
+//Function not found: call InitTrig_______Player_______002()
+//Function not found: call InitTrig_________________003()
+//Function not found: call InitTrig____________________004()
+//Function not found: call InitTrig______________005()
+//Function not found: call InitTrig________________null_006()
 //Function not found: call InitTrig____defineLibrary()
 //Function not found: call InitTrig__________baseLibrary()
 //Function not found: call InitTrig_11____________11plantRecord()
@@ -60000,6 +60069,8 @@ call InitTrig_jinru()
 call InitTrig_likai()
 call InitTrig_siwang()
 call InitTrig_TEST()
+call InitTrig_TEST2()
+call InitTrig_TEST2_______u()
 call InitTrig_jishi01()
 call InitTrig_jishi02()
 call InitTrig_jishi03()
@@ -60866,12 +60937,6 @@ call InitTrig_xuanfengzhan()
 call InitTrig_shuangdaozhan()
 call InitTrig_huixuanzhan()
 call InitTrig_testga()
-//Function not found: call InitTrig_______________________001()
-//Function not found: call InitTrig_______Player_______002()
-//Function not found: call InitTrig_________________003()
-//Function not found: call InitTrig____________________004()
-//Function not found: call InitTrig______________005()
-//Function not found: call InitTrig________________null_006()
 endfunction
 function RunInitializationTriggers takes nothing returns nothing
 call ConditionalTriggerExecute(gg_trg_chushihua)
@@ -61106,22 +61171,22 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs429357277")
+call ExecuteFunc("jasshelper__initstructs463691833")
 call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
 call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
 call ExecuteFunc("YDWEGeneralBounsSystem___Initialize")
 call ExecuteFunc("baseLibrary__Init")
-call ExecuteFunc("AIlibrary___Init")
+call ExecuteFunc("AIlibrary__Init")
 call ExecuteFunc("LuaLibrary__Init")
 call ExecuteFunc("Record__Init")
-call ExecuteFunc("YDWELibrary___Init")
+call ExecuteFunc("YDWELibrary__Init")
 call ExecuteFunc("bakaLibrary__Init")
 call ExecuteFunc("effectLibrary__Init")
 call ExecuteFunc("eventLibrary__Init")
 call ExecuteFunc("mathLibrary__Init")
 call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary___Init")
+call ExecuteFunc("processLibrary__Init")
 call ExecuteFunc("soundLibrary__Init")
 call ExecuteFunc("stringLibrary__Init")
 call ExecuteFunc("testLibrary__Init")
@@ -61266,7 +61331,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs429357277 takes nothing returns nothing
+function jasshelper__initstructs463691833 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__String_byte2=CreateTrigger()
