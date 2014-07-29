@@ -170,19 +170,17 @@ local function main()
 			print('[失败]: 打开 ' .. new_dir:string())
 			return
 		end
-		
-		table.insert(files, '(listfile)')
+
 		for _, name in ipairs(files) do
-			if name ~= '(listfile)' then
-				if inmap:import(name, file_dir / name) then
-					print('[成功]: 导入 ' .. name)
-				else
-					print('[失败]: 导入 ' .. name)
-				end
+			if inmap:import(name, file_dir / name) then
+				print('[成功]: 导入 ' .. name)
+			else
+				print('[失败]: 导入 ' .. name)
 			end
 		end
 
 		inmap:close()
+
 	end
 	
 	print('[完毕]: 用时 ' .. os.clock() .. ' 秒') 
