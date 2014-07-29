@@ -57,6 +57,11 @@ STRING 9
 凯琳
 }
 
+STRING 10
+{
+|cFFCC6600【混战模式】|r-时间到！
+}
+
 STRING 11
 {
  
@@ -165,6 +170,11 @@ STRING 28
 // 技能: A027 (|cFF0075ff地狱火炎|r), Tip (提示工具 - 普通)
 {
 |cFF0075ff地狱火炎|r等级5（Q）
+}
+
+STRING 29
+{
+|cFFFFCC33人头相等，发放1W块钱，率先取得人头的一方将会获得胜利！r|
 }
 
 STRING 30
@@ -12551,6 +12561,11 @@ STRING 2103
 // 技能: A0DB (星辰闪避), Name (名字)
 {
 星辰闪避
+}
+
+STRING 2104
+{
+|cff00ffff极冬酷寒|r 胜！
 }
 
 STRING 2105
@@ -43820,11 +43835,6 @@ STRING 7327
 能量之刃 目标
 }
 
-STRING 7328
-{
-|cFFCC6600【混战模式】|r-时间到！
-}
-
 STRING 7329
 // 魔法效果: B03E (), Buffubertip (工具提示 - 扩展)
 {
@@ -46626,21 +46636,6 @@ STRING 7798
 |cffff2626移动速度：|r|cffffff00300|r
 }
 
-STRING 7799
-{
-|cffffcc00万物复苏|r 胜！
-}
-
-STRING 7800
-{
-|cff00ffff极冬酷寒|r 胜！
-}
-
-STRING 7801
-{
-|cFFFFCC33人头相等，发放1W块钱，率先取得人头的一方将会获得胜利！r|
-}
-
 STRING 7802
 // 技能: A0QW (|cFF75ccff退步箭|r), Researchtip (提示工具 - 学习)
 {
@@ -47058,6 +47053,11 @@ STRING 7871
 STRING 7872
 {
 提示：将玩家|cFFFF9900<击杀>|r以及|cFFFF9900<赶出>|r|cFF0033CC 星辰之塔 |r的范围或者让其进入|cFFFF9900<隐身>|r状态即可打断占领，|cFFCC0000如果不打断占领将会使其获得更多的经济|r
+}
+
+STRING 7873
+{
+|cffffcc00万物复苏|r 胜！
 }
 
 STRING 7874
