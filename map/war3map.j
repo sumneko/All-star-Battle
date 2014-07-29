@@ -27,26 +27,26 @@ real yd_MapMaxX=0
 real yd_MapMinX=0
 real yd_MapMaxY=0
 real yd_MapMinY=0
-string array YDWEBase__yd_PlayerColor
-trigger array YDWEBase__AbilityCastingOverEventQueue
-integer array YDWEBase__AbilityCastingOverEventType
-integer YDWEBase__AbilityCastingOverEventNumber=0
+string array YDWEBase___yd_PlayerColor
+trigger array YDWEBase___AbilityCastingOverEventQueue
+integer array YDWEBase___AbilityCastingOverEventType
+integer YDWEBase___AbilityCastingOverEventNumber=0
 //endglobals from YDWEBase
 //globals from YDWEEnumDestructablesInCircleBJFilterNull:
 constant boolean LIBRARY_YDWEEnumDestructablesInCircleBJFilterNull=true
 //endglobals from YDWEEnumDestructablesInCircleBJFilterNull
 //globals from YDWEGeneralBounsSystem:
 constant boolean LIBRARY_YDWEGeneralBounsSystem=true
-integer array YDWEGeneralBounsSystem__ABILITY_COUNT
-integer array YDWEGeneralBounsSystem__ABILITY_NUM
-integer array YDWEGeneralBounsSystem__BonusAbilitys
-integer array YDWEGeneralBounsSystem__PowersOf2
-integer YDWEGeneralBounsSystem__PRELOAD_DUMMY_UNIT=0x68706561
-integer array YDWEGeneralBounsSystem__YDWEBONUS_MyChar
-boolean YDWEGeneralBounsSystem__PRELOAD_ABILITYS=true
-constant integer YDWEGeneralBounsSystem__BONUS_TYPES=4
-integer array YDWEGeneralBounsSystem__MaxBonus
-integer array YDWEGeneralBounsSystem__MinBonus
+integer array YDWEGeneralBounsSystem___ABILITY_COUNT
+integer array YDWEGeneralBounsSystem___ABILITY_NUM
+integer array YDWEGeneralBounsSystem___BonusAbilitys
+integer array YDWEGeneralBounsSystem___PowersOf2
+integer YDWEGeneralBounsSystem___PRELOAD_DUMMY_UNIT=0x68706561
+integer array YDWEGeneralBounsSystem___YDWEBONUS_MyChar
+boolean YDWEGeneralBounsSystem___PRELOAD_ABILITYS=true
+constant integer YDWEGeneralBounsSystem___BONUS_TYPES=4
+integer array YDWEGeneralBounsSystem___MaxBonus
+integer array YDWEGeneralBounsSystem___MinBonus
 //endglobals from YDWEGeneralBounsSystem
 //globals from YDWEGetForceOfPlayerNull:
 constant boolean LIBRARY_YDWEGetForceOfPlayerNull=true
@@ -114,12 +114,12 @@ constant boolean LIBRARY_YDWESetUnitFacingToFaceLocTimedNull=true
 //globals from YDWETriggerEvent:
 constant boolean LIBRARY_YDWETriggerEvent=true
 trigger yd_DamageEventTrigger=null
-trigger array YDWETriggerEvent___DamageEventQueue
-integer YDWETriggerEvent___DamageEventNumber=0
+trigger array YDWETriggerEvent__DamageEventQueue
+integer YDWETriggerEvent__DamageEventNumber=0
 item bj_lastMovedItemInItemSlot=null
-trigger YDWETriggerEvent___MoveItemEventTrigger=null
-trigger array YDWETriggerEvent___MoveItemEventQueue
-integer YDWETriggerEvent___MoveItemEventNumber=0
+trigger YDWETriggerEvent__MoveItemEventTrigger=null
+trigger array YDWETriggerEvent__MoveItemEventQueue
+integer YDWETriggerEvent__MoveItemEventNumber=0
 //endglobals from YDWETriggerEvent
 //globals from YDWETriggerRegisterEnterRectSimpleNull:
 constant boolean LIBRARY_YDWETriggerRegisterEnterRectSimpleNull=true
@@ -206,10 +206,10 @@ integer MoveMoreLevel_JumpTimer=3
 //endglobals from YDWEJumpTimer
 //globals from YDWELibrary:
 constant boolean LIBRARY_YDWELibrary=true
-unit YDWELibrary__U=null
-unit array YDWELibrary__Uflush_units
-integer YDWELibrary__Iflush_first=0
-integer YDWELibrary__Iflush_top=0
+unit YDWELibrary___U=null
+unit array YDWELibrary___Uflush_units
+integer YDWELibrary___Iflush_first=0
+integer YDWELibrary___Iflush_top=0
 //endglobals from YDWELibrary
 //globals from YDWESetUnitFacingToFaceUnitTimedNull:
 constant boolean LIBRARY_YDWESetUnitFacingToFaceUnitTimedNull=true
@@ -1751,8 +1751,7 @@ trigger gg_trg_leijizhenpo_1=null
 trigger gg_trg_leijizhenpo_2=null
 trigger gg_trg_leiyanshengjian_1=null
 trigger gg_trg_leiyanshengjian_2=null
-trigger gg_trg_caiyansheji_1=null
-trigger gg_trg_caiyansheji_2=null
+trigger gg_trg_CYSJ=null
 trigger gg_trg_hongzhishi_1=null
 trigger gg_trg_hongzhishi_2=null
 trigger gg_trg_hongzhishi_2_5=null
@@ -1858,13 +1857,12 @@ unit gg_unit_hhou_0121=null
 destructable gg_dest_YT11_3231=null
 integer ydg_var_index=0
 boolean array ydg_boolean_0xFA4993B9
-group array ydg_group_0x38601DA8
-string MU_UPDATE_RESULT_1="优化逆天计时器用时0.69秒"
+string MU_UPDATE_RESULT_1="优化逆天计时器用时0.72秒"
 string MU_UPDATE_RESULT_2="修正逆天计时器嵌套传参错误用时0.13秒"
-string MU_UPDATE_RESULT_3="优化逆天触发器用时0.70秒"
-string MU_UPDATE_RESULT_4="优化逆天局部变量中的选取用时0.23秒"
-string MU_UPDATE_RESULT_5="优化逆天局部变量用时0.91秒"
-string MU_UPDATE_RESULT_6="优化总用时2.67秒"
+string MU_UPDATE_RESULT_3="优化逆天触发器用时0.68秒"
+string MU_UPDATE_RESULT_4="优化逆天局部变量中的选取用时0.28秒"
+string MU_UPDATE_RESULT_5="优化逆天局部变量用时0.90秒"
+string MU_UPDATE_RESULT_6="优化总用时2.71秒"
 
 trigger l__library_init
 
@@ -2590,13 +2588,13 @@ function cj_true_a497bnsor7 takes nothing returns boolean
 //# optional
 return true
 endfunction
-function cjLibw560nbs9b8nse46703948___init takes nothing returns nothing
+function cjLibw560nbs9b8nse46703948__init takes nothing returns nothing
 set cj_true_bool_4896bnao87=Condition(function cj_true_a497bnsor7)
 endfunction
 
 //library cjLibw560nbs9b8nse46703948 ends
 //library YDTriggerSaveLoadSystem:
-function YDTriggerSaveLoadSystem___Init takes nothing returns nothing
+function YDTriggerSaveLoadSystem__Init takes nothing returns nothing
 set YDHT=InitHashtable()
 endfunction
 
@@ -3150,20 +3148,20 @@ endfunction
 function YDWESyStemAbilityCastingOverTriggerAction takes unit hero,integer index returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWEBase__AbilityCastingOverEventNumber
-if YDWEBase__AbilityCastingOverEventType[i] == index then
+exitwhen i >= YDWEBase___AbilityCastingOverEventNumber
+if YDWEBase___AbilityCastingOverEventType[i] == index then
 set bj_lastAbilityCastingUnit=hero
-if YDWEBase__AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase__AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase__AbilityCastingOverEventQueue[i]) then
-call TriggerExecute(YDWEBase__AbilityCastingOverEventQueue[i])
+if YDWEBase___AbilityCastingOverEventQueue[i] != null and TriggerEvaluate(YDWEBase___AbilityCastingOverEventQueue[i]) and IsTriggerEnabled(YDWEBase___AbilityCastingOverEventQueue[i]) then
+call TriggerExecute(YDWEBase___AbilityCastingOverEventQueue[i])
 endif
 endif
 set i=i + 1
 endloop
 endfunction
 function YDWESyStemAbilityCastingOverRegistTrigger takes trigger trg,integer index returns nothing
-set YDWEBase__AbilityCastingOverEventQueue[YDWEBase__AbilityCastingOverEventNumber]=trg
-set YDWEBase__AbilityCastingOverEventType[YDWEBase__AbilityCastingOverEventNumber]=index
-set YDWEBase__AbilityCastingOverEventNumber=YDWEBase__AbilityCastingOverEventNumber + 1
+set YDWEBase___AbilityCastingOverEventQueue[YDWEBase___AbilityCastingOverEventNumber]=trg
+set YDWEBase___AbilityCastingOverEventType[YDWEBase___AbilityCastingOverEventNumber]=index
+set YDWEBase___AbilityCastingOverEventNumber=YDWEBase___AbilityCastingOverEventNumber + 1
 endfunction
 function YDWECreateUnitPool takes nothing returns nothing
 set bj_lastCreatedUnitPool=CreateUnitPool()
@@ -3195,7 +3193,7 @@ set bj_lastSetDamageType=dt
 set bj_lastSetWeaponType=wt
 endfunction
 function YDWEGetPlayerColorString takes player p,string s returns string
-return YDWEBase__yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
+return YDWEBase___yd_PlayerColor[GetHandleId(GetPlayerColor(p))] + s + "|r"
 endfunction
 function YDWEGetUnitItemSoftId takes unit hero,item it returns integer
 local integer i=0
@@ -3228,22 +3226,22 @@ set yd_MapMinX=GetCameraBoundMinX() - GetCameraMargin(CAMERA_MARGIN_LEFT)
 set yd_MapMinY=GetCameraBoundMinY() - GetCameraMargin(CAMERA_MARGIN_BOTTOM)
 set yd_MapMaxX=GetCameraBoundMaxX() + GetCameraMargin(CAMERA_MARGIN_RIGHT)
 set yd_MapMaxY=GetCameraBoundMaxY() + GetCameraMargin(CAMERA_MARGIN_TOP)
-set YDWEBase__yd_PlayerColor[0]="|cFFFF0303"
-set YDWEBase__yd_PlayerColor[1]="|cFF0042FF"
-set YDWEBase__yd_PlayerColor[2]="|cFF1CE6B9"
-set YDWEBase__yd_PlayerColor[3]="|cFF540081"
-set YDWEBase__yd_PlayerColor[4]="|cFFFFFC01"
-set YDWEBase__yd_PlayerColor[5]="|cFFFE8A0E"
-set YDWEBase__yd_PlayerColor[6]="|cFF20C000"
-set YDWEBase__yd_PlayerColor[7]="|cFFE55BB0"
-set YDWEBase__yd_PlayerColor[8]="|cFF959697"
-set YDWEBase__yd_PlayerColor[9]="|cFF7EBFF1"
-set YDWEBase__yd_PlayerColor[10]="|cFF106246"
-set YDWEBase__yd_PlayerColor[11]="|cFF4E2A04"
-set YDWEBase__yd_PlayerColor[12]="|cFF282828"
-set YDWEBase__yd_PlayerColor[13]="|cFF282828"
-set YDWEBase__yd_PlayerColor[14]="|cFF282828"
-set YDWEBase__yd_PlayerColor[15]="|cFF282828"
+set YDWEBase___yd_PlayerColor[0]="|cFFFF0303"
+set YDWEBase___yd_PlayerColor[1]="|cFF0042FF"
+set YDWEBase___yd_PlayerColor[2]="|cFF1CE6B9"
+set YDWEBase___yd_PlayerColor[3]="|cFF540081"
+set YDWEBase___yd_PlayerColor[4]="|cFFFFFC01"
+set YDWEBase___yd_PlayerColor[5]="|cFFFE8A0E"
+set YDWEBase___yd_PlayerColor[6]="|cFF20C000"
+set YDWEBase___yd_PlayerColor[7]="|cFFE55BB0"
+set YDWEBase___yd_PlayerColor[8]="|cFF959697"
+set YDWEBase___yd_PlayerColor[9]="|cFF7EBFF1"
+set YDWEBase___yd_PlayerColor[10]="|cFF106246"
+set YDWEBase___yd_PlayerColor[11]="|cFF4E2A04"
+set YDWEBase___yd_PlayerColor[12]="|cFF282828"
+set YDWEBase___yd_PlayerColor[13]="|cFF282828"
+set YDWEBase___yd_PlayerColor[14]="|cFF282828"
+set YDWEBase___yd_PlayerColor[15]="|cFF282828"
 call YDWEVersion_Init()
 endfunction
 
@@ -3257,7 +3255,7 @@ endfunction
 
 //library YDWEEnumDestructablesInCircleBJFilterNull ends
 //library YDWEGeneralBounsSystem:
-function YDWEGeneralBounsSystem__DisplayAllAbilityId takes nothing returns nothing
+function YDWEGeneralBounsSystem___DisplayAllAbilityId takes nothing returns nothing
 local integer aid=0
 set aid=0x59446C30
 set aid=0x59446C31
@@ -3328,22 +3326,22 @@ set aid=0x5944626C
 set aid=0x5944626D
 set aid=0x5944626E
 endfunction
-function YDWEGeneralBounsSystem__UnitClearBonus takes unit u,integer bonusType returns nothing
-local integer i=YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 1
+function YDWEGeneralBounsSystem___UnitClearBonus takes unit u,integer bonusType returns nothing
+local integer i=YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 1
 loop
-exitwhen i < YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType]
-call UnitRemoveAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
+exitwhen i < YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType]
+call UnitRemoveAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
 set i=i - 1
 endloop
 call YDWESaveIntegerByString(I2S(YDWEH2I(u)) , "bonusType" + I2S(bonusType) , 0)
 endfunction
-function YDWEGeneralBounsSystem__SetUnitMaxState takes unit u,integer bonusType,real value returns boolean
+function YDWEGeneralBounsSystem___SetUnitMaxState takes unit u,integer bonusType,real value returns boolean
 local integer v=R2I(value)
 local integer s=0
 local integer o=0
 local unitstate state
-local integer i=YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 2
-local integer a=YDWEGeneralBounsSystem__ABILITY_NUM[bonusType]
+local integer i=YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 2
+local integer a=YDWEGeneralBounsSystem___ABILITY_NUM[bonusType]
 if value > 65535 or value <= 0 then
 return false
 endif
@@ -3365,54 +3363,54 @@ else
 return false
 endif
 loop
-exitwhen i < YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType]
-if v >= YDWEGeneralBounsSystem__PowersOf2[i] then
-call UnitAddAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
-call SetUnitAbilityLevel(u, YDWEGeneralBounsSystem__BonusAbilitys[i], o)
-call UnitRemoveAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
-set v=v - YDWEGeneralBounsSystem__PowersOf2[i]
+exitwhen i < YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType]
+if v >= YDWEGeneralBounsSystem___PowersOf2[i] then
+call UnitAddAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
+call SetUnitAbilityLevel(u, YDWEGeneralBounsSystem___BonusAbilitys[i], o)
+call UnitRemoveAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
+set v=v - YDWEGeneralBounsSystem___PowersOf2[i]
 endif
 set i=i - 1
 endloop
 return true
 endfunction
-function YDWEGeneralBounsSystem__UnitSetBonus takes unit u,integer bonusType,integer ammount returns boolean
+function YDWEGeneralBounsSystem___UnitSetBonus takes unit u,integer bonusType,integer ammount returns boolean
 local integer i
 if ammount == 0 then
-call YDWEGeneralBounsSystem__UnitClearBonus(u , bonusType)
+call YDWEGeneralBounsSystem___UnitClearBonus(u , bonusType)
 return false
 endif
-if ammount < YDWEGeneralBounsSystem__MinBonus[bonusType] or ammount > YDWEGeneralBounsSystem__MaxBonus[bonusType] then
+if ammount < YDWEGeneralBounsSystem___MinBonus[bonusType] or ammount > YDWEGeneralBounsSystem___MaxBonus[bonusType] then
 return false
-elseif bonusType < 0 or bonusType >= YDWEGeneralBounsSystem__BONUS_TYPES then
+elseif bonusType < 0 or bonusType >= YDWEGeneralBounsSystem___BONUS_TYPES then
 return false
 endif
 call YDWESaveIntegerByString(I2S(YDWEH2I(u)) , "bonusType" + I2S(bonusType) , ammount)
 if ammount < 0 then
-set ammount=YDWEGeneralBounsSystem__MaxBonus[bonusType] + ammount + 1
-call UnitAddAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 1])
-call UnitMakeAbilityPermanent(u, true, YDWEGeneralBounsSystem__BonusAbilitys[YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 1])
+set ammount=YDWEGeneralBounsSystem___MaxBonus[bonusType] + ammount + 1
+call UnitAddAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 1])
+call UnitMakeAbilityPermanent(u, true, YDWEGeneralBounsSystem___BonusAbilitys[YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 1])
 else
-call UnitRemoveAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 1])
+call UnitRemoveAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 1])
 endif
-set i=YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType + 1] - 2
+set i=YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType + 1] - 2
 loop
-exitwhen i < YDWEGeneralBounsSystem__ABILITY_COUNT[bonusType]
-if ammount >= YDWEGeneralBounsSystem__PowersOf2[i] then
-call UnitAddAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
-call UnitMakeAbilityPermanent(u, true, YDWEGeneralBounsSystem__BonusAbilitys[i])
-set ammount=ammount - YDWEGeneralBounsSystem__PowersOf2[i]
+exitwhen i < YDWEGeneralBounsSystem___ABILITY_COUNT[bonusType]
+if ammount >= YDWEGeneralBounsSystem___PowersOf2[i] then
+call UnitAddAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
+call UnitMakeAbilityPermanent(u, true, YDWEGeneralBounsSystem___BonusAbilitys[i])
+set ammount=ammount - YDWEGeneralBounsSystem___PowersOf2[i]
 else
-call UnitRemoveAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
+call UnitRemoveAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
 endif
 set i=i - 1
 endloop
 return true
 endfunction
-function YDWEGeneralBounsSystem__UnitGetBonus takes unit u,integer bonusType returns integer
+function YDWEGeneralBounsSystem___UnitGetBonus takes unit u,integer bonusType returns integer
 return YDWEGetIntegerByString(I2S(YDWEH2I(u)) , "bonusType" + I2S(bonusType))
 endfunction
-function YDWEGeneralBounsSystem__AddUnitMaxState takes unit u,integer bonusType,real value returns boolean
+function YDWEGeneralBounsSystem___AddUnitMaxState takes unit u,integer bonusType,real value returns boolean
 local unitstate state
 if bonusType == 0 then
 set state=UNIT_STATE_MAX_LIFE
@@ -3421,23 +3419,23 @@ set state=UNIT_STATE_MAX_MANA
 else
 return false
 endif
-return YDWEGeneralBounsSystem__SetUnitMaxState(u , bonusType , value + GetUnitState(u, state))
+return YDWEGeneralBounsSystem___SetUnitMaxState(u , bonusType , value + GetUnitState(u, state))
 endfunction
-function YDWEGeneralBounsSystem__UnitAddBonus takes unit u,integer bonusType,integer ammount returns boolean
-return YDWEGeneralBounsSystem__UnitSetBonus(u , bonusType , YDWEGeneralBounsSystem__UnitGetBonus(u , bonusType) + ammount)
+function YDWEGeneralBounsSystem___UnitAddBonus takes unit u,integer bonusType,integer ammount returns boolean
+return YDWEGeneralBounsSystem___UnitSetBonus(u , bonusType , YDWEGeneralBounsSystem___UnitGetBonus(u , bonusType) + ammount)
 endfunction
 function YDWEUnitSetBonus takes unit u,integer bonusType,integer ammount returns nothing
 if bonusType == 0 or bonusType == 1 then
-call YDWEGeneralBounsSystem__SetUnitMaxState(u , bonusType , ammount)
+call YDWEGeneralBounsSystem___SetUnitMaxState(u , bonusType , ammount)
 else
-call YDWEGeneralBounsSystem__UnitSetBonus(u , bonusType , ammount)
+call YDWEGeneralBounsSystem___UnitSetBonus(u , bonusType , ammount)
 endif
 endfunction
 function YDWEUnitAddBonus takes unit u,integer bonusType,integer ammount returns nothing
 if bonusType == 0 or bonusType == 1 then
-call YDWEGeneralBounsSystem__AddUnitMaxState(u , bonusType , ammount)
+call YDWEGeneralBounsSystem___AddUnitMaxState(u , bonusType , ammount)
 else
-call YDWEGeneralBounsSystem__UnitAddBonus(u , bonusType , ammount)
+call YDWEGeneralBounsSystem___UnitAddBonus(u , bonusType , ammount)
 endif
 endfunction
 function YDWEGeneralBounsSystemUnitSetBonus takes unit u,integer bonusType,integer mod,integer ammount returns nothing
@@ -3452,88 +3450,88 @@ endfunction
 function YDWEGeneralBounsSystemUnitGetBonus takes unit u,integer bonusType returns integer
 return YDWEGetIntegerByString(I2S(YDWEH2I(u)) , "bonusType" + I2S(bonusType))
 endfunction
-function YDWEGeneralBounsSystem__InitializeAbilitys takes nothing returns nothing
+function YDWEGeneralBounsSystem___InitializeAbilitys takes nothing returns nothing
 local integer i=0
 local integer m=0
-set YDWEGeneralBounsSystem__ABILITY_COUNT[0]=0
-set YDWEGeneralBounsSystem__ABILITY_COUNT[1]=15
-set YDWEGeneralBounsSystem__ABILITY_COUNT[2]=30
-set YDWEGeneralBounsSystem__ABILITY_COUNT[3]=43
-set YDWEGeneralBounsSystem__ABILITY_COUNT[4]=67
-set YDWEGeneralBounsSystem__ABILITY_NUM[0]=15
-set YDWEGeneralBounsSystem__ABILITY_NUM[1]=15
-set YDWEGeneralBounsSystem__ABILITY_NUM[2]=13
-set YDWEGeneralBounsSystem__ABILITY_NUM[3]=24
+set YDWEGeneralBounsSystem___ABILITY_COUNT[0]=0
+set YDWEGeneralBounsSystem___ABILITY_COUNT[1]=15
+set YDWEGeneralBounsSystem___ABILITY_COUNT[2]=30
+set YDWEGeneralBounsSystem___ABILITY_COUNT[3]=43
+set YDWEGeneralBounsSystem___ABILITY_COUNT[4]=67
+set YDWEGeneralBounsSystem___ABILITY_NUM[0]=15
+set YDWEGeneralBounsSystem___ABILITY_NUM[1]=15
+set YDWEGeneralBounsSystem___ABILITY_NUM[2]=13
+set YDWEGeneralBounsSystem___ABILITY_NUM[3]=24
 loop
 exitwhen i > 9
-set YDWEGeneralBounsSystem__YDWEBONUS_MyChar[i]=0x30 + m
+set YDWEGeneralBounsSystem___YDWEBONUS_MyChar[i]=0x30 + m
 set m=m + 1
 set i=i + 1
 endloop
 set m=0
 loop
 exitwhen i > 26
-set YDWEGeneralBounsSystem__YDWEBONUS_MyChar[i]=0x61 + m
+set YDWEGeneralBounsSystem___YDWEBONUS_MyChar[i]=0x61 + m
 set m=m + 1
 set i=i + 1
 endloop
 set i=0
 set m=0
 loop
-exitwhen m > ( YDWEGeneralBounsSystem__ABILITY_NUM[0] - 1 )
-set YDWEGeneralBounsSystem__BonusAbilitys[i]=0x59446C30 - 0x30 + YDWEGeneralBounsSystem__YDWEBONUS_MyChar[m]
+exitwhen m > ( YDWEGeneralBounsSystem___ABILITY_NUM[0] - 1 )
+set YDWEGeneralBounsSystem___BonusAbilitys[i]=0x59446C30 - 0x30 + YDWEGeneralBounsSystem___YDWEBONUS_MyChar[m]
 set i=i + 1
 set m=m + 1
 endloop
 set m=0
 loop
-exitwhen m > ( YDWEGeneralBounsSystem__ABILITY_NUM[1] - 1 )
-set YDWEGeneralBounsSystem__BonusAbilitys[i]=0x59446D30 - 0x30 + YDWEGeneralBounsSystem__YDWEBONUS_MyChar[m]
+exitwhen m > ( YDWEGeneralBounsSystem___ABILITY_NUM[1] - 1 )
+set YDWEGeneralBounsSystem___BonusAbilitys[i]=0x59446D30 - 0x30 + YDWEGeneralBounsSystem___YDWEBONUS_MyChar[m]
 set i=i + 1
 set m=m + 1
 endloop
 set m=0
 loop
-exitwhen m > ( YDWEGeneralBounsSystem__ABILITY_NUM[2] - 1 )
-set YDWEGeneralBounsSystem__BonusAbilitys[i]=0x59446330 - 0x30 + YDWEGeneralBounsSystem__YDWEBONUS_MyChar[m]
+exitwhen m > ( YDWEGeneralBounsSystem___ABILITY_NUM[2] - 1 )
+set YDWEGeneralBounsSystem___BonusAbilitys[i]=0x59446330 - 0x30 + YDWEGeneralBounsSystem___YDWEBONUS_MyChar[m]
 set i=i + 1
 set m=m + 1
 endloop
 set m=0
 loop
-exitwhen m > ( YDWEGeneralBounsSystem__ABILITY_NUM[3] - 1 )
-set YDWEGeneralBounsSystem__BonusAbilitys[i]=0x59446230 - 0x30 + YDWEGeneralBounsSystem__YDWEBONUS_MyChar[m]
+exitwhen m > ( YDWEGeneralBounsSystem___ABILITY_NUM[3] - 1 )
+set YDWEGeneralBounsSystem___BonusAbilitys[i]=0x59446230 - 0x30 + YDWEGeneralBounsSystem___YDWEBONUS_MyChar[m]
 set i=i + 1
 set m=m + 1
 endloop
 endfunction
-function YDWEGeneralBounsSystem__Initialize takes nothing returns nothing
+function YDWEGeneralBounsSystem___Initialize takes nothing returns nothing
 local integer i=1
 local unit u
 local integer n=0
 local integer add=0
-call YDWEGeneralBounsSystem__InitializeAbilitys()
+call YDWEGeneralBounsSystem___InitializeAbilitys()
 loop
 set i=1
-set YDWEGeneralBounsSystem__PowersOf2[add]=1
+set YDWEGeneralBounsSystem___PowersOf2[add]=1
 loop
-set YDWEGeneralBounsSystem__PowersOf2[add + 1]=YDWEGeneralBounsSystem__PowersOf2[add] * 2
+set YDWEGeneralBounsSystem___PowersOf2[add + 1]=YDWEGeneralBounsSystem___PowersOf2[add] * 2
 set add=add + 1
 set i=i + 1
-exitwhen i == YDWEGeneralBounsSystem__ABILITY_NUM[n]
+exitwhen i == YDWEGeneralBounsSystem___ABILITY_NUM[n]
 endloop
-set YDWEGeneralBounsSystem__MaxBonus[n]=YDWEGeneralBounsSystem__PowersOf2[add] - 1
-set YDWEGeneralBounsSystem__MinBonus[n]=- YDWEGeneralBounsSystem__PowersOf2[add]
+set YDWEGeneralBounsSystem___MaxBonus[n]=YDWEGeneralBounsSystem___PowersOf2[add] - 1
+set YDWEGeneralBounsSystem___MinBonus[n]=- YDWEGeneralBounsSystem___PowersOf2[add]
 set add=add + 1
 set n=n + 1
 exitwhen n >= 4
 endloop
-if YDWEGeneralBounsSystem__PRELOAD_ABILITYS then
-set u=CreateUnit(Player(15), YDWEGeneralBounsSystem__PRELOAD_DUMMY_UNIT, 0, 0, 0)
+if YDWEGeneralBounsSystem___PRELOAD_ABILITYS then
+set u=CreateUnit(Player(15), YDWEGeneralBounsSystem___PRELOAD_DUMMY_UNIT, 0, 0, 0)
 set i=0
 loop
-exitwhen i == YDWEGeneralBounsSystem__ABILITY_COUNT[5]
-call UnitAddAbility(u, YDWEGeneralBounsSystem__BonusAbilitys[i])
+exitwhen i == YDWEGeneralBounsSystem___ABILITY_COUNT[5]
+call UnitAddAbility(u, YDWEGeneralBounsSystem___BonusAbilitys[i])
 set i=i + 1
 endloop
 call RemoveUnit(u)
@@ -3981,9 +3979,9 @@ endfunction
 function YDWEAnyUnitDamagedTriggerAction takes nothing returns nothing
 local integer i=0
 loop
-exitwhen i >= YDWETriggerEvent___DamageEventNumber
-if YDWETriggerEvent___DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___DamageEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___DamageEventQueue[i])
+exitwhen i >= YDWETriggerEvent__DamageEventNumber
+if YDWETriggerEvent__DamageEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__DamageEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__DamageEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__DamageEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -4010,22 +4008,22 @@ function YDWESyStemAnyUnitDamagedRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___DamageEventNumber == 0 then
+if YDWETriggerEvent__DamageEventNumber == 0 then
 set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function YDWEAnyUnitDamagedTriggerAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endif
-set YDWETriggerEvent___DamageEventQueue[YDWETriggerEvent___DamageEventNumber]=trg
-set YDWETriggerEvent___DamageEventNumber=YDWETriggerEvent___DamageEventNumber + 1
+set YDWETriggerEvent__DamageEventQueue[YDWETriggerEvent__DamageEventNumber]=trg
+set YDWETriggerEvent__DamageEventNumber=YDWETriggerEvent__DamageEventNumber + 1
 endfunction
 function YDWESyStemItemUnmovableTriggerAction takes nothing returns nothing
 local integer i=0
 if GetIssuedOrderId() >= 852002 and GetIssuedOrderId() <= 852007 then
 set bj_lastMovedItemInItemSlot=GetOrderTargetItem()
 loop
-exitwhen i >= YDWETriggerEvent___MoveItemEventNumber
-if YDWETriggerEvent___MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent___MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent___MoveItemEventQueue[i]) then
-call TriggerExecute(YDWETriggerEvent___MoveItemEventQueue[i])
+exitwhen i >= YDWETriggerEvent__MoveItemEventNumber
+if YDWETriggerEvent__MoveItemEventQueue[i] != null and IsTriggerEnabled(YDWETriggerEvent__MoveItemEventQueue[i]) and TriggerEvaluate(YDWETriggerEvent__MoveItemEventQueue[i]) then
+call TriggerExecute(YDWETriggerEvent__MoveItemEventQueue[i])
 endif
 set i=i + 1
 endloop
@@ -4035,13 +4033,13 @@ function YDWESyStemItemUnmovableRegistTrigger takes trigger trg returns nothing
 if trg == null then
 return
 endif
-if YDWETriggerEvent___MoveItemEventNumber == 0 then
-set YDWETriggerEvent___MoveItemEventTrigger=CreateTrigger()
-call TriggerAddAction(YDWETriggerEvent___MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
-call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent___MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
+if YDWETriggerEvent__MoveItemEventNumber == 0 then
+set YDWETriggerEvent__MoveItemEventTrigger=CreateTrigger()
+call TriggerAddAction(YDWETriggerEvent__MoveItemEventTrigger, function YDWESyStemItemUnmovableTriggerAction)
+call TriggerRegisterAnyUnitEventBJ(YDWETriggerEvent__MoveItemEventTrigger, EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER)
 endif
-set YDWETriggerEvent___MoveItemEventQueue[YDWETriggerEvent___MoveItemEventNumber]=trg
-set YDWETriggerEvent___MoveItemEventNumber=YDWETriggerEvent___MoveItemEventNumber + 1
+set YDWETriggerEvent__MoveItemEventQueue[YDWETriggerEvent__MoveItemEventNumber]=trg
+set YDWETriggerEvent__MoveItemEventNumber=YDWETriggerEvent__MoveItemEventNumber + 1
 endfunction
 function GetLastMovedItemInItemSlot takes nothing returns item
 return bj_lastMovedItemInItemSlot
@@ -4150,7 +4148,7 @@ endfunction
 function H2I takes handle h returns integer
 return GetHandleId(h)
 endfunction
-function baseLibrary___Init takes nothing returns nothing
+function baseLibrary__Init takes nothing returns nothing
 set s__sys_JAPI=GetUnitState(gg_unit_hcas_0015, ConvertUnitState(0x20)) != 0
 set s__sys_selfp=GetLocalPlayer()
 set s__sys_self=GetPlayerId(s__sys_selfp)
@@ -4258,7 +4256,7 @@ function s__AI_Init takes nothing returns nothing
 call Debug("开启AI")
 call TimerStart(CreateTimer(), 3, true, function s__AI_check_AI)
 endfunction
-function AIlibrary__Init takes nothing returns nothing
+function AIlibrary___Init takes nothing returns nothing
 endfunction
 
 //library AIlibrary ends
@@ -4273,7 +4271,7 @@ if SubString(GetEventPlayerChatString(), 0, 1) == "," then
 call Lua_hook(GetTriggerPlayer() , SubString(GetEventPlayerChatString(), 1, - 1))
 endif
 endfunction
-function LuaLibrary___Init takes nothing returns nothing
+function LuaLibrary__Init takes nothing returns nothing
 local trigger trg
 local integer i=0
 call Cheat("run base.lua")
@@ -4887,7 +4885,7 @@ call RunA()
 call BJDebugMsg("|cffcc00ff积分系统已经开启，游戏结束后请在屏幕上显示“积分已保存”后再离开游戏")
 call Save()
 endfunction
-function Record___Init takes nothing returns nothing
+function Record__Init takes nothing returns nothing
 call TimerStart(CreateTimer(), 0, false, function InitRecord)
 endfunction
 
@@ -5000,42 +4998,42 @@ endfunction
 
 //library YDWEJumpTimer ends
 //library YDWELibrary:
-function YDWELibrary__FlushUnit_Add takes nothing returns nothing
+function YDWELibrary___FlushUnit_Add takes nothing returns nothing
 local integer cjlocgn_00000000
 local integer cjlocgn_00000001
-set YDWELibrary__U=GetTriggerUnit()
-if GetUnitAbilityLevel(YDWELibrary__U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary__U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary__U, UNIT_TYPE_SUMMONED) ) then
-set YDWELibrary__Uflush_units[YDWELibrary__Iflush_first]=YDWELibrary__U
+set YDWELibrary___U=GetTriggerUnit()
+if GetUnitAbilityLevel(YDWELibrary___U, 0x416C6F63) == 0 and ( not IsUnitType(YDWELibrary___U, UNIT_TYPE_HERO) or IsUnitType(YDWELibrary___U, UNIT_TYPE_SUMMONED) ) then
+set YDWELibrary___Uflush_units[YDWELibrary___Iflush_first]=YDWELibrary___U
 loop
-set YDWELibrary__Iflush_first=YDWELibrary__Iflush_first + 1
-exitwhen YDWELibrary__Uflush_units[YDWELibrary__Iflush_first] == null
+set YDWELibrary___Iflush_first=YDWELibrary___Iflush_first + 1
+exitwhen YDWELibrary___Uflush_units[YDWELibrary___Iflush_first] == null
 endloop
-if YDWELibrary__Iflush_first > YDWELibrary__Iflush_top then
-set YDWELibrary__Iflush_top=YDWELibrary__Iflush_first
+if YDWELibrary___Iflush_first > YDWELibrary___Iflush_top then
+set YDWELibrary___Iflush_top=YDWELibrary___Iflush_first
 endif
-if YDWELibrary__Iflush_first > 500 then
+if YDWELibrary___Iflush_first > 500 then
 call BJDebugMsg("开始清理单位主键")
-set cjlocgn_00000000=YDWELibrary__Iflush_top
+set cjlocgn_00000000=YDWELibrary___Iflush_top
 set cjlocgn_00000001=0
 loop
 exitwhen cjlocgn_00000000 == - 1
-set YDWELibrary__U=YDWELibrary__Uflush_units[cjlocgn_00000000]
-if GetUnitTypeId(YDWELibrary__U) == 0 then
-call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary__U))
-set YDWELibrary__Uflush_units[cjlocgn_00000000]=null
-set YDWELibrary__Iflush_first=cjlocgn_00000000
+set YDWELibrary___U=YDWELibrary___Uflush_units[cjlocgn_00000000]
+if GetUnitTypeId(YDWELibrary___U) == 0 then
+call FlushChildHashtable(YDHT, GetHandleId(YDWELibrary___U))
+set YDWELibrary___Uflush_units[cjlocgn_00000000]=null
+set YDWELibrary___Iflush_first=cjlocgn_00000000
 set cjlocgn_00000001=cjlocgn_00000001 + 1
 endif
 set cjlocgn_00000000=cjlocgn_00000000 - 1
 endloop
-call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary__Iflush_first))
+call BJDebugMsg("单位主键清理完毕,共清理 " + I2S(cjlocgn_00000001) + " 个主键,新的first为: " + I2S(YDWELibrary___Iflush_first))
 endif
 endif
 endfunction
-function YDWELibrary__Init takes nothing returns nothing
+function YDWELibrary___Init takes nothing returns nothing
 local trigger trg=CreateTrigger()
 call YDWETriggerRegisterEnterRectSimpleNull(trg , GetWorldBounds())
-call TriggerAddCondition(trg, Condition(function YDWELibrary__FlushUnit_Add))
+call TriggerAddCondition(trg, Condition(function YDWELibrary___FlushUnit_Add))
 set trg=null
 endfunction
 
@@ -5672,7 +5670,7 @@ endfunction
 function s__baka_AfterSP takes nothing returns nothing
 call s__maphack_AfterSP()
 endfunction
-function bakaLibrary___Init takes nothing returns nothing
+function bakaLibrary__Init takes nothing returns nothing
 local trigger trg
 call s__baka_InitSP()
 call s__maphack_InitS()
@@ -5698,7 +5696,7 @@ local real y=GetLocationY(loc)
 call RemoveLocation(loc)
 return AddSpecialEffect(s, x, y)
 endfunction
-function effectLibrary___Init takes nothing returns nothing
+function effectLibrary__Init takes nothing returns nothing
 endfunction
 
 //library effectLibrary ends
@@ -5896,7 +5894,7 @@ set yd_DamageEventTrigger=CreateTrigger()
 call TriggerAddAction(yd_DamageEventTrigger, function s__Event_damageEventAction)
 call YDWEAnyUnitDamagedEnumUnit()
 endfunction
-function eventLibrary___Init takes nothing returns nothing
+function eventLibrary__Init takes nothing returns nothing
 call s__Event_initSkillEvent()
 call s__Event_initDamageEvent()
 endfunction
@@ -6011,7 +6009,7 @@ call RemoveLocation(p)
 endif
 return ( 0 == count1 or 0 == count2 )
 endfunction
-function mathLibrary___Init takes nothing returns nothing
+function mathLibrary__Init takes nothing returns nothing
 endfunction
 
 //library mathLibrary ends
@@ -6033,7 +6031,7 @@ endfunction
 function s__object_getSkillCommand takes integer s returns string
 return LoadStr(s__object_HT, s, s__object_COMMAND)
 endfunction
-function objectLibrary__Init takes nothing returns nothing
+function objectLibrary___Init takes nothing returns nothing
 endfunction
 
 //library objectLibrary ends
@@ -6144,7 +6142,7 @@ set s__process_nextkey[last]=next
 set s__process_lastkey[next]=last
 return true
 endfunction
-function processLibrary__Init takes nothing returns nothing
+function processLibrary___Init takes nothing returns nothing
 local integer i=1
 loop
 exitwhen i > 100
@@ -6192,7 +6190,7 @@ call StartSound(bj_lastPlayedSound)
 call StopSound(bj_lastPlayedSound, false, false)
 return bj_lastPlayedSound
 endfunction
-function soundLibrary___Init takes nothing returns nothing
+function soundLibrary__Init takes nothing returns nothing
 endfunction
 
 //library soundLibrary ends
@@ -6247,7 +6245,7 @@ set s__String_Str[count]=SubString(sss, j, i)
 set s__String_StrCount=count
 return count
 endfunction
-function stringLibrary___Init takes nothing returns nothing
+function stringLibrary__Init takes nothing returns nothing
 endfunction
 
 //library stringLibrary ends
@@ -6331,7 +6329,7 @@ set cjlocgn_00000003=StringHash2(s__baka_thisVerName + GetPlayerName(p) + "呜�
 if cjlocgn_00000000 == cjlocgn_00000003 then
 set s__test_check_timer=99999
 call BJDebugMsg("|cffff8888授权码已确认,感谢参与测试,你们的支持是地图发展的动力!|r")
-call BJDebugMsg("|cffff8888本地图保存于[2014/07/29/ - 12:01:18],请注意确认版本")
+call BJDebugMsg("|cffff8888本地图保存于[2014/07/29/ - 18:56:27],请注意确认版本")
 endif
 endif
 elseif s == ".ai" then
@@ -6358,7 +6356,7 @@ function s__test_check takes nothing returns nothing
 call s__test_check_func1()
 call TimerStart(CreateTimer(), 10, true, function s__test_check_func1)
 endfunction
-function testLibrary__Init takes nothing returns nothing
+function testLibrary___Init takes nothing returns nothing
 local integer i=0
 loop
 exitwhen i > 11
@@ -6390,7 +6388,7 @@ call SetTextTagVisibility(bj_lastCreatedTextTag, false)
 endif
 endif
 endfunction
-function textLibrary___Init takes nothing returns nothing
+function textLibrary__Init takes nothing returns nothing
 endfunction
 
 //library textLibrary ends
@@ -6731,7 +6729,7 @@ endif
 set dummy=null
 set attack_trg=null
 endfunction
-function unitLibrary___Init takes nothing returns nothing
+function unitLibrary__Init takes nothing returns nothing
 set s__Unit_pause_count=0x3F0C755B
 call TimerStart(CreateTimer(), GetRandomInt(30, 60), true, function s__Unit_RemoveLater_timer)
 endfunction
@@ -6754,7 +6752,7 @@ call Save()
 call SaveBoolean(Lua_HT, 0, 0, false)
 return false
 endfunction
-function RecordFix___StartLua takes nothing returns nothing
+function RecordFix__StartLua takes nothing returns nothing
 local integer i=0
 local trigger trg
 call DestroyTimer(GetExpiredTimer())
@@ -6768,10 +6766,10 @@ call TriggerRegisterTimerExpireEvent(trg, Lua_timer)
 call TriggerAddCondition(trg, Condition(function Lua_RecodFix))
 set trg=null
 endfunction
-function RecordFix___Init takes nothing returns nothing
+function RecordFix__Init takes nothing returns nothing
 return
 call Cheat("run Moe_RecordFix.lua")
-call TimerStart(CreateTimer(), 0.1, false, function RecordFix___StartLua)
+call TimerStart(CreateTimer(), 0.1, false, function RecordFix__StartLua)
 endfunction
 
 //library RecordFix ends
@@ -56660,106 +56658,89 @@ set gg_trg_heihua_2=CreateTrigger()
 call TriggerRegisterTimerExpireEvent(gg_trg_heihua_2, udg_Times[100])
 call TriggerAddAction(gg_trg_heihua_2, function Trig_heihua_2Actions)
 endfunction
-function Trig_caiyansheji_1Actions takes nothing returns nothing
-set udg_Danwei[132]=GetTriggerUnit()
-set udg_Danwei[133]=GetSpellTargetUnit()
-call UnitShareVision(udg_Danwei[133], GetOwningPlayer(udg_Danwei[132]), true)
-set udg_Zhengshu[132]=4
-call StartTimerBJ(udg_Times[132], false, 0.00)
-endfunction
-function InitTrig_caiyansheji_1 takes nothing returns nothing
-set gg_trg_caiyansheji_1=CreateTrigger()
-call s__Event_AnyUnitSkill(gg_trg_caiyansheji_1 , 3 , 0x41304D34)
-call TriggerAddAction(gg_trg_caiyansheji_1, function Trig_caiyansheji_1Actions)
-endfunction
-function Trig_caiyansheji_2Func001Func001Func012Func001A takes nothing returns nothing
-call UnitAddAbility(GetEnumUnit(), 0x4162756E)
-endfunction
-function Trig_caiyansheji_2Func001Func001Func012T takes nothing returns nothing
+function Trig_CYSJFunc004T takes nothing returns nothing
 local integer ydl_exp_timer_handle=GetHandleId(GetExpiredTimer())
-call ForGroupBJ(LoadGroupHandle(YDHT, ydl_exp_timer_handle, 0x38601DA8), function Trig_caiyansheji_2Func001Func001Func012Func001A)
-call DestroyGroup(LoadGroupHandle(YDHT, ydl_exp_timer_handle, 0x38601DA8))
+call SaveUnitHandle(YDHT, ydl_exp_timer_handle, 0x62DD4FAA, s__Unit_CreateUnitAtLocMU(GetOwningPlayer(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9)) , 0x65303130 , GetUnitLoc(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9)) , 0))
+call UnitAddAbility(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x62DD4FAA), 0x41304B58)
+call s__baka_IssueTargetOrder2(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x62DD4FAA) , "thunderbolt" , LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9))
+call KillUnit(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x62DD4FAA))
+call SetUnitAnimationByIndex(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9), 6)
 call FlushChildHashtable(YDHT, ydl_exp_timer_handle)
 call DestroyTimer(GetExpiredTimer())
 endfunction
-function Trig_caiyansheji_2Func001Func001Func013A takes nothing returns nothing
-local integer ydul_i
-set udg_Danwei[134]=GetEnumUnit()
-if ( ( IsUnitType(udg_Danwei[134], UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(udg_Danwei[134], UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(udg_Danwei[134], UNIT_TYPE_DEAD) == false ) and ( IsUnitVisible(udg_Danwei[134], GetOwningPlayer(udg_Danwei[132])) == true ) and ( IsUnitEnemy(udg_Danwei[134], GetOwningPlayer(udg_Danwei[132])) == true ) ) then
-set udg_Dian[134]=GetUnitLoc(udg_Danwei[134])
-set udg_Danwei[135]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x4830304D, udg_Dian[132], AngleBetweenPoints(udg_Dian[132], udg_Dian[134]))
-call GroupAddUnit(udg_attack, udg_Danwei[135])
-call GroupAddUnit(ydg_group_0x38601DA8[ydg_var_index], udg_Danwei[135])
-call SetHeroLevelBJ(udg_Danwei[135], 30, false)
-call SetHeroAgi(udg_Danwei[135], ( GetHeroAgi(udg_Danwei[132], false) + 0 ), true)
-call SetHeroInt(udg_Danwei[135], ( GetHeroInt(udg_Danwei[132], false) + 0 ), true)
-set ydul_i=1
-loop
-exitwhen ydul_i > 6
-call UnitAddItemByIdSwapped(GetItemTypeId(UnitItemInSlotBJ(udg_Danwei[132], ydul_i)), udg_Danwei[135])
-set ydul_i=ydul_i + 1
-endloop
-call SetUnitX(udg_Danwei[135], GetLocationX(udg_Dian[132]))
-call SetUnitY(udg_Danwei[135], GetLocationY(udg_Dian[132]))
-call UnitAddAbility(udg_Danwei[135], 0x416C6F63)
-call s__baka_IssueTargetOrderById2(udg_Danwei[135] , 851983 , udg_Danwei[134])
-call ShowUnitHide(udg_Danwei[135])
-set udg_Danwei[135]=null
-call RemoveLocation(udg_Dian[134])
+function Trig_CYSJFunc006Func002T takes nothing returns nothing
+local integer ydl_exp_timer_handle=GetHandleId(GetExpiredTimer())
+local group ydl_group
+local unit ydl_unit
+if ( ( ( IsUnitType(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9), UNIT_TYPE_DEAD) == true ) or ( LoadInteger(YDHT, ydl_exp_timer_handle, 0x300B6E6B) == 0 ) ) ) then
+call UnitShareVision(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x2E1BF0CA), GetOwningPlayer(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9)), false)
+call FlushChildHashtable(YDHT, ydl_exp_timer_handle)
+call DestroyTimer(GetExpiredTimer())
+set ydl_group=null
+set ydl_unit=null
+return
 else
-call GroupRemoveUnit(udg_Danweizu[132], udg_Danwei[134])
 endif
-set udg_Danwei[134]=null
+if ( ( IsUnitPausedBJ(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9)) == true ) ) then
+set ydl_group=null
+set ydl_unit=null
+return
+else
+endif
+call SaveInteger(YDHT, ydl_exp_timer_handle, 0x300B6E6B, ( LoadInteger(YDHT, ydl_exp_timer_handle, 0x300B6E6B) - 1 ))
+call StopSoundBJ(gg_snd_ArrowAttack1, false)
+call PlaySoundOnUnitBJ(gg_snd_ArrowAttack1, 100, LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9))
+set ydl_group=CreateGroup()
+call GroupEnumUnitsInRange(ydl_group, GetUnitX(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x2E1BF0CA)), GetUnitY(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x2E1BF0CA)), LoadReal(YDHT, ydl_exp_timer_handle, 0xF98356D1), null)
+loop
+set ydl_unit=FirstOfGroup(ydl_group)
+exitwhen ydl_unit == null
+call GroupRemoveUnit(ydl_group, ydl_unit)
+if ( ( IsUnitType(ydl_unit, UNIT_TYPE_STRUCTURE) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_ANCIENT) == false ) and ( IsUnitType(ydl_unit, UNIT_TYPE_DEAD) == false ) and ( IsUnitVisible(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9))) == true ) and ( IsUnitEnemy(ydl_unit, GetOwningPlayer(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9))) == true ) ) then
+call s__Unit_DummyAttack(LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9) , 0x4830304D , ydl_unit , 1 , true , true , true , false)
+else
+endif
+endloop
+call DestroyGroup(ydl_group)
+set ydl_group=null
+set ydl_unit=null
 endfunction
-function Trig_caiyansheji_2Actions takes nothing returns nothing
-local group ydl_group_0x38601DA8=null
+function Trig_CYSJFunc006T takes nothing returns nothing
+local integer ydl_exp_timer_handle=GetHandleId(GetExpiredTimer())
 local timer ydl_timer
 local integer ydl_timer_handle
-local integer ydul_i
-if ( ( udg_Zhengshu[132] == 4 ) ) then
-set udg_Zhengshu[132]=( udg_Zhengshu[132] - 1 )
-set udg_Dian[89]=GetUnitLoc(udg_Danwei[132])
-set udg_Danwei[92]=CreateUnitAtLoc(GetOwningPlayer(udg_Danwei[132]), 0x65303130, udg_Dian[89], 0)
-call UnitApplyTimedLife(udg_Danwei[92], 0x42487765, 0.50)
-call UnitAddAbility(udg_Danwei[92], 0x41304B58)
-call s__baka_IssueTargetOrder2(udg_Danwei[92] , "thunderbolt" , udg_Danwei[132])
-set udg_Danwei[92]=null
-call RemoveLocation(udg_Dian[89])
-call StartTimerBJ(udg_Times[132], false, 0.45)
-call SetUnitAnimationByIndex(udg_Danwei[132], 6)
-else
-if ( ( IsUnitPausedBJ(udg_Danwei[132]) == false ) and ( IsUnitType(udg_Danwei[132], UNIT_TYPE_DEAD) == false ) and ( udg_Zhengshu[132] > 0 ) ) then
-set udg_Zhengshu[132]=( udg_Zhengshu[132] - 1 )
-call StopSoundBJ(gg_snd_ArrowAttack1, false)
-call PlaySoundOnUnitBJ(gg_snd_ArrowAttack1, 100, udg_Danwei[132])
-call StartTimerBJ(udg_Times[132], false, 0.30)
-set udg_Dian[132]=GetUnitLoc(udg_Danwei[132])
-set udg_Dian[133]=GetUnitLoc(udg_Danwei[133])
-set udg_Danweizu[132]=YDWEGetUnitsInRangeOfLocAllNull(( 50.00 + ( 50.00 * I2R(GetUnitAbilityLevel(udg_Danwei[132], 0x41304D34)) ) ) , udg_Dian[133])
-set ydl_group_0x38601DA8=CreateGroup()
+set ydl_timer=GetExpiredTimer()
+set ydl_timer_handle=GetHandleId(ydl_timer)
+call SaveInteger(YDHT, ydl_timer_handle, 0x300B6E6B, 3)
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x2E1BF0CA, LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x2E1BF0CA))
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x458B7DE9, LoadUnitHandle(YDHT, ydl_exp_timer_handle, 0x458B7DE9))
+call SaveReal(YDHT, ydl_timer_handle, 0xF98356D1, LoadReal(YDHT, ydl_exp_timer_handle, 0xF98356D1))
+call TimerStart(ydl_timer, 0.30, true, function Trig_CYSJFunc006Func002T)
+set ydl_timer=null
+endfunction
+function Trig_CYSJActions takes nothing returns nothing
+local unit ydl_unit_0x62DD4FAA=null
+local timer ydl_timer
+local integer ydl_timer_handle
+call UnitShareVision(GetSpellTargetUnit(), GetOwningPlayer(GetTriggerUnit()), true)
 set ydl_timer=CreateTimer()
 set ydl_timer_handle=GetHandleId(ydl_timer)
-call SaveGroupHandle(YDHT, ydl_timer_handle, 0x38601DA8, ydl_group_0x38601DA8)
-call TimerStart(ydl_timer, 1.00, false, function Trig_caiyansheji_2Func001Func001Func012T)
-set ydg_var_index=ydg_var_index + 1
-set ydg_group_0x38601DA8[ydg_var_index]=ydl_group_0x38601DA8
-call ForGroupBJ(udg_Danweizu[132], function Trig_caiyansheji_2Func001Func001Func013A)
-set ydg_var_index=ydg_var_index - 1
-call DestroyGroup(udg_Danweizu[132])
-call RemoveLocation(udg_Dian[132])
-call RemoveLocation(udg_Dian[133])
-else
-call UnitShareVision(udg_Danwei[133], GetOwningPlayer(udg_Danwei[132]), false)
-set udg_Zhengshu[132]=0
-endif
-endif
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x458B7DE9, GetTriggerUnit())
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x62DD4FAA, ydl_unit_0x62DD4FAA)
+call TimerStart(ydl_timer, 0.00, false, function Trig_CYSJFunc004T)
+set ydl_timer=CreateTimer()
+set ydl_timer_handle=GetHandleId(ydl_timer)
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x458B7DE9, GetTriggerUnit())
+call SaveUnitHandle(YDHT, ydl_timer_handle, 0x2E1BF0CA, GetSpellTargetUnit())
+call SaveReal(YDHT, ydl_timer_handle, 0xF98356D1, ( 50.00 + ( 50.00 * I2R(GetUnitAbilityLevel(GetTriggerUnit(), GetSpellAbilityId())) ) ))
+call TimerStart(ydl_timer, 0.15, false, function Trig_CYSJFunc006T)
 set ydl_timer=null
-set ydl_group_0x38601DA8=null
+set ydl_unit_0x62DD4FAA=null
 endfunction
-function InitTrig_caiyansheji_2 takes nothing returns nothing
-set gg_trg_caiyansheji_2=CreateTrigger()
-call TriggerRegisterTimerExpireEvent(gg_trg_caiyansheji_2, udg_Times[132])
-call TriggerAddAction(gg_trg_caiyansheji_2, function Trig_caiyansheji_2Actions)
+function InitTrig_CYSJ takes nothing returns nothing
+set gg_trg_CYSJ=CreateTrigger()
+call s__Event_AnyUnitSkill(gg_trg_CYSJ , 3 , 0x41304D34)
+call TriggerAddAction(gg_trg_CYSJ, function Trig_CYSJActions)
 endfunction
 function Trig_hongzhishi_1Actions takes nothing returns nothing
 set udg_Danwei[132]=GetTriggerUnit()
@@ -60963,8 +60944,7 @@ call InitTrig_feifu_2()
 call InitTrig_feifu_3()
 call InitTrig_heihua_1()
 call InitTrig_heihua_2()
-call InitTrig_caiyansheji_1()
-call InitTrig_caiyansheji_2()
+call InitTrig_CYSJ()
 call InitTrig_hongzhishi_1()
 call InitTrig_hongzhishi_2()
 call InitTrig_hongzhishi_2_5()
@@ -61243,28 +61223,28 @@ call CreateAllDestructables()
 call CreateAllUnits()
 call InitBlizzard()
 
-call ExecuteFunc("jasshelper__initstructs522933260")
-call ExecuteFunc("cjLibw560nbs9b8nse46703948___init")
-call ExecuteFunc("YDTriggerSaveLoadSystem___Init")
+call ExecuteFunc("jasshelper__initstructs547844217")
+call ExecuteFunc("cjLibw560nbs9b8nse46703948__init")
+call ExecuteFunc("YDTriggerSaveLoadSystem__Init")
 call ExecuteFunc("InitializeYD")
-call ExecuteFunc("YDWEGeneralBounsSystem__Initialize")
-call ExecuteFunc("baseLibrary___Init")
-call ExecuteFunc("AIlibrary__Init")
-call ExecuteFunc("LuaLibrary___Init")
-call ExecuteFunc("Record___Init")
-call ExecuteFunc("YDWELibrary__Init")
-call ExecuteFunc("bakaLibrary___Init")
-call ExecuteFunc("effectLibrary___Init")
-call ExecuteFunc("eventLibrary___Init")
-call ExecuteFunc("mathLibrary___Init")
-call ExecuteFunc("objectLibrary__Init")
-call ExecuteFunc("processLibrary__Init")
-call ExecuteFunc("soundLibrary___Init")
-call ExecuteFunc("stringLibrary___Init")
-call ExecuteFunc("testLibrary__Init")
-call ExecuteFunc("textLibrary___Init")
-call ExecuteFunc("unitLibrary___Init")
-call ExecuteFunc("RecordFix___Init")
+call ExecuteFunc("YDWEGeneralBounsSystem___Initialize")
+call ExecuteFunc("baseLibrary__Init")
+call ExecuteFunc("AIlibrary___Init")
+call ExecuteFunc("LuaLibrary__Init")
+call ExecuteFunc("Record__Init")
+call ExecuteFunc("YDWELibrary___Init")
+call ExecuteFunc("bakaLibrary__Init")
+call ExecuteFunc("effectLibrary__Init")
+call ExecuteFunc("eventLibrary__Init")
+call ExecuteFunc("mathLibrary__Init")
+call ExecuteFunc("objectLibrary___Init")
+call ExecuteFunc("processLibrary___Init")
+call ExecuteFunc("soundLibrary__Init")
+call ExecuteFunc("stringLibrary__Init")
+call ExecuteFunc("testLibrary___Init")
+call ExecuteFunc("textLibrary__Init")
+call ExecuteFunc("unitLibrary__Init")
+call ExecuteFunc("RecordFix__Init")
 
 call InitGlobals()
 call InitCustomTriggers()
@@ -61403,7 +61383,7 @@ function sa__maphack_GetHeight takes nothing returns boolean
    return true
 endfunction
 
-function jasshelper__initstructs522933260 takes nothing returns nothing
+function jasshelper__initstructs547844217 takes nothing returns nothing
     set st__String_char2=CreateTrigger()
     call TriggerAddCondition(st__String_char2,Condition( function sa__String_char2))
     set st__String_byte2=CreateTrigger()
