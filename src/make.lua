@@ -131,7 +131,7 @@ local function main()
 					dir_scan(full_path)
 				else
 					local name = full_path:string():sub(path_len)
-					if name:sub(1, 1) ~= '(' then
+					if name:sub(1, 1) ~= '(' and name ~= 'war3map.j' then
 						--将文件名保存在files中
 						table.insert(files, name)
 					end
@@ -141,12 +141,13 @@ local function main()
 
 		dir_scan(file_dir)
 
-		--生成新的listfile
-		fname = '(listfile)'
-		local listfile_path = test_dir / fname
-		local listfile = io.open(listfile_path:string(), 'w')
-		listfile:write(table.concat(files, '\n') .. "\n")
-		listfile:close()
+		--生成新的war3map.imp
+		fname = 'war3map.imp'
+		local file_path = test_dir / fname
+		local file = io.open(file_path:string(), 'wb')
+		local fcount = #files
+		file:write(string.char(1, 0, 0, 0, fcount % 256, math.floor(fcount / 256), 0, 0, 0) .. table.concat(files, string.char(0, 13)) .. string.char(0))
+		file:close()
 		git_fresh(fname)
 
 		local map_dir = root_dir / 'build' / 'map.w3x'
