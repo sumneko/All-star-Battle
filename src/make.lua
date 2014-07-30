@@ -1,10 +1,30 @@
 local file_dir
 local test_dir
 
+local zip_files = {
+	['war3map.j'] = true,
+	['war3map.wtg'] = true,
+	['war3map.wts'] = true,
+	['war3map.w3a'] = true,
+	['war3map.wpm'] = true,
+	['war3map.shd'] = true,
+	['war3map.w3u'] = true,
+	['war3map.doo'] = true,
+	['War3MapPreview.tga'] = true,
+	['war3map.wct'] = true,
+	['war3map.w3e'] = true
+}
+
 local function git_fresh(fname)
 	local r, w = 'rb', 'wb'
 	if fname:sub(-2) == '.j' or fname:sub(-4) == '.lua' then
 		r, w = 'r', 'w'
+	end
+	if zip_files[fname] then
+		fs.remove(file_dir / fname)
+		fs.remove(test_dir / (fname .. '.zip'))
+		os.execute(('%s\\rar a -ep %s %s'):format((root_dir / 'build'):string(), (test_dir / fname):string() .. '.zip', (test_dir / fname):string(), fname))
+		fname = fname .. '.zip'
 	end
 	local f = io.open((test_dir / fname):string(), r)
 	local test_file = f:read('*a')
@@ -32,8 +52,8 @@ local function main()
 		flag_newmap = true
 	end
 	
-	local input_map  = flag_newmap and (arg[1] .. 'build\\map.w3x') or arg[1]
-	local root_dir   = flag_newmap and arg[1] or arg[2]
+	input_map  = flag_newmap and (arg[1] .. 'build\\map.w3x') or arg[1]
+	root_dir   = flag_newmap and arg[1] or arg[2]
 	
 	--添加require搜寻路径
 	package.path = package.path .. ';' .. root_dir .. 'src\\?.lua'
@@ -44,14 +64,14 @@ local function main()
 
 	--保存路径
 	git_path = root_dir
-	local input_map    = fs.path(input_map)
-	local root_dir     = fs.path(root_dir)
+	input_map    = fs.path(input_map)
+	root_dir     = fs.path(root_dir)
 	file_dir           = root_dir / 'map'
 	
 	fs.create_directories(root_dir / 'test')
 
 	test_dir           = root_dir / 'test'
-	local output_map   = test_dir / input_map:filename():string()
+	output_map   = test_dir / input_map:filename():string()
 	
 	local fname
 
@@ -131,8 +151,11 @@ local function main()
 					dir_scan(full_path)
 				else
 					local name = full_path:string():sub(path_len)
-					if name:sub(1, 1) ~= '(' and name ~= 'war3map.j' then
+					if name:sub(1, 1) ~= '(' and not zip_files[name] then
 						--将文件名保存在files中
+						if name:sub(-4, -1) == '.zip' then
+							name = name:sub(1, -5)
+						end
 						table.insert(files, name)
 					end
 				end
@@ -191,12 +214,24 @@ local function main()
 		local count = 0
 		
 		for _, name in ipairs(files) do
-			if inmap:import(name, file_dir / name) then
-				print('[成功]: 导入 ' .. name)
-				count = count + 1
+			if zip_files[name] then
+				os.execute(('%s\\unrar x -o+ %s %s %s'):format((root_dir / 'build'):string(), (file_dir / name):string() .. '.zip', name, file_dir:string()))
+				if inmap:import(name, file_dir / name) then
+					print('[成功]: 导入 ' .. name)
+					count = count + 1
+				else
+					print('[失败]: 导入 ' .. name)
+				end
+				fs.remove(file_dir / name)
 			else
-				print('[失败]: 导入 ' .. name)
+				if inmap:import(name, file_dir / name) then
+					print('[成功]: 导入 ' .. name)
+					count = count + 1
+				else
+					print('[失败]: 导入 ' .. name)
+				end
 			end
+			
 		end
 
 		inmap:close()
