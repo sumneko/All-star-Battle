@@ -74,6 +74,13 @@ local function main()
 			return
 		end
 
+		--保存地图名字
+		local map_name = output_map:filename():string()
+		local map_name_f = io.open((test_dir / '(map_name)'):string(), 'wb')
+		map_name_f:write(map_name)
+		map_name_f:close()
+		git_fresh('(map_name)')
+
 		--打开地图
 		local inmap = mpq_open(output_map)
 		if inmap then
@@ -124,7 +131,7 @@ local function main()
 					dir_scan(full_path)
 				else
 					local name = full_path:string():sub(path_len)
-					if name ~= '(map_head)' then
+					if name:sub(1, 1) ~= '(' then
 						--将文件名保存在files中
 						table.insert(files, name)
 					end
@@ -143,7 +150,16 @@ local function main()
 		git_fresh(fname)
 
 		local map_dir = root_dir / 'build' / 'map.w3x'
-		local new_dir = root_dir / 'output' / 'map.w3x'
+
+		--获取地图名字
+		local map_name_f = io.open((file_dir / '(map_name)'):string(), 'rb')
+		local map_name = map_name_f:read('*a')
+		map_name_f:close()
+
+		--清空与创建目录
+		fs.create_directories(root_dir / 'output')
+		
+		local new_dir = root_dir / 'output' / map_name
 
 		--将模板地图复制到output路径
 		pcall(fs.copy_file, map_dir, new_dir, true)
@@ -160,7 +176,7 @@ local function main()
 		local map_f = io.open(new_dir:string(), 'wb')
 		map_f:write(map_hex)
 		map_f:close()
-		
+
 		--将文件全部导入回去
 		local inmap = mpq_open(new_dir)
 
@@ -171,15 +187,20 @@ local function main()
 			return
 		end
 
+		local count = 0
+		
 		for _, name in ipairs(files) do
 			if inmap:import(name, file_dir / name) then
 				print('[成功]: 导入 ' .. name)
+				count = count + 1
 			else
 				print('[失败]: 导入 ' .. name)
 			end
 		end
 
 		inmap:close()
+
+		print('[成功]: 一共导入了 ' .. count .. ' 个文件')
 
 	end
 	
