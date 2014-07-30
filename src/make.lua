@@ -202,6 +202,52 @@ local function main()
 
 		print('[成功]: 一共导入了 ' .. count .. ' 个文件')
 
+		--读取或生成ini文件
+		local config_dir = root_dir / 'config.ini'
+		if not fs.exists(config_dir) then
+			local f = io.open(config_dir:string(), 'wb')
+			local lines = {}
+			table.insert(lines, 'ver = 1.0')
+			table.insert(lines, 'YDWE = D:\\魔兽争霸III\\YDWE1.27.5测试版(全明星)')
+			f:write(table.concat(lines, '\n'))
+			f:close()
+		end
+
+		local f = io.open(config_dir:string(), 'rb')
+		local ini = f:read('*a')
+		for name, value in ini:gmatch('(%C-) = (%C+)') do
+			if name == 'YDWE' then
+				local path_len = #(root_dir / 'YDWE'):string() + 2
+				local ydwe_dir = fs.path(value)
+				if fs.exists(ydwe_dir) then
+					local function dir_scan(dir)
+						for full_path in dir:list_directory() do
+							if fs.is_directory(full_path) then
+								-- 递归处理
+								dir_scan(full_path)
+							else
+								local path = full_path:string():sub(path_len)
+								local yd_path = ydwe_dir / path
+								local f1 = io.open(full_path:string(), 'rb')
+								local con1 = f1:read('*a')
+								local f2 = io.open(yd_path:string(), 'rb')
+								local con2 = f2:read('*a')
+								f1:close()
+								f2:close()
+								if con1 ~= con2 then
+									fs.copy_file(full_path, yd_path, true)
+									print('[更新]: ' .. yd_path:string())
+								end
+							end
+						end
+					end
+					dir_scan(root_dir / 'YDWE')
+				else
+					print('[错误]: YDWE路径不存在!请修改config.ini')
+				end
+			end
+		end
+
 	end
 	
 	print('[完毕]: 用时 ' .. os.clock() .. ' 秒') 
