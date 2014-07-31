@@ -22,9 +22,7 @@ local function git_fresh(fname)
 	end
 	if zip_files[fname] then
 		fs.remove(file_dir / fname)
-		fs.remove(test_dir / (fname .. '.zip'))
-		os.execute(('%s\\rar a -ep %s %s'):format((root_dir / 'build'):string(), (test_dir / fname):string() .. '.zip', (test_dir / fname):string(), fname))
-		fname = fname .. '.zip'
+		os.execute(('%s\\unrar x -o+ %s %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', fname, file_dir:string()))
 	end
 	local f = io.open((test_dir / fname):string(), r)
 	local test_file = f:read('*a')
@@ -39,7 +37,13 @@ local function git_fresh(fname)
 		f = io.open((file_dir / fname):string(), w)
 		f:write(test_file)
 		f:close()
+		if zip_files[fname] then
+			os.execute(('%s\\rar a -ep %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', (file_dir / fname):string(), fname))
+		end
 		print('[成功]: 更新 ' .. fname)
+	end
+	if zip_files[fname] then
+		fs.remove(file_dir / fname)
 	end
 end
 
