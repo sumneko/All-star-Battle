@@ -17,6 +17,32 @@ local zip_files = {
 
 local imp_ignore = {
 	['Tsukiko.mdx'] = true,
+	['war3map.j'] = true,
+	['war3map.doo'] = true,
+	['war3map.imp'] = true,
+	['war3map.mmp'] = true,
+	['war3map.shd'] = true,
+	['war3map.w3a'] = true,
+	['war3map.w3c'] = true,
+	['war3map.w3d'] = true,
+	['war3map.w3e'] = true,
+	['war3map.w3h'] = true,
+	['war3map.w3i'] = true,
+	['war3map.w3q'] = true,
+	['war3map.w3r'] = true,
+	['war3map.w3s'] = true,
+	['war3map.w3t'] = true,
+	['war3map.w3u'] = true,
+	['war3map.wct'] = true,
+	['war3map.wpm'] = true,
+	['war3map.wtg'] = true,
+	['war3map.wts'] = true,
+	['war3mapExtra.txt'] = true,
+	['war3mapMap.blp'] = true,
+	['war3mapMisc.txt'] = true,
+	['War3MapPreview.tga'] = true,
+	['war3mapSkin.txt'] = true,
+	['war3mapUnits.doo'] = true,
 }
 
 local function git_fresh(fname)
@@ -38,6 +64,7 @@ local function git_fresh(fname)
 		f:close()
 	end
 	if test_file ~= map_file then
+		
 		f = io.open((file_dir / fname):string(), w)
 		f:write(test_file)
 		f:close()
