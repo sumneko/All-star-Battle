@@ -7081,6 +7081,11 @@ _PlaySoundAtPointBJ_Defaults=_,100,_,0
 _PlaySoundAtPointBJ_Limits=_,_,0,100,_,_,_,_
 _PlaySoundAtPointBJ_Category=TC_SOUND
 
+Sound.PlaySoundAtPointBJ2=1,sound,real,location,real
+_Sound.PlaySoundAtPointBJ2_Defaults=_,100,_,0
+_Sound.PlaySoundAtPointBJ2_Limits=_,_,0,100,_,_,_,_
+_Sound.PlaySoundAtPointBJ2_Category=TC_SOUND
+
 PlaySoundOnUnitBJ=1,sound,real,unit
 _PlaySoundOnUnitBJ_Defaults=_,100,_
 _PlaySoundOnUnitBJ_Limits=_,_,0,100,_,_

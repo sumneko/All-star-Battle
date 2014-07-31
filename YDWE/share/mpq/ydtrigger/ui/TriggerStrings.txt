@@ -3349,6 +3349,10 @@ PlaySoundAtPointBJ="播放3D音效(指定点)"
 PlaySoundAtPointBJ="播放 ",~3D音效," ,音量: ",~Volume,"% 播放位置: ",~指定点," Z轴高度: ",~Z
 PlaySoundAtPointBJHint="音效不能在地图初始化时播放. 该动作只能用于播放3D音效."
 
+Sound.PlaySoundAtPointBJ2="播放3D音效(自动清除点) - <音效库>"
+Sound.PlaySoundAtPointBJ2="播放 ",~3D音效," ,音量: ",~Volume,"% 播放位置: ",~指定点," Z轴高度偏移: ",~Z
+Sound.PlaySoundAtPointBJ2Hint="音效不能在地图初始化时播放. 该动作只能用于播放3D音效.z轴的高度偏移将相对于点的高度."
+
 PlaySoundOnUnitBJ="播放3D音效(跟随单位)"
 PlaySoundOnUnitBJ="播放 ",~3D音效," ,音量: ",~Volume,"%, 跟随单位: ",~目标单位
 PlaySoundOnUnitBJHint="音效不能在地图初始化时播放. 该动作只能用于播放3D音效."
