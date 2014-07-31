@@ -41,7 +41,6 @@ local imp_ignore = {
 	['war3mapExtra.txt'] = true,
 	['war3mapMap.blp'] = true,
 	['war3mapMisc.txt'] = true,
-	['War3MapPreview.tga'] = true,
 	['war3mapSkin.txt'] = true,
 	['war3mapUnits.doo'] = true,
 }
