@@ -15,6 +15,10 @@ local zip_files = {
 	['war3map.w3e'] = true
 }
 
+local imp_ignore = {
+	['Tsukiko.mdx'] = true,
+}
+
 local function git_fresh(fname)
 	local r, w = 'rb', 'wb'
 	if fname:sub(-2) == '.j' or fname:sub(-4) == '.lua' then
@@ -172,8 +176,15 @@ local function main()
 		fname = 'war3map.imp'
 		local file_path = test_dir / fname
 		local file = io.open(file_path:string(), 'wb')
-		local fcount = #files
-		file:write(string.char(1, 0, 0, 0, fcount % 256, math.floor(fcount / 256), 0, 0, 0) .. table.concat(files, string.char(0, 13)) .. string.char(0))
+		local imp = {}
+		for i, v in ipairs(files) do
+			if not imp_ignore[v] then
+				table.insert(imp, v)
+			end
+		end
+		
+		local fcount = #imp
+		file:write(string.char(1, 0, 0, 0, fcount % 256, math.floor(fcount / 256), 0, 0, 0) .. table.concat(imp, string.char(0, 13)) .. string.char(0))
 		file:close()
 		git_fresh(fname)
 
