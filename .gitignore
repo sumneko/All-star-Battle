@@ -2,5 +2,6 @@
 (listfile)
 /output/
 config.ini
-war3map.j
-war3map.imp
+map/war3map.j
+map/war3map.j.zip
+map/war3map.imp
