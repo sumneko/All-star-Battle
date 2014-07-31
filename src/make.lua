@@ -23,6 +23,7 @@ local imp_ignore = {
 	['war3map.mmp'] = true,
 	['war3map.shd'] = true,
 	['war3map.w3a'] = true,
+	['war3map.w3b'] = true,
 	['war3map.w3c'] = true,
 	['war3map.w3d'] = true,
 	['war3map.w3e'] = true,
