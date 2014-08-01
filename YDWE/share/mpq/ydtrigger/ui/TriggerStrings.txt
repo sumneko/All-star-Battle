@@ -553,23 +553,6 @@ maphack.InitHero="加入反全图"
 maphack.InitHero="将 ",~单位," 加入反全图系统"
 maphack.InitHeroHint="注册英雄会自动加入"
 
-//基础库
-toDefine("循环整数A局部化")="将 循环整数A 局部化(废弃)"
-toDefine("循环整数A局部化")="将 循环整数A 局部化(废弃)"
-toDefine("循环整数A局部化")Hint="该功能在浩方上有BUG请勿使用!之后的 循环整数A 将作为一个局部变量运作,不会与其他冲突.请不要在同一个代码域中多次使用这个功能!"
-
-toDefine("循环整数B局部化")="将 循环整数B 局部化(废弃)"
-toDefine("循环整数B局部化")="将 循环整数B 局部化(废弃)"
-toDefine("循环整数B局部化")Hint="该功能在浩方上有BUG请勿使用!之后的 循环整数B 将作为一个局部变量运作,不会与其他冲突.请不要在同一个代码域中多次使用这个功能!"
-
-toDefine="将全局变量局部化(废弃)"
-toDefine="将 ",~类型," ",~变量名称," 局部化(废弃)"
-toDefineHint="该功能在浩方上有BUG请勿使用!之后的这个全局变量将作为一个局部变量运作,不会与其他冲突.在同一个代码域中每个变量只能声明一次.如果是数组的话在后面加 [] (例如:player[])"
-
-toDefine("清空局部变量")="清空局部变量(废弃)"
-toDefine("清空局部变量")="清空局部变量(废弃)"
-toDefine("清空局部变量")Hint="该功能在浩方上有BUG请勿使用!绝大部分属于(整数/实数/布尔/字符串)的局部变量在使用后要用这个清空一下.当然你也可以手动存一个null(比如 没有单位)进去来清空.不过貌似只能清空非数组的局部变量"
-
 //数学库
 math.MoveLocationAngle="移动点"
 math.MoveLocationAngle="将 ",~点," 向 ",~角度,"° 的方向移动 ",~实数," 距离 (检查地图边界 ",~真值," )"
@@ -2050,15 +2033,15 @@ SetCameraQuickPositionLocForPlayerHint="按下空格键时镜头转向的位置.
 // Visibility actions
 FogEnable="启用/禁用 战争迷雾 [R]"
 FogEnable=~启用/禁用," 战争迷雾"
-FogEnableHint=
+FogEnableHint="该功能会导致FMH系统误判,请不要使用它!"
 
 FogEnableOn="启用战争迷雾"
 FogEnableOn="启用战争迷雾"
-FogEnableOnHint=
+FogEnableOnHint="该功能会导致FMH系统误判,请不要使用它!"
 
 FogEnableOff="禁用战争迷雾"
 FogEnableOff="禁用战争迷雾"
-FogEnableOffHint=
+FogEnableOffHint="该功能会导致FMH系统误判,请不要使用它!"
 
 FogMaskEnable="启用/禁用黑色阴影 [R]"
 FogMaskEnable=~启用/禁用," 黑色阴影"
@@ -7814,11 +7797,11 @@ ConvertFogModifierHint="用于取得该整数地址所表示的可见度修正�
 
 CreateFogModifierRect="新建可见度修正器(矩形区域) [R]"
 CreateFogModifierRect="新建的 ",~玩家," 可见度修正器. 可见度: ",~FogStateVisible," 影响区域: ",~矩形区域," (对盟友 ",~共享," 视野, ",~覆盖," 单位视野)"
-CreateFogModifierRectHint="会创建可见度修正器."
+CreateFogModifierRectHint="会创建可见度修正器.注意!!!类型为可见时不能设置为覆盖单位视野!!!会导致FMH系统误判!!!"
 
 CreateFogModifierRadius="新建可见度修正器(圆范围) [R]"
 CreateFogModifierRadius="新建的 ",~玩家," 可见度修正器. 可见度: ",~FogStateVisible," 圆心坐标:(",~X,",",~Y,") 半径: ",~数值," (对盟友 ",~共享," 视野, ",~覆盖," 单位视野)"
-CreateFogModifierRadiusHint="会创建可见度修正器."
+CreateFogModifierRadiusHint="会创建可见度修正器.注意!!!类型为可见时不能设置为覆盖单位视野!!!会导致FMH系统误判!!!"
 
 GetLastCreatedFogModifier="最后创建的可见度修正器"
 GetLastCreatedFogModifier="最后创建的可见度修正器"

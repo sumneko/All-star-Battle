@@ -3912,23 +3912,6 @@ maphack.InitHero=0,unit
 _maphack.InitHero_Defaults=GetTriggerUnit
 _maphack.InitHero_Category=TC_MU_BAKA
 
-//基础库
-toDefine("循环整数A局部化")=0
-_toDefine("循环整数A局部化")_Defaults=
-_toDefine("循环整数A局部化")_Category=TC_MU_BASE
-
-toDefine("循环整数B局部化")=0
-_toDefine("循环整数B局部化")_Defaults=
-_toDefine("循环整数B局部化")_Category=TC_MU_BASE
-
-toDefine=0,typename,scriptcode
-_toDefine_Defaults=_,_
-_toDefine_Category=TC_MU_BASE
-
-toDefine("清空局部变量")=0
-_toDefine("清空局部变量")_Defaults=
-_toDefine("清空局部变量")_Category=TC_MU_BASE
-
 //数学库
 math.MoveLocationAngle=0,location,real,real,boolean
 _math.MoveLocationAngle_Defaults=_,0,100,true
@@ -6581,15 +6564,15 @@ _SetCameraQuickPositionLocForPlayer_Category=TC_CAMERA
 // Visibility actions
 FogEnable=0,enableddisabledoption
 _FogEnable_Defaults=EnabledDisabledDisabled
-_FogEnable_Category=TC_VISIBILITY
+_FogEnable_Category=TC_YDHIDE
 
 FogEnableOn=0,nothing
 _FogEnableOn_Defaults=
-_FogEnableOn_Category=TC_VISIBILITY
+_FogEnableOn_Category=TC_YDHIDE
 
 FogEnableOff=0,nothing
 _FogEnableOff_Defaults=
-_FogEnableOff_Category=TC_VISIBILITY
+_FogEnableOff_Category=TC_YDHIDE
 
 FogMaskEnable=0,enableddisabledoption
 _FogMaskEnable_Defaults=EnabledDisabledDisabled
