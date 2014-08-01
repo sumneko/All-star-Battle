@@ -7,8 +7,9 @@
     timer.loop(1,
         function()
             local hero = game.self()
+            local flag = jass.IsPlayerObserver(jass.GetLocalPlayer())
             if hero then
-                for i = 0, 99 do --0:物品栏 1:英雄 2:攻击 3:移动,因此从4开始遍历
+                for i = 0, 99 do
                     local ab = japi.EXGetUnitAbilityByIndex(hero, i)
                     if not ab then break end --如果技能不存在就结束
                     text.setAbText(ab)
@@ -16,6 +17,13 @@
             end
             for i = 1, #game.heroes do
                 local hero = game.heroes[i]
+                if flag then
+                    for i = 0, 99 do
+                        local ab = japi.EXGetUnitAbilityByIndex(hero, i)
+                        if not ab then break end --如果技能不存在就结束
+                        text.setAbText(ab)
+                    end
+                end
                 jass.UnitAddAbility(hero, |Amgl|)
                 jass.UnitRemoveAbility(hero, |Amgl|)
             end
