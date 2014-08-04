@@ -578,6 +578,10 @@ Unit.Move2Hint="如果单位移动速度为0则不做动作(否则可能出现�
 Unit.DummyAttack="马甲攻击"
 Unit.DummyAttack="创建隶属于 ",~英雄," 的攻击马甲 [",~单位类型,"] ,攻击 ",~目标单位," ",~整数," 次,立即进行攻击 ",~true," ,继承英雄属性 ",~true," ,继承物品 ",~true,", 当英雄进行其他指令时停止攻击 ",~true
 
+Unit.WantDestroyGroup="删除下一个被选取的单位组"
+Unit.WantDestroyGroup="删除下一个被选取的单位组"
+Unit.WantDestroyGroupHint="必须保证下一行是选取,以免误删单位组!"
+
 //过程库
 process.Remove="结束过程"
 process.Remove="结束过程 # ",~key," #"

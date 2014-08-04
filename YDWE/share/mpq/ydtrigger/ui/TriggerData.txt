@@ -3939,6 +3939,9 @@ Unit.DummyAttack=0,unit,unitcode,unit,integer,boolean,boolean,boolean,boolean
 _Unit.DummyAttack_Defaults=GetTriggerUnit,_,GetTriggerUnit,1,true,true,true,true
 _Unit.DummyAttack_Category=TC_MU_UNIT
 
+Unit.WantDestroyGroup=0
+_Unit.WantDestroyGroup_Category=TC_MU_UNIT
+
 
 //过程库
 process.Remove=0,integer
