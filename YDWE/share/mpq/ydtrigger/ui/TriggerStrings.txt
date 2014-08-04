@@ -583,6 +583,11 @@ Unit.WantDestroyGroup="删除下一个被选取的单位组"
 Unit.WantDestroyGroupHint="必须保证下一行是选取,以免误删单位组!"
 
 //过程库
+//最萌小汐
+process.Create2="创建过程"
+process.Create2="新建 ",~单位," 的 ",~名字," 过程, 优先级为 ",~优先级," ,剔除低优先级过程 ",~布尔
+process.Create2Hint="通过 '最后创建的过程' 来获取"
+
 process.Remove="结束过程"
 process.Remove="结束过程 # ",~key," #"
 process.RemoveHint="立刻结束并回收此过程.之后的key将不可预料,请确认不会再使用到此key"
@@ -590,6 +595,14 @@ process.RemoveHint="立刻结束并回收此过程.之后的key将不可预料,�
 process.Cover="剔除过程"
 process.Cover="剔除 ",~单位," 优先级小于等于 ",~优先级," 的 ",~过程名称," 过程"
 process.CoverHint="仅改变过程有效性,需要手动结束过程"
+
+process.SetUper="设置过程优先级"
+process.SetUper="设置过程 # ",~key," # 的优先级为 ",~优先级
+
+//事件库
+Event.ReduceDamage="减免伤害"
+Event.ReduceDamage="为 触发单位 减免 ",~实数," 点伤害"
+Event.ReduceDamageHint="只能用在专用的伤害事件中!!!"
 
 // Trigger actions
 DisableTrigger="关闭触发"

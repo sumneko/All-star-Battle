@@ -580,6 +580,7 @@ OperatorNotEqualENE=0,EqualNotEqualOperator,"!=",WESTRING_EQUALNOTEQUALOPERATOR_
 //Integer
 bj_forLoopAIndex=0,integer,bj_forLoopAIndex,循环整数A [R]
 bj_forLoopBIndex=0,integer,bj_forLoopBIndex,循环整数B [R]
+process.lastKey=0,integer,process.lastKey,最后创建的过程 <过程库>
 
 abileventA=0,abilevent,1,环绕(特效)
 abileventB=0,abilevent,2,跳跃
@@ -3944,6 +3945,10 @@ _Unit.WantDestroyGroup_Category=TC_MU_UNIT
 
 
 //过程库
+process.Create2=0,unit,string,integer,boolean
+_process.Create2_Defaults=GetTriggerUnit,"移动",100,true
+_process.Create2_Category=TC_MU_PROCESS
+
 process.Remove=0,integer
 _process.Remove_Defaults=_
 _process.Remove_Category=TC_MU_PROCESS
@@ -3951,6 +3956,15 @@ _process.Remove_Category=TC_MU_PROCESS
 process.Cover=0,unit,integer,string
 _process.Cover_Defaults=GetTriggerUnit,100,"移动"
 _process.Cover_Category=TC_MU_PROCESS
+
+process.SetUper=0,integer,integer
+_process.SetUper_Defaults=_,100
+_process.SetUper_Category=TC_MU_PROCESS
+
+//事件库
+Event.ReduceDamage=0,real
+_Event.ReduceDamage_Defaults=100
+_Event.ReduceDamage_Category=TC_MU_EVENT
 
 //YD Ability
 YDWEJumpTimer=0,unit,real,real,real,real,real
