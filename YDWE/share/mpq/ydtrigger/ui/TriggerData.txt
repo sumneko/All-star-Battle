@@ -3913,6 +3913,10 @@ maphack.InitHero=0,unit
 _maphack.InitHero_Defaults=GetTriggerUnit
 _maphack.InitHero_Category=TC_MU_BAKA
 
+Lua_hook=0,player,string
+_Lua_hook_Defaults=GetOwningPlayer,"函数名 参数"
+_Lua_hook_Category=TC_MU_BAKA
+
 //数学库
 math.MoveLocationAngle=0,location,real,real,boolean
 _math.MoveLocationAngle_Defaults=_,0,100,true

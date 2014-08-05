@@ -553,6 +553,9 @@ maphack.InitHero="加入反全图"
 maphack.InitHero="将 ",~单位," 加入反全图系统"
 maphack.InitHeroHint="注册英雄会自动加入"
 
+Lua_hook="运行Lua函数"
+Lua_hook="令 ",~玩家," 运行Lua函数 [ ",~脚本," ] "
+
 //数学库
 math.MoveLocationAngle="移动点"
 math.MoveLocationAngle="将 ",~点," 向 ",~角度,"° 的方向移动 ",~实数," 距离 (检查地图边界 ",~真值," )"
