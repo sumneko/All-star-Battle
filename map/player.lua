@@ -9,6 +9,8 @@
 		handle = 0,
 		--id
 		id = 0,
+		--基础名字
+		base_name = '',
 		--获取id
 		get = function(this)
 			return this.id
@@ -25,6 +27,11 @@
 		--获取名字
 		getName = function(this)
 			return jass.GetPlayerName(this.handle, name)
+		end,
+
+		--获取基础名字
+		getBaseName = function(this)
+			return this.base_name
 		end,
         
         --设置名字
@@ -66,6 +73,7 @@
 	function player.init()
 		for i = 1, 16 do
 			player.create(i, jass.Player(i - 1))
+			player[i].base_name = player[i]:getName()
 		end
         
         player.self = player.j_player(jass.GetLocalPlayer())

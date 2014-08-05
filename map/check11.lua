@@ -24,26 +24,7 @@
         end
     )
 
-		local suc, content = pcall(storm.load, '11record.txt')
-		if suc then
-			local names = {}
-			for name, title in content:gmatch('([%C%S]+)=([%C%S]+)') do
-				names[name] = title
-			end
+	require '11record.lua'
 
-			for i = 1, 12 do
-				names[i] = player(i):getName()
-			end
-
-			function cmd.fresh_name(p)
-				local base_name = names[p:get()]
-				if names[base_name] then
-					local name = p:getName()
-					name = names[base_name] .. name
-					p:setName(name)
-				end
-			end
-		end
-    
     pcall(require, 'MoeUshio\\All-Star-Battle\\init.lua')
     

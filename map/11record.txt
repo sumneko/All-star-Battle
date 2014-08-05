@@ -1,7 +1,31 @@
 
-	//特殊称号
+	==特殊称号==
 
-	WorldEdit=|cffffcc00[测试中的]|r
+	WorldEdit=|cffffcc00[测试中]|r
 	最萌小汐=|cffffcc00[超高校级の]|r
 	哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-	
+
+
+
+	==特殊信使==
+
+	名字=WorldEdit
+	信使=n01F
+	图标=war3mapImported\btntemp.blp
+	技能=被动
+	标题=测试辛苦了!
+	内容=无聊的时候就逗逗裂魂人玩吧~
+
+	名字=最萌小汐
+	信使=n01I
+	图标=war3mapImported\btntemp.blp
+	技能=被动
+	标题=|cffffcc00最萌小汐|r的专属信使
+	内容=筒隐月子俺嫁,萝莉后宫万岁!
+
+	名字=哇嘎嘎西奈
+	信使=n01J
+	图标=war3mapImported\btntemp.blp
+	技能=主动
+	标题=|cffffcc00幻雷|r的专属信使
+	内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。|n该战队曾在balabala和gagagaga比赛中获得|cffffdd00冠军|r，并作为卫冕冠军与2014年8月1日的荣耀之战5v5冠军参加表演赛。|n|n|cffffcc00点击翻滚~皮卡皮卡~
