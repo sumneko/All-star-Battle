@@ -45,9 +45,17 @@ local imp_ignore = {
 	['war3mapUnits.doo'] = true,
 }
 
+local ext_ignore = {
+	['11record.txt'] = true,
+}
+
 local function git_fresh(fname)
+	if ext_ignore[fname] or fname:sub(-4) == '.lua' then
+		return
+	end
+	
 	local r, w = 'rb', 'wb'
-	if fname:sub(-2) == '.j' or fname:sub(-4) == '.lua' then
+	if fname:sub(-2) == '.j' then
 		r, w = 'r', 'w'
 	end
 	if zip_files[fname] then
