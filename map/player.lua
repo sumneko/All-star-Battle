@@ -21,6 +21,11 @@
 		setColor = function(this, c)
 			jass.SetPlayerColor(this.handle, c)
 		end,
+
+		--获取名字
+		getName = function(this)
+			return jass.GetPlayerName(this.handle, name)
+		end,
         
         --设置名字
         setName = function(this, name)

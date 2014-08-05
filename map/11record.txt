@@ -1,0 +1,7 @@
+
+	//特殊称号
+
+	WorldEdit=|cffffcc00[测试中的]|r
+	最萌小汐=|cffffcc00[超高校级の]|r
+	哇嘎嘎西奈=|cffffcc00[BOOM!]|r
+	
