@@ -1,45 +1,105 @@
 
 	==特殊称号==
 
-	WorldEdit=|cffffcc00[测试中]|r
-	最萌小汐=|cffffcc00[超高校级の]|r
-	哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-	裂魂SAMA=|cffffcc00[裂裂裂裂魂!]|r
-	只傲不娇=|cffffcc00[色情男主播]|r
+		WorldEdit=|cffffcc00[测试中]|r
+		最萌小汐=|cffffcc00[超高校级の]|r
+		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
+		裂魂SAMA=|cffffcc00[裂裂裂裂魂!]|r
+		只傲不娇=|cffffcc00[色情男主播]|r
 
 	==特殊信使==
 
-	名字=WorldEdit
-	信使=n01F
-	图标=war3mapImported\btntemp.blp
-	技能=被动
-	标题=测试辛苦了!
-	内容=无聊的时候就逗逗裂魂人玩吧~
+		//皮卡丘	n01J
+		//⑨ 	n01D
+		//Saber	n01I
+		//裂魂	n01F
+		//呆唯 	n01L
+		//律队 	n01M
+		//梓喵 	n01N
 
-	名字=最萌小汐
-	信使=n01I
-	图标=war3mapImported\btntemp.blp
-	技能=被动
-	标题=|cffffcc00最萌小汐|r的专属信使
-	内容=筒隐月子俺嫁,萝莉后宫万岁!
+		//幸运	button\BTNXS_S_XY.blp
+		//YY	button\BTNXS_S_YY.blp
 
-	名字=哇嘎嘎西奈
-	信使=n01J
-	图标=war3mapImported\btntemp.blp
-	技能=主动
-	标题=|cffffcc00幻雷|r的专属信使
-	内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。|n该战队曾在balabala和gagagaga比赛中获得|cffffdd00冠军|r，并作为卫冕冠军与2014年8月1日的荣耀之战5v5冠军参加表演赛。|n|n|cffffcc00点击翻滚~皮卡皮卡~
+		//黑幕
 
-	名字=裂魂SAMA
-	信使=n01F
-	图标=war3mapImported\btntemp.blp
-	技能=被动
-	标题=|cffffcc00裂魂|r的专属信使
-	内容=专业演员
+			名字=WorldEdit
+			信使=n01F
+			图标=war3mapImported\btntemp.blp
+			技能=被动
+			标题=|cffffcc00%name%|r,测试辛苦了!
+			内容=无聊的时候就逗逗裂魂人玩吧~
 
-	名字=只傲不娇
-	信使=n01I
-	图标=war3mapImported\btntemp.blp
-	技能=被动
-	标题=|cffffcc00节操|r的专属信使
-	内容=管理YY辛苦了!要注意休息哦
+			名字=最萌小汐
+			信使=n01I
+			图标=button\BTNXS_U_saber.blp
+			技能=被动
+			标题=|cffffcc00%name%|r的专属信使
+			内容=筒隐月子俺嫁,萝莉后宫万岁!
+
+			名字=哇嘎嘎西奈
+			信使=n01J
+			图标=button\BTNXS_U_PKQ.blp
+			技能=主动
+			标题=|cffffcc00%name%|r的专属信使
+			内容=又自爆了!?|n|n|cffffcc00点击翻滚~皮卡皮卡~
+
+			名字=裂魂SAMA
+			信使=n01F
+			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
+			技能=被动
+			标题=|cffffcc00%name%|r的专属信使
+			内容=专业演员
+
+		//抽奖获得的信使
+		//⑨ 	n01D
+		//幸运	button\BTNXS_S_XY.blp
+		
+			名字=丶四季甜橙铃兰|;CLANNAD_汐;丶夏_娜;纸巾思香芋;葛力姆乔酱;珍双月同天;诗丨丶乃;小爱不是处;黎瑟格林;肉包和卡卡;丶琪露诺;幼女真白;单马尾萌娘;幻影穿梭;禁丶断;空心de木偶;好肉的馒头;一方通氵行;完美丿女友
+			信使=n01D
+			图标=button\BTNXS_S_XY.blp
+			技能=被动
+			标题=幸运
+			内容=这个信使是|cffffcc00%name%|r在2014年8月1日开始的5v5中荣耀之战的抽奖中幸运获得的,太走运了!
+
+			名字=幻雷风暴;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃
+			信使=n01D
+
+		//YY直播获得的信使
+		//裂魂	n01F
+		//YY	button\BTNXS_S_YY.blp
+
+			名字=安久娜银;安久娜蓝;rhr789;紫天受;结弦无音;尤斯蒂娅丶
+			信使=n01F
+			图标=button\BTNXS_S_YY.blp
+			技能=被动
+			标题=YY直播
+			内容=这个信使是|cffffcc00%name%|r曾在官方YY92509787担当直播或者解说奖励获得,感谢你的付出!
+
+			名字=刻刻帝;云雀丘由贵;氵下面真凉;黎明山脉;因幡I帝
+			信使=n01F
+
+		//Saber	n01I
+		
+			名字=哇嘎嘎西奈;娇傲娜;前园利绘;噩梦睡篮丶
+			信使=n01I
+
+		//皮卡丘	n01J
+
+			名字=S灭杀_____
+			信使=n01J
+			图标=button\BTNXS_S_PKQ.blp
+			技能=主动
+			标题=专属信使
+			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%name%|r!|n|n|cff888888点击翻滚~皮卡皮卡~|r
+
+		//呆唯 	n01L
+			
+			名字=平泽忧
+			信使=n01L
+
+		//梓喵 	n01N
+
+			名字=只傲不娇
+			信使=n01N
+
+		//律队 	n01M
