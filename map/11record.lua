@@ -14,19 +14,27 @@
 			end,
 			['特殊信使'] = function(line)
 				local name, value = line:match('([%C%S]+)=([%C%S]+)')
+				local key
 				if name == '名字' then
-					messenger.who = value
-					messenger[messenger.who] = {}
+					messenger.who = value:split(';')
+					for _, name in ipairs(messenger.who) do
+						messenger[name] = {name = name}
+					end
 				elseif name == '信使' then
-					messenger[messenger.who].uid = __id(value)
+					key = {'uid', __id(value)}
 				elseif name == '图标' then
-					messenger[messenger.who].image = value
+					key = {'image', value}
 				elseif name == '技能' then
-					messenger[messenger.who].type = value == '被动' and 'skill1' or 'skill2'
+					key = {'type', value == '被动' and 'skill1' or value == '主动' and 'skill2' or nil}
 				elseif name == '标题' then
-					messenger[messenger.who].title = value
+					key = {'title', value}
 				elseif name == '内容' then
-					messenger[messenger.who].text = value
+					key = {'text', value}
+				end
+				if key then
+					for _, name in ipairs(messenger.who) do
+						messenger[name][key[1]] = key[2]
+					end
 				end
 			end,
 		}
@@ -88,14 +96,25 @@
 			local name = p:getBaseName()
 			if messenger[name] then
 				local t = messenger[name]
-				local sid = messenger[t.type][p:get()]
-				u = tonumber(u)
-				jass.UnitAddAbility(u, sid)
-				jass.UnitMakeAbilityPermanent(u, true, sid)
-				local ab = japi.EXGetUnitAbility(u, sid)
-				japi.EXSetAbilityDataString(ab, 1, 204, t.image)
-				japi.EXSetAbilityDataString(ab, 1, 215, t.title)
-				japi.EXSetAbilityDataString(ab, 1, 218, t.text)
+				if t.type then
+					local sid = messenger[t.type][p:get()]
+					local function sub(s, t)
+						return s:gsub('(%%%C-%%)',
+							function(s)
+								s = s:sub(2, -2)
+								return t[s]
+							end
+						)
+					end
+					
+					u = tonumber(u)
+					jass.UnitAddAbility(u, sid)
+					jass.UnitMakeAbilityPermanent(u, true, sid)
+					local ab = japi.EXGetUnitAbility(u, sid)
+					japi.EXSetAbilityDataString(ab, 1, 204, t.image)
+					japi.EXSetAbilityDataString(ab, 1, 215, sub(t.title, t))
+					japi.EXSetAbilityDataString(ab, 1, 218, sub(t.text, t))
+				end
 			end
 		end
 	end
