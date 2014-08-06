@@ -4,7 +4,7 @@
 		WorldEdit=|cffffcc00[测试中]|r
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-		裂魂SAMA=|cffffcc00[裂裂裂裂魂!]|r
+		裂魂SAMA=|cffffcc00[请叫我]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
 
 	==特殊信使==
@@ -44,7 +44,7 @@
 			内容=又自爆了!?|n|n|cffffcc00点击翻滚~皮卡皮卡~
 
 			名字=裂魂SAMA
-			信使=n01F
+			信使=n01D
 			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
 			技能=被动
 			标题=|cffffcc00%name%|r的专属信使
@@ -61,7 +61,7 @@
 			标题=幸运
 			内容=这个信使是|cffffcc00%name%|r在2014年8月1日开始的5v5中荣耀之战的抽奖中幸运获得的,太走运了!
 
-			名字=幻雷风暴;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃
+			名字=幻雷风暴;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩
 			信使=n01D
 
 		//YY直播获得的信使
@@ -75,7 +75,7 @@
 			标题=YY直播
 			内容=这个信使是|cffffcc00%name%|r曾在官方YY92509787担当直播或者解说奖励获得,感谢你的付出!
 
-			名字=刻刻帝;云雀丘由贵;氵下面真凉;黎明山脉;因幡I帝
+			名字=刻刻帝;云雀丘由贵;氵下面真凉;黎明山脉;因幡I帝;星伽白雪
 			信使=n01F
 
 		//Saber	n01I
@@ -85,12 +85,12 @@
 
 		//皮卡丘	n01J
 
-			名字=S灭杀_____
+			名字=S灭杀_____;WorldEdit
 			信使=n01J
 			图标=button\BTNXS_S_PKQ.blp
 			技能=主动
 			标题=专属信使
-			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%name%|r!|n|n|cff888888点击翻滚~皮卡皮卡~|r
+			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%name%|r!
 
 		//呆唯 	n01L
 			
