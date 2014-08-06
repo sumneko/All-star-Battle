@@ -85,12 +85,12 @@
 
 		//皮卡丘	n01J
 
-			名字=S灭杀_____;WorldEdit
+			名字=S灭杀_____;
 			信使=n01J
 			图标=button\BTNXS_S_PKQ.blp
 			技能=主动
 			标题=专属信使
-			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%name%|r!
+			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%name%|r!|n|n|cffffcc00点击翻滚~皮卡皮卡~
 
 		//呆唯 	n01L
 			
