@@ -4,14 +4,14 @@
 		WorldEdit=|cffffcc00[测试中]|r
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-		裂魂SAMA=|cffffcc00[白牛]|r
+		裂魂SAMA=|cffffcc00[|cFFFF9900请|r|cFFFF7326叫|r|cFFFF4C4C我|r]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
-		沙门丶=|cffffcc00[破碎王者之刃☆]|r
-		Any_遗失=|cffffcc00[泯灭虚空之刃☆]|r
-		姬神小桃=|cffffcc00[誓约胜利之剑☆]|r
-		如月飒沙=|cffffcc00[灭杀魔王之剑☆]|r
-		S灭杀_____=|cffffcc00[贯穿真实之剑☆]|r
-		噩梦睡篮丶=|cffffcc00[破碎虚伪之枪☆]|r
+		沙门丶=|cffffcc00[|cFFFF9900破|r|cFFFF8613碎|r|cFFFF7326王|r|cFFFF6039者|r|cFFFF4C4C之|r|cFFFF3960刃|r|cFFFF2673☆|r]|r
+		Any_遗失=|cffffcc00[|cFF6600CC泯|r|cFF7300C6灭|r|cFF8000BF虚|r|cFF8C00B9空|r|cFF9900B2之|r|cFFA600AC刃|r|cFFB200A6☆|r]|r
+		姬神小桃=|cffffcc00[|cFFFFCC33誓|r|cFFF9B22D约|r|cFFF29926胜|r|cFFEC8020利|r|cFFE6661A之|r|cFFDF4C13剑|r|cFFD9330D☆|r]|r
+		如月飒沙=|cffffcc00[|cFF990000灭|r|cFF930013杀|r|cFF8C0026魔|r|cFF860039王|r|cFF80004C之|r|cFF790060剑|r|cFF730073☆|r]|r
+		S灭杀_____=|cffffcc00[|cFF00FF66贯|r|cFF0DF279穿|r|cFF1AE68C真|r|cFF26D99F实|r|cFF33CCB2之|r|cFF40BFC6剑|r|cFF4CB2D9☆|r]|r
+		噩梦睡篮丶=|cffffcc00[|cFFCC99FF破|r|cFFC6A6EC碎|r|cFFBFB2D9虚|r|cFFB9BFC6伪|r|cFFB2CCB2之|r|cFFACD99F枪|r|cFFA6E68C☆|r]|r
 
 	==特殊信使==
 
