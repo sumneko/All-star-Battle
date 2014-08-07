@@ -1,11 +1,17 @@
-
+﻿
 	==特殊称号==
 
 		WorldEdit=|cffffcc00[测试中]|r
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-		裂魂SAMA=|cffffcc00[请叫我]|r
+		裂魂SAMA=|cffffcc00[白牛]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
+		沙门丶=|cffffcc00[破碎王者之刃☆]|r
+		Any_遗失=|cffffcc00[泯灭虚空之刃☆]|r
+		姬神小桃=|cffffcc00[誓约胜利之剑☆]|r
+		如月飒沙=|cffffcc00[灭杀魔王之剑☆]|r
+		S灭杀_____=|cffffcc00[贯穿真实之剑☆]|r
+		噩梦睡篮丶=|cffffcc00[破碎虚伪之枪☆]|r
 
 	==特殊信使==
 
@@ -85,7 +91,7 @@
 
 		//皮卡丘	n01J
 
-			名字=S灭杀_____;
+			名字=沙门丶;Any_遗失;姬神小桃;如月飒沙;S灭杀_____;
 			信使=n01J
 			图标=button\BTNXS_S_PKQ.blp
 			技能=主动
