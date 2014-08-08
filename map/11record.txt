@@ -4,14 +4,14 @@
 		WorldEdit=|cffffcc00[测试中]|r
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-		裂魂SAMA=|cffffcc00[|cFFFF9900请|r|cFFFF7326叫|r|cFFFF4C4C我|r]|r
+		裂魂SAMA=|cffffcc00[|cFFFF9900请|r|cFFFF7326叫|r|cFFFF4C4C我|r|cffffcc00]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
-		沙门丶=|cffffcc00[|cFFFF9900破|r|cFFFF8613碎|r|cFFFF7326王|r|cFFFF6039者|r|cFFFF4C4C之|r|cFFFF3960刃|r|cFFFF2673☆|r]|r
-		Any_遗失=|cffffcc00[|cFF6600CC泯|r|cFF7300C6灭|r|cFF8000BF虚|r|cFF8C00B9空|r|cFF9900B2之|r|cFFA600AC刃|r|cFFB200A6☆|r]|r
-		姬神小桃=|cffffcc00[|cFFFFCC33誓|r|cFFF9B22D约|r|cFFF29926胜|r|cFFEC8020利|r|cFFE6661A之|r|cFFDF4C13剑|r|cFFD9330D☆|r]|r
-		如月飒沙=|cffffcc00[|cFF990000灭|r|cFF930013杀|r|cFF8C0026魔|r|cFF860039王|r|cFF80004C之|r|cFF790060剑|r|cFF730073☆|r]|r
-		S灭杀_____=|cffffcc00[|cFF00FF66贯|r|cFF0DF279穿|r|cFF1AE68C真|r|cFF26D99F实|r|cFF33CCB2之|r|cFF40BFC6剑|r|cFF4CB2D9☆|r]|r
-		噩梦睡篮丶=|cffffcc00[|cFFCC99FF破|r|cFFC6A6EC碎|r|cFFBFB2D9虚|r|cFFB9BFC6伪|r|cFFB2CCB2之|r|cFFACD99F枪|r|cFFA6E68C☆|r]|r
+		沙门丶=|cffffcc00[|cFFFF9900破|r|cFFFF8613碎|r|cFFFF7326王|r|cFFFF6039者|r|cFFFF4C4C之|r|cFFFF3960刃|r|cFFFF2673☆|r|cffffcc00]|r
+		Any_遗失=|cffffcc00[|cFF6600CC泯|r|cFF7300C6灭|r|cFF8000BF虚|r|cFF8C00B9空|r|cFF9900B2之|r|cFFA600AC刃|r|cFFB200A6☆|r|cffffcc00]|r
+		姬神小桃=|cffffcc00[|cFFFFCC33誓|r|cFFF9B22D约|r|cFFF29926胜|r|cFFEC8020利|r|cFFE6661A之|r|cFFDF4C13剑|r|cFFD9330D☆|r|cffffcc00]|r
+		如月飒沙=|cffffcc00[|cFF990000灭|r|cFF930013杀|r|cFF8C0026魔|r|cFF860039王|r|cFF80004C之|r|cFF790060剑|r|cFF730073☆|r|cffffcc00]|r
+		S灭杀_____=|cffffcc00[|cFF00FF66贯|r|cFF0DF279穿|r|cFF1AE68C真|r|cFF26D99F实|r|cFF33CCB2之|r|cFF40BFC6剑|r|cFF4CB2D9☆|r|cffffcc00]|r
+		噩梦睡篮丶=|cffffcc00[|cFFCC99FF破|r|cFFC6A6EC碎|r|cFFBFB2D9虚|r|cFFB9BFC6伪|r|cFFB2CCB2之|r|cFFACD99F枪|r|cFFA6E68C☆|r|cffffcc00]|r
 
 	==特殊信使==
 
@@ -42,13 +42,6 @@
 			标题=|cffffcc00%name%|r的专属信使
 			内容=筒隐月子俺嫁,萝莉后宫万岁!
 
-			名字=哇嘎嘎西奈
-			信使=n01J
-			图标=button\BTNXS_U_PKQ.blp
-			技能=主动
-			标题=|cffffcc00%name%|r的专属信使
-			内容=又自爆了!?|n|n|cffffcc00点击翻滚~皮卡皮卡~
-
 			名字=裂魂SAMA
 			信使=n01D
 			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
@@ -60,14 +53,14 @@
 		//⑨ 	n01D
 		//幸运	button\BTNXS_S_XY.blp
 		
-			名字=丶四季甜橙;铃兰|;CLANNAD_汐;丶夏_娜;纸巾思香芋;葛力姆乔酱;珍双月同天;诗丨丶乃;小爱不是处;黎瑟格林;肉包和卡卡;丶琪露诺;幼女真白;单马尾萌娘;幻影穿梭;空心de木偶;好肉的馒头;一方通氵行;完美丿女友
+			名字=丶四季甜橙;安久娜橙;CLANNAD_汐;丶夏_娜;纸巾思香芋;葛力姆乔酱;珍双月同天;诗丨丶乃;小爱不是处;黎瑟格林;肉包和卡卡;丶琪露诺;幼女真白;单马尾萌娘;幻影穿梭;空心de木偶;好肉的馒头;一方通氵行;完美丿女友
 			信使=n01D
 			图标=button\BTNXS_S_XY.blp
 			技能=被动
 			标题=幸运
 			内容=这个信使是|cffffcc00%name%|r在2014年8月1日开始的5v5中荣耀之战的抽奖中幸运获得的,太走运了!
 
-			名字=幻雷风暴;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断
+			名字=幻雷风暴;CLANNAD_殇;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断
 			信使=n01D
 
 		//YY直播获得的信使
