@@ -219,7 +219,7 @@ local function main()
 		end
 		
 		local fcount = #imp
-		file:write(string.char(1, 0, 0, 0, fcount % 256, math.floor(fcount / 256), 0, 0, 0) .. table.concat(imp, string.char(0, 13)) .. string.char(0))
+		file:write(string.char(1, 0, 0, 0, fcount % 256, math.floor(fcount / 256), 0, 0, 0x0D) .. table.concat(imp, string.char(0, 13)) .. string.char(0))
 		file:close()
 		git_fresh(fname)
 
