@@ -5543,7 +5543,7 @@ _YDWEIssueNeutralTargetItemOrderById_Category=TC_UNIT
 _YDWEIssueNeutralTargetItemOrderById_ScriptName=IssueNeutralTargetOrderById
 
 UnitDamagePoint=1,unit,real,real,real,real,real,isnotoption,isnotoption,attacktype,damagetype,weapontype
-_UnitDamagePoint_Defaults=GetTriggerUnit,0,500,0,0,100,IsNotIs,IsNotNot,AttackTypeNormal,DamageTypeNormal,WEAPON_TYPE_WHOKNOWS
+_UnitDamagePoint_Defaults=GetTriggerUnit,0,500,0,0,100,IsNotNot,IsNotNot,AttackTypeNormal,DamageTypeNormal,WEAPON_TYPE_WHOKNOWS
 _UnitDamagePoint_Category=TC_UNIT
 
 UnitDamagePointLoc=1,unit,real,real,location,real,attacktype,damagetype
@@ -5551,7 +5551,7 @@ _UnitDamagePointLoc_Defaults=GetTriggerUnit,0,500,GetRectCenter,100,AttackTypeNo
 _UnitDamagePointLoc_Category=TC_UNIT
 
 UnitDamageTarget=1,unit,unit,real,isnotoption,isnotoption,attacktype,damagetype,weapontype
-_UnitDamageTarget_Defaults=GetTriggerUnit,GetTriggerUnit,500,IsNotIs,IsNotNot,AttackTypeNormal,DamageTypeNormal,WEAPON_TYPE_WHOKNOWS
+_UnitDamageTarget_Defaults=GetTriggerUnit,GetTriggerUnit,500,IsNotNot,IsNotNot,AttackTypeNormal,DamageTypeNormal,WEAPON_TYPE_WHOKNOWS
 _UnitDamageTarget_Category=TC_UNIT
 
 UnitDamageTargetBJ=1,unit,unit,real,attacktype,damagetype
