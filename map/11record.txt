@@ -12,6 +12,8 @@
 		如月飒沙=|cffffcc00[|cFFFF3333灭|r|cFFF23346杀|r|cFFE63359魔|r|cFFD9336C王|r|cFFCC3380之|r|cFFBF3393剑|r|cFFB233A6☆|r|cffffcc00]|r
 		S灭杀_____=|cffffcc00[|cFF1BE6B8贯|r|cFF38E9A1穿|r|cFF54EC8A真|r|cFF70EF73实|r|cFF8DF25C之|r|cFFAAF645剑|r|cFFC6F92E☆|r|cffffcc00]|r
 		噩梦睡篮丶=|cffffcc00[|cFFCC99FF破|r|cFFC6A6EC碎|r|cFFBFB2D9虚|r|cFFB9BFC6伪|r|cFFB2CCB2之|r|cFFACD99F枪|r|cFFA6E68C☆|r|cffffcc00]|r
+		小爱不是处=|cffffcc00[|cffff66aa邪王真眼|r|cffffcc00]|r
+		冰琪露诺=|cffffcc00[|cff35ddffバカ|r|cffffcc00]|r
 
 	==特殊信使==
 
@@ -60,7 +62,7 @@
 			标题=幸运
 			内容=这个信使是|cffffcc00%name%|r在2014年8月1日开始的5v5中荣耀之战的抽奖中幸运获得的,太走运了!
 
-			名字=幻雷风暴;CLANNAD_殇;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断;E_s_t
+			名字=幻雷风暴;CLANNAD_殇;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断;E_s_t;姬神小桃
 			信使=n01D
 
 		//YY直播获得的信使
@@ -84,7 +86,7 @@
 
 		//皮卡丘	n01J
 
-			名字=沙门丶;Any_遗失;姬神小桃;如月飒沙;S灭杀_____;
+			名字=沙门丶;Any_遗失;如月飒沙;S灭杀_____;
 			信使=n01J
 			图标=button\BTNXS_S_PKQ.blp
 			技能=主动
