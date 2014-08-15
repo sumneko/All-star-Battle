@@ -6,14 +6,15 @@
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
 		裂魂SAMA=|cffffcc00[请叫我]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
-		沙门丶=|cffffcc00[|cFFFFFFCC破碎王者之刃☆|cffffcc00]|r
-		Any_遗失=|cffffcc00[|cFFCC00FF泯灭虚空之刃☆|cffffcc00]|r
-		姬神小桃=|cffffcc00[|cFFFF6600誓约胜利之剑☆|cffffcc00]|r
-		如月飒沙=|cffffcc00[|cFF330033灭杀魔王之剑☆|cffffcc00]|r
-		S灭杀_____=|cffffcc00[|cFFEEA5D1贯穿真实之剑☆|cffffcc00]|r
-		噩梦睡篮丶=|cffffcc00[|cFF00D2FF破碎虚伪之枪☆|cffffcc00]|r
+		沙门丶=|cffffcc00[|cffff80ff破碎王者之刃★|cffffcc00]|r
+		Any_遗失=|cffffcc00[|cffaa10bb泯灭虚空之刃★|cffffcc00]|r
+		姬神小桃=|cffffcc00[|cffffff00誓约胜利之剑★|cffffcc00]|r
+		如月飒沙=|cffffcc00[|cff9925ff灭杀魔王之剑★|cffffcc00]|r
+		S灭杀_____=|cffffcc00[|cff1BE6B8贯穿真实之剑★|cffffcc00]|r
+		噩梦睡篮丶=|cffffcc00[|cffDF4C13破碎虚伪之枪★|cffffcc00]|r
 		小爱不是处=|cffffcc00[|cffff66aa邪王真眼|cffffcc00]|r
-		冰琪露诺=|cffffcc00[|cff35ddffバカ|cffffcc00]|r
+		帅帅de丶|cffffcc00[|cffffdd00漆黑烈焰使|cffffcc00]|r
+		冰琪露诺=|cffffcc00[|cff35ddff⑨蕾么么哒|cffffcc00]|r
 
 	==特殊信使==
 
