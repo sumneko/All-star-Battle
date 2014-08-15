@@ -1,4 +1,4 @@
-    game = {}
+﻿    game = {}
     
     local game = game
     
@@ -147,7 +147,7 @@
                 elseif s < 15 then
                     w = '建议洗把脸再回来玩?'
                 else
-                    w = 'RP一般般啦'
+                    w = '加油加油~'
                 end
                 japi.EXDisplayChat(jass.Player(12), 3, ('|cffff88cc综合暴击率为%.2f%%,%s|r'):format(s, w))
             end
