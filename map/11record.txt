@@ -4,7 +4,7 @@
 		WorldEdit=|cffffcc00[测试中]|r
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
-		裂魂SAMA=|cffffcc00[请叫我]|r
+		裂魂SAMA=|cFF66FFFF[请叫我]|r
 		只傲不娇=|cffffcc00[色情男主播]|r
 		沙门丶=|cffffcc00[|cffff80ff破碎王者之刃★|cffffcc00]|r
 		Any_遗失=|cffffcc00[|cffaa10bb泯灭虚空之刃★|cffffcc00]|r
@@ -15,6 +15,13 @@
 		小爱不是处=|cffffcc00[|cffff66aa邪王真眼|cffffcc00]|r
 		帅帅de丶|cffffcc00[|cffffdd00漆黑烈焰使|cffffcc00]|r
 		冰琪露诺=|cffffcc00[|cff35ddff⑨蕾么么哒|cffffcc00]|r
+		最爱桃子=|cffffcc00[|cFFFF0000炎发灼眼の讨伐者|cffffcc00]|r
+		艾斯特=|cffffcc00[|cFF330033魔王剑-Terminus Est Zwei|cffffcc00]|r
+		CLANNAD_殇=|cffffcc00[|cFFCC6600Lost time Memory|cffffcc00]|r
+		户川汐音=|cffffcc00[|cFFFF66FF最萌眼镜娘|cffffcc00]|r
+		空心の木偶=|cffffcc00[|cFF00FFFF完美潇洒の从者|cffffcc00]|r
+		樱逝夕颜=|cffffcc00[|cFFFFCC66远离尘世の理想乡|cffffcc00]|r
+
 
 	==特殊信使==
 
