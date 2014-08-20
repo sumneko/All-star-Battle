@@ -7,13 +7,13 @@
 		
 		local funcs = {
 			['特殊称号'] = function(line)
-				local name, title = line:match('([%C%S]+)=([%C%S]+)')
+				local name, title = line:match('(.+)=(.+)')
 				if name then
 					names[name] = title
 				end
 			end,
 			['特殊信使'] = function(line)
-				local name, value = line:match('([%C%S]+)=([%C%S]+)')
+				local name, value = line:match('(.+)=(.+)')
 				local key
 				if name == '名字' then
 					messenger.who = value:split(';')
@@ -40,7 +40,22 @@
 		}
 		
 		local now_type
-		for line in content:gmatch('([^\n\r]+)') do
+		for line in content:gmatch('([^\n\r\t]+)') do
+
+			for i = 1, #line do
+				if line:sub(i, i) ~= ' ' then
+					line = line:sub(i)
+					break
+				end
+			end
+
+			for i = #line, 1, -1 do
+				if line:sub(i, i) ~= ' ' then
+					line = line:sub(1, i)
+					break
+				end
+			end
+			
 			now_type = line:match('==(%C+)==') or now_type
 
 			if now_type then
