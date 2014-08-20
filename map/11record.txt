@@ -32,12 +32,12 @@
         绎绚=|cffffcc00[焰]|r
 
         //saber骑士队伍                               
-        黑仪=|cffffcc00[黑仪女王|r
-        美夕丶念安=|cffffcc00[唵嘛呢叭咪吽|r
-        李狗蛋520=|cffffcc00[我能打⑨个|r
-        禁丶丶断=|cffffcc00[愿为水逼|r
-        纯白丶依然=|cffffcc00[杀人鬼十六夜  吧 |r
-        犯罪系数=|cffffcc00[放开那个萝莉|r
+        黑仪=|cffffcc00[黑仪女王]|r
+        美夕丶念安=|cffffcc00[唵嘛呢叭咪吽]|r
+        李狗蛋520=|cffffcc00[我能打⑨个]|r
+        禁丶丶断=|cffffcc00[愿为水逼]|r
+        纯白丶依然=|cffffcc00[杀人鬼十六夜  吧 ]|r
+        犯罪系数=|cffffcc00[放开那个萝莉]|r
 
         //妖魄队伍
         妖魄受=|cffffcc00[天地同受]|r
@@ -122,15 +122,26 @@
         鲜血之刃=|cffffcc00[傲慢]|r
         始祖月神=|cffffcc00[暴虐]|r
         UU子=|cffffcc00[暴食]|r
-        天明冥=|cffffcc00[自负|r
+        天明冥=|cffffcc00[自负]|r
         q799587865=|cffffcc00[贪婪]|r
         缇娜_童萌=|cffffcc00[懒惰]|r
 
         //黑幕队
         黎瑟格林=|cffffcc00[染血の童话使]|r
         结弦无音=|cffffcc00[？不祥，伪善]|r
+		
+        //史上最强尼玛
+        喊我欧尼酱=|cffffcc00[赛♂亚♀人]|r
+		五河幻羽=|cffffcc00[漆黑烈焰使]|r
+		Eldrida_=|cffffcc00[超高校级の萌哀er]|r
+		JW丶上帝=|cffffcc00[机智の上帝]|r
+		丶夏_娜=|cffffcc00[天壤の炎发灼眼の征讨者 ]|r
+		丶四季甜橙=|cffffcc00[妈的还有谁？]|r
 
-        
+		//测试
+		黎瑟格林=|cff000000[封弊者]|r
+		呆蠢月菟=|cff000000[封弊者]|r
+		不挂机不行=|cff000000[封弊者]|r
         
         
 	==特殊信使==
