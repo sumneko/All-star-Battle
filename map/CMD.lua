@@ -253,3 +253,8 @@
 			end
 		)
 	end
+
+	--¼ÇÂ¼°æ±¾ºÅ
+	function cmd.set_ver_name(_, s)
+		cmd.ver_name = s
+	end
