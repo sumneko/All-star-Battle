@@ -43,6 +43,10 @@ Event.ItemInit="物品效果注册"
 Event.ItemInit=~物品," 第一次出现在游戏中"
 Event.ItemInitHint="只能存放一个触发器"
 
+Event.HeroRevive="英雄复活"
+Event.HeroRevive="带有 ",~技能," 的英雄复活"
+Event.HeroReviveHint="只能存放一个触发器"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"

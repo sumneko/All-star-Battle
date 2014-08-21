@@ -3367,6 +3367,9 @@ _Event.SkillCoolReset_Category=TC_MU_EVENT
 Event.ItemInit=0,itemcode
 _Event.ItemInit_Category=TC_MU_EVENT
 
+Event.HeroRevive=0,abilcode
+_Event.HeroRevive_Category=TC_MU_EVENT
+
 //
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
