@@ -845,7 +845,6 @@ bj_lastCreatedMultiboard=0,multiboard,bj_lastCreatedMultiboard,最后创建的�
 //Timer
 bj_lastStartedTimer=0,timer,bj_lastStartedTimer,最后启用的计时器 [R]
 ydl_timer=0,timer,ydl_timer,最后启动的逆天计时器
-ydl_exp_timer=0,timer,ydl_exp_timer,到期的逆天计时器
 
 // TimerDialog
 bj_lastCreatedTimerDialog=0,timerdialog,bj_lastCreatedTimerDialog,最后创建的计时器窗口 [R]
