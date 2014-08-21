@@ -581,6 +581,8 @@ OperatorNotEqualENE=0,EqualNotEqualOperator,"!=",WESTRING_EQUALNOTEQUALOPERATOR_
 bj_forLoopAIndex=0,integer,bj_forLoopAIndex,循环整数A [R]
 bj_forLoopBIndex=0,integer,bj_forLoopBIndex,循环整数B [R]
 process.lastKey=0,integer,process.lastKey,最后创建的过程 <过程库>
+ydl_timer_handle=0,integer,ydl_timer_handle,最后启动的逆天计时器地址
+ydl_exp_timer_handle=0,integer,ydl_exp_timer_handle,到期的逆天计时器地址
 
 abileventA=0,abilevent,1,环绕(特效)
 abileventB=0,abilevent,2,跳跃
@@ -800,6 +802,8 @@ bj_lastHauntedGoldMine=0,unit,bj_lastHauntedGoldMine,最后创建的不死族金
 bj_lastPoolAbstractedUnit=0,unit,bj_lastPoolAbstractedUnit,最后从单位池中取出的单位 [YDWE]
 bj_lastAbilityCastingUnit=0,unit,bj_lastAbilityCastingUnit,最后施放特殊技能的单位 [YDWE]
 bj_lastAbilityTargetUnit=0,unit,bj_lastAbilityTargetUnit,最后被特殊技能命中的单位 [YDWE]
+Event.u_from=0,unit,Event.u_from,事件来源 <事件库>
+Event.u_to=0,unit,Event.u_to,事件目标 <事件库>
 
 // Unit pool
 bj_lastCreatedUnitPool=0,unitpool,bj_lastCreatedUnitPool,最后创建的单位池 [YDWE]
@@ -840,6 +844,8 @@ bj_lastCreatedMultiboard=0,multiboard,bj_lastCreatedMultiboard,最后创建的�
 
 //Timer
 bj_lastStartedTimer=0,timer,bj_lastStartedTimer,最后启用的计时器 [R]
+ydl_timer=0,timer,ydl_timer,最后启动的逆天计时器
+ydl_exp_timer=0,timer,ydl_exp_timer,到期的逆天计时器
 
 // TimerDialog
 bj_lastCreatedTimerDialog=0,timerdialog,bj_lastCreatedTimerDialog,最后创建的计时器窗口 [R]
@@ -3354,6 +3360,12 @@ _Event.AnyUnitSkill_Category=TC_MU_EVENT
 Event.AnyUnitDamage=0,damageTypeA,damageTypeB
 _Event.AnyUnitDamage_Defaults=damageTypeA1,damageTypeB1
 _Event.AnyUnitDamage_Category=TC_MU_EVENT
+
+Event.SkillCoolReset=0,abilcode
+_Event.SkillCoolReset_Category=TC_MU_EVENT
+
+Event.ItemInit=0,itemcode
+_Event.ItemInit_Category=TC_MU_EVENT
 
 //
 YDWEDisableRegister=0,nothing

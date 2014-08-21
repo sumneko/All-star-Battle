@@ -35,6 +35,14 @@ Event.AnyUnitDamage="任意单位受到伤害"
 Event.AnyUnitDamage=~单位选项," 受到 ",~伤害选项
 Event.AnyUnitDamageHint="该事件不会被0伤害驱动"
 
+Event.SkillCoolReset="技能冷却重置"
+Event.SkillCoolReset="英雄的 ",~技能," 冷却重置"
+Event.SkillCoolResetHint="只能存放一个触发器"
+
+Event.ItemInit="物品效果注册"
+Event.ItemInit=~物品," 第一次出现在游戏中"
+Event.ItemInitHint="只能存放一个触发器"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"
