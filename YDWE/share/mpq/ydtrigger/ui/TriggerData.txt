@@ -3361,12 +3361,14 @@ _Event.AnyUnitDamage_Defaults=damageTypeA1,damageTypeB1
 _Event.AnyUnitDamage_Category=TC_MU_EVENT
 
 Event.SkillCoolReset=0,abilcode
+_Event.SkillCoolReset_Defaults=GetSpellAbilityId
 _Event.SkillCoolReset_Category=TC_MU_EVENT
 
 Event.ItemInit=0,itemcode
 _Event.ItemInit_Category=TC_MU_EVENT
 
 Event.HeroRevive=0,abilcode
+_Event.HeroRevive_Defaults=GetSpellAbilityId
 _Event.HeroRevive_Category=TC_MU_EVENT
 
 //
