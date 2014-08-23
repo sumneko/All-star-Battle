@@ -3963,6 +3963,13 @@ _Unit.DummyAttack_Category=TC_MU_UNIT
 Unit.WantDestroyGroup=0
 _Unit.WantDestroyGroup_Category=TC_MU_UNIT
 
+Unit.DummySkill=0,player,unit,integer,abilcode
+_Unit.DummySkill_Defaults=GetOwningPlayer,GetTriggerUnit,1,Aloc
+_Unit.DummySkill_Category=TC_MU_UNIT
+
+Unit.SetHard=0,unit,real
+_Unit.SetHard_Defaults=GetTriggerUnit,1
+_Unit.SetHard_Category=TC_MU_UNIT
 
 //过程库
 process.Create2=0,unit,string,integer,boolean
