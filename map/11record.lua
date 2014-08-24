@@ -65,7 +65,7 @@
 
 		function cmd.fresh_name(p)
 			local base_name = p:getBaseName()
-			if names[base_name] then
+			if names[base_name] and not p:isObserver() then
 				local name = p:getName()
 				name = names[base_name] .. name
 				p:setName(name)
