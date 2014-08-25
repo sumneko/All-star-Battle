@@ -5,7 +5,7 @@
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
 		裂魂SAMA=|cFF66FFFF[请叫我]|r
-		只傲不娇=|cffffcc00[色情男主播]|r
+		只傲不娇=|cffffcc00[立誓今生尊你为王，用我热血为你封疆]|r
 		沙门丶=|cffffcc00[|cffff80ff破碎王者之刃★|cffffcc00]|r
 		Any_遗失=|cffffcc00[|cffaa10bb泯灭虚空之刃★|cffffcc00]|r
 		姬神小桃=|cffffcc00[|cffffff00誓约胜利之剑★|cffffcc00]|r
@@ -17,6 +17,7 @@
 		E_s_t=|cffffcc00[魔王杀しの圣剑]|r
 		毒岛牙子丶=|cffffcc00[蠢妃大人]|r
                 怨恨已闻=|cff505050[汝之怨恨·为汝消除]|r
+                镜子大大王=|cffffcc00[掌管二次元的女大王]|r
 
         //天道受1
         我妻桃子=|cffffcc00[|cFFFF5020炎发灼眼の讨伐者|cffffcc00]|r
@@ -119,7 +120,7 @@
         InabaHimeko=|cffffcc00[渴望真爱の幽灵]|r
         Clanmin=|cffffcc00[空JJ你嘛嘛]|r
         冢耶舞莉=|cffffcc00[斩断罪恶之刃]|r
-        妄想的青春=|cffffcc00[火猫少女]|r
+        妄想的青春=|cffffcc00[帝王受的传说]|r
         七尾奈留=|cffffcc00[来打我啊]|r
 
         //采集大队
@@ -133,11 +134,12 @@
         //黑幕队
         黎瑟格林=|cffffcc00[染血の童话使]|r
         结弦无音=|cffffcc00[？不祥，伪善]|r
+        丶琪露诺=|cffffcc00[星空の下での最初の強者]|r
 		
         //史上最强尼玛
         喊我欧尼酱=|cffffcc00[赛♂亚♀人]|r
 	五河幻羽=|cffffcc00[漆黑烈焰使]|r
-	Eldrida_=|cffffcc00[超高校级の萌哀er]|r
+	Eldrida__=|cffffcc00[超高校级の萌哀er]|r
 	JW丶上帝=|cffffcc00[机智の上帝]|r
 	丶夏_娜=|cffffcc00[天壤の炎发灼眼の征讨者 ]|r
 	丶四季甜橙=|cffffcc00[妈的还有谁？]|r
@@ -197,7 +199,7 @@
 			标题=幸运
 			内容=这只⑨是|cffffcc00%name%|r在第一届荣耀之战的抽奖中幸运获得的,因为是笨蛋所以运气总是这么好!
 
-			名字=幻雷风暴;CLANNAD_殇;冰琪露诺;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断;E_s_t;姬神小桃;天野葵
+			名字=幻雷风暴;CLANNAD_殇;冰琪露诺;BAKA丶月殇;zh1殿遮那;提泰妮娅级;安久娜白;姬神小桃;丿BeSt丶轩;禁丶断;E_s_t;姬神小桃;天野葵;墨尘飞血
 			信使=n01D
 
 		//YY直播获得的信使
