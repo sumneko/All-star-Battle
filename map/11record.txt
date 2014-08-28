@@ -98,7 +98,7 @@
         单马尾萌娘=|cffffcc00[兔兔一生推]|r
         刻刻帝=|cffffcc00[菲德の专属兔女仆]|r
         Angel丿奏=|cffffcc00[骑我请排队]|r
-        荒巾岐宫乃=|cffffcc00[叛逆の骑士王]|r
+        荒巾歧宫乃=|cffffcc00[叛逆の骑士王]|r
 
         //GGMMD
         完美丿女友=|cffffcc00[战神の咆哮]|r
@@ -138,9 +138,9 @@
 		
         //史上最强尼玛
         喊我欧尼酱=|cffffcc00[赛♂亚♀人]|r
-	五河幻羽=|cffffcc00[漆黑烈焰使]|r
+	五河_幻羽=|cffffcc00[漆黑烈焰使]|r
 	Eldrida__=|cffffcc00[超高校级の萌哀er]|r
-	JW丶上帝=|cffffcc00[机智の上帝]|r
+	Jw丶上帝=|cffffcc00[机智の上帝]|r
 	丶夏_娜=|cffffcc00[天壤の炎发灼眼の征讨者 ]|r
 	丶四季甜橙=|cffffcc00[妈的还有谁？]|r
 
