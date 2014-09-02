@@ -248,6 +248,10 @@ local function main()
 		map_f:close()
 
 		local map_f = io.open(new_dir:string(), 'wb')
+		if not map_f then
+			print '[错误]: 地图文件被占用,先把编辑器关掉再打包地图啊笨蛋!'
+			return
+		end
 		map_f:write(map_hex)
 		map_f:close()
 
