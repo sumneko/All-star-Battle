@@ -262,7 +262,7 @@ local function main()
 		end
 
 		local count = 0
-		
+		local fail_files = {}
 		for _, name in ipairs(files) do
 			if zip_files[name] then
 				os.execute(('%s\\unrar x -o+ %s %s %s'):format((root_dir / 'build'):string(), (file_dir / name):string() .. '.zip', name, file_dir:string()))
@@ -271,6 +271,7 @@ local function main()
 					count = count + 1
 				else
 					print('[失败]: 导入 ' .. name)
+					table.insert(fail_files, name)
 				end
 				fs.remove(file_dir / name)
 			else
@@ -279,6 +280,7 @@ local function main()
 					count = count + 1
 				else
 					print('[失败]: 导入 ' .. name)
+					table.insert(fail_files, name)
 				end
 			end
 			
@@ -287,6 +289,13 @@ local function main()
 		inmap:close()
 
 		print('[成功]: 一共导入了 ' .. count .. ' 个文件')
+		if #fail_files > 0 then
+			print('[错误]: 以下文件导入失败')
+			for _, name in ipairs(fail_files) do
+				print(name)
+			end
+			print(('[错误]: 以上 %s 个文件导入失败!!!'):format(#fail_files))
+		end
 
 		--读取或生成ini文件
 		local config_dir = root_dir / 'config.ini'
