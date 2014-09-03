@@ -7,7 +7,7 @@
     timer.loop(1,
         function()
             local hero = game.self()
-            if hero then
+            if hero and jass.GetUnitTypeId(hero) ~= 0 then
                 for i = 0, 99 do
                     local ab = japi.EXGetUnitAbilityByIndex(hero, i)
                     if not ab then break end --如果技能不存在就结束
