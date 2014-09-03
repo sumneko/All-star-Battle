@@ -11092,6 +11092,11 @@ _ConvertedPlayer_Defaults=1
 _ConvertedPlayer_Limits=1,16
 _ConvertedPlayer_Category=TC_CONVERSION
 
+Player=0,1,player,integer
+_Player_Defaults=1
+_Player_Limits=0,15
+_Player_Category=TC_CONVERSION
+
 LeaderboardGetIndexedPlayerBJ=1,0,player,integer,leaderboard
 _LeaderboardGetIndexedPlayerBJ_Defaults=1,GetLastCreatedLeaderboard
 _LeaderboardGetIndexedPlayerBJ_Limits=1,16

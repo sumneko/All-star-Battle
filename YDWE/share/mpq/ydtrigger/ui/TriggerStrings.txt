@@ -5792,7 +5792,7 @@ GetConvertedPlayerId=~Player," 的玩家索引号"
 GetConvertedPlayerIdHint="玩家索引取值1-16."
 
 GetPlayerId="玩家索引 [R]"
-GetPlayerId=~Player," 的玩家索引号"
+GetPlayerId=~Player," 的玩家索引号<0-15>"
 GetPlayerIdHint="玩家索引取值0-15，玩家一的索引号为0"
 
 GetPlayerStructureCount="建筑数量"
@@ -7674,6 +7674,10 @@ GetLocalPlayerHint="指代玩家自己,所以对每个玩家返回值都不一�
 ConvertedPlayer="转换玩家索引号为玩家"
 ConvertedPlayer="玩家 ",~Player Index
 ConvertedPlayerHint="玩家索引号取值1-16."
+
+Player="转换玩家索引号为玩家 [BAKA]"
+Player="玩家 ",~Player Index," <0-15>"
+PlayerHint="玩家索引号取值0-15."
 
 GetChangingUnitPrevOwner="原所有者"
 GetChangingUnitPrevOwner="原所有者"
