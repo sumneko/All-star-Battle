@@ -6840,6 +6840,11 @@ _LeaderboardSetPlayerItemStyleBJ_Category=TC_LEADERBOARD
 
 
 // Text Tag actions
+text.CreateText=0,player,unit,StringExt,real,real,real,real,real,real,real,boolean,real,real,showTo
+_text.CreateText_Defaults=GetOwningPlayer,GetTriggerUnit,_,10,100,100,100,0,58,90,false,2,3,showToC
+_text.CreateText_Limits=_,_,_,_,_,_,1,_,0,100,0,100,0,100,0,100,0,_,_,_,_,_,0,_,0,_,0,2
+_text.CreateText_Category=TC_TEXTTAG
+
 CreateTextTagLocBJ=1,StringExt,location,real,real,real,real,real,real
 _CreateTextTagLocBJ_Defaults=_,_,0,10,100,100,100,0
 _CreateTextTagLocBJ_Limits=_,_,_,_,_,_,1,_,0,100,0,100,0,100,0,100
