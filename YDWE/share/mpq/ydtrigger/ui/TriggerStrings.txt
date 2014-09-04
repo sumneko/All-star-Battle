@@ -1100,7 +1100,7 @@ IssuePointOrderLocHint=
 
 //最萌小汐
 Unit.IssuePointOrderLocMU="发布命令(指定点) <单位库>"
-Unit.IssuePointOrderLocMU="对 ",~单位," 发布 ",~Order," 命令到目标点: ",~指定点 (自动清除)
+Unit.IssuePointOrderLocMU="对 ",~单位," 发布 ",~Order," 命令到目标点: ",~指定点," (自动清除)"
 Unit.IssuePointOrderLocMUHint="自动清除引用点,其他一样"
 
 IssueTargetOrder="发布命令(指定单位)"
@@ -7113,7 +7113,7 @@ CreateUnitAtLocHint=
 
 //最萌小汐
 Unit.CreateUnitAtLocMU="新建单位(指定点) <单位库>"
-Unit.CreateUnitAtLocMU="新建 ",~玩家," 的 ",~单位," 在 ",~点," 面向角度:",~Face," 度"
+Unit.CreateUnitAtLocMU="新建 ",~玩家," 的 ",~单位," 在 ",~点," (自动清除) 面向角度:",~Face," 度"
 Unit.CreateUnitAtLocMUHint="自动删除点"
 
 CreateCorpse="新建尸体 [R]"
