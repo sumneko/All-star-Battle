@@ -806,8 +806,8 @@ bj_lastHauntedGoldMine=0,unit,bj_lastHauntedGoldMine,最后创建的不死族金
 bj_lastPoolAbstractedUnit=0,unit,bj_lastPoolAbstractedUnit,最后从单位池中取出的单位 [YDWE]
 bj_lastAbilityCastingUnit=0,unit,bj_lastAbilityCastingUnit,最后施放特殊技能的单位 [YDWE]
 bj_lastAbilityTargetUnit=0,unit,bj_lastAbilityTargetUnit,最后被特殊技能命中的单位 [YDWE]
-Event.u_from=0,unit,Event.u_from,事件来源 <事件库>
-Event.u_to=0,unit,Event.u_to,事件目标 <事件库>
+Event.u_from=0,unit,Event.u_from[Event.index],事件来源 <事件库>
+Event.u_to=0,unit,Event.u_to[Event.index],事件目标 <事件库>
 
 // Unit pool
 bj_lastCreatedUnitPool=0,unitpool,bj_lastCreatedUnitPool,最后创建的单位池 [YDWE]
