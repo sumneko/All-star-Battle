@@ -583,6 +583,8 @@ bj_forLoopBIndex=0,integer,bj_forLoopBIndex,循环整数B [R]
 process.lastKey=0,integer,process.lastKey,最后创建的过程 <过程库>
 ydl_timer_handle=0,integer,ydl_timer_handle,最后启动的逆天计时器地址
 ydl_exp_timer_handle=0,integer,ydl_exp_timer_handle,到期的逆天计时器地址
+ydl_trigger_handle=0,integer,ydl_trigger_handle,最后注册的逆天触发器地址
+ydl_tri_trigger_handle=0,integer,ydl_tri_trigger_handle,触发的逆天触发器地址
 
 abileventA=0,abilevent,1,环绕(特效)
 abileventB=0,abilevent,2,跳跃
@@ -1894,6 +1896,8 @@ CinematicIndexXOP=1,cinematicindex,bj_CINEMATICINDEX_XOP,WESTRING_CINEMATICTYPE_
 CinematicIndexXED=1,cinematicindex,bj_CINEMATICINDEX_XED,WESTRING_CINEMATICTYPE_XED
 
 // Trigger Unit-Targeted Unit Orders
+ydl_trigger=0,trigger,ydl_trigger,最后注册的逆天触发器
+
 // Common
 UnitOrderAttackUnitnull=0,unitorderutarg,null,无
 UnitOrderAttackUnit=0,unitorderutarg,`attack`,WESTRING_UNITORDERUTARG_ATTACK

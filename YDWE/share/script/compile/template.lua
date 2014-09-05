@@ -118,6 +118,7 @@ function template:do_compile(op)
 	__map_path__   = op.map_path
 	local env = setmetatable({import = map_file_import, StringHash = string_hash}, {__index = _G})
 	table.insert(lua_codes, "return do_update_j(table.concat(__jass_result__))")	
+	io.save(fs.ydwe_path() / "logs" / "调用lua插件前最后看一眼脚本.lua", table.concat(lua_codes, '\n'))
 	local f, err = load(table.concat(lua_codes, '\n'), nil, 't', env)
 	if not f then
 		return f, err
