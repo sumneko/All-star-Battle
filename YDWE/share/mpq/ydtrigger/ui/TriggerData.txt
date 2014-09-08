@@ -27,6 +27,7 @@ TC_MU_BASE=基础库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_EVENT=事件库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_MATH=数学库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_UNIT=单位库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
+TC_MU_ITEM=物品库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_TEXT=漂浮文字库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_EFFECT=特效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_SOUND=音效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
@@ -3978,6 +3979,11 @@ _Unit.DummySkill_Category=TC_MU_UNIT
 Unit.SetHard=0,unit,real
 _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
+
+//物品库
+Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode
+_Item.Formula_Defaults=_,_,_,_,ches,ches,ches,ches
+_Item.Formula_Category=TC_MU_ITEM
 
 //过程库
 process.Create2=0,unit,string,integer,boolean
