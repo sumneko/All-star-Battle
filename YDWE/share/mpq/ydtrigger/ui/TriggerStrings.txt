@@ -47,6 +47,10 @@ Event.HeroRevive="英雄复活"
 Event.HeroRevive="带有 ",~技能," 的英雄复活"
 Event.HeroReviveHint="通过 事件来源 事件目标 获取英雄"
 
+Event.ProcessCovered="过程被剔除"
+Event.ProcessCovered="# ",~过程," # 被剔除"
+Event.ProcessCoveredHint="同一个过程下只能注册一个触发器"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"

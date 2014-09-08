@@ -3380,6 +3380,9 @@ Event.HeroRevive=0,abilcode
 _Event.HeroRevive_Defaults=GetSpellAbilityId
 _Event.HeroRevive_Category=TC_MU_EVENT
 
+Event.ProcessCovered=0,integer
+_Event.ProcessCovered_Category=TC_MU_EVENT
+
 //
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
