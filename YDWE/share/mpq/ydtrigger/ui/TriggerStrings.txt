@@ -5929,7 +5929,10 @@ math.U2L=~单位," 到 ",~点," 的 ",~距离/方向," (清除此点 ",~真值,"
 
 math.Angle="2个角度的夹角"
 math.Angle=~角度,"° 和 ",~角度,"° 之间的夹角"
-math.AngleHint="参数可以是任意范围.返回值范围为0°-180°"   
+math.AngleHint="参数可以是任意范围.返回值范围为0°-180°"  
+
+sys.getTime="获取游戏经过的时间"
+sys.getTime="游戏经过的时间" 
 
 YDWEGetLocalVariableReal="局部变量"
 YDWEGetLocalVariableReal="local_",~R

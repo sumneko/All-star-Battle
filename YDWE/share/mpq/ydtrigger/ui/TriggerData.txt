@@ -9639,6 +9639,9 @@ math.Angle=0,1,real,real,real
 _math.Angle_Defaults=0,180
 _math.Angle_Category=TC_MU_MATH
 
+sys.getTime=0,1,real
+_sys.getTime_Category=TC_MU_BASE
+
 GetLocationX=0,1,real,location
 _GetLocationX_Category=TC_NOTHING
 
