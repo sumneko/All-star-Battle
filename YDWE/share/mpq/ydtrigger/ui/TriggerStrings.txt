@@ -650,6 +650,10 @@ ConditionalTriggerExecute="运行触发(检查条件)"
 ConditionalTriggerExecute="运行 ",~触发," (检查条件)"
 ConditionalTriggerExecuteHint="如果其触发条件成立则运行触发动作."
 
+TriggerEvaluate="运行触发的条件(运行逆天触发器)"
+TriggerEvaluate="运行 ",~触发," 的条件(运行逆天触发器)"
+TriggerEvaluateHint="运行普通触发器的条件.由于逆天触发器的动作其实是条件,所以可以用来直接运行逆天触发器"
+
 
 YDWEActivateTrigger="激活触发"
 YDWEActivateTrigger="激活 ",~Trigger," ( ",~On/Off," 兼容模式 )"

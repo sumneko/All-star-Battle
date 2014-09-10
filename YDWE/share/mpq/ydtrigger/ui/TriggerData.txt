@@ -4911,6 +4911,10 @@ ConditionalTriggerExecute=0,trigger
 _ConditionalTriggerExecute_Defaults=_
 _ConditionalTriggerExecute_Category=TC_TRIGGER
 
+TriggerEvaluate=0,trigger
+_TriggerEvaluate_Defaults=_
+_TriggerEvaluate_Category=TC_TRIGGER
+
 
 YDWEActivateTrigger=0,trigger,onoffoption
 _YDWEActivateTrigger_Defaults=_,OnOffOn
