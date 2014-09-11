@@ -1179,8 +1179,8 @@ UnitTypeSummoned=0,unittype,UNIT_TYPE_SUMMONED,WESTRING_UNITTYPE_SUMMONED
 UnitTypePlagued=0,unittype,UNIT_TYPE_PLAGUED,WESTRING_UNITTYPE_PLAGUED
 UnitTypeSnared=0,unittype,UNIT_TYPE_SNARED,WESTRING_UNITTYPE_SNARED
 UnitTypeStunned=0,unittype,UNIT_TYPE_STUNNED,WESTRING_UNITTYPE_STUNNED
-UnitTypeGiant=0,unittype,UNIT_TYPE_GIANT,泰坦族 [R]
-UnitTypeTauren=0,unittype,UNIT_TYPE_TAUREN,牛头人 [R]
+UnitTypeGiant=0,unittype,UNIT_TYPE_GIANT,泰坦族(无法改变高度) [R]
+UnitTypeTauren=0,unittype,UNIT_TYPE_TAUREN,牛头人(不会被圆形选取选取选取到) [R]
 UnitTypeUndead=0,unittype,UNIT_TYPE_UNDEAD,WESTRING_UNITTYPE_UNDEAD
 UnitTypeMechanical=0,unittype,UNIT_TYPE_MECHANICAL,WESTRING_UNITTYPE_MECHANICAL
 UnitTypeAncient=0,unittype,UNIT_TYPE_ANCIENT,WESTRING_UNITTYPE_ANCIENT
@@ -1202,8 +1202,8 @@ UnitTypeAncientAdd=0,unittypeaddable,UNIT_TYPE_ANCIENT,WESTRING_UNITTYPE_ANCIENT
 UnitTypePeonAdd=0,unittypeaddable,UNIT_TYPE_PEON,WESTRING_UNITTYPE_PEON
 UnitTypeTownHallAdd=0,unittypeaddable,UNIT_TYPE_TOWNHALL,WESTRING_UNITTYPE_TOWNHALL
 UnitTypeSapperAdd=0,unittypeaddable,UNIT_TYPE_SAPPER,WESTRING_UNITTYPE_SAPPER
-UnitTypeGiantAdd=0,unittypeaddable,UNIT_TYPE_GIANT,泰坦族
-UnitTypeTaurenAdd=0,unittypeaddable,UNIT_TYPE_TAUREN,牛头人
+UnitTypeGiantAdd=0,unittypeaddable,UNIT_TYPE_GIANT,泰坦族(无法改变高度)
+UnitTypeTaurenAdd=0,unittypeaddable,UNIT_TYPE_TAUREN,牛头人(只会被逆天选取选取到)
 
 // Game speeds
 GameSpeedSlowest=0,gamespeed,MAP_SPEED_SLOWEST,WESTRING_GAMESPEED_SLOWEST
@@ -3985,6 +3985,10 @@ _Unit.DummySkill_Category=TC_MU_UNIT
 Unit.SetHard=0,unit,real
 _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
+
+Unit.SetMover=0,unit,real
+_Unit.SetMover_Defaults=bj_lastCreatedUnit,50
+_Unit.SetMover_Category=TC_MU_UNIT
 
 //物品库
 Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode
