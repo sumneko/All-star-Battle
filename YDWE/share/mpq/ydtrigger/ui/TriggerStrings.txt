@@ -40,11 +40,11 @@ Event.SkillCoolReset="英雄的 ",~技能," 冷却重置"
 Event.SkillCoolResetHint="通过 事件来源 事件目标 获取英雄"
 
 Event.ItemPick="获得物品"
-Event.ItemPick="英雄获得 "~物品
+Event.ItemPick="任意英雄 获得 "~物品
 Event.ItemPickHint="只能存放一个触发器"
 
 Event.ItemDrop="失去物品"
-Event.ItemDrop="英雄失去 "~物品
+Event.ItemDrop="任意英雄 失去 "~物品
 Event.ItemDropHint="只能存放一个触发器"
 
 Event.HeroRevive="英雄复活"
@@ -614,8 +614,8 @@ Unit.SetHard="为 ",~单位," 添加 ",~时间," 秒的硬直"
 Unit.SetHardHint="短时间的硬直会覆盖长时间的硬直,使用0秒硬直可以直接解除硬直.此外地图内所有的晕眩效果必须使用BPSE这个魔法效果"
 
 Unit.SetMover="设为弹幕"
-Unit.SetMover="将 ",~弹幕," 设置为弹幕,当撞上原力场时维持 ",~实数," %的移动速度"
-Unit.SetMoverHint="速度设置为负数表示撞上原力场就挂了.弹幕有以下物编要求:有蝗虫,移动速度大于0,有守卫类型.Debug版本中会自动校验这些"
+Unit.SetMover="将 ",~弹幕," 设置为弹幕,当撞上原力场时维持 ",~实数,"% 的移动速度"
+Unit.SetMoverHint="速度设置为负数表示撞上原力场就挂了.弹幕有以下物编要求:有蝗虫,移动速度大于0,有守卫,牛头人类型.Debug版本中会自动校验这些"
 
 //物品库
 //最萌小汐
