@@ -644,7 +644,7 @@ Event.ReduceDamageHint="只能用在专用的伤害事件中!!!"
 //弹幕库
 Mover.SetMover="设为弹幕"
 Mover.SetMover="将 ",~弹幕," 设置为弹幕"
-Mover.SetMoverHint="速度设置为负数表示无法.弹幕有以下物编要求:有蝗虫,移动速度大于0,有守卫,牛头人类型.Debug版本中会自动校验这些"
+Mover.SetMoverHint="速度设置为负数表示无法.弹幕有以下物编要求:有蝗虫,移动速度大于0,有古树,守卫,牛头人类型.Debug版本中会自动校验这些"
 
 Mover.SetStateReal="设置弹幕属性(实数)"
 Mover.SetStateReal="设置 ",~弹幕," 的 ",~属性," 为 ",~实数
