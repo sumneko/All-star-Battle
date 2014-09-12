@@ -32,6 +32,7 @@ TC_MU_TEXT=漂浮文字库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_EFFECT=特效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_SOUND=音效库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 TC_MU_PROCESS=过程库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
+TC_MU_MOVER=弹幕库<MU>,ReplaceableTextures\WorldEditUI\Actions-Game
 
 TC_ARITHMETIC=WESTRING_TRIGCAT_ARITHMETIC,ReplaceableTextures\WorldEditUI\Actions-AI,1
 TC_NOTHING=WESTRING_TRIGCAT_NOTHING,ReplaceableTextures\CommandButtons\BTNPillage.blp,1
@@ -396,6 +397,7 @@ removeWhichLocation=0,0,0,清除哪个点,integer
 DisOrAng=0,0,0,距离/方向,integer
 showTo=0,0,0,漂浮文字可见性,integer
 isLuck=0,0,0,神符效果,boolean
+mover_state_real=0,0,0,弹幕属性(实数),integer
 
 
 //***************************************************************************
@@ -447,6 +449,9 @@ damageTypeA3=0,damageTypeA,2,普通单位
 damageTypeB1=0,damageTypeB,0,任意伤害
 damageTypeB2=0,damageTypeB,1,攻击伤害
 damageTypeB3=0,damageTypeB,2,非攻击伤害
+
+mover_state_real1=0,mover_state_real,1,在原力场中降低的移动速度(%)
+mover_state_real2=0,mover_state_real,2,在原力场中受到的额外斥力(%)
 
 //YDWE 修改属性
 bonusTypeC=0,bonusType,3,攻击
@@ -614,6 +619,7 @@ RealCamDefRotation=0,real,bj_CAMERA_DEFAULT_ROTATION,WESTRING_CAMDEFAULT_ROTATIO
 bj_lastTransmissionDuration=0,real,bj_lastTransmissionDuration,最后发言长度 [R]
 RealE=0,real,bj_E,WESTRING_REAL_E
 RealPi=0,real,bj_PI,WESTRING_REAL_PI
+Unit.lastMoveDis=0,real,Unit.lastMoveDis,上次移动的距离 <单位库>
 
 //ScriptCode
 ScriptCode00=0,scriptcode,exitwhen true,退出当前循环 [R]
@@ -1180,7 +1186,7 @@ UnitTypePlagued=0,unittype,UNIT_TYPE_PLAGUED,WESTRING_UNITTYPE_PLAGUED
 UnitTypeSnared=0,unittype,UNIT_TYPE_SNARED,WESTRING_UNITTYPE_SNARED
 UnitTypeStunned=0,unittype,UNIT_TYPE_STUNNED,WESTRING_UNITTYPE_STUNNED
 UnitTypeGiant=0,unittype,UNIT_TYPE_GIANT,泰坦族(无法改变高度) [R]
-UnitTypeTauren=0,unittype,UNIT_TYPE_TAUREN,牛头人(弹幕,不会被圆形选取选取选取到) [R]
+UnitTypeTauren=0,unittype,UNIT_TYPE_TAUREN,牛头人(弹幕，不会被圆形选取选取选取到) [R]
 UnitTypeUndead=0,unittype,UNIT_TYPE_UNDEAD,WESTRING_UNITTYPE_UNDEAD
 UnitTypeMechanical=0,unittype,UNIT_TYPE_MECHANICAL,WESTRING_UNITTYPE_MECHANICAL
 UnitTypeAncient=0,unittype,UNIT_TYPE_ANCIENT,WESTRING_UNITTYPE_ANCIENT
@@ -3986,10 +3992,6 @@ Unit.SetHard=0,unit,real
 _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
 
-Unit.SetMover=0,unit,real
-_Unit.SetMover_Defaults=bj_lastCreatedUnit,50
-_Unit.SetMover_Category=TC_MU_UNIT
-
 //物品库
 Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode
 _Item.Formula_Defaults=_,_,_,_,ches,ches,ches,ches
@@ -4016,6 +4018,15 @@ _process.SetUper_Category=TC_MU_PROCESS
 Event.ReduceDamage=0,real
 _Event.ReduceDamage_Defaults=100
 _Event.ReduceDamage_Category=TC_MU_EVENT
+
+//弹幕库
+Mover.SetMover=0,unit
+_Mover.SetMover_Defaults=bj_lastCreatedUnit
+_Mover.SetMover_Category=TC_MU_MOVER
+
+Mover.SetStateReal=0,unit,mover_state_real,real
+_Mover.SetStateReal_Defaults=bj_lastCreatedUnit,mover_state_real1,0
+_Mover.SetStateReal_Category=TC_MU_MOVER
 
 //YD Ability
 YDWEJumpTimer=0,unit,real,real,real,real,real
