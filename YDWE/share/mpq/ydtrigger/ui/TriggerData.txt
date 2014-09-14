@@ -3988,6 +3988,10 @@ Unit.DummySkill=0,player,unit,integer,abilcode
 _Unit.DummySkill_Defaults=GetOwningPlayer,GetTriggerUnit,1,Aloc
 _Unit.DummySkill_Category=TC_MU_UNIT
 
+Unit.DummySkillLoc=0,player,location,boolean,integer,abilcode
+_Unit.DummySkillLoc_Defaults=GetOwningPlayer,GetUnitLoc,true,1,Aloc
+_Unit.DummySkillLoc_Category=TC_MU_UNIT
+
 Unit.SetHard=0,unit,real
 _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
