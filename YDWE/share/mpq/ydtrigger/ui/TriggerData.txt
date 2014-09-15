@@ -3977,6 +3977,14 @@ Unit.Move2=0,unit,real,real,pathingtype
 _Unit.Move2_Defaults=GetTriggerUnit,0,50,PathingTypeWalkability
 _Unit.Move2_Category=TC_MU_UNIT
 
+Unit.SetUnitXY=0,unit,real,real
+_Unit.SetUnitXY_Defaults=GetTriggerUnit,0,0
+_Unit.SetUnitXY_Category=TC_MU_UNIT
+
+Unit.SetUnitXYOffset=0,unit,real,real,real,real
+_Unit.SetUnitXYOffset_Defaults=GetTriggerUnit,0,0,GetUnitFacing,50
+_Unit.SetUnitXYOffset_Category=TC_MU_UNIT
+
 Unit.DummyAttack=0,unit,unitcode,unit,integer,boolean,boolean,boolean,boolean
 _Unit.DummyAttack_Defaults=GetTriggerUnit,_,GetTriggerUnit,1,true,true,true,true
 _Unit.DummyAttack_Category=TC_MU_UNIT
