@@ -4005,8 +4005,8 @@ _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
 
 //物品库
-Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode
-_Item.Formula_Defaults=_,_,_,_,ches,ches,ches,ches
+Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,integer
+_Item.Formula_Defaults=_,_,_,_,ches,ches,ches,ches,0
 _Item.Formula_Category=TC_MU_ITEM
 
 //过程库
