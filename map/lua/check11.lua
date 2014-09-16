@@ -24,7 +24,7 @@
         end
     )
 
-	require '11record.lua'
+	require 'lua\\11record.lua'
 
     pcall(require, 'MoeUshio\\All-Star-Battle\\init.lua')
     

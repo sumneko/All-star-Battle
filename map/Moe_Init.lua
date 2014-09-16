@@ -1,1 +1,0 @@
-    jass_ext.EnableConsole()
