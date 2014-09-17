@@ -41,8 +41,11 @@
 
     require 'lua\\cmd.lua'
 	require 'lua\\util.lua'
+	require 'lua\\table.lua'
 	require 'lua\\timer.lua'
 	require 'lua\\player.lua'
 	require 'lua\\game.lua'
 	require 'lua\\text.lua'
 	require 'lua\\check11.lua'
+
+	require 'lua\\record.lua'

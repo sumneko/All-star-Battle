@@ -28,13 +28,13 @@
 	--存放空闲计时器
 	timer.idles = {}
 	--空闲计时器计数
-	timer.idleCount = 500
+	timer.idleCount = 100
 	--先创建500个备用计时器出来
-	for i = 1, 500 do
+	for i = 1, 100 do
 		timer.idles[i] = jass.CreateTimer()
 	end
 	--已经创建的计时器计数
-	timer.count = 500
+	timer.count = 100
 	--创建计时器
 	function timer.create()
 		local jTimer
@@ -46,7 +46,7 @@
 			--没有就新建计时器
 			jTimer = jass.CreateTimer()
 			timer.count = timer.count + 1
-			--警告,使用的计时器超出了500个
+			--警告,使用的计时器超出了100个
 			print(('CreateMoreTimers!! (%d)'):format(timer.time(true), timer.count))
 		end
 		return setmetatable({jTimer}, timer)
