@@ -94,7 +94,7 @@
 			if not data[name] then
 				table.insert(data, name)
 			end
-			data[name] = player.self:getRecord '局数'
+			data[name] = math.max(data[name], value)
 		end
 
 		--保存当前名字
@@ -129,7 +129,7 @@
 
 		--判定是不是在开小号
 		if name ~= player.self:getBaseName() then
-			cmd.maid_chat(player.self, '主人你又在开小号虐菜了')
+			cmd.maid_chat(player.self, '主人您又在开小号虐菜了')
 			cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
 		end
 		
