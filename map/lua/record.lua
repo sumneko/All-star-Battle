@@ -128,7 +128,7 @@
 		player.self:saveRecord()
 
 		--判定是不是在开小号
-		if name ~= player.self:getBaseName() then
+		if data[name] ~= data[player.self:getBaseName()] then
 			cmd.maid_chat(player.self, '主人您又在开小号虐菜了')
 			cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
 		end
