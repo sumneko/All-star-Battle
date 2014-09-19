@@ -94,7 +94,7 @@
 			if not data[name] then
 				table.insert(data, name)
 			end
-			data[name] = math.max(data[name], value)
+			data[name] = math.max(data[name] or 0, value)
 		end
 
 		--保存当前名字
