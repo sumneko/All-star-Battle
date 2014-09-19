@@ -5,6 +5,7 @@
 		最萌小汐=|cffffcc00[超高校级の]|r
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
 		裂魂SAMA=|cFF66FFFF[请叫我]|r
+                Mythmakers=|cff505050[起始者]|r
 		只傲不娇=|cffffcc00[立誓今生尊你为王，用我热血为你封疆]|r
 		沙门丶=|cffffcc00[|cffff80ff破碎王者之刃★|cffffcc00]|r
 		Any_遗失=|cffffcc00[|cffaa10bb泯灭虚空之刃★|cffffcc00]|r
@@ -182,17 +183,17 @@
 			内容=筒隐月子俺嫁,萝莉后宫万岁!
 
 			名字=裂魂SAMA
-			信使=n01D
+			信使=n01R
 			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
 			技能=被动
-			标题=|cffffcc00%name%|r的专属信使
-			内容=专业演员
+			标题=|cffffcc00%name%|r的女儿
+			内容=么么哒
 
 		//抽奖获得的信使
 		//⑨ 	n01D
 		//幸运	button\BTNXS_S_XY.blp
 		
-			名字=丶四季甜橙;安久娜橙;CLANNAD_汐;丶夏_娜;纸巾思香芋;葛力姆乔酱;珍双月同天;悲伤巷陌;小爱不是处;黎瑟格林;肉包和卡卡;丶琪露诺;小灰SAMA;单马尾萌娘;幻影穿梭;空心de木偶;好肉的馒头;方之萝莉柚;完美丿女友
+			名字=丶四季甜橙;安久娜橙;CLANNAD_汐;丶夏_娜;纸巾思香芋;葛力姆乔酱;珍双月同天;悲伤巷陌;黎瑟格林;肉包和卡卡;丶琪露诺;小灰SAMA;单马尾萌娘;幻影穿梭;空心de木偶;好肉的馒头;方之萝莉柚;完美丿女友
 			信使=n01D
 			图标=button\BTNXS_S_XY.blp
 			技能=被动
@@ -241,3 +242,12 @@
 			信使=n01N
 
 		//律队 	n01M
+
+                //凛凛蝶 n01R
+
+                        名字=小爱不是处;Mythmakers
+			信使=n01R
+                        图标=button\BTNBTNXS_U_Riricho.blp
+			技能=被动
+			标题=|cffffcc00%name%|r的女儿
+			内容=么么哒
