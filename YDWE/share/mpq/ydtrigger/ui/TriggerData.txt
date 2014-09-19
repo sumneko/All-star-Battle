@@ -398,6 +398,7 @@ DisOrAng=0,0,0,距离/方向,integer
 showTo=0,0,0,漂浮文字可见性,integer
 isLuck=0,0,0,神符效果,boolean
 mover_state_real=0,0,0,弹幕属性(实数),integer
+SkillBarEndReason=0,0,0,技能进度条事件原因,integer
 
 
 //***************************************************************************
@@ -566,6 +567,9 @@ showToC=0,showTo,2,仅对自己可见
 
 isLuckA=0,isLuck,true,好神符
 isLuckB=0,isLuck,false,坏神符
+
+SkillBarEndReasonA=0,SkillBarEndReason,0,技能成功
+SkillBarEndReasonB=0,SkillBarEndReason,1,技能失败
 
 // Operators
 OperatorAdd=0,ArithmeticOperator,"+",WESTRING_ARITHMETICOPERATOR_ADD
@@ -815,6 +819,7 @@ bj_lastHauntedGoldMine=0,unit,bj_lastHauntedGoldMine,最后创建的不死族金
 bj_lastPoolAbstractedUnit=0,unit,bj_lastPoolAbstractedUnit,最后从单位池中取出的单位 [YDWE]
 bj_lastAbilityCastingUnit=0,unit,bj_lastAbilityCastingUnit,最后施放特殊技能的单位 [YDWE]
 bj_lastAbilityTargetUnit=0,unit,bj_lastAbilityTargetUnit,最后被特殊技能命中的单位 [YDWE]
+Unit.lastSkillBar=0,unit,Unit.lastSkillBar,最后创建的施法进度条 <单位库>
 Event.u_from=0,unit,Event.u_from[Event.index],事件来源 <事件库>
 Event.u_to=0,unit,Event.u_to[Event.index],事件目标 <事件库>
 
@@ -3392,6 +3397,10 @@ _Event.HeroRevive_Category=TC_MU_EVENT
 Event.ProcessCovered=0,integer
 _Event.ProcessCovered_Category=TC_MU_EVENT
 
+Event.SkillBarEnd=0,unit,SkillBarEndReason
+_Event.SkillBarEnd_Defaults=Unit.lastSkillBar,SkillBarEndReasonA
+_Event.SkillBarEnd_Category=TC_MU_EVENT
+
 //
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
@@ -4003,6 +4012,10 @@ _Unit.DummySkillLoc_Category=TC_MU_UNIT
 Unit.SetHard=0,unit,real
 _Unit.SetHard_Defaults=GetTriggerUnit,1
 _Unit.SetHard_Category=TC_MU_UNIT
+
+Unit.SkillBar=0,unit,real,playercolor,boolean,boolean,boolean
+_Unit.SkillBar_Defaults=GetTriggerUnit,1,Color00,true,true,true
+_Unit.SkillBar_Category=TC_MU_UNIT
 
 //物品库
 Item.Formula=0,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,itemcode,integer

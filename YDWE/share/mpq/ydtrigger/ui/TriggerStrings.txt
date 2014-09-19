@@ -55,6 +55,10 @@ Event.ProcessCovered="过程被剔除"
 Event.ProcessCovered="# ",~过程," # 被剔除"
 Event.ProcessCoveredHint="同一个过程下只能注册一个触发器"
 
+Event.SkillBarEnd="技能进度条结束"
+Event.SkillBarEnd=~进度条," ",~结束
+Event.SkillBarEndHint="同一个组合下只能注册一个触发器"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"
@@ -622,6 +626,9 @@ Unit.DummySkillLocHint="技能必须是静态值,不能使用变量"
 Unit.SetHard="设置硬直"
 Unit.SetHard="为 ",~单位," 添加 ",~时间," 秒的硬直"
 Unit.SetHardHint="短时间的硬直会覆盖长时间的硬直,使用0秒硬直可以直接解除硬直.此外地图内所有的晕眩效果必须使用BPSE这个魔法效果"
+
+Unit.SkillBar="施法进度条"
+Unit.SkillBar="在 ",~单位," 头上创建持续时间 ",~实数," 秒的进度条,队伍颜色为 ",~队伍颜色," .英雄暂停时暂停 ",~布尔," .英雄死亡时停止 ",~布尔," .英雄停止施法时停止 ",~布尔
 
 //物品库
 //最萌小汐
