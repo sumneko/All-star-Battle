@@ -169,7 +169,7 @@
 		//黑幕
 
 			名字=WorldEdit
-			信使=n01F
+			信使=n01S
 			图标=war3mapImported\btntemp.blp
 			技能=被动
 			标题=|cffffcc00%name%|r,测试辛苦了!
@@ -183,7 +183,7 @@
 			内容=筒隐月子俺嫁,萝莉后宫万岁!
 
 			名字=裂魂SAMA
-			信使=n01R
+			信使=n01S
 			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
 			技能=被动
 			标题=|cffffcc00%name%|r的女儿
@@ -243,10 +243,10 @@
 
 		//律队 	n01M
 
-                //凛凛蝶 n01R
+                //凛凛蝶 n01S
 
                         名字=小爱不是处;Mythmakers
-			信使=n01R
+			信使=n01S
                         图标=button\BTNBTNXS_U_Riricho.blp
 			技能=被动
 			标题=|cffffcc00%name%|r的女儿
