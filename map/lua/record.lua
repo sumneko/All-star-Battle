@@ -5,6 +5,8 @@
 
 	setmetatable(record, record)
 
+	record.GC = jass.InitGameCache 'M'
+
 	if not japi.InitGameCache then
 		local names	= {
 			'InitGameCache',
@@ -57,6 +59,7 @@
 		player.self:setRecord(first .. 2, __id(name:sub(5, 8)) - 2 ^ 31)
 		player.self:setRecord(first .. 3, __id(name:sub(9, 12)) - 2 ^ 31)
 		player.self:setRecord(first .. 4, __id(name:sub(13, 16)) - 2 ^ 31)
+
 	end
 
 	--读取名字
@@ -103,7 +106,7 @@
 		if not data[name] then
 			table.insert(data, name)
 		end
-		data[name] = player.self:getRecord '局数'
+		data[name] = math.max(data[name] or 0, player.self:getRecord '局数')
 		
 		--生成新的本地记录
 		local texts = {}
@@ -127,12 +130,157 @@
 
 		player.self:saveRecord()
 
-		--判定是不是在开小号
-		if data[name] ~= data[player.self:getBaseName()] then
-			cmd.maid_chat(player.self, '主人您又在开小号虐菜了')
-			cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
-		end
+		--将局数信息发送给其他玩家
+		jass.StoreInteger(record.GC, 'mt0', player.self:get(), data[name])
+		jass.SyncStoredInteger(record.GC, 'mt0', player.self:get())
 		
 	end
+
+	--计算节操
+	function record.init_jc()
+		local player_num 	= 0 --记录玩家数
+		local my_team		= 0 --本方玩家数
+		local enemy_team	= 0 --敌方玩家数
+		local team			= player.self:getTeam()
+		local lv1			= 0 --本方局数总和
+		local lv2			= 0 --敌方局数总和
+		
+		record.jc = {}
+		--读取节操
+		for i = 1, 10 do
+			record.jc[i] = table.new(0){
+				['节操'] = player[i]:getRecord '节操',
+				['收益'] = 1,
+			}
+			if player[i]:isPlayer() then
+				if player[i]:getTeam() == team then
+					my_team 	= my_team + 1
+					lv1			= lv1 + math.max(player[i]:getRecord 'mt0', jass.GetStoredInteger(record.GC, 'mt0', i))
+				else
+					enemy_team 	= enemy_team + 1
+					lv2			= lv2 + math.max(player[i]:getRecord 'mt0', jass.GetStoredInteger(record.GC, 'mt0', i))
+				end
+				player_num = player_num + 1
+			end
+		end
+		local jc = record.jc[player.self:get()]
+
+		if my_team ~= enemy_team then
+			--return
+		end
+
+		if player_num < 10 then
+			jc['收益'] = jc['收益'] * player_num / 10
+		end
+
+		--判定是不是在开小号
+		local is_main	= true
+		local data	= player.self.record_data
+		local name, value	= record.loadName('mt')
+		if data[name] ~= data[player.self:getBaseName()] then
+			is_main	= false
+		end
+		
+		--对比双方战绩
+		if lv1 < lv2 then
+			local n = lv2 - lv1
+			local x = 0
+			if n <= 200 then
+				x = x + n * 0.01
+			else
+				x = x + 200 * 0.01
+				n = n - 200
+				if n <= 500 then
+					x = x + n * 0.005
+				else
+					x = x + 500 * 0.005
+					n = n - 500
+					if n <= 1000 then
+						x = x + n * 0.002
+					else
+						x = x + 1000 * 0.002
+						n = n - 1000
+						x = x + n * 0.001
+					end
+				end
+			end
+			cmd.maid_chat(player.self, '主人,对方很强要加油哦')
+			cmd.maid_chat(player.self, ('不管输赢本局您都可以获得额外%.1f%%节操收益哦~'):format(100 * x))
+			jc['收益'] = jc['收益'] * (1 + x)
+		else
+			--检查是不是差距太大了
+			if lv1 > 100 then
+				local n = lv1 - lv2
+				local x = 1
+				if n > 5000 then
+					x = 0.1
+				elseif n > 2000 then
+					x = 0.2
+				elseif n > 1000 then
+					x = 0.3
+				elseif n > 800 then
+					x = 0.4
+				elseif n > 600 then
+					x = 0.5
+				elseif n > 500 then
+					x = 0.6
+				elseif n > 400 then
+					x = 0.7
+				elseif n > 300 then
+					x = 0.8
+				elseif n > 200 then
+					x = 0.9
+				end
+				if x ~= 1 then
+					cmd.maid_chat(player.self, '主人呀,对面差你们太多了吧')
+					cmd.maid_chat(player.self, ('本局的节操收益只有%d%%了哟'):format(100 * x))
+					jc['收益'] = jc['收益'] * x
+				end
+			end
+			
+			--检查是不是小号
+			if not is_main then
+				if player.self:getRecord '局数' == 0 then
+					cmd.maid_chat(player.self, '主人您居然开小号虐菜!从下局开始节操收益会降低50%')
+					cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
+				else
+					cmd.maid_chat(player.self, '主人您又在开小号虐菜了,您本局的节操收益降低50%')
+					cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
+					jc['收益'] = jc['收益'] * 0.5
+				end
+			end
+		end
+
+		print('jc:' .. jc['收益'])
+	end
 	
-	timer.wait(1, record.save_players)
+	timer.wait(1,
+		function()
+			
+			record.save_players()
+			
+		end
+	)
+
+	timer.wait(10,
+		function()
+			print(111111)
+			record.init_jc()
+		end
+	)
+
+	function cmd.game_over(p, tid)
+		local n = timer.time() --每分钟+1节操
+		local jc = record.jc[player.self:get()]
+		if tid == p:getTeam() then
+			n = n + 30 --胜利+30节操
+			n = math.floor(n * jc['收益'])
+			cmd.maid_chat(player.self, ('恭喜获胜,您本局收获了 %d 点节操哦~'):format(n))
+		else
+			n = n + 20 --失败+30节操
+			n = math.floor(n * jc['收益'])
+			cmd.maid_chat(player.self, ('主人,您本局收获了 %d 点节操哦~'):format(n))
+		end
+		jc['节操'] = jc['节操'] + n
+		player.self:setRecord('节操', jc['节操'])
+	end

@@ -49,6 +49,11 @@
         chat = function(this, state, text)
             japi.EXDisplayChat(this.handle, state, text)
         end,
+
+        --获取队伍
+        getTeam = function(this)
+        	return jass.GetPlayerTeam(this.handle)
+    	end,
 	}
 	
 	function player.__call(_, i)
