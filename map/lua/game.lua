@@ -6,9 +6,13 @@
     
     function game.initHero(u)
         table.insert(game.heroes, u)
+        
         if jass.GetOwningPlayer(u) == jass.GetLocalPlayer() then
             game.selfHero = u
         end
+
+        local p = player.j_player(jass.GetOwningPlayer(u))
+        p.hero	= u
     end
     
     function game.self()

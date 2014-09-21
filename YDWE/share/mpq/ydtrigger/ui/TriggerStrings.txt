@@ -59,6 +59,10 @@ Event.SkillBarEnd="技能进度条结束"
 Event.SkillBarEnd=~进度条," ",~结束
 Event.SkillBarEndHint="同一个组合下只能注册一个触发器"
 
+Event.HeroInit="注册英雄"
+Event.HeroInit=~英雄类型," 被注册"
+Event.HeroInitHint="通过 事件来源 事件目标 获取英雄"
+
 // Game events
 
 TriggerRegisterVariableEvent="实数变量事件"

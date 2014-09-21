@@ -16,6 +16,8 @@
 	function _id(a)
 		return ids1[a] or _id2(a)
 	end
+
+	id2string = _id
 	
 	function __id2(a)
 		local n1 = string.byte(a, 1) or 0
@@ -30,6 +32,8 @@
 	function __id(a)
 		return ids2[a] or __id2(a)
 	end
+
+	string2id = __id
     
 	--分割字符串
     string.split = function(str, tos)

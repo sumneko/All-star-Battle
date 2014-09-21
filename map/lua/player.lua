@@ -54,6 +54,13 @@
         getTeam = function(this)
         	return jass.GetPlayerTeam(this.handle)
     	end,
+
+    	--获取英雄
+		hero = 0,
+    	
+		getHero = function(this)
+			return this.hero
+		end,
 	}
 	
 	function player.__call(_, i)

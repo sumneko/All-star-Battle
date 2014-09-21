@@ -3401,6 +3401,9 @@ Event.SkillBarEnd=0,unit,SkillBarEndReason
 _Event.SkillBarEnd_Defaults=Unit.lastSkillBar,SkillBarEndReasonA
 _Event.SkillBarEnd_Category=TC_MU_EVENT
 
+Event.HeroInit=0,unitcode
+_Event.HeroInit_Category=TC_MU_EVENT
+
 //
 YDWEDisableRegister=0,nothing
 _YDWEDisableRegister_Defaults=
