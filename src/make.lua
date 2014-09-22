@@ -60,7 +60,7 @@ local function git_fresh(fname)
 	end
 	if zip_files[fname] then
 		fs.remove(file_dir / fname)
-		os.execute(('%s\\unrar x -o+ %s %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', fname, file_dir:string()))
+		os.execute(('%s\\unrar x -o+ -inul %s %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', fname, file_dir:string()))
 	end
 	local f = io.open((test_dir / fname):string(), r)
 	local test_file = f:read('*a')
@@ -77,7 +77,7 @@ local function git_fresh(fname)
 		f:write(test_file)
 		f:close()
 		if zip_files[fname] then
-			os.execute(('%s\\rar a -ep %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', (file_dir / fname):string(), fname))
+			os.execute(('%s\\rar a -ep -inul %s %s'):format((root_dir / 'build'):string(), (file_dir / fname):string() .. '.zip', (file_dir / fname):string(), fname))
 		end
 		print('[成功]: 更新 ' .. fname)
 	end
@@ -269,9 +269,9 @@ local function main()
 		local fail_files = {}
 		for _, name in ipairs(files) do
 			if zip_files[name] then
-				os.execute(('%s\\unrar x -o+ %s %s %s'):format((root_dir / 'build'):string(), (file_dir / name):string() .. '.zip', name, file_dir:string()))
+				os.execute(('%s\\unrar x -o+ -inul %s %s %s'):format((root_dir / 'build'):string(), (file_dir / name):string() .. '.zip', name, file_dir:string()))
 				if inmap:import(name, file_dir / name) then
-					print('[成功]: 导入 ' .. name)
+					--print('[成功]: 导入 ' .. name)
 					count = count + 1
 				else
 					print('[失败]: 导入 ' .. name)
@@ -280,7 +280,7 @@ local function main()
 				fs.remove(file_dir / name)
 			else
 				if inmap:import(name, file_dir / name) then
-					print('[成功]: 导入 ' .. name)
+					--print('[成功]: 导入 ' .. name)
 					count = count + 1
 				else
 					print('[失败]: 导入 ' .. name)
@@ -294,10 +294,6 @@ local function main()
 
 		print('[成功]: 一共导入了 ' .. count .. ' 个文件')
 		if #fail_files > 0 then
-			print('[错误]: 以下文件导入失败')
-			for _, name in ipairs(fail_files) do
-				print(name)
-			end
 			print(('[错误]: 以上 %s 个文件导入失败!!!'):format(#fail_files))
 		end
 
