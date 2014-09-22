@@ -5105,6 +5105,9 @@ process.IsEnable="过程是否有效"
 process.IsEnable="过程 # ",~key," # 有效"
 process.IsEnableHint="过程无效时请及时做好回收工作"
 
+process.HasName="是否拥有某过程"
+process.HasName=~单位," 拥有优先级大于 ",~优先级," 的 ",~名称," 过程 (包含不剔除低优先级的过程 ",~布尔," ;包含无效过程 ",~布尔," )"
+
 YDWEGetLocalVariableBoolean="局部变量"
 YDWEGetLocalVariableBoolean="local_",~bl
 YDWEGetLocalVariableBooleanHint="获取一个局部变量，参数处填入该变量的名字;局部变量仅在当前触发器下有效。"
