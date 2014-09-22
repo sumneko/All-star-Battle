@@ -174,8 +174,10 @@
 
 		--解析售价
 		data.gold	= {}
-		for n, gold in data['价格']:gmatch '(%d+)%-(%d+)' do
-			table.insert(data.gold, {tonumber(n), tonumber(gold)})
+		if data['价格'] then
+			for n, gold in data['价格']:gmatch '(%d+)%-(%d+)' do
+				table.insert(data.gold, {tonumber(n), tonumber(gold)})
+			end
 		end
 
 		--解析名字
@@ -232,8 +234,15 @@
 				end
 
 				--使用皮肤
-				local func1 = event('英雄发动技能',
-					function(this)
+				local func1 = event('英雄发动技能', '注册英雄',
+					function(this, name, f)
+
+						--如果该英雄被交换,移除注册
+						if name == '注册英雄' and this.hero == hero then
+							event('-英雄发动技能', '-注册英雄', f)
+							return
+						end
+						
 						if this.from == hero and hero_model.skills[this.skill] then
 							local i 	= hero_model.skills[this.skill]
 							local data	= hero_model[id][i]
@@ -346,7 +355,7 @@
 							jass.UnitRemoveAbility(hero, hero_model.skills[i])
 						end
 
-						event('-英雄发动技能', func1)
+						event('-英雄发动技能', '-注册英雄', func1)
 					end
 				)
 			end

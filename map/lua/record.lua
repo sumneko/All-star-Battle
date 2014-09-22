@@ -264,7 +264,6 @@
 
 	timer.wait(10,
 		function()
-			print(111111)
 			record.init_jc()
 		end
 	)
@@ -277,7 +276,7 @@
 			n = math.floor(n * jc['收益'])
 			cmd.maid_chat(player.self, ('恭喜获胜,您本局收获了 %d 点节操哦~'):format(n))
 		else
-			n = n + 20 --失败+30节操
+			n = n + 20 --失败+20节操
 			n = math.floor(n * jc['收益'])
 			cmd.maid_chat(player.self, ('主人,您本局收获了 %d 点节操哦~'):format(n))
 		end
