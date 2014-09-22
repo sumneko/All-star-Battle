@@ -251,3 +251,15 @@
 			技能=被动
 			标题=|cffffcc00%name%|r的女儿
 			内容=么么哒
+
+	==英雄皮肤==
+
+		//saber alter
+		皮肤=A0S9
+		前缀=|cffcc00cc黑色圣光|r
+		说明=这里是皮肤说明
+		价格=1-100 5-450 25-2000
+		变身特效=war3mapImported\C8_blackwave.mdl
+		特效点=origin
+		特效时间=0.5
+		名字=WorldEdit

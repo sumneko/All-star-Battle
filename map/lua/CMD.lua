@@ -8,6 +8,7 @@
 
 	cmd.text_print = {}
 	
+	---[[
 	function print(...)
 		table.insert(cmd.text_print, table.concat({...}, '\t'))
 	end
@@ -28,6 +29,7 @@
 		print(debug.traceback())
 		print("---------------------------------------")
 	end
+	--]]
 
 	--cmdÖ¸Áî½Ó¿Ú
 	function cmd.start()

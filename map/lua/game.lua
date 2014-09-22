@@ -3,6 +3,8 @@
     local game = game
     
     game.heroes = {}
+    game.trg_hero_spell	= jass.CreateTrigger()
+    game.trg_hero_skill	= jass.CreateTrigger()
     
     function game.initHero(u)
         table.insert(game.heroes, u)
@@ -13,7 +15,23 @@
 
         local p = player.j_player(jass.GetOwningPlayer(u))
         p.hero	= u
+
+        event('注册英雄', {hero = u, player = p})
+        jass.TriggerRegisterUnitEvent(game.trg_hero_spell, u, jass.EVENT_UNIT_SPELL_EFFECT)
+        jass.TriggerRegisterUnitEvent(game.trg_hero_skill, u, jass.EVENT_UNIT_HERO_SKILL)
     end
+
+    jass.TriggerAddCondition(game.trg_hero_spell, jass.Condition(
+    	function()
+	    	event('英雄发动技能', {from = jass.GetTriggerUnit(), to = jass.GetSpellTargetUnit(), skill = jass.GetSpellAbilityId()})
+    	end
+    ))
+
+    jass.TriggerAddCondition(game.trg_hero_skill, jass.Condition(
+    	function()
+	    	event('英雄学习技能', {from = jass.GetTriggerUnit(), skill = jass.GetLearnedSkill()})
+    	end
+    ))
     
     function game.self()
         return game.selfHero

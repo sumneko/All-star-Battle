@@ -95,5 +95,16 @@
 		end
         
         player.self = player.j_player(jass.GetLocalPlayer())
+
+		--注册玩家聊天事件
+        local trg = jass.CreateTrigger()
+        for i = 1, 12 do
+	        jass.TriggerRegisterPlayerChatEvent(trg, player[i].handle, '', false)
+        end
+        jass.TriggerAddCondition(trg, jass.Condition(
+			function()
+				event('玩家聊天', {player = player.j_player(jass.GetTriggerPlayer()), text = jass.GetEventPlayerChatString()})
+			end
+        ))
 	end
 	player.init()
