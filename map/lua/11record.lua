@@ -113,10 +113,6 @@
 	
 	function cmd.get_messenger_type(p)
 		jass.udg_Lua_integer = |n008|
-		local name = p:getBaseName()
-		if messenger[name] then
-			jass.udg_Lua_integer = messenger[name].uid
-		end
 	end
 
 	function cmd.set_messenger_text(p, u)
@@ -219,8 +215,10 @@
 						table.insert(texts, ('\n|cffffcc00您当前拥有 %d 次使用权\n\n点击使用该皮肤|r'):format(count))
 					end
 
+					data.name = slk.unit[data.hero_id_new].Propernames:match '([^%,]+)'
+
 					--生成技能标题
-					local title		= ('%s %s'):format(data['前缀'], slk.unit[data.hero_id_new].Propernames:match '([^%,]+)')
+					local title		= ('%s %s'):format(data['前缀'], data.name)
 
 					--生成技能说明
 					local direct	= ('%s\n\n%s'):format(data['说明'], table.concat(texts, '\n'))
@@ -236,12 +234,17 @@
 				end
 
 				--使用皮肤
-				local func1 = event('英雄发动技能', '注册英雄',
+				local func1 = event('英雄发动技能', '注册英雄', '玩家离开',
 					function(this, name, f)
 
 						--如果该英雄被交换,移除注册
 						if name == '注册英雄' and this.hero == hero then
-							event('-英雄发动技能', '-注册英雄', f)
+							event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+							return
+						end
+
+						if name == '玩家离开' and this.player == p then
+							event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
 							return
 						end
 						
@@ -252,6 +255,7 @@
 
 							event('点击皮肤技能', this)
 
+							--使用皮肤
 							local function change()
 								jass.UnitAddAbility(hero, data.skill_id)
 								jass.UnitRemoveAbility(hero, data.skill_id)
@@ -282,6 +286,24 @@
 
 								jass.SetUnitAnimation(hero, data['变身动画'] or 'stand')
 								jass.QueueUnitAnimation(hero, 'stand')
+
+								local time = timer.time()
+
+								event('玩家离开',
+									function(this, name, f)
+										event('-玩家离开', f)
+
+										--有玩家在20分钟内退出
+										if timer.time() - time < 1200 then
+											local count = p:getRecord(data['皮肤'])
+											count = count + 1
+											p:setRecord(data['皮肤'], count)
+											p:saveRecord()
+
+											cmd.maid_chat(p, ('主人,您的 %s 皮肤使用次数已经返还给您了,剩余 %d 次!'):format(data.name, count))
+										end
+									end
+								)
 							end
 
 							--确认是否能直接使用
@@ -370,7 +392,7 @@
 							jass.UnitRemoveAbility(hero, hero_model.skills[i])
 						end
 
-						event('-英雄发动技能', '-注册英雄', func1)
+						event('-英雄发动技能', '-注册英雄', '-玩家离开', func1)
 					end
 				)
 			end

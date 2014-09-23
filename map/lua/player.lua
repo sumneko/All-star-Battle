@@ -106,5 +106,16 @@
 				event('玩家聊天', {player = player.j_player(jass.GetTriggerPlayer()), text = jass.GetEventPlayerChatString()})
 			end
         ))
+
+        --注册玩家离开事件
+        local trg = jass.CreateTrigger()
+        for i = 1, 12 do
+	        jass.TriggerRegisterPlayerEvent(trg, player[i].handle, jass.EVENT_PLAYER_LEAVE)
+        end
+        jass.TriggerAddCondition(trg, jass.Condition(
+			function()
+				event('玩家离开', {player = player.j_player(jass.GetTriggerPlayer())})
+			end
+        ))
 	end
 	player.init()
