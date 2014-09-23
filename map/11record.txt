@@ -179,7 +179,7 @@
 			变身动画=morph
 
 			//皮肤无限使用权
-			名字=WorldEdit
+			名字=WorldEdit;
 			图标=war3mapImported\btntemp.blp
 			技能=被动
 			标题=|cffffcc00%player_name%|r,测试辛苦了!
@@ -190,6 +190,12 @@
 			技能=被动
 			标题=|cffffcc00%player_name%|r的专属信使
 			内容=筒隐月子俺嫁,萝莉后宫万岁!
+
+			名字=裂魂SAMA;小爱不是处;Mythmakers
+			图标=button\BTNBTNXS_U_Riricho.blp
+			技能=被动
+			标题=|cffffcc00%player_name%|r,测试辛苦了!
+			内容=无聊的时候就逗逗裂魂人玩吧~
 
 		//皮卡丘	n01J
 
@@ -220,4 +226,4 @@
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
-		名字=WorldEdit
+		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
