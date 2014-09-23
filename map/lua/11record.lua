@@ -208,9 +208,11 @@
 						end
 					end
 
-					local count	= p:getRecord(data['皮肤'])
+					local count	= p:getRecord(data['皮肤'])	
 					if data.names[p:getBaseName()] then
 						table.insert(texts, ('\n|cffffcc00无限使用!\n\n点击使用该皮肤|r'))
+					elseif #data.gold == 0 then
+						table.insert(texts, ('\n|cffffcc00非卖品|r'))
 					elseif count == 0 then
 						table.insert(texts, ('\n|cffffcc00您当前拥有 %d 点节操\n\n点击购买该皮肤|r'):format(jc))
 					else
@@ -259,7 +261,7 @@
 									table.back(ignore)
 									for name, value in pairs(slk.unit[data.hero_id_base]) do
 										if not ignore[name] and slk.unit[data.hero_id_new][name] ~= value then
-											cmd.maid_chat(player.self, ('皮肤数据不匹配[%s][%s][%s] - [%s][%s][%s]'):format(data.hero_id_base, name, value, data.hero_id_new, name, slk.unit[data.hero_id_new][name]))
+											cmd.maid_chat(player.self, ('皮肤数据不匹配[%s]:[%s] - [%s]'):format(name, value, slk.unit[data.hero_id_new][name]))
 										end
 									end
 								end
