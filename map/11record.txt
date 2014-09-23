@@ -194,8 +194,8 @@
 			名字=裂魂SAMA;小爱不是处;Mythmakers
 			图标=button\BTNBTNXS_U_Riricho.blp
 			技能=被动
-			标题=|cffffcc00%player_name%|r,测试辛苦了!
-			内容=无聊的时候就逗逗裂魂人玩吧~
+			标题=|cffffcc00%player_name%|r的女儿
+			内容=么么哒
 
 		//皮卡丘	n01J
 
