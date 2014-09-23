@@ -14,26 +14,25 @@
 		end,
 		['特殊信使'] = function(line)
 			local name, value = line:match('(.+)=(.+)')
-			local key
-			if name == '名字' then
-				messenger.who = value:split(';')
-				for _, name in ipairs(messenger.who) do
-					messenger[name] = {name = name}
+			if name then
+				if name == '信使' then
+					messenger.now = value
+					messenger[value] = {}
+					messenger[value].names = {}
+					table.insert(messenger, messenger[value])
+				elseif name == '名字' then
+					messenger[messenger.now].now_names = {}
+					for pname in value:gmatch '([^%;]+)' do
+						messenger[messenger.now].names[pname] = {}
+						messenger[messenger.now].now_names[pname] = messenger[messenger.now].names[pname]
+					end
 				end
-			elseif name == '信使' then
-				key = {'uid', __id(value)}
-			elseif name == '图标' then
-				key = {'image', value}
-			elseif name == '技能' then
-				key = {'type', value == '被动' and 'skill1' or value == '主动' and 'skill2' or nil}
-			elseif name == '标题' then
-				key = {'title', value}
-			elseif name == '内容' then
-				key = {'text', value}
-			end
-			if key then
-				for _, name in ipairs(messenger.who) do
-					messenger[name][key[1]] = key[2]
+				if messenger[messenger.now].now_names then
+					for pname, t in pairs(messenger[messenger.now].now_names) do
+						t[name] = value
+					end
+				elseif messenger.now then
+					messenger[messenger.now][name] = value
 				end
 			end
 		end,
@@ -110,36 +109,302 @@
 		|A0S1|,
 		|A0S2|,
 	}
+
+	--信使皮肤技能
+	messenger.model_skill = {
+		|A0TD|,
+		|A0TE|,
+		|A0TF|,
+		|A0TG|,
+		|A0TH|,
+		|A0TI|,
+		|A0TJ|,
+		|A0TK|,
+		|A0TL|,
+		|A0TM|,
+		|A0TN|,
+	}
+
+	table.back(messenger.model_skill)
+
+	--解析信使皮肤属性
+	for _, data in ipairs(messenger) do
+		--单位ID
+		data.id		= data['信使']
+		data.uid	= string2id(data.id)
+		
+		--解析售价
+		data.gold	= {}
+		if data['价格'] then
+			for n, gold in data['价格']:gmatch '(%d+)%-(%d+)' do
+				table.insert(data.gold, {tonumber(n), tonumber(gold)})
+			end
+		end
+	end
 	
 	function cmd.get_messenger_type(p)
 		jass.udg_Lua_integer = |n008|
 	end
 
 	function cmd.set_messenger_text(p, u)
-		local name = p:getBaseName()
-		if messenger[name] then
-			local t = messenger[name]
-			if t.type then
-				local sid = messenger[t.type][p:get()]
-				local function sub(s, t)
-					return s:gsub('(%%%C-%%)',
-						function(s)
-							s = s:sub(2, -2)
-							return t[s]
+		--给信使添加魔法书
+		jass.UnitAddAbility(u, |A0TO|)
+		local jc	= p:getRecord '节操'
+		
+		for i, data in ipairs(messenger) do
+			--遍历当前的皮肤
+			local sid	= messenger.model_skill[i]
+			local ab	= japi.EXGetUnitAbility(u, sid)
+
+			local texts	= {}
+
+			for i, t in ipairs(data.gold) do
+				if t[2] > jc then
+					texts[i]	= ('#%d 套餐: |cffff1111%02d 次使用权 - %04d 节操|r'):format(i, t[1], t[2])
+				else
+					texts[i]	= ('#%d 套餐: |cff11ff11%02d 次使用权 - %04d 节操|r'):format(i, t[1], t[2])
+				end
+			end
+
+			local count	= p:getRecord(data['信使'])
+			if data.names[p:getBaseName()] then
+				table.insert(texts, ('\n|cffffcc00无限使用!\n\n点击使用该皮肤|r'))
+			elseif #data.gold == 0 then
+				table.insert(texts, ('\n|cffffcc00非卖品|r'))
+			elseif count == 0 then
+				table.insert(texts, ('\n|cffffcc00您当前拥有 %d 点节操\n\n点击购买该皮肤|r'):format(jc))
+			else
+				table.insert(texts, ('\n|cffffcc00您当前拥有 %d 次使用权\n\n点击使用该皮肤|r'):format(count))
+			end
+
+			data.name = slk.unit[data.id].Name
+
+			--生成技能标题
+			local title		= ('%s %s'):format(data['前缀'], data.name)
+
+			--生成技能说明
+			local direct	= ('%s\n\n%s'):format(data['说明'], table.concat(texts, '\n'))
+			
+
+			--设置技能
+			if p == player.self then
+				japi.EXSetAbilityDataReal(ab, 1, 110, 1)
+				japi.EXSetAbilityDataString(ab, 1, 215, title)
+				japi.EXSetAbilityDataString(ab, 1, 218, direct)
+				japi.EXSetAbilityDataString(ab, 1, 204, slk.unit[data.id].Art)
+			end
+		end
+
+		--使用皮肤
+		local func1 = event('点击信使皮肤', '玩家离开',
+			function(this, name, f)
+				if name == '玩家离开' then
+					if this.player == p then
+						event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+					end
+					return
+				end
+				
+				local i 	= messenger.model_skill[this.skill]
+				local data	= messenger[i]
+				local count	= p:getRecord(data['信使'])
+				
+				event('点击皮肤技能', this)
+				
+				--使用皮肤
+				local function change()
+					if game.debug then
+						local ignore = {'file', 'ScoreScreenIcon', 'Art', 'modelScale', 'scale', 'unitSound', 'EditorSuffix', 'name', 'abilList'}
+						table.back(ignore)
+						local old_id = id2string(jass.GetUnitTypeId(u))
+						for name, value in pairs(slk.unit[data.id]) do
+							if not ignore[name] and slk.unit[old_id][name] ~= value then
+								cmd.maid_chat(player.self, ('皮肤数据不匹配[%s]:[%s] - [%s]'):format(name, value, slk.unit[old_id][name]))
+							end
+						end
+					end
+
+					--删除原来的信使
+					local x, y, face, life	= jass.GetUnitX(u), jass.GetUnitY(u), jass.GetUnitFacing(u), jass.GetWidgetLife(u)
+					local items	= {}
+					for i = 0, 5 do
+						items[i] = jass.UnitItemInSlot(u, i)
+						if items[i] then
+							jass.SetItemPosition(items[i], 0, 0)
+						end
+					end
+					jass.UnitRemoveAbility(u, |A0TO|)
+					jass.RemoveUnit(u)
+
+					--创建新的信使
+					u	= jass.CreateUnit(p.handle, data.uid, x, y, face)
+					for i = 0, 5 do
+						if items[i] then
+							jass.UnitAddItem(u, items[i])
+						end
+					end
+					jass.SetWidgetLife(u, life)
+				
+					--本地玩家选中信使
+					if p == player.self then
+						jass.SelectUnit(u, true)
+					end
+
+					--保存到jass中
+					jass.udg_danwei[328]	= u
+
+					--添加特殊技能
+					local pid		= p:get()
+					local pdata		= data.names[p:getBaseName()]
+					local skills	= messenger.skill1
+					if pdata and pdata['技能'] == '主动' then
+						skills		= messenger.skill2
+					end
+					
+					jass.UnitAddAbility(u, skills[pid])
+					jass.UnitMakeAbilityPermanent(u, true, skills[pid])
+
+					local ab	= japi.EXGetUnitAbility(u, skills[pid])
+
+					local title	= pdata and pdata['标题'] or '%player_name% 从商城中购买的信使'
+					local text	= pdata and pdata['内容'] or '该皮肤还剩余 %messenger_count% 次使用次数'
+					local art	= pdata and pdata['图标'] or 'button\\BTNXS_S_XY.blp'
+
+					data.player_name		= p:getBaseName()
+					data.messenger_count	= p:getRecord(data['信使'])
+
+					local function sub(s)
+						return s:gsub('%%(.-)%%',
+							function(name)
+								if name then
+									return data[name]
+								end
+							end
+						)
+					end
+
+					japi.EXSetAbilityDataString(ab, 1, 215, sub(title))
+					japi.EXSetAbilityDataString(ab, 1, 218, sub(text))
+					japi.EXSetAbilityDataString(ab, 1, 204, art)
+
+					if data['变身特效'] then
+						local t = tonumber(data['特效时间'])
+						local e = jass.AddSpecialEffectTarget(data['变身特效'], u, data['特效点'])
+						if t < 0 then
+							jass.DestroyEffect(e)
+						else
+							timer.wait(t,
+								function()
+									jass.DestroyEffect(e)
+								end
+							)
+						end
+					end
+
+					jass.SetUnitAnimation(u, data['变身动画'] or 'stand')
+					jass.QueueUnitAnimation(u, 'stand')
+
+					local time = timer.time()
+
+					event('玩家离开', '单位死亡',
+						function(this, name, f)
+							event('-玩家离开', '-单位死亡', f)
+
+							--有玩家在20分钟内退出
+							if timer.time() - time < 1200 then
+								local count = p:getRecord(data['信使'])
+								count = count + 1
+								p:setRecord(data['信使'], count)
+								p:saveRecord()
+
+								cmd.maid_chat(p, ('主人,您的 %s 皮肤使用次数已经返还给您了,剩余 %d 次!'):format(data.name, count))
+							end
 						end
 					)
 				end
-				
-				u = tonumber(u)
-				jass.UnitAddAbility(u, sid)
-				jass.UnitMakeAbilityPermanent(u, true, sid)
-				local ab = japi.EXGetUnitAbility(u, sid)
-				japi.EXSetAbilityDataString(ab, 1, 204, t.image)
-				japi.EXSetAbilityDataString(ab, 1, 215, sub(t.title, t))
-				japi.EXSetAbilityDataString(ab, 1, 218, sub(t.text, t))
+
+				--确认是否能直接使用
+				if data.names[p:getBaseName()] then
+					change()
+				elseif count == 0 then
+					--确认是否是非卖品
+					if #data.gold == 0 then
+						cmd.maid_chat(p, '主人主人,该皮肤目前已经下架买不了哦')
+						return
+					end
+					
+					--确认是否够钱买最便宜的那个
+					if p:getRecord '节操' < data.gold[1][2] then
+						cmd.maid_chat(p, '主人您好像连最便宜的套餐都买不起耶')
+						cmd.maid_chat(p, '不过我不会抛弃您的,赶紧给我搬砖挣钱去啊!')
+					else
+						cmd.maid_chat(p, '主人,请输入您要购买的套餐编号(一个数字)')
+						cmd.maid_chat(p, '具体的套餐请查看皮肤说明哦~注意是编号不是使用次数哦')
+
+						event('玩家聊天', '点击皮肤技能',
+							function(this, name, f)
+								if this.player == p then
+									event('-玩家聊天', '-点击皮肤技能', f)
+
+									if name == '点击皮肤技能' then
+										return
+									end
+
+									local n = tonumber(this.text)
+									if n then
+										--检查是否有该套餐
+										if data.gold[n] then
+											local jc 	= p:getRecord '节操'
+											local count	= data.gold[n][1]
+											local gold	= data.gold[n][2]
+											--检查够不够钱
+											if gold > jc then
+												cmd.maid_chat(p, '主人,您现在好像还买不起这么多哦')
+											else
+												jc = jc - gold
+												p:setRecord('节操', jc)
+
+												count = count - 1
+												p:setRecord(data['信使'], count)
+
+												p:saveRecord()
+
+												change()
+
+												cmd.maid_chat(p, ('主人,您已经成功购买了该皮肤哦'))
+												cmd.maid_chat(p, ('该皮肤还剩下 %d 次使用权,您还剩余 %d 点节操'):format(count, jc))
+											end
+										else
+											cmd.maid_chat(p, '主人您的输入有误,请输入套餐的编号,不是使用次数哦')
+										end
+									else
+										cmd.maid_chat(p, '主人您的输入有误,主要输入一个数字就可以了哦')
+									end
+								end
+							end
+						)
+					end
+				else
+					count = count - 1
+					p:setRecord(data['信使'], count)
+					p:saveRecord()
+
+					change()
+
+					cmd.maid_chat(p, ('主人,该皮肤您还拥有 %d 次使用权哦~'):format(count))
+				end
+			end
+		)
+	end
+
+	event('单位发动技能',
+		function(this)
+			local i	= messenger.model_skill[this.skill]
+			if i then
+				event('点击信使皮肤', this)
 			end
 		end
-	end
+	)
 	
 	--注册英雄皮肤
 	--皮肤技能
@@ -231,6 +496,10 @@
 						japi.EXSetAbilityDataString(ab, 1, 218, direct)
 						japi.EXSetAbilityDataString(ab, 1, 204, slk.unit[data.hero_id_new].Art)
 					end
+					if player.self:isObserver() then
+						--对OB隐藏图标
+						japi.EXSetAbilityDataReal(ab, 1, 110, 0)
+					end
 				end
 
 				--使用皮肤
@@ -238,13 +507,17 @@
 					function(this, name, f)
 
 						--如果该英雄被交换,移除注册
-						if name == '注册英雄' and this.hero == hero then
-							event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+						if name == '注册英雄' then
+							if this.hero == hero then
+								event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+							end
 							return
 						end
 
-						if name == '玩家离开' and this.player == p then
-							event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+						if name == '玩家离开' then
+							if this.player == p then
+								event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+							end
 							return
 						end
 						

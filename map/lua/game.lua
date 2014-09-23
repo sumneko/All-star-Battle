@@ -34,6 +34,26 @@
 	    	event('英雄学习技能', {from = jass.GetTriggerUnit(), skill = jass.GetLearnedSkill()})
     	end
     ))
+
+   	game.trg_unit_spell = jass.CreateTrigger()
+	for i = 1, 12 do
+		jass.TriggerRegisterPlayerUnitEvent(game.trg_unit_spell, player[i].handle, jass.EVENT_PLAYER_UNIT_SPELL_EFFECT, nil)
+	end
+	jass.TriggerAddCondition(game.trg_unit_spell, jass.Condition(
+    	function()
+	    	event('单位发动技能', {from = jass.GetTriggerUnit(), to = jass.GetSpellTargetUnit(), skill = jass.GetSpellAbilityId(), player = player.j_player(jass.GetTriggerPlayer())})
+    	end
+    ))
+
+    game.trg_unit_death	= jass.CreateTrigger()
+    for i = 1, 12 do
+		jass.TriggerRegisterPlayerUnitEvent(game.trg_unit_death, player[i].handle, jass.EVENT_PLAYER_UNIT_DEATH, nil)
+	end
+	jass.TriggerAddCondition(game.trg_unit_death, jass.Condition(
+    	function()
+	    	event('单位死亡', {from = jass.GetKillingUnit(), to = jass.GetSpellTargetUnit(), player = player.j_player(jass.GetTriggerPlayer())})
+    	end
+    ))
     
     function game.self()
         return game.selfHero
