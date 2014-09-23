@@ -262,4 +262,5 @@
 		变身特效=war3mapImported\C8_blackwave.mdl
 		特效点=origin
 		特效时间=0.5
+		变身动画=morph
 		名字=WorldEdit

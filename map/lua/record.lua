@@ -91,7 +91,7 @@
 		end
 		local data = player.self.record_data
 
-		--取出局数最多的一个名字
+		--取出胜利最多的一个名字
 		local name, value	= record.loadName('mt')
 		if value > 0 then
 			if not data[name] then
@@ -106,7 +106,7 @@
 		if not data[name] then
 			table.insert(data, name)
 		end
-		data[name] = math.max(data[name] or 0, player.self:getRecord '局数')
+		data[name] = math.max(data[name] or 0, player.self:getRecord '胜利')
 		
 		--生成新的本地记录
 		local texts = {}
@@ -117,7 +117,7 @@
 		--print(table.concat(texts, '\n'))
 		storm.save('save\\Profile1\\Campaigns.mu', table.concat(texts, '\n'))
 
-		--找到局数最多的一个名字
+		--找到胜利最多的一个名字
 		local name	= table.pick(data,
 			function(name1, name2)
 				return data[name1] > data[name2]
@@ -130,7 +130,7 @@
 
 		player.self:saveRecord()
 
-		--将局数信息发送给其他玩家
+		--将胜利信息发送给其他玩家
 		jass.StoreInteger(record.GC, 'mt0', player.self:get(), data[name])
 		jass.SyncStoredInteger(record.GC, 'mt0', player.self:get())
 		
@@ -142,8 +142,8 @@
 		local my_team		= 0 --本方玩家数
 		local enemy_team	= 0 --敌方玩家数
 		local team			= player.self:getTeam()
-		local lv1			= 0 --本方局数总和
-		local lv2			= 0 --敌方局数总和
+		local lv1			= 0 --本方胜利总和
+		local lv2			= 0 --敌方胜利总和
 		
 		record.jc = {}
 		--读取节操
@@ -240,13 +240,13 @@
 			
 			--检查是不是小号
 			if not is_main then
-				if player.self:getRecord '局数' == 0 then
-					cmd.maid_chat(player.self, '主人您居然开小号虐菜!从下局开始节操收益会降低50%')
+				if player.self:getRecord '胜利' == 0 then
+					cmd.maid_chat(player.self, '主人您居然开小号虐菜!从下局开始节操收益会降低25%')
 					cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
 				else
-					cmd.maid_chat(player.self, '主人您又在开小号虐菜了,您本局的节操收益降低50%')
+					cmd.maid_chat(player.self, '主人您又在开小号虐菜了,您本局的节操收益降低25%')
 					cmd.maid_chat(player.self, '主人您的大号是 [' .. name .. '] 没错吧~')
-					jc['收益'] = jc['收益'] * 0.5
+					jc['收益'] = jc['收益'] * 0.75
 				end
 			end
 		end

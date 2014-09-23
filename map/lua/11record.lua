@@ -254,6 +254,16 @@
 								jass.UnitAddAbility(hero, data.skill_id)
 								jass.UnitRemoveAbility(hero, data.skill_id)
 
+								if game.debug then
+									local ignore = {'file', 'ScoreScreenIcon', 'Art', 'Propernames', 'Name', 'ModelScale', 'scale', 'UnitSound', 'EditorSuffix'}
+									table.back(ignore)
+									for name, value in pairs(slk.unit[data.hero_id_base]) do
+										if not ignore[name] and slk.unit[data.hero_id_new][name] ~= value then
+											cmd.maid_chat(player.self, ('皮肤数据不匹配[%s][%s][%s] - [%s][%s][%s]'):format(data.hero_id_base, name, value, data.hero_id_new, name, slk.unit[data.hero_id_new][name]))
+										end
+									end
+								end
+
 								if data['变身特效'] then
 									local t = tonumber(data['特效时间'])
 									local e = jass.AddSpecialEffectTarget(data['变身特效'], hero, data['特效点'])
@@ -267,6 +277,9 @@
 										)
 									end
 								end
+
+								jass.SetUnitAnimation(hero, data['变身动画'] or 'stand')
+								jass.QueueUnitAnimation(hero, 'stand')
 							end
 
 							--确认是否能直接使用
@@ -297,7 +310,7 @@
 												end
 
 												--5分钟以后不能买皮肤
-												if timer.time > 300 then
+												if timer.time() > 300 then
 													return
 												end
 												

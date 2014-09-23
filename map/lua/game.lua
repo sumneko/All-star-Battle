@@ -1,6 +1,8 @@
     game = {}
     
     local game = game
+
+    game.debug = jass.s__sys_Debug
     
     game.heroes = {}
     game.trg_hero_spell	= jass.CreateTrigger()
