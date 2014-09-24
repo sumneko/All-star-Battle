@@ -62,12 +62,6 @@
 			标题=|cffffcc00%player_name%|r,测试辛苦了!
 			内容=无聊的时候就逗逗裂魂人玩吧~
 
-			名字=最萌小汐
-			图标=button\BTNXS_U_saber.blp
-			技能=被动
-			标题=|cffffcc00%player_name%|r的专属信使
-			内容=筒隐月子俺嫁,萝莉后宫万岁!
-
 			名字=裂魂SAMA;小爱不是处;Mythmakers
 			图标=button\BTNBTNXS_U_Riricho.blp
 			技能=被动
@@ -164,6 +158,12 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
+			名字=最萌小汐
+			图标=button\BTNXS_U_saber.blp
+			技能=被动
+			标题=|cffffcc00%player_name%|r的专属信使
+			内容=筒隐月子俺嫁,萝莉后宫万岁!
+
 			名字=
 			图标=button\BTNXS_U_saber.blp
 			技能=被动
