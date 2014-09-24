@@ -6,19 +6,14 @@
 		哇嘎嘎西奈=|cffffcc00[BOOM!]|r
 		裂魂SAMA=|cFF66FFFF[请叫我]|r
                 Mythmakers=|cff505050[起始者]|r
-		只傲不娇=|cffffcc00[立誓今生尊你为王，用我热血为你封疆]|r
 		沙门丶=|cffffcc00[|cffff80ff破碎王者之刃★|cffffcc00]|r
 		Any_遗失=|cffffcc00[|cffaa10bb泯灭虚空之刃★|cffffcc00]|r
 		姬神小桃=|cffffcc00[|cffffff00誓约胜利之剑★|cffffcc00]|r
 		藤林杏=|cffffcc00[|cff9925ff灭杀魔王之剑★|cffffcc00]|r
 		S灭杀_____=|cffffcc00[|cff1BE6B8贯穿真实之剑★|cffffcc00]|r
 		噩梦睡篮丶=|cffffcc00[|cffDF4C13破碎虚伪之枪★|cffffcc00]|r
-		冰琪露诺=|cffffcc00[|cff35ddff⑨蕾么么哒|cffffcc00]|r
-		幻幻森森=|cffffcc00[最后的月牙天冲]|r
-		E_s_t=|cffffcc00[魔王杀しの圣剑]|r
-		毒岛牙子丶=|cffffcc00[蠢妃大人]|r
-                怨恨已闻=|cff505050[汝之怨恨·为汝消除]|r
-                镜子大大王=|cffffcc00[掌管二次元的女大王]|r
+		
+                
 
         //天道受1
         我妻桃子=|cffffcc00[|cFFFF5020炎发灼眼の讨伐者|cffffcc00]|r
@@ -28,130 +23,6 @@
         空心de木偶=|cffffcc00[|cFF00FFFF完美潇洒の从者|cffffcc00]|r
         樱逝夕颜=|cffffcc00[|cFFFFCC66远离尘世の理想乡|cffffcc00]|r
 
-        //零度娘
-        宇智波萌乔=|cffffcc00[虫群之心]|r
-        爱滢零度=|cffffcc00[Niflheimr]|r
-        纸巾思香芋=|cffffcc00[至今思项羽]|r
-        月倾影=|cffffcc00[神の领域]|r
-        云雀丘由贵=|cffffcc00[学院の魔女]|r
-        绎绚=|cffffcc00[焰]|r
-
-        //saber骑士队伍                               
-        黑仪=|cffffcc00[黑仪女王]|r
-        美夕丶念安=|cffffcc00[唵嘛呢叭咪吽]|r
-        李狗蛋520=|cffffcc00[我能打⑨个]|r
-        禁丶丶断=|cffffcc00[愿为水逼]|r
-        纯白丶依然=|cffffcc00[夜幕中的杀人鬼]|r
-        犯罪系数=|cffffcc00[放开那个萝莉]|r
-
-        //妖魄队伍
-        妖魄受=|cffffcc00[天地同受]|r
-        紫天受=|cffffcc00[色情男主播]|r
-        黎明山脉=|cffffcc00[色情男主播]|r
-        夜影受=|cffffcc00[色情男主播]|r
-        珍双月同天=|cffffcc00[花开只为蝶恋香]|r
-
-        //黑雪队   
-        悲伤巷陌=|cffffcc00[众神の序曲]|r
-        帅帅DE恶魔=|cffffcc00[光明の礼赞]|r
-        上泽白慧=|cffffcc00[生命の旋律]|r
-        科斯米娅=|cffffcc00[海の镇魂曲]|r 
-        夜灬夜丶3=|cffffcc00[爱之梦]|r
-        
-        //蛋蛋娘队                                            
-        蛋D丶e忧伤=|cffffcc00[此人很懒不留称号]|r
-        好肉的馒头=|cffffcc00[想吃早饭请找我]|r
-        安久娜白=|cffffcc00[遵从召唤而来，你是我的Master么]|r
-        安久娜蓝=|cffffcc00[癫疯图逼]|r
-        CLANNAD_汐=|cffffcc00[世界第一可爱汐]|r
-        幻影穿梭=|cffffcc00[莫测的狂徒]|r
-
-        //菜鸡一队
-        西园寺筑紫=|cffffcc00[最菜玩家]|r
-        夜刀十神香=|cffffcc00[我想要图包]|r
-        方之萝莉柚=|cffffcc00[方の萝莉柚]|r
-        清凤随云=|cffffcc00[吾王saber]|r
-
-        //菜鸡二队
-        meriaol=|cffffcc00[某作死的村民M]|r
-        小黑屋调教=|cffffcc00[level6绝对萝莉控]|r
-        卖萌奈叶=|cffffcc00[白色の恶魔]|r
-        SOS灬狂三=|cffffcc00[狂而病娇]|r
-        烛影魂风=|cffffcc00[烛龙]|r
-
-        //白店
-        神级推土=|cffffcc00[永恒の黑暗]|r
-        Mem丿馨=|cffffcc00[十月莹光]|r
-        神级推萝莉=|cffffcc00[长门大萌神]|r
-        艾露、明莉=|cffffcc00[爱莉的好粑粑]|r
-        花开半落S=|cffffcc00[世界第一妹控]|r
-
-        //菜鸟三队
-        安久娜橙=|cffffcc00[叫我女王大人]|r
-        卖傻小分队=|cffffcc00[魔王哥哥大人]|r
-        金色眼暗=|cffffcc00[全明星第一坑]|r
-        磨损的螺母=|cffffcc00[最佳第六人]|r
-        稀有的螺丝=|cffffcc00[魂逗螺大教主]|r
-        琴师=|cffffcc00[做比利的王男人]|r
-
-        //巅峰队
-        绯色菠萝=|cFFFCAFFC[蠢萌の傲娇女仆]|r
-        单马尾萌娘=|cffffcc00[兔兔一生推]|r
-        刻刻帝=|cffffcc00[菲德の专属兔女仆]|r
-        Angel丿奏=|cffffcc00[骑我请排队]|r
-        荒巾歧宫乃=|cffffcc00[叛逆の骑士王]|r
-
-        //GGMMD
-        完美丿女友=|cffffcc00[战神の咆哮]|r
-        床上不言爱=|cffffcc00[冥神の诅咒]|r
-        Misaka丶酱=|cffffcc00[众神之审判]|r
-        柏崎星奈丿=|cffffcc00[只要你一个眼神肯定]|r
-        雾岛董香冫=|cffffcc00[我的爱就有意义]|r
-        油条是神=|cffffcc00[分手快乐]|r
-
-        //大师萝
-        肉包和卡卡=|cffffcc00[幸福之后的悲伤]|r
-        紫涩蔷薇恋=|cffffcc00[思念背后的凄凉]|r
-        洒言=|cffffcc00[巅峰第3人]|r
-        小爱不是处=|cFFFCAFFC[虚幻现实纷繁四散的世界，流逝中的羽蝶，徜徉于一触即逝七月雪]|r
-        我才不是x=|cffffcc00[不朽之守护]|r
-        柒夜之夏=|cffffcc00[遵从吾的召唤，出现吧！世界第一公主：初音未来]|r
-
-        //天道受2
-        InabaHimeko=|cffffcc00[渴望真爱の幽灵]|r
-        Clanmin=|cffffcc00[空JJ你嘛嘛]|r
-        冢耶舞莉=|cffffcc00[斩断罪恶之刃]|r
-        妄想的青春=|cffffcc00[帝王受的传说]|r
-        七尾奈留=|cffffcc00[来打我啊]|r
-
-        //采集大队
-        鲜血之刃=|cffffcc00[傲慢]|r
-        始祖月神=|cffffcc00[暴虐]|r
-        UU子=|cffffcc00[暴食]|r
-        天明冥=|cffffcc00[自负]|r
-        q799587865=|cffffcc00[贪婪]|r
-        缇娜_童萌=|cffffcc00[懒惰]|r
-
-        //黑幕队
-        黎瑟格林=|cffffcc00[染血の童话使]|r
-        结弦无音=|cffffcc00[？不祥，伪善]|r
-        丶琪露诺=|cffffcc00[星空の下での最初の強者]|r
-		
-        //史上最强尼玛
-        喊我欧尼酱=|cffffcc00[赛♂亚♀人]|r
-	五河_幻羽=|cffffcc00[漆黑烈焰使]|r
-	Eldrida__=|cffffcc00[超高校级の萌哀er]|r
-	Jw丶上帝=|cffffcc00[机智の上帝]|r
-	丶夏_娜=|cffffcc00[天壤の炎发灼眼の征讨者 ]|r
-	丶四季甜橙=|cffffcc00[妈的还有谁？]|r
-
-		//测试
-		呆蠢月菟=|cff505050[封弊者]|r
-		不挂机不行=|cff505050[封弊者]|r
-                角鹿丸二二=|cff505050[封弊者]|r
-                A拉垃圾君=|cff505050[封弊者]|r
-                死神拆黑组=|cff505050[封弊者]|r
-        
         
 	==特殊信使==
 
@@ -245,7 +116,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=WuKong.blp
 			技能=被动
 			标题=特殊信使
@@ -269,7 +140,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=button\BTNXS_U_9.blp
 			技能=被动
 			标题=特殊信使
@@ -293,7 +164,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=button\BTNXS_U_saber.blp
 			技能=被动
 			标题=特殊信使
@@ -317,7 +188,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=ReplaceableTextures\CommandButtons\BTNSpiritWalker.blp
 			技能=被动
 			标题=特殊信使
@@ -341,7 +212,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=button\BTNXS_U_YUI.blp
 			技能=被动
 			标题=特殊信使
@@ -365,7 +236,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=button\BTNXS_U_LD.blp
 			技能=被动
 			标题=特殊信使
@@ -389,7 +260,7 @@
 			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
 
             //皮肤无限使用权
-			名字=WorldEdit;裂魂SAMA;小爱不是处;Mythmakers
+			名字=
 			图标=button\BTNXS_U_ZM.blp
 			技能=被动
 			标题=特殊信使
@@ -401,14 +272,14 @@
 		皮肤=A0S9
 		前缀=|cffcc00cc黑色圣光|r
 		说明=这里是皮肤说明
-		价格=1-99998 5-499998 25-2499998
+		价格=
 		变身特效=war3mapImported\C2_blackdong.mdl
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
 		//图标路径不能包含空格
 		技能图标=A01A-BTNSkill_Saber_Alter_Q.blp A0OD-BTNSkill_Saber_Alter_W.blp A0GX-BTNSkill_Saber_Alter_E.blp A03D-BTNSkill_Saber_Alter_R.blp AOw2-BTNSkill_Saber_Alter_D.blp
-		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+		名字=沙门丶;Any_遗失;藤林杏;S灭杀_____;噩梦睡篮丶;樱逝夕颜;我妻桃子;艾斯特;CLANNAD_殇;户川汐音;空心de木偶
 
 		//saber extra
 		皮肤=A0TT
@@ -419,18 +290,18 @@
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
-		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+		名字=
 
 		//黑崎一护 白
 		皮肤=A0TU
 		前缀=|cffcc00cc死神代理|r 白
 		说明=这里是皮肤说明
-		价格=1-200 5-900 25-4000
+		价格=
 		变身特效=war3mapImported\firaga4.mdl
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
-		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+		名字=沙门丶;Any_遗失;藤林杏;S灭杀_____;噩梦睡篮丶我妻桃子;艾斯特;CLANNAD_殇;户川汐音;空心de木偶;樱逝夕颜
 
 		//夏娜 火雾战士
 		皮肤=A0TV
@@ -441,4 +312,4 @@
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
-		名字=WorldEdit
+		名字=

@@ -459,8 +459,10 @@
 
 		--解析名字
 		data.names	= {}
-		for name in data['名字']:gmatch '([^%;]+)' do
-			data.names[name] = true
+		if data['名字'] then
+			for name in data['名字']:gmatch '([^%;]+)' do
+				data.names[name] = true
+			end
 		end
 
 		--解析技能图标
