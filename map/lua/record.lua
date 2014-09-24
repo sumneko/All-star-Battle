@@ -271,6 +271,7 @@
 	function cmd.game_over(p, tid)
 		local n = timer.time() --每分钟+1节操
 		local jc = record.jc[player.self:get()]
+		print 'game_over'
 		if tid == p:getTeam() then
 			n = n + 30 --胜利+30节操
 			n = math.floor(n * jc['收益'])
