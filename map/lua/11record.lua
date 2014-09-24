@@ -205,12 +205,16 @@
 		end
 
 		--使用皮肤
-		local func1 = event('点击信使皮肤', '玩家离开',
+		event('点击信使皮肤', '玩家离开',
 			function(this, name, f)
 				if name == '玩家离开' then
 					if this.player == p then
-						event('-英雄发动技能', '-玩家离开', f)
+						event('-点击信使皮肤', '-玩家离开', f)
 					end
+					return
+				end
+
+				if this.player ~= p then
 					return
 				end
 				
