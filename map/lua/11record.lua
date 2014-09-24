@@ -558,7 +558,7 @@
 								jass.UnitRemoveAbility(hero, data.skill_id)
 
 								if game.debug then
-									local ignore = {'file', 'ScoreScreenIcon', 'Art', 'Propernames', 'Name', 'ModelScale', 'scale', 'UnitSound', 'EditorSuffix'}
+									local ignore = {'file', 'ScoreScreenIcon', 'Art', 'Propernames', 'Name', 'ModelScale', 'scale', 'UnitSound', 'EditorSuffix', 'name', 'modelScale'}
 									table.back(ignore)
 									for name, value in pairs(slk.unit[data.hero_id_base]) do
 										if not ignore[name] and slk.unit[data.hero_id_new][name] ~= value then

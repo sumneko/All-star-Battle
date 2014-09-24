@@ -268,7 +268,7 @@
 
 		//saber extra
 		皮肤=A0TT
-		前缀=|cFFFF0000红色曙光|r
+		前缀=|cFFFFFF00黄金剧场|r
 		说明=这里是皮肤说明
 		价格=1-200 5-900 25-4000
 		变身特效=war3mapImported\C8_blackwave.mdl
@@ -287,3 +287,14 @@
 		特效时间=0.5
 		变身动画=morph
 		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+
+		//夏娜 火雾战士
+		皮肤=A0TV
+		前缀=|cffff1111火雾战士|r
+		说明=这里是皮肤说明
+		价格=1-20 5-90 25-400
+		变身特效=war3mapImported\C8_blackwave.mdl
+		特效点=origin
+		特效时间=0.5
+		变身动画=morph
+		名字=WorldEdit
