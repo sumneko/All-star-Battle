@@ -253,7 +253,7 @@
 						end
 					end
 					jass.SetWidgetLife(u, life)
-				
+					jass.SetUnitUserData(u, p:get())
 					--本地玩家选中信使
 					if p == player.self then
 						jass.SelectUnit(u, true)
