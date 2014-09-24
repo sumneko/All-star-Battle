@@ -178,8 +178,14 @@
 			特效时间=0.5
 			变身动画=morph
 
+			//从商店中购买时的额外技能
+			图标=button\BTNXS_S_XY.blp
+			技能=被动
+			标题=|cffffcc00%player_name%|r 从商城中购买的信使
+			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
+
 			//皮肤无限使用权
-			名字=WorldEdit;
+			名字=WorldEdit
 			图标=war3mapImported\btntemp.blp
 			技能=被动
 			标题=|cffffcc00%player_name%|r,测试辛苦了!
@@ -208,6 +214,12 @@
 			特效时间=0.5
 			变身动画=morph
 
+			//从商店中购买时的额外技能
+			图标=button\BTNXS_S_XY.blp
+			技能=被动
+			标题=|cffffcc00%player_name%|r 从商城中购买的信使
+			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
+
 			//皮肤无限使用权
 			名字=沙门丶;Any_遗失;藤林杏;S灭杀_____;噩梦睡篮丶;WorldEdit
 			图标=button\BTNXS_S_PKQ.blp
@@ -226,4 +238,6 @@
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
+		//图标路径不能包含空格
+		技能图标=A01A-button\BTNXS_S_XY.blp A0OD-button\BTNXS_S_XY.blp A0GX-button\BTNXS_S_XY.blp A03D-button\BTNXS_S_XY.blp AOw2-button\BTNXS_S_XY.blp
 		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers

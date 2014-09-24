@@ -143,10 +143,19 @@
 	end
 	
 	function cmd.get_messenger_type(p)
-		jass.udg_Lua_integer = |n008|
+		jass.udg_Lua_integer = p.messenger_type or |n008|
 	end
 
 	function cmd.set_messenger_text(p, u)
+		if p.second_messenger then
+			if p.messenger_skill then
+				jass.UnitAddAbility(u, p.messenger_skill)
+				jass.UnitMakeAbilityPermanent(u, true, p.messenger_skill)
+			end
+			return
+		end
+
+		p.second_messenger	= true
 		--给信使添加魔法书
 		jass.UnitAddAbility(u, |A0TO|)
 		local jc	= p:getRecord '节操'
@@ -200,7 +209,7 @@
 			function(this, name, f)
 				if name == '玩家离开' then
 					if this.player == p then
-						event('-英雄发动技能', '-注册英雄', '-玩家离开', f)
+						event('-英雄发动技能', '-玩家离开', f)
 					end
 					return
 				end
@@ -214,7 +223,7 @@
 				--使用皮肤
 				local function change()
 					if game.debug then
-						local ignore = {'file', 'ScoreScreenIcon', 'Art', 'modelScale', 'scale', 'unitSound', 'EditorSuffix', 'name', 'abilList'}
+						local ignore = {'file', 'ScoreScreenIcon', 'Art', 'modelScale', 'scale', 'unitSound', 'EditorSuffix', 'name', 'abilList', 'shadowH', 'death', 'unitShadow', 'shadowW', 'shadowX', 'shadowY', 'Tip'}
 						table.back(ignore)
 						local old_id = id2string(jass.GetUnitTypeId(u))
 						for name, value in pairs(slk.unit[data.id]) do
@@ -250,6 +259,8 @@
 						jass.SelectUnit(u, true)
 					end
 
+					p.messenger_type	= data.uid
+
 					--保存到jass中
 					jass.udg_danwei[328]	= u
 
@@ -257,18 +268,21 @@
 					local pid		= p:get()
 					local pdata		= data.names[p:getBaseName()]
 					local skills	= messenger.skill1
-					if pdata and pdata['技能'] == '主动' then
+					local skill_type	= pdata and pdata['技能'] or data['技能']
+					if skill_type == '主动' then
 						skills		= messenger.skill2
 					end
 					
 					jass.UnitAddAbility(u, skills[pid])
 					jass.UnitMakeAbilityPermanent(u, true, skills[pid])
 
+					p.messenger_skill	= skills[pid]
+
 					local ab	= japi.EXGetUnitAbility(u, skills[pid])
 
-					local title	= pdata and pdata['标题'] or '%player_name% 从商城中购买的信使'
-					local text	= pdata and pdata['内容'] or '该皮肤还剩余 %messenger_count% 次使用次数'
-					local art	= pdata and pdata['图标'] or 'button\\BTNXS_S_XY.blp'
+					local title	= pdata and pdata['标题'] or data['标题']
+					local text	= pdata and pdata['内容'] or data['内容']
+					local art	= pdata and pdata['图标'] or data['图标']
 
 					data.player_name		= p:getBaseName()
 					data.messenger_count	= p:getRecord(data['信使'])
@@ -283,9 +297,11 @@
 						)
 					end
 
-					japi.EXSetAbilityDataString(ab, 1, 215, sub(title))
-					japi.EXSetAbilityDataString(ab, 1, 218, sub(text))
-					japi.EXSetAbilityDataString(ab, 1, 204, art)
+					if title and text and art then
+						japi.EXSetAbilityDataString(ab, 1, 215, sub(title))
+						japi.EXSetAbilityDataString(ab, 1, 218, sub(text))
+						japi.EXSetAbilityDataString(ab, 1, 204, art)
+					end
 
 					if data['变身特效'] then
 						local t = tonumber(data['特效时间'])
@@ -306,9 +322,9 @@
 
 					local time = timer.time()
 
-					event('玩家离开', '单位死亡',
+					event('玩家离开',
 						function(this, name, f)
-							event('-玩家离开', '-单位死亡', f)
+							event('-玩家离开', f)
 
 							--有玩家在20分钟内退出
 							if timer.time() - time < 1200 then
@@ -443,8 +459,16 @@
 
 		--解析名字
 		data.names	= {}
-		for name in data['名字']:gmatch '([^%,]+)' do
+		for name in data['名字']:gmatch '([^%;]+)' do
 			data.names[name] = true
+		end
+
+		--解析技能图标
+		data.skill_icons	= {}
+		if data['技能图标'] then
+			for id, art in data['技能图标']:gmatch '(%S+)%-(%S+)' do
+				data.skill_icons[string2id(id)] = art
+			end
 		end
 	end
 
@@ -554,6 +578,23 @@
 												jass.DestroyEffect(e)
 											end
 										)
+									end
+								end
+
+								--改技能图标
+								for sid, art in pairs(data.skill_icons) do
+									local flag	= jass.GetUnitAbilityLevel(hero, sid) == 0
+									if flag then
+										jass.UnitAddAbility(hero, sid)
+									end
+
+									local ab	= japi.EXGetUnitAbility(hero, sid)
+									if player.self == p then
+										japi.EXSetAbilityDataString(ab, 1, 204, art)
+									end
+									
+									if flag then
+										jass.UnitRemoveAbility(hero, sid)
 									end
 								end
 
