@@ -227,17 +227,63 @@
 			标题=专属信使
 			内容=这个信使是战队|cffffdd00黑店1队|r的专属信使。荣耀与你同在,|cffffcc00%player_name%|r!|n|n|cffffcc00点击翻滚~皮卡皮卡~
 
+                //孙悟空        n01U
+
+                        信使=n01U
+			前缀=|cffffcc00这里是前缀|r
+			说明=这里是皮肤说明
+			价格=1-50 5-200 25-900
+			变身特效=war3mapImported\C8_blackwave.mdl
+			特效点=origin
+			特效时间=0.5
+			变身动画=morph
+
+			//从商店中购买时的额外技能
+			图标=button\BTNXS_S_XY.blp
+			技能=被动
+			标题=|cffffcc00%player_name%|r 从商城中购买的信使
+			内容=该皮肤还剩余 |cffffcc00%messenger_count%|r 次使用次数
+
+                        //皮肤无限使用权
+			名字=WorldEdit
+			图标=WuKong.blp
+			技能=被动
+			标题=特殊信使
+			内容=0_0
+
 	==英雄皮肤==
 
 		//saber alter
 		皮肤=A0S9
 		前缀=|cffcc00cc黑色圣光|r
 		说明=这里是皮肤说明
-		价格=1-100 5-450 25-2000
+		价格=1-99998 5-499998 25-2499998
 		变身特效=war3mapImported\C8_blackwave.mdl
 		特效点=origin
 		特效时间=0.5
 		变身动画=morph
 		//图标路径不能包含空格
-		技能图标=A01A-button\BTNXS_S_XY.blp A0OD-button\BTNXS_S_XY.blp A0GX-button\BTNXS_S_XY.blp A03D-button\BTNXS_S_XY.blp AOw2-button\BTNXS_S_XY.blp
+		技能图标=A01A-BTNSkill_Saber_Alter_Q.blp A0OD-BTNSkill_Saber_Alter_W.blp A0GX-BTNSkill_Saber_Alter_E.blp A03D-BTNSkill_Saber_Alter_R.blp AOw2-BTNSkill_Saber_Alter_D.blp
+		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+
+		//saber extra
+		皮肤=A0TT
+		前缀=|cFFFF0000红色曙光|r
+		说明=这里是皮肤说明
+		价格=1-200 5-900 25-4000
+		变身特效=war3mapImported\C8_blackwave.mdl
+		特效点=origin
+		特效时间=0.5
+		变身动画=morph
+		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
+
+		//黑崎一护 白
+		皮肤=A0TU
+		前缀=|cffcc00cc死神代理|r 白
+		说明=这里是皮肤说明
+		价格=1-200 5-900 25-4000
+		变身特效=war3mapImported\C8_blackwave.mdl
+		特效点=origin
+		特效时间=0.5
+		变身动画=morph
 		名字=WorldEdit;小爱不是处;裂魂SAMA;Mythmakers
