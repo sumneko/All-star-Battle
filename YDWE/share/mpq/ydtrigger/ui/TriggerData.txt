@@ -8808,6 +8808,9 @@ process.HasName=0,1,boolean,unit,int,string,boolean,boolean
 _process.HasName_Defaults=GetTriggerUnit,0,_,true,false
 _process.HasName_Category=TC_MU_PROCESS
 
+Unit.IsHard=0,1,boolean,unit
+_Unit.IsHard_Category=TC_MU_UNIT
+
 // returns boolean
 
 YDWEGetLocalVariableBoolean=0,1,boolean,string
