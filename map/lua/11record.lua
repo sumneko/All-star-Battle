@@ -431,10 +431,10 @@
 	hero_model.skills = {
 		|A0T6|,
 		|A0T7|,
+		|A0TB|,
 		|A0T8|,
 		|A0T9|,
 		|A0TA|,
-		|A0TB|,
 	}
 	
 	table.back(hero_model.skills)
