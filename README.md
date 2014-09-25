@@ -1,5 +1,7 @@
 全明星战役
 =========================
+此项目已经迁移至 [这里](https://github.com/syj2010syj/All-Star-Battle-2)
+
 魔兽争霸RPG地图mod:全明星战役的全部文件
 
 * 通过双击make.bat来生未加密图,输出路径为output
